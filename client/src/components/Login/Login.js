@@ -18,6 +18,10 @@ function Login() {
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   const onValueChange = (inputLabel, value) => {
     switch (inputLabel) {
       case 'email':
@@ -34,6 +38,7 @@ function Login() {
     <Card
       component="form"
       className="loginForm"
+      onSubmit={handleSubmit}
     >
       <h2 className="login-title">Connexion</h2>
       <CardContent>
