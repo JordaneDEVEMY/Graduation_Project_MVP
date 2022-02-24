@@ -1,11 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 
+/* images imports */
+import headerImg from './imgs/header-img.svg';
+import functCoworking from './imgs/funct-coworking.svg';
+import functDrag from './imgs/funct-drag.svg';
+import functOther from './imgs/funct-other.svg';
+import teamIcon from './imgs/team-icon.svg';
+
 function HomePage() {
   return (
     <>
       <header className="header">
-        <img src="" alt="" className="header--img" />
+        <img src={headerImg} alt="" className="header--img" />
         <a to="/">Se connecter</a>
         <h1 className="header-title">Phrase d'accroche</h1>
       </header>
@@ -13,7 +20,7 @@ function HomePage() {
       <main className="main">
         <section className="main--func">
           <div className="func--content">
-            <img src="" alt="" className="func--img" />
+            <img src={functCoworking} alt="" className="func--img" />
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Asperiores minus fuga accusamus omnis nostrum iusto rerum sequi.
@@ -21,7 +28,7 @@ function HomePage() {
           </div>
 
           <div className="func--content">
-            <img src="" alt="" className="func--img" />
+            <img src={functDrag} alt="" className="func--img" />
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Asperiores minus fuga accusamus omnis nostrum iusto rerum sequi.
@@ -29,7 +36,7 @@ function HomePage() {
           </div>
 
           <div className="func--content">
-            <img src="" alt="" className="func--img" />
+            <img src={functOther} alt="" className="func--img" />
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Asperiores minus fuga accusamus omnis nostrum iusto rerum sequi.
@@ -51,35 +58,35 @@ function HomePage() {
         <section className="main--team">
           <h2 className="team--title">Notre équipe</h2>
           <div className="team--card">
-            <img src="" alt="" className="team--img" />
+            <img src={teamIcon} alt="" className="team--img" />
             <p>
               Lorem Ipsum
             </p>
           </div>
 
           <div className="team--card">
-            <img src="" alt="" className="team--img" />
+            <img src={teamIcon} alt="" className="team--img" />
             <p>
               Lorem Ipsum
             </p>
           </div>
 
           <div className="team--card">
-            <img src="" alt="" className="team--img" />
+            <img src={teamIcon} alt="" className="team--img" />
             <p>
               Lorem Ipsum
             </p>
           </div>
 
           <div className="team--card">
-            <img src="" alt="" className="team--img" />
+            <img src={teamIcon} alt="" className="team--img" />
             <p>
               Lorem Ipsum
             </p>
           </div>
 
           <div className="team--card">
-            <img src="" alt="" className="team--img" />
+            <img src={teamIcon} alt="" className="team--img" />
             <p>
               Lorem Ipsum
             </p>
