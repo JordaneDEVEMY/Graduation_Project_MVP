@@ -18,10 +18,19 @@ function Login() {
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
+  /**
+   * function used to submit form
+   * @param {event} event used to stop refreshing of page
+   */
   const handleSubmit = (event) => {
     event.preventDefault();
   };
 
+  /**
+   * function used to change input value
+   * @param {string} inputLabel input wich will be change
+   * @param {*} value value witch will be the new input's value
+   */
   const onValueChange = (inputLabel, value) => {
     switch (inputLabel) {
       case 'email':
