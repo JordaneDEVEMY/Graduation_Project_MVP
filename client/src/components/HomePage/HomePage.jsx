@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import './homePage.scss';
 
 /* images imports */
 import headerImg from './imgs/header-img.svg';
