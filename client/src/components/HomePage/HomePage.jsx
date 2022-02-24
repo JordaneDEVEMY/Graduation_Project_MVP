@@ -1,21 +1,26 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import { Button } from '@mui/material';
 import './homePage.scss';
 
 /* images imports */
-import headerImg from './imgs/header-img.svg';
-import functCoworking from './imgs/funct-coworking.svg';
-import functDrag from './imgs/funct-drag.svg';
-import functOther from './imgs/funct-other.svg';
-import teamIcon from './imgs/team-icon.svg';
+// import headerImg from './public/header-img.svg';
+import functCoworking from './public/funct-coworking.svg';
+import functDrag from './public/funct-drag.svg';
+import functOther from './public/funct-other.svg';
+import teamIcon from './public/team-icon.svg';
 
 function HomePage() {
   return (
     <>
       <header className="header">
-        <img src={headerImg} alt="" className="header--img" />
-        <a to="/">Se connecter</a>
-        <h1 className="header-title">Phrase d'accroche</h1>
+        <a href="/" className="header--link">
+          <Button variant="contained" size="medium">
+            Se connecter
+          </Button>
+        </a>
+
+        <h1 className="header--title">O'lleks</h1>
       </header>
 
       <main className="main">

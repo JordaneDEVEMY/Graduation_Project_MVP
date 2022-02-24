@@ -1,10 +1,33 @@
 .header {
-  width: 100%;
-  border: 1px solid green;
+  position: relative;
+  height: 100vh;
+  background-image: url(./public/calendar-img.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
 
-  &--img {
-    width:100%;
-    border: 1px solid red;
+  @media screen and (max-width: 600px) {
+    height: 50vh;
+    background-size: cover;
+  }
+
+  &--title {
+    font-size: 5em;
+    text-transform: uppercase;
+    font-style: italic;
+
+    position: relative;
+    display: inline;
+    border: 1px solid black;
+    top: 20%;
+    left: 10%;
+  }
+
+  &--link {
+    display: block;
+    margin: 1rem;
+    text-align: right;
+    text-decoration: none;
   }
 }
 
