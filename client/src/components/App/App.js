@@ -1,11 +1,12 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import themeFunctions from '../../utils';
 import logo from './logo.svg';
 import './App.css';
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: themeFunctions.getThemeMode(),
   },
 });
 
