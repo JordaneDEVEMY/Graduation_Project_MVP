@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { Button } from '@mui/material';
+import {
+  Button, Grid, Card, CardContent, CardMedia, Box,
+} from '@mui/material';
 import './homePage.scss';
 
 /* images imports */
@@ -24,33 +26,66 @@ function HomePage() {
       </header>
 
       <main className="main">
-        <section className="main--func">
-          <div className="func--content">
-            <img src={functCoworking} alt="" className="func--img" />
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Asperiores minus fuga accusamus omnis nostrum iusto rerum sequi.
-            </p>
-          </div>
+        <Box className="main--func">
+          <Grid
+            container
+            spacing={{
+              xs: 4, sm: 4, md: 8, lg: 12,
+            }}
+            justifyContent="center"
+            className="func-grid"
+          >
+            <Grid item xs={9} sm={4}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={functCoworking}
+                  alt="alt text"
+                />
+                <CardContent>
+                  <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  </p>
+                </CardContent>
+              </Card>
+            </Grid>
 
-          <div className="func--content">
-            <img src={functDrag} alt="" className="func--img" />
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Asperiores minus fuga accusamus omnis nostrum iusto rerum sequi.
-            </p>
-          </div>
+            <Grid item xs={9} sm={4}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={functDrag}
+                  alt="alt text"
+                />
+                <CardContent>
+                  <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  </p>
+                </CardContent>
+              </Card>
+            </Grid>
 
-          <div className="func--content">
-            <img src={functOther} alt="" className="func--img" />
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Asperiores minus fuga accusamus omnis nostrum iusto rerum sequi.
-            </p>
-          </div>
-        </section>
+            <Grid item xs={9} sm={4}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={functOther}
+                  alt="alt text"
+                />
+                <CardContent>
+                  <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  </p>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Box>
 
-        <section className="main--encart">
+        <Box className="main--encart">
           <h2 classeName="encart--title">Phrase d'accroche bis</h2>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -59,9 +94,9 @@ function HomePage() {
             sapiente harum repudiandae?
           </p>
           <img src="" alt="" className="encart--img" />
-        </section>
+        </Box>
 
-        <section className="main--team">
+        <Box className="main--team">
           <h2 className="team--title">Notre équipe</h2>
           <div className="team--card">
             <img src={teamIcon} alt="" className="team--img" />
@@ -97,7 +132,7 @@ function HomePage() {
               Lorem Ipsum
             </p>
           </div>
-        </section>
+        </Box>
       </main>
     </>
   );
