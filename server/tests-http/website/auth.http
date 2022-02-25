@@ -8,7 +8,16 @@
 ### 404
 GET {{ endpoint }}/azertyuiop
 
-### Post method for visitor connection
+### Post method for visitor 
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+    "email": "j.andy@protonmail.com",
+    "password": "KPP18YZC3OE"
+}
+
+### Post method for visitor connection with bad E/P
 POST {{ endpoint }}/
 content-type: application/json
 
@@ -40,6 +49,6 @@ POST {{ endpoint }}/
 content-type: application/json
 
 {
-    "email": "",
+    "email": "test@test.com",
     "password": ""
 }

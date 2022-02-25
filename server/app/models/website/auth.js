@@ -1,5 +1,4 @@
 const client = require('../../config/database');
-const { WebsiteError } = require('../../helpers/errorHandler');
 
 module.exports = {
 

@@ -15,15 +15,15 @@ const controller = {
     const isEmailValid = emailValidator.validate(req.body.email);
 
     if (!req.body.email) {
-      return { error: 'L\'email obligatoire' };
+      throw new WebsiteError(401, 'L\'email obligatoire');
     }
 
     if (!isEmailValid) {
-      return { error: 'Cet email n\'est pas valide' };
+      throw new WebsiteError(401, 'Cet email n\'est pas valide');
     }
 
     if (!req.body.password) {
-      return { error: 'Le mot de passe est obligatoire' };
+      throw new WebsiteError(401, 'Le mot de passe est obligatoire');
     }
 
     const user = await authDatamapper.findOne(req.body.email, req.body.password);
