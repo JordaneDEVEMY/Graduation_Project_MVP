@@ -1,9 +1,16 @@
-const { Router } = require('express');
+const express = require('express');
+
 const { websiteController } = require('../../controllers');
 
-const router = Router();
+const controllerHandler = require('../../helpers/websiteControllerHandler');
+const { WebsiteError } = require('../../helpers/errorHandler');
 
-//! Development fonctionnality
-router.get('/', websiteController.homePage);
+const router = express.Router();
+
+router.get('/', controllerHandler(websiteController.homePage));
+
+router.use(() => {
+  throw new WebsiteError(404, 'Page introuvable');
+});
 
 module.exports = router;
