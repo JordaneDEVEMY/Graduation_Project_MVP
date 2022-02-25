@@ -7,9 +7,9 @@ const { WebsiteError } = require('../../helpers/errorHandler');
 
 const router = express.Router();
 
-router.get('/', controllerHandler(websiteController.homePage));
+router.all('/', controllerHandler(websiteController.homePage));
 
-router.get('/login', controllerHandler(websiteAuth.loginAction));
+router.use('/login', websiteAuth);
 
 router.use(() => {
   throw new WebsiteError(404, 'Page introuvable');
