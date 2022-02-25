@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Button, Grid, Card, CardContent, CardMedia, Box, Typography, Divider,
+  Button, Grid, Card, CardContent, CardMedia, Box, Typography, Divider, Modal,
 } from '@mui/material';
 import './homePage.scss';
 import Login from '../Login/Login';
@@ -14,23 +14,31 @@ import teamIcon from './public/team-icon.svg';
 import encartImg from './public/encart-img.svg';
 
 function HomePage() {
+  const [modal, displayModal] = useState(false);
+
+  /** *
+   * function to handle modals
+   */
+  const handleModal = () => {
+    displayModal((stateModal) => !stateModal);
+  };
+
   return (
     <>
       <header className="header">
-        <a href="/" className="header--link">
-          <Button
-            variant="contained"
-            size="medium"
-            sx={{
-              margin: '1rem',
-              display: {
-                md: 'none',
-              },
-            }}
-          >
-            Se connecter
-          </Button>
-        </a>
+        <Button
+          onClick={handleModal}
+          variant="contained"
+          size="medium"
+          sx={{
+            margin: '1rem',
+            display: {
+              md: 'none',
+            },
+          }}
+        >
+          Se connecter
+        </Button>
 
         <Box
           className="header--connect"
@@ -65,7 +73,20 @@ function HomePage() {
           >
             Your new planning-handling tool
           </Typography>
+
           <Login />
+          <Modal
+            sx={{
+              width: '90vw',
+              mx: 'auto',
+              mt: '25%',
+            }}
+            open={modal}
+            onClose={handleModal}
+          >
+            <Login />
+          </Modal>
+
         </Box>
 
       </header>
