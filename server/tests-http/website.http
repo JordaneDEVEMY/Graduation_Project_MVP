@@ -10,3 +10,6 @@ GET {{ endpoint }}/azertyuiop
 
 ### Get homePage
 GET {{ endpoint }}/
+
+### GET Login (à supprimer)
+GET {{ endpoint }}/login
