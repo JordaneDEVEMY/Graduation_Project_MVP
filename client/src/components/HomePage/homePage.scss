@@ -6,21 +6,22 @@
   background-size: contain;
   background-position: right;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 900px) {
     height: 50vh;
     background-size: cover;
   }
 
   &--title {
-    font-size: 5em;
-    text-transform: uppercase;
-    font-style: italic;
 
+    @media screen and (min-width: 900px) {
+      top: 25vh;
+      left: 10vw;
+      display: inline;
+    }
+
+    text-align: center;
     position: relative;
-    display: inline;
-    border: 1px solid black;
-    top: 20%;
-    left: 10%;
+    top: 25%;
   }
 
   &--link {
@@ -33,28 +34,6 @@
 
 .main {
   margin-top: 1rem;
-
-  &--func {
-    text-align: center;
-    padding: 2rem;
-  }
-
-  &--encart {
-    margin-top: 1rem;
-    padding: 2rem;
-    background: #bce5ff;
-    text-align: center;
-
-    p {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-  }
-
-  &--team {
-    margin-top: 2rem;
-    text-align: center;
-  }
 }
 
 .encart {
