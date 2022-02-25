@@ -1,3 +1,5 @@
+const ApiError = require('../errors/apiError');
+const WebsiteError = require('../errors/websiteError');
 /**
   * Middleware that respond to a next method with an error as argument
   * @param {object} err Error class
@@ -26,7 +28,7 @@ const errorHandler = (err, res) => {
 };
 
 module.exports = {
-  // ApiError,
-  // WebsiteError,
+  ApiError,
+  WebsiteError,
   errorHandler,
 };
