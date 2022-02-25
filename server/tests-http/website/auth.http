@@ -10,3 +10,36 @@ GET {{ endpoint }}/azertyuiop
 
 ### Post method for visitor connection
 POST {{ endpoint }}/
+content-type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "ceciestunpassword"
+}
+
+### Post method for visitor connection WITH @ ERROR
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+    "email": "testsansarobase",
+    "password": "ceciestunpassword"
+}
+
+### Post method for visitor connection WITH no email ERROR
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+    "email": "",
+    "password": "ceciestunpassword"
+}
+
+### Post method for visitor connection WITH no password ERROR
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+    "email": "",
+    "password": ""
+}
