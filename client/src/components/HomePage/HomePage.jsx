@@ -98,39 +98,37 @@ function HomePage() {
 
         <Box className="main--team">
           <h2 className="team--title">Notre équipe</h2>
-          <div className="team--card">
-            <img src={teamIcon} alt="" className="team--img" />
-            <p>
-              Lorem Ipsum
-            </p>
-          </div>
-
-          <div className="team--card">
-            <img src={teamIcon} alt="" className="team--img" />
-            <p>
-              Lorem Ipsum
-            </p>
-          </div>
-
-          <div className="team--card">
-            <img src={teamIcon} alt="" className="team--img" />
-            <p>
-              Lorem Ipsum
-            </p>
-          </div>
-
-          <div className="team--card">
-            <img src={teamIcon} alt="" className="team--img" />
-            <p>
-              Lorem Ipsum
-            </p>
-          </div>
-
-          <div className="team--card">
-            <img src={teamIcon} alt="" className="team--img" />
-            <p>
-              Lorem Ipsum
-            </p>
+          <div className="team--cards">
+            <div className="team--card">
+              <img src={teamIcon} alt="" className="team--img" />
+              <p>
+                Lorem Ipsum
+              </p>
+            </div>
+            <div className="team--card">
+              <img src={teamIcon} alt="" className="team--img" />
+              <p>
+                Lorem Ipsum
+              </p>
+            </div>
+            <div className="team--card">
+              <img src={teamIcon} alt="" className="team--img" />
+              <p>
+                Lorem Ipsum
+              </p>
+            </div>
+            <div className="team--card">
+              <img src={teamIcon} alt="" className="team--img" />
+              <p>
+                Lorem Ipsum
+              </p>
+            </div>
+            <div className="team--card">
+              <img src={teamIcon} alt="" className="team--img" />
+              <p>
+                Lorem Ipsum
+              </p>
+            </div>
           </div>
         </Box>
       </main>

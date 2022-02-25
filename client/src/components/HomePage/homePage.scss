@@ -38,8 +38,33 @@
   &--func {
     text-align: center;
   }
+
+  &--encart {
+    margin-top: 1rem;
+    border: 1px solid blue;
+    text-align: center;
+  }
+
+  &--team {
+    margin-top: 1rem;
+    text-align: center;
+  }
 }
 
-.team--img {
-  width: 100px;
+.team {
+  &--cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &--card {
+    margin: 1em;
+    width: 100px;
+    text-align: center;
+  }
+
+  &--img {
+    width: 100%;
+  }
 }
