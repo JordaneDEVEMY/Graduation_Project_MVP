@@ -2,6 +2,7 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP TABLE 
+"qualification_employe", "absence", "employe", "affectation", "contrat_employe", "site", "contact", "entreprise"; 
 
 COMMIT;
