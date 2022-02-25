@@ -6,29 +6,32 @@
   background-size: contain;
   background-position: right;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 899px) {
     height: 50vh;
     background-size: cover;
+  }
+
+  &--link {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+  }
+
+  &--connect {
+
+    @media screen and (min-width: 900px) {
+      position: relative;
+      top: 25%;
+      left: 10%;
+    }
   }
 
   &--title {
 
     @media screen and (min-width: 900px) {
-      top: 25vh;
-      left: 10vw;
-      display: inline;
     }
 
     text-align: center;
-    position: relative;
-    top: 25%;
-  }
-
-  &--link {
-    display: block;
-    margin: 1rem;
-    text-align: right;
-    text-decoration: none;
   }
 }
 
@@ -47,7 +50,9 @@
   &--cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   &--card {

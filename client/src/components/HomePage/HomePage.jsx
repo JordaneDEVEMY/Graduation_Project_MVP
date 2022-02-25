@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import {
-  Button, Grid, Card, CardContent, CardMedia, Box, Typography,
+  Button, Grid, Card, CardContent, CardMedia, Box, Typography, Divider,
 } from '@mui/material';
 import './homePage.scss';
-// import Login from '../Login/Login';
+import Login from '../Login/Login';
 
 /* images imports */
 import functCoworking from './public/funct-coworking.svg';
@@ -12,46 +12,80 @@ import functDrag from './public/funct-drag.svg';
 import functOther from './public/funct-other.svg';
 import teamIcon from './public/team-icon.svg';
 import encartImg from './public/encart-img.svg';
-// import headerImg from './public/calendar-img.png';
 
 function HomePage() {
   return (
     <>
       <header className="header">
         <a href="/" className="header--link">
-          <Button variant="contained" size="medium">
+          <Button
+            variant="contained"
+            size="medium"
+            sx={{
+              margin: '1rem',
+              display: {
+                md: 'none',
+              },
+            }}
+          >
             Se connecter
           </Button>
-          {/* <Login /> */}
         </a>
 
-        <Typography
-          className="header--title"
-          variant="h1"
+        <Box
+          className="header--connect"
           sx={{
-            textTransform: 'uppercase',
-            fontStyle: 'italic',
+            width: '30em',
+            padding: '1em',
+            display: {
+              xs: 'none',
+              sm: 'none',
+              md: 'block',
+            },
           }}
         >
-          O'lleks
-        </Typography>
+          <Typography
+            className="header--title"
+            variant="h1"
+            sx={{
+              textTransform: 'uppercase',
+              fontStyle: 'italic',
+            }}
+          >
+            O'lleks
+          </Typography>
+          <Divider />
+          <Typography
+            className="header--title"
+            variant="subtitle1"
+            sx={{
+              fontSize: '2em',
+              fontStyle: 'italic',
+            }}
+          >
+            Your new planning-handling tool
+          </Typography>
+          <Login />
+        </Box>
+
       </header>
 
       <main className="main">
         <Box sx={{
           textAlign: 'center',
-          padding: 2,
+          px: '1em',
+          mx: 'auto',
+          mt: '2em',
         }}
         >
           <Grid
             container
             spacing={{
-              xs: 4, sm: 4, md: 8, lg: 12,
+              xs: 4, sm: 2, md: 8,
             }}
             justifyContent="center"
-            className="func-grid"
           >
-            <Grid item xs={9} sm={4}>
+            <Grid item xs={11} sm={4} md={3}>
               <Card>
                 <CardMedia
                   component="img"
@@ -67,7 +101,7 @@ function HomePage() {
               </Card>
             </Grid>
 
-            <Grid item xs={9} sm={4}>
+            <Grid item xs={11} sm={4} md={3}>
               <Card>
                 <CardMedia
                   component="img"
@@ -83,7 +117,7 @@ function HomePage() {
               </Card>
             </Grid>
 
-            <Grid item xs={9} sm={4}>
+            <Grid item xs={11} sm={4} md={3}>
               <Card>
                 <CardMedia
                   component="img"
@@ -104,7 +138,7 @@ function HomePage() {
         <Box sx={{
           textAlign: 'center',
           padding: 2,
-          mt: 1,
+          mt: '2em',
           backgroundColor: '#bce5ff',
         }}
         >
@@ -125,8 +159,7 @@ function HomePage() {
 
         <Box sx={{
           textAlign: 'center',
-          padding: 2,
-          mt: 1,
+          mt: '2em',
         }}
         >
           <Typography variant="h2">Notre équipe</Typography>
