@@ -22,11 +22,11 @@ CREATE TABLE "absence" (
 
 CREATE TABLE "employee" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "social_security_number" INT NOT NULL UNIQUE,
+    "social_security_number" BIGINT NOT NULL UNIQUE,
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "date_of_birth" DATE NOT NULL,
-    "adress" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
     "email" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "starting_date" DATE NOT NULL DEFAULT now(),
