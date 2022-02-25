@@ -15,6 +15,6 @@ router
   * @return {WebsiteError} 400 - Bad request response - application/json
   * @return {WebsiteError} 404 - Category not found - application/json
    */
-  .post(controllerHandler(websiteAuth.login));
+  .post(controllerHandler(websiteAuth.loginAction));
 
 module.exports = router;
