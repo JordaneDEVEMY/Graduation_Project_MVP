@@ -4,6 +4,8 @@ const cors = require('cors');
 const router = require('./routes');
 
 const app = express();
+// JsDoc with Swagger
+require('./helpers/apiDocs')(app);
 
 // Activation of Json middleware
 app.use(express.json());
