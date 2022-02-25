@@ -27,6 +27,7 @@ CREATE TABLE "employee" (
     "lastname" TEXT NOT NULL,
     "date_of_birth" DATE NOT NULL,
     "address" TEXT NOT NULL,
+    "zip_code" INT NOT NULL,
     "email" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "starting_date" DATE NOT NULL DEFAULT now(),
@@ -41,7 +42,7 @@ CREATE TABLE "employee" (
 CREATE TABLE "assignment" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "starting_date" DATE NOT NULL,
-    "ending_date" INT NOT NULL,
+    "ending_date" DATE NOT NULL,
     "color" TEXT,
     "position" INT NOT NULL DEFAULT 0,
     "visibility" BOOLEAN DEFAULT false,
@@ -90,6 +91,7 @@ CREATE TABLE "company" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL UNIQUE,
     "address" TEXT NOT NULL UNIQUE,
+    "zip_code" INT NOT NULL,
     "type" TEXT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
