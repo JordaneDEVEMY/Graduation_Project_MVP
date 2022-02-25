@@ -3,6 +3,6 @@
 BEGIN;
 
 DROP TABLE 
-"qualification_employe", "absence", "employe", "affectation", "contrat_employe", "site", "contact", "entreprise"; 
+"employee_qualification", "absence", "employee", "assignment", "employee_contract", "site", "contact", "company"; 
 
 COMMIT;
