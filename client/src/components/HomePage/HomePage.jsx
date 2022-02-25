@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import {
-  Button, Grid, Card, CardContent, CardMedia, Box,
+  Button, Grid, Card, CardContent, CardMedia, Box, Typography,
 } from '@mui/material';
 import './homePage.scss';
 
@@ -45,9 +45,9 @@ function HomePage() {
                   alt="alt text"
                 />
                 <CardContent>
-                  <p>
+                  <Typography>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </p>
+                  </Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -61,9 +61,9 @@ function HomePage() {
                   alt="alt text"
                 />
                 <CardContent>
-                  <p>
+                  <Typography>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </p>
+                  </Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -77,9 +77,9 @@ function HomePage() {
                   alt="alt text"
                 />
                 <CardContent>
-                  <p>
+                  <Typography>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </p>
+                  </Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -87,48 +87,48 @@ function HomePage() {
         </Box>
 
         <Box className="main--encart">
-          <h2 classeName="encart--title">Phrase d'accroche bis</h2>
-          <p>
+          <Typography classeName="encart--title">Phrase d'accroche bis</Typography>
+          <Typography>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Odio placeat excepturi non quaerat fuga libero a incidunt corporis,
             rerum obcaecati nemo, qui molestiae cupiditate velit aliquid inventore
             sapiente harum repudiandae?
-          </p>
+          </Typography>
           <img src={encartImg} alt="" className="encart--img" />
         </Box>
 
         <Box className="main--team">
-          <h2 className="team--title">Notre équipe</h2>
+          <Typography className="team--title">Notre équipe</Typography>
           <div className="team--cards">
             <div className="team--card">
               <img src={teamIcon} alt="" className="team--img" />
-              <p>
+              <Typography>
                 Lorem Ipsum
-              </p>
+              </Typography>
             </div>
             <div className="team--card">
               <img src={teamIcon} alt="" className="team--img" />
-              <p>
+              <Typography>
                 Lorem Ipsum
-              </p>
+              </Typography>
             </div>
             <div className="team--card">
               <img src={teamIcon} alt="" className="team--img" />
-              <p>
+              <Typography>
                 Lorem Ipsum
-              </p>
+              </Typography>
             </div>
             <div className="team--card">
               <img src={teamIcon} alt="" className="team--img" />
-              <p>
+              <Typography>
                 Lorem Ipsum
-              </p>
+              </Typography>
             </div>
             <div className="team--card">
               <img src={teamIcon} alt="" className="team--img" />
-              <p>
+              <Typography>
                 Lorem Ipsum
-              </p>
+              </Typography>
             </div>
           </div>
         </Box>
