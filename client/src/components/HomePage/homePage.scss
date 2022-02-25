@@ -33,21 +33,34 @@
 
 .main {
   margin-top: 1rem;
-  padding: 2rem;
 
   &--func {
     text-align: center;
+    padding: 2rem;
   }
 
   &--encart {
     margin-top: 1rem;
-    border: 1px solid blue;
+    padding: 2rem;
+    background: #bce5ff;
     text-align: center;
+
+    p {
+      max-width: 900px;
+      margin: 0 auto;
+    }
   }
 
   &--team {
-    margin-top: 1rem;
+    margin-top: 2rem;
     text-align: center;
+  }
+}
+
+.encart {
+  &--img {
+    width: 15em;
+    margin-top: 2rem;
   }
 }
 

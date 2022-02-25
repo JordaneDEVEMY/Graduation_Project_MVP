@@ -11,6 +11,7 @@ import functCoworking from './public/funct-coworking.svg';
 import functDrag from './public/funct-drag.svg';
 import functOther from './public/funct-other.svg';
 import teamIcon from './public/team-icon.svg';
+import encartImg from './public/encart-img.svg';
 
 function HomePage() {
   return (
@@ -93,7 +94,7 @@ function HomePage() {
             rerum obcaecati nemo, qui molestiae cupiditate velit aliquid inventore
             sapiente harum repudiandae?
           </p>
-          <img src="" alt="" className="encart--img" />
+          <img src={encartImg} alt="" className="encart--img" />
         </Box>
 
         <Box className="main--team">
