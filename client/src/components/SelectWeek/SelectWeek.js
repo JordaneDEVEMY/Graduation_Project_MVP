@@ -8,13 +8,11 @@ import './selectweek.scss';
 function SelectWeek({
   range,
 }) {
-  const now = new Date();
-  const currentWeek = utils.dateFunctions.getWeekNumberFromDate(now);
-  const weeks = {
-    prev: utils.dateFunctions.getPrevWeek(now),
-    current: currentWeek,
-    next: [],
-    dates: utils.dateFunctions.getDatesFromWeekNumber(now.getFullYear(), currentWeek),
+  const week = {
+    prev: utils.dateFunctions.getPrevWeek(),
+    current: utils.dateFunctions.getWeek(),
+    next: utils.dateFunctions.getNextWeek(),
+    dates: utils.dateFunctions.getWeekDates(),
   };
 
   // for (const type of ['prevs', 'nexts']) {
@@ -30,11 +28,11 @@ function SelectWeek({
   //   }
   // }
 
-  console.log(weeks);
+  console.log(week);
 
   return (
     <p>
-      {`current week : ${weeks.current}, range : ${range}`}
+      {`current week : ${week.current}, range : ${range}`}
     </p>
   );
 }

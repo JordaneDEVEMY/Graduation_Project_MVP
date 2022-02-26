@@ -1,93 +1,98 @@
+import dayjs from 'dayjs';
+import isoWeek from 'dayjs/plugin/isoWeek';
+import 'dayjs/locale/fr';
+
+dayjs.extend(isoWeek);
+
 const dateFunctions = {
 
   /**
-   * Get week monday day
-   * @param {number} year Week year.
-   * @param {number} weekNumber Number of week.
-   * @returns {string} the ISO date.
+   * Get a dayjs object
+   * @param {string=} dateString - A string date eg. 'YYYY-MM-DD'
+   * @returns {object} dayjs object.
    */
-  getFirstDayOfWeek: (year, weekNumber) => {
-    const firstMonday = new Date(dateFunctions.getFirstMondayOfYear(year));
-    // first day of week
-    firstMonday.setDate(firstMonday.getDate() + (7 * (weekNumber - 1)));
+  getDate: (dateString) => {
+    const date = dateString || `${dayjs().format('YYYY')}-${dayjs().format('MM')}-${dayjs().format('DD')}`;
 
-    return firstMonday.toString();
+    return dayjs(date).locale('fr');
   },
 
   /**
-   * Get first monday of a year
-   * @param {date} date A date object.
-   * @param {number} nbWeeks Number of weeks to add.
-   * @returns {string} the ISO week of the date.
+   * Get next week from a date
+   * @param {string} dateString A string date eg. 'YYYY-MM-DD'
+   * @returns {number} Prev week.
    */
-  getFirstMondayOfYear: (year) => {
-    const oneJan = new Date(year, 0, 1);
-    const oneJanvDayNum = oneJan.getDay();
+  getNextWeek: (dateString = null) => {
+    let dateFrom;
 
-    // in JS, weeks start on sunday
-    if (oneJanvDayNum === 0) {
-      oneJan.setDate(oneJan.getDate() + 1);
-    // add days if not on monday
-    } else if (oneJanvDayNum > 2) {
-      oneJan.setDate(oneJan.getDate() + (8 - oneJanvDayNum));
+    if (dateString) {
+      dateFrom = dateFunctions.getDate(dateString);
+    } else {
+      dateFrom = dateFunctions.getDate();
     }
 
-    return oneJan.toString();
+    return dateFrom.add(1, 'week').isoWeek();
   },
 
   /**
-   * Get the week number of adate
-   * @param {date} date A date object.
+   * Get the week number of a date
+   * @param {string=} dateString - A string date eg. 'YYYY-MM-DD'
    * @returns {number} the ISO week of the date.
    */
-  getWeekNumberFromDate: (date) => {
-    const oneJan = new Date(date.getFullYear(), 0, 1);
-    const oneJanvDayNum = oneJan.getDay();
-    let numberOfDays = Math.floor((date - oneJan) / (24 * 60 * 60 * 1000));
+  getWeek: (dateString) => {
+    let date;
 
-    // weeks start on monday
-    // so, if 1st jan is on sunday, add one day
-    if (oneJanvDayNum === 0) {
-      numberOfDays += 1;
-    // substract days
+    if (dateString) {
+      date = dateFunctions.getDate(dateString);
     } else {
-      numberOfDays -= (oneJanvDayNum - 1);
+      date = dateFunctions.getDate();
     }
 
-    return Math.ceil(numberOfDays / 7);
+    return date.isoWeek();
   },
 
   /**
    * Get dates from a week number
-   * @param {string} year Full year.
-   * @param {number} weekNumber The week number.
+   * @param {string} dateString A string date eg. 'YYYY-MM-DD'
    * @returns {array} List of week dates.
    */
-  getDatesFromWeekNumber: (year, weekNumber) => {
-    const firstDay = new Date(dateFunctions.getFirstDayOfWeek(year, weekNumber));
+  getWeekDates: (dateString = null) => {
+    let dateFrom;
+
+    if (dateString) {
+      dateFrom = dateFunctions.getDate(dateString);
+    } else {
+      dateFrom = dateFunctions.getDate();
+    }
+
     const dates = [];
 
     for (let i = 0; i < 7; i += 1) {
-      const date = new Date(firstDay.toString());
-      date.setDate(date.getDate() + i);
-      dates.push(date.toString());
+      const dayNum = dateFrom.get('d');
+      const subtract = dayNum === 0 ? 6 : (dayNum - 1);
+      const date = `${dateFrom.subtract(subtract, 'day').add(i, 'day').format('DD')} ${dateFrom.subtract(subtract, 'day').add(i, 'day').format('MMM')} ${dateFrom.subtract(subtract, 'day').add(i, 'day').format('YYYY')}`;
+
+      dates.push(date);
     }
 
     return dates;
   },
 
   /**
-   * get prev week from a week
-   * @param {date} date A date object.
-   * @returns {number} the ISO week of the prev week.
+   * Get prev week from a date
+   * @param {string} dateString A string date eg. 'YYYY-MM-DD'
+   * @returns {number} Prev week.
    */
-  getPrevWeek: (year, weekNumber) => {
-    const firstDay = new Date(dateFunctions.getFirstDayOfWeek(year, weekNumber));
-    // subtract one week to first day
-    firstDay.setDate(firstDay.getDate() - 7);
-    const firstDayPrevWeek = new Date(firstDay.toString());
+  getPrevWeek: (dateString = null) => {
+    let dateFrom;
 
-    return dateFunctions.getWeekNumberFromDate(firstDayPrevWeek);
+    if (dateString) {
+      dateFrom = dateFunctions.getDate(dateString);
+    } else {
+      dateFrom = dateFunctions.getDate();
+    }
+
+    return dateFrom.subtract(1, 'week').isoWeek();
   },
 };
 
