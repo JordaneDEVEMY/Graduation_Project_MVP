@@ -1,16 +1,23 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 import themeFunctions from '../../utils';
 import logo from './logo.svg';
 import './App.css';
 
-const theme = createTheme({
-  palette: {
-    mode: themeFunctions.getThemeMode(),
-  },
-});
-
 function App() {
+  const [mode, setMode] = React.useState(themeFunctions.getThemeMode());
+  const theme = createTheme({
+    palette: {
+      mode,
+    },
+  });
+
+  const handleThemeMode = (themeMode) => {
+    themeFunctions.setThemeMode(themeMode);
+    setMode(themeMode);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -32,6 +39,11 @@ function App() {
             Learn React
           </a>
         </header>
+
+        <ThemeSwitch
+          themeMode={mode}
+          onChange={handleThemeMode}
+        />
       </div>
     </ThemeProvider>
   );
