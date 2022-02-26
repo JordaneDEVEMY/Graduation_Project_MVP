@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Typography } from '@mui/material';
+import SelectWeek from '../SelectWeek/SelectWeek';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 
 function MobileHeader({
@@ -22,6 +23,7 @@ function MobileHeader({
             themeMode={mode}
             onChange={handleMode}
           />
+          <SelectWeek />
         </Toolbar>
       </AppBar>
     </header>
