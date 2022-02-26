@@ -31,6 +31,18 @@ function SearchAutocomplete({
     setSelectValue(event.target.value);
   };
 
+  /**
+   *
+   * @param {Object} params
+   * @returns a textField component
+   */
+  const renderInput = (params) => {
+    console.log(params.inputProps);
+    return (
+      <TextField {...params} label="Recherche..." />
+    );
+  };
+
   return (
     <Box sx={{
       m: 1, minWidth: 120, display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
@@ -58,9 +70,7 @@ function SearchAutocomplete({
         autoComplete
         options={datas.map((option) => option.title)}
         sx={{ width: '300px', margin: '5px' }}
-        renderInput={(params) => (
-          <TextField {...params} label="Recherche..." />
-        )}
+        renderInput={renderInput}
       />
     </Box>
 

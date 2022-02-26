@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import themeFunctions from '../../utils';
 import logo from './logo.svg';
 import './App.css';
+import SearchContainer from '../SearchContainer/SearchContainer';
 
 const theme = createTheme({
   palette: {
@@ -16,6 +17,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <SearchContainer />
           <p>
             Edit
             {' '}
