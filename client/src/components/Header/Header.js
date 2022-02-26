@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Typography } from '@mui/material';
+import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 
-function MobileHeader() {
+function MobileHeader({
+  mode,
+  handleMode,
+}) {
   return (
     <header>
       <AppBar position="static">
@@ -12,6 +17,11 @@ function MobileHeader() {
           <Typography variant="h6">
             UserName
           </Typography>
+
+          <ThemeSwitch
+            themeMode={mode}
+            onChange={handleMode}
+          />
         </Toolbar>
       </AppBar>
     </header>
@@ -19,6 +29,8 @@ function MobileHeader() {
 }
 
 MobileHeader.propTypes = {
+  mode: PropTypes.string.isRequired,
+  handleMode: PropTypes.func.isRequired,
 };
 MobileHeader.defaultProps = {
 };
