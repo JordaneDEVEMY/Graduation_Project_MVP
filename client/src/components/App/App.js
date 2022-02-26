@@ -1,12 +1,11 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
-import themeFunctions from '../../utils';
-import logo from './logo.svg';
+import Header from '../Header/Header';
+import utils from '../../utils';
 import './App.css';
 
 function App() {
-  const [mode, setMode] = React.useState(themeFunctions.getThemeMode());
+  const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
   const theme = createTheme({
     palette: {
       mode,
@@ -14,35 +13,16 @@ function App() {
   });
 
   const handleThemeMode = (themeMode) => {
-    themeFunctions.setThemeMode(themeMode);
+    utils.themeFunctions.setThemeMode(themeMode);
     setMode(themeMode);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit
-            {' '}
-            <code>src/App.js</code>
-            {' '}
-            and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-
-        <ThemeSwitch
-          themeMode={mode}
-          onChange={handleThemeMode}
+        <Header
+          mode={mode}
+          handleMode={handleThemeMode}
         />
       </div>
     </ThemeProvider>
