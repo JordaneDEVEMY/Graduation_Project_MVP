@@ -5,10 +5,12 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Replay from '@mui/icons-material/Replay';
 import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 import utils from '../../utils';
 import './selectweek.scss';
+import dateFunctions from '../../utils/dateFunctions';
 
 function SelectWeek({
   date,
@@ -17,17 +19,16 @@ function SelectWeek({
   const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
 
-  console.log(utils.dateFunctions.getDate(week.prev.dates[6]).year(), maxOldYear);
   /**
    * Get last ten years
    * @returns {array} List of MenuItem components
    */
   const getYears = () => {
-    let now = new Date().getFullYear();
+    let y = new Date().getFullYear();
     const years = [];
-    while (now >= maxOldYear) {
-      years.push(<MenuItem key={now} value={now}>{now}</MenuItem>);
-      now -= 1;
+    while (y >= maxOldYear) {
+      years.push(<MenuItem key={y} value={y}>{y}</MenuItem>);
+      y -= 1;
     }
 
     return years;
@@ -70,14 +71,18 @@ function SelectWeek({
     setWeek(utils.dateFunctions.getWeek(firstMonday));
   };
 
+  const handleNextButton = () => {
+    const nextMonday = week.next.dates[0];
+    setWeek(utils.dateFunctions.getWeek(nextMonday));
+  };
+
   const handlePrevButton = () => {
     const lastMonday = week.prev.dates[0];
     setWeek(utils.dateFunctions.getWeek(lastMonday));
   };
 
-  const handleNextButton = () => {
-    const nextMonday = week.next.dates[0];
-    setWeek(utils.dateFunctions.getWeek(nextMonday));
+  const handleRefreshButton = () => {
+    setWeek(utils.dateFunctions.getWeek(date));
   };
 
   return (
@@ -92,6 +97,13 @@ function SelectWeek({
         </Button>
       </Grid>
       <Grid item xs={6}>
+        <Button
+          onClick={handleRefreshButton}
+          title="Semaine en cours"
+          disabled={week.current.num === dateFunctions.getDate().isoWeek()}
+        >
+          <Replay />
+        </Button>
         <Select
           value={currentYear}
           onChange={handleYearSelect}
