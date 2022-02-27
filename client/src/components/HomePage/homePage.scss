@@ -6,20 +6,6 @@
 }
 
 .team {
-  &--cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  &--card {
-    margin: 1em;
-    width: 100px;
-    text-align: center;
-  }
-
   &--img {
     width: 100%;
   }

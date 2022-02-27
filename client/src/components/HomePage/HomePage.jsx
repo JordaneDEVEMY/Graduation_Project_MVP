@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import {
-  Button, Grid, Card, CardContent, CardMedia, Box, Typography, Modal, Divider,
+  Button, Card, CardContent, CardMedia, Box, Typography, Modal, Divider,
 } from '@mui/material';
 import './homePage.scss';
 import Login from '../Login/Login';
@@ -136,66 +136,69 @@ function HomePage() {
       <main className="main">
         <Box sx={{
           textAlign: 'center',
-          px: '1em',
           mx: 'auto',
           mt: '2em',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-evenly',
         }}
         >
-          <Grid
-            container
-            spacing={{
-              xs: 4, sm: 2, md: 8,
-            }}
-            justifyContent="center"
+          <Card sx={{
+            minWidth: '20em',
+            maxWidth: '10%',
+            mb: '1em',
+          }}
           >
-            <Grid item xs={11} sm={4} md={3}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={functCoworking}
-                  alt="alt text"
-                />
-                <CardContent>
-                  <Typography>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <CardMedia
+              component="img"
+              height="140"
+              image={functCoworking}
+              alt="alt text"
+            />
+            <CardContent>
+              <Typography>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              </Typography>
+            </CardContent>
+          </Card>
 
-            <Grid item xs={11} sm={4} md={3}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={functDrag}
-                  alt="alt text"
-                />
-                <CardContent>
-                  <Typography>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+          <Card sx={{
+            minWidth: '20em',
+            maxWidth: '10%',
+            mb: '1em',
+          }}
+          >
+            <CardMedia
+              component="img"
+              height="140"
+              image={functDrag}
+              alt="alt text"
+            />
+            <CardContent>
+              <Typography>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              </Typography>
+            </CardContent>
+          </Card>
 
-            <Grid item xs={11} sm={4} md={3}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={functOther}
-                  alt="alt text"
-                />
-                <CardContent>
-                  <Typography>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+          <Card sx={{
+            minWidth: '20em',
+            maxWidth: '10%',
+            mb: '1em',
+          }}
+          >
+            <CardMedia
+              component="img"
+              height="140"
+              image={functOther}
+              alt="alt text"
+            />
+            <CardContent>
+              <Typography>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              </Typography>
+            </CardContent>
+          </Card>
         </Box>
 
         <Box sx={{
@@ -226,38 +229,77 @@ function HomePage() {
         }}
         >
           <Typography variant="h2">Notre équipe</Typography>
-          <div className="team--cards">
-            <div className="team--card">
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-evenly',
+              maxWidth: '900px',
+              mx: 'auto',
+              textAlign: 'center',
+            }}
+          >
+            <Box
+              sx={{
+                margin: '1em',
+                width: '7em',
+              }}
+            >
               <img src={teamIcon} alt="" className="team--img" />
               <Typography mt={1}>
                 Lorem Ipsum
               </Typography>
-            </div>
-            <div className="team--card">
+            </Box>
+
+            <Box
+              sx={{
+                margin: '1em',
+                width: '7em',
+              }}
+            >
               <img src={teamIcon} alt="" className="team--img" />
               <Typography mt={1}>
                 Lorem Ipsum
               </Typography>
-            </div>
-            <div className="team--card">
+            </Box>
+
+            <Box
+              sx={{
+                margin: '1em',
+                width: '7em',
+              }}
+            >
               <img src={teamIcon} alt="" className="team--img" />
               <Typography mt={1}>
                 Lorem Ipsum
               </Typography>
-            </div>
-            <div className="team--card">
+            </Box>
+
+            <Box
+              sx={{
+                margin: '1em',
+                width: '7em',
+              }}
+            >
               <img src={teamIcon} alt="" className="team--img" />
               <Typography mt={1}>
                 Lorem Ipsum
               </Typography>
-            </div>
-            <div className="team--card">
+            </Box>
+
+            <Box
+              sx={{
+                margin: '1em',
+                width: '7em',
+              }}
+            >
               <img src={teamIcon} alt="" className="team--img" />
               <Typography mt={1}>
                 Lorem Ipsum
               </Typography>
-            </div>
-          </div>
+            </Box>
+
+          </Box>
         </Box>
       </main>
     </>
