@@ -1,7 +1,11 @@
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
+import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear';
+import isLeapYear from 'dayjs/plugin/isLeapYear';
 import 'dayjs/locale/fr';
 
+dayjs.extend(isoWeeksInYear);
+dayjs.extend(isLeapYear);
 dayjs.extend(isoWeek);
 
 const dateFunctions = {
@@ -35,6 +39,23 @@ const dateFunctions = {
   },
 
   /**
+   * Get prev week and dates from a date string
+   * @param {string} dateString - A string date eg. 'YYYY-MM-DD'
+   * @returns {object} week Prev week.
+   * @returns {object} week.num Prev week number.
+   * @returns {object} week.dates Prev week dates.
+   */
+  getPrevWeek: (dateString) => {
+    const date = dateFunctions.getDate(dateString);
+    const prevDateString = `${date.subtract(7, 'day').format('YYYY-MM-DD')}`;
+
+    return {
+      num: date.subtract(7, 'day').isoWeek(),
+      dates: dateFunctions.getWeekDates(prevDateString),
+    };
+  },
+
+  /**
    * Get week number and week days from a date string
    * @param {string} dateString - A string date eg. 'YYYY-MM-DD'
    * @returns {object} week Week infos.
@@ -48,24 +69,23 @@ const dateFunctions = {
    * @returns {object} week.prev.num Prev week number.
    * @returns {object} week.prev.dates Prev week dates.
    */
-  getWeek: (dateString) => ({
-    prev: dateFunctions.getPrevWeek(dateString),
-    current: {
-      num: dateFunctions.getWeekNumber(dateString),
-      dates: dateFunctions.getWeekDates(dateString),
-    },
-    next: dateFunctions.getNextWeek(dateString),
-  }),
+  getWeek: (dateString) => {
+    const week = {
+      prev: dateFunctions.getPrevWeek(dateString),
+      current: {
+        num: dateFunctions.getWeekNumber(dateString),
+        dates: dateFunctions.getWeekDates(dateString),
+      },
+      next: dateFunctions.getNextWeek(dateString),
+    };
+    const fromYear = dateFunctions.getDate(week.current.dates[0]).year();
+    const toYear = dateFunctions.getDate(week.current.dates[6]).year();
+    const fromFormat = fromYear !== toYear ? 'DD MMM YY' : 'DD MMM';
+    const fromString = dateFunctions.getDate(week.current.dates[0]).format(fromFormat);
+    const toString = dateFunctions.getDate(week.current.dates[6]).format('DD MMM YY');
+    week.current.label = `Du ${fromString} au ${toString}`;
 
-  /**
-   * Get the week number of a date
-   * @param {string=} dateString - A string date eg. 'YYYY-MM-DD'
-   * @returns {number} the ISO week of the date.
-   */
-  getWeekNumber: (dateString) => {
-    const date = dateFunctions.getDate(dateString);
-
-    return date.isoWeek();
+    return week;
   },
 
   /**
@@ -94,14 +114,20 @@ const dateFunctions = {
    * @returns {object} week.num Prev week number.
    * @returns {object} week.dates Prev week dates.
    */
-  getPrevWeek: (dateString) => {
-    const date = dateFunctions.getDate(dateString);
-    const prevDateString = `${date.subtract(7, 'day').format('YYYY-MM-DD')}`;
+  getWeekMonday: (weekYear, weekNumber) => {
+    const date = dateFunctions.getDate(`${weekYear}-01-01`);
+    console.log(dateFunctions.getWeekDates(date), weekNumber);
+  },
 
-    return {
-      num: date.subtract(7, 'day').isoWeek(),
-      dates: dateFunctions.getWeekDates(prevDateString),
-    };
+  /**
+   * Get the week number of a date
+   * @param {string} dateString - A string date eg. 'YYYY-MM-DD'
+   * @returns {number} the ISO week of the date.
+   */
+  getWeekNumber: (dateString) => {
+    const date = dateFunctions.getDate(dateString);
+
+    return date.isoWeek();
   },
 };
 
