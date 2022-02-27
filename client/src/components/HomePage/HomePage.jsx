@@ -27,6 +27,9 @@ function HomePage() {
   return (
     <>
       <header>
+        {/*
+        Header global block
+        */}
         <Box sx={{
           position: 'relative',
           textAlign: {
@@ -45,6 +48,10 @@ function HomePage() {
           },
         }}
         >
+          {/*
+          Connect button (on display only on small screens),
+          Application logo will be there.
+          */}
           <Box sx={{
             textAlign: 'right',
           }}
@@ -64,6 +71,9 @@ function HomePage() {
             </Button>
           </Box>
 
+          {/*
+          Title and subtitle, with the connect zone, on display only on large screen.
+          */}
           <Box sx={{
             width: {
               md: '30em',
@@ -106,6 +116,11 @@ function HomePage() {
             >
               Your new planning-handling tool
             </Typography>
+
+            {/*
+            Blocks the view of the component on small screens
+            */}
+
             <Box
               sx={{
                 width: '30em',
@@ -117,6 +132,10 @@ function HomePage() {
               }}
             >
               <Login />
+
+              {/*
+              Connection modal : only appears when click the connect button
+              */}
               <Modal
                 sx={{
                   width: '90vw',
@@ -133,7 +152,10 @@ function HomePage() {
         </Box>
       </header>
 
-      <main className="main">
+      <main>
+        {/*
+        Functionnalities global block
+        */}
         <Box sx={{
           textAlign: 'center',
           mx: 'auto',
@@ -201,6 +223,9 @@ function HomePage() {
           </Card>
         </Box>
 
+        {/*
+        2nd functionnality global block
+        */}
         <Box sx={{
           textAlign: 'center',
           padding: 2,
@@ -223,12 +248,19 @@ function HomePage() {
           <img src={encartImg} alt="" className="encart--img" />
         </Box>
 
+        {/*
+        Team global block
+        */}
         <Box sx={{
           textAlign: 'center',
           mt: '2em',
         }}
         >
           <Typography variant="h2">Notre équipe</Typography>
+
+          {/*
+          Individual team items
+          */}
           <Box
             sx={{
               display: 'flex',
