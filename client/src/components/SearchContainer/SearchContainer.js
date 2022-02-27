@@ -7,9 +7,9 @@ import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete';
 
 function SearchContainer() {
   return (
-    <>
+    <div className="search-container">
       <SearchAutocomplete sites={sites} entreprises={entreprises} />
-    </>
+    </div>
   );
 }
 
