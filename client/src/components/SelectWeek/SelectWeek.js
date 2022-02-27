@@ -1,47 +1,51 @@
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
-import React from 'react';
+import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Grid from '@mui/material/Grid';
 import PropTypes from 'prop-types';
 import utils from '../../utils';
 import './selectweek.scss';
 
 function SelectWeek({
-  range,
   date,
 }) {
-  const dateString = date || utils.dateFunctions.getDate().format('YYYY-MM-DD');
-  console.log(dateString);
+  const [week, setWeek] = useState(utils.dateFunctions.getWeek(date));
 
-  const week = utils.dateFunctions.getWeek(dateString);
+  const handlePrevButton = () => {
+    const lastMonday = week.prev.dates[0];
+    setWeek(utils.dateFunctions.getWeek(lastMonday));
+  };
 
-  // for (const type of ['prevs', 'nexts']) {
-  //   for (let i = 0; i < range; i += 1) {
-  //     let week;
-
-  //     if (type === 'prevs') {
-  //       week = weeks.current - (i + 1);
-  //     } else {
-  //       week = weeks.current + (i + 1);
-  //     }
-  //     weeks[type].push(week);
-  //   }
-  // }
-
-  console.log(week);
+  const handleNextButton = () => {
+    const nextMonday = week.next.dates[0];
+    setWeek(utils.dateFunctions.getWeek(nextMonday));
+  };
 
   return (
-    <p>
-      {`current week : ${week.current.num}, range : ${range}`}
-    </p>
+    <Grid container spacing={2}>
+      <Grid item xs>
+        <Button variant="outlined" onClick={handlePrevButton}>
+          <ArrowBackIosIcon />
+        </Button>
+      </Grid>
+      <Grid item xs={6}>
+        <strong>{`Semaine ${week.current.num}`}</strong>
+        {` ${week.current.dates[0]} => ${week.current.dates[6]}`}
+      </Grid>
+      <Grid item xs>
+        <Button variant="outlined" onClick={handleNextButton}>
+          <ArrowForwardIosIcon />
+        </Button>
+      </Grid>
+    </Grid>
   );
 }
 
 SelectWeek.propTypes = {
-  date: PropTypes.number,
-  range: PropTypes.number,
+  date: PropTypes.string,
 };
 SelectWeek.defaultProps = {
-  date: undefined,
-  range: 2,
+  date: utils.dateFunctions.getDate().format('YYYY-MM-DD'),
 };
 export default React.memo(SelectWeek);
