@@ -7,13 +7,12 @@ import './selectweek.scss';
 
 function SelectWeek({
   range,
+  date,
 }) {
-  const week = {
-    prev: utils.dateFunctions.getPrevWeek(),
-    current: utils.dateFunctions.getWeek(),
-    next: utils.dateFunctions.getNextWeek(),
-    dates: utils.dateFunctions.getWeekDates(),
-  };
+  const dateString = date || utils.dateFunctions.getDate().format('YYYY-MM-DD');
+  console.log(dateString);
+
+  const week = utils.dateFunctions.getWeek(dateString);
 
   // for (const type of ['prevs', 'nexts']) {
   //   for (let i = 0; i < range; i += 1) {
@@ -32,15 +31,17 @@ function SelectWeek({
 
   return (
     <p>
-      {`current week : ${week.current}, range : ${range}`}
+      {`current week : ${week.current.num}, range : ${range}`}
     </p>
   );
 }
 
 SelectWeek.propTypes = {
+  date: PropTypes.number,
   range: PropTypes.number,
 };
 SelectWeek.defaultProps = {
+  date: undefined,
   range: 2,
 };
 export default React.memo(SelectWeek);
