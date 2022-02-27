@@ -7,12 +7,12 @@ import './homePage.scss';
 import Login from '../Login/Login';
 
 /* images imports */
-import functCoworking from './public/funct-coworking.svg';
-import functDrag from './public/funct-drag.svg';
-import functOther from './public/funct-other.svg';
-import teamIcon from './public/team-icon.svg';
-import encartImg from './public/encart-img.svg';
-import calendarImg from './public/calendar-img.png';
+import functCoworking from '../../Assets/images/funct-coworking.svg';
+import functDrag from '../../Assets/images/funct-drag.svg';
+import functOther from '../../Assets/images/funct-other.svg';
+import teamIcon from '../../Assets/images/team-icon.svg';
+import encartImg from '../../Assets/images/encart-img.svg';
+import calendarImg from '../../Assets/images/calendar-img.png';
 
 function HomePage() {
   const [modal, displayModal] = useState(false);

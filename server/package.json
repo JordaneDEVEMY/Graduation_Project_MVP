@@ -4,7 +4,10 @@
   "description": "Server Olleks réalisé par l'équipe Back-end : Hicham Chrita et Jordane Devémy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "resetDB" :"sqitch revert -y; sqitch deploy;" ,
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "DEBUG=*,-express:*,-nodemon*,-body-parser:* npx nodemon"
   },
   "keywords": [],
   "author": "",
