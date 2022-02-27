@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import {
-  Button, Grid, Card, CardContent, CardMedia, Box, Typography, Divider, Modal,
+  Button, Grid, Card, CardContent, CardMedia, Box, Typography, Modal, Divider,
 } from '@mui/material';
 import './homePage.scss';
 import Login from '../Login/Login';
@@ -12,6 +12,7 @@ import functDrag from './public/funct-drag.svg';
 import functOther from './public/funct-other.svg';
 import teamIcon from './public/team-icon.svg';
 import encartImg from './public/encart-img.svg';
+import calendarImg from './public/calendar-img.png';
 
 function HomePage() {
   const [modal, displayModal] = useState(false);
@@ -25,70 +26,111 @@ function HomePage() {
 
   return (
     <>
-      <header className="header">
-        <Button
-          onClick={handleModal}
-          variant="contained"
-          size="medium"
-          sx={{
-            margin: '1rem',
-            display: {
-              md: 'none',
-            },
-          }}
+      <header>
+        <Box sx={{
+          position: 'relative',
+          textAlign: {
+            xs: 'center',
+          },
+          backgroundImage: `url(${calendarImg})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right',
+          backgroundSize: {
+            xs: 'cover',
+            md: 'contain',
+          },
+          height: {
+            xs: '50vh',
+            md: '100vh',
+          },
+        }}
         >
-          Se connecter
-        </Button>
-
-        <Box
-          className="header--connect"
-          sx={{
-            width: '30em',
-            padding: '1em',
-            display: {
-              xs: 'none',
-              sm: 'none',
-              md: 'block',
-            },
+          <Box sx={{
+            textAlign: 'right',
           }}
-        >
-          <Typography
-            className="header--title"
-            variant="h1"
-            sx={{
-              textTransform: 'uppercase',
-              fontStyle: 'italic',
-            }}
           >
-            O'lleks
-          </Typography>
-          <Divider />
-          <Typography
-            className="header--title"
-            variant="subtitle1"
-            sx={{
-              fontSize: '2em',
-              fontStyle: 'italic',
-            }}
-          >
-            Your new planning-handling tool
-          </Typography>
+            <Button
+              onClick={handleModal}
+              variant="contained"
+              size="medium"
+              sx={{
+                margin: '1rem',
+                display: {
+                  md: 'none',
+                },
+              }}
+            >
+              Se connecter
+            </Button>
+          </Box>
 
-          <Login />
-          <Modal
-            sx={{
-              width: '90vw',
-              mx: 'auto',
-              mt: '25%',
-            }}
-            open={modal}
-            onClose={handleModal}
+          <Box sx={{
+            width: {
+              md: '30em',
+            },
+            position: 'relative',
+            top: '30%',
+            left: {
+              md: '15%',
+            },
+            color: '#ff4f00',
+          }}
           >
-            <Login />
-          </Modal>
-
+            <Typography
+              variant="h1"
+              sx={{
+                textTransform: 'uppercase',
+                fontStyle: 'italic',
+                fontWeight: '600',
+                fontSize: {
+                  xs: '4em',
+                },
+              }}
+            >
+              O'lleks
+            </Typography>
+            <Divider
+              variant="middle"
+              sx={{
+                mx: 'auto',
+                width: '70%',
+              }}
+            />
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontSize: {
+                  xs: '1.5em',
+                },
+              }}
+            >
+              Your new planning-handling tool
+            </Typography>
+            <Box
+              sx={{
+                width: '30em',
+                display: {
+                  xs: 'none',
+                  sm: 'none',
+                  md: 'block',
+                },
+              }}
+            >
+              <Login />
+              <Modal
+                sx={{
+                  width: '90vw',
+                  mx: 'auto',
+                  mt: '25%',
+                }}
+                open={modal}
+                onClose={handleModal}
+              >
+                <Login />
+              </Modal>
+            </Box>
+          </Box>
         </Box>
-
       </header>
 
       <main className="main">

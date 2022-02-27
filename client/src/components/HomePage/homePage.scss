@@ -1,38 +1,3 @@
-.header {
-  position: relative;
-  height: 100vh;
-  background-image: url(./public/calendar-img.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
-
-  @media screen and (max-width: 899px) {
-    height: 50vh;
-    background-size: cover;
-  }
-
-  &--connect {
-
-    @media screen and (min-width: 900px) {
-      position: relative;
-      top: 25%;
-      left: 10%;
-    }
-  }
-
-  &--title {
-
-    @media screen and (min-width: 900px) {
-    }
-
-    text-align: center;
-  }
-}
-
-.main {
-  margin-top: 1rem;
-}
-
 .encart {
   &--img {
     width: 15em;
