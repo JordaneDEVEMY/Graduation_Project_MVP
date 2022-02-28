@@ -1,14 +1,24 @@
 import React from 'react';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 // import Sidebar from '../Sidebar/Sidebar';
 import './main.scss';
 
 function Main(props) {
   const { children } = props;
+  const theme = useTheme();
+
   return (
-    <main className="main">
+    <Box
+      component="main"
+      className="main"
+      sx={{
+        padding: theme.spacing(2, 6),
+      }}
+    >
       {children}
-    </main>
+    </Box>
   );
 }
 

@@ -33,7 +33,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={
+      <Box
+        className="app"
+        sx={
           {
             backgroundColor: theme.palette.background.default,
           }

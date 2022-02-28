@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import './planning.scss';
 
@@ -6,9 +7,9 @@ function Planning({
   isAdmin,
 }) {
   return (
-    <p>
+    <Typography paragraph sx={{ color: 'text.primary' }}>
       {`Planning en mode ${isAdmin ? 'admin' : 'user'}`}
-    </p>
+    </Typography>
   );
 }
 

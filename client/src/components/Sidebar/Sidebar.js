@@ -1,13 +1,14 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import { styled } from '@mui/material/styles';
-import { IconButton } from '@mui/material';
+import { styled, useTheme } from '@mui/material/styles';
+import { Box, Button } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
 
 const Aside = styled('aside')(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.grey[800],
+  transition: theme.transitions.create(['margin-left', 'transform']),
 }));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -21,31 +22,53 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 function Sidebar() {
   const [open, setOpen] = React.useState(true);
+  const theme = useTheme();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawer = () => {
+    setOpen((oldOpen) => !oldOpen);
   };
 
   return (
     <Aside
       className={`sidebar${open ? ' opened' : ''}`}
     >
-      <DrawerHeader>
-        {open ? (
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronRightIcon />
-          </IconButton>
-        ) : (
-          <IconButton onClick={handleDrawerOpen}>
+      <Button
+        size="small"
+        sx={{
+          position: 'absolute',
+          left: '100%',
+          top: theme.spacing(2),
+          flexDirection: 'column',
+          minWidth: 0,
+          padding: '.5rem',
+        }}
+        onClick={handleDrawer}
+        className="sidebar__button"
+      >
+        {
+          open ? (
             <ChevronLeftIcon />
-          </IconButton>
-        )}
+          ) : (
+            <ChevronRightIcon />
+          )
+        }
+        <Box
+          component="span"
+          sx={{
+            writingMode: 'vertical-lr',
+            textOrientation: 'upright',
+          }}
+        >
+          Menu
+        </Box>
+      </Button>
+
+      <DrawerHeader>
+        SIDEBAR HEADER
       </DrawerHeader>
+
       SIDEBAR
+
     </Aside>
   );
 }

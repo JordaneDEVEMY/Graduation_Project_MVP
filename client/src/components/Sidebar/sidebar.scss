@@ -1,3 +1,8 @@
 .sidebar {
+  position: relative;
   width: 240px;
+
+  &:not(.opened) {
+    margin-left: -240px;
+  }
 }
