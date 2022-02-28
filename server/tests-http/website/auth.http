@@ -13,8 +13,8 @@ POST {{ endpoint }}/
 content-type: application/json
 
 {
-    "email": "j.andy@protonmail.com",
-    "password": "KPP18YZC3OE"
+    "email": "boris-hall@outlook.edu",
+    "password": "BEX05PPW8UA"
 }
 
 ### Post method for visitor connection with bad E/P

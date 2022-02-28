@@ -1,9 +1,10 @@
 const emailValidator = require('email-validator');
+// ? const bcrypt = require('bcryptjs');
+const { generateToken } = require('../../helpers/generateToken');
 const authDatamapper = require('../../models/website/auth');
 const { WebsiteError } = require('../../helpers/errorHandler');
 
 const controller = {
-
   /**
    * Login action
    * ExpressMiddleware signature
@@ -12,9 +13,11 @@ const controller = {
    * @returns {user} Route API JSON response
    */
   async loginAction(req, res) {
-    const isEmailValid = emailValidator.validate(req.body.email);
+    const { email, password } = req.body;
 
-    if (!req.body.email || !req.body.password) {
+    const isEmailValid = emailValidator.validate(email);
+
+    if (!email || !password) {
       throw new WebsiteError(400, 'L\'email et le mot de passe sont requis');
     }
 
@@ -24,11 +27,17 @@ const controller = {
 
     const user = await authDatamapper.findOne(req.body);
 
-    if (!user) {
-      throw new WebsiteError(422, 'Email et/ou mot de passe invalide');
+    // ? if (user && (await bcrypt.compare(password, user.password))) {
+    if (user) {
+      res.json({
+        // ! Rajouter les informations demandées par le front
+        id: user.id,
+        email: user.email,
+        token: generateToken(user.id),
+      });
+    } else {
+      throw new WebsiteError(422, 'SGEG Email et/ou mot de passe invalide');
     }
-
-    return res.json(user);
   },
 };
 
