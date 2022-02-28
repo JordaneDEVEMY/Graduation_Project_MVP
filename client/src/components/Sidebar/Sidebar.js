@@ -1,7 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import { styled, createTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
 import { IconButton } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -20,17 +19,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-function Sidebar({
-  themeMode,
-  width,
-}) {
-  const drawerWidth = width;
+function Sidebar() {
   const [open, setOpen] = React.useState(true);
-  const theme = createTheme({
-    palette: {
-      mode: themeMode,
-    },
-  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -42,14 +32,7 @@ function Sidebar({
 
   return (
     <Aside
-      theme={theme}
-      sx={{
-        width: drawerWidth,
-        backgroundColor: theme.palette.background.default,
-      }}
-      variant="persistent"
-      anchor="left"
-      open={open}
+      className={`sidebar${open ? ' opened' : ''}`}
     >
       <DrawerHeader>
         {open ? (
@@ -66,13 +49,5 @@ function Sidebar({
     </Aside>
   );
 }
-
-Sidebar.propTypes = {
-  themeMode: PropTypes.string.isRequired,
-  width: PropTypes.number,
-};
-Sidebar.defaultProps = {
-  width: 240,
-};
 
 export default React.memo(Sidebar);

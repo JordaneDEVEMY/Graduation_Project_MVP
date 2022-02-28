@@ -1,30 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Toolbar } from '@mui/material';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
+import logo from './logo.svg';
+import './header.scss';
 
 function MobileHeader({
   mode,
   handleMode,
 }) {
   return (
-    <header>
-      <AppBar position="static">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h5">
-            O&apos;lleks
-          </Typography>
-          <Typography variant="h6">
-            UserName
-          </Typography>
+    <AppBar position="relative">
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <img src={logo} alt="O'lleks" className="logo" />
 
-          <ThemeSwitch
-            themeMode={mode}
-            onChange={handleMode}
-          />
-        </Toolbar>
-      </AppBar>
-    </header>
+        <ThemeSwitch
+          themeMode={mode}
+          onChange={handleMode}
+        />
+      </Toolbar>
+    </AppBar>
   );
 }
 
