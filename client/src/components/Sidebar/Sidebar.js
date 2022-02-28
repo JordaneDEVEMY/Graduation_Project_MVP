@@ -2,7 +2,7 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemText,
+  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography,
 } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -60,12 +60,14 @@ function Sidebar() {
         component="div"
         sx={{
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           padding: theme.spacing(1),
-          justifyContent: 'flex-end',
+          justifyContent: 'center',
+          color: theme.palette.text.primary,
         }}
       >
-        SIDEBAR HEADER
+        <Typography variant="h6">SIDEBAR HEADER</Typography>
       </Box>
       <Box
         component="div"

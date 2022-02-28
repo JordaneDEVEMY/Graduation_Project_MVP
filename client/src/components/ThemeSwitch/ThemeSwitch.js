@@ -2,9 +2,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import './themeswitch.scss';
 
 const SwitchInput = styled('input')``;
@@ -27,10 +28,10 @@ const SwitchThumb = styled('span')`
 `;
 
 function ThemeSwitch({
-  themeMode,
   onChange,
 }) {
-  const checked = (themeMode === 'dark');
+  const theme = useTheme();
+  const checked = (theme.palette.mode === 'dark');
   const stateClasses = {
     checked,
   };
@@ -41,10 +42,16 @@ function ThemeSwitch({
   };
 
   return (
-    <div className={`switchMode ${themeMode}--mode`}>
-      <span className="switchMode__track">
+    <div className={`switchMode ${theme.palette.mode}--mode`}>
+      <Box
+        component="span"
+        sx={{
+          bgcolor: '#2F3A45',
+        }}
+        className="switchMode__track"
+      >
         <SwitchThumb className={`switchMode__thumb ${clsx(stateClasses)}`} />
-      </span>
+      </Box>
       <SwitchInput
         type="checkbox"
         checked={checked}
@@ -57,7 +64,6 @@ function ThemeSwitch({
 }
 
 ThemeSwitch.propTypes = {
-  themeMode: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

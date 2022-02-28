@@ -42,7 +42,6 @@ function App() {
         }
       >
         <Header
-          mode={mode}
           handleMode={handleThemeMode}
         />
         <Routes>
@@ -54,7 +53,7 @@ function App() {
                   <Route
                     path="planning"
                     element={(
-                      <Planning theme={theme} isAdmin={user.is_admin} />
+                      <Planning isAdmin={user.is_admin} />
                     )}
                   />
                 </Route>
@@ -64,7 +63,7 @@ function App() {
                   <Route
                     path="/:user_id/planning"
                     element={(
-                      <Planning theme={theme} isAdmin={user.is_admin} />
+                      <Planning isAdmin={user.is_admin} />
                     )}
                   />
                 </Route>

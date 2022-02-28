@@ -7,7 +7,6 @@ import logo from './logo.svg';
 import './header.scss';
 
 function MobileHeader({
-  mode,
   handleMode,
 }) {
   return (
@@ -18,7 +17,6 @@ function MobileHeader({
         </Link>
 
         <ThemeSwitch
-          themeMode={mode}
           onChange={handleMode}
         />
       </Toolbar>
@@ -27,7 +25,6 @@ function MobileHeader({
 }
 
 MobileHeader.propTypes = {
-  mode: PropTypes.string.isRequired,
   handleMode: PropTypes.func.isRequired,
 };
 MobileHeader.defaultProps = {
