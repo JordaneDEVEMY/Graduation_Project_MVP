@@ -8,16 +8,27 @@ const router = express.Router();
 router
   .route('/:id(\\d+)')
   /**
-   * GET /users/{id}
+   * GET /user/{id}
    * @summary Get one user
    * @tags User
    * @param {number} id.path.required - User identifier
    * @return {User} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
-   * //! à compléter avant le PUSH !!!!!!
    */
   .get(controllerHandler(userController.getOne));
-// TODO PATCH
+
+router
+  .route('/:id(\\d+)/profil')
+  /**
+   * PATCH /user/{id}/profil
+   * @summary Update User profile
+   * @tags User
+   * @param {number} id.path.required - User identifier
+   * @return {User} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
+  .patch(controllerHandler(userController.update));
 
 module.exports = router;

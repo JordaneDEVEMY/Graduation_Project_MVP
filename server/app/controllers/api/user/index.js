@@ -3,9 +3,9 @@ const { ApiError } = require('../../../helpers/errorHandler');
 
 const controller = {
   /**
-   * User controller to get a user with REST response
+   * User controller to get an user with REST response
    * ExpressMiddleware signature
-   * @param {object} req Express req.object used for url params id
+   * @param {object} req Express req.object used for url id params
    * @param {object} res Express response object
    * @returns {string} Route API JSON response
    */
@@ -17,6 +17,18 @@ const controller = {
     }
 
     return res.json(user);
+  },
+
+  /**
+   * User controller to update an user
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id and body params
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async update(req, res) {
+    const userUpdate = await userDatamapper.update(req.params.id, req.body);
+    return res.json(userUpdate);
   },
 };
 
