@@ -6,6 +6,7 @@ import HomePage from '../HomePage/HomePage';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
+import Footer from '../Footer/Footer';
 import utils from '../../utils';
 import './App.css';
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="/mentions-legales" element={<Legals />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
+        <Footer />
       </div>
     </ThemeProvider>
   );

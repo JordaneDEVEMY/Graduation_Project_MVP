@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 // import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -12,43 +12,52 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import './footer.scss';
 
 function Footer() {
+  const user = {
+    id: 1,
+    is_admin: true,
+  };
+
   return (
     <footer>
       <Box>
         <Typography>
-          Mentions légales
+          <Link to="/mentions-legales">Mentions légales</Link>
         </Typography>
       </Box>
 
-      <BottomNavigation
-        showLabels
-        sx={{
-          display: {
-            xs: 'block',
-            md: 'none',
-          },
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-      >
-        {/* <Link to="/"> */}
-        <BottomNavigationAction label="Plannings" icon={<DateRangeRoundedIcon />} />
-        {/* </Link> */}
+      {user.id
+      && (user.is_admin && (
+        <BottomNavigation
+          showLabels
+          sx={{
+            display: {
+              xs: 'block',
+              md: 'none',
+            },
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}
+        >
+          {/* <Link to="/"> */}
+          <BottomNavigationAction label="Plannings" icon={<DateRangeRoundedIcon />} />
+          {/* </Link> */}
 
-        {/* <Link to="/"> */}
-        <BottomNavigationAction disabled label="Personnel" icon={<BadgeRoundedIcon />} />
-        {/* </Link> */}
+          {/* <Link to="/"> */}
+          <BottomNavigationAction disabled label="Personnel" icon={<BadgeRoundedIcon />} />
+          {/* </Link> */}
 
-        {/* <Link to="/"> */}
-        <BottomNavigationAction disabled label="Sites" icon={<EngineeringIcon />} />
-        {/* </Link> */}
+          {/* <Link to="/"> */}
+          <BottomNavigationAction disabled label="Sites" icon={<EngineeringIcon />} />
+          {/* </Link> */}
 
-        {/* <Link to="/"> */}
-        <BottomNavigationAction disabled label="Clients" icon={<SupervisorAccountIcon />} />
-        {/* </Link> */}
-      </BottomNavigation>
+          {/* <Link to="/"> */}
+          <BottomNavigationAction disabled label="Clients" icon={<SupervisorAccountIcon />} />
+          {/* </Link> */}
+        </BottomNavigation>
+      ))}
+
     </footer>
   );
 }
