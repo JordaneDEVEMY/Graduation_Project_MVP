@@ -40,21 +40,21 @@ function Footer() {
             right: 0,
           }}
         >
-          {/* <Link to="/"> */}
-          <BottomNavigationAction label="Plannings" icon={<DateRangeRoundedIcon />} />
-          {/* </Link> */}
+          <Link to="/admins/planning">
+            <BottomNavigationAction label="Plannings" icon={<DateRangeRoundedIcon />} />
+          </Link>
 
-          {/* <Link to="/"> */}
-          <BottomNavigationAction disabled label="Personnel" icon={<BadgeRoundedIcon />} />
-          {/* </Link> */}
+          <Link to="/admins/personnel">
+            <BottomNavigationAction disabled label="Personnel" icon={<BadgeRoundedIcon />} />
+          </Link>
 
-          {/* <Link to="/"> */}
-          <BottomNavigationAction disabled label="Sites" icon={<EngineeringIcon />} />
-          {/* </Link> */}
+          <Link to="/admins/sites">
+            <BottomNavigationAction disabled label="Sites" icon={<EngineeringIcon />} />
+          </Link>
 
-          {/* <Link to="/"> */}
-          <BottomNavigationAction disabled label="Clients" icon={<SupervisorAccountIcon />} />
-          {/* </Link> */}
+          <Link to="/admins/clients">
+            <BottomNavigationAction disabled label="Clients" icon={<SupervisorAccountIcon />} />
+          </Link>
         </BottomNavigation>
       ))}
 
