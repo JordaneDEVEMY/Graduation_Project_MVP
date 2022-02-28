@@ -8,12 +8,6 @@ import Header from '../Header/Header';
 import utils from '../../utils';
 import './App.css';
 
-// const theme = createTheme({
-//   palette: {
-//     mode: themeFunctions.getThemeMode(),
-//   },
-// });
-
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
   const theme = createTheme({
