@@ -14,10 +14,12 @@ const errorHandler = (err, res) => {
 
   if (statusCode === 500) {
     console.error(err);
+
   }
 
   if (statusCode === 500 && res.app.get('env') !== 'development') {
     message = 'Internal Server Error';
+
   }
 
   res.status(statusCode).json({

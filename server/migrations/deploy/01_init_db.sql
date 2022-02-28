@@ -15,7 +15,7 @@ CREATE TABLE "absence" (
     "starting_date" DATE NOT NULL,
     "estimated_end_date" DATE NOT NULL,
     "ending_date" DATE,
-    "assignment_id" INT NOT NULL,
+    "assignment_id" INT NOT NULL ON DELETE CASCADE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
@@ -69,7 +69,7 @@ CREATE TABLE "site" (
     "zip_code" INT NOT NULL,
     "manager_name" TEXT,
     "estimated_duration" INT,
-    "assignment_id" INT NOT NULL,
+    "assignment_id" INT,
     "company_id" INT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
