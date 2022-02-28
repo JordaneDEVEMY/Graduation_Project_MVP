@@ -26,9 +26,17 @@ function Footer() {
 
   return (
     <footer>
-      <Box>
+      <Box
+        className="footer--content"
+        sx={{
+          mt: '1em',
+          p: '0.5em',
+        }}
+      >
         <Typography>
           <Link to="/mentions-legales">Mentions légales</Link>
+          {' '}
+          - Tous droits réservés © O'lleks 2022
         </Typography>
       </Box>
 
