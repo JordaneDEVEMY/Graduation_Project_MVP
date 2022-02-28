@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 // import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import { useNavigate, Link } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
