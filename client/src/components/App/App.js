@@ -1,13 +1,17 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Adminlayout from '../../layouts/AdminLayout';
 import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
 import utils from '../../utils';
-import './App.css';
+import './app.scss';
 
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
@@ -28,7 +32,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <div className="app">
         <Header
           mode={mode}
           handleMode={handleThemeMode}
@@ -38,10 +42,24 @@ function App() {
           {user.id
             && (
               (user.is_admin && (
-                <Route path="/admins/planning" element={<Planning isAdmin />} />
+                <Route path="/admins" element={<Adminlayout />}>
+                  <Route
+                    path="planning"
+                    element={(
+                      <Planning theme={theme} isAdmin={user.is_admin} />
+                    )}
+                  />
+                </Route>
               ))
               || (!user.is_admin && (
-                <Route path="/users/:user_id/planning" element={<Planning isAdmin />} />
+                <Route path="/users">
+                  <Route
+                    path="/:user_id/planning"
+                    element={(
+                      <Planning theme={theme} isAdmin={user.is_admin} />
+                    )}
+                  />
+                </Route>
               ))
             )}
           <Route path="/mentions-legales" element={<Legals />} />
