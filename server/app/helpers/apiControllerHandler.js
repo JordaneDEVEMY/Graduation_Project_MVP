@@ -1,4 +1,4 @@
-const { WebsiteError } = require('./errorHandler');
+const { ApiError } = require('./errorHandler');
 
 /**
  * Controller wrapper to manage errors
@@ -9,6 +9,6 @@ module.exports = (controller) => async (req, res, next) => {
   try {
     await controller(req, res, next);
   } catch (err) {
-    next(new WebsiteError(err.statusCode, err.message));
+    next(new ApiError(err.statusCode, err.message));
   }
 };
