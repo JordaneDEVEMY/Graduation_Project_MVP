@@ -3,6 +3,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { Box } from '@mui/material';
+import { blue } from '@mui/material/colors';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled, useTheme } from '@mui/material/styles';
@@ -46,11 +47,16 @@ function ThemeSwitch({
       <Box
         component="span"
         sx={{
-          bgcolor: '#2F3A45',
+          bgcolor: theme.palette.divider,
         }}
         className="switchMode__track"
       >
-        <SwitchThumb className={`switchMode__thumb ${clsx(stateClasses)}`} />
+        <SwitchThumb
+          sx={{
+            bgcolor: blue[500],
+          }}
+          className={`switchMode__thumb ${clsx(stateClasses)}`}
+        />
       </Box>
       <SwitchInput
         type="checkbox"

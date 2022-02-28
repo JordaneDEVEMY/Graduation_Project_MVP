@@ -27,6 +27,7 @@ function Sidebar() {
     >
       <Button
         size="small"
+        variant="text"
         sx={{
           position: 'absolute',
           left: '100%',
