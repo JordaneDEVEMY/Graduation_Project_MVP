@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Toolbar } from '@mui/material';
+import { AppBar, Toolbar } from '@mui/material';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 import logo from './logo.svg';
 import './header.scss';
@@ -11,7 +11,7 @@ function MobileHeader({
   handleMode,
 }) {
   return (
-    <header>
+    <AppBar position="relative" color="primary">
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Link to="/">
           <img src={logo} alt="O'lleks" className="logo" />
@@ -22,7 +22,7 @@ function MobileHeader({
           onChange={handleMode}
         />
       </Toolbar>
-    </header>
+    </AppBar>
   );
 }
 

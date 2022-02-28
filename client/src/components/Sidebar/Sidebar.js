@@ -6,11 +6,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
 
-const Aside = styled('aside')(({ theme }) => ({
-  backgroundColor: theme.palette.grey[800],
-  transition: theme.transitions.create(['margin-left', 'transform']),
-}));
-
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -29,8 +24,14 @@ function Sidebar() {
   };
 
   return (
-    <Aside
+    <Box
+      component="aside"
       className={`sidebar${open ? ' opened' : ''}`}
+      variant="outlined"
+      sx={{
+        borderRight: `1px solid ${theme.palette.divider}`,
+        transition: theme.transitions.create(['margin-left', 'transform']),
+      }}
     >
       <Button
         size="small"
@@ -69,7 +70,7 @@ function Sidebar() {
 
       SIDEBAR
 
-    </Aside>
+    </Box>
   );
 }
 
