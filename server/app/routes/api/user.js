@@ -1,5 +1,8 @@
 const express = require('express');
 
+const validate = require('../../validation');
+const userSchema = require('../../validation/userSchema');
+
 const { userController } = require('../../controllers');
 const controllerHandler = require('../../helpers/apiControllerHandler');
 
@@ -29,6 +32,6 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .patch(controllerHandler(userController.update));
+  .patch(validate('body', userSchema), controllerHandler(userController.update));
 
 module.exports = router;

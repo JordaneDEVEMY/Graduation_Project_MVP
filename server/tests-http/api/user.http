@@ -18,15 +18,25 @@ GET {{ endpoint }}/9999
 GET {{ endpoint }}/tartempion
 
 ### Patch an user 
+PATCH {{ endpoint }}/1/profil
 content-type: application/json
 
 {
-    "email": "j.andy@protonmail.com",
-    "password": "KPP18YZC3OE"
+    "email": "react4ever@protonmail.com",
+    "password": "TESTDEVANTLESREACT"
+}
+
+### Patch an user with a bad email
+PATCH {{ endpoint }}/1/profil
+content-type: application/json
+
+{
+    "email": "jaipasmislearobase",
+    "password": "TESTDEVANTLESREACT"
 }
 
 ### Patch an inexistant user
-PATCH {{ endpoint }}/1/profil
+PATCH {{ endpoint }}/999/profil
 content-type: application/json
 
 {
