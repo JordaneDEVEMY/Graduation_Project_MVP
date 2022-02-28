@@ -17,11 +17,21 @@ function Footer() {
     is_admin: true,
   };
 
+  /*
+    Changes the URL to navigate in the app
+  */
   const [value, setValue] = React.useState('');
   const navigate = useNavigate();
+
+  /**
+   * Function which 'extract' the value of our Navigation to change the URL.
+   * @param {*} event
+   * @param {string} newValue / the new URL
+   */
   const handleChange = (event, newValue) => {
     navigate(`${newValue}`);
     setValue(newValue);
+    console.log(`Switch from ${value} to ${newValue}`);
   };
 
   return (
