@@ -8,6 +8,7 @@ import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
 import utils from '../../utils';
 import './App.css';
+import Carousel from '../Carousel/Carousel';
 
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
@@ -29,6 +30,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        <Carousel />
         <Header
           mode={mode}
           handleMode={handleThemeMode}
