@@ -2,112 +2,152 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import {
-  Box, Typography,
+  Box, Typography, Divider,
 } from '@mui/material';
 import './legals.scss';
 
-/* image import */
-import legals from '../../Assets/images/legals.png';
-
 function Legals() {
   return (
-    <>
-      <Box sx={{
-        position: 'relative',
-        backgroundImage: `url(${legals})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right',
-        backgroundSize: 'contain',
-        height: '50vh',
-      }}
-      >
-        <Box sx={{
-          position: 'relative',
-          top: '40%',
-          color: '#ff4f00',
-          mx: 'auto',
-        }}
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              textTransform: 'uppercase',
-              fontStyle: 'italic',
-              fontWeight: '600',
-              fontSize: '4em',
-            }}
-          >
-            Mentions légales
-          </Typography>
-        </Box>
-      </Box>
-
-      <Box
+    <Box sx={{
+      width: '70vw',
+      mx: 'auto',
+      my: '2em',
+      backgroundColor: '#bce5ff',
+      borderRadius: '10px',
+      padding: '2em',
+      textAlign: 'left',
+    }}
+    >
+      <Typography
+        variant="h1"
         sx={{
-          p: '2em',
-          textAlign: 'left',
+          textTransform: 'uppercase',
+          fontStyle: 'italic',
+          fontWeight: '600',
+          fontSize: '3em',
+          color: 'white',
+          textAlign: 'center',
         }}
       >
-        <Typography
-          variant="h2"
-          className="section--title"
-        >
-          1 - Édition du site
-        </Typography>
+        Mentions légales
+      </Typography>
+      <Divider />
+      <Typography
+        sx={{
+          mt: '1em',
+          fontSize: '1.5em',
+        }}
+      >
+        Édition du site
+      </Typography>
 
-        <Typography
-          variant="body1"
-          className="section--text"
-        >
-          En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site internet
-          {' '}
-          <strong>https://olleks.com</strong>
-          {' '}
-          l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi:
-        </Typography>
-        <Typography
-          variant="body1"
-          className="section--text"
-        >
-          <strong>Propriétaires du site :</strong>
-          {' '}
-          DEVEMY Jordane, CHRITA Hicham, TASSEL Pascal, GUILLEMOT Ben, LEBRETON Mathieu
+      <Typography>
+        En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site internet https://olleks.com l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :
+      </Typography>
 
-          <ul>
-            <li>olleks@oclock.io</li>
-            <li>+33 6 01 02 03 04</li>
-            <li>1, Blvd de mon salon 77852 Du coin France.</li>
-          </ul>
-        </Typography>
+      <Typography
+        sx={{
+          mt: '1em',
+          fontWeight: '600',
+        }}
+      >
+        Propriétaires du site :
+      </Typography>
 
-        <Typography
-          variant="h2"
-          className="section--title"
-        >
-          2 - Propriété intellectuelle et contrefaçons.
-        </Typography>
+      <Typography>
+        Devémy Jordane, Chrita Hicham, Guillemot Ben, Tassel Pascal, Lebreton Mathieu
+      </Typography>
 
-        <Typography
-          variant="body1"
-          className="section--text"
-        >
-          DEVEMY Jordane, CHRITA Hicham, TASSEL Pascal, GUILLEMOT Ben, LEBRETON Mathieu sont propriétaires des droits de propriété intellectuelle et détient les droits d’usage sur tous les éléments accessibles sur le site internet, notamment les textes, images, graphismes, logos, vidéos, architecture, icônes et sons.
-        </Typography>
-        <Typography
-          variant="body1"
-          className="section--text"
-        >
-          Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de DEVEMY Jordane, CHRITA Hicham, TASSEL Pascal, GUILLEMOT Ben, LEBRETON Mathieu.
-        </Typography>
-        <Typography
-          variant="body1"
-          className="section--text"
-        >
-          Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles L.335-2 et suivants du Code de Propriété Intellectuelle.
-        </Typography>
+      <Typography
+        sx={{
+          mt: '1.5em',
+          fontWeight: '600',
+        }}
+      >
+        Contact :
+      </Typography>
 
-      </Box>
-    </>
+      <Typography>
+        olleks@oclock.com
+      </Typography>
+
+      <Typography
+        sx={{
+          mt: '1em',
+          fontSize: '1.5em',
+        }}
+      >
+        Limitations de responsabilité.
+      </Typography>
+
+      <Typography>
+        L'équipe O'lleks ne pourra être tenue pour responsable des dommages directs et indirects causés au matériel de l’utilisateur, lors de l’accès au site https://olleks.com.
+      </Typography>
+
+      <Typography>
+        L'équipe O'lleks décline toute responsabilité quant à l’utilisation qui pourrait être faite des informations et contenus présents sur https://olleks.com.
+      </Typography>
+
+      <Typography>
+        L'équipe O'lleks s’engage à sécuriser au mieux le site https://olleks.com, cependant sa responsabilité ne pourra être mise en cause si des données indésirables sont importées et installées sur son site à son insu.
+      </Typography>
+
+      <Typography>
+        Des espaces interactifs (espace contact ou commentaires) sont à la disposition des utilisateurs. L'équipe O'lleks se réserve le droit de supprimer, sans mise en demeure préalable, tout contenu déposé dans cet espace qui contreviendrait à la législation applicable en France, en particulier aux dispositions relatives à la protection des données.
+      </Typography>
+
+      <Typography
+        sx={{
+          mt: '1em',
+          fontSize: '1.5em',
+        }}
+      >
+        CNIL et gestion des données personnelles.
+      </Typography>
+
+      <Typography>
+        Conformément aux dispositions de la loi 78-17 du 6 janvier 1978 modifiée, l’utilisateur du site https://olleks.com dispose d’un droit d’accès, de modification et de suppression des informations collectées.
+      </Typography>
+
+      <Typography
+        sx={{
+          mt: '1em',
+          fontSize: '1.5em',
+        }}
+      >
+        Liens hypertextes et cookies
+      </Typography>
+
+      <Typography>
+        La navigation sur le site https://olleks.com est susceptible de provoquer l’installation de cookie(s) sur l’ordinateur de l’utilisateur.
+      </Typography>
+
+      <Typography>
+        Un "cookie" est un fichier de petite taille qui enregistre des informations relatives à la navigation d’un utilisateur sur un site. Les données ainsi obtenues permettent d'obtenir des mesures de fréquentation, par exemple.
+      </Typography>
+
+      <Typography>
+        Vous avez la possibilité d’accepter ou de refuser les cookies en modifiant les paramètres de votre navigateur. Aucun cookie ne sera déposé sans votre consentement.
+      </Typography>
+
+      <Typography>
+        Les cookies sont enregistrés pour une durée maximale de 1 mois.
+      </Typography>
+
+      <Typography
+        sx={{
+          mt: '1em',
+          fontSize: '1.5em',
+        }}
+      >
+        Droit applicable et attribution de juridiction.
+      </Typography>
+
+      <Typography>
+        Tout litige en relation avec l’utilisation du site https://olleks.com est soumis au droit français.
+      </Typography>
+
+    </Box>
   );
 }
 
