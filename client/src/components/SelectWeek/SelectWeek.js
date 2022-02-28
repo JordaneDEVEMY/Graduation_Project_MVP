@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Replay from '@mui/icons-material/Replay';
-import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import utils from '../../utils';
 import './selectweek.scss';
@@ -18,6 +18,8 @@ function SelectWeek({
   const [week, setWeek] = useState(utils.dateFunctions.getWeek(date));
   const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
+
+  console.log(week);
 
   /**
    * Get last ten years
@@ -86,8 +88,13 @@ function SelectWeek({
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs="auto">
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      gutter={2}
+    >
+      <Box>
         <Button
           disabled={(currentYear === maxOldYear) && (week.current.num === 1)}
           onClick={handlePrevButton}
@@ -95,36 +102,51 @@ function SelectWeek({
         >
           <ArrowBackIosIcon />
         </Button>
-      </Grid>
-      <Grid item xs={6}>
-        <Button
-          onClick={handleRefreshButton}
-          title="Semaine en cours"
-          disabled={week.current.num === dateFunctions.getDate().isoWeek()}
-        >
-          <Replay />
-        </Button>
-        <Select
-          value={currentYear}
-          onChange={handleYearSelect}
-        >
-          {getYears()}
-        </Select>
-        <Select
-          value={week.current.num}
-          onChange={handleWeekSelect}
-        >
-          {getWeeks()}
-        </Select>
-        <strong>{`Semaine ${week.current.num}`}</strong>
-        <small>{` ${week.current.label}`}</small>
-      </Grid>
-      <Grid item xs="auto">
+      </Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexWrap="nowrap"
+        spacing={2}
+      >
+        <Box>
+          <Button
+            onClick={handleRefreshButton}
+            title="Semaine en cours"
+            disabled={week.current.num === dateFunctions.getDate().isoWeek()}
+          >
+            <Replay />
+          </Button>
+        </Box>
+        <Box>
+          <Select
+            size="small"
+            value={currentYear}
+            onChange={handleYearSelect}
+          >
+            {getYears()}
+          </Select>
+        </Box>
+        <Box>
+          <Select
+            size="small"
+            value={week.current.num}
+            onChange={handleWeekSelect}
+          >
+            {getWeeks()}
+          </Select>
+        </Box>
+        <Box>
+          <span>{`${week.current.label}`}</span>
+        </Box>
+      </Box>
+      <Box>
         <Button variant="outlined" onClick={handleNextButton} title={`Semaine ${week.next.num}`}>
           <ArrowForwardIosIcon />
         </Button>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 }
 
