@@ -14,7 +14,7 @@ const options = {
   // Visible
   exposeApiDocs: true,
   // On this URL
-  //apiDocsPath: '/olleks/docs',
+  apiDocsPath: '/olleks/docs',
 };
 
 /**

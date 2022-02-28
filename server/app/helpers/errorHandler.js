@@ -8,15 +8,10 @@ const WebsiteError = require('../errors/websiteError');
 const errorHandler = (err, res) => {
   let { statusCode, message } = err;
 
-  if (Number.isNaN(Number(statusCode))) {
-    statusCode = 500;
-  }
+  statusCode = statusCode ?? 500;
 
   if (statusCode === 500) {
     console.error(err);
-  }
-
-  if (statusCode === 500 && res.app.get('env') !== 'development') {
     message = 'Internal Server Error';
   }
 

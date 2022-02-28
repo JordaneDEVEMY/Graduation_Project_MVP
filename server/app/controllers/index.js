@@ -1,3 +1,4 @@
 const websiteController = require('./website');
+const websiteAuth = require('./website/auth');
 
-module.exports = { websiteController };
+module.exports = { websiteController, websiteAuth };
