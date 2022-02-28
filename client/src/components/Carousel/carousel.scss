@@ -1,22 +1,30 @@
 .carousel {
-  width: 100vw;
-  height: 100vh;
-}
-
-.swiper {
+  position: relative;
   width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
-.swiper-card  {
-  margin: 0 auto;
-  width: 50%;
-  height: 90%;
+.arrow-left {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  font-size: 3rem;
+  z-index: 10;
+}
+
+.arrow-right {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  font-size: 5rem;
+  z-index: 10;
+}
+
+.image {
+  width: 1000px;
+  height: auto;
 }
