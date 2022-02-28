@@ -11,9 +11,11 @@ router
    * POST /login
    * @summary Connect on website
    * @tags Authentification
-   * @return {Category} 200 - success response - application/json
-  * @return {WebsiteError} 400 - Bad request response - application/json
-  * @return {WebsiteError} 404 - Category not found - application/json
+   * @param {User} user
+   * @return {User} 200 - success response - application/json
+   * @return {WebsiteError} 400 - Bad request response - application/json
+   * @return {WebsiteError} 422 - Incorrect email/password association - application/json
+   * @return {WebsiteError} 500 - Internal server error - application/json
    */
   .post(controllerHandler(websiteAuth.loginAction));
 
