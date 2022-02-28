@@ -1,19 +1,12 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import { Box, Button } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import {
+  Box, Button, List, ListItem, ListItemButton, ListItemText,
+} from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}));
 
 function Sidebar() {
   const [open, setOpen] = React.useState(true);
@@ -27,7 +20,6 @@ function Sidebar() {
     <Box
       component="aside"
       className={`sidebar${open ? ' opened' : ''}`}
-      variant="outlined"
       sx={{
         borderRight: `1px solid ${theme.palette.divider}`,
         transition: theme.transitions.create(['margin-left', 'transform']),
@@ -64,12 +56,41 @@ function Sidebar() {
         </Box>
       </Button>
 
-      <DrawerHeader>
+      <Box
+        component="div"
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: theme.spacing(1),
+          justifyContent: 'flex-end',
+        }}
+      >
         SIDEBAR HEADER
-      </DrawerHeader>
-
-      SIDEBAR
-
+      </Box>
+      <Box
+        component="div"
+      >
+        <nav aria-label="main mailbox folders">
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Inbox"
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Drafts"
+                />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </nav>
+      </Box>
     </Box>
   );
 }
