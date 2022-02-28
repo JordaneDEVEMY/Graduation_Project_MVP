@@ -4,6 +4,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Box } from '@mui/material';
 import Adminlayout from '../../layouts/AdminLayout';
 import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
@@ -32,7 +33,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="app">
+      <Box sx={
+          {
+            backgroundColor: theme.palette.background.default,
+          }
+        }
+      >
         <Header
           mode={mode}
           handleMode={handleThemeMode}
@@ -65,7 +71,7 @@ function App() {
           <Route path="/mentions-legales" element={<Legals />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
-      </div>
+      </Box>
     </ThemeProvider>
   );
 }
