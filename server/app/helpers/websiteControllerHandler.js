@@ -9,7 +9,6 @@ module.exports = (controller) => async (req, res, next) => {
   try {
     await controller(req, res, next);
   } catch (err) {
-    const websiteError = new WebsiteError(500, err.message);
-    next(websiteError);
+    next(new WebsiteError(err.statusCode, err.message));
   }
 };
