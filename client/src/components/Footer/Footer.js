@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -17,6 +18,13 @@ function Footer() {
     is_admin: true,
   };
 
+  const [value, setValue] = React.useState('');
+  const navigate = useNavigate();
+  const handleChange = (event, newValue) => {
+    navigate(`${newValue}`);
+    setValue(newValue);
+  };
+
   return (
     <footer>
       <Box>
@@ -29,6 +37,8 @@ function Footer() {
       && (user.is_admin && (
         <BottomNavigation
           showLabels
+          value={value}
+          onChange={handleChange}
           sx={{
             display: {
               xs: 'block',
@@ -40,21 +50,14 @@ function Footer() {
             right: 0,
           }}
         >
-          <Link to="/admins/planning">
-            <BottomNavigationAction label="Plannings" icon={<DateRangeRoundedIcon />} />
-          </Link>
+          <BottomNavigationAction label="Plannings" value="admins/planning" icon={<DateRangeRoundedIcon />} />
 
-          <Link to="/admins/personnel">
-            <BottomNavigationAction disabled label="Personnel" icon={<BadgeRoundedIcon />} />
-          </Link>
+          <BottomNavigationAction disabled label="Personnel" value="admins/personnel" icon={<BadgeRoundedIcon />} />
 
-          <Link to="/admins/sites">
-            <BottomNavigationAction disabled label="Sites" icon={<EngineeringIcon />} />
-          </Link>
+          <BottomNavigationAction disabled label="Sites" value="admins/sites" icon={<EngineeringIcon />} />
 
-          <Link to="/admins/clients">
-            <BottomNavigationAction disabled label="Clients" icon={<SupervisorAccountIcon />} />
-          </Link>
+          <BottomNavigationAction disabled label="Clients" value="admins/clients" icon={<SupervisorAccountIcon />} />
+
         </BottomNavigation>
       ))}
 
@@ -66,4 +69,5 @@ Footer.propTypes = {
 };
 Footer.defaultProps = {
 };
+
 export default React.memo(Footer);
