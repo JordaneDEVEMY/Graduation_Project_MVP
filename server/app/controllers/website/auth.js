@@ -14,10 +14,6 @@ const controller = {
   async loginAction(req, res) {
     const isEmailValid = emailValidator.validate(req.body.email);
 
-    if (!req.body.email || !req.body.password) {
-      throw new WebsiteError(400, 'L\'email et le mot de passe sont requis');
-    }
-
     if (!isEmailValid) {
       throw new WebsiteError(400, 'Cet email n\'est pas valide');
     }
