@@ -2,11 +2,11 @@ BEGIN;
 
 INSERT INTO "employee_qualification" ("label")
 VALUES
-('lorem'),
-('egestas'),
-('luctus'),
-('malesuada.'),
-('cursus,');
+('Cariste'),
+('Electricien'),
+('Plombier'),
+('Automaticien'),
+('Maçon');
 
 INSERT INTO "company" ("name","address","zip_code","type")
 VALUES
@@ -217,13 +217,16 @@ VALUES
 ('2021-02-22 13:29:31','2021-02-26 07:14:05','#c96642',31),
 ('2021-02-22 21:59:37','2021-02-25 04:05:55','#ed93de',31);
 
-INSERT INTO "absence" ("reason","starting_date","estimated_end_date","ending_date","assignment_id")
+INSERT INTO "absence" ("reason","assignment_id")
 VALUES
-('vitae','2021-02-22 08:00:00','2021-02-25 08:00:00','2021-02-25 08:00:00',35),
-('et','2021-02-23 08:00:00','2021-02-26 08:00:00','2021-02-26 08:00:00',4),
-('nunc.','2021-02-21 08:00:00','2021-02-25 08:00:00','2021-02-25 08:00:00',27),
-('nec,','2021-02-21 08:00:00','2021-02-26 08:00:00','2021-02-26 08:00:00',15),
-('ac','2021-02-21 08:00:00','2021-02-24 08:00:00','2021-02-24 08:00:00',30);
+('Maladie',35),
+('Formation',4),
+('Visite médicale',27),
+('Maladie',15),
+('Congés',16),
+('Congés',17),
+('Formation',18),
+('Maladie',30);
 
 INSERT INTO "contact" ("email","firstname","lastname","mobile_number","function","company_id")
 VALUES

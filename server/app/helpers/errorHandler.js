@@ -12,13 +12,6 @@ const errorHandler = (err, res) => {
 
   if (statusCode === 500) {
     console.error(err);
-<<<<<<< HEAD
-
-  }
-
-  if (statusCode === 500 && res.app.get('env') !== 'development') {
-=======
->>>>>>> fdebe31fcb7c8e7b3aa053e1bc4e16b8a601ca05
     message = 'Internal Server Error';
 
   }
