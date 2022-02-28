@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
@@ -19,9 +19,15 @@ function Footer() {
         right: 0,
       }}
     >
-      <Link to="/"><BottomNavigationAction label="Gestion de plannings" icon={<DateRangeRoundedIcon />} /></Link>
-      <Link to="/"><BottomNavigationAction label="Mon compte" icon={<SettingsIcon />} /></Link>
-      <Link to="/"><BottomNavigationAction label="Se déconnecter" icon={<LogoutRoundedIcon />} /></Link>
+      {/* <Link to="/"> */}
+      <BottomNavigationAction label="Gestion de plannings" icon={<DateRangeRoundedIcon />} />
+      {/* </Link> */}
+      {/* <Link to="/"> */}
+      <BottomNavigationAction label="Mon compte" icon={<SettingsIcon />} />
+      {/* </Link> */}
+      {/* <Link to="/"> */}
+      <BottomNavigationAction label="Se déconnecter" icon={<LogoutRoundedIcon />} />
+      {/* </Link> */}
     </BottomNavigation>
   );
 }

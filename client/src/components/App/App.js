@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from '../Header/Header';
 import utils from '../../utils';
 import './App.css';
+import Footer from '../Footer/Footer';
 
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
@@ -24,6 +25,7 @@ function App() {
           mode={mode}
           handleMode={handleThemeMode}
         />
+        <Footer />
       </div>
     </ThemeProvider>
   );
