@@ -36,23 +36,23 @@ module.exports = {
     const result = await client.query(
       `
       SELECT 
-        "employee"."id", 
-        "employee"."social_security_number", 
+        "employee"."id",
         "employee"."firstname", 
         "employee"."lastname", 
-        "employee"."date_of_birth", 
-        "employee"."address", 
-        "employee"."zip_code", 
-        "employee"."email", 
-        "employee"."starting_date", 
-        "employee"."avatar", 
-        "employee"."function", 
-        "employee"."role_application", 
-        "employee"."employee_qualification_id",
-        "employee_qualification"."label"
-      FROM "employee" 
-      JOIN "employee_qualification" ON "employee_qualification"."id" = "employee"."employee_qualification_id"
-      WHERE "employee"."id" = $1`,
+        "assignment"."starting_date" AS start, 
+        "assignment"."starting_date" AS end, 
+        "site"."name" AS site_name, 
+        "site"."address", 
+        "site"."zip_code", 
+        "site"."manager_name",
+        "company"."name" AS company_name
+      FROM "employee"
+      JOIN "assignment" ON "assignment"."employee_id" = "employee"."id"
+      JOIN "site" ON "site"."assignment_id" = "assignment"."id"
+      JOIN "company" ON "site"."company_id" = "company"."id"
+      WHERE "employee"."id" = $1
+      GROUP BY "employee"."id", "assignment"."id", "site"."id", "company"."id"
+      ORDER BY "employee";`,
       [userId],
     );
 
@@ -60,7 +60,7 @@ module.exports = {
       return undefined;
     }
 
-    return result.rows[0];
+    return result.rows;
   },
 
   async update(userId, user) {
