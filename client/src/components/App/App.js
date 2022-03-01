@@ -5,7 +5,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import Adminlayout from '../../layouts/AdminLayout';
+import AdminLayout from '../../layouts/AdminLayout';
+import UserLayout from '../../layouts/UserLayout';
 import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
 import Error404 from '../Error404/Error404';
@@ -28,14 +29,14 @@ function App() {
           background: {
             default: '#fff',
             paper: '#fff',
-            component: 'rgba(0,0,0,0.05)',
+            component: '#e1e1e1',
           },
         }
         : {
           background: {
             default: '#121212',
             paper: '#121212',
-            component: 'rgba(255,255,255,0.05)',
+            component: '#1e1e1e',
           },
         }),
     },
@@ -64,7 +65,7 @@ function App() {
           {user.id
             && (
               (user.is_admin && (
-                <Route path="/admins" element={<Adminlayout />}>
+                <Route path="/admins" element={<AdminLayout />}>
                   <Route
                     path="planning"
                     element={(
@@ -74,9 +75,9 @@ function App() {
                 </Route>
               ))
               || (!user.is_admin && (
-                <Route path="/users">
+                <Route path="/users" element={<UserLayout />}>
                   <Route
-                    path="/:user_id/planning"
+                    path=":user_id/planning"
                     element={(
                       <Planning isAdmin={user.is_admin} />
                     )}
