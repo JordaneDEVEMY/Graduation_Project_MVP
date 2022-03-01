@@ -12,7 +12,7 @@ CREATE TABLE "employee_qualification" (
 CREATE TABLE "absence" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "reason" TEXT NOT NULL,
-    "assignment_id" INT NOT NULL,
+    "assignment_id" INT NOT NULL UNIQUE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
@@ -66,7 +66,7 @@ CREATE TABLE "site" (
     "zip_code" INT NOT NULL,
     "manager_name" TEXT,
     "estimated_duration" INT,
-    "assignment_id" INT,
+    "assignment_id" INT UNIQUE,
     "company_id" INT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
@@ -80,7 +80,7 @@ CREATE TABLE "contact" (
     "phone_number" TEXT,
     "mobile_number" TEXT NOT NULL UNIQUE,
     "function" TEXT NOT NULL,
-    "company_id" INT NOT NULL,
+    "company_id" INT NOT NULL UNIQUE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
