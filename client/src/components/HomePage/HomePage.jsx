@@ -100,6 +100,7 @@ function HomePage() {
                 fontWeight: theme.typography.fontWeightBold,
                 fontSize: {
                   xs: '4em',
+                  md: theme.typography.h1.fontSize,
                 },
               }}
             >
