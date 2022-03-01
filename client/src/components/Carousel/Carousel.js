@@ -63,7 +63,7 @@ function Carousel() {
       <ArrowCircleLeftIcon
         sx={{
           color: theme.palette.grey[500],
-          fontSize: '5rem',
+          fontSize: '3rem',
           position: 'absolute',
           top: '50%',
           left: '2px',
@@ -76,7 +76,7 @@ function Carousel() {
       <ArrowCircleRightIcon
         sx={{
           color: theme.palette.grey[500],
-          fontSize: '5rem',
+          fontSize: '3rem',
           position: 'absolute',
           top: '50%',
           right: '2px',
