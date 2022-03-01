@@ -28,7 +28,8 @@ router
    * @summary Update User profile
    * @tags User
    * @param {number} id.path.required - User identifier
-   * @return {User} 200 - success response - application/json
+   * @param {authInput} request.body.required - User email/password to update
+   * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */

@@ -19,6 +19,13 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} label - User qualification label
  */
 
+/**
+ * @typedef {object} UserUpdate
+ * @property {number} id - Database primary key of User
+ * @property {string} email - User email
+ * @property {string} updated_at - User updated timestamptz
+ */
+
 module.exports = {
   /**
    * Find an User by his id
@@ -27,7 +34,8 @@ module.exports = {
    */
   async findByPk(userId) {
     const result = await client.query(
-      `SELECT 
+      `
+      SELECT 
         "employee"."id", 
         "employee"."social_security_number", 
         "employee"."firstname", 
@@ -47,7 +55,7 @@ module.exports = {
       WHERE "employee"."id" = $1`,
       [userId],
     );
-    //! Mettre à jour la query conjointement avec Hicham ASAP
+
     if (result.rowCount === 0) {
       return undefined;
     }
@@ -62,7 +70,20 @@ module.exports = {
       throw new ApiError(400, 'Cet utilisateur n\'existe pas');
     }
 
-    const userToSave = await client.query('UPDATE "employee" SET "email" = $1, "password" = $2 WHERE "id"= $3 RETURNING *;', [user.email, user.password, userId]);
+    const userToSave = await client.query(
+      `
+      UPDATE "employee" 
+      SET 
+        "email" = $1, 
+        "password" = $2,
+        "updated_at" = NOW()
+      WHERE "id"= $3 
+      RETURNING 
+        "id", 
+        "email",
+        "updated_at";`,
+      [user.email, user.password, userId],
+    );
 
     // ? Standby Code for update function in SQL
     // const userToUpdate = result.rows[0];
