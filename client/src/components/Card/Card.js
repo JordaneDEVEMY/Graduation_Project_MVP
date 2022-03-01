@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import CardHeader from '../CardHeader/CardHeader';
 import SheetList from '../SheetList/SheetList';
 
@@ -8,18 +9,16 @@ import './card.scss';
 
 function Card({
   className,
-  currentCard,
 }) {
+  const theme = useTheme();
+
   return (
     <Box
       className={className}
       sx={{
-        width: '300px', height: '500px', backgroundColor: '#000', color: '#fff', marginBottom: '10px',
+        width: '300px', height: '500px', backgroundColor: theme.palette.grey[500], marginBottom: '10px',
       }}
     >
-      <Typography variant="h4">
-        {currentCard}
-      </Typography>
       <CardHeader />
       <SheetList />
     </Box>
@@ -28,7 +27,6 @@ function Card({
 
 Card.propTypes = {
   className: PropTypes.string,
-  currentCard: PropTypes.number.isRequired,
 };
 Card.defaultProps = {
   className: '',
