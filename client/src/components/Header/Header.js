@@ -1,35 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Toolbar } from '@mui/material';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
+import logo from './logo.svg';
+import './header.scss';
 
 function MobileHeader({
-  mode,
   handleMode,
 }) {
   return (
-    <header>
-      <AppBar position="static">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h5">
-            O&apos;lleks
-          </Typography>
-          <Typography variant="h6">
-            UserName
-          </Typography>
+    <AppBar position="relative" color="primary">
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Link to="/">
+          <img src={logo} alt="O'lleks" className="logo" />
+        </Link>
 
-          <ThemeSwitch
-            themeMode={mode}
-            onChange={handleMode}
-          />
-        </Toolbar>
-      </AppBar>
-    </header>
+        <ThemeSwitch
+          onChange={handleMode}
+        />
+      </Toolbar>
+    </AppBar>
   );
 }
 
 MobileHeader.propTypes = {
-  mode: PropTypes.string.isRequired,
   handleMode: PropTypes.func.isRequired,
 };
 MobileHeader.defaultProps = {
