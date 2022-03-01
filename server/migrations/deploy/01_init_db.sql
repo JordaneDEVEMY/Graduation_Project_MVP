@@ -12,9 +12,6 @@ CREATE TABLE "employee_qualification" (
 CREATE TABLE "absence" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "reason" TEXT NOT NULL,
-    "starting_date" DATE NOT NULL,
-    "estimated_end_date" DATE NOT NULL,
-    "ending_date" DATE,
     "assignment_id" INT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
@@ -69,7 +66,7 @@ CREATE TABLE "site" (
     "zip_code" INT NOT NULL,
     "manager_name" TEXT,
     "estimated_duration" INT,
-    "assignment_id" INT NOT NULL,
+    "assignment_id" INT,
     "company_id" INT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
@@ -99,7 +96,7 @@ CREATE TABLE "company" (
 );
 
 
-ALTER TABLE "absence" ADD FOREIGN KEY ("assignment_id") REFERENCES "assignment" ("id");
+ALTER TABLE "absence" ADD FOREIGN KEY ("assignment_id") REFERENCES "assignment" ("id") ON DELETE CASCADE;
 ALTER TABLE "employee" ADD FOREIGN KEY ("employee_qualification_id") REFERENCES "employee_qualification" ("id");
 ALTER TABLE "assignment" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id");
 ALTER TABLE "employee_contract" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
