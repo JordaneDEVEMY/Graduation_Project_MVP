@@ -51,7 +51,7 @@ function HomePage() {
             xs: '50vh',
             md: '100vh',
           },
-          backgroundColor: theme.palette.common,
+          backgroundColor: theme.palette.background.default,
         }}
         >
           {/*
@@ -163,7 +163,7 @@ function HomePage() {
       <Box
         component="main"
         sx={{
-          backgroundColor: theme.palette.common,
+          backgroundColor: theme.palette.background.default,
         }}
       >
         {/*
