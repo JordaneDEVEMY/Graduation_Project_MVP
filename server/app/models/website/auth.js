@@ -1,20 +1,14 @@
 const client = require('../../config/database');
 
 /**
- * @typedef {object} User
+ * @typedef {object} AuthUser
  * @property {number} id - Database primary key of User
- * @property {number} social_security_number - User SSN
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
- * @property {string} date_of_birth - User date_of_birth
- * @property {string} address - User address
- * @property {number} zip_code - User zip_code
  * @property {string} email - User email
- * @property {string} password - User password
- * @property {string} starting_date - User starting_date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
- * @property {Number} token - Generated Json Web Token
+ * @property {string} role_application - User role in web application
+ * @property {number} token - Generated Json Web Token
  */
 
 /**
@@ -31,7 +25,19 @@ module.exports = {
    * @returns {User|null} - Return User or null if no user found
    */
   async findOne(inputsAuth) {
-    const result = await client.query('SELECT * FROM "employee" WHERE "email" = $1 AND "password" = $2', [inputsAuth.email, inputsAuth.password]);
+    const result = await client.query(
+      `
+    SELECT 
+      "id", 
+      "firstname", 
+      "lastname", 
+      "email", 
+      "avatar",
+      "role_application" 
+    FROM "employee" WHERE "email" = $1 AND "password" = $2
+    `,
+      [inputsAuth.email, inputsAuth.password],
+    );
 
     if (result.rowCount === 0) {
       return null;
