@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTheme } from '@emotion/react';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -14,6 +15,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './login.scss';
 
 function Login() {
+  const theme = useTheme();
+
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [passwordVisibility, setPasswordVisibility] = useState(false);
