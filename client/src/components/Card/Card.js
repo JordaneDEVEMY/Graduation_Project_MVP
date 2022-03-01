@@ -16,7 +16,7 @@ function Card({
     <Box
       className={className}
       sx={{
-        width: '300px', height: '500px', backgroundColor: theme.palette.grey[500], marginBottom: '10px',
+        width: '300px', height: '500px', backgroundColor: theme.palette.grey[700], marginBottom: '10px',
       }}
     >
       <CardHeader />
