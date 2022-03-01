@@ -30,13 +30,16 @@ const controller = {
     // ? if (user && (await bcrypt.compare(password, user.password))) {
     if (user) {
       res.json({
-        // ! Rajouter les informations demandées par le front
         id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
         email: user.email,
+        avatar: user.avatar,
+        role_application: user.role_application,
         token: generateToken(user.id),
       });
     } else {
-      throw new WebsiteError(422, 'SGEG Email et/ou mot de passe invalide');
+      throw new WebsiteError(422, 'Email et/ou mot de passe invalide');
     }
   },
 };

@@ -6,7 +6,7 @@ const client = require('../../config/database');
  * @property {number} social_security_number - User SSN
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
- * @property {number} date_of_birth - User date_of_birth
+ * @property {string} date_of_birth - User date_of_birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip_code
  * @property {string} email - User email
@@ -14,13 +14,15 @@ const client = require('../../config/database');
  * @property {string} starting_date - User starting_date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
+ * @property {Number} token - Generated Json Web Token
  */
 
 /**
- * @typedef {Object} InputsAuth
+ * @typedef {object} authInput
  * @property {string} email - Email used for connection
  * @property {string} password - Password used for connection
  */
+
 module.exports = {
 
   /**
