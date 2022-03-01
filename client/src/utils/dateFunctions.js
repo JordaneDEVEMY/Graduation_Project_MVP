@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear';
@@ -109,14 +110,31 @@ const dateFunctions = {
 
   /**
    * Get prev week and dates from a date string
-   * @param {string} dateString - A string date eg. 'YYYY-MM-DD'
-   * @returns {object} week Prev week.
-   * @returns {object} week.num Prev week number.
-   * @returns {object} week.dates Prev week dates.
+   * @param {int} weekYear - A string date eg. 'YYYY-MM-DD'
+   * @param {int} weekNumber - week Prev week.
+   * @returns {string} Week period
    */
-  getWeekMonday: (weekYear, weekNumber) => {
-    const date = dateFunctions.getDate(`${weekYear}-01-01`);
-    console.log(dateFunctions.getWeekDates(date), weekNumber);
+  getWeekPeriod: (weekYear, weekNumber) => {
+    const maxWeeks = dateFunctions.getDate(`${weekYear}-01-01`).isoWeeksInYear();
+
+    if (weekNumber > maxWeeks) {
+      return false;
+    }
+
+    // const to = dateFunctions.getDate(`${weekYear}-01-01`).isoWeek(weekNumber);
+    const start = dayjs().year(weekYear).isoWeek(weekNumber);
+    const dayNum = start.get('d');
+    const subtract = dayNum === 0 ? 6 : (dayNum - 1);
+    const from = dayjs().locale('fr').year(weekYear).isoWeek(weekNumber)
+      .subtract(subtract, 'day');
+    const to = dayjs().locale('fr').year(weekYear).isoWeek(weekNumber)
+      .subtract(subtract, 'day')
+      .add(6, 'day');
+
+    // console.log(dayNum);
+    const fromString = `${from.format('DD MMM')} au ${to.format('DD MMM')}`;
+
+    return fromString;
   },
 
   /**

@@ -19,8 +19,6 @@ function SelectWeek({
   const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
 
-  console.log(week);
-
   /**
    * Get last ten years
    * @returns {array} List of MenuItem components
@@ -38,15 +36,15 @@ function SelectWeek({
 
   /**
    * Get weeks of current year
-   * @param {number} year - Current year
    * @returns {array} List of MenuItem components
    */
-  const getWeeks = (year) => {
-    const nbWeeks = utils.dateFunctions.getDate(`${year}-01-01`).isoWeeksInYear();
+  const getWeeks = () => {
+    const nbWeeks = utils.dateFunctions.getDate(`${currentYear}-01-01`).isoWeeksInYear();
     const weeks = [];
     let i = 1;
     while (i <= nbWeeks) {
-      weeks.push(<MenuItem key={i} value={i}>{`Semaine ${i}`}</MenuItem>);
+      const period = utils.dateFunctions.getWeekPeriod(currentYear, i);
+      weeks.push(<MenuItem key={i} value={i}>{`S${i} - ${period}`}</MenuItem>);
       i += 1;
     }
 
@@ -137,8 +135,8 @@ function SelectWeek({
             {getWeeks()}
           </Select>
         </Box>
-        <Box>
-          <span>{`${week.current.label}`}</span>
+        <Box sx={{ color: 'text.primary' }}>
+          {`${week.current.label}`}
         </Box>
       </Box>
       <Box>
