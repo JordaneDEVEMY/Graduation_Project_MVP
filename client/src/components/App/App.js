@@ -23,6 +23,21 @@ function App() {
   const theme = createTheme({
     palette: {
       mode,
+      ...(mode === 'light'
+        ? {
+          background: {
+            default: '#fff',
+            paper: '#fff',
+            component: 'rgba(0,0,0,0.05)',
+          },
+        }
+        : {
+          background: {
+            default: '#121212',
+            paper: '#121212',
+            component: 'rgba(255,255,255,0.05)',
+          },
+        }),
     },
   });
 
