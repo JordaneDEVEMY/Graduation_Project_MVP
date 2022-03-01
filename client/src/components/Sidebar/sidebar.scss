@@ -2,6 +2,7 @@
   box-sizing: border-box;
   position: relative;
   width: 240px;
+  align-self: stretch;
 
   &:not(.opened) {
     margin-left: -240px;
