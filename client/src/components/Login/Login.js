@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
@@ -22,6 +24,8 @@ function Login({
 }) {
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  
+  const theme = useTheme();
 
   useEffect(() => {
     if (emailValue.trim() === '' || passwordValue.trim() === '') {
@@ -56,6 +60,9 @@ function Login({
       component="form"
       className="loginForm"
       onSubmit={handleSubmit}
+      sx={{
+        textAlign: 'center',
+      }}
     >
       <h2 className="login-title">Connexion</h2>
       <CardContent>
@@ -106,22 +113,30 @@ function Login({
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions>
-        <Button
-          type="submit"
-          size="small"
-          variant="contained"
-          disabled={isButtonDisable}
-        >
-          Valider
-        </Button>
-        <Button
-          size="small"
-          variant="text"
-        >
-          Mot de passe oublié
-        </Button>
-      </CardActions>
+      <Box
+        sx={{
+          display: 'flex',
+          mb: theme.spacing(1),
+          justifyContent: 'center',
+        }}
+      >
+        <CardActions>
+          <Button
+            type="submit"
+            size="small"
+            variant="contained"
+            disabled={isButtonDisable}
+          >
+            Valider
+          </Button>
+          <Button
+            size="small"
+            variant="text"
+          >
+            Mot de passe oublié
+          </Button>
+        </CardActions>
+      </Box>
     </Card>
   );
 }

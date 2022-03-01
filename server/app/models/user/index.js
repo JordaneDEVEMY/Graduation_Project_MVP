@@ -5,18 +5,14 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @typedef {object} User
  * @property {number} id - Database primary key of User
  * @property {number} social_security_number - User SSN
- * @property {string} firstname - User firstname
- * @property {string} lastname - User lastname
  * @property {number} date_of_birth - User date_of_birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip_code
- * @property {string} email - User email
  * @property {string} starting_date - User starting_date
- * @property {string} avatar - User avatar
  * @property {string} function - User function
- * @property {string} role_application - User role in web application
  * @property {number} employee_qualification_id - User qualification key
  * @property {string} label - User qualification label
+ * @property {array.<assignments>} assignments - User assignments
  */
 
 /**
@@ -24,6 +20,37 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {number} id - Database primary key of User
  * @property {string} email - User email
  * @property {string} updated_at - User updated timestamptz
+ */
+
+/**
+ * @typedef {Array} assignments
+ * @property {number} id - Database primary key of assignement
+ * @property {string} starting_date - assignment starting date
+ * @property {string} ending_date - assignment ending date
+ * @property {absence} absence - User absence assignment
+ * @property {site} site - User site assignment
+ */
+
+/**
+ * @typedef {object} absence
+ * @property {number} id - Database primary key of absence
+ * @property {string} reason - absence reason
+ */
+
+/**
+ * @typedef {object} site
+ * @property {number} id - Database primary key of site
+ * @property {string} name - site name
+ * @property {string} adress - site adress
+ * @property {number} zip_code - site zip code
+ * @property {string} manager_name - site manager name
+ * @property {company} company - site owner's company
+ */
+
+/**
+ * @typedef {object} company
+ * @property {number} id - Database primary key of site
+ * @property {string} name - company name
  */
 
 module.exports = {
@@ -35,24 +62,8 @@ module.exports = {
   async findByPk(userId) {
     const result = await client.query(
       `
-      SELECT 
-        "employee"."id",
-        "employee"."firstname", 
-        "employee"."lastname", 
-        "assignment"."starting_date" AS start, 
-        "assignment"."starting_date" AS end, 
-        "site"."name" AS site_name, 
-        "site"."address", 
-        "site"."zip_code", 
-        "site"."manager_name",
-        "company"."name" AS company_name
-      FROM "employee"
-      JOIN "assignment" ON "assignment"."employee_id" = "employee"."id"
-      JOIN "site" ON "site"."assignment_id" = "assignment"."id"
-      JOIN "company" ON "site"."company_id" = "company"."id"
-      WHERE "employee"."id" = $1
-      GROUP BY "employee"."id", "assignment"."id", "site"."id", "company"."id"
-      ORDER BY "employee";`,
+        SELECT * FROM get_user_rest WHERE id=$1;
+      `,
       [userId],
     );
 
@@ -60,7 +71,7 @@ module.exports = {
       return undefined;
     }
 
-    return result.rows;
+    return result.rows[0];
   },
 
   async update(userId, user) {
