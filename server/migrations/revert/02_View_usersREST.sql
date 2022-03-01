@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION get_user_rest(int);
+DROP VIEW get_user_rest;
 
 COMMIT;
