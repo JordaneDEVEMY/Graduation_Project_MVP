@@ -22,10 +22,13 @@ function Error404() {
       height: '100vh',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center',
     }}
     >
-      <Box>
+      <Box
+        sx={{
+          mt: theme.spacing(20),
+        }}
+      >
         <Typography
           variant="h2"
           sx={{
@@ -49,6 +52,7 @@ function Error404() {
             variant="contained"
           >
             Revenir sur le site
+
           </Button>
         </Link>
       </Box>
