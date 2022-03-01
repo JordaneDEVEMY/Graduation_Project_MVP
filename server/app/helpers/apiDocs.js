@@ -13,7 +13,7 @@ const options = {
   // Activate API through server router
   // Visible
   exposeApiDocs: true,
-  // On this URL
+  // On this URL in Json response
   apiDocsPath: '/olleks/docs',
 };
 
