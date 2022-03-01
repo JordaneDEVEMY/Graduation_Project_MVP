@@ -39,7 +39,7 @@ const controller = {
         token: generateToken(user.id),
       });
     } else {
-      throw new WebsiteError(422, 'SGEG Email et/ou mot de passe invalide');
+      throw new WebsiteError(422, 'Email et/ou mot de passe invalide');
     }
   },
 };
