@@ -4,17 +4,19 @@ import {
   Button, Card, CardContent, CardMedia, Box, Typography, Modal, Divider,
 } from '@mui/material';
 import './homePage.scss';
+import { useTheme } from '@mui/material/styles';
 import Login from '../Login/Login';
 
 /* images imports */
-import functCoworking from '../../Assets/images/funct-coworking.svg';
-import functDrag from '../../Assets/images/funct-drag.svg';
-import functOther from '../../Assets/images/funct-other.svg';
+import funct1 from '../../Assets/images/DropImgSvg.svg';
+import funct2 from '../../Assets/images/EventImgSvg.svg';
+import funct3 from '../../Assets/images/Calendar-bro.svg';
 import teamIcon from '../../Assets/images/team-icon.svg';
-import encartImg from '../../Assets/images/encart-img.svg';
-import calendarImg from '../../Assets/images/calendar-img.png';
+import encartImg from '../../Assets/images/Design team-amico.svg';
+import calendarImg from '../../Assets/images/CalendarImgSvg.svg';
 
 function HomePage() {
+  const theme = useTheme();
   const [modal, displayModal] = useState(false);
 
   /** *
@@ -37,7 +39,10 @@ function HomePage() {
           },
           backgroundImage: `url(${calendarImg})`,
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right',
+          backgroundPosition: {
+            xs: 'center',
+            md: 'right',
+          },
           backgroundSize: {
             xs: 'cover',
             md: 'contain',
@@ -46,6 +51,7 @@ function HomePage() {
             xs: '50vh',
             md: '100vh',
           },
+          backgroundColor: theme.palette.common,
         }}
         >
           {/*
@@ -79,11 +85,11 @@ function HomePage() {
               md: '30em',
             },
             position: 'relative',
-            top: '30%',
+            top: theme.spacing(30),
             left: {
-              md: '15%',
+              md: theme.spacing(30),
             },
-            color: '#ff4f00',
+            color: theme.palette.primary.main,
           }}
           >
             <Typography
@@ -91,7 +97,7 @@ function HomePage() {
               sx={{
                 textTransform: 'uppercase',
                 fontStyle: 'italic',
-                fontWeight: '600',
+                fontWeight: theme.typography.fontWeightBold,
                 fontSize: {
                   xs: '4em',
                 },
@@ -102,8 +108,9 @@ function HomePage() {
             <Divider
               variant="middle"
               sx={{
+                color: theme.palette.divider,
                 mx: 'auto',
-                width: '70%',
+                width: '80%',
               }}
             />
             <Typography
@@ -152,18 +159,25 @@ function HomePage() {
         </Box>
       </header>
 
-      <main>
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: theme.palette.common,
+        }}
+      >
         {/*
         Functionnalities global block
         */}
-        <Box sx={{
-          textAlign: 'center',
-          mx: 'auto',
-          mt: '2em',
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-evenly',
-        }}
+        <Box
+          component="section"
+          sx={{
+            textAlign: 'center',
+            mx: 'auto',
+            mt: '2em',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-evenly',
+          }}
         >
           <Card sx={{
             minWidth: '20em',
@@ -173,8 +187,8 @@ function HomePage() {
           >
             <CardMedia
               component="img"
-              height="140"
-              image={functCoworking}
+              height="250"
+              image={funct1}
               alt="alt text"
             />
             <CardContent>
@@ -192,8 +206,8 @@ function HomePage() {
           >
             <CardMedia
               component="img"
-              height="140"
-              image={functDrag}
+              height="250"
+              image={funct2}
               alt="alt text"
             />
             <CardContent>
@@ -211,8 +225,8 @@ function HomePage() {
           >
             <CardMedia
               component="img"
-              height="140"
-              image={functOther}
+              height="250"
+              image={funct3}
               alt="alt text"
             />
             <CardContent>
@@ -226,17 +240,30 @@ function HomePage() {
         {/*
         2nd functionnality global block
         */}
-        <Box sx={{
-          textAlign: 'center',
-          padding: 2,
-          mt: '2em',
-          backgroundColor: '#bce5ff',
-        }}
+        <Box
+          component="section"
+          sx={{
+            textAlign: 'center',
+            padding: theme.spacing(4),
+            mt: theme.spacing(4),
+            backgroundColor: theme.palette.primary.main,
+          }}
         >
-          <Typography variant="h2">Phrase d'accroche bis</Typography>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: {
+                xs: '2.5em',
+                md: theme.typography.h2.fontSize,
+              },
+            }}
+          >
+            Phrase d'accroche bis
+
+          </Typography>
           <Typography
             variant="subtitle1"
-            mt={1}
+            mt={theme.spacing(1)}
             maxWidth={900}
             sx={{ mx: 'auto' }}
           >
@@ -251,12 +278,22 @@ function HomePage() {
         {/*
         Team global block
         */}
-        <Box sx={{
-          textAlign: 'center',
-          mt: '2em',
-        }}
+        <Box
+          component="section"
+          sx={{
+            textAlign: 'center',
+            mt: theme.spacing(4),
+          }}
         >
-          <Typography variant="h2">Notre équipe</Typography>
+          <Typography
+            variant="h2"
+            sx={{
+              color: theme.palette.primary.main,
+            }}
+          >
+            Notre équipe
+
+          </Typography>
 
           {/*
           Individual team items
@@ -269,6 +306,7 @@ function HomePage() {
               maxWidth: '900px',
               mx: 'auto',
               textAlign: 'center',
+              color: theme.palette.text.primary,
             }}
           >
             <Box
@@ -333,7 +371,7 @@ function HomePage() {
 
           </Box>
         </Box>
-      </main>
+      </Box>
     </>
   );
 }
