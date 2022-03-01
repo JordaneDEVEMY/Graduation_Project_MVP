@@ -28,7 +28,7 @@ function Planning({
 
   return (
     <>
-      <SearchContainer />
+      <SearchContainer isAdmin={isAdmin} />
       <Typography paragraph sx={{ color: 'text.primary' }}>
         {`Planning en mode ${isAdmin ? 'admin' : 'user'}`}
       </Typography>

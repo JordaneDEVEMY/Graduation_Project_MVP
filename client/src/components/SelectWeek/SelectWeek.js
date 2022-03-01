@@ -1,12 +1,10 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Replay from '@mui/icons-material/Replay';
-import Box from '@mui/material/Box';
+import {
+  Box, Button, IconButton, MenuItem, Select,
+} from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import utils from '../../utils';
@@ -14,12 +12,21 @@ import './selectweek.scss';
 import dateFunctions from '../../utils/dateFunctions';
 
 function SelectWeek({
+  isAdmin,
   date,
 }) {
   const theme = useTheme();
   const [week, setWeek] = useState(utils.dateFunctions.getWeek(date));
   const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
+  const disabledPrev = isAdmin
+    ? (currentYear === maxOldYear) && (week.current.num === 1)
+    : (week.current.num !== dateFunctions.getDate().isoWeek() + 1);
+  const disabledNext = isAdmin
+    ? false
+    : (week.current.num === dateFunctions.getDate().isoWeek() + 1);
+
+  console.log('selectWeek', week);
 
   /**
    * Get last ten years
@@ -37,7 +44,7 @@ function SelectWeek({
   };
 
   /**
-   * Get weeks of current year
+   * Get weeks of select year
    * @returns {array} List of MenuItem components
    */
   const getWeeks = () => {
@@ -46,11 +53,11 @@ function SelectWeek({
     let i = 1;
     while (i <= nbWeeks) {
       const period = utils.dateFunctions.getWeekPeriod(currentYear, i);
-      weeks.push(<MenuItem key={i} value={i}>{`S${i} - ${period}`}</MenuItem>);
+      weeks.push(<MenuItem key={i} value={i}>{`S${i < 10 ? '0' : ''}${i} - ${period}`}</MenuItem>);
       i += 1;
     }
 
-    return weeks;
+    return isAdmin ? weeks : weeks.slice(week.current.num - 1, week.current.num + 1);
   };
 
   const handleWeekSelect = (event) => {
@@ -94,25 +101,27 @@ function SelectWeek({
       alignItems="center"
       gap={theme.spacing(1)}
     >
+      {isAdmin && (
+        <Box>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={handleRefreshButton}
+            title="Semaine en cours"
+            disabled={week.current.num === dateFunctions.getDate().isoWeek()}
+          >
+            Auj.
+          </Button>
+        </Box>
+      )}
       <Box>
-        <Button
-          size="small"
-          onClick={handleRefreshButton}
-          title="Semaine en cours"
-          disabled={week.current.num === dateFunctions.getDate().isoWeek()}
-        >
-          <Replay />
-        </Button>
-      </Box>
-      <Box>
-        <Button
-          size="small"
-          disabled={(currentYear === maxOldYear) && (week.current.num === 1)}
+        <IconButton
+          disabled={disabledPrev}
           onClick={handlePrevButton}
           title={`Semaine ${week.prev.num}`}
         >
-          <ArrowBackIosIcon />
-        </Button>
+          <KeyboardArrowLeftIcon />
+        </IconButton>
       </Box>
       <Box
         display="flex"
@@ -121,18 +130,21 @@ function SelectWeek({
         flexWrap="nowrap"
         gap={theme.spacing(1)}
       >
+        {isAdmin && (
+          <Box>
+            <Select
+              size="small"
+              value={currentYear}
+              onChange={handleYearSelect}
+            >
+              {getYears()}
+            </Select>
+          </Box>
+        )}
         <Box>
           <Select
             size="small"
-            value={currentYear}
-            onChange={handleYearSelect}
-          >
-            {getYears()}
-          </Select>
-        </Box>
-        <Box>
-          <Select
-            size="small"
+            sx={{ width: '15rem' }}
             value={week.current.num}
             onChange={handleWeekSelect}
           >
@@ -141,19 +153,21 @@ function SelectWeek({
         </Box>
       </Box>
       <Box>
-        <Button
+        <IconButton
           size="small"
           onClick={handleNextButton}
           title={`Semaine ${week.next.num}`}
+          disabled={disabledNext}
         >
-          <ArrowForwardIosIcon />
-        </Button>
+          <KeyboardArrowRightIcon />
+        </IconButton>
       </Box>
     </Box>
   );
 }
 
 SelectWeek.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
   date: PropTypes.string,
 };
 SelectWeek.defaultProps = {
