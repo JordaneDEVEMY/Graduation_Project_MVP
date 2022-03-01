@@ -11,11 +11,14 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} address - User address
  * @property {number} zip_code - User zip_code
  * @property {string} email - User email
- * @property {string} password - User password
  * @property {string} starting_date - User starting_date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
+ * @property {string} role_application - User role in web application
+ * @property {number} employee_qualification_id - User qualification key
+ * @property {string} label - User qualification label
  */
+
 module.exports = {
   /**
    * Find an User by his id
@@ -23,7 +26,27 @@ module.exports = {
    * @returns {User[]|undefined} - REST response of an User or undefined if no user found
    */
   async findByPk(userId) {
-    const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
+    const result = await client.query(
+      `SELECT 
+        "employee"."id", 
+        "employee"."social_security_number", 
+        "employee"."firstname", 
+        "employee"."lastname", 
+        "employee"."date_of_birth", 
+        "employee"."address", 
+        "employee"."zip_code", 
+        "employee"."email", 
+        "employee"."starting_date", 
+        "employee"."avatar", 
+        "employee"."function", 
+        "employee"."role_application", 
+        "employee"."employee_qualification_id",
+        "employee_qualification"."label"
+      FROM "employee" 
+      JOIN "employee_qualification" ON "employee_qualification"."id" = "employee"."employee_qualification_id"
+      WHERE "employee"."id" = $1`,
+      [userId],
+    );
     //! Mettre à jour la query conjointement avec Hicham ASAP
     if (result.rowCount === 0) {
       return undefined;
