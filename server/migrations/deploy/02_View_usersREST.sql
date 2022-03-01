@@ -7,16 +7,11 @@ CREATE VIEW get_user_rest AS
     SELECT 
         "employee"."id", 
         "employee"."social_security_number", 
-        "employee"."firstname", 
-        "employee"."lastname", 
         "employee"."date_of_birth", 
         "employee"."address", 
         "employee"."zip_code", 
-        "employee"."email", 
         "employee"."starting_date", 
-        "employee"."avatar", 
         "employee"."function", 
-        "employee"."role_application", 
         "employee"."employee_qualification_id",
         "employee_qualification"."label",
         array_agg
