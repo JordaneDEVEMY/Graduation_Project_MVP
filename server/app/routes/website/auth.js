@@ -14,7 +14,7 @@ router
    * POST /login
    * @summary Connect on website
    * @tags Authentification
-   * @param {User} user
+   * @param {authInput} request.body.required
    * @return {User} 200 - success response - application/json
    * @return {WebsiteError} 400 - Bad request response - application/json
    * @return {WebsiteError} 422 - Incorrect email/password association - application/json

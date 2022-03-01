@@ -7,13 +7,13 @@ const options = {
     description: 'Application de gestion de planning fiche en T',
   },
   baseDir: __dirname,
-  filesPattern: ['../routes/**/*.js', '../models/*.js', '../errors/*.js'],
+  filesPattern: ['../routes/**/*.js', '../models/**/*.js', '../errors/**/*.js'],
   // URL Documentation define on variable environnement
   swaggerUIPath: process.env.API_DOCUMENTATION_ROUTE,
   // Activate API through server router
   // Visible
   exposeApiDocs: true,
-  // On this URL
+  // On this URL in Json response
   apiDocsPath: '/olleks/docs',
 };
 
