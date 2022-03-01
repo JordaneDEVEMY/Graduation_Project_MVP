@@ -1,15 +1,21 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
+import Carousel from '../Carousel/Carousel';
 import './planning.scss';
 
 function Planning({
   isAdmin,
 }) {
   return (
-    <Typography paragraph sx={{ color: 'text.primary' }}>
-      {`Planning en mode ${isAdmin ? 'admin' : 'user'}`}
-    </Typography>
+    <Box
+      component="div"
+    >
+      <Typography paragraph sx={{ color: 'text.primary' }}>
+        {`Planning en mode ${isAdmin ? 'admin' : 'user'}`}
+      </Typography>
+      <Carousel />
+    </Box>
   );
 }
 

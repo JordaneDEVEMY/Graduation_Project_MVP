@@ -1,13 +1,16 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
-import MobileStepper from '@mui/material/MobileStepper';
+import { MobileStepper, Box } from '@mui/material';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import { useTheme } from '@mui/material/styles';
 import Card from '../Card/Card';
 
 import './carousel.scss';
 
 function Carousel() {
+  const theme = useTheme();
+
   const [current, setCurrent] = useState(0);
   const [rightDisabled, setRightDisabled] = useState(false);
   const [leftDisabled, setLeftDisabled] = useState(true);
@@ -43,19 +46,55 @@ function Carousel() {
   }
 
   return (
-    <div className="carousel">
+    <Box
+      component="div"
+      className="carousel"
+      sx={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       {!leftDisabled && (
-      <ArrowCircleLeftIcon sx={{ fontSize: '3rem' }} className="arrow-left" onClick={prevCard} />
+      <ArrowCircleLeftIcon
+        sx={{
+          color: theme.palette.grey[500],
+          fontSize: '5rem',
+          position: 'absolute',
+          top: '50%',
+          left: '2px',
+          cursor: 'pointer',
+        }}
+        onClick={prevCard}
+      />
       )}
       {!rightDisabled && (
-      <ArrowCircleRightIcon sx={{ fontSize: '3rem' }} className="arrow-right" onClick={nextCard} />
+      <ArrowCircleRightIcon
+        sx={{
+          color: theme.palette.grey[500],
+          fontSize: '5rem',
+          position: 'absolute',
+          top: '50%',
+          right: '2px',
+          cursor: 'pointer',
+        }}
+        onClick={nextCard}
+      />
       )}
       {cards.map((card, index) => (
-        <div className={index === current ? 'card active' : 'card'} key={index}>
+        <Box
+          component="div"
+          className={index === current ? 'card active' : 'card'}
+          key={index}
+        >
           {index === current && (
           <Card currentCard={current} />
           )}
-        </div>
+        </Box>
       ))}
       <MobileStepper
         variant="dots"
@@ -64,7 +103,7 @@ function Carousel() {
         activeStep={current}
         sx={{ maxWidth: 400 }}
       />
-    </div>
+    </Box>
   );
 }
 
