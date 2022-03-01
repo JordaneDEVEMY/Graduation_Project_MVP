@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
 import {
   Autocomplete, TextField, InputLabel, Select, MenuItem, Box, FormControl,
 } from '@mui/material';
@@ -12,6 +13,7 @@ function SearchAutocomplete({
   sites,
   entreprises,
 }) {
+  const theme = useTheme();
   const [selectedValue, setSelectedValue] = useState('');
   const [datas, setDatas] = useState([]);
   const [autocompleteValue, setAutocompleteValue] = useState(null);
@@ -38,16 +40,32 @@ function SearchAutocomplete({
   };
 
   return (
-    <Box sx={{
-      m: 1, minWidth: 120, display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
-    }}
+    <Box
+      mt={2}
+      sx={{
+        display: 'flex',
+        gap: theme.spacing(1),
+      }}
     >
-      <FormControl sx={{ margin: '5px' }}>
-        <InputLabel id="select-seach-label">Filtrer</InputLabel>
+      <Autocomplete
+        size="small"
+        getOptionLabel={(datas) => `${datas.title}`}
+        options={datas}
+        sx={{ width: '50%' }}
+        renderInput={(params) => (
+          <TextField {...params} label="Recherche..." />
+        )}
+        value={autocompleteValue}
+        onChange={(_event, newValue) => {
+          setAutocompleteValue(newValue);
+        }}
+      />
+      <FormControl sx={{ width: '50%' }}>
+        <InputLabel id="select-seach-label" size="small">Filtrer</InputLabel>
         <Select
+          size="small"
           labelId="select-seach-label"
           id="select-seach"
-          sx={{ width: '300px', marginBottom: '10px' }}
           label="Filtrer"
           value={selectedValue}
           onChange={handleChange}
@@ -60,18 +78,6 @@ function SearchAutocomplete({
           <MenuItem value="employees">Employés</MenuItem>
         </Select>
       </FormControl>
-      <Autocomplete
-        getOptionLabel={(datas) => `${datas.title}`}
-        options={datas}
-        sx={{ width: '300px', margin: '5px' }}
-        renderInput={(params) => (
-          <TextField {...params} label="Recherche..." />
-        )}
-        value={autocompleteValue}
-        onChange={(_event, newValue) => {
-          setAutocompleteValue(newValue);
-        }}
-      />
     </Box>
 
   );

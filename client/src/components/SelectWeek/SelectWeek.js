@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Replay from '@mui/icons-material/Replay';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 import utils from '../../utils';
 import './selectweek.scss';
 import dateFunctions from '../../utils/dateFunctions';
@@ -15,6 +16,7 @@ import dateFunctions from '../../utils/dateFunctions';
 function SelectWeek({
   date,
 }) {
+  const theme = useTheme();
   const [week, setWeek] = useState(utils.dateFunctions.getWeek(date));
   const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
@@ -90,10 +92,21 @@ function SelectWeek({
       display="flex"
       justifyContent="center"
       alignItems="center"
-      gutter={2}
+      gap={theme.spacing(1)}
     >
       <Box>
         <Button
+          size="small"
+          onClick={handleRefreshButton}
+          title="Semaine en cours"
+          disabled={week.current.num === dateFunctions.getDate().isoWeek()}
+        >
+          <Replay />
+        </Button>
+      </Box>
+      <Box>
+        <Button
+          size="small"
           disabled={(currentYear === maxOldYear) && (week.current.num === 1)}
           onClick={handlePrevButton}
           title={`Semaine ${week.prev.num}`}
@@ -106,17 +119,8 @@ function SelectWeek({
         justifyContent="center"
         alignItems="center"
         flexWrap="nowrap"
-        spacing={2}
+        gap={theme.spacing(1)}
       >
-        <Box>
-          <Button
-            onClick={handleRefreshButton}
-            title="Semaine en cours"
-            disabled={week.current.num === dateFunctions.getDate().isoWeek()}
-          >
-            <Replay />
-          </Button>
-        </Box>
         <Box>
           <Select
             size="small"
@@ -137,7 +141,11 @@ function SelectWeek({
         </Box>
       </Box>
       <Box>
-        <Button variant="outlined" onClick={handleNextButton} title={`Semaine ${week.next.num}`}>
+        <Button
+          size="small"
+          onClick={handleNextButton}
+          title={`Semaine ${week.next.num}`}
+        >
           <ArrowForwardIosIcon />
         </Button>
       </Box>
