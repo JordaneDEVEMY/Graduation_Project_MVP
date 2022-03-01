@@ -74,17 +74,11 @@ const dateFunctions = {
     const week = {
       prev: dateFunctions.getPrevWeek(dateString),
       current: {
-        num: dateFunctions.getWeekNumber(dateString),
+        num: dateFunctions.getDate(dateString).isoWeek(),
         dates: dateFunctions.getWeekDates(dateString),
       },
       next: dateFunctions.getNextWeek(dateString),
     };
-    const fromYear = dateFunctions.getDate(week.current.dates[0]).year();
-    const toYear = dateFunctions.getDate(week.current.dates[6]).year();
-    const fromFormat = fromYear !== toYear ? 'DD MMM YY' : 'DD MMM';
-    const fromString = dateFunctions.getDate(week.current.dates[0]).format(fromFormat);
-    const toString = dateFunctions.getDate(week.current.dates[6]).format('DD MMM YY');
-    week.current.label = `Du ${fromString} au ${toString}`;
 
     return week;
   },
@@ -96,16 +90,34 @@ const dateFunctions = {
    */
   getWeekDates: (dateString) => {
     const date = dateFunctions.getDate(dateString);
+    const weekYear = date.year();
+    const weekNumber = date.isoWeek();
+    const monday = dateFunctions.getWeekMonday(weekYear, weekNumber);
+    const from = dateFunctions.getDate(monday);
+
     const dates = [];
 
     for (let i = 0; i < 7; i += 1) {
-      const dayNum = date.get('d');
-      const subtract = dayNum === 0 ? 6 : (dayNum - 1);
-
-      dates.push(`${date.subtract(subtract, 'day').add(i, 'day').format('YYYY-MM-DD')}`);
+      dates.push(`${from.add(i, 'day').format('YYYY-MM-DD')}`);
     }
 
     return dates;
+  },
+
+  /**
+   * Get week monday (if first day of a week is not)
+   * @param {int} weekYear - A string date eg. 'YYYY'
+   * @param {int} weekNumber - week number.
+   * @returns {string} Monday string date eg. 'YYYY-MM-DD'
+   */
+  getWeekMonday: (weekYear, weekNumber) => {
+    const firstDayOfWeek = dayjs().year(weekYear).isoWeek(weekNumber);
+    const dayNum = firstDayOfWeek.get('d');
+    const subtract = dayNum === 0 ? 6 : (dayNum - 1);
+    const monday = dayjs().year(weekYear).isoWeek(weekNumber).subtract(subtract, 'day')
+      .format('YYYY-MM-DD');
+
+    return monday;
   },
 
   /**
@@ -121,31 +133,13 @@ const dateFunctions = {
       return false;
     }
 
-    // const to = dateFunctions.getDate(`${weekYear}-01-01`).isoWeek(weekNumber);
-    const start = dayjs().year(weekYear).isoWeek(weekNumber);
-    const dayNum = start.get('d');
-    const subtract = dayNum === 0 ? 6 : (dayNum - 1);
-    const from = dayjs().locale('fr').year(weekYear).isoWeek(weekNumber)
-      .subtract(subtract, 'day');
-    const to = dayjs().locale('fr').year(weekYear).isoWeek(weekNumber)
-      .subtract(subtract, 'day')
-      .add(6, 'day');
+    const monday = dateFunctions.getWeekMonday(weekYear, weekNumber);
+    const from = dateFunctions.getDate(monday);
+    const to = dateFunctions.getDate(monday).add(6, 'day');
 
-    // console.log(dayNum);
     const fromString = `${from.format('DD MMM')} au ${to.format('DD MMM')}`;
 
     return fromString;
-  },
-
-  /**
-   * Get the week number of a date
-   * @param {string} dateString - A string date eg. 'YYYY-MM-DD'
-   * @returns {number} the ISO week of the date.
-   */
-  getWeekNumber: (dateString) => {
-    const date = dateFunctions.getDate(dateString);
-
-    return date.isoWeek();
   },
 };
 

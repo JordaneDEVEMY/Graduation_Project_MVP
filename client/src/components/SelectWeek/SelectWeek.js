@@ -135,9 +135,6 @@ function SelectWeek({
             {getWeeks()}
           </Select>
         </Box>
-        <Box sx={{ color: 'text.primary' }}>
-          {`${week.current.label}`}
-        </Box>
       </Box>
       <Box>
         <Button variant="outlined" onClick={handleNextButton} title={`Semaine ${week.next.num}`}>
