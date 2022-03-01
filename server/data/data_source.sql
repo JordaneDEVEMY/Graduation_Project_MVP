@@ -2,11 +2,11 @@ BEGIN;
 
 INSERT INTO "employee_qualification" ("label")
 VALUES
-('lorem'),
-('egestas'),
-('luctus'),
-('malesuada.'),
-('cursus,');
+('Cariste'),
+('Electricien'),
+('Plombier'),
+('Automaticien'),
+('Maçon');
 
 INSERT INTO "company" ("name","address","zip_code","type")
 VALUES
@@ -217,13 +217,16 @@ VALUES
 ('2021-02-22 13:29:31','2021-02-26 07:14:05','#c96642',31),
 ('2021-02-22 21:59:37','2021-02-25 04:05:55','#ed93de',31);
 
-INSERT INTO "absence" ("reason","starting_date","estimated_end_date","ending_date","assignment_id")
+INSERT INTO "absence" ("reason","assignment_id")
 VALUES
-('vitae','2021-02-22 08:00:00','2021-02-25 08:00:00','2021-02-25 08:00:00',35),
-('et','2021-02-23 08:00:00','2021-02-26 08:00:00','2021-02-26 08:00:00',4),
-('nunc.','2021-02-21 08:00:00','2021-02-25 08:00:00','2021-02-25 08:00:00',27),
-('nec,','2021-02-21 08:00:00','2021-02-26 08:00:00','2021-02-26 08:00:00',15),
-('ac','2021-02-21 08:00:00','2021-02-24 08:00:00','2021-02-24 08:00:00',30);
+('Maladie',35),
+('Formation',4),
+('Visite médicale',27),
+('Maladie',15),
+('Congés',16),
+('Congés',17),
+('Formation',18),
+('Maladie',30);
 
 INSERT INTO "contact" ("email","firstname","lastname","mobile_number","function","company_id")
 VALUES
@@ -385,32 +388,32 @@ INSERT INTO "site" ("name","address","zip_code","manager_name","estimated_durati
 VALUES
 ('Dictum Limited','490-3123 Felis. Rd.',31051,'Ima Heeren',5,23,42),
 ('Aliquam Gravida Industries','P.O. Box 884, 3992 Ornare Avenue',31375,'Brenden Bouwmeester',2,36,21),
-('Dapibus Gravida LLP','P.O. Box 921, 5917 Feugiat St.',31080,'Griffin Bakhuizen',4,47,42),
-('Vulputate Mauris Sagittis LLP','101-6775 Fringilla, Rd.',31060,'Bruce Plamondon',4,28,2),
-('Mi Enim Limited','P.O. Box 135, 6141 Nunc Road',31464,'Aurora Archambault',2,46,41),
+('Dapibus Gravida LLP','P.O. Box 921, 5917 Feugiat St.',31080,'Griffin Bakhuizen',4,40,42),
+('Vulputate Mauris Sagittis LLP','101-6775 Fringilla, Rd.',31060,'Bruce Plamondon',4,27,2),
+('Mi Enim Limited','P.O. Box 135, 6141 Nunc Road',31464,'Aurora Archambault',2,44,41),
 ('Pharetra Felis Limited','P.O. Box 356, 7431 Dignissim Ave',31398,'Sandra Langlais',7,26,28),
 ('Nibh Associates','P.O. Box 580, 1705 Nibh. Road',31007,'Ali Segal',2,45,41),
 ('Aptent Taciti Sociosqu Associates','809-1532 Sed Rd.',31293,'Wallace Dam',2,12,8),
-('Nunc LLP','Ap #789-8556 Etiam Street',31254,'Amela Van Alphen',3,40,44),
+('Nunc LLP','Ap #789-8556 Etiam Street',31254,'Amela Van Alphen',3,4,44),
 ('Vestibulum Ante Limited','162-5918 Porta Ave',31362,'Ocean Kloet',9,47,3),
 ('In Faucibus Orci Foundation','P.O. Box 175, 791 In Av.',31443,'Gannon Achthoven',4,22,17),
 ('Luctus Curabitur Incorporated','P.O. Box 723, 9547 Magna. Ave',31017,'Noelle Haak',8,17,32),
 ('Nunc Quis LLP','926-6489 Et, Street',31220,'Kyla Bouwmeester',9,24,38),
 ('Phasellus Dolor LLC','956 Nunc. Av.',31094,'Miriam Fabre',5,2,39),
 ('Sed Auctor Odio Incorporated','451-1631 Eu Rd.',31113,'Rhonda Koopman',9,48,34),
-('Tincidunt Vehicula Limited','351-8794 A, Ave',31349,'Abraham Savatier',7,47,15),
+('Tincidunt Vehicula Limited','351-8794 A, Ave',31349,'Abraham Savatier',7,42,15),
 ('Arcu Industries','P.O. Box 536, 2869 Mus. Street',31020,'Hillary Aaldenberg',6,13,30),
 ('Scelerisque Neque Nullam Corporation','Ap #966-4096 Magna St.',31333,'Noelani Marchand',4,46,29),
 ('Gravida Company','Ap #607-589 Nunc Rd.',31479,'Kylee Eikenboom',7,19,42),
 ('Integer Mollis Integer Institute','Ap #546-5057 Sagittis St.',31219,'Zenaida Van Alphen',9,38,9),
 ('Scelerisque Inc.','8214 Vitae, Rd.',31046,'Octavia Dumont',6,28,22),
 ('Eu Metus Inc.','7063 Mauris Street',31317,'Zephania Leroux',9,10,13),
-('Auctor Quis Associates','1909 Vel, Rd.',31196,'Hedy Beauchene',5,5,36),
+('Auctor Quis Associates','1909 Vel, Rd.',31196,'Hedy Beauchene',5,5,37),
 ('Interdum Incorporated','Ap #882-9439 Amet Street',31514,'Lester Chastain',9,5,29),
 ('Mus Ltd','Ap #172-9754 Diam Road',31411,'Colton Villenueve',4,20,4),
 ('Enim Company','Ap #997-1819 Metus Ave',31328,'Nicholas Prinsen',9,32,20),
-('Sapien Gravida Non Institute','532-9134 Dis Street',31334,'Walter Adrichem',1,36,29),
-('Aliquam Adipiscing Lacus LLC','Ap #518-5268 Tincidunt Ave',31113,'Kaseem Cruyssen',8,36,6),
+('Sapien Gravida Non Institute','532-9134 Dis Street',31334,'Walter Adrichem',1,39,29),
+('Aliquam Adipiscing Lacus LLC','Ap #518-5268 Tincidunt Ave',31113,'Kaseem Cruyssen',8,32,6),
 ('Cras LLP','Ap #907-4164 Egestas, Street',31175,'Nerea Koopman',8,44,48),
 ('A Arcu Incorporated','P.O. Box 664, 5405 Eu Rd.',31419,'Amity Hoedemaker',8,9,7);
 

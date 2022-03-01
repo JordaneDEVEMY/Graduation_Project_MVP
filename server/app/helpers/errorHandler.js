@@ -13,6 +13,7 @@ const errorHandler = (err, res) => {
   if (statusCode === 500) {
     console.error(err);
     message = 'Internal Server Error';
+
   }
 
   res.status(statusCode).json({
