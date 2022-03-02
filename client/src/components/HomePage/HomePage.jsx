@@ -15,7 +15,11 @@ import encartImg from '../../Assets/images/Design team-amico.svg';
 import calendarImg from '../../Assets/images/CalendarImgSvg.svg';
 import LoginContainer from '../../containers/LoginContainer';
 
-function HomePage() {
+function HomePage({
+  isLogged,
+  isAdmin,
+  userId,
+}) {
   const theme = useTheme();
   const [modal, displayModal] = useState(false);
 
