@@ -4,6 +4,7 @@ import React from 'react';
 import {
   Box, Typography, Divider, useTheme,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import './legals.scss';
 
 /* import imgs */
