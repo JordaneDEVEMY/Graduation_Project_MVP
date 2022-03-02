@@ -4,15 +4,18 @@ import React from 'react';
 import {
   Box, Typography, Divider,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import './legals.scss';
 
 function Legals() {
+  const theme = useTheme();
+
   return (
     <Box sx={{
       width: '70vw',
       mx: 'auto',
       my: '2em',
-      backgroundColor: '#bce5ff',
+      backgroundColor: theme.palette.primary.main,
       borderRadius: '10px',
       padding: '2em',
       textAlign: 'left',
@@ -25,13 +28,16 @@ function Legals() {
           fontStyle: 'italic',
           fontWeight: '600',
           fontSize: '3em',
-          color: 'white',
+          color: theme.palette.text.primary,
           textAlign: 'center',
         }}
       >
         Mentions légales
       </Typography>
-      <Divider />
+      <Divider sx={{
+        color: theme.palette.divider,
+      }}
+      />
       <Typography
         sx={{
           mt: '1em',
