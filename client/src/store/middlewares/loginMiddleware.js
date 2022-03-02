@@ -9,7 +9,6 @@ const loginMiddleware = (store) => (next) => async (action) => {
       const { login } = store.getState();
 
       const response = await requestLogin(login.email, login.password);
-      console.log(response);
       if (response.status === 200) {
         store.dispatch(actions.actionSetUserId(response.data.id));
 
