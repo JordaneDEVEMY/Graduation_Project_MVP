@@ -8,7 +8,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import Layout from '../Layout/Layout';
 import Header from '../Header/Header';
-import HomePage from '../HomePage/HomePage';
+import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
@@ -41,7 +41,7 @@ function App() {
           handleMode={handleThemeMode}
         />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomeContainer />} />
           {isLogged
             && (
               (isAdmin && (
