@@ -21,7 +21,7 @@ function App() {
     id: 1,
     is_admin: true,
   };
-  console.log(utils.getTheme(mode));
+
   const theme = utils.getTheme(mode);
 
   const handleThemeMode = (themeMode) => {
