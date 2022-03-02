@@ -57,7 +57,7 @@ module.exports = {
   /**
    * Find an User by his id
    * @param {number} userId - User's ID
-   * @returns {RestUser[]|undefined} - REST response of an User or undefined if no user found
+   * @returns {RestUser[]|ApiError} - REST response of an User or ApiError if user not found
    */
   async findByPk(userId) {
     const result = await client.query(
@@ -68,12 +68,18 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      return undefined;
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
     }
 
     return result.rows[0];
   },
 
+  /**
+   * Update and User by his id with email and password body request
+   * @param {number} userId - User's ID
+   * @param {object<email, password>} user - Body request with email and password required
+   * @returns {UserUpdate[]|ApiError} - Return updated User or ApiError if user not found
+   */
   async update(userId, user) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
 
