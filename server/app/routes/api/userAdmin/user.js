@@ -14,7 +14,7 @@ router
   /**
    * GET /api/admin/user/{id}
    * @summary Get one user
-   * @tags UserAdmin
+   * @tags UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
    * @return {User} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
@@ -24,20 +24,20 @@ router
 
   /**
    * PATCH /api/admin/user/{id}
-   * @summary Update one User
-   * @tags UserAdmin
+   * @summary Update one user
+   * @tags UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
-   * @param {AuthInput} request.body.required - User email/password to update
-   * @return {UserUpdate} 200 - success response - application/json
+   * @param {User} request.body.required - User email/password to update
+   * @return {User} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
   .patch(validate('body', userSchema), controllerHandler(userAdminUserController.update))
 
   /**
-   * PATCH /api/admin/user/{id}
-   * @summary Delete one User
-   * @tags UserAdmin
+   * DELETE /api/admin/user/{id}
+   * @summary Delete one user
+   * @tags UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
    * @return {string} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json

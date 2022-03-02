@@ -133,9 +133,7 @@ module.exports = {
       throw new ApiError(400, 'Cet utilisateur n\'existe pas');
     }
 
-    const userToDelete = await client.query('ON DELETE CASCADE FROM "employee" WHERE "id" = $1;', [userId]);
-
-    console.log('file: user.js ~ line 137 ~ delete ~ userToDelete', userToDelete.rows[0]);
+    const userToDelete = await client.query('DELETE FROM "employee" WHERE "id" = $1;', [userId]);
 
     return userToDelete.rows[0];
   },

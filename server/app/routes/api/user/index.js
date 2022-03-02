@@ -25,7 +25,7 @@ router
   .route('/:id(\\d+)/profil')
   /**
    * PATCH /api/user/{id}/profil
-   * @summary Update User profile
+   * @summary Update one user profile
    * @tags User
    * @param {number} id.path.required - User identifier
    * @param {AuthInput} request.body.required - User email/password to update
