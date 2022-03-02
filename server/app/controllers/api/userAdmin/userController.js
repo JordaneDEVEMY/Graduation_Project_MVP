@@ -37,6 +37,18 @@ const controller = {
     const userUpdate = await userAdminDatamapper.update(req.params.id, req.body);
     return res.json(userUpdate);
   },
+
+  /**
+   * User controller to delete an user
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async delete(req, res) {
+    const userDelete = await userAdminDatamapper.delete(req.params.id);
+    return res.json(userDelete);
+  },
 };
 
 module.exports = controller;

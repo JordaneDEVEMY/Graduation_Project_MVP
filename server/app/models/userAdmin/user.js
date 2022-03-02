@@ -125,4 +125,18 @@ module.exports = {
 
     return userToSave.rows[0];
   },
+
+  async delete(userId) {
+    const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1;', [userId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+    }
+
+    const userToDelete = await client.query('ON DELETE CASCADE FROM "employee" WHERE "id" = $1;', [userId]);
+
+    console.log('file: user.js ~ line 137 ~ delete ~ userToDelete', userToDelete.rows[0]);
+
+    return userToDelete.rows[0];
+  },
 };

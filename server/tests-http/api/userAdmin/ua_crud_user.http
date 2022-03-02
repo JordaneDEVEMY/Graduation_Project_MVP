@@ -63,3 +63,6 @@ content-type: application/json
     "email": "j.andy@protonmail.com",
     "password": "KPP18YZC3OE"
 }
+
+### Delete an user
+DELETE {{ endpoint }}/99
