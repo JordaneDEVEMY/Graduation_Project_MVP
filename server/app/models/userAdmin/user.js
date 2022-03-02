@@ -44,12 +44,12 @@ module.exports = {
       FROM "employee"
       LEFT JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
       WHERE "employee"."id" = $1;
-    `,
+      `,
       [userId],
     );
 
     if (result.rowCount === 0) {
-      return undefined;
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
     }
 
     return result.rows[0];

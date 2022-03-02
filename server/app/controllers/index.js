@@ -1,11 +1,11 @@
 const websiteController = require('./website');
 const websiteAuth = require('./website/auth');
 const userController = require('./api/user');
-const userAdminController = require('./api/userAdmin');
+const userAdminUserController = require('./api/userAdmin/userController');
 
 module.exports = {
   websiteController,
   websiteAuth,
   userController,
-  userAdminController,
+  userAdminUserController,
 };

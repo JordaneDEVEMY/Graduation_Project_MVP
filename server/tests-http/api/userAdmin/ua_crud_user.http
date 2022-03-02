@@ -7,3 +7,48 @@
 
 ### 404
 GET {{ endpoint }}/azertyuiop
+
+### Get one user
+GET {{ endpoint }}/1
+
+### Get an user who does not exist
+GET {{ endpoint }}/9999
+
+### Get an user with an id as not a number
+GET {{ endpoint }}/tartempion
+
+### Patch an user 
+PATCH {{ endpoint }}/100/profil
+content-type: application/json
+
+{
+    "email": "boris-hall@outlook.edu",
+    "password": "BEX05PPW8UA"
+}
+
+### Patch an user with a bad email
+PATCH {{ endpoint }}/1/profil
+content-type: application/json
+
+{
+    "email": "jaipasmislearobase",
+    "password": "TESTDEVANTLESREACT"
+}
+
+### Patch an inexistant user
+PATCH {{ endpoint }}/999/profil
+content-type: application/json
+
+{
+    "email": "j.andy@protonmail.com",
+    "password": "KPP18YZC3OE"
+}
+
+### Patch an inexistant user with id as a string
+PATCH {{ endpoint }}/tartempion/profil
+content-type: application/json
+
+{
+    "email": "j.andy@protonmail.com",
+    "password": "KPP18YZC3OE"
+}
