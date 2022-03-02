@@ -14,6 +14,7 @@ import funct3 from '../../Assets/images/Calendar-bro.svg';
 import teamIcon from '../../Assets/images/team-icon.svg';
 import encartImg from '../../Assets/images/Design team-amico.svg';
 import calendarImg from '../../Assets/images/CalendarImgSvg.svg';
+import LoginContainer from '../../containers/LoginContainer';
 
 function HomePage() {
   const theme = useTheme();
@@ -51,7 +52,7 @@ function HomePage() {
             xs: '50vh',
             md: '100vh',
           },
-          backgroundColor: theme.palette.background.default,
+          backgroundColor: theme.palette.common,
         }}
         >
           {/*
@@ -139,7 +140,7 @@ function HomePage() {
                 },
               }}
             >
-              <Login />
+              <LoginContainer />
 
               {/*
               Connection modal : only appears when click the connect button
@@ -163,7 +164,7 @@ function HomePage() {
       <Box
         component="main"
         sx={{
-          backgroundColor: theme.palette.background.default,
+          backgroundColor: theme.palette.common,
         }}
       >
         {/*

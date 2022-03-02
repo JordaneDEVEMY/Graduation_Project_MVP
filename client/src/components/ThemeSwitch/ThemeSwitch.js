@@ -3,7 +3,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { Box } from '@mui/material';
-import { blue } from '@mui/material/colors';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled, useTheme } from '@mui/material/styles';
@@ -53,7 +52,7 @@ function ThemeSwitch({
       >
         <SwitchThumb
           sx={{
-            bgcolor: blue[500],
+            bgcolor: theme.palette.mode === 'dark' ? theme.palette.background.component : theme.palette.primary.dark,
           }}
           className={`switchMode__thumb ${clsx(stateClasses)}`}
         />
