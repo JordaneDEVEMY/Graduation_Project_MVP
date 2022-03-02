@@ -35,50 +35,45 @@ function Footer() {
   };
 
   return (
-    <footer>
-      <Box
-        className="footer--content"
-        sx={{
-          mt: '1em',
-          p: '0.5em',
-        }}
-      >
-        <Typography>
-          <Link to="/mentions-legales">Mentions légales</Link>
-          {' '}
-          - Tous droits réservés © O'lleks 2022
-        </Typography>
-      </Box>
+    <Box
+      component="footer"
+      className="footer--content"
+      sx={{
+        display: { xs: 'block', sm: 'none' },
+        mt: '1em',
+        p: '0.5em',
+      }}
+    >
+      <Typography>
+        <Link to="/mentions-legales">Mentions légales</Link>
+        {' '}
+        - Tous droits réservés © O'lleks 2022
+      </Typography>
 
-      {user.id
-      && (user.is_admin && (
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={handleChange}
-          sx={{
-            display: {
-              xs: 'block',
-              md: 'none',
-            },
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            right: 0,
-          }}
-        >
-          <BottomNavigationAction label="Plannings" value="admins/planning" icon={<DateRangeRoundedIcon />} />
-
-          <BottomNavigationAction disabled label="Personnel" value="admins/personnel" icon={<BadgeRoundedIcon />} />
-
-          <BottomNavigationAction disabled label="Sites" value="admins/sites" icon={<EngineeringIcon />} />
-
-          <BottomNavigationAction disabled label="Clients" value="admins/clients" icon={<SupervisorAccountIcon />} />
-
-        </BottomNavigation>
-      ))}
-
-    </footer>
+      {user.is_admin
+        && (
+          <BottomNavigation
+            showLabels
+            value={value}
+            onChange={handleChange}
+            sx={{
+              display: {
+                xs: 'block',
+                md: 'none',
+              },
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+            }}
+          >
+            <BottomNavigationAction label="Plannings" value="admins/planning" icon={<DateRangeRoundedIcon />} />
+            <BottomNavigationAction disabled label="Personnel" value="admins/personnel" icon={<BadgeRoundedIcon />} />
+            <BottomNavigationAction disabled label="Sites" value="admins/sites" icon={<EngineeringIcon />} />
+            <BottomNavigationAction disabled label="Clients" value="admins/clients" icon={<SupervisorAccountIcon />} />
+          </BottomNavigation>
+        )}
+    </Box>
   );
 }
 

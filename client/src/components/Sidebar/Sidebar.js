@@ -21,6 +21,7 @@ function Sidebar() {
       component="aside"
       className={`sidebar${open ? ' opened' : ''}`}
       sx={{
+        display: { xs: 'none', sm: 'block' },
         borderRight: `1px solid ${theme.palette.divider}`,
         transition: theme.transitions.create(['margin-left', 'transform']),
       }}
