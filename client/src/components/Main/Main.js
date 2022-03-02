@@ -12,9 +12,9 @@ function Main(props) {
   return (
     <Box
       component="main"
-      className="main"
       sx={{
         padding: theme.spacing(3, 6),
+        flexGrow: 1,
       }}
     >
       {children}
