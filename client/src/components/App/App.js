@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import Layout from '../Layout/Layout';
 import Header from '../Header/Header';
@@ -20,26 +20,8 @@ function App() {
     id: 1,
     is_admin: true,
   };
-  const theme = createTheme({
-    palette: {
-      mode,
-      ...(mode === 'light'
-        ? {
-          background: {
-            default: '#fff',
-            paper: '#fff',
-            component: '#f7f7f7',
-          },
-        }
-        : {
-          background: {
-            default: '#121212',
-            paper: '#121212',
-            component: '#1e1e1e',
-          },
-        }),
-    },
-  });
+
+  const theme = utils.getTheme(mode);
 
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
