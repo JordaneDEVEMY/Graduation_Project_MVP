@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
-import logo from '../Header/logo.svg';
 
 function Sidebar({
   id,
@@ -149,17 +148,7 @@ function Sidebar({
           </List>
         </nav>
       </Box>
-      <Box
-        component="div"
-        sx={{
-          textAlign: 'center',
-          p: theme.spacing(2),
-          opacity: '0.2',
-        }}
-      >
-        <img src={logo} alt="O'lleks" className="logo" />
-      </Box>
-
+      <Box />
     </Box>
   );
 }
