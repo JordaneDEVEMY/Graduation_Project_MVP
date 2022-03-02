@@ -1,14 +1,20 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography,
+  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography, Avatar,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
+import logo from '../Header/logo.svg';
 
-function Sidebar() {
+function Sidebar({
+  id,
+  handleLogout,
+}) {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
 
@@ -71,7 +77,31 @@ function Sidebar() {
           color: theme.palette.text.primary,
         }}
       >
-        <Typography variant="h6">SIDEBAR HEADER</Typography>
+        <Avatar sx={{ width: 56, height: 56 }} />
+        <Typography variant="h6">_USER_NAME_</Typography>
+        <Box
+          component="div"
+          sx={{
+            width: '100%',
+            textAlign: 'center',
+          }}
+        >
+          <Button>
+            <Link
+              to={`/user/${id}/profil`} /* <-- route ? */
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              Mon profil
+            </Link>
+          </Button>
+          <Button
+            onClick={handleLogout}
+          >
+            Se déconnecter
+          </Button>
+        </Box>
       </Box>
       <Box
         component="div"
@@ -121,12 +151,22 @@ function Sidebar() {
       </Box>
       <Box
         component="div"
+        sx={{
+          textAlign: 'center',
+          p: theme.spacing(2),
+          opacity: '0.2',
+        }}
       >
-        Logo (?)
+        <img src={logo} alt="O'lleks" className="logo" />
       </Box>
 
     </Box>
   );
 }
+
+Sidebar.propTypes = {
+  id: PropTypes.number.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+};
 
 export default React.memo(Sidebar);
