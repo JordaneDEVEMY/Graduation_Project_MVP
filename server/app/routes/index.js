@@ -6,7 +6,6 @@ const { errorHandler } = require('../helpers/errorHandler');
 
 const router = express.Router();
 
-// router.use('/admin', adminUserRouter);
 router.use('/api', apiRouter);
 router.use('/', websiteRouter);
 

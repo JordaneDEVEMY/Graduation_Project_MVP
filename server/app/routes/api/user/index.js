@@ -1,10 +1,10 @@
 const express = require('express');
 
-const validate = require('../../validation');
-const userSchema = require('../../validation/userSchema');
+const validate = require('../../../validation');
+const userSchema = require('../../../validation/userSchema');
 
-const { userController } = require('../../controllers');
-const controllerHandler = require('../../helpers/apiControllerHandler');
+const { userController } = require('../../../controllers');
+const controllerHandler = require('../../../helpers/apiControllerHandler');
 
 const router = express.Router();
 
