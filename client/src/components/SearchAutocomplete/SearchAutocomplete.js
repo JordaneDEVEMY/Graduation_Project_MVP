@@ -14,29 +14,27 @@ function SearchAutocomplete({
   entreprises,
 }) {
   const theme = useTheme();
-  const [selectedValue, setSelectedValue] = useState('');
+  const [searchIn, setSearchIn] = useState('');
   const [datas, setDatas] = useState([]);
   const [autocompleteValue, setAutocompleteValue] = useState(null);
 
-  console.log(autocompleteValue);
-
   useEffect(() => {
-    if (selectedValue === 'sites') {
+    if (searchIn === 'sites') {
       setDatas(sites);
       setAutocompleteValue(null);
     }
-    if (selectedValue === 'entreprises') {
+    if (searchIn === 'entreprises') {
       setDatas(entreprises);
       setAutocompleteValue(null);
     }
-  }, [selectedValue]);
+  }, [searchIn]);
 
   /**
    * function to change the value of state selectValue with array received in props
    * @param {string} event
    */
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+  const handleChangeSearchTarget = (event) => {
+    setSearchIn(event.target.value);
   };
 
   return (
@@ -53,7 +51,7 @@ function SearchAutocomplete({
         options={datas}
         sx={{ width: '50%' }}
         renderInput={(params) => (
-          <TextField {...params} label="Recherche..." />
+          <TextField {...params} label="Rechercher..." />
         )}
         value={autocompleteValue}
         onChange={(_event, newValue) => {
@@ -61,18 +59,15 @@ function SearchAutocomplete({
         }}
       />
       <FormControl sx={{ width: '50%' }}>
-        <InputLabel id="select-seach-label" size="small">Filtrer</InputLabel>
+        <InputLabel id="select-search-label" size="small">Dans</InputLabel>
         <Select
           size="small"
-          labelId="select-seach-label"
-          id="select-seach"
-          label="Filtrer"
-          value={selectedValue}
-          onChange={handleChange}
+          labelId="select-search-label"
+          id="select-search"
+          label="Dans"
+          value={searchIn}
+          onChange={handleChangeSearchTarget}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           <MenuItem value="sites">Sites</MenuItem>
           <MenuItem value="entreprises">Entreprises</MenuItem>
           <MenuItem value="employees">Employés</MenuItem>
