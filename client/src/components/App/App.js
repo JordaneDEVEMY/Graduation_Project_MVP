@@ -2,12 +2,13 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import Layout from '../Layout/Layout';
 import Header from '../Header/Header';
-import HomePage from '../HomePage/HomePage';
+import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
@@ -16,10 +17,8 @@ import './app.scss';
 
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
-  const user = {
-    id: 1,
-    is_admin: true,
-  };
+  const isLogged = useSelector((state) => state.login.isLogged);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   const theme = utils.getTheme(mode);
 
@@ -42,25 +41,25 @@ function App() {
           handleMode={handleThemeMode}
         />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          {user.id
+          <Route path="/" element={<HomeContainer />} />
+          {isLogged
             && (
-              (user.is_admin && (
-                <Route path="/admins" element={<Layout isAdmin={user.is_admin} />}>
+              (isAdmin && (
+                <Route path="/admins" element={<Layout isAdmin={isAdmin} />}>
                   <Route
                     path="planning"
                     element={(
-                      <Planning isAdmin={user.is_admin} />
+                      <Planning isAdmin={isAdmin} />
                     )}
                   />
                 </Route>
               ))
-              || (!user.is_admin && (
-                <Route path="/users" element={<Layout isAdmin={user.is_admin} />}>
+              || (!isAdmin && (
+                <Route path="/users" element={<Layout isAdmin={isAdmin} />}>
                   <Route
                     path=":user_id/planning"
                     element={(
-                      <Planning isAdmin={user.is_admin} />
+                      <Planning isAdmin={isAdmin} />
                     )}
                   />
                 </Route>
