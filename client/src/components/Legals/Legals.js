@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import {
-  Box, Typography, Divider, useTheme,
+  Box, Typography, Divider,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import './legals.scss';
