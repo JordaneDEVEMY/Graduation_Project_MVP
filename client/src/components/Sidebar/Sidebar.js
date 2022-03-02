@@ -87,7 +87,9 @@ function Sidebar() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                disabled
+              >
                 <ListItemText
                   sx={{ color: theme.palette.text.primary }}
                   primary="Gestion du personnel"
@@ -95,7 +97,9 @@ function Sidebar() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                disabled
+              >
                 <ListItemText
                   sx={{ color: theme.palette.text.primary }}
                   primary="Gestion des sites"
@@ -103,7 +107,9 @@ function Sidebar() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                disabled
+              >
                 <ListItemText
                   sx={{ color: theme.palette.text.primary }}
                   primary="Gestion des clients"
