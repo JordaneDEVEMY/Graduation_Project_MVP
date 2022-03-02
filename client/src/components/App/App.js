@@ -5,8 +5,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import AdminLayout from '../../layouts/AdminLayout';
-import UserLayout from '../../layouts/UserLayout';
+import Layout from '../Layout/Layout';
 import Header from '../Header/Header';
 import HomePage from '../HomePage/HomePage';
 import Error404 from '../Error404/Error404';
@@ -47,7 +46,7 @@ function App() {
           {user.id
             && (
               (user.is_admin && (
-                <Route path="/admins" element={<AdminLayout />}>
+                <Route path="/admins" element={<Layout isAdmin={user.is_admin} />}>
                   <Route
                     path="planning"
                     element={(
@@ -57,7 +56,7 @@ function App() {
                 </Route>
               ))
               || (!user.is_admin && (
-                <Route path="/users" element={<UserLayout />}>
+                <Route path="/users" element={<Layout isAdmin={user.is_admin} />}>
                   <Route
                     path=":user_id/planning"
                     element={(
