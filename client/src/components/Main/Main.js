@@ -14,7 +14,7 @@ function Main(props) {
       component="main"
       className="main"
       sx={{
-        padding: theme.spacing(2, 6),
+        padding: theme.spacing(3, 6),
       }}
     >
       {children}

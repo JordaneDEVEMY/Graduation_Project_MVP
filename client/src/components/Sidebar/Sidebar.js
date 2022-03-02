@@ -31,7 +31,7 @@ function Sidebar() {
         sx={{
           position: 'absolute',
           left: '100%',
-          top: theme.spacing(2),
+          top: theme.spacing(3),
           flexDirection: 'column',
           minWidth: 0,
           padding: '.5rem',

@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
 import {
   Autocomplete, TextField, InputLabel, Select, MenuItem, Box, FormControl,
 } from '@mui/material';
@@ -12,66 +13,66 @@ function SearchAutocomplete({
   sites,
   entreprises,
 }) {
-  const [selectedValue, setSelectedValue] = useState('');
+  const theme = useTheme();
+  const [searchIn, setSearchIn] = useState('');
   const [datas, setDatas] = useState([]);
   const [autocompleteValue, setAutocompleteValue] = useState(null);
 
-  console.log(autocompleteValue);
-
   useEffect(() => {
-    if (selectedValue === 'sites') {
+    if (searchIn === 'sites') {
       setDatas(sites);
       setAutocompleteValue(null);
     }
-    if (selectedValue === 'entreprises') {
+    if (searchIn === 'entreprises') {
       setDatas(entreprises);
       setAutocompleteValue(null);
     }
-  }, [selectedValue]);
+  }, [searchIn]);
 
   /**
    * function to change the value of state selectValue with array received in props
    * @param {string} event
    */
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+  const handleChangeSearchTarget = (event) => {
+    setSearchIn(event.target.value);
   };
 
   return (
-    <Box sx={{
-      m: 1, minWidth: 120, display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
-    }}
+    <Box
+      mt={2}
+      sx={{
+        display: 'flex',
+        gap: theme.spacing(1),
+      }}
     >
-      <FormControl sx={{ margin: '5px' }}>
-        <InputLabel id="select-seach-label">Filtrer</InputLabel>
-        <Select
-          labelId="select-seach-label"
-          id="select-seach"
-          sx={{ width: '300px', marginBottom: '10px' }}
-          label="Filtrer"
-          value={selectedValue}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="sites">Sites</MenuItem>
-          <MenuItem value="entreprises">Entreprises</MenuItem>
-          <MenuItem value="employees">Employés</MenuItem>
-        </Select>
-      </FormControl>
       <Autocomplete
+        size="small"
         getOptionLabel={(datas) => `${datas.title}`}
         options={datas}
-        sx={{ width: '300px', margin: '5px' }}
+        sx={{ width: '50%' }}
         renderInput={(params) => (
-          <TextField {...params} label="Recherche..." />
+          <TextField {...params} label="Rechercher..." />
         )}
         value={autocompleteValue}
         onChange={(_event, newValue) => {
           setAutocompleteValue(newValue);
         }}
       />
+      <FormControl sx={{ width: '50%' }}>
+        <InputLabel id="select-search-label" size="small">Dans</InputLabel>
+        <Select
+          size="small"
+          labelId="select-search-label"
+          id="select-search"
+          label="Dans"
+          value={searchIn}
+          onChange={handleChangeSearchTarget}
+        >
+          <MenuItem value="sites">Sites</MenuItem>
+          <MenuItem value="entreprises">Entreprises</MenuItem>
+          <MenuItem value="employees">Employés</MenuItem>
+        </Select>
+      </FormControl>
     </Box>
 
   );
