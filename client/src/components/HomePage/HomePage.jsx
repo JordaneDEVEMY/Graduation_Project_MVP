@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import './homePage.scss';
 import { useTheme } from '@mui/material/styles';
-import Login from '../Login/Login';
 
 /* images imports */
 import funct1 from '../../Assets/images/DropImgSvg.svg';
@@ -154,7 +153,7 @@ function HomePage() {
                 open={modal}
                 onClose={handleModal}
               >
-                <Login />
+                <LoginContainer />
               </Modal>
             </Box>
           </Box>
