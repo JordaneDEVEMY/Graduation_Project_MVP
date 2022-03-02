@@ -14,6 +14,8 @@ function SearchContainer({
 }) {
   const theme = useTheme();
 
+  console.log(`uuuu${theme.typography.fontSize}`);
+
   return (
     <Box
       sx={{

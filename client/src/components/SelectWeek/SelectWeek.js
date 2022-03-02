@@ -112,52 +112,44 @@ function SelectWeek({
           </Button>
         </Grid>
       )}
-      <Grid item xs>
-        <Grid
-          container
-          spacing={1}
+      <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <IconButton
+          disabled={disabledPrev}
+          onClick={handlePrevButton}
+          title={`Semaine ${week.prev.num}`}
         >
-          {isAdmin && (
-          <Grid item xs="auto">
-            <Select
-              size="small"
-              value={currentYear}
-              onChange={handleYearSelect}
-            >
-              {getYears()}
-            </Select>
-          </Grid>
-          )}
-          <Grid item xs="auto">
-            <IconButton
-              disabled={disabledPrev}
-              onClick={handlePrevButton}
-              title={`Semaine ${week.prev.num}`}
-            >
-              <KeyboardArrowLeftIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs>
-            <Select
-              size="small"
-              sx={{ width: '15rem' }}
-              value={week.current.num}
-              onChange={handleWeekSelect}
-            >
-              {getWeeks()}
-            </Select>
-          </Grid>
-          <Grid item xs>
-            <IconButton
-              size="small"
-              onClick={handleNextButton}
-              title={`Semaine ${week.next.num}`}
-              disabled={disabledNext}
-            >
-              <KeyboardArrowRightIcon />
-            </IconButton>
-          </Grid>
+          <KeyboardArrowLeftIcon />
+        </IconButton>
+      </Grid>
+      {isAdmin && (
+        <Grid item xs="auto">
+          <Select
+            size="small"
+            value={currentYear}
+            onChange={handleYearSelect}
+          >
+            {getYears()}
+          </Select>
         </Grid>
+      )}
+      <Grid item xs>
+        <Select
+          size="small"
+          sx={{ width: '15rem' }}
+          value={week.current.num}
+          onChange={handleWeekSelect}
+        >
+          {getWeeks()}
+        </Select>
+      </Grid>
+      <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <IconButton
+          onClick={handleNextButton}
+          title={`Semaine ${week.next.num}`}
+          disabled={disabledNext}
+        >
+          <KeyboardArrowRightIcon />
+        </IconButton>
       </Grid>
     </Grid>
   );
