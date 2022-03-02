@@ -2,20 +2,27 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import {
-  Box, Typography, Divider,
+  Box, Typography, Divider, useTheme,
 } from '@mui/material';
 import './legals.scss';
 
+/* import imgs */
+import legals from '../../Assets/images/lawSvg.svg';
+
 function Legals() {
+  const theme = useTheme();
+
   return (
     <Box sx={{
-      width: '70vw',
+      maxWidth: '70vw',
       mx: 'auto',
-      my: '2em',
-      backgroundColor: '#bce5ff',
+      my: theme.spacing(4),
+      padding: theme.spacing(4),
+      backgroundColor: theme.palette.background.component,
       borderRadius: '10px',
-      padding: '2em',
-      textAlign: 'left',
+      display: 'flex',
+      flexDirection: 'column',
+      color: theme.palette.text.primary,
     }}
     >
       <Typography
@@ -23,18 +30,26 @@ function Legals() {
         sx={{
           textTransform: 'uppercase',
           fontStyle: 'italic',
-          fontWeight: '600',
+          fontWeight: theme.typography.fontWeightBold,
           fontSize: '3em',
-          color: 'white',
           textAlign: 'center',
         }}
       >
         Mentions légales
       </Typography>
-      <Divider />
+      <Divider
+        sx={{
+          color: theme.palette.divider,
+        }}
+      />
+      <img
+        src={legals}
+        alt=""
+        className="legals--img"
+      />
       <Typography
         sx={{
-          mt: '1em',
+          mt: theme.spacing(2),
           fontSize: '1.5em',
         }}
       >
@@ -47,7 +62,7 @@ function Legals() {
 
       <Typography
         sx={{
-          mt: '1em',
+          mt: theme.spacing(2),
           fontWeight: '600',
         }}
       >
@@ -60,7 +75,7 @@ function Legals() {
 
       <Typography
         sx={{
-          mt: '1.5em',
+          mt: theme.spacing(2),
           fontWeight: '600',
         }}
       >
@@ -73,7 +88,7 @@ function Legals() {
 
       <Typography
         sx={{
-          mt: '1em',
+          mt: theme.spacing(2),
           fontSize: '1.5em',
         }}
       >
@@ -98,7 +113,7 @@ function Legals() {
 
       <Typography
         sx={{
-          mt: '1em',
+          mt: theme.spacing(2),
           fontSize: '1.5em',
         }}
       >
@@ -111,7 +126,7 @@ function Legals() {
 
       <Typography
         sx={{
-          mt: '1em',
+          mt: theme.spacing(2),
           fontSize: '1.5em',
         }}
       >
@@ -136,7 +151,7 @@ function Legals() {
 
       <Typography
         sx={{
-          mt: '1em',
+          mt: theme.spacing(2),
           fontSize: '1.5em',
         }}
       >
