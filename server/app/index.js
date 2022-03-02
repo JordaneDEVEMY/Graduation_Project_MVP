@@ -7,6 +7,9 @@ const app = express();
 // JsDoc with Swagger
 require('./helpers/apiDocs')(app);
 
+app.set('view engine', 'pug');
+app.set('views', './app/views');
+
 // Activation of Json middleware
 app.use(express.json());
 // Activation of parload urlencoded parser middleware

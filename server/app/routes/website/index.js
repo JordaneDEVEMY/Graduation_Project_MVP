@@ -8,7 +8,7 @@ const { WebsiteError } = require('../../helpers/errorHandler');
 
 const router = express.Router();
 
-router.all('/', controllerHandler(websiteController.homePage));
+router.all('/', controllerHandler(websiteController.home));
 
 router.use('/login', authRouter);
 
