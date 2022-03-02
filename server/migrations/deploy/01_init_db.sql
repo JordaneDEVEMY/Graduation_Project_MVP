@@ -97,12 +97,12 @@ CREATE TABLE "company" (
 
 
 ALTER TABLE "absence" ADD FOREIGN KEY ("assignment_id") REFERENCES "assignment" ("id") ON DELETE CASCADE;
-ALTER TABLE "employee" ADD FOREIGN KEY ("employee_qualification_id") REFERENCES "employee_qualification" ("id");
-ALTER TABLE "assignment" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id");
-ALTER TABLE "employee_contract" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
-ALTER TABLE "employee_contract" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id");
-ALTER TABLE "site" ADD FOREIGN KEY ("assignment_id") REFERENCES "assignment" ("id");
-ALTER TABLE "site" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
-ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
+ALTER TABLE "employee" ADD FOREIGN KEY ("employee_qualification_id") REFERENCES "employee_qualification" ("id") ON DELETE CASCADE;
+ALTER TABLE "assignment" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id") ON DELETE CASCADE;
+ALTER TABLE "employee_contract" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
+ALTER TABLE "employee_contract" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id") ON DELETE CASCADE;
+ALTER TABLE "site" ADD FOREIGN KEY ("assignment_id") REFERENCES "assignment" ("id") ON DELETE CASCADE;
+ALTER TABLE "site" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
+ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
 
 COMMIT;
