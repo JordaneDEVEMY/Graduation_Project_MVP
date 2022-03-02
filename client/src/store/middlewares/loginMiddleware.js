@@ -9,11 +9,18 @@ const loginMiddleware = (store) => (next) => async (action) => {
       const { login } = store.getState();
 
       const response = await requestLogin(login.email, login.password);
-
+      console.log(response);
       if (response.status === 200) {
-        console.log(response);
+        store.dispatch(actions.actionSetUserId(response.data.id));
+
+        if (response.data.role_application === 'admin') {
+          store.dispatch(actions.actionSetUserIsAdmin(true));
+        }
+
         store.dispatch(actions.actionSetIsLogged(true));
-        store.dispatch(actions.actionSetUserRole(response.data.role_application));
+        store.dispatch(actions.actionSetUserFirstname(response.data.firstname));
+        store.dispatch(actions.actionSetUserLastname(response.data.lastname));
+        store.dispatch(actions.actionSetUserAvatar(response.data.avatar));
 
         setBearerToken(response.data.token);
       } else {
