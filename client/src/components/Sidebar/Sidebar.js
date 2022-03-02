@@ -2,7 +2,7 @@
 import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography,
+  Box, Button, Fade, List, ListItem, ListItemButton, ListItemText, Typography,
 } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -32,13 +32,11 @@ const Overlay = styled('div')(({ theme }) => ({
     left: 0,
     width: '100vw',
     height: 0,
-    background: 'red',
-    opacity: 0,
+    background: 'rgba(0, 0, 0, 0.8)',
     transition: theme.transitions.create(['opacity']),
     zIndex: theme.zIndex.drawer - 1,
     '.opened ~ &': {
       height: '100vh',
-      opacity: 1,
     },
   },
   [theme.breakpoints.up('md')]: {
@@ -131,7 +129,10 @@ function Sidebar() {
           </nav>
         </Box>
       </Aside>
-      <Overlay />
+
+      <Fade in={open}>
+        <Overlay />
+      </Fade>
 
     </>
   );
