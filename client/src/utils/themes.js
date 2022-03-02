@@ -1,3 +1,5 @@
+import { createTheme } from '@mui/material/styles';
+
 const themes = {
   dark: {
     palette: {
@@ -19,4 +21,11 @@ const themes = {
   },
 };
 
-export default themes;
+const getTheme = (mode) => createTheme({
+  palette: {
+    mode,
+    ...themes[mode].palette,
+  },
+});
+
+export default getTheme;
