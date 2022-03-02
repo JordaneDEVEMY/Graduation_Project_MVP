@@ -7,6 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import Layout from '../Layout/Layout';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import HomePage from '../HomePage/HomePage';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
@@ -69,6 +70,7 @@ function App() {
           <Route path="/mentions-legales" element={<Legals />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
+        <Footer />
       </Box>
     </ThemeProvider>
   );

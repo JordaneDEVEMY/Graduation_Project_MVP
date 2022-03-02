@@ -1,21 +1,27 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import Sidebar from '../Sidebar/Sidebar';
 import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
 
 function Layout({
   isAdmin,
 }) {
+  const theme = useTheme();
+
   return (
     <Box sx={{
       display: 'flex',
       flexGrow: 1,
+      flexWrap: 'wrap',
       alignItems: 'flex-start',
       position: 'relative',
+      [theme.breakpoints.down('md')]: {
+        flexDirection: 'column',
+      },
     }}
     >
       {isAdmin
@@ -23,7 +29,6 @@ function Layout({
       <Main>
         <Outlet />
       </Main>
-      <Footer isAdmin />
     </Box>
   );
 }

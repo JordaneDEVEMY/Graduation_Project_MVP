@@ -10,7 +10,6 @@ import './sidebar.scss';
 
 const Aside = styled('aside')(({ theme }) => ({
   boxSizing: 'border-box',
-  width: '240px',
   borderRight: `1px solid ${theme.palette.divider}`,
   transition: theme.transitions.create(['margin-left']),
   [theme.breakpoints.down('md')]: {
@@ -18,10 +17,12 @@ const Aside = styled('aside')(({ theme }) => ({
     backgroundColor: theme.palette.background.default,
     height: '100%',
     zIndex: theme.zIndex.drawer,
+    width: 240,
   },
   [theme.breakpoints.up('md')]: {
     position: 'relative',
     alignSelf: 'stretch',
+    flex: '0 0 240px',
   },
 }));
 
@@ -46,7 +47,6 @@ const Overlay = styled('div')(({ theme }) => ({
 
 function Sidebar() {
   const theme = useTheme();
-  // const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const [open, setOpen] = React.useState(true);
 
