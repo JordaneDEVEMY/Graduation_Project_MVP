@@ -54,4 +54,75 @@ module.exports = {
 
     return result.rows[0];
   },
+
+  /**
+   * Update User
+   * @param {number} userId - User's ID
+   * @param {object} user - Body request with email and password required
+   * @returns {User|ApiError} - Return updated User or ApiError if user not found
+   */
+  async update(userId, user) {
+    const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+    }
+
+    const userToSave = await client.query(
+      `
+      UPDATE "employee" 
+      SET 
+        "firstname" = $2,
+        "lastname" = $3,
+        "email" = $4,
+        "social_security_number" = $5,
+        "date_of_birth" = $6,
+        "address" = $7,
+        "zip_code" = $8,
+        "starting_date" = $9,
+        "avatar" = $10,
+        "function" = $11,
+        "role_application" = $12,
+        "employee_qualification_id" = $13,
+        "updated_at" = NOW()
+      WHERE "id"= $1
+      RETURNING 
+        "firstname",
+        "lastname",
+        "email",
+        "social_security_number",
+        "date_of_birth",
+        "address",
+        "zip_code",
+        "starting_date",
+        "avatar",
+        "function",
+        "role_application",
+        "employee_qualification_id",
+        "updated_at";`,
+      [
+        userId,
+        user.firstname,
+        user.lastname,
+        user.email,
+        user.social_security_number,
+        user.date_of_birth,
+        user.address,
+        user.zip_code,
+        user.starting_date,
+        user.avatar,
+        user.function,
+        user.role_application,
+        user.employee_qualification_id,
+      ],
+    );
+
+    // ? Standby Code for update function in SQL
+    // const userToUpdate = result.rows[0];
+    // const userUpdated = { ...userToUpdate, ...user };
+
+    // const userToSave = await client.query('', [userUpdated]);
+
+    return userToSave.rows[0];
+  },
 };

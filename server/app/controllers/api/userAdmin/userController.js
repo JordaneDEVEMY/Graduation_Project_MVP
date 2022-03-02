@@ -4,7 +4,7 @@ const { ApiError } = require('../../../helpers/errorHandler');
 
 const controller = {
   /**
-   * User controller to get an user with REST response
+   * User controller to get an user
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id params
    * @param {object} res Express response object

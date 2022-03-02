@@ -78,7 +78,7 @@ module.exports = {
    * Update and User by his id with email and password body request
    * @param {number} userId - User's ID
    * @param {object<email, password>} user - Body request with email and password required
-   * @returns {UserUpdate[]|ApiError} - Return updated User or ApiError if user not found
+   * @returns {UserUpdate|ApiError} - Return updated User or ApiError if user not found
    */
   async update(userId, user) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);

@@ -18,12 +18,23 @@ GET {{ endpoint }}/9999
 GET {{ endpoint }}/tartempion
 
 ### Patch an user 
-PATCH {{ endpoint }}/100/profil
+PATCH {{ endpoint }}/2
 content-type: application/json
 
 {
-    "email": "boris-hall@outlook.edu",
-    "password": "BEX05PPW8UA"
+  "id": 2,
+  "firstname": "test",
+  "lastname": "test",
+  "email": "test@test.com",
+  "social_security_number": "22473299336969",
+  "date_of_birth": "2018-06-22T22:00:00.000Z",
+  "address": "464-6625 Tuuuuuuurpis Av.",
+  "zip_code": 34000,
+  "starting_date": "2022-03-01T23:00:00.000Z",
+  "avatar": "/oups/69.jps",
+  "function": "Operator",
+  "role_application": "user",
+  "employee_qualification_id": 1
 }
 
 ### Patch an user with a bad email
