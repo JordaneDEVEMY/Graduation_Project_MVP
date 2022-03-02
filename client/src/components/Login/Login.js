@@ -24,7 +24,7 @@ function Login({
 }) {
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  
+
   const theme = useTheme();
 
   useEffect(() => {
