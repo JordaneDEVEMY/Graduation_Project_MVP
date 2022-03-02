@@ -1,23 +1,30 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-// import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
 import './footer.scss';
 
 function Footer() {
+  const theme = useTheme();
+
   return (
     <Box
       component="footer"
       sx={{
-        mt: '1em',
-        p: '0.5em',
+        p: theme.spacing(2),
+        borderTop: `1px solid ${theme.palette.divider}`,
       }}
     >
-      <Typography>
-        <Link to="/mentions-legales">Mentions légales</Link>
-        {' '}
-        - Tous droits réservés © O'lleks 2022
+      <Typography sx={{
+        color: theme.palette.text.disabled,
+      }}
+      >
+        <small>
+          <Link to="/mentions-legales">Mentions légales</Link>
+          {' '}
+          - Tous droits réservés © O'lleks 2022
+        </small>
       </Typography>
     </Box>
   );

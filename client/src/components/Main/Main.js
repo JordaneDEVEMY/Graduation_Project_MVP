@@ -15,6 +15,10 @@ function Main(props) {
       sx={{
         padding: theme.spacing(3, 6),
         flexGrow: 1,
+        boxSizing: 'border-box',
+        [theme.breakpoints.down('md')]: {
+          width: '100%',
+        },
       }}
     >
       {children}
