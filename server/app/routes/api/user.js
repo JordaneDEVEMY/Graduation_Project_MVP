@@ -11,11 +11,11 @@ const router = express.Router();
 router
   .route('/:id(\\d+)')
   /**
-   * GET /user/{id}
+   * GET /api/user/{id}
    * @summary Get one user
    * @tags User
    * @param {number} id.path.required - User identifier
-   * @return {User} 200 - success response - application/json
+   * @return {RestUser} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
@@ -24,11 +24,11 @@ router
 router
   .route('/:id(\\d+)/profil')
   /**
-   * PATCH /user/{id}/profil
+   * PATCH /api/user/{id}/profil
    * @summary Update User profile
    * @tags User
    * @param {number} id.path.required - User identifier
-   * @param {authInput} request.body.required - User email/password to update
+   * @param {AuthInput} request.body.required - User email/password to update
    * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json

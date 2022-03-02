@@ -12,7 +12,7 @@ const client = require('../../config/database');
  */
 
 /**
- * @typedef {object} authInput
+ * @typedef {object} AuthInput
  * @property {string} email - Email used for connection
  * @property {string} password - Password used for connection
  */
@@ -22,7 +22,7 @@ module.exports = {
   /**
    * Find one user
    * @param {InputsAuth} inputsAuth - Email and Password for authentication
-   * @returns {User|null} - Return User or null if no user found
+   * @returns {AuthUser|null} - Return User or null if no user found
    */
   async findOne(inputsAuth) {
     const result = await client.query(
