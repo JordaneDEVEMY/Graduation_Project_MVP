@@ -23,6 +23,9 @@ function Sidebar() {
       sx={{
         borderRight: `1px solid ${theme.palette.divider}`,
         transition: theme.transitions.create(['margin-left', 'transform']),
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
       }}
     >
       <Button
@@ -79,7 +82,7 @@ function Sidebar() {
               <ListItemButton>
                 <ListItemText
                   sx={{ color: theme.palette.text.primary }}
-                  primary="Inbox"
+                  primary="Gestion des plannings"
                 />
               </ListItemButton>
             </ListItem>
@@ -87,13 +90,35 @@ function Sidebar() {
               <ListItemButton>
                 <ListItemText
                   sx={{ color: theme.palette.text.primary }}
-                  primary="Drafts"
+                  primary="Gestion du personnel"
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Gestion des sites"
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Gestion des clients"
                 />
               </ListItemButton>
             </ListItem>
           </List>
         </nav>
       </Box>
+      <Box
+        component="div"
+      >
+        Logo (?)
+      </Box>
+
     </Box>
   );
 }
