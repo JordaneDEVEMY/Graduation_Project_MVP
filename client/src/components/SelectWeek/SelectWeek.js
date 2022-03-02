@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import {
-  Box, Button, IconButton, MenuItem, Select,
+  Grid, Button, IconButton, MenuItem, Select,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import utils from '../../utils';
 import './selectweek.scss';
 import dateFunctions from '../../utils/dateFunctions';
@@ -15,7 +15,7 @@ function SelectWeek({
   isAdmin,
   date,
 }) {
-  const theme = useTheme();
+  // const theme = useTheme();
   const [week, setWeek] = useState(utils.dateFunctions.getWeek(date));
   const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
@@ -95,14 +95,12 @@ function SelectWeek({
   };
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      gap={theme.spacing(1)}
+    <Grid
+      container
+      spacing={1}
     >
       {isAdmin && (
-        <Box>
+        <Grid item xs="auto">
           <Button
             variant="outlined"
             size="small"
@@ -112,26 +110,15 @@ function SelectWeek({
           >
             Auj.
           </Button>
-        </Box>
+        </Grid>
       )}
-      <Box>
-        <IconButton
-          disabled={disabledPrev}
-          onClick={handlePrevButton}
-          title={`Semaine ${week.prev.num}`}
+      <Grid item xs>
+        <Grid
+          container
+          spacing={1}
         >
-          <KeyboardArrowLeftIcon />
-        </IconButton>
-      </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexWrap="nowrap"
-        gap={theme.spacing(1)}
-      >
-        {isAdmin && (
-          <Box>
+          {isAdmin && (
+          <Grid item xs="auto">
             <Select
               size="small"
               value={currentYear}
@@ -139,30 +126,40 @@ function SelectWeek({
             >
               {getYears()}
             </Select>
-          </Box>
-        )}
-        <Box>
-          <Select
-            size="small"
-            sx={{ width: '15rem' }}
-            value={week.current.num}
-            onChange={handleWeekSelect}
-          >
-            {getWeeks()}
-          </Select>
-        </Box>
-      </Box>
-      <Box>
-        <IconButton
-          size="small"
-          onClick={handleNextButton}
-          title={`Semaine ${week.next.num}`}
-          disabled={disabledNext}
-        >
-          <KeyboardArrowRightIcon />
-        </IconButton>
-      </Box>
-    </Box>
+          </Grid>
+          )}
+          <Grid item xs="auto">
+            <IconButton
+              disabled={disabledPrev}
+              onClick={handlePrevButton}
+              title={`Semaine ${week.prev.num}`}
+            >
+              <KeyboardArrowLeftIcon />
+            </IconButton>
+          </Grid>
+          <Grid item xs>
+            <Select
+              size="small"
+              sx={{ width: '15rem' }}
+              value={week.current.num}
+              onChange={handleWeekSelect}
+            >
+              {getWeeks()}
+            </Select>
+          </Grid>
+          <Grid item xs>
+            <IconButton
+              size="small"
+              onClick={handleNextButton}
+              title={`Semaine ${week.next.num}`}
+              disabled={disabledNext}
+            >
+              <KeyboardArrowRightIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 
