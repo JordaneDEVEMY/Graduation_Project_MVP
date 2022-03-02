@@ -29,7 +29,7 @@ function App() {
           background: {
             default: '#fff',
             paper: '#fff',
-            component: '#e1e1e1',
+            component: '#f7f7f7',
           },
         }
         : {
