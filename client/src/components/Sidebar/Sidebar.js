@@ -11,8 +11,12 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
 
 function Sidebar({
-  id,
+  userId,
   handleLogout,
+  userFirstname,
+  userLastname,
+  userAvatar,
+
 }) {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
@@ -76,8 +80,16 @@ function Sidebar({
           color: theme.palette.text.primary,
         }}
       >
-        <Avatar sx={{ width: 56, height: 56 }} />
-        <Typography variant="h6">UserName</Typography>
+        <Avatar
+          alt={`Avatar de ${userFirstname} ${userLastname}`}
+          src={userAvatar}
+          sx={{ width: 56, height: 56 }}
+        />
+        <Typography variant="h6">
+          {userFirstname}
+          {' '}
+          {userLastname}
+        </Typography>
         <Box
           component="div"
           sx={{
@@ -87,7 +99,7 @@ function Sidebar({
         >
           <Button>
             <Link
-              to={`/user/${id}/profil`} /* <-- route ? */
+              to={`/user/${userId}/profil`} /* <-- route ? */
               style={{
                 textDecoration: 'none',
               }}
@@ -154,8 +166,11 @@ function Sidebar({
 }
 
 Sidebar.propTypes = {
-  id: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
   handleLogout: PropTypes.func.isRequired,
+  userFirstname: PropTypes.string.isRequired,
+  userLastname: PropTypes.string.isRequired,
+  userAvatar: PropTypes.string.isRequired,
 };
 
 export default React.memo(Sidebar);

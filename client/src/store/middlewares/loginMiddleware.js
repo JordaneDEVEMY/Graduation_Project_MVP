@@ -16,11 +16,10 @@ const loginMiddleware = (store) => (next) => async (action) => {
           store.dispatch(actions.actionSetUserIsAdmin(true));
         }
 
-        store.dispatch(actions.actionSetIsLogged(true));
         store.dispatch(actions.actionSetUserFirstname(response.data.firstname));
         store.dispatch(actions.actionSetUserLastname(response.data.lastname));
         store.dispatch(actions.actionSetUserAvatar(response.data.avatar));
-
+        store.dispatch(actions.actionSetIsLogged(true));
         setBearerToken(response.data.token);
       } else {
         store.dispatch(actions.actionSetIsLogged(false));
