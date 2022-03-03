@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -15,6 +16,7 @@ function MobileHeader({
 }) {
   const theme = useTheme();
   const [modal, displayModal] = useState(false);
+  const isLogged = useSelector((state) => state.login.isLogged);
 
   const handleModal = () => {
     displayModal((stateModal) => !stateModal);
@@ -47,6 +49,8 @@ function MobileHeader({
           />
         </Link>
 
+        {!isLogged
+        && (
         <Button
           onClick={handleModal}
           variant="outlined"
@@ -61,23 +65,27 @@ function MobileHeader({
         >
           Connexion
         </Button>
+        )}
 
         <ThemeSwitch
           onChange={handleMode}
         />
       </Toolbar>
 
-      <Modal
-        sx={{
-          width: '90vw',
-          mx: 'auto',
-          mt: '25%',
-        }}
-        open={modal}
-        onClose={handleModal}
-      >
-        <LoginContainer />
-      </Modal>
+      {!isLogged
+        && (
+        <Modal
+          sx={{
+            width: '90vw',
+            mx: 'auto',
+            mt: '25%',
+          }}
+          open={modal}
+          onClose={handleModal}
+        >
+          <LoginContainer />
+        </Modal>
+        )}
     </AppBar>
   );
 }
