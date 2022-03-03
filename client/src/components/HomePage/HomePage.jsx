@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Button, Card, CardContent, CardMedia, Box, Typography, Modal, Divider,
 } from '@mui/material';
@@ -15,7 +17,11 @@ import encartImg from '../../Assets/images/Design team-amico.svg';
 import calendarImg from '../../Assets/images/CalendarImgSvg.svg';
 import LoginContainer from '../../containers/LoginContainer';
 
-function HomePage() {
+function HomePage({
+  isLogged,
+  isAdmin,
+  userId,
+}) {
   const theme = useTheme();
   const [modal, displayModal] = useState(false);
 
@@ -25,6 +31,14 @@ function HomePage() {
   const handleModal = () => {
     displayModal((stateModal) => !stateModal);
   };
+
+  if (isLogged) {
+    if (isAdmin) {
+      return <Navigate to="/admins/planning" replace />;
+    }
+
+    return <Navigate to={`/users/${userId}/planning`} replace />;
+  }
 
   return (
     <>
@@ -376,5 +390,11 @@ function HomePage() {
     </>
   );
 }
+
+HomePage.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  userId: PropTypes.number.isRequired,
+};
 
 export default React.memo(HomePage);
