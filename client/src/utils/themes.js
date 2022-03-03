@@ -36,7 +36,7 @@ const getTheme = (mode) => createTheme({
   },
   typography: {
     h1: {
-      fontSize: '3rem',
+      fontSize: '2.5rem',
       marginBottom: '.5em',
     },
     h2: {

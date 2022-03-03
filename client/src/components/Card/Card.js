@@ -26,7 +26,7 @@ function Card({
     >
       {`${data.label}`}
       <CardHeader />
-      <SheetList />
+      <SheetList list={data.employees} />
     </Box>
   );
 }

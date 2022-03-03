@@ -28,11 +28,11 @@ function Planning({
 
   return (
     <>
-      <Typography variant="h1" sx={{ color: 'text.primary' }}>
+      <SearchContainer isAdmin={isAdmin} />
+      <Typography variant="h1" sx={{ textAlign: 'center', color: 'text.primary' }}>
         {'Planning d\'intervention'}
       </Typography>
-      <SearchContainer isAdmin={isAdmin} />
-      {displayCarousel && (
+      {(displayCarousel || true) && (
       <Carousel />
       )}
     </>

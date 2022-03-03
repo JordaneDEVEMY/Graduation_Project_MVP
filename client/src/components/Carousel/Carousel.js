@@ -14,23 +14,103 @@ import './carousel.scss';
 const images = [
   {
     label: 'San Francisco – Oakland Bay Bridge, United States',
-    imgPath:
-      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+    employees: [
+      {
+        id: 1,
+        name: 'Jean Bon',
+        color: 'red',
+      },
+      {
+        id: 2,
+        name: 'Aline Héa',
+        color: 'blue',
+      },
+      {
+        id: 3,
+        name: 'Alex Térieur',
+        color: 'red',
+      },
+      {
+        id: 4,
+        name: 'Alain Térieur',
+        color: 'yellow',
+      },
+    ],
   },
   {
     label: 'Bird',
-    imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+    employees: [
+      {
+        id: 1,
+        name: 'Jean Bon',
+        color: 'red',
+      },
+      {
+        id: 2,
+        name: 'Aline Héa',
+        color: 'green',
+      },
+      {
+        id: 3,
+        name: 'Alex Térieur',
+        color: 'yellow',
+      },
+      {
+        id: 4,
+        name: 'Alain Térieur',
+        color: 'blue',
+      },
+    ],
   },
   {
     label: 'Bali, Indonesia',
-    imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
+    employees: [
+      {
+        id: 1,
+        name: 'Jean Bon',
+        color: 'yellow',
+      },
+      {
+        id: 2,
+        name: 'Aline Héa',
+        color: 'red',
+      },
+      {
+        id: 3,
+        name: 'Alex Térieur',
+        color: 'orange',
+      },
+      {
+        id: 4,
+        name: 'Alain Térieur',
+        color: 'blue',
+      },
+    ],
   },
   {
     label: 'Goč, Serbia',
-    imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+    employees: [
+      {
+        id: 1,
+        name: 'Jean Bon',
+        color: 'blue',
+      },
+      {
+        id: 2,
+        name: 'Aline Héa',
+        color: 'gray',
+      },
+      {
+        id: 3,
+        name: 'Alex Térieur',
+        color: 'yellow',
+      },
+      {
+        id: 4,
+        name: 'Alain Térieur',
+        color: 'blue',
+      },
+    ],
   },
 ];
 
@@ -52,7 +132,12 @@ function Carousel() {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        margin: '0 auto',
+        maxWidth: 332,
+      }}
+    >
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
