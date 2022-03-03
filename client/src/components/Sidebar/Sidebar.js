@@ -19,7 +19,6 @@ const Aside = styled('aside')(({ theme }) => ({
   },
   [theme.breakpoints.up('md')]: {
     position: 'relative',
-    alignSelf: 'stretch',
     flex: '0 0 240px',
   },
 }));

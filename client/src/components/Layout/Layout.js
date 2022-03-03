@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { Outlet, Navigate } from 'react-router-dom';
 import { Box } from '@mui/material';
@@ -13,7 +12,6 @@ import './layout.scss';
 function Layout({
   isAdmin,
 }) {
-  const theme = useTheme();
   const isLogged = useSelector((state) => state.login.isLogged);
 
   if (!isLogged) {
@@ -27,11 +25,7 @@ function Layout({
       display: 'flex',
       flexGrow: 1,
       flexWrap: 'wrap',
-      alignItems: 'flex-start',
       position: 'relative',
-      [theme.breakpoints.down('md')]: {
-        flexDirection: 'column',
-      },
     }}
     >
       {isAdmin

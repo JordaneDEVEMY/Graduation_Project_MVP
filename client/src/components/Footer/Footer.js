@@ -12,9 +12,9 @@ function Footer() {
     <Box
       component="footer"
       sx={{
-        p: theme.spacing(2, 3),
+        p: theme.spacing(2),
         borderTop: `1px solid ${theme.palette.divider}`,
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
           p: theme.spacing(1, 3),
         },
       }}
