@@ -1,14 +1,32 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import { styled, useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography, Avatar,
+  Box, Button, List, ListItem, ListItemButton, ListItemIcon, Link, ListItemText, Typography, Avatar,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import BusinessIcon from '@mui/icons-material/Business';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import './sidebar.scss';
+
+const Aside = styled('aside')(({ theme }) => ({
+  boxSizing: 'border-box',
+  borderRight: `1px solid ${theme.palette.divider}`,
+  transition: theme.transitions.create(['margin-left']),
+  [theme.breakpoints.down('md')]: {
+    display: 'none',
+  },
+  [theme.breakpoints.up('md')]: {
+    position: 'relative',
+    flex: '0 0 240px',
+  },
+}));
 
 function Sidebar({
   userId,
@@ -25,16 +43,19 @@ function Sidebar({
     setOpen((oldOpen) => !oldOpen);
   };
 
+  const onLogoutClick = (event) => {
+    event.preventDefault();
+    handleLogout();
+  };
+
   return (
-    <Box
-      component="aside"
+    <Aside
       className={`sidebar${open ? ' opened' : ''}`}
       sx={{
         borderRight: `1px solid ${theme.palette.divider}`,
         transition: theme.transitions.create(['margin-left', 'transform']),
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
       }}
     >
       <Button
@@ -49,7 +70,6 @@ function Sidebar({
           padding: '.5rem',
         }}
         onClick={handleDrawer}
-        className="sidebar__button"
       >
         {
           open ? (
@@ -75,9 +95,11 @@ function Sidebar({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: theme.spacing(1),
-          justifyContent: 'center',
+          margin: theme.spacing(2),
+          paddingBottom: theme.spacing(2),
           color: theme.palette.text.primary,
+          borderBottom: 1,
+          borderColor: 'divider',
         }}
       >
         <Avatar
@@ -86,82 +108,108 @@ function Sidebar({
           sx={{ width: 56, height: 56 }}
         />
         <Typography variant="h6">
-          {userFirstname}
-          {' '}
-          {userLastname}
+          {`${userFirstname} ${userLastname}`}
         </Typography>
-        <Box
-          component="div"
+
+        <Typography
+          variant="p"
           sx={{
-            width: '100%',
-            textAlign: 'center',
+            color: theme.palette.text.disabled,
           }}
         >
-          <Button>
+          <small>
             <Link
-              to={`/user/${userId}/profil`} /* <-- route ? */
-              style={{
-                textDecoration: 'none',
-              }}
+              component={RouterLink}
+              to={`/user/${userId}/profil`}
             >
               Mon profil
             </Link>
-          </Button>
-          <Button
-            onClick={handleLogout}
+            {' | '}
+            <Link
+              sx={{ width: 56, height: 56 }}
+              onClick={onLogoutClick}
+            >
+              Se déconnecter
+            </Link>
+
+          </small>
+        </Typography>
+      </Box>
+      <nav aria-label="main mailbox folders">
+        <List>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/planning"
           >
-            Se déconnecter
-          </Button>
-        </Box>
-      </Box>
-      <Box
-        component="div"
-      >
-        <nav aria-label="main mailbox folders">
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion des plannings"
-                />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                disabled
-              >
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion du personnel"
-                />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                disabled
-              >
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion des sites"
-                />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                disabled
-              >
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion des clients"
-                />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </nav>
-      </Box>
-      <Box />
-    </Box>
+            <ListItemButton>
+              <ListItemIcon>
+                <DateRangeRoundedIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Planning"
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/staff"
+          >
+            <ListItemButton
+              disabled
+            >
+              <ListItemIcon>
+                <AssignmentIndIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Personnel"
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/sites"
+          >
+            <ListItemButton
+              disabled
+            >
+              <ListItemIcon>
+                <BusinessIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Sites"
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/customers"
+          >
+            <ListItemButton
+              disabled
+            >
+              <ListItemIcon>
+                <SupervisorAccountIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Clients"
+              />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </nav>
+    </Aside>
   );
 }
 

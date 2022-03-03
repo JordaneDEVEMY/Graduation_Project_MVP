@@ -62,6 +62,19 @@ function reducer(state = initialState, action) {
         assignements: action.payload,
       };
 
+    case actions.SET_USER_LOGOUT:
+      return {
+        ...state,
+        id: initialState.id,
+        firstname: initialState.firstname,
+        lastname: initialState.lastname,
+        avatar: initialState.avatar,
+        isAdmin: initialState.isAdmin,
+        qualificationId: initialState.qualificationId,
+        label: initialState.label,
+        assignements: initialState.assignements,
+      };
+
     default:
       return state;
   }
