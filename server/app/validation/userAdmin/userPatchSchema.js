@@ -8,7 +8,7 @@ module.exports = Joi.object({
   email: Joi.string()
   // ? .pattern(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/)
     .required(),
-  social_security_number: Joi.string()
+  social_security_number: Joi.number()
     .required(),
   date_of_birth: Joi.date()
     .iso()
