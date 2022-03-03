@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
-import { Typography, Box } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Typography, Box, Link } from '@mui/material';
 import './footer.scss';
 
 function Footer() {
@@ -12,8 +12,11 @@ function Footer() {
     <Box
       component="footer"
       sx={{
-        p: theme.spacing(2),
+        p: theme.spacing(2, 3),
         borderTop: `1px solid ${theme.palette.divider}`,
+        [theme.breakpoints.up('md')]: {
+          p: theme.spacing(1, 3),
+        },
       }}
     >
       <Typography sx={{
@@ -21,7 +24,16 @@ function Footer() {
       }}
       >
         <small>
-          <Link to="/mentions-legales">Mentions légales</Link>
+          <Link
+            component={RouterLink}
+            to="/mentions-legales"
+            sx={{
+              color: theme.palette.text.disabled,
+            }}
+          >
+            Mentions légales
+
+          </Link>
           {' '}
           - Tous droits réservés © O'lleks 2022
         </small>
