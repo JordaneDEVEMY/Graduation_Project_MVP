@@ -9,7 +9,9 @@ module.exports = Joi.object({
     .required(),
   manager_name: Joi.string()
     .required(),
-  estimated_duration: Joi.date()
-    .iso()
+  estimated_duration: Joi.number()
+    .required(),
+  company_id: Joi.number()
+    .min(1)
     .required(),
 }).required();

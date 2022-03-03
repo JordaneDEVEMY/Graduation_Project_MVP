@@ -18,6 +18,18 @@ const controller = {
 
     return res.json(site);
   },
+
+  /**
+   * UserAdmin controller to update a site
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async update(req, res) {
+    const siteUpdate = await siteAdminDatamapper.update(req.params.id, req.body);
+    return res.json(siteUpdate);
+  },
 };
 
 module.exports = controller;
