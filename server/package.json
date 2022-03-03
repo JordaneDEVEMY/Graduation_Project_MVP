@@ -4,21 +4,29 @@
   "description": "Server Olleks réalisé par l'équipe Back-end : Hicham Chrita et Jordane Devémy",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "resetDB": "sqitch revert -y; sqitch deploy;",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "DEBUG=*,-express:*,-nodemon*,-body-parser:* npx nodemon"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "bunyan": "^1.8.15",
     "cors": "^2.8.5",
     "debug": "^4.3.3",
     "dotenv": "^16.0.0",
+    "email-validator": "^2.0.4",
     "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
     "express-jsdoc-swagger": "^1.6.7",
     "express-redis-cache": "^1.1.3",
     "joi": "^17.6.0",
-    "pg": "^8.7.3"
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "eslint": "^8.9.0",

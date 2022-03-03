@@ -1,0 +1,147 @@
+################################################################################
+# Test file for HTTP routes of userAdmin API
+# REST Client for VSCode needed
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+################################################################################
+@endpoint = http://localhost:{{$dotenv PORT}}/api/admin/user
+
+### 404
+GET {{ endpoint }}/azertyuiop
+
+### Get one user
+GET {{ endpoint }}/1
+
+### Get an user who does not exist
+GET {{ endpoint }}/9999
+
+### Get an user with an id as not a number
+GET {{ endpoint }}/tartempion
+
+### Create an user 
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "strinssesg@test.net",
+  "password": "string",
+  "social_security_number": 143444789033122,
+  "date_of_birth": "2018-07-10",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2018-07-10",
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 1
+}
+
+### Create a user with email error
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string",
+  "password": "string",
+  "social_security_number": 123456789012323,
+  "date_of_birth": "string",
+  "address": "string",
+  "zip_code": 0,
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 1
+}
+
+### Create a user with SSN error
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string@testssn.fr",
+  "password": "string",
+  "social_security_number": "mustbeanumber",
+  "date_of_birth": "2018-07-10",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2018-07-10",
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 1
+}
+
+### Create a user with date error
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string@testssn.fr",
+  "password": "string",
+  "social_security_number": 123453253262326,
+  "date_of_birth": "21-07-10",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "20-07-10",
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 1
+}
+
+### Patch an user 
+PATCH {{ endpoint }}/2
+content-type: application/json
+
+{
+  "id": 2,
+  "firstname": "test",
+  "lastname": "test",
+  "email": "test@test.com",
+  "social_security_number": "22473299336969",
+  "date_of_birth": "2018-06-22T22:00:00.000Z",
+  "address": "464-6625 Tuuuuuuurpis Av.",
+  "zip_code": 34000,
+  "starting_date": "2022-03-01T23:00:00.000Z",
+  "avatar": "/oups/69.jps",
+  "function": "Operator",
+  "role_application": "user",
+  "employee_qualification_id": 1
+}
+
+### Patch an user with a bad email
+PATCH {{ endpoint }}/1/profil
+content-type: application/json
+
+{
+    "email": "jaipasmislearobase",
+    "password": "TESTDEVANTLESREACT"
+}
+
+### Patch an inexistant user
+PATCH {{ endpoint }}/999/profil
+content-type: application/json
+
+{
+    "email": "j.andy@protonmail.com",
+    "password": "KPP18YZC3OE"
+}
+
+### Patch an inexistant user with id as a string
+PATCH {{ endpoint }}/tartempion/profil
+content-type: application/json
+
+{
+    "email": "j.andy@protonmail.com",
+    "password": "KPP18YZC3OE"
+}
+
+### Delete an user
+DELETE {{ endpoint }}/99

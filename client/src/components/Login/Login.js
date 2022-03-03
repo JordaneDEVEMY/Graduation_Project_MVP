@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
@@ -13,34 +16,43 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './login.scss';
 
-function Login() {
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
+function Login({
+  emailValue,
+  passwordValue,
+  changeField,
+  handleLogin,
+}) {
+  const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
+  const theme = useTheme();
+
+  useEffect(() => {
+    if (emailValue.trim() === '' || passwordValue.trim() === '') {
+      if (isButtonDisable === false) {
+        setIsButtonDisable(true);
+      }
+    } else if (isButtonDisable === true) {
+      setIsButtonDisable(false);
+    }
+  }, [emailValue, passwordValue]);
+
   /**
-   * function used to submit form
-   * @param {event} event used to stop refreshing of page
+   * function used to submit login form
+   * @param {event} e used to stop refreshing of page
    */
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin();
   };
 
   /**
-   * function used to change input value
-   * @param {string} inputLabel input wich will be change
-   * @param {*} value value witch will be the new input's value
+   * function used to change input value in store
+   * @param {string} label input's label
+   * @param {event} event input's value
    */
-  const onValueChange = (inputLabel, value) => {
-    switch (inputLabel) {
-      case 'email':
-        setEmailValue(value);
-        break;
-      case 'password':
-        setPasswordValue(value);
-        break;
-      default:
-    }
+  const handleChange = (label, event) => {
+    changeField(label, event.target.value);
   };
 
   return (
@@ -48,6 +60,9 @@ function Login() {
       component="form"
       className="loginForm"
       onSubmit={handleSubmit}
+      sx={{
+        textAlign: 'center',
+      }}
     >
       <h2 className="login-title">Connexion</h2>
       <CardContent>
@@ -59,7 +74,7 @@ function Login() {
               type="email"
               label="email"
               value={emailValue}
-              onChange={(event) => onValueChange('email', event.target.value)}
+              onChange={(event) => handleChange('email', event)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -76,7 +91,7 @@ function Login() {
               type={passwordVisibility ? 'text' : 'password'}
               label="password"
               value={passwordValue}
-              onChange={(event) => onValueChange('password', event.target.value)}
+              onChange={(event) => handleChange('password', event)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -98,28 +113,41 @@ function Login() {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions>
-        <Button
-          type="submit"
-          size="small"
-          variant="contained"
-        >
-          Valider
-        </Button>
-        <Button
-          type="submit"
-          size="small"
-          variant="text"
-        >
-          Mot de passe oublié
-        </Button>
-      </CardActions>
+      <Box
+        sx={{
+          display: 'flex',
+          mb: theme.spacing(1),
+          justifyContent: 'center',
+        }}
+      >
+        <CardActions>
+          <Button
+            type="submit"
+            size="small"
+            variant="contained"
+            disabled={isButtonDisable}
+          >
+            Valider
+          </Button>
+          <Button
+            size="small"
+            variant="text"
+          >
+            Mot de passe oublié
+          </Button>
+        </CardActions>
+      </Box>
     </Card>
   );
 }
 
 Login.propTypes = {
+  emailValue: PropTypes.string.isRequired,
+  passwordValue: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
 };
 Login.defaultProps = {
 };
+
 export default React.memo(Login);
