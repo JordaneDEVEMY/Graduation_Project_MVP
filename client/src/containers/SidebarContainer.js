@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionLogout } from '../actions/login';
+import { actionSetUserLogout } from '../actions/user';
 import Sidebar from '../components/Sidebar/Sidebar';
 
 function SidebarContainer() {
@@ -13,6 +14,7 @@ function SidebarContainer() {
 
   const handleLogout = () => {
     dispatch(actionLogout());
+    dispatch(actionSetUserLogout());
   };
 
   return (
