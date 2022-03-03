@@ -4,11 +4,15 @@ import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import {
-  Box, Button, List, ListItem, ListItemButton, Link, ListItemText, Typography, Avatar,
+  Box, Button, List, ListItem, ListItemButton, ListItemIcon, Link, ListItemText, Typography, Avatar,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import BusinessIcon from '@mui/icons-material/Business';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import './sidebar.scss';
 
 const Aside = styled('aside')(({ theme }) => ({
@@ -128,38 +132,70 @@ function Sidebar({
       </Box>
       <nav aria-label="main mailbox folders">
         <List>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/planning"
+          >
             <ListItemButton>
+              <ListItemIcon>
+                <DateRangeRoundedIcon />
+              </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
                 primary="Planning"
               />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/staff"
+          >
             <ListItemButton
               disabled
             >
+              <ListItemIcon>
+                <AssignmentIndIcon />
+              </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
                 primary="Personnel"
               />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/sites"
+          >
             <ListItemButton
               disabled
             >
+              <ListItemIcon>
+                <BusinessIcon />
+              </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
                 primary="Sites"
               />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            disablePadding
+            button
+            component={RouterLink}
+            to="/admins/customers"
+          >
             <ListItemButton
               disabled
             >
+              <ListItemIcon>
+                <SupervisorAccountIcon />
+              </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
                 primary="Clients"

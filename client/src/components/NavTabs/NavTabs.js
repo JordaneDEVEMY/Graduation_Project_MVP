@@ -6,7 +6,7 @@ import { useLocation, Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Box, Tabs, Tab } from '@mui/material';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
-import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import BusinessIcon from '@mui/icons-material/Business';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import './nav_tabs.scss';
@@ -37,9 +37,9 @@ function NavTabs() {
         scrollButtons="auto"
       >
         <Tab key="Planning" icon={<DateRangeRoundedIcon />} label="Planning" component={Link} to="/admins/planning" value="/admins/planning" />
-        <Tab key="Personnel" icon={<BadgeRoundedIcon />} label="Personnel" component={Link} to="/admins/personnel" value="/admins/personnel" />
+        <Tab key="Personnel" icon={<AssignmentIndIcon />} label="Personnel" component={Link} to="/admins/staff" value="/admins/personnel" />
         <Tab key="Sites" icon={<BusinessIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
-        <Tab key="Clients" icon={<SupervisorAccountIcon />} label="Clients" component={Link} to="/admins/clients" value="/admins/sites" />
+        <Tab key="Clients" icon={<SupervisorAccountIcon />} label="Clients" component={Link} to="/admins/customers" value="/admins/sites" />
       </Tabs>
     </Box>
   );
