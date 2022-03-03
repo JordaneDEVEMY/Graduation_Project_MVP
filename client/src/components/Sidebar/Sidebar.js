@@ -1,11 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography, Avatar,
+  Box, Button, List, ListItem, ListItemButton, Link, ListItemText, Typography, Avatar,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
@@ -46,7 +47,6 @@ function Sidebar({
         transition: theme.transitions.create(['margin-left', 'transform']),
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
       }}
     >
       <Button
@@ -86,9 +86,11 @@ function Sidebar({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: theme.spacing(3),
-          justifyContent: 'center',
+          margin: theme.spacing(2),
+          paddingBottom: theme.spacing(2),
           color: theme.palette.text.primary,
+          borderBottom: 1,
+          borderColor: 'divider',
         }}
       >
         <Avatar
@@ -99,21 +101,30 @@ function Sidebar({
         <Typography variant="h6">
           {`${userFirstname} ${userLastname}`}
         </Typography>
-        <Button>
-          <Link
-            to={`/user/${userId}/profil`} /* <-- route ? */
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            Mon profil
-          </Link>
-        </Button>
-        <Button
-          onClick={handleLogout}
+
+        <Typography
+          variant="p"
+          sx={{
+            color: theme.palette.text.disabled,
+          }}
         >
-          Se déconnecter
-        </Button>
+          <small>
+            <Link
+              component={RouterLink}
+              to={`/user/${userId}/profil`}
+            >
+              Mon profil
+            </Link>
+            {' | '}
+            <Link
+              sx={{ width: 56, height: 56 }}
+              onClick={handleLogout}
+            >
+              Se déconnecter
+            </Link>
+
+          </small>
+        </Typography>
       </Box>
       <nav aria-label="main mailbox folders">
         <List>
