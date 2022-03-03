@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  AppBar, Box, Button, Modal, Toolbar,
+  AppBar, Avatar, Box, Button, Modal, Toolbar,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
@@ -70,10 +70,18 @@ function Header({
           )
           : (
             <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: theme.spacing(1),
               ml: 'auto',
               mr: theme.spacing(1),
             }}
             >
+              <Avatar
+                alt={`${user.firstname} ${user.lastname}`}
+                src={user.avatar}
+                sx={{ width: 36, height: 36 }}
+              />
               {`${user.firstname} ${user.lastname}`}
             </Box>
           )}
