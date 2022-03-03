@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 import {
   Grid, Button, IconButton, MenuItem, Select,
 } from '@mui/material';
@@ -15,7 +16,7 @@ function SelectWeek({
   isAdmin,
   date,
 }) {
-  // const theme = useTheme();
+  const theme = useTheme();
   const [week, setWeek] = useState(utils.dateFunctions.getWeek(date));
   const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
@@ -97,6 +98,8 @@ function SelectWeek({
   return (
     <Grid
       container
+      direction="row"
+      alignItems="center"
       spacing={1}
     >
       {isAdmin && (
@@ -112,7 +115,7 @@ function SelectWeek({
           </Button>
         </Grid>
       )}
-      <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
+      <Grid item sm="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <IconButton
           disabled={disabledPrev}
           onClick={handlePrevButton}
@@ -122,11 +125,17 @@ function SelectWeek({
         </IconButton>
       </Grid>
       {isAdmin && (
-        <Grid item xs="auto">
+        <Grid item xs sm="auto">
           <Select
             size="small"
             value={currentYear}
             onChange={handleYearSelect}
+            sx={{
+              width: '100%',
+              [theme.breakpoints.up('sm')]: {
+                width: '6rem',
+              },
+            }}
           >
             {getYears()}
           </Select>
@@ -135,7 +144,7 @@ function SelectWeek({
       <Grid item xs>
         <Select
           size="small"
-          sx={{ width: '15rem' }}
+          sx={{ width: '100%' }}
           value={week.current.num}
           onChange={handleWeekSelect}
         >
