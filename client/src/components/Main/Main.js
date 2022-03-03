@@ -18,6 +18,10 @@ function Main(props) {
         boxSizing: 'border-box',
         [theme.breakpoints.down('md')]: {
           width: '100%',
+          padding: theme.spacing(3),
+        },
+        [theme.breakpoints.up('md')]: {
+          padding: theme.spacing(3, 6),
         },
       }}
     >

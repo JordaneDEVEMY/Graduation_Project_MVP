@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import Sidebar from '../Sidebar/Sidebar';
+import NavTabs from '../NavTabs/NavTabs';
 import Main from '../Main/Main';
 
 function Layout({
@@ -27,6 +28,8 @@ function Layout({
       {isAdmin
         && (<Sidebar />)}
       <Main>
+        {isAdmin
+        && (<NavTabs />)}
         <Outlet />
       </Main>
     </Box>
