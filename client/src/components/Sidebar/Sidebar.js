@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import {
   Box, Button, List, ListItem, ListItemButton, ListItemText, Typography, Avatar,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
@@ -20,7 +20,6 @@ function Sidebar({
 }) {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
-  const navigate = useNavigate();
 
   const handleDrawer = () => {
     setOpen((oldOpen) => !oldOpen);
@@ -29,7 +28,6 @@ function Sidebar({
   const onLogoutClick = (event) => {
     event.preventDefault();
     handleLogout();
-    navigate('/');
   };
 
   return (

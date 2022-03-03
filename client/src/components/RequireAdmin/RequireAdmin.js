@@ -8,7 +8,7 @@ function RequireAdmin() {
 
   return (
     isAdmin
-      ? <Navigate to="admins/planning" replace />
+      ? <Outlet />
       : <Navigate to="/users" state={{ from: location }} replace />
   );
 }
