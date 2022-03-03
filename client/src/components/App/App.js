@@ -17,7 +17,7 @@ import './app.scss';
 
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
-  const isLogged = useSelector((state) => state.login.isLogged);
+
   const isAdmin = useSelector((state) => state.user.isAdmin);
 
   const theme = utils.getTheme(mode);
@@ -42,29 +42,28 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<HomeContainer />} />
-          {isLogged
-            && (
-              (isAdmin && (
-                <Route path="/admins" element={<Layout isAdmin={isAdmin} />}>
-                  <Route
-                    path="planning"
-                    element={(
-                      <Planning isAdmin={isAdmin} />
+          <Route element={<RequireAuth />}>
+            <Route element={<RequireAdmin />}>
+              <Route path="admins" element={<Layout isAdmin={isAdmin} />}>
+                <Route
+                  path="planning"
+                  element={(
+                    <Planning isAdmin={isAdmin} />
                     )}
-                  />
-                </Route>
-              ))
-              || (!isAdmin && (
-                <Route path="/users" element={<Layout isAdmin={isAdmin} />}>
-                  <Route
-                    path=":user_id/planning"
-                    element={(
-                      <Planning isAdmin={isAdmin} />
+                />
+              </Route>
+            </Route>
+            <Route element={<RequireUser />}>
+              <Route path="users" element={<Layout isAdmin={isAdmin} />}>
+                <Route
+                  path=":user_id/planning"
+                  element={(
+                    <Planning isAdmin={isAdmin} />
                     )}
-                  />
-                </Route>
-              ))
-            )}
+                />
+              </Route>
+            </Route>
+          </Route>
           <Route path="/mentions-legales" element={<Legals />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
