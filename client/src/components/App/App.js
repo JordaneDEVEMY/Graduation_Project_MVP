@@ -13,6 +13,7 @@ import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
+import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import utils from '../../utils';
 import './app.scss';
 
