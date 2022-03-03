@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Button, Card, CardContent, CardMedia, Box, Typography, Modal, Divider,
+  Grid, Box, Typography, useMediaQuery,
 } from '@mui/material';
 import './homePage.scss';
 import { useTheme } from '@mui/material/styles';
@@ -17,226 +17,176 @@ import LoginContainer from '../../containers/LoginContainer';
 
 function HomePage() {
   const theme = useTheme();
-  const [modal, displayModal] = useState(false);
-
-  /** *
-   * function to handle modals
-   */
-  const handleModal = () => {
-    displayModal((stateModal) => !stateModal);
-  };
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
-      <header>
-        {/*
-        Header global block
-        */}
-        <Box sx={{
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
           position: 'relative',
-          textAlign: {
-            xs: 'center',
-          },
           backgroundImage: `url(${calendarImg})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: {
-            xs: 'center',
-            md: 'right',
+            xs: 'center top',
+            md: '42vw center',
           },
           backgroundSize: {
-            xs: 'cover',
+            xs: '60vw auto',
             md: 'contain',
           },
           height: {
-            xs: '50vh',
-            md: '100vh',
+            md: 600,
           },
           backgroundColor: theme.palette.common,
         }}
+      >
+        <Box sx={{
+          position: 'relative',
+          textAlign: 'center',
+          width: {
+            xs: '100%',
+            md: '50vw',
+          },
+          [theme.breakpoints.down('md')]: {
+            marginTop: '55vw',
+            padding: theme.spacing(3),
+          },
+        }}
         >
-          {/*
-          Connect button (on display only on small screens),
-          Application logo will be there.
-          */}
-          <Box sx={{
-            textAlign: 'right',
-          }}
-          >
-            <Button
-              onClick={handleModal}
-              variant="contained"
-              size="medium"
-              sx={{
-                margin: '1rem',
-                display: {
-                  md: 'none',
-                },
-              }}
-            >
-              Se connecter
-            </Button>
-          </Box>
-
           {/*
           Title and subtitle, with the connect zone, on display only on large screen.
           */}
-          <Box sx={{
-            width: {
-              md: '30em',
-            },
-            position: 'relative',
-            top: theme.spacing(30),
-            left: {
-              md: theme.spacing(30),
-            },
-            color: theme.palette.primary.main,
-          }}
+          <Typography
+            variant="p"
+            sx={{
+              fontSize: theme.typography.h1.fontSize,
+              color: theme.palette.primary.main,
+            }}
           >
-            <Typography
-              variant="h1"
-              sx={{
-                textTransform: 'uppercase',
-                fontStyle: 'italic',
-                fontWeight: theme.typography.fontWeightBold,
-                fontSize: {
-                  xs: '4em',
-                  md: theme.typography.h1.fontSize,
-                },
-              }}
-            >
-              O'lleks
-            </Typography>
-            <Divider
-              variant="middle"
-              sx={{
-                color: theme.palette.divider,
-                mx: 'auto',
-                width: '80%',
-              }}
-            />
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontSize: {
-                  xs: '1.5em',
-                },
-              }}
-            >
-              Your new planning-handling tool
-            </Typography>
+            O'lleks
+          </Typography>
+          <Typography
+            variant="h2"
+            sx={{
+              color: theme.palette.text.primary,
+            }}
+          >
+            Your new planning-handling tool
+          </Typography>
 
-            {/*
-            Blocks the view of the component on small screens
-            */}
-
-            <Box
-              sx={{
-                width: '30em',
-                display: {
-                  xs: 'none',
-                  sm: 'none',
-                  md: 'block',
-                },
-              }}
-            >
-              <LoginContainer />
-
-              {/*
-              Connection modal : only appears when click the connect button
-              */}
-              <Modal
-                sx={{
-                  width: '90vw',
-                  mx: 'auto',
-                  mt: '25%',
-                }}
-                open={modal}
-                onClose={handleModal}
-              >
-                <LoginContainer />
-              </Modal>
-            </Box>
+          {/*
+          Blocks the view of the component on small screens
+          */}
+          {!isMobile
+          && (
+          <Box
+            sx={{
+              margin: theme.spacing(3, 'auto'),
+              width: '50vw',
+              maxWidth: 400,
+              display: {
+                xs: 'none',
+                sm: 'block',
+              },
+            }}
+          >
+            <LoginContainer />
           </Box>
+          )}
         </Box>
-      </header>
+      </Box>
 
       <Box
-        component="main"
         sx={{
-          backgroundColor: theme.palette.common,
+          backgroundColor: theme.palette.background.component,
+          color: theme.palette.text.primary,
         }}
       >
         {/*
         Functionnalities global block
         */}
-        <Box
-          component="section"
+        <Grid
+          container
+          spacing={2}
           sx={{
             textAlign: 'center',
-            mx: 'auto',
             mt: '2em',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-evenly',
           }}
         >
-          <Card sx={{
-            minWidth: '20em',
-            maxWidth: '10%',
-            mb: '1em',
-          }}
-          >
-            <CardMedia
-              component="img"
-              height="250"
-              image={funct1}
-              alt="alt text"
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                height: 250,
+                width: 250,
+                backgroundColor: theme.palette.background.default,
+                backgroundImage: `url(${funct1})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: '60%',
+                borderRadius: '50%',
+                margin: 'auto',
+              }}
             />
-            <CardContent>
-              <Typography>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              </Typography>
-            </CardContent>
-          </Card>
+            <Typography
+              sx={{
+                marginTop: theme.spacing(1),
+                fontSize: '1.2rem',
+              }}
+            >
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            </Typography>
+          </Grid>
 
-          <Card sx={{
-            minWidth: '20em',
-            maxWidth: '10%',
-            mb: '1em',
-          }}
-          >
-            <CardMedia
-              component="img"
-              height="250"
-              image={funct2}
-              alt="alt text"
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                height: 250,
+                width: 250,
+                backgroundColor: theme.palette.background.default,
+                backgroundImage: `url(${funct2})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: '60%',
+                borderRadius: '50%',
+                margin: 'auto',
+              }}
             />
-            <CardContent>
-              <Typography>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              </Typography>
-            </CardContent>
-          </Card>
+            <Typography
+              sx={{
+                marginTop: theme.spacing(1),
+                fontSize: '1.2rem',
+              }}
+            >
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            </Typography>
+          </Grid>
 
-          <Card sx={{
-            minWidth: '20em',
-            maxWidth: '10%',
-            mb: '1em',
-          }}
-          >
-            <CardMedia
-              component="img"
-              height="250"
-              image={funct3}
-              alt="alt text"
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                height: 250,
+                width: 250,
+                backgroundColor: theme.palette.background.default,
+                backgroundImage: `url(${funct3})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: '60%',
+                borderRadius: '50%',
+                margin: 'auto',
+              }}
             />
-            <CardContent>
-              <Typography>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Box>
+            <Typography
+              sx={{
+                marginTop: theme.spacing(1),
+                fontSize: '1.2rem',
+              }}
+            >
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            </Typography>
+          </Grid>
+        </Grid>
 
         {/*
         2nd functionnality global block

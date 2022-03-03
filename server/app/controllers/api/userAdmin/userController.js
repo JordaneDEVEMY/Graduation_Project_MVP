@@ -34,6 +34,18 @@ const controller = {
       throw new ApiError(400, 'Cet email n\'est pas valide');
     }
 
+    const isSsnAvailable = await userAdminDatamapper.getSsn(req.body.social_security_number);
+
+    if (!isSsnAvailable) {
+      throw new ApiError(400, 'Le numéro de sécurité social est déjà affecté à un autre salarié');
+    }
+
+    const isEmailAvailable = await userAdminDatamapper.getEmail(req.body.email);
+
+    if (!isEmailAvailable) {
+      throw new ApiError(400, 'L\'email est déjà affecté à un autre salarié');
+    }
+
     const userCreate = await userAdminDatamapper.insert(req.body);
     return res.json(userCreate);
   },

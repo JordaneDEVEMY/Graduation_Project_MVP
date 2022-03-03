@@ -24,9 +24,9 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "strinsssg@test.net",
+  "email": "strinssesg@test.net",
   "password": "string",
-  "social_security_number": 143454789022323,
+  "social_security_number": 143444789033122,
   "date_of_birth": "2018-07-10",
   "address": "string",
   "zip_code": 0,

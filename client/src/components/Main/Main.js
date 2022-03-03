@@ -12,9 +12,16 @@ function Main(props) {
   return (
     <Box
       component="main"
-      className="main"
       sx={{
-        padding: theme.spacing(3, 6),
+        flexGrow: 1,
+        boxSizing: 'border-box',
+        [theme.breakpoints.up('md')]: {
+          padding: theme.spacing(3, 6),
+        },
+        [theme.breakpoints.down('md')]: {
+          width: '100%',
+          padding: theme.spacing(3, 2),
+        },
       }}
     >
       {children}

@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 import {
-  Box, Button, IconButton, MenuItem, Select,
+  Grid, Button, IconButton, MenuItem, Select,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import utils from '../../utils';
 import './selectweek.scss';
 import dateFunctions from '../../utils/dateFunctions';
@@ -95,14 +96,14 @@ function SelectWeek({
   };
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
+    <Grid
+      container
+      direction="row"
       alignItems="center"
-      gap={theme.spacing(1)}
+      spacing={1}
     >
       {isAdmin && (
-        <Box>
+        <Grid item xs="auto">
           <Button
             variant="outlined"
             size="small"
@@ -112,9 +113,9 @@ function SelectWeek({
           >
             Auj.
           </Button>
-        </Box>
+        </Grid>
       )}
-      <Box>
+      <Grid item sm="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <IconButton
           disabled={disabledPrev}
           onClick={handlePrevButton}
@@ -122,47 +123,44 @@ function SelectWeek({
         >
           <KeyboardArrowLeftIcon />
         </IconButton>
-      </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexWrap="nowrap"
-        gap={theme.spacing(1)}
-      >
-        {isAdmin && (
-          <Box>
-            <Select
-              size="small"
-              value={currentYear}
-              onChange={handleYearSelect}
-            >
-              {getYears()}
-            </Select>
-          </Box>
-        )}
-        <Box>
+      </Grid>
+      {isAdmin && (
+        <Grid item xs sm="auto">
           <Select
             size="small"
-            sx={{ width: '15rem' }}
-            value={week.current.num}
-            onChange={handleWeekSelect}
+            value={currentYear}
+            onChange={handleYearSelect}
+            sx={{
+              width: '100%',
+              [theme.breakpoints.up('sm')]: {
+                width: '6rem',
+              },
+            }}
           >
-            {getWeeks()}
+            {getYears()}
           </Select>
-        </Box>
-      </Box>
-      <Box>
-        <IconButton
+        </Grid>
+      )}
+      <Grid item xs>
+        <Select
           size="small"
+          sx={{ width: '100%' }}
+          value={week.current.num}
+          onChange={handleWeekSelect}
+        >
+          {getWeeks()}
+        </Select>
+      </Grid>
+      <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <IconButton
           onClick={handleNextButton}
           title={`Semaine ${week.next.num}`}
           disabled={disabledNext}
         >
           <KeyboardArrowRightIcon />
         </IconButton>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
 
