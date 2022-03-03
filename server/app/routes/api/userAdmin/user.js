@@ -11,6 +11,19 @@ const controllerHandler = require('../../../helpers/apiControllerHandler');
 const router = express.Router();
 
 router
+  .route('/')
+  /**
+   * POST /api/admin/user
+   * @summary Create one user
+   * @tags UserAdmin - User CRUD section
+   * @param {UserToCreate} request.body.required - All for creating user
+   * @return {UserCreate} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
+  .post(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
+
+router
   .route('/:id(\\d+)')
   /**
    * GET /api/admin/user/{id}
@@ -24,24 +37,12 @@ router
   .get(controllerHandler(userAdminUserController.getOne))
 
   /**
-   * POST /api/admin/user/{id}
-   * @summary Create one user
-   * @tags UserAdmin - User CRUD section
-   * @param {number} id.path.required - User identifier
-   * @param {UserCreate} request.body.required - All informations for creating user
-   * @return {User} 200 - success response - application/json
-   * @return {ApiError} 400 - Bad request response - application/json
-   * @return {ApiError} 404 - User not found - application/json
-   */
-  .patch(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create))
-
-  /**
    * PATCH /api/admin/user/{id}
    * @summary Update one user
    * @tags UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
-   * @param {User} request.body.required - User email/password to update
-   * @return {User} 200 - success response - application/json
+   * @param {User} request.body.required - All for updating user
+   * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */

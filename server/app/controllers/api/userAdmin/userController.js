@@ -4,7 +4,7 @@ const { ApiError } = require('../../../helpers/errorHandler');
 
 const controller = {
   /**
-   * User controller to get an user
+   * UserAdmin controller to get an user
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id params
    * @param {object} res Express response object
@@ -21,7 +21,25 @@ const controller = {
   },
 
   /**
-   * User controller to update an user
+   * UserAdmin controller to create an user
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id and body params
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async create(req, res) {
+    const isEmailValid = emailValidator.validate(req.body.email);
+
+    if (!isEmailValid) {
+      throw new ApiError(400, 'Cet email n\'est pas valide');
+    }
+
+    const userCreate = await userAdminDatamapper.insert(req.body);
+    return res.json(userCreate);
+  },
+
+  /**
+   * UserAdmin controller to update an user
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id and body params
    * @param {object} res Express response object
@@ -39,7 +57,7 @@ const controller = {
   },
 
   /**
-   * User controller to delete an user
+   * UserAdmin controller to delete an user
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id
    * @param {object} res Express response object

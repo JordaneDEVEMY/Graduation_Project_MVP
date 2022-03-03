@@ -1,20 +1,27 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Outlet, Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Sidebar from '../Sidebar/Sidebar';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import './layout.scss';
 import './admin_layout.scss';
+import SidebarContainer from '../../containers/SidebarContainer';
 
 function Layout({
   isAdmin,
 }) {
+  const isLogged = useSelector((state) => state.login.isLogged);
+  if (!isLogged) {
+    return (
+      <Navigate to="/" />
+    );
+  }
   return (
     <div className="wrapper">
       {isAdmin
-        && (<Sidebar />)}
+        && (<SidebarContainer />)}
       <Main>
         <Outlet />
       </Main>

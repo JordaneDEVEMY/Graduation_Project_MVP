@@ -1,8 +1,6 @@
 const Joi = require('joi');
 
 module.exports = Joi.object({
-  id: Joi.number()
-    .required(),
   firstname: Joi.string()
     .required(),
   lastname: Joi.string()
@@ -12,15 +10,13 @@ module.exports = Joi.object({
     .required(),
   password: Joi.string()
     .required(),
-  social_security_number: Joi.string()
+  social_security_number: Joi.number()
     .required(),
   date_of_birth: Joi.string()
     .required(),
   address: Joi.string()
     .required(),
   zip_code: Joi.number()
-    .required(),
-  starting_date: Joi.string()
     .required(),
   avatar: Joi.string()
     .required(),

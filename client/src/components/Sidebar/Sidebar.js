@@ -1,14 +1,23 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography,
+  Box, Button, List, ListItem, ListItemButton, ListItemText, Typography, Avatar,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './sidebar.scss';
 
-function Sidebar() {
+function Sidebar({
+  userId,
+  handleLogout,
+  userFirstname,
+  userLastname,
+  userAvatar,
+
+}) {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
 
@@ -23,6 +32,9 @@ function Sidebar() {
       sx={{
         borderRight: `1px solid ${theme.palette.divider}`,
         transition: theme.transitions.create(['margin-left', 'transform']),
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
       }}
     >
       <Button
@@ -68,7 +80,39 @@ function Sidebar() {
           color: theme.palette.text.primary,
         }}
       >
-        <Typography variant="h6">SIDEBAR HEADER</Typography>
+        <Avatar
+          alt={`Avatar de ${userFirstname} ${userLastname}`}
+          src={userAvatar}
+          sx={{ width: 56, height: 56 }}
+        />
+        <Typography variant="h6">
+          {userFirstname}
+          {' '}
+          {userLastname}
+        </Typography>
+        <Box
+          component="div"
+          sx={{
+            width: '100%',
+            textAlign: 'center',
+          }}
+        >
+          <Button>
+            <Link
+              to={`/user/${userId}/profil`} /* <-- route ? */
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              Mon profil
+            </Link>
+          </Button>
+          <Button
+            onClick={handleLogout}
+          >
+            Se déconnecter
+          </Button>
+        </Box>
       </Box>
       <Box
         component="div"
@@ -79,23 +123,54 @@ function Sidebar() {
               <ListItemButton>
                 <ListItemText
                   sx={{ color: theme.palette.text.primary }}
-                  primary="Inbox"
+                  primary="Gestion des plannings"
                 />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                disabled
+              >
                 <ListItemText
                   sx={{ color: theme.palette.text.primary }}
-                  primary="Drafts"
+                  primary="Gestion du personnel"
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                disabled
+              >
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Gestion des sites"
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                disabled
+              >
+                <ListItemText
+                  sx={{ color: theme.palette.text.primary }}
+                  primary="Gestion des clients"
                 />
               </ListItemButton>
             </ListItem>
           </List>
         </nav>
       </Box>
+      <Box />
     </Box>
   );
 }
+
+Sidebar.propTypes = {
+  userId: PropTypes.number.isRequired,
+  handleLogout: PropTypes.func.isRequired,
+  userFirstname: PropTypes.string.isRequired,
+  userLastname: PropTypes.string.isRequired,
+  userAvatar: PropTypes.string.isRequired,
+};
 
 export default React.memo(Sidebar);

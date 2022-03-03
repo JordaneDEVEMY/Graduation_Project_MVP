@@ -3,29 +3,60 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} User
- * @property {number} id - Database primary key of User
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
  * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {date} date_of_birth - User date of birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {string} starting_date - User starting date
+ * @property {date} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {string} qualification_label - label of User qualification
+ * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
  */
 
 /**
- * @typedef {object} UserCreate
- * @property {number} id - Database primary key of User
+ * @typedef {object} UserToCreate
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
  * @property {string} password - User password
  * @property {number} social_security_number - User social security number
+ * @property {date} date_of_birth - User date of birth
+ * @property {string} address - User address
+ * @property {number} zip_code - User zip code
+ * @property {string} avatar - User avatar
+ * @property {string} function - User function
+ * @property {string} role_application - User role in web application
+ * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ */
+
+/**
+ * @typedef {object} UserCreate
+ * @property {string} firstname - User firstname
+ * @property {string} lastname - User lastname
+ * @property {string} email - User email
+ * @property {string} password - User password
+ * @property {number} social_security_number - User social security number
+ * @property {date} date_of_birth - User date of birth
+ * @property {string} address - User address
+ * @property {number} zip_code - User zip code
+ * @property {date} starting_date - User starting date
+ * @property {string} avatar - User avatar
+ * @property {string} function - User function
+ * @property {string} role_application - User role in web application
+ * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {date} created_at - timestamp for the create in DB
+ */
+
+/**
+ * @typedef {object} UserUpdate
+ * @property {string} firstname - User firstname
+ * @property {string} lastname - User lastname
+ * @property {string} email - User email
+ * @property {number} social_security_number - User social security number
  * @property {string} date_of_birth - User date of birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
@@ -33,7 +64,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {string} qualification_label - label of User qualification
+ * @property {string} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {number} updated_at - timestamp for the update in DB
  */
 
 /**
@@ -48,7 +80,7 @@ module.exports = {
   /**
    * Find an User by his id
    * @param {number} userId - User's ID
-   * @returns {User[]|undefined} - REST response of an User or undefined if no user found
+   * @returns {User|undefined} - REST response of an user or undefined if no user found
    */
   async findByPk(userId) {
     const result = await client.query(
@@ -82,10 +114,72 @@ module.exports = {
   },
 
   /**
+   * Insert User
+   * @param {object} user - Body request with email and password required
+   * @returns {UserCreate|ApiError} - Return the new user or ApiError if user not found
+   */
+  async insert(user) {
+    const userToCreate = await client.query(
+      `
+        INSERT INTO "employee" 
+        (
+          "firstname",
+          "lastname",
+          "email",
+          "password",
+          "social_security_number",
+          "date_of_birth",
+          "address",
+          "zip_code",
+          "avatar",
+          "function",
+          "role_application",
+          "employee_qualification_id"
+        )
+        VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
+        )
+        RETURNING 
+          "firstname",
+          "lastname",
+          "email",
+          "password",
+          "social_security_number",
+          "date_of_birth",
+          "address",
+          "zip_code",
+          "starting_date",
+          "avatar",
+          "function",
+          "role_application",
+          "employee_qualification_id",
+          "created_at";`,
+      [
+        user.firstname,
+        user.lastname,
+        user.email,
+        user.password,
+        user.social_security_number,
+        user.date_of_birth,
+        user.address,
+        user.zip_code,
+        user.avatar,
+        user.function,
+        user.role_application,
+        user.employee_qualification_id,
+      ],
+    );
+
+    // TODO: Gérer un retour d'erreur en cas de duplicate values : SSN, adress, email, ...(Sprint 2 voir 3 !);
+
+    return userToCreate.rows[0];
+  },
+
+  /**
    * Update User
    * @param {number} userId - User's ID
    * @param {object} user - Body request with email and password required
-   * @returns {User|ApiError} - Return updated User or ApiError if user not found
+   * @returns {UserUpdate|ApiError} - Return updated user or ApiError if user not found
    */
   async update(userId, user) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
@@ -152,6 +246,12 @@ module.exports = {
     return userToSave.rows[0];
   },
 
+  /**
+   * Remove User
+   * @param {number} userId - User's ID
+   * @param {object} user - Body request with email and password required
+   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   */
   async delete(userId) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1;', [userId]);
 

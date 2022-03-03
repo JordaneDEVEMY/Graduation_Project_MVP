@@ -17,6 +17,63 @@ GET {{ endpoint }}/9999
 ### Get an user with an id as not a number
 GET {{ endpoint }}/tartempion
 
+### Create an user 
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string@test.net",
+  "password": "string",
+  "social_security_number": 123456789022323,
+  "date_of_birth": "2018-07-10",
+  "address": "string",
+  "zip_code": 0,
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 1
+}
+
+### Create a user with email error
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string",
+  "password": "string",
+  "social_security_number": 123456789012323,
+  "date_of_birth": "string",
+  "address": "string",
+  "zip_code": 0,
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 0
+}
+
+### Create a user with SSN error
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string",
+  "password": "string",
+  "social_security_number": "mustbeanumber",
+  "date_of_birth": "string",
+  "address": "string",
+  "zip_code": 0,
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 0
+}
+
 ### Patch an user 
 PATCH {{ endpoint }}/2
 content-type: application/json
