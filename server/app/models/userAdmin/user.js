@@ -27,6 +27,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {date} date_of_birth - User date of birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {date} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
@@ -131,13 +132,14 @@ module.exports = {
           "date_of_birth",
           "address",
           "zip_code",
+          "starting_date",
           "avatar",
           "function",
           "role_application",
           "employee_qualification_id"
         )
         VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13
         )
         RETURNING 
           "firstname",
@@ -163,6 +165,7 @@ module.exports = {
         user.date_of_birth,
         user.address,
         user.zip_code,
+        user.starting_date,
         user.avatar,
         user.function,
         user.role_application,

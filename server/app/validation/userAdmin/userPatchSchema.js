@@ -11,12 +11,14 @@ module.exports = Joi.object({
   social_security_number: Joi.string()
     .required(),
   date_of_birth: Joi.string()
+    .pattern(/^[1][9][0-9]{2}(?:-[0-2]{2}){2}$|^[2][0][0-9][0-9](?:-[0-2]{2}){2}$/)
     .required(),
   address: Joi.string()
     .required(),
   zip_code: Joi.number()
     .required(),
   starting_date: Joi.string()
+    .pattern(/^[1][9][5-9][0-9](?:-[0-2]{2}){2}$|^[2][0][0-9][0-9](?:-[0-2]{2}){2}$/)
     .required(),
   avatar: Joi.string()
     .required(),
