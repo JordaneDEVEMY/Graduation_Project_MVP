@@ -6,6 +6,7 @@ export const SET_USER_ISADMIN = 'SET_USER_ISADMIN';
 export const SET_USER_QUALIFICATION = 'SET_USER_QUALIFICATION';
 export const SET_USER_LABEL = 'SET_USER_LABEL';
 export const SET_USER_ASSIGNEMENTS = 'SET_USER_ASSIGNEMENTS';
+export const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
 
 export function actionSetUserId(id) {
   return {
@@ -52,5 +53,11 @@ export function actionSetUserLabel(label) {
 export function actionSetUserAssignements(assignements) {
   return {
     type: SET_USER_ASSIGNEMENTS, payload: assignements,
+  };
+}
+
+export function actionSetUserLogout() {
+  return {
+    type: SET_USER_LOGOUT,
   };
 }
