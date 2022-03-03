@@ -77,7 +77,7 @@ function Sidebar({
         }}
       >
         <Avatar sx={{ width: 56, height: 56 }} />
-        <Typography variant="h6">_USER_NAME_</Typography>
+        <Typography variant="h6">UserName</Typography>
         <Box
           component="div"
           sx={{
