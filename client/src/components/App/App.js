@@ -15,6 +15,7 @@ import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import RequireAdmin from '../RequireAdmin/RequireAdmin';
+import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
 
@@ -22,6 +23,7 @@ function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
 
   const isAdmin = useSelector((state) => state.user.isAdmin);
+  const userId = useSelector((state) => state.user.id);
 
   const theme = utils.getTheme(mode);
 
@@ -59,7 +61,7 @@ function App() {
             <Route element={<RequireUser />}>
               <Route path="users" element={<Layout isAdmin={isAdmin} />}>
                 <Route
-                  path=":user_id/planning"
+                  path={`:${userId}/planning`}
                   element={(
                     <Planning isAdmin={isAdmin} />
                     )}

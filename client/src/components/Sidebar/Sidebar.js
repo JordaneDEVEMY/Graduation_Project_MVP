@@ -38,7 +38,6 @@ function Sidebar({
 }) {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
-  const navigate = useNavigate();
 
   const handleDrawer = () => {
     setOpen((oldOpen) => !oldOpen);
@@ -47,7 +46,6 @@ function Sidebar({
   const onLogoutClick = (event) => {
     event.preventDefault();
     handleLogout();
-    navigate('/');
   };
 
   return (
