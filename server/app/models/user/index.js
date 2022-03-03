@@ -2,7 +2,7 @@ const client = require('../../config/database');
 const { ApiError } = require('../../helpers/errorHandler');
 
 /**
- * @typedef {object} User
+ * @typedef {object} RestUser
  * @property {number} id - Database primary key of User
  * @property {number} social_security_number - User SSN
  * @property {number} date_of_birth - User date_of_birth
@@ -12,7 +12,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} function - User function
  * @property {number} employee_qualification_id - User qualification key
  * @property {string} label - User qualification label
- * @property {array.<assignments>} assignments - User assignments
+ * @property {array.<Assignments>} assignments - User assignments
  */
 
 /**
@@ -23,32 +23,32 @@ const { ApiError } = require('../../helpers/errorHandler');
  */
 
 /**
- * @typedef {Array} assignments
+ * @typedef {Array} Assignments
  * @property {number} id - Database primary key of assignement
  * @property {string} starting_date - assignment starting date
  * @property {string} ending_date - assignment ending date
- * @property {absence} absence - User absence assignment
- * @property {site} site - User site assignment
+ * @property {Absence} absence - User absence assignment
+ * @property {Site} site - User site assignment
  */
 
 /**
- * @typedef {object} absence
+ * @typedef {object} Absence
  * @property {number} id - Database primary key of absence
  * @property {string} reason - absence reason
  */
 
 /**
- * @typedef {object} site
+ * @typedef {object} Site
  * @property {number} id - Database primary key of site
  * @property {string} name - site name
  * @property {string} adress - site adress
  * @property {number} zip_code - site zip code
  * @property {string} manager_name - site manager name
- * @property {company} company - site owner's company
+ * @property {Company} company - site owner's company
  */
 
 /**
- * @typedef {object} company
+ * @typedef {object} Company
  * @property {number} id - Database primary key of site
  * @property {string} name - company name
  */
@@ -57,7 +57,7 @@ module.exports = {
   /**
    * Find an User by his id
    * @param {number} userId - User's ID
-   * @returns {User[]|undefined} - REST response of an User or undefined if no user found
+   * @returns {RestUser[]|ApiError} - REST response of an User or ApiError if user not found
    */
   async findByPk(userId) {
     const result = await client.query(
@@ -68,12 +68,18 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      return undefined;
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
     }
 
     return result.rows[0];
   },
 
+  /**
+   * Update and User by his id with email and password body request
+   * @param {number} userId - User's ID
+   * @param {object<email, password>} user - Body request with email and password required
+   * @returns {UserUpdate|ApiError} - Return updated User or ApiError if user not found
+   */
   async update(userId, user) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
 

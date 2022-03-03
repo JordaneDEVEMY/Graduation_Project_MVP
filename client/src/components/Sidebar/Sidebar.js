@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
   Box, Button, List, ListItem, ListItemButton, ListItemIcon, Link, ListItemText, Typography, Avatar,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
@@ -38,9 +38,16 @@ function Sidebar({
 }) {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const handleDrawer = () => {
     setOpen((oldOpen) => !oldOpen);
+  };
+
+  const onLogoutClick = (event) => {
+    event.preventDefault();
+    handleLogout();
+    navigate('/');
   };
 
   return (
@@ -122,7 +129,7 @@ function Sidebar({
             {' | '}
             <Link
               sx={{ width: 56, height: 56 }}
-              onClick={handleLogout}
+              onClick={onLogoutClick}
             >
               Se déconnecter
             </Link>
