@@ -28,10 +28,10 @@ function Planning({
 
   return (
     <>
-      <SearchContainer isAdmin={isAdmin} />
-      <Typography paragraph sx={{ color: 'text.primary' }}>
-        {`Planning en mode ${isAdmin ? 'admin' : 'user'}`}
+      <Typography variant="h1" sx={{ color: 'text.primary' }}>
+        {'Planning d\'intervention'}
       </Typography>
+      <SearchContainer isAdmin={isAdmin} />
       {displayCarousel && (
       <Carousel />
       )}

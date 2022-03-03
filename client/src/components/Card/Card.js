@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
@@ -8,6 +9,7 @@ import SheetList from '../SheetList/SheetList';
 import './card.scss';
 
 function Card({
+  data,
   className,
 }) {
   const theme = useTheme();
@@ -16,9 +18,13 @@ function Card({
     <Box
       className={className}
       sx={{
-        width: '300px', height: '500px', backgroundColor: theme.palette.grey[700], marginBottom: '10px',
+        height: '50vh',
+        backgroundColor: theme.palette.background.component,
+        color: theme.palette.text.primary,
+        p: theme.spacing(2),
       }}
     >
+      {`${data.label}`}
       <CardHeader />
       <SheetList />
     </Box>
@@ -26,6 +32,7 @@ function Card({
 }
 
 Card.propTypes = {
+  data: PropTypes.object.isRequired,
   className: PropTypes.string,
 };
 Card.defaultProps = {

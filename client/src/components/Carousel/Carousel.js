@@ -1,107 +1,101 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState } from 'react';
-import { MobileStepper, Box } from '@mui/material';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import React, { useState } from 'react';
+import {
+  Box, Button, MobileStepper,
+} from '@mui/material';
+import SwipeableViews from 'react-swipeable-views';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useTheme } from '@mui/material/styles';
 import Card from '../Card/Card';
 
 import './carousel.scss';
 
+const images = [
+  {
+    label: 'San Francisco – Oakland Bay Bridge, United States',
+    imgPath:
+      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+  },
+  {
+    label: 'Bird',
+    imgPath:
+      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+  },
+  {
+    label: 'Bali, Indonesia',
+    imgPath:
+      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
+  },
+  {
+    label: 'Goč, Serbia',
+    imgPath:
+      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+  },
+];
+
 function Carousel() {
   const theme = useTheme();
+  const [activeStep, setActiveStep] = useState(0);
+  const maxSteps = images.length;
 
-  const [current, setCurrent] = useState(0);
-  const [rightDisabled, setRightDisabled] = useState(false);
-  const [leftDisabled, setLeftDisabled] = useState(true);
-
-  const cards = [1, 2, 3, 4, 5];
-  const { length } = cards;
-
-  useEffect(() => {
-    if (current === 0) {
-      setLeftDisabled(true);
-    }
-    if (current === length - 1) {
-      setRightDisabled(true);
-    }
-  }, [current]);
-
-  const nextCard = () => {
-    if (!rightDisabled) {
-      setCurrent(current + 1);
-      setLeftDisabled(false);
-    }
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const prevCard = () => {
-    if (!leftDisabled) {
-      setCurrent(current - 1);
-      setRightDisabled(false);
-    }
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  if (!Array.isArray(cards) || cards.length <= 0) {
-    return null;
-  }
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
 
   return (
-    <Box
-      component="div"
-      className="carousel"
-      sx={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {!leftDisabled && (
-      <ArrowCircleLeftIcon
-        sx={{
-          color: theme.palette.grey[500],
-          fontSize: '3rem',
-          position: 'absolute',
-          top: '50%',
-          left: '2px',
-          cursor: 'pointer',
-        }}
-        onClick={prevCard}
-      />
-      )}
-      {!rightDisabled && (
-      <ArrowCircleRightIcon
-        sx={{
-          color: theme.palette.grey[500],
-          fontSize: '3rem',
-          position: 'absolute',
-          top: '50%',
-          right: '2px',
-          cursor: 'pointer',
-        }}
-        onClick={nextCard}
-      />
-      )}
-      {cards.map((card, index) => (
-        <Box
-          component="div"
-          className={index === current ? 'card active' : 'card'}
-          key={index}
-        >
-          {index === current && (
-          <Card currentCard={current} />
-          )}
-        </Box>
-      ))}
+    <Box>
+      <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+      >
+        {images.map((data, index) => (
+          <div key={data.label}>
+            {Math.abs(activeStep - index) <= 2 ? (
+              <Box
+                component="div"
+                sx={{
+                  display: 'block',
+                  overflow: 'hidden',
+                  width: '100%',
+                }}
+              >
+                <Card data={data} />
+              </Box>
+            ) : null}
+          </div>
+        ))}
+      </SwipeableViews>
       <MobileStepper
-        variant="dots"
-        steps={length}
+        steps={maxSteps}
         position="static"
-        activeStep={current}
-        sx={{ maxWidth: 400 }}
+        activeStep={activeStep}
+        nextButton={(
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+          >
+            Suiv.
+            <KeyboardArrowRight />
+          </Button>
+        )}
+        backButton={(
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+            <KeyboardArrowLeft />
+            Préc.
+          </Button>
+        )}
       />
     </Box>
   );
