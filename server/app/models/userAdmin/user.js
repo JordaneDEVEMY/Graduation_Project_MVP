@@ -19,6 +19,24 @@ const { ApiError } = require('../../helpers/errorHandler');
  */
 
 /**
+ * @typedef {object} UserCreate
+ * @property {number} id - Database primary key of User
+ * @property {string} firstname - User firstname
+ * @property {string} lastname - User lastname
+ * @property {string} email - User email
+ * @property {string} password - User password
+ * @property {number} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
+ * @property {string} address - User address
+ * @property {number} zip_code - User zip code
+ * @property {string} starting_date - User starting date
+ * @property {string} avatar - User avatar
+ * @property {string} function - User function
+ * @property {string} role_application - User role in web application
+ * @property {string} qualification_label - label of User qualification
+ */
+
+/**
  * Deleted user response
  * @typedef {object} UserDelete
  * @property {boolean} isDeleted - Status

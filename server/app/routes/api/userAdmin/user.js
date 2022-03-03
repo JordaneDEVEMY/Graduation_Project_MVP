@@ -1,7 +1,8 @@
 const express = require('express');
 
 const validate = require('../../../validation');
-const userSchema = require('../../../validation/userAdmin/userSchema');
+const userPatchSchema = require('../../../validation/userAdmin/userPatchSchema');
+const userCreateSchema = require('../../../validation/userAdmin/userCreateSchema');
 
 const { userAdminUserController } = require('../../../controllers');
 
@@ -23,6 +24,18 @@ router
   .get(controllerHandler(userAdminUserController.getOne))
 
   /**
+   * POST /api/admin/user/{id}
+   * @summary Create one user
+   * @tags UserAdmin - User CRUD section
+   * @param {number} id.path.required - User identifier
+   * @param {UserCreate} request.body.required - All informations for creating user
+   * @return {User} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
+  .patch(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create))
+
+  /**
    * PATCH /api/admin/user/{id}
    * @summary Update one user
    * @tags UserAdmin - User CRUD section
@@ -32,7 +45,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .patch(validate('body', userSchema), controllerHandler(userAdminUserController.update))
+  .patch(validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
 
   /**
    * DELETE /api/admin/user/{id}
