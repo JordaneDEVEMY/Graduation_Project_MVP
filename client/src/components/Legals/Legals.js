@@ -46,17 +46,11 @@ function Legals() {
       }}
     >
       <Typography
-        variant="h1"
+        variant="p"
         sx={{
+          fontSize: theme.typography.h1.fontSize,
           color: theme.palette.primary.main,
-          textTransform: 'uppercase',
           textAlign: 'center',
-          fontStyle: 'italic',
-          fontWeight: theme.typography.fontWeightBold,
-          fontSize: {
-            xs: '4em',
-            md: theme.typography.h1.fontSize,
-          },
         }}
       >
         Mentions légales
