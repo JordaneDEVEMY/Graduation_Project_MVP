@@ -12,6 +12,7 @@ import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
 import Planning from '../Planning/Planning';
+import RequireAuth from '../RequireAuth/RequireAuth';
 import utils from '../../utils';
 import './app.scss';
 
