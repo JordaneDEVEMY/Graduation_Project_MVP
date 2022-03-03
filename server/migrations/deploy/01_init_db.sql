@@ -43,8 +43,8 @@ CREATE TABLE "assignment" (
     "position" INT NOT NULL DEFAULT 0,
     "visibility" BOOLEAN DEFAULT false,
     "employee_id" INT NOT NULL,
-    "absence_id" INT NOT NULL,
-    "site_id" INT NOT NULL,
+    "absence_id" INT,
+    "site_id" INT,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
