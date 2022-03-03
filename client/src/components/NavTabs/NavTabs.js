@@ -33,6 +33,8 @@ function NavTabs() {
           borderColor: 'divider',
         }}
         value={pathname}
+        variant="scrollable"
+        scrollButtons="auto"
       >
         <Tab icon={<DateRangeRoundedIcon />} label="Planning" value="/admins/planning" />
         <Tab icon={<BadgeRoundedIcon />} label="Personnel" value="/admins/personnel" />

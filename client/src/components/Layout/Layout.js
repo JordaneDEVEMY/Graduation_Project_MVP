@@ -1,17 +1,26 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Outlet, Navigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import Sidebar from '../Sidebar/Sidebar';
-import NavTabs from '../NavTabs/NavTabs';
 import Main from '../Main/Main';
+import NavTabs from '../NavTabs/NavTabs';
+import SidebarContainer from '../../containers/SidebarContainer';
+import './layout.scss';
 
 function Layout({
   isAdmin,
 }) {
   const theme = useTheme();
+  const isLogged = useSelector((state) => state.login.isLogged);
+
+  if (!isLogged) {
+    return (
+      <Navigate to="/" />
+    );
+  }
 
   return (
     <Box sx={{
@@ -26,7 +35,7 @@ function Layout({
     }}
     >
       {isAdmin
-        && (<Sidebar />)}
+        && (<SidebarContainer />)}
       <Main>
         {isAdmin
         && (<NavTabs />)}
