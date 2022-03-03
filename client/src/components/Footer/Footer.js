@@ -2,13 +2,14 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { useNavigate, Link } from 'react-router-dom';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Button } from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import { useTheme } from '@mui/material/styles';
 import './footer.scss';
 
 function Footer() {
@@ -16,6 +17,8 @@ function Footer() {
     id: 1,
     is_admin: true,
   };
+
+  const theme = useTheme();
 
   /*
     Changes the URL to navigate in the app
@@ -35,12 +38,14 @@ function Footer() {
   };
 
   return (
-    <footer>
+    <>
       <Box
-        className="footer--content"
+        component="footer"
         sx={{
-          mt: '1em',
-          p: '0.5em',
+          mt: theme.spacing(2),
+          p: theme.spacing(2),
+          backgroundColor: theme.palette.background.component,
+          textAlign: 'center',
         }}
       >
         <Typography>
@@ -48,6 +53,7 @@ function Footer() {
           {' '}
           - Tous droits réservés © O'lleks 2022
         </Typography>
+        <Button size="small" href="https://storyset.com/">Website illustrations by Storyset</Button>
       </Box>
 
       {user.id
@@ -77,8 +83,7 @@ function Footer() {
 
         </BottomNavigation>
       ))}
-
-    </footer>
+    </>
   );
 }
 
