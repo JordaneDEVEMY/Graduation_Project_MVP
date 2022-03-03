@@ -1,8 +1,8 @@
 const express = require('express');
 
 const validate = require('../../../validation');
-const userPatchSchema = require('../../../validation/userAdmin/userPatchSchema');
-const userCreateSchema = require('../../../validation/userAdmin/userCreateSchema');
+const userPatchSchema = require('../../../validation/userAdmin/user/userPatchSchema');
+const userCreateSchema = require('../../../validation/userAdmin/user/userCreateSchema');
 
 const { userAdminUserController } = require('../../../controllers');
 

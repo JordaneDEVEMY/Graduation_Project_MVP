@@ -3,6 +3,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} User
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -36,6 +37,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} UserCreate
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -54,6 +56,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} UserUpdate
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -80,7 +83,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 module.exports = {
   /**
    * Find an User by his id
-   * @param {number} userId - User's ID
+   * @param {number} userId - User ID
    * @returns {User|undefined} - REST response of an user or undefined if no user found
    */
   async findByPk(userId) {
@@ -178,7 +181,7 @@ module.exports = {
 
   /**
    * Update User
-   * @param {number} userId - User's ID
+   * @param {number} userId - User ID
    * @param {object} user - Body request with email and password required
    * @returns {UserUpdate|ApiError} - Return updated user or ApiError if user not found
    */
@@ -249,7 +252,7 @@ module.exports = {
 
   /**
    * Remove User
-   * @param {number} userId - User's ID
+   * @param {number} userId - User ID
    * @param {object} user - Body request with email and password required
    * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
    */

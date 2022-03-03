@@ -7,3 +7,12 @@
 
 ### 404
 GET {{ endpoint }}/azertyuiop
+
+### Get one user
+GET {{ endpoint }}/1
+
+### Get an user who does not exist
+GET {{ endpoint }}/9999
+
+### Get an user with an id as not a number
+GET {{ endpoint }}/tartempion
