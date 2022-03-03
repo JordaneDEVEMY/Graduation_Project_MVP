@@ -1,7 +1,6 @@
 export const UPDATE_LOGIN_INPUT = 'UPDATE_LOGIN_INPUT';
-export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
-export const SET_USER_ROLE = 'SET_USER_ROLE';
+export const SET_IS_LOGGED = 'SET_IS_LOGGED';
 export const LOGOUT = 'LOGOUT';
 
 export function actionUpdateLoginInput(name, value) {
@@ -19,12 +18,6 @@ export function actionSetIsLogged(isLogged) {
 export function actionSubmitLogin() {
   return {
     type: SUBMIT_LOGIN,
-  };
-}
-
-export function actionSetUserRole(role) {
-  return {
-    type: SET_USER_ROLE, payload: role,
   };
 }
 
