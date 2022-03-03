@@ -7,10 +7,10 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} lastname - User lastname
  * @property {string} email - User email
  * @property {number} social_security_number - User social security number
- * @property {date} date_of_birth - User date of birth
+ * @property {string} date_of_birth - User date of birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {date} starting_date - User starting date
+ * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
@@ -24,10 +24,10 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} email - User email
  * @property {string} password - User password
  * @property {number} social_security_number - User social security number
- * @property {date} date_of_birth - User date of birth
+ * @property {string} date_of_birth - User date of birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {date} starting_date - User starting date
+ * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
@@ -41,15 +41,15 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} email - User email
  * @property {string} password - User password
  * @property {number} social_security_number - User social security number
- * @property {date} date_of_birth - User date of birth
+ * @property {string} date_of_birth - User date of birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {date} starting_date - User starting date
+ * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
  * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
- * @property {date} created_at - timestamp for the create in DB
+ * @property {string} created_at - timestamp for the create in DB
  */
 
 /**

@@ -24,13 +24,13 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "strinsg@test.net",
+  "email": "strinsssg@test.net",
   "password": "string",
-  "social_security_number": 123454789022323,
+  "social_security_number": 143454789022323,
   "date_of_birth": "2018-07-10",
   "address": "string",
   "zip_code": 0,
-  "starting_date": "string",
+  "starting_date": "2018-07-10",
   "avatar": "string",
   "function": "string",
   "role_application": "string",
@@ -53,7 +53,7 @@ content-type: application/json
   "avatar": "string",
   "function": "string",
   "role_application": "string",
-  "employee_qualification_id": 0
+  "employee_qualification_id": 1
 }
 
 ### Create a user with SSN error
@@ -63,17 +63,37 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "string",
+  "email": "string@testssn.fr",
   "password": "string",
   "social_security_number": "mustbeanumber",
-  "date_of_birth": "string",
+  "date_of_birth": "2018-07-10",
   "address": "string",
   "zip_code": 0,
-  "starting_date": "string",
+  "starting_date": "2018-07-10",
   "avatar": "string",
   "function": "string",
   "role_application": "string",
-  "employee_qualification_id": 0
+  "employee_qualification_id": 1
+}
+
+### Create a user with date error
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "string@testssn.fr",
+  "password": "string",
+  "social_security_number": 123453253262326,
+  "date_of_birth": "21-07-10",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "20-07-10",
+  "avatar": "string",
+  "function": "string",
+  "role_application": "string",
+  "employee_qualification_id": 1
 }
 
 ### Patch an user 

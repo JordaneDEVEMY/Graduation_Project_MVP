@@ -10,15 +10,16 @@ module.exports = Joi.object({
     .required(),
   social_security_number: Joi.string()
     .required(),
-  date_of_birth: Joi.string()
-    .pattern(/^[1][9][0-9]{2}(?:-[0-2]{2}){2}$|^[2][0][0-9][0-9](?:-[0-2]{2}){2}$/)
+  date_of_birth: Joi.date()
+    .iso()
+    .less('now')
     .required(),
   address: Joi.string()
     .required(),
   zip_code: Joi.number()
     .required(),
-  starting_date: Joi.string()
-    .pattern(/^[1][9][5-9][0-9](?:-[0-2]{2}){2}$|^[2][0][0-9][0-9](?:-[0-2]{2}){2}$/)
+  starting_date: Joi.date()
+    .iso()
     .required(),
   avatar: Joi.string()
     .required(),
@@ -27,6 +28,7 @@ module.exports = Joi.object({
   role_application: Joi.string()
     .required(),
   employee_qualification_id: Joi.number()
+    .min(1)
     .required(),
   // qualification_label: Joi.string()
   // .required(),
