@@ -7,7 +7,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { Box, Tabs, Tab } from '@mui/material';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
-import EngineeringIcon from '@mui/icons-material/Engineering';
+import BusinessIcon from '@mui/icons-material/Business';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import './nav_tabs.scss';
 
@@ -38,7 +38,7 @@ function NavTabs() {
       >
         <Tab key="Planning" icon={<DateRangeRoundedIcon />} label="Planning" component={Link} to="/admins/planning" value="/admins/planning" />
         <Tab key="Personnel" icon={<BadgeRoundedIcon />} label="Personnel" component={Link} to="/admins/personnel" value="/admins/personnel" />
-        <Tab key="Sites" icon={<EngineeringIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
+        <Tab key="Sites" icon={<BusinessIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
         <Tab key="Clients" icon={<SupervisorAccountIcon />} label="Clients" component={Link} to="/admins/clients" value="/admins/sites" />
       </Tabs>
     </Box>
