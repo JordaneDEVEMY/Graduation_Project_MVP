@@ -20,9 +20,6 @@ function Main(props) {
         },
         [theme.breakpoints.down('md')]: {
           width: '100%',
-          padding: theme.spacing(3),
-        },
-        [theme.breakpoints.down('sm')]: {
           padding: theme.spacing(3, 2),
         },
       }}

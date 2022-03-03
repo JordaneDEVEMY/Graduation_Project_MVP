@@ -14,9 +14,6 @@ function Footer() {
       sx={{
         p: theme.spacing(2),
         borderTop: `1px solid ${theme.palette.divider}`,
-        [theme.breakpoints.up('sm')]: {
-          p: theme.spacing(1, 3),
-        },
       }}
     >
       <Typography sx={{

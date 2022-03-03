@@ -22,7 +22,17 @@ function MobileHeader({
 
   return (
     <AppBar position="static" color="header">
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+      <Toolbar
+        sx={{
+          justifyContent: 'space-between',
+          paddingRight: {
+            sm: theme.spacing(2),
+          },
+          paddingLeft: {
+            sm: theme.spacing(2),
+          },
+        }}
+      >
         <Link to="/">
           <Box
             component="img"

@@ -86,7 +86,7 @@ function Sidebar({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: theme.spacing(1),
+          padding: theme.spacing(3),
           justifyContent: 'center',
           color: theme.palette.text.primary,
         }}
@@ -97,80 +97,66 @@ function Sidebar({
           sx={{ width: 56, height: 56 }}
         />
         <Typography variant="h6">
-          {userFirstname}
-          {' '}
-          {userLastname}
+          {`${userFirstname} ${userLastname}`}
         </Typography>
-        <Box
-          component="div"
-          sx={{
-            width: '100%',
-            textAlign: 'center',
-          }}
-        >
-          <Button>
-            <Link
-              to={`/user/${userId}/profil`} /* <-- route ? */
-              style={{
-                textDecoration: 'none',
-              }}
-            >
-              Mon profil
-            </Link>
-          </Button>
-          <Button
-            onClick={handleLogout}
+        <Button>
+          <Link
+            to={`/user/${userId}/profil`} /* <-- route ? */
+            style={{
+              textDecoration: 'none',
+            }}
           >
-            Se déconnecter
-          </Button>
-        </Box>
+            Mon profil
+          </Link>
+        </Button>
+        <Button
+          onClick={handleLogout}
+        >
+          Se déconnecter
+        </Button>
       </Box>
-      <Box
-        component="div"
-      >
-        <nav aria-label="main mailbox folders">
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion des plannings"
-                />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                disabled
-              >
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion du personnel"
-                />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                disabled
-              >
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion des sites"
-                />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                disabled
-              >
-                <ListItemText
-                  sx={{ color: theme.palette.text.primary }}
-                  primary="Gestion des clients"
-                />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </nav>
-      </Box>
+      <nav aria-label="main mailbox folders">
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Planning"
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              disabled
+            >
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Personnel"
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              disabled
+            >
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Sites"
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              disabled
+            >
+              <ListItemText
+                sx={{ color: theme.palette.text.primary }}
+                primary="Clients"
+              />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </nav>
     </Aside>
   );
 }
