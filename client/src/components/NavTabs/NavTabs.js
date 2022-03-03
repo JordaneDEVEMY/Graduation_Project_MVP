@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Box, Tabs, Tab } from '@mui/material';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
@@ -36,10 +36,10 @@ function NavTabs() {
         variant="scrollable"
         scrollButtons="auto"
       >
-        <Tab icon={<DateRangeRoundedIcon />} label="Planning" value="/admins/planning" />
-        <Tab icon={<BadgeRoundedIcon />} label="Personnel" value="/admins/personnel" />
-        <Tab icon={<EngineeringIcon />} label="Sites" value="/admins/sites" />
-        <Tab icon={<SupervisorAccountIcon />} label="Clients" value="/admins/clients" />
+        <Tab key="Planning" icon={<DateRangeRoundedIcon />} label="Planning" component={Link} to="/admins/planning" value="/admins/planning" />
+        <Tab key="Personnel" icon={<BadgeRoundedIcon />} label="Personnel" component={Link} to="/admins/personnel" value="/admins/personnel" />
+        <Tab key="Sites" icon={<EngineeringIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
+        <Tab key="Clients" icon={<SupervisorAccountIcon />} label="Clients" component={Link} to="/admins/clients" value="/admins/sites" />
       </Tabs>
     </Box>
   );
