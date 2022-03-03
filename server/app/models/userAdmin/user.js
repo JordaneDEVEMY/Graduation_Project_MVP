@@ -173,8 +173,6 @@ module.exports = {
       ],
     );
 
-    // TODO: Gérer un retour d'erreur en cas de duplicate values : SSN, adress, email, ...(Sprint 2 voir 3 !);
-
     return userToCreate.rows[0];
   },
 
@@ -265,5 +263,37 @@ module.exports = {
     const userToDelete = await client.query('DELETE FROM "employee" WHERE "id" = $1;', [userId]);
 
     return !!userToDelete.rowCount;
+  },
+
+  /**
+   * Search if SSN already exist in db
+   * @param {number} userSsn - User Ssn to find
+   * @param {object} user - Body request
+   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   */
+  async getSsn(userSsn) {
+    const result = await client.query('SELECT social_security_number FROM "employee" WHERE social_security_number = $1', [userSsn]);
+
+    if (result.rowCount > 0) {
+      throw new ApiError(400, 'Le numéro de sécurité social est déjà affecté à un autre salarié');
+    }
+
+    return !result.rowCount;
+  },
+
+  /**
+   * Search if SSN already exist in db
+   * @param {number} userSsn - User Email to find
+   * @param {object} user - Body request
+   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   */
+  async getEmail(userEmail) {
+    const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);
+
+    if (result.rowCount > 0) {
+      throw new ApiError(400, 'L\'email est déjà affecté à un autre salarié');
+    }
+
+    return !result.rowCount;
   },
 };
