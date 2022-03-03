@@ -21,6 +21,14 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {number} estimated_duration - Site estimated duration
  * @property {number} company_id - Site company id owner
  */
+
+/**
+ * @typedef {object} SiteDelete
+ * @property {boolean} isDeleted - Status
+ * @property {number} statusCode - HTTP Status code
+ * @property {string} message - Status message
+ */
+
 module.exports = {
   /**
    * Find a Site by his id
@@ -40,6 +48,40 @@ module.exports = {
     }
 
     return result.rows[0];
+  },
+
+  /**
+   * Insert Site
+   * @param {object} site - Body request required
+   * @returns {SiteInDatabase|ApiError} - Return the new site or ApiError if site not found
+   */
+  async insert(site) {
+    const siteToCreate = await client.query(
+      `
+      INSERT INTO "site" 
+      (
+        "name",
+        "address",
+        "zip_code",
+        "manager_name",
+        "estimated_duration",
+        "company_id"
+      )
+      VALUES (
+        $1, $2, $3, $4, $5, $6
+      )
+      RETURNING *;`,
+      [
+        site.name,
+        site.address,
+        site.zip_code,
+        site.manager_name,
+        site.estimated_duration,
+        site.company_id,
+      ],
+    );
+
+    return siteToCreate.rows[0];
   },
 
   /**
@@ -81,5 +123,37 @@ module.exports = {
     );
 
     return siteToSave.rows[0];
+  },
+
+  /**
+   * Remove site
+   * @param {number} siteId - Site ID
+   * @returns {boolean|ApiError} - Return boolean or ApiError if site not found
+   */
+  async delete(siteId) {
+    const result = await client.query('SELECT * FROM "site" WHERE "id" = $1;', [siteId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Ce site n\'existe pas');
+    }
+
+    const siteToDelete = await client.query('DELETE FROM "site" WHERE "id" = $1;', [siteId]);
+
+    return !!siteToDelete.rowCount;
+  },
+
+  /**
+   * Search if company id already exist in db
+   * @param {number} companyId - company id PK to find
+   * @returns {boolean|ApiError} - Return boolean or ApiError if company id PK not found
+   */
+  async getCompanyId(companyId) {
+    const result = await client.query('SELECT * FROM "company" WHERE "id" = $1', [companyId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'L\'id de la société n\'existe pas');
+    }
+
+    return result.rows[0];
   },
 };

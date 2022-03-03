@@ -73,7 +73,6 @@ const { ApiError } = require('../../helpers/errorHandler');
  */
 
 /**
- * Deleted user response
  * @typedef {object} UserDelete
  * @property {boolean} isDeleted - Status
  * @property {number} statusCode - HTTP Status code
@@ -253,8 +252,7 @@ module.exports = {
   /**
    * Remove User
    * @param {number} userId - User ID
-   * @param {object} user - Body request with email and password required
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @returns {boolean|ApiError} - Return boolean or ApiError if user not found
    */
   async delete(userId) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1;', [userId]);
@@ -271,8 +269,7 @@ module.exports = {
   /**
    * Search if SSN already exist in db
    * @param {number} userSsn - User Ssn to find
-   * @param {object} user - Body request
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @returns {boolean|ApiError} - Return boolean or ApiError if userSsn not found
    */
   async getSsn(userSsn) {
     const result = await client.query('SELECT social_security_number FROM "employee" WHERE social_security_number = $1', [userSsn]);
@@ -286,9 +283,8 @@ module.exports = {
 
   /**
    * Search if SSN already exist in db
-   * @param {number} userSsn - User Email to find
-   * @param {object} user - Body request
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @param {number} userEmail - User Email to find
+   * @returns {boolean|ApiError} - Return boolean or ApiError if userEmail not found
    */
   async getEmail(userEmail) {
     const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);

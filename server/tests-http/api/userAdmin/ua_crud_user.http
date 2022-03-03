@@ -155,3 +155,6 @@ content-type: application/json
 
 ### Delete an user
 DELETE {{ endpoint }}/99
+
+### Delete an inexistant user
+DELETE {{ endpoint }}/999
