@@ -39,7 +39,7 @@ router
    * @summary Delete one user
    * @tags UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
-   * @return {string} 200 - success response - application/json
+   * @return {UserDelete} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */

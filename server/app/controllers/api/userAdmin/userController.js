@@ -43,11 +43,16 @@ const controller = {
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id
    * @param {object} res Express response object
-   * @returns {string} Route API JSON response
+   * @returns {object} Route API JSON response
    */
   async delete(req, res) {
     const userDelete = await userAdminDatamapper.delete(req.params.id);
-    return res.json(userDelete);
+
+    return res.status(200).json({
+      isDeleted: userDelete,
+      statusCode: 200,
+      message: 'Utilisateur supprimé',
+    });
   },
 };
 

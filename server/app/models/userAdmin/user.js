@@ -18,6 +18,14 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} qualification_label - label of User qualification
  */
 
+/**
+ * Deleted user response
+ * @typedef {object} UserDelete
+ * @property {boolean} isDeleted - Status
+ * @property {number} statusCode - HTTP Status code
+ * @property {string} message - Status message
+ */
+
 module.exports = {
   /**
    * Find an User by his id
@@ -135,6 +143,6 @@ module.exports = {
 
     const userToDelete = await client.query('DELETE FROM "employee" WHERE "id" = $1;', [userId]);
 
-    return userToDelete.rows[0];
+    return !!userToDelete.rowCount;
   },
 };
