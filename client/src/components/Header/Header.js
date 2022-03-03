@@ -1,5 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -11,12 +11,13 @@ import LoginContainer from '../../containers/LoginContainer';
 import logo from './logo.svg';
 import './header.scss';
 
-function MobileHeader({
+function Header({
   handleMode,
+  isLogged,
+  user,
 }) {
   const theme = useTheme();
   const [modal, displayModal] = useState(false);
-  const isLogged = useSelector((state) => state.login.isLogged);
 
   const handleModal = () => {
     displayModal((stateModal) => !stateModal);
@@ -27,6 +28,7 @@ function MobileHeader({
       <Toolbar
         sx={{
           justifyContent: 'space-between',
+          alignItems: 'center',
           paddingRight: {
             sm: theme.spacing(2),
           },
@@ -50,22 +52,31 @@ function MobileHeader({
         </Link>
 
         {!isLogged
-        && (
-        <Button
-          onClick={handleModal}
-          variant="outlined"
-          size="small"
-          sx={{
-            ml: 'auto',
-            mr: theme.spacing(1),
-            display: {
-              md: 'none',
-            },
-          }}
-        >
-          Connexion
-        </Button>
-        )}
+          ? (
+            <Button
+              onClick={handleModal}
+              variant="outlined"
+              size="small"
+              sx={{
+                ml: 'auto',
+                mr: theme.spacing(1),
+                display: {
+                  md: 'none',
+                },
+              }}
+            >
+              Connexion
+            </Button>
+          )
+          : (
+            <Box sx={{
+              ml: 'auto',
+              mr: theme.spacing(1),
+            }}
+            >
+              {`${user.firstname} ${user.lastname}`}
+            </Box>
+          )}
 
         <ThemeSwitch
           onChange={handleMode}
@@ -90,9 +101,11 @@ function MobileHeader({
   );
 }
 
-MobileHeader.propTypes = {
+Header.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
   handleMode: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
-MobileHeader.defaultProps = {
+Header.defaultProps = {
 };
-export default React.memo(MobileHeader);
+export default React.memo(Header);
