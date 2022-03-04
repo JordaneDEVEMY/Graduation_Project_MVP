@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP VIEW get_week_admin_planning;
 
 COMMIT;

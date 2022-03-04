@@ -12,7 +12,6 @@ CREATE TABLE "employee_qualification" (
 CREATE TABLE "absence" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "reason" TEXT NOT NULL,
-    "assignment_id" INT NOT NULL UNIQUE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
@@ -44,6 +43,8 @@ CREATE TABLE "assignment" (
     "position" INT NOT NULL DEFAULT 0,
     "visibility" BOOLEAN DEFAULT false,
     "employee_id" INT NOT NULL,
+    "absence_id" INT,
+    "site_id" INT,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
@@ -66,7 +67,6 @@ CREATE TABLE "site" (
     "zip_code" INT NOT NULL,
     "manager_name" TEXT,
     "estimated_duration" INT,
-    "assignment_id" INT UNIQUE,
     "company_id" INT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
@@ -96,13 +96,13 @@ CREATE TABLE "company" (
 );
 
 
-ALTER TABLE "absence" ADD FOREIGN KEY ("assignment_id") REFERENCES "assignment" ("id") ON DELETE CASCADE;
-ALTER TABLE "employee" ADD FOREIGN KEY ("employee_qualification_id") REFERENCES "employee_qualification" ("id");
-ALTER TABLE "assignment" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id");
-ALTER TABLE "employee_contract" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
-ALTER TABLE "employee_contract" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id");
-ALTER TABLE "site" ADD FOREIGN KEY ("assignment_id") REFERENCES "assignment" ("id");
-ALTER TABLE "site" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
-ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id");
+ALTER TABLE "employee" ADD FOREIGN KEY ("employee_qualification_id") REFERENCES "employee_qualification" ("id") ON DELETE CASCADE;
+ALTER TABLE "assignment" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id") ON DELETE CASCADE;
+ALTER TABLE "assignment" ADD FOREIGN KEY ("site_id") REFERENCES "site" ("id") ON DELETE CASCADE;
+ALTER TABLE "assignment" ADD FOREIGN KEY ("absence_id") REFERENCES "absence" ("id") ON DELETE CASCADE;
+ALTER TABLE "employee_contract" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
+ALTER TABLE "employee_contract" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id") ON DELETE CASCADE;
+ALTER TABLE "site" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
+ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
 
 COMMIT;
