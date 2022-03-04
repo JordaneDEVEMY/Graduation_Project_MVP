@@ -18,6 +18,7 @@ import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
+import PlanningContainer from '../../containers/PlanningContainer';
 
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
@@ -63,7 +64,7 @@ function App() {
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <Planning isAdmin={isAdmin} />
+                    <PlanningContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
