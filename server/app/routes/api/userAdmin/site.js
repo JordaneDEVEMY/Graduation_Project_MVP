@@ -29,7 +29,7 @@ router
    * @summary Get one site
    * @tags 4.UserAdmin - Site CRUD section
    * @param {number} id.path.required - site identifier
-   * @return {Site} 200 - success response - application/json
+   * @return {SiteInDatabase} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - site not found - application/json
    */
