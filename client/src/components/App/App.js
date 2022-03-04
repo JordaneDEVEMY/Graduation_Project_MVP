@@ -4,7 +4,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import Layout from '../Layout/Layout';
 import HeaderContainer from '../../containers/HeaderContainer';
@@ -25,7 +25,7 @@ function App() {
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const userId = useSelector((state) => state.user.id);
 
-  const theme = utils.getTheme(mode);
+  const theme = responsiveFontSizes(utils.getTheme(mode));
 
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
