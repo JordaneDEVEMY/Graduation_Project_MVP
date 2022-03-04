@@ -76,10 +76,6 @@ function Card({
     <Box
       sx={{
         position: 'relative',
-        height: {
-          xs: '50vh',
-          md: 'auto',
-        },
         backgroundColor: theme.palette.background.component,
         color: theme.palette.text.primary,
         p: theme.spacing(2),
