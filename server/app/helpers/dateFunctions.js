@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import dayjs from 'dayjs';
-import isoWeek from 'dayjs/plugin/isoWeek';
-import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear';
-import isLeapYear from 'dayjs/plugin/isLeapYear';
-import 'dayjs/locale/fr';
+const dayjs = require('dayjs');
+const isoWeek = require('dayjs/plugin/isoWeek');
+const isoWeeksInYear = require('dayjs/plugin/isoWeeksInYear');
+const isLeapYear = require('dayjs/plugin/isLeapYear');
+require('dayjs/locale/fr');
 
 dayjs.extend(isoWeeksInYear);
 dayjs.extend(isLeapYear);
@@ -137,10 +137,10 @@ const dateFunctions = {
     const from = dateFunctions.getDate(monday);
     const to = dateFunctions.getDate(monday).add(6, 'day');
 
-    const fromString = `${from.format('DD MMM')} au ${to.format('DD MMM')}`;
+    const fromString = `${from.format('YYYY-MM-DD')} au ${to.format('YYYY-MM-DD')}`;
 
     return fromString;
   },
 };
 
-export default dateFunctions;
+module.exports = dateFunctions;
