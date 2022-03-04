@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import Main from '../Main/Main';
 import NavTabs from '../NavTabs/NavTabs';
-import SidebarContainer from '../../containers/SidebarContainer';
+import Sidebar from '../Sidebar/Sidebar';
 import './layout.scss';
 
 function Layout({
@@ -20,7 +20,7 @@ function Layout({
     }}
     >
       {isAdmin
-        && (<SidebarContainer />)}
+        && (<Sidebar />)}
       <Main>
         {isAdmin
         && (<NavTabs />)}

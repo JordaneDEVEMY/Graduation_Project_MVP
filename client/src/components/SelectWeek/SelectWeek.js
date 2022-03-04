@@ -27,8 +27,6 @@ function SelectWeek({
     ? false
     : (week.current.num === dateFunctions.getDate().isoWeek() + 1);
 
-  console.log('selectWeek', week);
-
   /**
    * Get last ten years
    * @returns {array} List of MenuItem components

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionLogout } from '../actions/login';
+import { actionSetUserLogout } from '../actions/user';
 import Header from '../components/Header/Header';
 
 function HeaderContainer({
@@ -8,13 +10,20 @@ function HeaderContainer({
 }) {
   const isLogged = useSelector((state) => state.login.isLogged);
   const user = useSelector((state) => state.user);
-  console.log('Header container', user);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(actionLogout());
+    dispatch(actionSetUserLogout());
+  };
 
   return (
     <Header
       isLogged={isLogged}
       user={user}
       handleMode={handleMode}
+      handleLogout={handleLogout}
     />
   );
 }
