@@ -32,8 +32,8 @@ FROM "company"
 LEFT JOIN "site" ON "site"."company_id" = "company"."id"
 LEFT JOIN "assignment" ON "site"."id" = "assignment"."site_id"
 LEFT JOIN "employee" ON "employee"."id" = "assignment"."employee_id"
-WHERE "assignment"."starting_date" BETWEEN assignment.starting_date AND assignment.ending_date 
-AND "assignment"."ending_date" BETWEEN assignment.starting_date AND assignment.ending_date
+WHERE "assignment"."starting_date" = assignment.starting_date  
+AND "assignment"."ending_date" = assignment.starting_date 
 GROUP BY "company"."id";
 
 COMMIT;
