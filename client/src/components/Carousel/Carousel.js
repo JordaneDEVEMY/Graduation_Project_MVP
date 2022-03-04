@@ -11,104 +11,73 @@ import Card from '../Card/Card';
 
 import './carousel.scss';
 
-const images = [
+const sites = [
   {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
+    id: 3,
+    name: 'Dapibus Gravida LLP',
+    address: 'P.O. Box 921, 5917 Feugiat St.',
+    zip_code: 31080,
+    manager_name: 'Griffin Bakhuizen',
+    starting_date: '2021-03-05',
+    ending_date: '2021-03-07',
+    company: {
+      id: 42,
+      name: 'Tincidunt Orci Quis Foundation',
+    },
     employees: [
       {
         id: 1,
-        name: 'Jean Bon',
-        color: 'red',
+        firstname: 'John',
+        lastname: 'Doe',
+        email: 'string@alo.fr',
+        avatar: 'string',
+        role_application: 'string',
+        color: '#f44336',
       },
       {
         id: 2,
-        name: 'Aline Héa',
-        color: 'blue',
+        firstname: 'Bernard',
+        lastname: 'De La Villardière',
+        email: 'bernard@free.fr',
+        avatar: 'string',
+        role_application: 'string',
+        color: '#2196f3',
       },
       {
         id: 3,
-        name: 'Alex Térieur',
-        color: 'red',
+        firstname: 'Bernard',
+        lastname: 'De La Villardière',
+        email: 'bernard@free.fr',
+        avatar: 'string',
+        role_application: 'string',
+        color: '#4caf50',
       },
       {
         id: 4,
-        name: 'Alain Térieur',
-        color: 'yellow',
-      },
-    ],
-  },
-  {
-    label: 'Bird',
-    employees: [
-      {
-        id: 1,
-        name: 'Jean Bon',
-        color: 'red',
+        firstname: 'Bernard',
+        lastname: 'De La Villardière',
+        email: 'bernard@free.fr',
+        avatar: 'string',
+        role_application: 'string',
+        color: '#ffeb3b',
       },
       {
-        id: 2,
-        name: 'Aline Héa',
-        color: 'green',
+        id: 5,
+        firstname: 'Bernard',
+        lastname: 'De La Villardière',
+        email: 'bernard@free.fr',
+        avatar: 'string',
+        role_application: 'string',
+        color: '#ff9800',
       },
       {
-        id: 3,
-        name: 'Alex Térieur',
-        color: 'yellow',
-      },
-      {
-        id: 4,
-        name: 'Alain Térieur',
-        color: 'blue',
-      },
-    ],
-  },
-  {
-    label: 'Bali, Indonesia',
-    employees: [
-      {
-        id: 1,
-        name: 'Jean Bon',
-        color: 'yellow',
-      },
-      {
-        id: 2,
-        name: 'Aline Héa',
-        color: 'red',
-      },
-      {
-        id: 3,
-        name: 'Alex Térieur',
-        color: 'orange',
-      },
-      {
-        id: 4,
-        name: 'Alain Térieur',
-        color: 'blue',
-      },
-    ],
-  },
-  {
-    label: 'Goč, Serbia',
-    employees: [
-      {
-        id: 1,
-        name: 'Jean Bon',
-        color: 'blue',
-      },
-      {
-        id: 2,
-        name: 'Aline Héa',
-        color: 'gray',
-      },
-      {
-        id: 3,
-        name: 'Alex Térieur',
-        color: 'yellow',
-      },
-      {
-        id: 4,
-        name: 'Alain Térieur',
-        color: 'blue',
+        id: 5,
+        firstname: 'Bernard',
+        lastname: 'De La Villardière',
+        email: 'bernard@free.fr',
+        avatar: 'string',
+        role_application: 'string',
+        color: '#ff9800',
       },
     ],
   },
@@ -117,7 +86,7 @@ const images = [
 function Carousel() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = images.length;
+  const maxSteps = sites.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -144,10 +113,11 @@ function Carousel() {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {images.map((data, index) => (
-          <div key={data.label}>
+        {sites.map((site, index) => (
+          <div key={site.id}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
+                key={site.id}
                 component="div"
                 sx={{
                   display: 'block',
@@ -155,7 +125,7 @@ function Carousel() {
                   width: '100%',
                 }}
               >
-                <Card data={data} />
+                <Card key={site.id} site={site} />
               </Box>
             ) : null}
           </div>

@@ -9,14 +9,12 @@ import SheetList from '../SheetList/SheetList';
 import './card.scss';
 
 function Card({
-  data,
-  className,
+  site,
 }) {
   const theme = useTheme();
 
   return (
     <Box
-      className={className}
       sx={{
         height: '50vh',
         backgroundColor: theme.palette.background.component,
@@ -24,18 +22,16 @@ function Card({
         p: theme.spacing(2),
       }}
     >
-      {`${data.label}`}
-      <CardHeader />
-      <SheetList list={data.employees} />
+      <CardHeader site={site} />
+      <SheetList employees={site.employees} />
     </Box>
   );
 }
 
 Card.propTypes = {
-  data: PropTypes.object.isRequired,
-  className: PropTypes.string,
+  site: PropTypes.object.isRequired,
 };
 Card.defaultProps = {
-  className: '',
+
 };
 export default React.memo(Card);

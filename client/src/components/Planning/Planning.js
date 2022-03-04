@@ -32,7 +32,7 @@ function Planning({
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
       </Typography>
-      {displayCarousel && (
+      {(displayCarousel || true) && (
         <Carousel />
       )}
     </>
