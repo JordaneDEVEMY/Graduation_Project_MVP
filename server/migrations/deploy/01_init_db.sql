@@ -61,8 +61,8 @@ CREATE TABLE "employee_contract" (
 
 CREATE TABLE "site" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "name" TEXT NOT NULL UNIQUE,
-    "address" TEXT NOT NULL UNIQUE,
+    "name" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
     "zip_code" INT NOT NULL,
     "manager_name" TEXT,
     "estimated_duration" INT,

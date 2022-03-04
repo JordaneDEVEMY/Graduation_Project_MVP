@@ -3,3 +3,4 @@
 
 01_init_db 2022-02-24T13:12:05Z Hicham Chrita <student@teleporter> # DDL
 02_View_usersREST 2022-03-01T14:33:14Z Hicham Chrita <student@teleporter> # Add users view
+03_View_admin_planning 2022-03-03T13:41:07Z Hicham Chrita <student@teleporter> # Add admin view

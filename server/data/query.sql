@@ -37,3 +37,21 @@ VALUES
 ('$1','$2','$3','$4','$5','$6','$7')
 -- Suppression d'un site
 DELETE FROM "site" WHERE "id" = '$1' RETURNING *;
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+-- 
+-- Récupération des employées travaillant sur un site donnée entre 2 dates	
+SELECT
+	"employee"."id",
+	"employee"."firstname",
+	"employee"."lastname",
+	"assignment"."starting_date",
+	"assignment"."ending_date"
+FROM "employee"
+LEFT JOIN "assignment" ON "employee"."id" = "assignment"."employee_id"
+WHERE "assignment"."site_id" = $1
+	AND "assignment"."starting_date" BETWEEN $2 AND $3 
+	AND "assignment"."ending_date" BETWEEN $2 AND $3;
