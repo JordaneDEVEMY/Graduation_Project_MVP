@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-// ? const asyncHandler = require('express-async-handler');
 const authDatamapper = require('../models/website/auth');
 const { WebsiteError } = require('./errorHandler');
 

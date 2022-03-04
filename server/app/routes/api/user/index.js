@@ -13,7 +13,7 @@ router
   /**
    * GET /api/user/{id}
    * @summary Get one user
-   * @tags User
+   * @tags 2.User
    * @param {number} id.path.required - User identifier
    * @return {RestUser} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
@@ -26,7 +26,7 @@ router
   /**
    * PATCH /api/user/{id}/profil
    * @summary Update one user profile
-   * @tags User
+   * @tags 2.User
    * @param {number} id.path.required - User identifier
    * @param {AuthInput} request.body.required - User email/password to update
    * @return {UserUpdate} 200 - success response - application/json
