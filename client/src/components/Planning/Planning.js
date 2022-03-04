@@ -49,6 +49,7 @@ function Planning({
                 display: 'flex',
                 gap: theme.spacing(2),
                 flexWrap: 'nowrap',
+                justifyContent: 'center',
               }}
             >
               {userAssignements.map((assignement) => (

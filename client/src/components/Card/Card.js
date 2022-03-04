@@ -8,6 +8,7 @@ import CardHeader from '../CardHeader/CardHeader';
 import SheetList from '../SheetList/SheetList';
 
 import './card.scss';
+import sheetListBg from '../../Assets/images/sheet-bg.png';
 
 function Card({
   site,
@@ -74,6 +75,7 @@ function Card({
   return (
     <Box
       sx={{
+        position: 'relative',
         height: {
           xs: '50vh',
           md: 'auto',
@@ -85,6 +87,19 @@ function Card({
       }}
     >
       <CardHeader site={site} />
+      {employees.length < 10 && (
+        <Box
+          sx={{
+            width: '100%',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            height: `calc(100% - ${Math.ceil(employees.length % 10) * 48}px)`,
+            background: `${theme.palette.background.component} url('${sheetListBg}') repeat-y center top`,
+            zIndex: employees.length,
+          }}
+        />
+      )}
       <SheetList employees={employees} />
     </Box>
   );

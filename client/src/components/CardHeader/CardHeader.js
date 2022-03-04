@@ -1,5 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
 import './cardheader.scss';
@@ -7,16 +8,18 @@ import './cardheader.scss';
 function CardHeader({
   site,
 }) {
+  const theme = useTheme();
+
   return (
     <Typography
-      variant="h2"
+      component="h2"
       sx={{
-        lineHeight: 1,
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
-        fontSize: '1.2rem',
         textAlign: 'center',
+        fontSize: '1.2rem',
+        marginBottom: theme.spacing(2),
       }}
     >
       {`${site.name}`}
