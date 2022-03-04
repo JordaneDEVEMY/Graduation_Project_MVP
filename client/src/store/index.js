@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from '../reducers';
 import loginMiddleware from '../middlewares/loginMiddleware';
+import userPlanningMiddleware from '../middlewares/userPlanningMiddleware';
 
 const allMiddlewares = applyMiddleware(
   loginMiddleware,
+  userPlanningMiddleware,
 );
 
 //  to use redux dev tool
