@@ -5,7 +5,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, CssBaseline } from '@mui/material';
 import Layout from '../Layout/Layout';
 import HeaderContainer from '../../containers/HeaderContainer';
 import Footer from '../Footer/Footer';
@@ -18,6 +18,7 @@ import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
+import PlanningContainer from '../../containers/PlanningContainer';
 
 function App() {
   const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
@@ -27,6 +28,8 @@ function App() {
 
   const theme = responsiveFontSizes(utils.getTheme(mode));
 
+  console.log(theme);
+
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
     setMode(themeMode);
@@ -34,6 +37,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Box
         className="app"
         sx={
@@ -63,7 +67,7 @@ function App() {
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <Planning isAdmin={isAdmin} />
+                    <PlanningContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>

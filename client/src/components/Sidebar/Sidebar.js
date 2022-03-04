@@ -1,10 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemIcon, Link, ListItemText, Typography, Avatar,
+  Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -28,24 +25,12 @@ const Aside = styled('aside')(({ theme }) => ({
   },
 }));
 
-function Sidebar({
-  userId,
-  handleLogout,
-  userFirstname,
-  userLastname,
-  userAvatar,
-
-}) {
+function Sidebar() {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
 
   const handleDrawer = () => {
     setOpen((oldOpen) => !oldOpen);
-  };
-
-  const onLogoutClick = (event) => {
-    event.preventDefault();
-    handleLogout();
   };
 
   return (
@@ -89,52 +74,6 @@ function Sidebar({
         </Box>
       </Button>
 
-      <Box
-        component="div"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          margin: theme.spacing(2),
-          paddingBottom: theme.spacing(2),
-          color: theme.palette.text.primary,
-          borderBottom: 1,
-          borderColor: 'divider',
-        }}
-      >
-        <Avatar
-          alt={`Avatar de ${userFirstname} ${userLastname}`}
-          src={userAvatar}
-          sx={{ width: 56, height: 56 }}
-        />
-        <Typography variant="h6">
-          {`${userFirstname} ${userLastname}`}
-        </Typography>
-
-        <Typography
-          variant="p"
-          sx={{
-            color: theme.palette.text.disabled,
-          }}
-        >
-          <small>
-            <Link
-              component={RouterLink}
-              to={`/user/${userId}/profil`}
-            >
-              Mon profil
-            </Link>
-            {' | '}
-            <Link
-              sx={{ width: 56, height: 56 }}
-              onClick={onLogoutClick}
-            >
-              Se déconnecter
-            </Link>
-
-          </small>
-        </Typography>
-      </Box>
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem
@@ -214,11 +153,6 @@ function Sidebar({
 }
 
 Sidebar.propTypes = {
-  userId: PropTypes.number.isRequired,
-  handleLogout: PropTypes.func.isRequired,
-  userFirstname: PropTypes.string.isRequired,
-  userLastname: PropTypes.string.isRequired,
-  userAvatar: PropTypes.string.isRequired,
 };
 
 export default React.memo(Sidebar);
