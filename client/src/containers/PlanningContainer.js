@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Planning from '../components/Planning/Planning';
 
 function PlanningContainer() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(actionGetUserPlanning());
   });
