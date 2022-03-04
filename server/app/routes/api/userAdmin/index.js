@@ -2,6 +2,7 @@ const express = require('express');
 
 const userRouter = require('./user');
 const siteRouter = require('./site');
+const companyRouter = require('./company');
 
 const { ApiError } = require('../../../helpers/errorHandler');
 
@@ -9,6 +10,7 @@ const router = express.Router();
 
 router.use('/user', userRouter);
 router.use('/site', siteRouter);
+router.use('/company', companyRouter);
 
 router.use(() => {
   throw new ApiError(404, 'Page introuvable');

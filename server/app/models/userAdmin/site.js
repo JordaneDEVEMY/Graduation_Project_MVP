@@ -10,6 +10,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} manager_name - Site manager name
  * @property {number} estimated_duration - Site estimated duration
  * @property {number} company_id - Site company id owner
+ * @property {number} created_at - Db timestamptz of create
+ * @property {number} updated_at - Db timestamptz of update
  */
 
 /**
@@ -53,7 +55,7 @@ module.exports = {
   /**
    * Insert Site
    * @param {object} site - Body request required
-   * @returns {SiteInDatabase|ApiError} - Return the new site or ApiError if site not found
+   * @returns {SiteInDatabase} - Return the new site
    */
   async insert(site) {
     const siteToCreate = await client.query(
