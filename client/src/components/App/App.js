@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import { Box, CssBaseline } from '@mui/material';
@@ -20,11 +20,11 @@ import utils from '../../utils';
 import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
 
-function App() {
-  const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
-
-  const isAdmin = useSelector((state) => state.user.isAdmin);
-  const userId = useSelector((state) => state.user.id);
+function App({
+  isAdmin,
+  userId,
+}) {
+  const [mode, setMode] = useState(utils.themeFunctions.getThemeMode());
 
   const theme = responsiveFontSizes(utils.getTheme(mode));
 
@@ -82,4 +82,9 @@ function App() {
   );
 }
 
-export default App;
+App.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+  userId: PropTypes.number.isRequired,
+};
+
+export default React.memo(App);
