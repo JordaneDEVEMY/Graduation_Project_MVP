@@ -14,7 +14,6 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} Company
- * @property {number} id - id
  * @property {string} name - Company name
  * @property {string} address - Company address
  * @property {number} zip_code - Company zip code
