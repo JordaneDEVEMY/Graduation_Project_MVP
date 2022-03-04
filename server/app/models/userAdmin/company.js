@@ -86,4 +86,21 @@ module.exports = {
     return companyToSave.rows[0];
   },
 
+  /**
+   * Remove company
+   * @param {number} companyId - Company ID
+   * @returns {boolean|ApiError} - Return boolean or ApiError if company not found
+   */
+  async delete(companyId) {
+    const result = await client.query('SELECT * FROM "company" WHERE "id" = $1;', [companyId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cette entreprise n\'existe pas');
+    }
+
+    const companyToDelete = await client.query('DELETE FROM "company" WHERE "id" = $1;', [companyId]);
+
+    return !!companyToDelete.rowCount;
+  },
+
 };

@@ -33,10 +33,14 @@ PATCH {{ endpoint }}/999
 content-type: application/json
 
 {
-  "name": "test",
-  "address": "test",
+  "name": "JD - Entreprise de test",
+  "address": "JD - Adresse de test",
   "zip_code": 34000,
-  "manager_name": "toto",
-  "estimated_duration": 5,
-  "company_id": 1
+  "type": "admin"
 }
+
+### Delete a company
+DELETE {{ endpoint }}/41
+
+### Delete an inexistant company
+DELETE {{ endpoint }}/999

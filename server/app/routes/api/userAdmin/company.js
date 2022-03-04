@@ -32,6 +32,16 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Site not found - application/json
    */
-  .patch(validate('body', companySchema), controllerHandler(userAdminCompanyController.update));
+  .patch(validate('body', companySchema), controllerHandler(userAdminCompanyController.update))
 
+/**
+   * DELETE /api/admin/company/{id}
+   * @summary Remove one company
+   * @tags 5.UserAdmin - Company CRUD section
+   * @param {number} id.path.required - company identifier
+   * @return {CompanyDelete} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - Company not found - application/json
+   */
+  .delete(controllerHandler(userAdminCompanyController.delete));
 module.exports = router;

@@ -31,6 +31,23 @@ const controller = {
     return res.json(companyUpdate);
   },
 
+  /**
+   * UserAdmin controller to delete a company
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id
+   * @param {object} res Express response object
+   * @returns {object} Route API JSON response
+   */
+  async delete(req, res) {
+    const companyDelete = await companyAdminDatamapper.delete(req.params.id);
+
+    return res.status(200).json({
+      isDeleted: companyDelete,
+      statusCode: 200,
+      message: 'Entreprise supprimée',
+    });
+  },
+
 };
 
 module.exports = controller;
