@@ -59,11 +59,7 @@ function HomePage() {
           Title and subtitle, with the connect zone, on display only on large screen.
           */}
           <Typography
-            variant="p"
-            sx={{
-              fontSize: theme.typography.h1.fontSize,
-              color: theme.palette.primary.main,
-            }}
+            variant="h1"
           >
             O'lleks
           </Typography>

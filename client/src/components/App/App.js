@@ -5,7 +5,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, CssBaseline } from '@mui/material';
 import Layout from '../Layout/Layout';
 import HeaderContainer from '../../containers/HeaderContainer';
 import Footer from '../Footer/Footer';
@@ -27,6 +27,8 @@ function App() {
 
   const theme = responsiveFontSizes(utils.getTheme(mode));
 
+  console.log(theme);
+
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
     setMode(themeMode);
@@ -34,6 +36,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Box
         className="app"
         sx={
