@@ -4,8 +4,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import { Box, CssBaseline } from '@mui/material';
 import Layout from '../Layout/Layout';
 import HeaderContainer from '../../containers/HeaderContainer';
 import Footer from '../Footer/Footer';
@@ -25,7 +25,9 @@ function App() {
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const userId = useSelector((state) => state.user.id);
 
-  const theme = utils.getTheme(mode);
+  const theme = responsiveFontSizes(utils.getTheme(mode));
+
+  console.log(theme);
 
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
@@ -34,6 +36,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Box
         className="app"
         sx={

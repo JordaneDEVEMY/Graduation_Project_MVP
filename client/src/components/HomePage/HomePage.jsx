@@ -29,7 +29,7 @@ function HomePage() {
           backgroundImage: `url(${calendarImg})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: {
-            xs: 'center top',
+            xs: 'center',
             md: '42vw center',
           },
           backgroundSize: {
@@ -58,21 +58,10 @@ function HomePage() {
           {/*
           Title and subtitle, with the connect zone, on display only on large screen.
           */}
-          <Typography
-            variant="p"
-            sx={{
-              fontSize: theme.typography.h1.fontSize,
-              color: theme.palette.primary.main,
-            }}
-          >
+          <Typography variant="h1">
             O'lleks
           </Typography>
-          <Typography
-            variant="h2"
-            sx={{
-              color: theme.palette.text.primary,
-            }}
-          >
+          <Typography variant="h2">
             Your new planning-handling tool
           </Typography>
 
@@ -109,42 +98,109 @@ function HomePage() {
           textAlign: 'center',
           mt: '2em',
           backgroundColor: theme.palette.background.component,
-          color: theme.palette.text.primary,
         }}
       >
-        <Grid item xs={12} sm={4}>
-          <Box
-            sx={{
-              height: {
-                xs: '50vw',
-                sm: '25vw',
-              },
-              width: {
-                xs: '50vw',
-                sm: '25vw',
-              },
-              maxWidth: 350,
-              maxHeight: 350,
-              backgroundColor: theme.palette.background.default,
-              backgroundImage: `url(${funct1})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: '60%',
-              borderRadius: '50%',
-              margin: 'auto',
-            }}
-          />
-          <Typography
-            variant="h3"
-            sx={{
-              marginTop: theme.spacing(2),
-              fontSize: {
-                xs: theme.typography.h4.fontSize,
-              },
-            }}
-          >
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          </Typography>
+        {/*
+        Functionnalities global block
+        */}
+        <Grid
+          container
+          columnSpacing={{
+            xs: 2,
+            md: 4,
+            lg: 16,
+          }}
+          sx={{
+            textAlign: 'center',
+            mt: '2em',
+            px: {
+              lg: theme.spacing(16),
+            },
+          }}
+        >
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                height: 250,
+                width: 250,
+                backgroundColor: theme.palette.background.default,
+                backgroundImage: `url(${funct1})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: '60%',
+                borderRadius: '50%',
+                border: 1,
+                borderColor: theme.palette.divider,
+                mx: 'auto',
+                marginBottom: theme.spacing(2),
+              }}
+            />
+            <Typography
+              variant="h3"
+              component="span"
+              sx={{
+                marginTop: theme.spacing(2),
+              }}
+            >
+              Ipsum dolor sit, adipisicing amet consectetur
+            </Typography>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                height: 250,
+                width: 250,
+                backgroundColor: theme.palette.background.default,
+                backgroundImage: `url(${funct2})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: '60%',
+                borderRadius: '50%',
+                border: 1,
+                borderColor: theme.palette.divider,
+                mx: 'auto',
+                marginBottom: theme.spacing(2),
+              }}
+            />
+            <Typography
+              variant="h3"
+              component="span"
+              sx={{
+                marginTop: theme.spacing(2),
+              }}
+            >
+              Lorem ipsum dolor sit amet consectetur
+            </Typography>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                height: 250,
+                width: 250,
+                backgroundColor: theme.palette.background.default,
+                backgroundImage: `url(${funct3})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: '60%',
+                borderRadius: '50%',
+                border: 1,
+                borderColor: theme.palette.divider,
+                mx: 'auto',
+                marginBottom: theme.spacing(2),
+              }}
+            />
+            <Typography
+              variant="h3"
+              component="span"
+              sx={{
+                marginTop: theme.spacing(2),
+              }}
+            >
+              Lorem ipsum met consectetur adipisicing elit
+            </Typography>
+          </Grid>
         </Grid>
 
         <Grid item xs={12} sm={4}>
@@ -172,110 +228,28 @@ function HomePage() {
           <Typography
             variant="h3"
             sx={{
+              color: theme.palette.background.default,
               marginTop: theme.spacing(2),
-              fontSize: {
-                xs: theme.typography.h4.fontSize,
-              },
             }}
           >
             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
           </Typography>
-        </Grid>
-
-        <Grid item xs={12} sm={4}>
           <Box
-            sx={{
-              height: {
-                xs: '50vw',
-                sm: '25vw',
-              },
-              width: {
-                xs: '50vw',
-                sm: '25vw',
-              },
-              maxWidth: 350,
-              maxHeight: 350,
-              backgroundColor: theme.palette.background.default,
-              backgroundImage: `url(${funct3})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: '60%',
-              borderRadius: '50%',
-              margin: 'auto',
-            }}
-          />
-          <Typography
-            variant="h3"
-            sx={{
-              marginTop: theme.spacing(2),
-              fontSize: {
-                xs: theme.typography.h4.fontSize,
-              },
-            }}
+            sx={{ mx: 'auto', maxWidth: '50rem' }}
           >
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          </Typography>
-        </Grid>
-      </Grid>
-
-      {/*
-      2nd functionnality global block
-      */}
-      <Box
-        component="section"
-        sx={{
-          textAlign: 'center',
-          padding: theme.spacing(4),
-          mt: theme.spacing(4),
-          backgroundColor: theme.palette.primary.main,
-        }}
-      >
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: {
-              xs: '2.5em',
-              md: theme.typography.h2.fontSize,
-            },
-          }}
-        >
-          Phrase d'accroche bis
-
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          mt={theme.spacing(1)}
-          maxWidth={900}
-          sx={{ mx: 'auto' }}
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Odio placeat excepturi non quaerat fuga libero a incidunt corporis,
-          rerum obcaecati nemo, qui molestiae cupiditate velit aliquid inventore
-          sapiente harum repudiandae?
-        </Typography>
-        <img src={encartImg} alt="" className="encart--img" />
-      </Box>
-
-      {/*
-      Team global block
-      */}
-      <Box
-        component="section"
-        sx={{
-          textAlign: 'center',
-          mt: theme.spacing(4),
-        }}
-      >
-        <Typography
-          variant="h2"
-          sx={{
-            color: theme.palette.primary.main,
-          }}
-        >
-          Notre équipe
-
-        </Typography>
-
+            <Typography
+              component="p"
+              variant="h3"
+              sx={{
+                color: theme.palette.text.secondary,
+              }}
+            >
+              Lorem ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit.
+              Odio placeat excepturi non quaerat fuga libero.
+            </Typography>
+            <img src={encartImg} alt="" className="encart--img" />
+          </Box>
+        </Box>
         {/*
         Individual team items
         */}
@@ -290,17 +264,10 @@ function HomePage() {
             color: theme.palette.text.primary,
           }}
         >
-          <Box
-            sx={{
-              margin: '1em',
-              width: '7em',
-            }}
-          >
-            <img src={teamIcon} alt="" className="team--img" />
-            <Typography mt={1}>
-              Lorem Ipsum
-            </Typography>
-          </Box>
+          <Typography component="p" variant="h2">
+            L'équipe
+          </Typography>
+
 
           <Box
             sx={{
