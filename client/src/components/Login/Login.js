@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -12,9 +14,8 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Email from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './login.scss';
 
 function Login({
@@ -77,10 +78,11 @@ function Login({
         Connexion
       </Typography>
       <CardContent>
-        <Grid container spacing={2}>
+        <Grid container rowSpacing={2}>
           <Grid item xs={12}>
             <TextField
               fullWidth
+              autoComplete="on"
               required
               type="email"
               label="email"
@@ -89,7 +91,7 @@ function Login({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email />
+                    <EmailIcon />
                   </InputAdornment>
                 ),
               }}
@@ -98,6 +100,7 @@ function Login({
           <Grid item xs={12}>
             <TextField
               fullWidth
+              autoComplete="on"
               required
               type={passwordVisibility ? 'text' : 'password'}
               label="password"
@@ -115,7 +118,7 @@ function Login({
                       aria-label="toggle password visibility"
                       onClick={() => setPasswordVisibility((x) => !x)}
                     >
-                      {passwordVisibility ? <VisibilityOff /> : <Visibility />}
+                      {passwordVisibility ? <VisibilityOffIcon /> : <VisibilityIcon />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -124,30 +127,21 @@ function Login({
           </Grid>
         </Grid>
       </CardContent>
-      <Box
-        sx={{
-          display: 'flex',
-          mb: theme.spacing(1),
-          justifyContent: 'center',
-        }}
-      >
-        <CardActions>
-          <Button
-            type="submit"
-            size="small"
-            variant="contained"
-            disabled={isButtonDisable}
-          >
-            Valider
-          </Button>
-          <Button
-            size="small"
-            variant="text"
-          >
-            Mot de passe oublié
-          </Button>
-        </CardActions>
-      </Box>
+      <CardActions sx={{ p: theme.spacing(2) }}>
+        <Button
+          type="submit"
+          size="large"
+          variant="contained"
+          disabled={isButtonDisable}
+        >
+          Valider
+        </Button>
+        <Link
+          sx={{ ml: 'auto', cursor: 'pointer' }}
+        >
+          Mot de passe oublié
+        </Link>
+      </CardActions>
     </Card>
   );
 }

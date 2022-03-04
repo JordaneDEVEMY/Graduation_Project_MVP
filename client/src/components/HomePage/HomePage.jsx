@@ -87,8 +87,16 @@ function HomePage() {
         </Box>
       </Box>
 
-      <Box
+      {/*
+      Functionnalities global block
+      */}
+      <Grid
+        container
+        spacing={{ sm: 4, lg: 12 }}
+        p={4}
         sx={{
+          textAlign: 'center',
+          mt: '2em',
           backgroundColor: theme.palette.background.component,
         }}
       >
@@ -195,26 +203,36 @@ function HomePage() {
           </Grid>
         </Grid>
 
-        {/*
-        2nd functionnality global block
-        */}
-        <Box
-          component="section"
-          sx={{
-            textAlign: 'center',
-            padding: theme.spacing(4),
-            mt: theme.spacing(4),
-            backgroundColor: theme.palette.primary.main,
-          }}
-        >
+        <Grid item xs={12} sm={4}>
+          <Box
+            sx={{
+              height: {
+                xs: '50vw',
+                sm: '25vw',
+              },
+              width: {
+                xs: '50vw',
+                sm: '25vw',
+              },
+              maxWidth: 350,
+              maxHeight: 350,
+              backgroundColor: theme.palette.background.default,
+              backgroundImage: `url(${funct2})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: '60%',
+              borderRadius: '50%',
+              margin: 'auto',
+            }}
+          />
           <Typography
-            variant="h2"
+            variant="h3"
             sx={{
               color: theme.palette.background.default,
+              marginTop: theme.spacing(2),
             }}
           >
-            Phrase d'accroche bis
-
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
           </Typography>
           <Box
             sx={{ mx: 'auto', maxWidth: '50rem' }}
@@ -232,96 +250,73 @@ function HomePage() {
             <img src={encartImg} alt="" className="encart--img" />
           </Box>
         </Box>
-
         {/*
-        Team global block
+        Individual team items
         */}
         <Box
-          component="section"
           sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-evenly',
+            maxWidth: '900px',
+            mx: 'auto',
             textAlign: 'center',
-            mt: theme.spacing(4),
+            color: theme.palette.text.primary,
           }}
         >
           <Typography component="p" variant="h2">
             L'équipe
           </Typography>
 
-          {/*
-          Individual team items
-          */}
+
           <Box
             sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-evenly',
-              maxWidth: '900px',
-              mx: 'auto',
-              textAlign: 'center',
-              color: theme.palette.text.primary,
+              margin: '1em',
+              width: '7em',
             }}
           >
-            <Box
-              sx={{
-                margin: '1em',
-                width: '7em',
-              }}
-            >
-              <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
-              </Typography>
-            </Box>
-
-            <Box
-              sx={{
-                margin: '1em',
-                width: '7em',
-              }}
-            >
-              <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
-              </Typography>
-            </Box>
-
-            <Box
-              sx={{
-                margin: '1em',
-                width: '7em',
-              }}
-            >
-              <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
-              </Typography>
-            </Box>
-
-            <Box
-              sx={{
-                margin: '1em',
-                width: '7em',
-              }}
-            >
-              <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
-              </Typography>
-            </Box>
-
-            <Box
-              sx={{
-                margin: '1em',
-                width: '7em',
-              }}
-            >
-              <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
-              </Typography>
-            </Box>
-
+            <img src={teamIcon} alt="" className="team--img" />
+            <Typography mt={1}>
+              Lorem Ipsum
+            </Typography>
           </Box>
+
+          <Box
+            sx={{
+              margin: '1em',
+              width: '7em',
+            }}
+          >
+            <img src={teamIcon} alt="" className="team--img" />
+            <Typography mt={1}>
+              Lorem Ipsum
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              margin: '1em',
+              width: '7em',
+            }}
+          >
+            <img src={teamIcon} alt="" className="team--img" />
+            <Typography mt={1}>
+              Lorem Ipsum
+            </Typography>
+          </Box>
+
+          <Box
+            sx={{
+              margin: '1em',
+              width: '7em',
+            }}
+          >
+            <img src={teamIcon} alt="" className="team--img" />
+            <Typography mt={1}>
+              Lorem Ipsum
+            </Typography>
+          </Box>
+
         </Box>
       </Box>
     </>
