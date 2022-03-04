@@ -1,6 +1,6 @@
-import { requestLogin } from '../../requests/loginRequest';
-import { setBearerToken, removeBearerToken } from '../../requests';
-import * as actions from '../../actions';
+import { requestLogin } from '../requests/loginRequest';
+import { setBearerToken, removeBearerToken } from '../requests';
+import * as actions from '../actions';
 
 const loginMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
