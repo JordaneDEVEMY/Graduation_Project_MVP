@@ -20,7 +20,7 @@ function SheetList({
     <Box
       sx={{
         position: 'relative',
-        height: 480,
+        height: 500,
         overflowY: 'auto',
         overflowX: 'hidden',
       }}
@@ -36,21 +36,21 @@ function SheetList({
         {employees.map((employee, index) => (
           <Sheet key={index} index={index} {...employee} />
         ))}
-      </Box>
 
-      {employees.length % 10 !== 0 && (
-      <Box
-        sx={{
-          width: '100%',
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          height: `calc(100% - ${(Math.ceil(employees.length % 10) * 48) + 2}px)`,
-          background: `${theme.palette.background.component} url('${sheetListBg}') repeat-y center top`,
-          zIndex: employees.length,
-        }}
-      />
-      )}
+        {employees.length % 10 !== 0 && (
+        <Box
+          sx={{
+            position: 'sticky',
+            top: Math.ceil(employees.length % 10) * 50,
+            left: 0,
+            width: '100%',
+            height: 500 - (Math.ceil(employees.length % 10) * 50),
+            background: `${theme.palette.background.component} url('${sheetListBg}') repeat-y center top`,
+            zIndex: employees.length,
+          }}
+        />
+        )}
+      </Box>
     </Box>
   );
 }
