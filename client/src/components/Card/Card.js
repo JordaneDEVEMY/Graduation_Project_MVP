@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -12,18 +13,79 @@ function Card({
   site,
 }) {
   const theme = useTheme();
+  console.log('assignement', site);
+  const employees = [
+    {
+      id: 1,
+      firstname: 'John',
+      lastname: 'Doe',
+      email: 'string@alo.fr',
+      avatar: 'string',
+      role_application: 'string',
+      color: '#f44336',
+    },
+    {
+      id: 2,
+      firstname: 'Bernard',
+      lastname: 'De La Villardière',
+      email: 'bernard@free.fr',
+      avatar: 'string',
+      role_application: 'string',
+      color: '#2196f3',
+    },
+    {
+      id: 3,
+      firstname: 'Bernard',
+      lastname: 'De La Villardière',
+      email: 'bernard@free.fr',
+      avatar: 'string',
+      role_application: 'string',
+      color: '#4caf50',
+    },
+    {
+      id: 4,
+      firstname: 'Bernard',
+      lastname: 'De La Villardière',
+      email: 'bernard@free.fr',
+      avatar: 'string',
+      role_application: 'string',
+      color: '#ffeb3b',
+    },
+    {
+      id: 5,
+      firstname: 'Bernard',
+      lastname: 'De La Villardière',
+      email: 'bernard@free.fr',
+      avatar: 'string',
+      role_application: 'string',
+      color: '#ff9800',
+    },
+    {
+      id: 5,
+      firstname: 'Bernard',
+      lastname: 'De La Villardière',
+      email: 'bernard@free.fr',
+      avatar: 'string',
+      role_application: 'string',
+      color: '#ff9800',
+    },
+  ];
 
   return (
     <Box
       sx={{
-        height: '50vh',
+        height: {
+          xs: '50vh',
+          md: 'auto',
+        },
         backgroundColor: theme.palette.background.component,
         color: theme.palette.text.primary,
         p: theme.spacing(2),
+        width: `calc(300px + ${theme.spacing(4)})`,
       }}
     >
       <CardHeader site={site} />
-      <SheetList employees={site.employees} />
+      <SheetList employees={employees} />
     </Box>
   );
 }

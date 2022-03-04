@@ -17,8 +17,9 @@ function Sheet(props) {
       component="div"
       sx={{
         display: 'block',
-        position: 'absolute',
-        top: 48 * index,
+        position: 'relative',
+        top: `calc((-426px + 48px) * ${index})`,
+        zIndex: index,
         left: 0,
         overflow: 'hidden',
         width: 300,

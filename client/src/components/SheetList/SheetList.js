@@ -21,21 +21,30 @@ function SheetList({
       sx={{
         position: 'relative',
         height: 480,
-        overflowY: 'auto',
+        overflow: 'auto',
       }}
     >
-      {employees.map((employee, index) => (
-        <Sheet key={index} index={index} {...employee} />
-      ))}
-      <Box sx={{
-        width: '100%',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        height: `calc(100% - ${Math.ceil(employees.length % 10) * 48}px)`,
-        background: `${theme.palette.background.component} url('${sheetListBg}') repeat-y center top`,
-      }}
-      />
+      <Box
+        sx={{
+          position: 'relative',
+          height: `calc(426px + (48px * ${employees.length - 1}))`,
+        }}
+      >
+        <Box
+          sx={{
+            width: '100%',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            height: `calc(100% - ${Math.ceil(employees.length % 10) * 48}px)`,
+            background: `${theme.palette.background.component} url('${sheetListBg}') repeat-y center top`,
+            zIndex: employees.length,
+          }}
+        />
+        {employees.map((employee, index) => (
+          <Sheet key={index} index={index} {...employee} />
+        ))}
+      </Box>
     </Box>
   );
 }

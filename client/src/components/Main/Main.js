@@ -15,6 +15,7 @@ function Main(props) {
       sx={{
         flexGrow: 1,
         boxSizing: 'border-box',
+        overflow: 'auto',
         [theme.breakpoints.up('md')]: {
           padding: theme.spacing(3, 6),
         },

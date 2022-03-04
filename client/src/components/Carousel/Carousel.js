@@ -1,5 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Box, Button, MobileStepper,
 } from '@mui/material';
@@ -11,82 +14,12 @@ import Card from '../Card/Card';
 
 import './carousel.scss';
 
-const sites = [
-  {
-    id: 3,
-    name: 'Dapibus Gravida LLP',
-    address: 'P.O. Box 921, 5917 Feugiat St.',
-    zip_code: 31080,
-    manager_name: 'Griffin Bakhuizen',
-    starting_date: '2021-03-05',
-    ending_date: '2021-03-07',
-    company: {
-      id: 42,
-      name: 'Tincidunt Orci Quis Foundation',
-    },
-    employees: [
-      {
-        id: 1,
-        firstname: 'John',
-        lastname: 'Doe',
-        email: 'string@alo.fr',
-        avatar: 'string',
-        role_application: 'string',
-        color: '#f44336',
-      },
-      {
-        id: 2,
-        firstname: 'Bernard',
-        lastname: 'De La Villardière',
-        email: 'bernard@free.fr',
-        avatar: 'string',
-        role_application: 'string',
-        color: '#2196f3',
-      },
-      {
-        id: 3,
-        firstname: 'Bernard',
-        lastname: 'De La Villardière',
-        email: 'bernard@free.fr',
-        avatar: 'string',
-        role_application: 'string',
-        color: '#4caf50',
-      },
-      {
-        id: 4,
-        firstname: 'Bernard',
-        lastname: 'De La Villardière',
-        email: 'bernard@free.fr',
-        avatar: 'string',
-        role_application: 'string',
-        color: '#ffeb3b',
-      },
-      {
-        id: 5,
-        firstname: 'Bernard',
-        lastname: 'De La Villardière',
-        email: 'bernard@free.fr',
-        avatar: 'string',
-        role_application: 'string',
-        color: '#ff9800',
-      },
-      {
-        id: 5,
-        firstname: 'Bernard',
-        lastname: 'De La Villardière',
-        email: 'bernard@free.fr',
-        avatar: 'string',
-        role_application: 'string',
-        color: '#ff9800',
-      },
-    ],
-  },
-];
-
-function Carousel() {
+function Carousel({
+  assignements,
+}) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = sites.length;
+  const maxSteps = assignements.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -113,11 +46,11 @@ function Carousel() {
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {sites.map((site, index) => (
-          <div key={site.id}>
+        {assignements.map((assignement, index) => (
+          <div key={assignement.id}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
-                key={site.id}
+                key={assignement.id}
                 component="div"
                 sx={{
                   display: 'block',
@@ -125,7 +58,7 @@ function Carousel() {
                   width: '100%',
                 }}
               >
-                <Card key={site.id} site={site} />
+                <Card key={assignement.id} {...assignement} />
               </Box>
             ) : null}
           </div>
@@ -157,6 +90,7 @@ function Carousel() {
 }
 
 Carousel.propTypes = {
+  assignements: PropTypes.array.isRequired,
 };
 Carousel.defaultProps = {
 };
