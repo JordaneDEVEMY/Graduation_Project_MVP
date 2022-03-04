@@ -14,9 +14,11 @@ function Planning({
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <>
       <SearchContainer isAdmin={isAdmin} />
+
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
       </Typography>
