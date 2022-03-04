@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
 const emailValidator = require('email-validator');
 const userDatamapper = require('../../../models/user');
 const { ApiError } = require('../../../helpers/errorHandler');
@@ -17,7 +19,32 @@ const controller = {
       throw new ApiError(404, 'Utilisateur introuvable');
     }
 
-    return res.json(user);
+    const allColleagues = [];
+
+    await Promise.all(user.assignements.map(async (assignment) => {
+      const { starting_date, ending_date } = assignment;
+      const siteId = assignment.site.id;
+      const userId = req.params.id;
+
+      const getColleagues = await userDatamapper.findColleagues(starting_date, ending_date, siteId, userId);
+
+      allColleagues.push(...getColleagues);
+    }));
+
+    const newSet = new Set();
+
+    const filteredArrOfColleagues = allColleagues.filter((element) => {
+      const duplicate = newSet.has(element.id, element.site_id, element.starting_date, element.ending_date);
+      newSet.add(element.id);
+      return !duplicate;
+    });
+    console.log('file: index.js ~ line 41 ~ filteredArrOfColleagues ~ filteredArrOfColleagues', filteredArrOfColleagues);
+
+    const userWithColleagues = new Array(user);
+    userWithColleagues.push(filteredArrOfColleagues);
+    console.log('file: index.js ~ line 43 ~ getOne ~ userWithColleagues', userWithColleagues);
+
+    return res.json(userWithColleagues);
   },
 
   /**

@@ -110,4 +110,33 @@ module.exports = {
 
     return userToSave.rows[0];
   },
+
+  /**
+   * Find colleagues of an employee
+   * @param {number} startingDate - Starting date of site affectation
+   * @param {number} endingDate - Ending date of site affectation
+   * @param {number} siteId - Site ID
+   * @param {number} userId - User ID
+   * @returns {TODO|ApiError} - Colleagues response
+   */
+  async findColleagues(startingDate, endingDate, siteId, userId) {
+    const result = await client.query(
+      `
+          SELECT * FROM get_user_colleagues 
+          WHERE "starting_date" >= $1 
+          AND "ending_date" <= $2
+          AND "site_id" = $3
+          AND "id" <> $4;
+        `,
+      [
+        startingDate,
+        endingDate,
+        siteId,
+        userId,
+      ],
+    );
+
+    return result.rows;
+  },
+
 };
