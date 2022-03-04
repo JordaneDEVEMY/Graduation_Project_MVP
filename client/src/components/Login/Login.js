@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -58,13 +59,23 @@ function Login({
   return (
     <Card
       component="form"
-      className="loginForm"
       onSubmit={handleSubmit}
+      elevation={5}
       sx={{
         textAlign: 'center',
       }}
     >
-      <h2 className="login-title">Connexion</h2>
+      <Typography
+        component="p"
+        variant="h2"
+        sx={{
+          color: theme.palette.text.secondary,
+          mb: 0,
+          p: theme.spacing(2),
+        }}
+      >
+        Connexion
+      </Typography>
       <CardContent>
         <Grid container spacing={2}>
           <Grid item xs={12}>

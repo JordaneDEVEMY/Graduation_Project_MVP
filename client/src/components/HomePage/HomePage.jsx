@@ -29,7 +29,7 @@ function HomePage() {
           backgroundImage: `url(${calendarImg})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: {
-            xs: 'center top',
+            xs: 'center',
             md: '42vw center',
           },
           backgroundSize: {
@@ -58,17 +58,10 @@ function HomePage() {
           {/*
           Title and subtitle, with the connect zone, on display only on large screen.
           */}
-          <Typography
-            variant="h1"
-          >
+          <Typography variant="h1">
             O'lleks
           </Typography>
-          <Typography
-            variant="h2"
-            sx={{
-              color: theme.palette.text.primary,
-            }}
-          >
+          <Typography variant="h2">
             Your new planning-handling tool
           </Typography>
 
@@ -97,7 +90,6 @@ function HomePage() {
       <Box
         sx={{
           backgroundColor: theme.palette.background.component,
-          color: theme.palette.text.primary,
         }}
       >
         {/*
@@ -105,10 +97,17 @@ function HomePage() {
         */}
         <Grid
           container
-          spacing={2}
+          columnSpacing={{
+            xs: 2,
+            md: 4,
+            lg: 16,
+          }}
           sx={{
             textAlign: 'center',
             mt: '2em',
+            px: {
+              lg: theme.spacing(16),
+            },
           }}
         >
           <Grid item xs={12} sm={4}>
@@ -122,16 +121,20 @@ function HomePage() {
                 backgroundPosition: 'center',
                 backgroundSize: '60%',
                 borderRadius: '50%',
-                margin: 'auto',
+                border: 1,
+                borderColor: theme.palette.divider,
+                mx: 'auto',
+                marginBottom: theme.spacing(2),
               }}
             />
             <Typography
+              variant="h3"
+              component="span"
               sx={{
-                marginTop: theme.spacing(1),
-                fontSize: '1.2rem',
+                marginTop: theme.spacing(2),
               }}
             >
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Ipsum dolor sit, adipisicing amet consectetur
             </Typography>
           </Grid>
 
@@ -146,16 +149,20 @@ function HomePage() {
                 backgroundPosition: 'center',
                 backgroundSize: '60%',
                 borderRadius: '50%',
-                margin: 'auto',
+                border: 1,
+                borderColor: theme.palette.divider,
+                mx: 'auto',
+                marginBottom: theme.spacing(2),
               }}
             />
             <Typography
+              variant="h3"
+              component="span"
               sx={{
-                marginTop: theme.spacing(1),
-                fontSize: '1.2rem',
+                marginTop: theme.spacing(2),
               }}
             >
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Lorem ipsum dolor sit amet consectetur
             </Typography>
           </Grid>
 
@@ -170,16 +177,20 @@ function HomePage() {
                 backgroundPosition: 'center',
                 backgroundSize: '60%',
                 borderRadius: '50%',
-                margin: 'auto',
+                border: 1,
+                borderColor: theme.palette.divider,
+                mx: 'auto',
+                marginBottom: theme.spacing(2),
               }}
             />
             <Typography
+              variant="h3"
+              component="span"
               sx={{
-                marginTop: theme.spacing(1),
-                fontSize: '1.2rem',
+                marginTop: theme.spacing(2),
               }}
             >
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Lorem ipsum met consectetur adipisicing elit
             </Typography>
           </Grid>
         </Grid>
@@ -199,27 +210,27 @@ function HomePage() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: {
-                xs: '2.5em',
-                md: theme.typography.h2.fontSize,
-              },
+              color: theme.palette.background.default,
             }}
           >
             Phrase d'accroche bis
 
           </Typography>
-          <Typography
-            variant="subtitle1"
-            mt={theme.spacing(1)}
-            maxWidth={900}
-            sx={{ mx: 'auto' }}
+          <Box
+            sx={{ mx: 'auto', maxWidth: '50rem' }}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Odio placeat excepturi non quaerat fuga libero a incidunt corporis,
-            rerum obcaecati nemo, qui molestiae cupiditate velit aliquid inventore
-            sapiente harum repudiandae?
-          </Typography>
-          <img src={encartImg} alt="" className="encart--img" />
+            <Typography
+              component="p"
+              variant="h3"
+              sx={{
+                color: theme.palette.text.secondary,
+              }}
+            >
+              Lorem ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit.
+              Odio placeat excepturi non quaerat fuga libero.
+            </Typography>
+            <img src={encartImg} alt="" className="encart--img" />
+          </Box>
         </Box>
 
         {/*
@@ -232,14 +243,8 @@ function HomePage() {
             mt: theme.spacing(4),
           }}
         >
-          <Typography
-            variant="h2"
-            sx={{
-              color: theme.palette.primary.main,
-            }}
-          >
-            Notre équipe
-
+          <Typography component="p" variant="h2">
+            L'équipe
           </Typography>
 
           {/*
