@@ -16,10 +16,6 @@ function Legals() {
 
   const LegalsSections = styled(Typography)(({ theme }) => ({
     marginTop: theme.spacing(2),
-    fontSize: '1.5em',
-    lineHeight: '1.5em',
-    color: theme.palette.primary.main,
-    fontStyle: 'italic',
   }));
 
   const LegalsDivider = styled(Divider)(({ theme }) => ({
@@ -31,8 +27,6 @@ function Legals() {
   }));
 
   const LegalsHighlight = styled(Typography)(({ theme }) => ({
-    fontWeight: theme.typography.fontWeightBold,
-    color: theme.palette.primary.main,
     marginTop: theme.spacing(1),
   }));
 
@@ -46,10 +40,8 @@ function Legals() {
       }}
     >
       <Typography
-        variant="p"
+        variant="h1"
         sx={{
-          fontSize: theme.typography.h1.fontSize,
-          color: theme.palette.primary.main,
           textAlign: 'center',
         }}
       >
