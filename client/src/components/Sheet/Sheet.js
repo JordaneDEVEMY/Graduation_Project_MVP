@@ -9,7 +9,7 @@ import './sheet.scss';
 function Sheet(props) {
   const theme = useTheme();
   const {
-    color, index, firstname, lastname,
+    color, index, handleClick, firstname, lastname,
   } = props;
 
   return (
@@ -39,6 +39,8 @@ function Sheet(props) {
       }}
     >
       <Box
+        component="Button"
+        onClick={handleClick}
         sx={{
           width: '100%',
           height: 48,
@@ -60,6 +62,7 @@ function Sheet(props) {
 
 Sheet.propTypes = {
   color: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/forbid-prop-types */
@@ -16,6 +17,10 @@ function SheetList({
 }) {
   const theme = useTheme();
 
+  const handleToggleSheet = (event) => {
+    event.target.closest('div').style.height = '100px';
+  };
+
   return (
     <Box
       sx={{
@@ -31,7 +36,7 @@ function SheetList({
         }}
       >
         {employees.map((employee, index) => (
-          <Sheet key={index} index={index} {...employee} />
+          <Sheet key={index} index={index} handleClick={handleToggleSheet} {...employee} />
         ))}
 
         {employees.length % 10 !== 0 && (

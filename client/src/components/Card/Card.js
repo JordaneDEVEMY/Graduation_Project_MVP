@@ -82,7 +82,9 @@ function Card({
         width: `calc(300px + ${theme.spacing(4)})`,
       }}
     >
-      <CardHeader site={site} />
+      <CardHeader
+        site={site}
+      />
       <SheetList employees={employees} />
     </Box>
   );
