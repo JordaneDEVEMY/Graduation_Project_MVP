@@ -16,7 +16,7 @@ router
    * @summary Get one week of planning information
    * @tags 6.UserAdmin - Planning CRUD section
    * @param {number} id.path.required - Week identifier
-   * @return {TODO !!!!!!!!!!!!} 200 - success response - application/json
+   * @return {Week} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Week not found - application/json
    */
