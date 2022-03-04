@@ -119,7 +119,7 @@ module.exports = {
   /**
    * Insert User
    * @param {object} user - Body request with email and password required
-   * @returns {UserCreate|ApiError} - Return the new user or ApiError if user not found
+   * @returns {UserCreate} - Return the new user
    */
   async insert(user) {
     const userToCreate = await client.query(

@@ -17,3 +17,26 @@ GET {{ endpoint }}/9999
 ### Get a company with an id as not a number
 GET {{ endpoint }}/tartempion
 
+### Patch a company 
+PATCH {{ endpoint }}/50
+content-type: application/json
+
+{
+  "name": "JD - Entreprise de test",
+  "address": "JD - Adresse de test",
+  "zip_code": 34000,
+  "type": "admin"
+}
+
+### Patch an inexistant company
+PATCH {{ endpoint }}/999
+content-type: application/json
+
+{
+  "name": "test",
+  "address": "test",
+  "zip_code": 34000,
+  "manager_name": "toto",
+  "estimated_duration": 5,
+  "company_id": 1
+}

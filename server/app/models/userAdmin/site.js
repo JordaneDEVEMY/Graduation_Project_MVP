@@ -55,7 +55,7 @@ module.exports = {
   /**
    * Insert Site
    * @param {object} site - Body request required
-   * @returns {SiteInDatabase|ApiError} - Return the new site or ApiError if site not found
+   * @returns {SiteInDatabase} - Return the new site
    */
   async insert(site) {
     const siteToCreate = await client.query(

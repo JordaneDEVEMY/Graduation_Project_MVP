@@ -19,6 +19,18 @@ const controller = {
     return res.json(company);
   },
 
+  /**
+   * UserAdmin controller to update a company
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async update(req, res) {
+    const companyUpdate = await companyAdminDatamapper.update(req.params.id, req.body);
+    return res.json(companyUpdate);
+  },
+
 };
 
 module.exports = controller;

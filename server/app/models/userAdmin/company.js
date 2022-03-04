@@ -49,4 +49,41 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Update Company
+   * @param {number} companyId - Company ID
+   * @param {object} company - Body request
+   * @returns {CompanyInDatabase|ApiError} - Return updated company or ApiError if company not found
+   */
+  async update(companyId, company) {
+    const result = await client.query('SELECT * FROM "company" WHERE "id" = $1', [companyId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cet entreprise n\'existe pas');
+    }
+
+    const companyToSave = await client.query(
+      `
+      UPDATE "company" 
+      SET 
+        "name" = $2,
+        "address" = $3,
+        "zip_code" = $4,
+        "type" = $5,
+        "updated_at" = NOW()
+      WHERE "id"= $1
+      RETURNING *;
+      `,
+      [
+        companyId,
+        company.name,
+        company.address,
+        company.zip_code,
+        company.type,
+      ],
+    );
+
+    return companyToSave.rows[0];
+  },
+
 };
