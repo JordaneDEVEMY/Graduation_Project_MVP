@@ -33,7 +33,7 @@ function Planning({
         {`Planning en mode ${isAdmin ? 'admin' : 'user'}`}
       </Typography>
       {displayCarousel && (
-      <Carousel />
+        <Carousel />
       )}
     </>
   );

@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import { Box, CssBaseline } from '@mui/material';
 import Layout from '../Layout/Layout';
 import HeaderContainer from '../../containers/HeaderContainer';
 import Footer from '../Footer/Footer';
@@ -18,14 +18,17 @@ import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
+import PlanningContainer from '../../containers/PlanningContainer';
 
-function App() {
-  const [mode, setMode] = React.useState(utils.themeFunctions.getThemeMode());
+function App({
+  isAdmin,
+  userId,
+}) {
+  const [mode, setMode] = useState(utils.themeFunctions.getThemeMode());
 
-  const isAdmin = useSelector((state) => state.user.isAdmin);
-  const userId = useSelector((state) => state.user.id);
+  const theme = responsiveFontSizes(utils.getTheme(mode));
 
-  const theme = utils.getTheme(mode);
+  console.log(theme);
 
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
@@ -34,6 +37,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Box
         className="app"
         sx={
@@ -63,7 +67,7 @@ function App() {
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <Planning isAdmin={isAdmin} />
+                    <PlanningContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
@@ -78,4 +82,9 @@ function App() {
   );
 }
 
-export default App;
+App.propTypes = {
+  isAdmin: PropTypes.bool.isRequired,
+  userId: PropTypes.number.isRequired,
+};
+
+export default React.memo(App);
