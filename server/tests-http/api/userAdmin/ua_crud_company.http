@@ -17,6 +17,28 @@ GET {{ endpoint }}/9999
 ### Get a company with an id as not a number
 GET {{ endpoint }}/tartempion
 
+### Create a company 
+POST {{ endpoint }}
+content-type: application/json
+
+{
+  "name": "JD - POST TEST Entreprise de test",
+  "address": "JD - POST TEST Adresse de test",
+  "zip_code": 34000,
+  "type": "admin"
+}
+
+### Create an inexistant company
+POST {{ endpoint }}
+content-type: application/json
+
+{
+  "name": "JD - Entreprise de test",
+  "address": "JD - Adresse de test",
+  "zip_code": 34000,
+  "type": "admin"
+}
+
 ### Patch a company 
 PATCH {{ endpoint }}/50
 content-type: application/json

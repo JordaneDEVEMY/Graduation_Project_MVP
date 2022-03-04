@@ -20,6 +20,30 @@ const controller = {
   },
 
   /**
+   * UserAdmin controller to create a company
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async create(req, res) {
+    const isCompanyNameExist = await companyAdminDatamapper.findByName(req.body.name);
+
+    if (!isCompanyNameExist) {
+      throw new ApiError(400, 'Le nom de la société existe déjà');
+    }
+
+    const isCompanyAddressExist = await companyAdminDatamapper.findByAddress(req.body.address);
+
+    if (!isCompanyAddressExist) {
+      throw new ApiError(400, 'L\'adresse de la société existe déjà');
+    }
+
+    const companyCreate = await companyAdminDatamapper.insert(req.body);
+    return res.json(companyCreate);
+  },
+
+  /**
    * UserAdmin controller to update a company
    * ExpressMiddleware signature
    * @param {object} req Express req.object

@@ -50,6 +50,36 @@ module.exports = {
   },
 
   /**
+   * Insert Company
+   * @param {object} company - Body request required
+   * @returns {CompanyInDatabase} - Return the new company
+   */
+  async insert(company) {
+    const companyToCreate = await client.query(
+      `
+          INSERT INTO "company" 
+          (
+            "name",
+            "address",
+            "zip_code",
+            "type"
+          )
+          VALUES (
+            $1, $2, $3, $4
+          )
+          RETURNING *;`,
+      [
+        company.name,
+        company.address,
+        company.zip_code,
+        company.type,
+      ],
+    );
+
+    return companyToCreate.rows[0];
+  },
+
+  /**
    * Update Company
    * @param {number} companyId - Company ID
    * @param {object} company - Body request
@@ -103,4 +133,33 @@ module.exports = {
     return !!companyToDelete.rowCount;
   },
 
+  /**
+   * Search if company name already exist in db
+   * @param {number} companyName - company name to find
+   * @returns {string|ApiError} - Return email string or ApiError if company id PK not found
+   */
+  async findByName(companyName) {
+    const result = await client.query('SELECT "name" FROM "company" WHERE "name" = $1', [companyName]);
+
+    if (result.rowCount > 0) {
+      throw new ApiError(400, 'Le nom de la société est déjà utilisé');
+    }
+
+    return !result.rowCount;
+  },
+
+  /**
+   * Search if company id already exist in db
+   * @param {number} companyAddress - company address to find
+   * @returns {string|ApiError} - Return address string or ApiError if company id PK not found
+   */
+  async findByAddress(companyAddress) {
+    const result = await client.query('SELECT "address" FROM "company" WHERE "address" = $1', [companyAddress]);
+
+    if (result.rowCount > 0) {
+      throw new ApiError(400, 'L\'adresse de la société est déjà utilisée');
+    }
+
+    return !result.rowCount;
+  },
 };
