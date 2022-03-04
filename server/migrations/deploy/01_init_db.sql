@@ -18,7 +18,7 @@ CREATE TABLE "absence" (
 
 CREATE TABLE "employee" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "social_security_number" BIGINT NOT NULL UNIQUE,
+    "social_security_number" TEXT NOT NULL UNIQUE,
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "date_of_birth" DATE NOT NULL,
