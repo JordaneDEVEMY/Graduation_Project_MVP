@@ -28,9 +28,6 @@ function SheetList({
       <Box
         sx={{
           position: 'relative',
-          height: (employees.length * 48) + 2,
-          width: 300,
-          overflow: 'hidden',
         }}
       >
         {employees.map((employee, index) => (
