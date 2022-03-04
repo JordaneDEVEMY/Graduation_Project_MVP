@@ -37,3 +37,31 @@ VALUES
 ('$1','$2','$3','$4','$5','$6','$7')
 -- Suppression d'un site
 DELETE FROM "site" WHERE "id" = '$1' RETURNING *;
+
+-----------------------------------------------------------------------------------------------------------------
+
+-- Query for admin panel - show week assignment 
+SELECT 
+	"assignment"."id",
+	"assignment"."starting_date",
+	"assignment"."ending_date",
+	"assignment"."color",
+	"assignment"."position",
+	"assignment"."visibility",
+	"employee"."id",
+	"employee"."firstname",
+	"employee"."lastname",
+	"absence"."id",
+	"absence"."reason",
+	"site"."name" AS site_name,
+	"site"."manager_name",
+	"company"."name" AS company_name
+	
+FROM "assignment"
+LEFT JOIN "employee" ON "assignment"."employee_id" = "employee"."id"
+LEFT JOIN "absence" ON "absence"."assignment_id" = "assignment"."id"
+LEFT JOIN "site" ON "site"."assignment_id" = "assignment"."id"
+LEFT JOIN "company" ON "site"."company_id" = "company"."id"
+WHERE "assignment"."starting_date" BETWEEN '2021-02-21' AND '2021-02-25' 
+AND "assignment"."ending_date" BETWEEN '2021-02-21' AND '2021-02-25'
+ORDER BY "site"."name";
