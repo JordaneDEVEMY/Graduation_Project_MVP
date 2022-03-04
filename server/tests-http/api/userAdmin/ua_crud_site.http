@@ -7,3 +7,96 @@
 
 ### 404
 GET {{ endpoint }}/azertyuiop
+
+### Get one site
+GET {{ endpoint }}/1
+
+### Get a site who does not exist
+GET {{ endpoint }}/9999
+
+### Get a site with an id as not a number
+GET {{ endpoint }}/tartempion
+
+### Create a site 
+POST {{ endpoint }}
+content-type: application/json
+
+{
+  "name": "testrestcslient",
+  "address": "testresstclient",
+  "zip_code": 34000,
+  "manager_name": "testrestclient",
+  "estimated_duration": 5,
+  "company_id": 1
+}
+
+### Create an existant site
+POST {{ endpoint }}
+content-type: application/json
+
+{
+  "name": "testrestclient",
+  "address": "testrestclient",
+  "zip_code": 34000,
+  "manager_name": "testrestclient",
+  "estimated_duration": 5,
+  "company_id": 1
+}
+
+### Create with an inexistant company_id
+POST {{ endpoint }}
+content-type: application/json
+
+{
+  "name": "test",
+  "address": "test",
+  "zip_code": 34000,
+  "manager_name": "toto",
+  "estimated_duration": 5,
+  "company_id": 9999
+}
+
+### Patch a site 
+PATCH {{ endpoint }}/1
+content-type: application/json
+
+{
+  "name": "test",
+  "address": "test",
+  "zip_code": 34000,
+  "manager_name": "toto",
+  "estimated_duration": 5,
+  "company_id": 1
+}
+
+### Patch an inexistant site
+PATCH {{ endpoint }}/999
+content-type: application/json
+
+{
+  "name": "test",
+  "address": "test",
+  "zip_code": 34000,
+  "manager_name": "toto",
+  "estimated_duration": 5,
+  "company_id": 1
+}
+
+### Patch an inexistant company_id
+PATCH {{ endpoint }}/1
+content-type: application/json
+
+{
+  "name": "test",
+  "address": "test",
+  "zip_code": 34000,
+  "manager_name": "toto",
+  "estimated_duration": 5,
+  "company_id": 9999
+}
+
+### Delete a site
+DELETE {{ endpoint }}/41
+
+### Delete an inexistant site
+DELETE {{ endpoint }}/999

@@ -3,6 +3,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} User
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -36,6 +37,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} UserCreate
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -54,6 +56,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} UserUpdate
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -70,7 +73,6 @@ const { ApiError } = require('../../helpers/errorHandler');
  */
 
 /**
- * Deleted user response
  * @typedef {object} UserDelete
  * @property {boolean} isDeleted - Status
  * @property {number} statusCode - HTTP Status code
@@ -80,7 +82,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 module.exports = {
   /**
    * Find an User by his id
-   * @param {number} userId - User's ID
+   * @param {number} userId - User ID
    * @returns {User|undefined} - REST response of an user or undefined if no user found
    */
   async findByPk(userId) {
@@ -117,7 +119,7 @@ module.exports = {
   /**
    * Insert User
    * @param {object} user - Body request with email and password required
-   * @returns {UserCreate|ApiError} - Return the new user or ApiError if user not found
+   * @returns {UserCreate} - Return the new user
    */
   async insert(user) {
     const userToCreate = await client.query(
@@ -178,7 +180,7 @@ module.exports = {
 
   /**
    * Update User
-   * @param {number} userId - User's ID
+   * @param {number} userId - User ID
    * @param {object} user - Body request with email and password required
    * @returns {UserUpdate|ApiError} - Return updated user or ApiError if user not found
    */
@@ -249,9 +251,8 @@ module.exports = {
 
   /**
    * Remove User
-   * @param {number} userId - User's ID
-   * @param {object} user - Body request with email and password required
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @param {number} userId - User ID
+   * @returns {boolean|ApiError} - Return boolean or ApiError if user not found
    */
   async delete(userId) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1;', [userId]);
@@ -268,8 +269,7 @@ module.exports = {
   /**
    * Search if SSN already exist in db
    * @param {number} userSsn - User Ssn to find
-   * @param {object} user - Body request
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @returns {boolean|ApiError} - Return boolean or ApiError if userSsn not found
    */
   async getSsn(userSsn) {
     const result = await client.query('SELECT social_security_number FROM "employee" WHERE social_security_number = $1', [userSsn]);
@@ -283,9 +283,8 @@ module.exports = {
 
   /**
    * Search if SSN already exist in db
-   * @param {number} userSsn - User Email to find
-   * @param {object} user - Body request
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @param {number} userEmail - User Email to find
+   * @returns {boolean|ApiError} - Return boolean or ApiError if userEmail not found
    */
   async getEmail(userEmail) {
     const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);

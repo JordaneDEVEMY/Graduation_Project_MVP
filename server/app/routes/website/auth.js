@@ -13,7 +13,7 @@ router
   /**
    * POST /login
    * @summary Connect on website
-   * @tags Authentification
+   * @tags 1.Authentification
    * @param {AuthInput} request.body.required - User email/password
    * @return {AuthUser} 200 - success response - application/json
    * @return {WebsiteError} 400 - Bad request response - application/json
