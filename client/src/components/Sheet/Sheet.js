@@ -7,7 +7,6 @@ import {
   AccordionSummary,
   Avatar,
   Grid,
-  IconButton,
   Typography,
 } from '@mui/material';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
@@ -27,12 +26,6 @@ function Sheet(props) {
   const {
     color, expandedSheet, handleChange, index, isMobile, firstname, lastname,
   } = props;
-
-  const handleDragSheet = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log(firstname, lastname);
-  };
 
   return (
 
@@ -65,9 +58,8 @@ function Sheet(props) {
 
         {!isMobile && isAdmin
           && (
-            <IconButton
-              aria-label="Déplacer"
-              size="small"
+            <DragIndicatorIcon
+              fontSize="small"
               color="sheet"
               sx={{
                 ml: 'auto',
@@ -76,10 +68,7 @@ function Sheet(props) {
                   opacity: '1',
                 },
               }}
-              onClick={handleDragSheet}
-            >
-              <DragIndicatorIcon fontSize="small" />
-            </IconButton>
+            />
           )}
       </AccordionSummary>
       <AccordionDetails

@@ -17,12 +17,19 @@ function SheetList({
   isMobile,
 }) {
   const theme = useTheme();
+  console.log(`site-${id}-employees`, employees);
   const [expandedSheet, setExpandedSheet] = React.useState(false);
   const [sortableList, setSortableList] = React.useState(employees);
-  console.log('employees', employees);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpandedSheet(isExpanded ? panel : false);
   };
+
+  // React.useEffect(() => {
+  //   console.log(`site-${id}-employees changed !`, sortableList.length);
+  //   sortableList.forEach((employee) => {
+  //     console.log(employee.firstname);
+  //   });
+  // }, [sortableList]);
 
   return (
     <Box
