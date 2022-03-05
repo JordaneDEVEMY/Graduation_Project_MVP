@@ -10,68 +10,13 @@ import SheetList from '../SheetList/SheetList';
 import './card.scss';
 
 function Card({
+  employees,
+  id,
   isMobile,
   site,
 }) {
   const theme = useTheme();
   console.log('assignement', site);
-
-  const employees = [
-    {
-      id: 1,
-      firstname: 'John',
-      lastname: 'Doe',
-      email: 'string@alo.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#f44336',
-    },
-    {
-      id: 2,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#2196f3',
-    },
-    {
-      id: 3,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#4caf50',
-    },
-    {
-      id: 4,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#ffeb3b',
-    },
-    {
-      id: 5,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#ff9800',
-    },
-    {
-      id: 5,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#ff9800',
-    },
-  ];
 
   return (
     <Box
@@ -87,12 +32,14 @@ function Card({
         site={site}
         isMobile={isMobile}
       />
-      <SheetList employees={employees} isMobile={isMobile} />
+      <SheetList employees={employees} id={id} isMobile={isMobile} />
     </Box>
   );
 }
 
 Card.propTypes = {
+  employees: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
   site: PropTypes.object.isRequired,
 };
