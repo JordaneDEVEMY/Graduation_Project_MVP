@@ -12,7 +12,7 @@ const router = express.Router();
 router.use('/user', userRouter);
 router.use('/site', siteRouter);
 router.use('/company', companyRouter);
-router.use('/planning', planningRouter);
+// router.use('/planning', planningRouter);
 
 router.use(() => {
   throw new ApiError(404, 'Page introuvable');
