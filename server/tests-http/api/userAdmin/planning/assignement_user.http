@@ -1,0 +1,12 @@
+################################################################################
+# Test file for HTTP routes of userAdmin API
+# REST Client for VSCode needed
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+################################################################################
+@endpoint = http://localhost:{{$dotenv PORT}}/api/admin/planning
+
+### 404
+GET {{ endpoint }}/azertyuiop
+
+### Update employee affectation
+PATCH {{ endpoint }}/1/assignment/user/1
