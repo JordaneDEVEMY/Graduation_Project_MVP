@@ -5,7 +5,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import { ReactSortable } from 'react-sortablejs';
 import { useTheme } from '@mui/material/styles';
 import Sheet from '../Sheet/Sheet';
 import sheetListBg from '../../Assets/images/sheet-bg.png';
@@ -19,7 +18,6 @@ function SheetList({
   const theme = useTheme();
   console.log(`site-${id}-employees`, employees);
   const [expandedSheet, setExpandedSheet] = React.useState(false);
-  const [sortableList, setSortableList] = React.useState(employees);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpandedSheet(isExpanded ? panel : false);
   };
@@ -45,22 +43,16 @@ function SheetList({
           position: 'relative',
         }}
       >
-        <ReactSortable
-          group={`site-${id}`}
-          list={sortableList}
-          setList={setSortableList}
-        >
-          {employees.map((employee, index) => (
-            <Sheet
-              key={index}
-              index={index}
-              handleChange={handleChange}
-              expandedSheet={expandedSheet}
-              isMobile={isMobile}
-              {...employee}
-            />
-          ))}
-        </ReactSortable>
+        {employees.map((employee, index) => (
+          <Sheet
+            key={index}
+            index={index}
+            handleChange={handleChange}
+            expandedSheet={expandedSheet}
+            isMobile={isMobile}
+            {...employee}
+          />
+        ))}
         {employees.length % 10 !== 0 && (
         <Box
           sx={{
