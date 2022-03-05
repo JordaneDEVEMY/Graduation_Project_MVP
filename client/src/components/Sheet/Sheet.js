@@ -2,7 +2,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import {
-  Accordion as MuiAccordion, AccordionDetails, AccordionSummary, Typography,
+  Accordion as MuiAccordion, AccordionDetails, AccordionSummary, Grid, Avatar, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import './sheet.scss';
@@ -36,6 +36,7 @@ function Sheet(props) {
           sx={{
             lineHeight: 1,
             fontFamily: 'Sriracha',
+            fontSize: '1.1rem',
             color: 'rgba(0,0,0,.9)',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -53,11 +54,21 @@ function Sheet(props) {
           clipPath: 'path(\'M29,13.6c0,0.2,0,0.3,0,0.5l0,0l-1,347.8c0,0,0,0,0,0.1c0,0,0,0,0,0.1l0,0.9l0.1,0c0.5,7.2,6.6,13,13.9,13h216c7.4,0,13.4-5.7,13.9-13l0.1,0l0-0.9c0,0,0,0,0-0.1c0,0,0,0,0-0.1l-1-347.8l0,0c0-0.2,0-0.3,0-0.5c0-5.8,3.2-10.9,8-13.6H21C25.8,2.6,29,7.7,29,13.6z\')',
         }}
       >
-        <Typography>
-          Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
-          varius pulvinar diam eros in elit. Pellentesque convallis laoreet
-          laoreet.
-        </Typography>
+        <Grid container spacing={1} mt={0}>
+          <Grid item xs="auto">
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          </Grid>
+          <Grid item xs>
+            <Typography
+              component="p"
+            >
+              <strong>Plombier</strong>
+            </Typography>
+            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
+            varius pulvinar diam eros in elit. Pellentesque convallis laoreet
+            laoreet.
+          </Grid>
+        </Grid>
       </AccordionDetails>
     </Accordion>
   );
