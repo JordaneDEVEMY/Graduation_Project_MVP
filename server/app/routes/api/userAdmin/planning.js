@@ -10,7 +10,7 @@ const controllerHandler = require('../../../helpers/apiControllerHandler');
 const router = express.Router();
 
 router
-  .route('/:slugYearWeekId')
+  .route('/:slugYearWeekId([2][0][0-9][0-9]-(?:[0-4][0-9]|[5][0-3]))')
   /**
    * GET /api/admin/planning/{id}
    * @summary Get one week of planning information

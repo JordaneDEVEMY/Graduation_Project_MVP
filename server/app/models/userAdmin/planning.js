@@ -1,5 +1,5 @@
 const client = require('../../config/database');
-const { ApiError } = require('../../helpers/errorHandler');
+// const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} Company
@@ -34,7 +34,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cet entreprise n\'existe pas');
+      return 'Semaine non planifiée pour le moment';
     }
 
     return result.rows;
