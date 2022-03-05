@@ -2,8 +2,15 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import {
-  Accordion as MuiAccordion, AccordionDetails, AccordionSummary, Grid, Avatar, Typography,
+  Accordion as MuiAccordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
+  Box,
+  Grid,
+  Typography,
 } from '@mui/material';
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import PropTypes from 'prop-types';
 import './sheet.scss';
 
@@ -16,7 +23,7 @@ const Accordion = styled((props) => (
 
 function Sheet(props) {
   const {
-    color, expandedSheet, handleChange, index, firstname, lastname,
+    color, expandedSheet, handleChange, index, isMobile, firstname, lastname,
   } = props;
 
   return (
@@ -45,6 +52,12 @@ function Sheet(props) {
         >
           {`${firstname} ${lastname}`}
         </Typography>
+        {!isMobile
+        && (
+        <Box>
+          <DragIndicatorIcon />
+        </Box>
+        )}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -79,6 +92,7 @@ Sheet.propTypes = {
   expandedSheet: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
 };

@@ -10,6 +10,7 @@ import SheetList from '../SheetList/SheetList';
 import './card.scss';
 
 function Card({
+  isMobile,
   site,
 }) {
   const theme = useTheme();
@@ -84,13 +85,15 @@ function Card({
     >
       <CardHeader
         site={site}
+        isMobile={isMobile}
       />
-      <SheetList employees={employees} />
+      <SheetList employees={employees} isMobile={isMobile} />
     </Box>
   );
 }
 
 Card.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
   site: PropTypes.object.isRequired,
 };
 Card.defaultProps = {

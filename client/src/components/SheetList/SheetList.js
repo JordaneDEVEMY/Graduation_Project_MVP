@@ -12,6 +12,7 @@ import './sheetlist.scss';
 
 function SheetList({
   employees,
+  isMobile,
 }) {
   const theme = useTheme();
   const [expandedSheet, setExpandedSheet] = React.useState(false);
@@ -40,6 +41,7 @@ function SheetList({
             index={index}
             handleChange={handleChange}
             expandedSheet={expandedSheet}
+            isMobile={isMobile}
             {...employee}
           />
         ))}
@@ -63,6 +65,7 @@ function SheetList({
 }
 
 SheetList.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
   employees: PropTypes.array.isRequired,
 };
 SheetList.defaultProps = {

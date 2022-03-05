@@ -17,6 +17,7 @@ import './carousel.scss';
 function Carousel({
   assignements,
 }) {
+  const isMobile = true;
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = assignements.length;
@@ -58,7 +59,7 @@ function Carousel({
                   width: '100%',
                 }}
               >
-                <Card key={assignement.id} {...assignement} />
+                <Card key={assignement.id} isMobile={isMobile} {...assignement} />
               </Box>
             ) : null}
           </div>
