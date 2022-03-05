@@ -6,8 +6,8 @@ import {
   AccordionDetails,
   AccordionSummary,
   Avatar,
-  Box,
   Grid,
+  IconButton,
   Typography,
 } from '@mui/material';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
@@ -40,7 +40,9 @@ function Sheet(props) {
         }}
       >
         <Typography
+          component="span"
           sx={{
+            alignSelf: 'center',
             lineHeight: 1,
             fontFamily: 'Sriracha',
             fontSize: '1.1rem',
@@ -52,12 +54,20 @@ function Sheet(props) {
         >
           {`${firstname} ${lastname}`}
         </Typography>
+
         {!isMobile
-        && (
-        <Box>
-          <DragIndicatorIcon />
-        </Box>
-        )}
+          && (
+            <IconButton
+              aria-label="Déplacer"
+              size="small"
+              sx={{
+                ml: 'auto',
+              }}
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); console.log('hello'); }}
+            >
+              <DragIndicatorIcon fontSize="small" />
+            </IconButton>
+          )}
       </AccordionSummary>
       <AccordionDetails
         sx={{

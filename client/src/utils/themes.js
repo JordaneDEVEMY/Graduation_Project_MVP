@@ -42,7 +42,7 @@ const getTheme = (mode) => ({
     ...themes[mode].typography,
     h1: {
       ...themes[mode].typography.h1,
-      fontSize: '3rem',
+      fontSize: '2.8rem',
       color: themes[mode].palette.primary.main,
       marginBottom: '.5em',
     },
