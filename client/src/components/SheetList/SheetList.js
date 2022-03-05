@@ -3,9 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import {
-  Box,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Sheet from '../Sheet/Sheet';
@@ -16,9 +14,10 @@ function SheetList({
   employees,
 }) {
   const theme = useTheme();
+  const [expandedSheet, setExpandedSheet] = React.useState(false);
 
-  const handleToggleSheet = (event) => {
-    event.target.closest('div').style.height = '100px';
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpandedSheet(isExpanded ? panel : false);
   };
 
   return (
@@ -36,7 +35,13 @@ function SheetList({
         }}
       >
         {employees.map((employee, index) => (
-          <Sheet key={index} index={index} handleClick={handleToggleSheet} {...employee} />
+          <Sheet
+            key={index}
+            index={index}
+            handleChange={handleChange}
+            expandedSheet={expandedSheet}
+            {...employee}
+          />
         ))}
 
         {employees.length % 10 !== 0 && (
