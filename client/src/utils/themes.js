@@ -13,10 +13,6 @@ const themes = {
         paper: '#121212',
         component: '#1e1e1e',
       },
-      header: {
-        main: '#121212',
-        contrastText: '#fff',
-      },
     },
   },
   light: {
@@ -28,16 +24,23 @@ const themes = {
         paper: '#fff',
         component: '#f7f7f7',
       },
-      header: {
-        main: '#121212',
-        contrastText: '#fff',
-      },
     },
   },
 };
 
 const getTheme = (mode) => ({
   ...themes[mode],
+  palette: {
+    ...themes[mode].palette,
+    header: {
+      main: '#121212',
+      contrastText: '#fff',
+    },
+    sheet: {
+      main: '#121212',
+      contrastText: '#fff',
+    },
+  },
   typography: {
     ...themes[mode].typography,
     h1: {

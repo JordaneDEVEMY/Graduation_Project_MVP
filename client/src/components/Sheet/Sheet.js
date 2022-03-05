@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import {
   Accordion as MuiAccordion,
   AccordionDetails,
@@ -16,15 +16,23 @@ import './sheet.scss';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
-))(() => ({
+))(({ theme }) => ({
   background: 'none',
-  color: 'rgba(0,0,0,.9)',
+  color: theme.palette.sheet.main,
 }));
 
 function Sheet(props) {
+  const isAdmin = true;
+  const theme = useTheme();
   const {
     color, expandedSheet, handleChange, index, isMobile, firstname, lastname,
   } = props;
+
+  const handleDragSheet = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(firstname, lastname);
+  };
 
   return (
 
@@ -46,7 +54,7 @@ function Sheet(props) {
             lineHeight: 1,
             fontFamily: 'Sriracha',
             fontSize: '1.1rem',
-            color: 'rgba(0,0,0,.9)',
+            color: theme.palette.sheet.main,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
@@ -55,15 +63,20 @@ function Sheet(props) {
           {`${firstname} ${lastname}`}
         </Typography>
 
-        {!isMobile
+        {!isMobile && isAdmin
           && (
             <IconButton
               aria-label="Déplacer"
               size="small"
+              color="sheet"
               sx={{
                 ml: 'auto',
+                opacity: '.3',
+                '&:hover, &:focus': {
+                  opacity: '1',
+                },
               }}
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); console.log('hello'); }}
+              onClick={handleDragSheet}
             >
               <DragIndicatorIcon fontSize="small" />
             </IconButton>
