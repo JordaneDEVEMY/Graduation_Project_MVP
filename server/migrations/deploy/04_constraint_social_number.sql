@@ -8,3 +8,4 @@ CREATE DOMAIN num_ss_fr AS text
     );
 
 COMMIT;
+                

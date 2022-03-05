@@ -25,6 +25,8 @@ CREATE TABLE "employee" (
     "address" TEXT NOT NULL,
     "zip_code" INT NOT NULL,
     "email" TEXT NOT NULL UNIQUE,
+    "mobile_number" TEXT NOT NULL,
+    "phone_number" TEXT,
     "password" TEXT NOT NULL,
     "starting_date" DATE NOT NULL DEFAULT now(),
     "avatar" TEXT,
