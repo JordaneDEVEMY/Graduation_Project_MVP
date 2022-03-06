@@ -3,9 +3,9 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Box, useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import Carousel from '../Carousel/Carousel';
-import Card from '../Card/Card';
+import CardsWrapper from '../CardsWrapper/CardsWrapper';
 import './cards.scss';
 
 function Cards({
@@ -13,6 +13,7 @@ function Cards({
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  // TODO SET EMPLOYEES
   const employees = [
     {
       id: 1,
@@ -25,9 +26,9 @@ function Cards({
     },
     {
       id: 2,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
+      firstname: 'Alain',
+      lastname: 'Benet',
+      email: 'benet.al@free.fr',
       avatar: 'string',
       role_application: 'string',
       color: '#2196f3',
@@ -35,7 +36,7 @@ function Cards({
     {
       id: 3,
       firstname: 'Bernard',
-      lastname: 'De La Villardière',
+      lastname: 'De La Vitre arrière',
       email: 'bernard@free.fr',
       avatar: 'string',
       role_application: 'string',
@@ -43,27 +44,27 @@ function Cards({
     },
     {
       id: 4,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
+      firstname: 'Yves',
+      lastname: 'Mourousi',
+      email: 'mourousi@orange.fr',
       avatar: 'string',
       role_application: 'string',
       color: '#ffeb3b',
     },
     {
       id: 5,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
+      firstname: 'Christine',
+      lastname: 'Pinson',
+      email: 'chrispinson@free.fr',
       avatar: 'string',
       role_application: 'string',
       color: '#ff9800',
     },
     {
       id: 6,
-      firstname: 'Bernard',
-      lastname: 'De La Villardière',
-      email: 'bernard@free.fr',
+      firstname: 'William',
+      lastname: 'Guiscard',
+      email: 'guiscard.william@sfr.fr',
       avatar: 'string',
       role_application: 'string',
       color: '#ff9800',
@@ -74,29 +75,9 @@ function Cards({
   });
 
   return (
-    isMobile ? (
-      <Carousel assignements={assignements} />
-    )
-      : (
-        <Box
-          sx={{
-            overflowX: 'auto',
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              gap: theme.spacing(2),
-              flexWrap: 'nowrap',
-              justifyContent: 'center',
-            }}
-          >
-            {assignements.map((assignement) => (
-              <Card key={assignement.id} isMobile={isMobile} {...assignement} />
-            ))}
-          </Box>
-        </Box>
-      )
+    isMobile
+      ? (<Carousel assignements={assignements} />)
+      : (<CardsWrapper assignements={assignements} />)
   );
 }
 

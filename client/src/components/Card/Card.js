@@ -16,7 +16,6 @@ function Card({
   site,
 }) {
   const theme = useTheme();
-  console.log('assignement', site);
 
   return (
     <Box
@@ -29,10 +28,11 @@ function Card({
       }}
     >
       <CardHeader
+        cardIid={id}
         site={site}
         isMobile={isMobile}
       />
-      <SheetList employees={employees} id={id} isMobile={isMobile} />
+      <SheetList employees={employees} cardIid={id} isMobile={isMobile} />
     </Box>
   );
 }
