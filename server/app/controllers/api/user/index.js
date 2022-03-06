@@ -31,8 +31,6 @@ const controller = {
       allColleagues.colleagues.push(...getColleagues);
     }));
 
-    console.log('file: index.js ~ line 39 ~ awaitPromise.all ~ allColleagues', allColleagues);
-
     //! I Keep this in comment for Sprint 03 if necessary
     // const newSet = new Set();
 

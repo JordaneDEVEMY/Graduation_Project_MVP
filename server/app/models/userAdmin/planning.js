@@ -1,5 +1,5 @@
 const client = require('../../config/database');
-const { ApiError } = require('../../helpers/errorHandler');
+// const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} Company
@@ -18,23 +18,26 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 module.exports = {
   /**
-   * Find a Company by his id
-   * @param {number} companyId - Company ID
-   * @returns {Company|ApiError} - REST response of Company or ApiError if no company found
+   * Find a Week planning with first and last ISO date of the week
+   * @param {string} mondayIsoDate - Week monday ISO date ID
+   * @param {string} sundayIsoDate - Week sunday ISO date ID
+   * @returns {Week[]|ApiError} - Response of Week or ApiError if no week found
    */
-  async findByPk(companyId) {
+  async findByDates(mondayIsoDate, sundayIsoDate) {
     const result = await client.query(
       `
-      SELECT * FROM "company" WHERE "id" = $1;
+      SELECT * FROM get_Week_admin_planning 
+      WHERE starting_date >= $1 
+      AND ending_date <= $2
       `,
-      [companyId],
+      [mondayIsoDate, sundayIsoDate],
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cet entreprise n\'existe pas');
+      return 'Semaine non planifiée pour le moment';
     }
 
-    return result.rows[0];
+    return result.rows;
   },
 
 };
