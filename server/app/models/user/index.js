@@ -8,8 +8,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {number} date_of_birth - User date_of_birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip_code
- * @property {number} phone_number - User phone number
- * @property {number} mobile_number - User mobile number
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} starting_date - User starting_date
  * @property {string} function - User function
  * @property {number} employee_qualification_id - User qualification key
@@ -21,8 +21,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @typedef {object} UserUpdate
  * @property {number} id - Database primary key of User
  * @property {string} email - User email
- * @property {number} phone_number - User phone number
- * @property {number} mobile_number - User mobile number
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} updated_at - User updated timestamptz
  */
 
@@ -111,7 +111,7 @@ module.exports = {
         "phone_number" = $2,
         "mobile_number" = $3,
         "updated_at" = NOW()
-      WHERE "id"= $3 
+      WHERE "id"= $4
       RETURNING 
         "id", 
         "email",
