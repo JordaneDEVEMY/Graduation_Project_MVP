@@ -36,7 +36,7 @@ function Cards({
         ? <Carousel assignments={assignments} handleAssignment={setAssignment} />
         : <CardsWrapper assignments={assignments} handleAssignment={setAssignment} />}
 
-      {!isAdmin
+      {isAdmin
         && (
         <Modal
           sx={{

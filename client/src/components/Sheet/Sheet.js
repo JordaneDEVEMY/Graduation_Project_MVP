@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
@@ -11,6 +12,7 @@ import {
 } from '@mui/material';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import PropTypes from 'prop-types';
+import dateFunctions from '../../utils/dateFunctions';
 import './sheet.scss';
 
 const Accordion = styled((props) => (
@@ -23,14 +25,22 @@ const Accordion = styled((props) => (
 function Sheet({
   color,
   expandedSheet,
+  ending_date,
   handleChange,
   index,
   isMobile,
   firstname,
   lastname,
+  starting_date,
 }) {
   const isAdmin = true;
   const theme = useTheme();
+  const week = dateFunctions.getWeek(starting_date);
+  const firstDayofWeek = dateFunctions.getDate(week.current.dates[0]).format('YYYY-MM-DD');
+  const lastDayofWeek = dateFunctions.getDate(week.current.dates[4]).format('YYYY-MM-DD');
+  console.log(firstDayofWeek, lastDayofWeek);
+  const startOnMonday = dateFunctions.getDate(starting_date).format('YYYY-MM-DD') === firstDayofWeek;
+  const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
 
   return (
 
@@ -57,7 +67,7 @@ function Sheet({
             alignSelf: 'center',
             lineHeight: 1,
             fontFamily: 'Sriracha',
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             color: theme.palette.sheet.main,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -67,13 +77,28 @@ function Sheet({
           {`${firstname} ${lastname}`}
         </Typography>
 
+        {(!startOnMonday || !finishOnFriday)
+          && (
+          <Typography
+            component="small"
+            sx={{
+              ml: 'auto',
+              display: 'inline-block',
+              fontSize: '.75rem',
+            }}
+          >
+            {`${dateFunctions.getDate(starting_date).format('DD-MM')} 
+            au ${dateFunctions.getDate(ending_date).format('DD-MM')}`}
+          </Typography>
+          )}
+
         {!isMobile && isAdmin
           && (
             <DragIndicatorIcon
               fontSize="small"
               color="sheet"
               sx={{
-                ml: 'auto',
+                ml: (!startOnMonday || !finishOnFriday) ? undefined : 'auto',
                 opacity: '.3',
                 '&:hover, &:focus': {
                   opacity: '1',
@@ -109,12 +134,14 @@ function Sheet({
 
 Sheet.propTypes = {
   color: PropTypes.string,
+  ending_date: PropTypes.string.isRequired,
   expandedSheet: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
+  starting_date: PropTypes.string.isRequired,
 };
 Sheet.defaultProps = {
   color: '#ed6c02',
