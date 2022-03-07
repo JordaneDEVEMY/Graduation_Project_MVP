@@ -62,4 +62,4 @@ CREATE VIEW get_user_rest AS
     GROUP BY "employee"."id", "employee_qualification"."label"
     ORDER BY "employee"."id";
 
-sCOMMIT;
+COMMIT;
