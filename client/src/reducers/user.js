@@ -50,7 +50,7 @@ function reducer(state = initialState, action) {
     case actions.GET_USER_ASSIGNMENTS:
       return {
         ...state,
-        assignmnts: action.payload,
+        assignments: action.payload,
       };
 
     case actions.SET_USER_LOGOUT:
