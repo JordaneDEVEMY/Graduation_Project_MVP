@@ -66,23 +66,17 @@ function CardsWrapper({
   return (
     <Box
       sx={{
-        // overflowX: 'auto',
+        display: 'flex',
+        gap: theme.spacing(2),
+        flexWrap: 'nowrap',
+        justifyContent: 'center',
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          gap: theme.spacing(2),
-          flexWrap: 'nowrap',
-          justifyContent: 'center',
-        }}
-      >
-        <DragDropContext onDragEnd={onDragEnd}>
-          {assignments.map((assignment) => (
-            <Card key={assignment.id} isMobile={false} {...assignment} employees={state[`card-${assignment.id}`]} />
-          ))}
-        </DragDropContext>
-      </Box>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {assignments.map((assignment) => (
+          <Card key={assignment.id} isMobile={false} {...assignment} employees={state[`card-${assignment.id}`]} />
+        ))}
+      </DragDropContext>
     </Box>
   );
 }

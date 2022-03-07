@@ -25,6 +25,7 @@ function Card({
         color: theme.palette.text.primary,
         p: theme.spacing(2),
         width: `calc(300px + ${theme.spacing(4)})`,
+        overflow: 'hidden',
       }}
     >
       <CardHeader
