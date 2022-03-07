@@ -19,6 +19,7 @@ const controller = {
     const weekId = slugYearWeekId.substring(5, 7);
 
     const period = getWeekPeriod(yearId, weekId);
+    console.log('file: planningController.js ~ line 22 ~ getOne ~ period', period);
 
     if (!period) {
       throw new ApiError(404, `Il n'y a pas de semaine ${weekId} en ${yearId}`);
@@ -53,7 +54,9 @@ const controller = {
       }
     });
 
-    return res.json(filteredWeek);
+    const periods = { weekPeriod: period, planning: filteredWeek };
+
+    return res.json(periods);
   },
 };
 
