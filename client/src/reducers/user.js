@@ -5,17 +5,8 @@ const initialState = {
   id: 0,
   firstname: '',
   lastname: '',
-  email: '',
   password: '',
-  socialSecurityNumber: '',
-  dateOfBirth: '',
-  adress: '',
-  zipCode: '',
-  startingDate: '',
   avatar: '',
-  function: '',
-  roleApplication: '',
-  qualificationId: 0,
   label: '',
   isAdmin: false,
   assignements: [],
@@ -23,25 +14,31 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case actions.SET_USER_ID:
+    case actions.GET_USER_ID:
       return {
         ...state,
         id: action.payload,
       };
 
-    case actions.SET_USER_FIRSTNAME:
+    case actions.GET_USER_FIRSTNAME:
       return {
         ...state,
         firstname: action.payload,
       };
 
-    case actions.SET_USER_LASTNAME:
+    case actions.GET_USER_LASTNAME:
       return {
         ...state,
         lastname: action.payload,
       };
 
-    case actions.SET_USER_AVATAR:
+    case actions.RESET_USER_PASSWORD:
+      return {
+        ...state,
+        password: initialState.password,
+      };
+
+    case actions.GET_USER_AVATAR:
       return {
         ...state,
         avatar: action.payload,
@@ -53,19 +50,13 @@ function reducer(state = initialState, action) {
         isAdmin: action.payload,
       };
 
-    case actions.SET_USER_QUALIFICATION:
-      return {
-        ...state,
-        qualificationId: action.payload,
-      };
-
-    case actions.SET_USER_LABEL:
+    case actions.GET_USER_LABEL:
       return {
         ...state,
         label: action.payload,
       };
 
-    case actions.SET_USER_ASSIGNEMENTS:
+    case actions.GET_USER_ASSIGNEMENTS:
       return {
         ...state,
         assignements: action.payload,
@@ -77,9 +68,9 @@ function reducer(state = initialState, action) {
         id: initialState.id,
         firstname: initialState.firstname,
         lastname: initialState.lastname,
+        password: initialState.password,
         avatar: initialState.avatar,
         isAdmin: initialState.isAdmin,
-        qualificationId: initialState.qualificationId,
         label: initialState.label,
         assignements: initialState.assignements,
       };
