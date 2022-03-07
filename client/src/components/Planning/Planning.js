@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import Cards from '../Cards/Cards';
+import utils from '../../utils';
 import './planning.scss';
 
 function Planning({
   isAdmin,
   userAssignements,
 }) {
+  const currentDate = utils.dateFunctions.getDate().format('YYYY-MM-DD');
+  const { current: currentWeek } = utils.dateFunctions.getWeek(currentDate);
+  console.log(currentWeek);
   return (
     <>
       <SearchContainer isAdmin={isAdmin} />
@@ -19,7 +23,12 @@ function Planning({
       </Typography>
 
       {userAssignements.length
-        && (<Cards assignements={userAssignements} />)}
+        ? (<Cards assignements={userAssignements} week={currentWeek} isAdmin={isAdmin} />)
+        : (
+          <Typography sx={{ textAlign: 'center' }}>
+            Aucun planning à afficher.
+          </Typography>
+        )}
     </>
   );
 }

@@ -9,7 +9,6 @@ function PlanningContainer({
 }) {
   const dispatch = useDispatch();
   const userAssignements = useSelector((state) => state.user.assignements);
-
   useEffect(() => {
     console.log('je suis dans le useEffect');
     dispatch(actionGetUserPlanning());

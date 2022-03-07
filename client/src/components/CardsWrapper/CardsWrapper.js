@@ -26,6 +26,7 @@ const dragReducer = produce((draft, action) => {
 
 function CardsWrapper({
   assignements,
+  handleModal,
 }) {
   const theme = useTheme();
 
@@ -54,6 +55,11 @@ function CardsWrapper({
         fromIndex: result.source.index,
         toIndex: result.destination.index,
       });
+      // TODO: update request
+      console.log('source', result.source);
+      console.log('destination', result.destination);
+
+      handleModal(result);
     }
   }, []);
 
@@ -87,6 +93,7 @@ CardsWrapper.propTypes = {
       id: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  handleModal: PropTypes.func.isRequired,
 };
 
 export default React.memo(CardsWrapper);

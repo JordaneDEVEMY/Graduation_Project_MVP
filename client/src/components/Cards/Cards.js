@@ -1,18 +1,28 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { useMediaQuery } from '@mui/material';
+import { Modal, useMediaQuery } from '@mui/material';
 import Carousel from '../Carousel/Carousel';
 import CardsWrapper from '../CardsWrapper/CardsWrapper';
+import AssignmentForm from '../AssignmentForm/AssignmentForm';
 import './cards.scss';
 
 function Cards({
   assignements,
+  isAdmin,
+  week,
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [modalOpened, setModalOpened] = React.useState(false);
+
+  const handleModal = () => {
+    setModalOpened((stateModal) => !stateModal);
+  };
+
   // TODO SET EMPLOYEES
   const employees = [
     {
@@ -45,8 +55,8 @@ function Cards({
     {
       id: 4,
       firstname: 'Yves',
-      lastname: 'Mourousi',
-      email: 'mourousi@orange.fr',
+      lastname: 'Jacquard',
+      email: 'jacquard@orange.fr',
       avatar: 'string',
       role_application: 'string',
       color: '#ffeb3b',
@@ -67,7 +77,7 @@ function Cards({
       email: 'guiscard.william@sfr.fr',
       avatar: 'string',
       role_application: 'string',
-      color: '#ff9800',
+      color: '#8e00ff',
     },
   ];
   assignements.forEach((assignement) => {
@@ -75,9 +85,27 @@ function Cards({
   });
 
   return (
-    isMobile
-      ? (<Carousel assignements={assignements} />)
-      : (<CardsWrapper assignements={assignements} />)
+    <>
+      {isMobile
+        ? <Carousel assignements={assignements} handleModal={handleModal} />
+        : <CardsWrapper assignements={assignements} handleModal={handleModal} />}
+
+      {!isAdmin
+        && (
+        <Modal
+          sx={{
+            width: '90vw',
+            maxWidth: '30rem',
+            mx: 'auto',
+            mt: '25vh',
+          }}
+          open={modalOpened}
+          onClose={handleModal}
+        >
+          <AssignmentForm week={week} />
+        </Modal>
+        )}
+    </>
   );
 }
 
@@ -87,6 +115,13 @@ Cards.propTypes = {
       id: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  week: PropTypes.shape({
+    num: PropTypes.number.isRequired,
+    dates: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ).isRequired,
+  }).isRequired,
 };
 
 export default React.memo(Cards);
