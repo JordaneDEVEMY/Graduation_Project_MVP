@@ -1,5 +1,5 @@
 const client = require('../../config/database');
-// const { ApiError } = require('../../helpers/errorHandler');
+const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} Week
@@ -57,7 +57,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      return 'Semaine non planifiée pour le moment';
+      throw new ApiError(400, 'Semaine non planifiée pour le moment');
     }
 
     return result.rows;

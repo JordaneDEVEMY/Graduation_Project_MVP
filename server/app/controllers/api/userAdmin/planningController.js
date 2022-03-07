@@ -19,7 +19,6 @@ const controller = {
     const weekId = slugYearWeekId.substring(5, 7);
 
     const period = getWeekPeriod(yearId, weekId);
-    console.log('file: planningController.js ~ line 22 ~ getOne ~ period', period);
 
     if (!period) {
       throw new ApiError(404, `Il n'y a pas de semaine ${weekId} en ${yearId}`);
@@ -34,6 +33,10 @@ const controller = {
       throw new ApiError(404, 'Semaine introuvable');
     }
 
+    if (!Array.isArray(week)) {
+      console.log('pas un array');
+      return;
+    }
     const filteredWeek = [];
 
     /**
