@@ -19,16 +19,14 @@ const controller = {
       throw new ApiError(404, 'Utilisateur introuvable');
     }
 
-    const allColleagues = { colleagues: [] };
-
-    await Promise.all(user.assignements.map(async (assignment) => {
+    await Promise.all(user.assignments.map(async (assignment, index) => {
       const { starting_date, ending_date } = assignment;
       const siteId = assignment.site.id;
       const userId = req.params.id;
 
       const getColleagues = await userDatamapper.findColleagues(starting_date, ending_date, siteId, userId);
 
-      allColleagues.colleagues.push(...getColleagues);
+      Object.assign(user.assignments[index], { colleagues: [...getColleagues] });
     }));
 
     //! I Keep this in comment for Sprint 03 if necessary
@@ -43,10 +41,9 @@ const controller = {
     // const userWithColleagues = new Array(user);
     // userWithColleagues.push(filteredArrOfColleagues);
 
-    const userWithColleagues = new Array(user);
-    userWithColleagues.push(allColleagues);
+    // userWithColleagues.push(allColleagues);
 
-    return res.json(userWithColleagues);
+    return res.json(user);
   },
 
   /**
