@@ -35,6 +35,36 @@ const siteMiddleware = (store) => (next) => async (action) => {
       }
       return;
     }
+    case actions.CREATE_SITE: {
+      const { site } = store.getState();
+      const {
+        id,
+        name,
+        adress,
+        zipCode,
+        managerName,
+        estimatedDuration,
+        companyId,
+        createdAt,
+        updatedAt,
+      } = site;
+      const siteDatas = {
+        id,
+        name,
+        adress,
+        zipCode,
+        managerName,
+        estimatedDuration,
+        companyId,
+        createdAt,
+        updatedAt,
+      };
+      const response = await createSite(siteDatas);
+      if (response.status === 200) {
+        store.dispatch(actions.actionRequestSiteInformations(response.data.id));
+      }
+      return;
+    }
     default: {
       next(action);
     }
