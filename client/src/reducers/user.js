@@ -5,37 +5,40 @@ const initialState = {
   id: 0,
   firstname: '',
   lastname: '',
+  password: '',
   avatar: '',
-  isAdmin: false,
-  qualificationId: 0,
   label: '',
-  assignements: [],
+  isAdmin: false,
+  assignments: [],
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case actions.SET_USER_ID:
+    case actions.GET_USER_INFORMATIONS:
       return {
         ...state,
-        id: action.payload,
+        id: action.payload.id,
+        firstname: action.payload.firstname,
+        lastname: action.payload.lastname,
+        avatar: action.payload.avatar,
       };
 
-    case actions.SET_USER_FIRSTNAME:
+    case actions.UPDATE_USER_PASSWORD:
       return {
         ...state,
-        firstname: action.payload,
+        password: action.payload.password,
       };
 
-    case actions.SET_USER_LASTNAME:
+    case actions.RESET_USER_PASSWORD:
       return {
         ...state,
-        lastname: action.payload,
+        password: initialState.password,
       };
 
-    case actions.SET_USER_AVATAR:
+    case actions.GET_USER_LABEL:
       return {
         ...state,
-        avatar: action.payload,
+        label: action.payload,
       };
 
     case actions.SET_USER_ISADMIN:
@@ -44,22 +47,10 @@ function reducer(state = initialState, action) {
         isAdmin: action.payload,
       };
 
-    case actions.SET_USER_QUALIFICATION:
+    case actions.GET_USER_ASSIGNMENTS:
       return {
         ...state,
-        qualificationId: action.payload,
-      };
-
-    case actions.SET_USER_LABEL:
-      return {
-        ...state,
-        label: action.payload,
-      };
-
-    case actions.SET_USER_ASSIGNEMENTS:
-      return {
-        ...state,
-        assignements: action.payload,
+        assignmnts: action.payload,
       };
 
     case actions.SET_USER_LOGOUT:
@@ -68,11 +59,11 @@ function reducer(state = initialState, action) {
         id: initialState.id,
         firstname: initialState.firstname,
         lastname: initialState.lastname,
+        password: initialState.password,
         avatar: initialState.avatar,
         isAdmin: initialState.isAdmin,
-        qualificationId: initialState.qualificationId,
         label: initialState.label,
-        assignements: initialState.assignements,
+        assignments: initialState.assignments,
       };
 
     default:
