@@ -8,6 +8,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {number} date_of_birth - User date_of_birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip_code
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} starting_date - User starting_date
  * @property {string} function - User function
  * @property {number} employee_qualification_id - User qualification key
@@ -19,6 +21,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @typedef {object} UserUpdate
  * @property {number} id - Database primary key of User
  * @property {string} email - User email
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} updated_at - User updated timestamptz
  */
 
@@ -59,6 +63,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {number} id - Database primary key of this colleague
  * @property {string} firstname - Colleagues firstname
  * @property {string} lastname - Colleagues lastname
+ * @property {number} phone_number - User phone number
+ * @property {number} mobile_number - User mobile number
  * @property {number} site_id - Colleagues site assignment
  * @property {string} starting_date - Colleagues starting date of assignment
  * @property {string} ending_date - Colleagues ending date of assignment
@@ -87,7 +93,7 @@ module.exports = {
   /**
    * Update and User by his id with email and password body request
    * @param {number} userId - User's ID
-   * @param {object<email, password>} user - Body request with email and password required
+   * @param {object<password, phoneNumber, mobileNumber>} user - Body request
    * @returns {UserUpdate|ApiError} - Return updated User or ApiError if user not found
    */
   async update(userId, user) {
@@ -101,15 +107,18 @@ module.exports = {
       `
       UPDATE "employee" 
       SET 
-        "email" = $1, 
-        "password" = $2,
+        "password" = $1, 
+        "phone_number" = $2,
+        "mobile_number" = $3,
         "updated_at" = NOW()
-      WHERE "id"= $3 
+      WHERE "id"= $4
       RETURNING 
         "id", 
         "email",
+        "phone_number",
+        "mobile_number",
         "updated_at";`,
-      [user.email, user.password, userId],
+      [user.password, user.phoneNumber, user.mobileNumber, userId],
     );
 
     // ? Standby Code for update function in SQL

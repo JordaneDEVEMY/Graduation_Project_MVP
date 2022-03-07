@@ -10,6 +10,10 @@ module.exports = Joi.object({
     .required(),
   password: Joi.string()
     .required(),
+  phone_number: Joi.string()
+    .required(),
+  mobile_number: Joi.string()
+    .required(),
   social_security_number: Joi.number()
     .required(),
   date_of_birth: Joi.date()
