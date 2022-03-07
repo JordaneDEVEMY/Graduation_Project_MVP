@@ -1,35 +1,40 @@
-export const SET_USER_ID = 'SET_USER_ID';
-export const SET_USER_FIRSTNAME = 'SET_USER_FIRSTNAME';
-export const SET_USER_LASTNAME = 'SET_USER_LASTNAME';
-export const SET_USER_AVATAR = 'SET_USER_AVATAR';
+export const GET_USER_ID = 'GET_USER_ID';
+export const GET_USER_FIRSTNAME = 'GET_USER_FIRSTNAME';
+export const GET_USER_LASTNAME = 'GET_USER_LASTNAME';
+export const GET_USER_AVATAR = 'GET_USER_AVATAR';
+export const GET_USER_LABEL = 'GET_USER_LABEL';
 export const SET_USER_ISADMIN = 'SET_USER_ISADMIN';
-export const SET_USER_QUALIFICATION = 'SET_USER_QUALIFICATION';
-export const SET_USER_LABEL = 'SET_USER_LABEL';
-export const SET_USER_ASSIGNEMENTS = 'SET_USER_ASSIGNEMENTS';
+export const GET_USER_ASSIGNEMENTS = 'GET_USER_ASSIGNEMENTS';
 export const GET_USER_PLANNING = 'GET_USER_PLANNING';
 export const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
 
-export function actionSetUserId(id) {
+export function actionGetUserId(id) {
   return {
-    type: SET_USER_ID, payload: id,
+    type: GET_USER_ID, payload: id,
   };
 }
 
-export function actionSetUserFirstname(firstname) {
+export function actionGetUserFirstname(firstname) {
   return {
-    type: SET_USER_FIRSTNAME, payload: firstname,
+    type: GET_USER_FIRSTNAME, payload: firstname,
   };
 }
 
-export function actionSetUserLastname(lastname) {
+export function actionGetUserLastname(lastname) {
   return {
-    type: SET_USER_LASTNAME, payload: lastname,
+    type: GET_USER_LASTNAME, payload: lastname,
   };
 }
 
-export function actionSetUserAvatar(avatar) {
+export function actionGetUserAvatar(avatar) {
   return {
-    type: SET_USER_AVATAR, payload: avatar,
+    type: GET_USER_AVATAR, payload: avatar,
+  };
+}
+
+export function actionGetUserLabel(label) {
+  return {
+    type: GET_USER_LABEL, payload: label,
   };
 }
 
@@ -39,21 +44,9 @@ export function actionSetUserIsAdmin(boolean) {
   };
 }
 
-export function actionSetUserQualification(qualification) {
+export function actionGetUserAssignements(assignements) {
   return {
-    type: SET_USER_QUALIFICATION, payload: qualification,
-  };
-}
-
-export function actionSetUserLabel(label) {
-  return {
-    type: SET_USER_LABEL, payload: label,
-  };
-}
-
-export function actionSetUserAssignements(assignements) {
-  return {
-    type: SET_USER_ASSIGNEMENTS, payload: assignements,
+    type: GET_USER_ASSIGNEMENTS, payload: assignements,
   };
 }
 
