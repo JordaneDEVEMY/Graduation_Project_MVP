@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
-const emailValidator = require('email-validator');
 const userDatamapper = require('../../../models/user');
 const { ApiError } = require('../../../helpers/errorHandler');
 
