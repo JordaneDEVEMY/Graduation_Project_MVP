@@ -38,7 +38,6 @@ function Sheet({
   const week = dateFunctions.getWeek(starting_date);
   const firstDayofWeek = dateFunctions.getDate(week.current.dates[0]).format('YYYY-MM-DD');
   const lastDayofWeek = dateFunctions.getDate(week.current.dates[4]).format('YYYY-MM-DD');
-  console.log(firstDayofWeek, lastDayofWeek);
   const startOnMonday = dateFunctions.getDate(starting_date).format('YYYY-MM-DD') === firstDayofWeek;
   const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
 

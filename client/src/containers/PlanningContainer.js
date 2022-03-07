@@ -14,7 +14,6 @@ function PlanningContainer({
   const [startDate, setStartDate] = React.useState(date);
 
   useEffect(() => {
-    console.log('Planning container useEffect');
     dispatch(actionGetUserPlanning());
   }, []);
 

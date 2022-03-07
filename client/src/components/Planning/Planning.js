@@ -15,8 +15,6 @@ function Planning({
   const { isAdmin } = user;
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-  console.log('user', user);
-  console.log('currentWeek', currentWeek);
 
   // get only current week assignments
   const currentAssignments = assignments.filter((assignment) => {
