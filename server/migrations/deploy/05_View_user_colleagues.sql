@@ -5,7 +5,9 @@ CREATE VIEW get_user_colleagues AS
 	SELECT 
 		"employee"."id", 
 		"employee"."firstname", 
-		"employee"."lastname",
+		"employee"."lastname", 
+		"employee"."phone_number", 
+		"employee"."mobile_number"				,
 		"site"."id" AS "site_id",
 		"assignment"."starting_date",
 		"assignment"."ending_date"
