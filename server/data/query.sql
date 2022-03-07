@@ -38,30 +38,19 @@ VALUES
 -- Suppression d'un site
 DELETE FROM "site" WHERE "id" = '$1' RETURNING *;
 
------------------------------------------------------------------------------------------------------------------
 
--- Query for admin panel - show week assignment 
-SELECT 
-	"assignment"."id",
-	"assignment"."starting_date",
-	"assignment"."ending_date",
-	"assignment"."color",
-	"assignment"."position",
-	"assignment"."visibility",
+
+-----------------------------------------------------------------------------------------------------------------
+-- 
+-- Récupération des employées travaillant sur un site donnée entre 2 dates	
+SELECT
 	"employee"."id",
 	"employee"."firstname",
 	"employee"."lastname",
-	"absence"."id",
-	"absence"."reason",
-	"site"."name" AS site_name,
-	"site"."manager_name",
-	"company"."name" AS company_name
-	
-FROM "assignment"
-LEFT JOIN "employee" ON "assignment"."employee_id" = "employee"."id"
-LEFT JOIN "absence" ON "absence"."assignment_id" = "assignment"."id"
-LEFT JOIN "site" ON "site"."assignment_id" = "assignment"."id"
-LEFT JOIN "company" ON "site"."company_id" = "company"."id"
-WHERE "assignment"."starting_date" BETWEEN '2021-02-21' AND '2021-02-25' 
-AND "assignment"."ending_date" BETWEEN '2021-02-21' AND '2021-02-25'
-ORDER BY "site"."name";
+	"assignment"."starting_date",
+	"assignment"."ending_date"
+FROM "employee"
+LEFT JOIN "assignment" ON "employee"."id" = "assignment"."employee_id"
+WHERE "assignment"."site_id" = assignment.site_id
+	AND "assignment"."starting_date" = assignment.starting_date
+	AND "assignment"."ending_date" = assignment.ending_date;
