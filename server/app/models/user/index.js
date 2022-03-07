@@ -24,11 +24,12 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {Array} Assignments
- * @property {number} id - Database primary key of assignement
+ * @property {number} id - Database primary key of assignment
  * @property {string} starting_date - assignment starting date
  * @property {string} ending_date - assignment ending date
  * @property {Absence} absence - User absence assignment
  * @property {Site} site - User site assignment
+ * @property {Colleagues} colleagues - User colleagues in assignment
  */
 
 /**
@@ -53,6 +54,15 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} name - company name
  */
 
+/**
+ * @typedef {object} Colleagues
+ * @property {number} id - Database primary key of this colleague
+ * @property {string} firstname - Colleagues firstname
+ * @property {string} lastname - Colleagues lastname
+ * @property {number} site_id - Colleagues site assignment
+ * @property {string} starting_date - Colleagues starting date of assignment
+ * @property {string} ending_date - Colleagues ending date of assignment
+ */
 module.exports = {
   /**
    * Find an User by his id
