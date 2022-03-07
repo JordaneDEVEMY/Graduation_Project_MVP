@@ -5,14 +5,10 @@ import React, { useState, useEffect } from 'react';
 import {
   Autocomplete, TextField, InputLabel, Select, MenuItem, Grid, FormControl,
 } from '@mui/material';
-import PropTypes from 'prop-types';
 
 import './searchautocomplete.scss';
 
-function SearchAutocomplete({
-  sites,
-  entreprises,
-}) {
+function SearchAutocomplete() {
   // const theme = useTheme();
   const [searchIn, setSearchIn] = useState('');
   const [datas, setDatas] = useState([]);
@@ -20,11 +16,11 @@ function SearchAutocomplete({
 
   useEffect(() => {
     if (searchIn === 'sites') {
-      setDatas(sites);
+      setDatas();
       setAutocompleteValue(null);
     }
     if (searchIn === 'entreprises') {
-      setDatas(entreprises);
+      setDatas();
       setAutocompleteValue(null);
     }
   }, [searchIn]);
@@ -81,16 +77,6 @@ function SearchAutocomplete({
 }
 
 SearchAutocomplete.propTypes = {
-  sites: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-    }).isRequired,
-  ).isRequired,
-  entreprises: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-    }).isRequired,
-  ).isRequired,
 };
 SearchAutocomplete.defaultProps = {
 };
