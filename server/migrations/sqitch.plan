@@ -5,3 +5,4 @@
 02_View_usersREST 2022-03-01T14:33:14Z Hicham Chrita <student@teleporter> # Add users view
 03_View_admin_planning 2022-03-03T13:41:07Z Hicham Chrita <student@teleporter> # Add admin view
 04_constraint_social_number 2022-03-04T13:42:08Z Hicham Chrita <student@teleporter> # Add domain for social security number
+05_View_user_colleagues 2022-03-07T12:21:27Z Hicham Chrita <student@teleporter> # Add user_colleagues View
