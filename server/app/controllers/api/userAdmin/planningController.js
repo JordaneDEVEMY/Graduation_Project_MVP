@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const planningAdminDatamapper = require('../../../models/userAdmin/planning');
 const { ApiError } = require('../../../helpers/errorHandler');
 
@@ -32,7 +33,33 @@ const controller = {
       throw new ApiError(404, 'Semaine introuvable');
     }
 
-    return res.json(week);
+    if (!Array.isArray(week)) {
+      console.log('pas un array');
+      return;
+    }
+    const filteredWeek = [];
+
+    /**
+     * Function who delete starting_date and ending_date using only for SQL condition in a view
+     * And who filter the array of assignment of the week without any company repetitions
+     */
+    week.forEach((item) => {
+      delete item.starting_date;
+      delete item.ending_date;
+
+      const existing = filteredWeek.filter((value) => value.company_id === item.company_id);
+      if (existing.length) {
+        const existingIndex = filteredWeek.indexOf(existing[0]);
+        filteredWeek[existingIndex].sites = filteredWeek[existingIndex].sites.concat(item.sites);
+      } else {
+        if (typeof item.sites === 'string') { item.sites = [item.sites]; }
+        filteredWeek.push(item);
+      }
+    });
+
+    const periods = { weekPeriod: period, planning: filteredWeek };
+
+    return res.json(periods);
   },
 };
 
