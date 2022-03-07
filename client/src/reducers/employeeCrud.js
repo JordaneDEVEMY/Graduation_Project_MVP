@@ -42,6 +42,26 @@ function reducer(state = initialState, action) {
         label: action.payload.label,
         assignements: action.payload.assignements,
       };
+    // reset employee informations
+    case actions.RESET_EMPLOYEE_INFORMATIONS:
+      return {
+        ...state,
+        id: initialState.id,
+        firstname: initialState.firstname,
+        lastname: initialState.lastname,
+        email: initialState.email,
+        socialSecurityNumber: initialState.socialSecurityNumber,
+        dateOfBirth: initialState.dateOfBirth,
+        adress: initialState.adress,
+        zipCode: initialState.zipCode,
+        startingDate: initialState.startingDate,
+        avatar: initialState.avatar,
+        fonction: initialState.fonction,
+        roleApplication: initialState.roleApplication,
+        qualificationId: initialState.qualificationId,
+        label: initialState.label,
+        assignements: initialState.assignements,
+      };
     default:
       return state;
   }
