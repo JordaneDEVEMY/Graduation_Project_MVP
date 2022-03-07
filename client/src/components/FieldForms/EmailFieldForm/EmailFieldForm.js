@@ -5,7 +5,7 @@ import {
 
 function EmailFieldForm() {
   return (
-    <TextField required type="email" label="Champ requis" variant="Outlined" />
+    <TextField required type="email" label="email" variant="Outlined" />
   );
 }
 

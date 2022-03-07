@@ -5,7 +5,7 @@ import {
 
 function NumberFieldForm() {
   return (
-    <TextField required type="number" label="Champ requis" variant="Outlined" />
+    <TextField required type="number" name="social_security_number" label="Numéro de sécurité sociale" variant="Outlined" />
   );
 }
 

@@ -10,7 +10,7 @@ function PasswordlFieldForm() {
     <TextField
       required
       type={passwordVisibility ? 'text' : 'password'}
-      label="Champ requis"
+      label="password"
       variant="outlined"
       InputProps={{
         endAdornment: (
