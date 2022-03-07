@@ -42,7 +42,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cet entreprise n\'existe pas');
+      throw new ApiError(400, 'Cette entreprise n\'existe pas');
     }
 
     return result.rows[0];
@@ -88,7 +88,7 @@ module.exports = {
     const result = await client.query('SELECT * FROM "company" WHERE "id" = $1', [companyId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cet entreprise n\'existe pas');
+      throw new ApiError(400, 'Cette entreprise n\'existe pas');
     }
 
     const companyToSave = await client.query(
