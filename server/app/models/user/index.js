@@ -24,7 +24,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {Array} Assignments
- * @property {number} id - Database primary key of assignement
+ * @property {number} id - Database primary key of assignment
  * @property {string} starting_date - assignment starting date
  * @property {string} ending_date - assignment ending date
  * @property {Absence} absence - User absence assignment

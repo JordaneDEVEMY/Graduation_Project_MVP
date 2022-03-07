@@ -51,7 +51,7 @@ CREATE VIEW get_user_rest AS
                     )
                     )
             )
-        ) AS assignements
+        ) AS assignments
     FROM "employee"
     LEFT JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
     LEFT JOIN "assignment" ON "assignment"."employee_id" = "employee"."id"
