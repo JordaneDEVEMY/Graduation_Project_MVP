@@ -8,3 +8,15 @@ export async function getOneCompany(id) {
     return err.response;
   }
 }
+
+export async function createCompany(companyDatas) {
+  try {
+    const response = await apiAxios.post(
+      '/api/admin/company',
+      companyDatas,
+    );
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
