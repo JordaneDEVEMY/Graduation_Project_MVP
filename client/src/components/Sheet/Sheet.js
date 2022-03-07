@@ -29,7 +29,6 @@ function Sheet({
   firstname,
   lastname,
 }) {
-  console.log(color);
   const isAdmin = true;
   const theme = useTheme();
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography } from '@mui/material';
+import { Alert, Typography } from '@mui/material';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import Cards from '../Cards/Cards';
 import dateFunctions from '../../utils/dateFunctions';
@@ -15,7 +15,7 @@ function Planning({
   const { isAdmin } = user;
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-  console.log('isAdmin', isAdmin);
+  console.log('user', user);
   console.log('currentWeek', currentWeek);
 
   // get only current week assignments
@@ -24,15 +24,26 @@ function Planning({
     return currentWeek.dates.includes(startingDate);
   });
 
+  // has absence ?
+  const absences = currentAssignments.filter((assignment) => assignment.absence.id !== null);
+
   return (
     <>
       <SearchContainer isAdmin={isAdmin} date={startDate} handleCurrentWeek={handleStartDate} />
+
+      {absences.map((absence) => (
+        <Alert severity="success">
+          {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MM YYYY')} 
+          au ${dateFunctions.getDate(absence.ending_date).format('DD MM YYYY')} : 
+          ${absence.reason}`}
+        </Alert>
+      ))}
 
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
       </Typography>
 
-      {assignments.length
+      {currentAssignments.length
         ? (<Cards assignments={currentAssignments} week={currentWeek} isAdmin={isAdmin} />)
         : (
           <Typography sx={{ textAlign: 'center' }}>
