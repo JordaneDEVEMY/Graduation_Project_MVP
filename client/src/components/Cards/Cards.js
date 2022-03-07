@@ -11,7 +11,7 @@ import AssignmentForm from '../AssignmentForm/AssignmentForm';
 import './cards.scss';
 
 function Cards({
-  assignements,
+  assignments,
   isAdmin,
   week,
 }) {
@@ -80,15 +80,15 @@ function Cards({
       color: '#8e00ff',
     },
   ];
-  assignements.forEach((assignement) => {
-    assignement.employees = employees;
+  assignments.forEach((assignment) => {
+    assignment.employees = employees;
   });
 
   return (
     <>
       {isMobile
-        ? <Carousel assignements={assignements} handleModal={handleModal} />
-        : <CardsWrapper assignements={assignements} handleModal={handleModal} />}
+        ? <Carousel assignments={assignments} handleModal={handleModal} />
+        : <CardsWrapper assignments={assignments} handleModal={handleModal} />}
 
       {!isAdmin
         && (
@@ -110,7 +110,7 @@ function Cards({
 }
 
 Cards.propTypes = {
-  assignements: PropTypes.arrayOf(
+  assignments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,

@@ -15,12 +15,12 @@ import Card from '../Card/Card';
 import './carousel.scss';
 
 function Carousel({
-  assignements,
+  assignments,
 }) {
   const isMobile = true;
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = assignements.length;
+  const maxSteps = assignments.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -47,11 +47,11 @@ function Carousel({
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {assignements.map((assignement, index) => (
-          <div key={assignement.id}>
+        {assignments.map((assignment, index) => (
+          <div key={assignment.id}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
-                key={assignement.id}
+                key={assignment.id}
                 component="div"
                 sx={{
                   display: 'block',
@@ -59,7 +59,7 @@ function Carousel({
                   width: '100%',
                 }}
               >
-                <Card key={assignement.id} isMobile={isMobile} {...assignement} />
+                <Card key={assignment.id} isMobile={isMobile} {...assignment} />
               </Box>
             ) : null}
           </div>
@@ -91,7 +91,7 @@ function Carousel({
 }
 
 Carousel.propTypes = {
-  assignements: PropTypes.array.isRequired,
+  assignments: PropTypes.array.isRequired,
 };
 Carousel.defaultProps = {
 };

@@ -8,14 +8,14 @@ function PlanningContainer({
   isAdmin,
 }) {
   const dispatch = useDispatch();
-  const userAssignements = useSelector((state) => state.user.assignements);
+  const userAssignments = useSelector((state) => state.user.assignments);
   useEffect(() => {
     console.log('je suis dans le useEffect');
     dispatch(actionGetUserPlanning());
   }, []);
 
   return (
-    <Planning userAssignements={userAssignements} isAdmin={isAdmin} />
+    <Planning userAssignments={userAssignments} isAdmin={isAdmin} />
   );
 }
 

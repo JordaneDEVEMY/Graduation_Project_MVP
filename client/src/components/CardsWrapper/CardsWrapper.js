@@ -25,7 +25,7 @@ const dragReducer = produce((draft, action) => {
 });
 
 function CardsWrapper({
-  assignements,
+  assignments,
   handleModal,
 }) {
   const theme = useTheme();
@@ -33,7 +33,7 @@ function CardsWrapper({
   // structure initial state as an object containing
   // an array of sheets for each card
   const draggableSheets = {};
-  assignements.forEach(({ id, employees }) => {
+  assignments.forEach(({ id, employees }) => {
     draggableSheets[`card-${id}`] = employees;
   });
 
@@ -78,8 +78,8 @@ function CardsWrapper({
         }}
       >
         <DragDropContext onDragEnd={onDragEnd}>
-          {assignements.map((assignement) => (
-            <Card key={assignement.id} isMobile={false} {...assignement} employees={state[`card-${assignement.id}`]} />
+          {assignments.map((assignment) => (
+            <Card key={assignment.id} isMobile={false} {...assignment} employees={state[`card-${assignment.id}`]} />
           ))}
         </DragDropContext>
       </Box>
@@ -88,7 +88,7 @@ function CardsWrapper({
 }
 
 CardsWrapper.propTypes = {
-  assignements: PropTypes.arrayOf(
+  assignments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,

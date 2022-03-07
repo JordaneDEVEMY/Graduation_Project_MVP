@@ -9,7 +9,7 @@ import './planning.scss';
 
 function Planning({
   isAdmin,
-  userAssignements,
+  userAssignments,
 }) {
   const currentDate = utils.dateFunctions.getDate().format('YYYY-MM-DD');
   const { current: currentWeek } = utils.dateFunctions.getWeek(currentDate);
@@ -22,8 +22,8 @@ function Planning({
         {'Planning d\'intervention'}
       </Typography>
 
-      {userAssignements.length
-        ? (<Cards assignements={userAssignements} week={currentWeek} isAdmin={isAdmin} />)
+      {userAssignments.length
+        ? (<Cards assignments={userAssignments} week={currentWeek} isAdmin={isAdmin} />)
         : (
           <Typography sx={{ textAlign: 'center' }}>
             Aucun planning à afficher.
@@ -35,7 +35,7 @@ function Planning({
 
 Planning.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
-  userAssignements: PropTypes.arrayOf(
+  userAssignments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,
