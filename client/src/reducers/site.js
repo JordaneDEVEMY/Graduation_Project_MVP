@@ -29,6 +29,26 @@ function reducer(state = initialState, action) {
         createdAt: action.payload.createdAt,
         updated: action.payload.updated,
       };
+      // set site information
+    case actions.SET_SITE_INFORMATION:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value,
+      };
+      // reset site informations
+    case actions.RESET_SITE_INFORMATIONS:
+      return {
+        ...state,
+        id: initialState.id,
+        name: initialState.name,
+        adress: initialState.adress,
+        zipCode: initialState.zipCode,
+        managerName: initialState.managerName,
+        estimatedDuration: initialState.estimatedDuration,
+        companyId: initialState.companyId,
+        createdAt: initialState.createdAt,
+        updated: initialState.updated,
+      };
     default:
       return state;
   }
