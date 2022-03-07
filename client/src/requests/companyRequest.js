@@ -23,7 +23,16 @@ export async function createCompany(companyDatas) {
 
 export async function updateCompany(id, companyDatas) {
   try {
-    const response = await apiAxios.put(`/api/admin/company/${id}`, companyDatas);
+    const response = await apiAxios.patch(`/api/admin/company/${id}`, companyDatas);
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
+
+export async function deleteCompany(id) {
+  try {
+    const response = await apiAxios.delete(`/api/admin/company/${id}`);
     return response;
   } catch (err) {
     return err.response;
