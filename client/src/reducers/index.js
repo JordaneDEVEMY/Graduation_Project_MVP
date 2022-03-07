@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import loginReducer from './login';
 import userReducer from './user';
-import employeeReducer from './employeeCrud';
+import employeeReducer from './employee';
 
 export default combineReducers({
   login: loginReducer,

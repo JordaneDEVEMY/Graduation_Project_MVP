@@ -13,11 +13,9 @@ const initialState = {
   zipCode: '',
   startingDate: '',
   avatar: '',
-  function: '',
+  fonction: '',
   roleApplication: '',
-  qualificationId: 0,
   label: '',
-  assignments: [],
 };
 
 function reducer(state = initialState, action) {

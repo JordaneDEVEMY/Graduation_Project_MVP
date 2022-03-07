@@ -1,3 +1,6 @@
+// request employee informations
+export const REQUEST_EMPLOYEE_INFORMATIONS = 'REQUEST_EMPLOYEE_INFORMATIONS';
+
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
 
@@ -7,7 +10,13 @@ export const SET_EMPLOYEE_INFORMATION = 'SET_EMPLOYEE_INFORMATION';
 // reset employee informations
 export const RESET_EMPLOYEE_INFORMATIONS = 'RESET_EMPLOYEE_INFORMATIONS';
 
-export function actionGetEmployeeId({
+export function actionRequestEmployInformations() {
+  return {
+    type: REQUEST_EMPLOYEE_INFORMATIONS,
+  };
+}
+
+export function actionGetEmployeeInformations({
   id,
   firstname,
   lastname,
@@ -20,9 +29,7 @@ export function actionGetEmployeeId({
   avatar,
   fonction,
   roleApplication,
-  qualificationId,
   label,
-  assignments,
 }) {
   return {
     type: GET_EMPLOYEE_INFORMATIONS,
@@ -39,9 +46,7 @@ export function actionGetEmployeeId({
       avatar,
       fonction,
       roleApplication,
-      qualificationId,
       label,
-      assignments,
     },
   };
 }

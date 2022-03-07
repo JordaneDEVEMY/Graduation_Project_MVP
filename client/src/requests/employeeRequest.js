@@ -1,6 +1,6 @@
 import apiAxios from './index';
 
-export async function GetOneEmployee(id) {
+export async function getOneEmployee(id) {
   try {
     const response = await apiAxios.get(`/api/admin/user/${id}`);
     return response;
@@ -9,7 +9,7 @@ export async function GetOneEmployee(id) {
   }
 }
 
-export async function CreateEmployee(employeeDatas) {
+export async function createEmployee(employeeDatas) {
   try {
     const response = await apiAxios.post(
       '/api/admin/user',
@@ -21,7 +21,7 @@ export async function CreateEmployee(employeeDatas) {
   }
 }
 
-export async function UpdateEmployee(id, employeeDatas) {
+export async function updateEmployee(id, employeeDatas) {
   try {
     const response = await apiAxios.patch(`/api/admin/user/${id}`, employeeDatas);
     return response;
@@ -30,7 +30,7 @@ export async function UpdateEmployee(id, employeeDatas) {
   }
 }
 
-export async function DeleteEmployee(id) {
+export async function deleteEmployee(id) {
   try {
     const response = await apiAxios.delete(`/api/admin/user/${id}`);
     return response;
