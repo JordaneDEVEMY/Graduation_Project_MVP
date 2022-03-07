@@ -1,53 +1,85 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import {
-  Box,
-} from '@mui/material';
-import TextFieldRequiredForm from '../FieldForms/TextFieldRequiredForm/TextFieldRequiredForm';
+import { Grid } from '@mui/material';
+
+import FirstnameFieldForm from '../FieldForms/FirstnameFieldForm/FirstnameFieldForm';
+import LastnameFieldForm from '../FieldForms/LastnameFieldForm/LastnameFieldForm';
 import EmailFieldForm from '../FieldForms/EmailFieldForm/EmailFieldForm';
 import PasswordFieldForm from '../FieldForms/PasswordFieldForm/PasswordFieldForm';
-import NumberFieldForm from '../FieldForms/NumberFieldForm/NumberFieldForm';
-import DateFieldForm from '../FieldForms/DateFieldForm/DateFieldForm';
-import TextFieldForm from '../FieldForms/TextFieldForm/TextFieldForm';
+import SocialNumberFieldForm from '../FieldForms/SocialNumberFieldForm/SocialNumberFieldForm';
+import BirthDateFieldForm from '../FieldForms/BirthDateFieldForm/BirthDateFieldForm';
+import AddressFieldForm from '../FieldForms/AddressFieldForm/AddressFieldForm';
+import ZipFieldForm from '../FieldForms/ZipFieldForm/ZipFieldForm';
+import StartingDateFieldForm from '../FieldForms/StartingDateFieldForm/StartingDateFieldForm';
+import AvatarFieldForm from '../FieldForms/AvatarFieldForm/AvatarFieldForm';
+import FunctionFieldForm from '../FieldForms/FunctionFieldForm/FunctionFieldForm';
+import RoleFieldForm from '../FieldForms/RoleFieldForm/RoleFieldForm';
+import QualificationFieldForm from '../FieldForms/QualificationFieldForm/QualificationFieldForm';
 
 function CreateUserForm() {
-  <Box>
-    Nom de famille :
-    <TextFieldRequiredForm />
+  // const [formValues, setFormValues] = useState(defaultValues);
 
-    Prénom :
-    <TextFieldRequiredForm />
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
-    Email :
-    <EmailFieldForm />
+  return (
+    <form onSubmit={handleSubmit}>
+      <Grid container spacing={1} mt={1}>
+        <Grid item xs={12} sm={6}>
+          <FirstnameFieldForm />
+        </Grid>
 
-    Mot de pass :
-    <PasswordFieldForm />
+        <Grid item xs={12} sm={6}>
+          <LastnameFieldForm />
+        </Grid>
 
-    Numéro de sécurité sociale :
-    <NumberFieldForm />
+        <Grid item xs={12} sm={6}>
+          <EmailFieldForm />
+        </Grid>
 
-    Date de naissance :
-    <DateFieldForm />
+        <Grid item xs={12} sm={6}>
+          <PasswordFieldForm />
+        </Grid>
 
-    Adresse postale :
-    <TextFieldRequiredForm />
+        <Grid item xs={12} sm={6}>
+          <SocialNumberFieldForm />
+        </Grid>
 
-    Code Postale :
-    <NumberFieldForm />
+        <Grid item xs={12} sm={6}>
+          <BirthDateFieldForm />
+        </Grid>
 
-    Date d'arrivée dans l'entreprise :
-    <DateFieldForm />
+        <Grid item xs={12} sm={6}>
+          <AddressFieldForm />
+        </Grid>
 
-    Avatar :
-    <TextFieldForm />
+        <Grid item xs={12} sm={6}>
+          <ZipFieldForm />
+        </Grid>
 
-    Poste occupé :
-    <TextFieldRequiredForm />
+        <Grid item xs={12} sm={6}>
+          <StartingDateFieldForm />
+        </Grid>
 
-    Employee Qualification Id (?) :
-    <NumberFieldForm />
-  </Box>;
+        <Grid item xs={12} sm={6}>
+          <AvatarFieldForm />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <FunctionFieldForm />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <RoleFieldForm />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <QualificationFieldForm />
+        </Grid>
+      </Grid>
+    </form>
+  );
 }
 
 export default React.memo(CreateUserForm);
