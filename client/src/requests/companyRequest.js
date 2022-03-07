@@ -20,3 +20,12 @@ export async function createCompany(companyDatas) {
     return err.response;
   }
 }
+
+export async function updateCompany(id, companyDatas) {
+  try {
+    const response = await apiAxios.put(`/api/admin/company/${id}`, companyDatas);
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
