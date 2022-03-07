@@ -40,6 +40,24 @@ const { ApiError } = require('../../helpers/errorHandler');
  */
 
 /**
+ * @typedef {object} UserToUpdate
+ * @property {string} firstname - User firstname
+ * @property {string} lastname - User lastname
+ * @property {string} email - User email
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
+ * @property {string} address - User address
+ * @property {number} zip_code - User zip code
+ * @property {number} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
+ * @property {string} starting_date - User starting date
+ * @property {string} avatar - User avatar
+ * @property {string} function - User function
+ * @property {string} role_application - User role in web application
+ * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ */
+
+/**
  * @typedef {object} UserCreate
  * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
