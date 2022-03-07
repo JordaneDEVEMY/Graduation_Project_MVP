@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
-const emailValidator = require('email-validator');
 const userDatamapper = require('../../../models/user');
 const { ApiError } = require('../../../helpers/errorHandler');
 
@@ -54,12 +53,6 @@ const controller = {
    * @returns {string} Route API JSON response
    */
   async update(req, res) {
-    const isEmailValid = emailValidator.validate(req.body.email);
-
-    if (!isEmailValid) {
-      throw new ApiError(400, 'Cet email n\'est pas valide');
-    }
-
     const userUpdate = await userDatamapper.update(req.params.id, req.body);
     return res.json(userUpdate);
   },

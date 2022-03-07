@@ -17,6 +17,13 @@ const client = require('../../config/database');
  * @property {string} password - Password used for connection
  */
 
+/**
+ * @typedef {object} AuthProfilUpdate
+ * @property {string} password - Password to change
+ * @property {string} phoneNumber - Phone number to change
+ * @property {string} mobileNumber - Mobile number to change
+ */
+
 module.exports = {
 
   /**
