@@ -1,7 +1,7 @@
-// request employee informations
+// request employee
 export const REQUEST_EMPLOYEE_INFORMATIONS = 'REQUEST_EMPLOYEE_INFORMATIONS';
-
 export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
+export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
@@ -21,6 +21,12 @@ export function actionRequestEmployInformations() {
 export function actionCreateEmployee() {
   return {
     type: CREATE_EMPLOYEE,
+  };
+}
+
+export function actionUpdateEmployee() {
+  return {
+    type: UPDATE_EMPLOYEE,
   };
 }
 
