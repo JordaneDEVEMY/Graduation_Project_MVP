@@ -7,18 +7,23 @@ const employeeMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case actions.REQUEST_EMPLOYEE_INFORMATIONS: {
       const { employee } = store.getState();
-      const response = await getOneEmployee(employee.id);
+      const response = await getOneEmployee(21);
       if (response.status === 200) {
         const {
-          id, firstname, lastname, email, adress, avatar,
+          id,
+          firstname,
+          lastname,
+          email,
+          adress,
+          avatar,
+          social_security_number: socialSecurityNumber,
+          date_of_birth: dateOfBirth,
+          zip_code: zipCode,
+          starting_date: startingDate,
+          function: fonction,
+          role_application: roleApplication,
+          qualification_label: label,
         } = response.data;
-        const socialSecurityNumber = response.data.social_security_number;
-        const dateOfBirth = response.data.date_of_birth;
-        const zipCode = response.data.zip_code;
-        const startingDate = response.data.starting_date;
-        const fonction = response.data.function;
-        const roleApplication = response.data.role_application;
-        const label = response.data.qualification_label;
 
         store.dispatch(actions.actionGetEmployeeInformations({
           id,
@@ -35,6 +40,42 @@ const employeeMiddleware = (store) => (next) => async (action) => {
           roleApplication,
           label,
         }));
+      }
+      return;
+    }
+    case actions.CREATE_EMPLOYEE: {
+      const { employee } = store.getState();
+      const {
+        firstname,
+        lastname,
+        email,
+        socialSecurityNumber,
+        dateOfBirth,
+        adress,
+        zipCode,
+        startingDate,
+        avatar,
+        fonction,
+        roleApplication,
+        label,
+      } = employee;
+      const employeeDatas = {
+        firstname,
+        lastname,
+        email,
+        socialSecurityNumber,
+        dateOfBirth,
+        adress,
+        zipCode,
+        startingDate,
+        avatar,
+        fonction,
+        roleApplication,
+        label,
+      };
+      const response = await createEmployee(employeeDatas);
+      if (response.status === 200) {
+        store.dispatch(actions.actionRequestEmployInformations(response.data.id));
       }
       return;
     }

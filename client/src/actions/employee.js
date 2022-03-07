@@ -1,6 +1,8 @@
 // request employee informations
 export const REQUEST_EMPLOYEE_INFORMATIONS = 'REQUEST_EMPLOYEE_INFORMATIONS';
 
+export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
+
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
 
@@ -13,6 +15,12 @@ export const RESET_EMPLOYEE_INFORMATIONS = 'RESET_EMPLOYEE_INFORMATIONS';
 export function actionRequestEmployInformations() {
   return {
     type: REQUEST_EMPLOYEE_INFORMATIONS,
+  };
+}
+
+export function actionCreateEmployee() {
+  return {
+    type: CREATE_EMPLOYEE,
   };
 }
 
@@ -51,7 +59,7 @@ export function actionGetEmployeeInformations({
   };
 }
 
-export function actionSetEmployeeInformation({ key, value }) {
+export function actionSetEmployeeInformation(key, value) {
   return {
     type: SET_EMPLOYEE_INFORMATION, payload: { key, value },
   };
