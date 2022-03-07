@@ -12,7 +12,6 @@ CREATE VIEW get_user_rest AS
         "employee"."zip_code", 
         "employee"."phone_number",
         "employee"."mobile_number", 
-        "employee"."zip_code", 
         "employee"."starting_date", 
         "employee"."function", 
         "employee"."employee_qualification_id",
