@@ -36,9 +36,7 @@ function reducer(state = initialState, action) {
         avatar: action.payload.avatar,
         fonction: action.payload.fonction,
         roleApplication: action.payload.roleApplication,
-        qualificationId: action.payload.qualificationId,
         label: action.payload.label,
-        assignments: action.payload.assignments,
       };
     // set employee informations
     case actions.SET_EMPLOYEE_INFORMATION:
@@ -54,6 +52,7 @@ function reducer(state = initialState, action) {
         firstname: initialState.firstname,
         lastname: initialState.lastname,
         email: initialState.email,
+        password: initialState.password,
         socialSecurityNumber: initialState.socialSecurityNumber,
         dateOfBirth: initialState.dateOfBirth,
         adress: initialState.adress,
@@ -62,9 +61,7 @@ function reducer(state = initialState, action) {
         avatar: initialState.avatar,
         fonction: initialState.fonction,
         roleApplication: initialState.roleApplication,
-        qualificationId: initialState.qualificationId,
         label: initialState.label,
-        assignments: initialState.assignments,
       };
     default:
       return state;
