@@ -31,7 +31,7 @@ function Planning({
     <>
       <SearchContainer isAdmin={isAdmin} date={startDate} handleCurrentWeek={handleStartDate} />
 
-      {absences.map((absence) => (
+      {!isAdmin && absences.map((absence) => (
         <Alert severity="success">
           {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MM YYYY')} 
           au ${dateFunctions.getDate(absence.ending_date).format('DD MM YYYY')} : 
