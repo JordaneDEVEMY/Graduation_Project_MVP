@@ -18,13 +18,15 @@ CREATE TABLE "absence" (
 
 CREATE TABLE "employee" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "social_security_number" BIGINT NOT NULL UNIQUE,
+    "social_security_number" TEXT NOT NULL UNIQUE,
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
-    "date_of_birth" DATE NOT NULL,
+    "date_of_birth" TIMESTAMPTZ NOT NULL,
     "address" TEXT NOT NULL,
     "zip_code" INT NOT NULL,
     "email" TEXT NOT NULL UNIQUE,
+    "mobile_number" TEXT NOT NULL,
+    "phone_number" TEXT,
     "password" TEXT NOT NULL,
     "starting_date" DATE NOT NULL DEFAULT now(),
     "avatar" TEXT,
@@ -37,8 +39,8 @@ CREATE TABLE "employee" (
 
 CREATE TABLE "assignment" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "starting_date" DATE NOT NULL,
-    "ending_date" DATE NOT NULL,
+    "starting_date" TIMESTAMPTZ NOT NULL,
+    "ending_date" TIMESTAMPTZ NOT NULL,
     "color" TEXT,
     "position" INT NOT NULL DEFAULT 0,
     "visibility" BOOLEAN DEFAULT false,
@@ -52,18 +54,18 @@ CREATE TABLE "assignment" (
 CREATE TABLE "employee_contract" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "type_of_contract" TEXT NOT NULL,
-    "starting_date" DATE NOT NULL,
-    "duration" INT NOT NULL,
-    "company_id" INT NOT NULL,
-    "employee_id" INT NOT NULL,    
+    "starting_date" TIMESTAMPTZ NOT NULL,
+    "duration" INT,
+    "company_id" INT,
+    "employee_id" INT,    
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "site" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "name" TEXT NOT NULL UNIQUE,
-    "address" TEXT NOT NULL UNIQUE,
+    "name" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
     "zip_code" INT NOT NULL,
     "manager_name" TEXT,
     "estimated_duration" INT,

@@ -7,10 +7,12 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {number} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
@@ -24,10 +26,30 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} lastname - User lastname
  * @property {string} email - User email
  * @property {string} password - User password
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {number} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
+ * @property {string} starting_date - User starting date
+ * @property {string} avatar - User avatar
+ * @property {string} function - User function
+ * @property {string} role_application - User role in web application
+ * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ */
+
+/**
+ * @typedef {object} UserToUpdate
+ * @property {string} firstname - User firstname
+ * @property {string} lastname - User lastname
+ * @property {string} email - User email
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
+ * @property {string} address - User address
+ * @property {number} zip_code - User zip code
+ * @property {number} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
@@ -42,10 +64,12 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} lastname - User lastname
  * @property {string} email - User email
  * @property {string} password - User password
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {number} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
@@ -60,10 +84,12 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {number} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
  * @property {string} function - User function
@@ -88,23 +114,8 @@ module.exports = {
   async findByPk(userId) {
     const result = await client.query(
       `
-      SELECT 
-        "employee"."id", 
-        "employee"."firstname", 
-        "employee"."lastname", 
-        "employee"."email", 
-        "employee"."social_security_number", 
-        "employee"."date_of_birth", 
-        "employee"."address", 
-        "employee"."zip_code", 
-        "employee"."starting_date", 
-        "employee"."avatar", 
-        "employee"."function", 
-        "employee"."role_application", 
-        "employee_qualification"."label" AS qualification_label
-      FROM "employee"
-      LEFT JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
-      WHERE "employee"."id" = $1;
+      SELECT * FROM get_user_by_admin
+      WHERE id = $1;
       `,
       [userId],
     );
@@ -130,46 +141,52 @@ module.exports = {
           "lastname",
           "email",
           "password",
-          "social_security_number",
-          "date_of_birth",
+          "phone_number",
+          "mobile_number",
           "address",
           "zip_code",
+          "date_of_birth",
+          "social_security_number",
           "starting_date",
-          "avatar",
           "function",
+          "avatar",
           "role_application",
           "employee_qualification_id"
         )
         VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15
         )
         RETURNING 
-          "firstname",
-          "lastname",
-          "email",
-          "password",
-          "social_security_number",
-          "date_of_birth",
-          "address",
-          "zip_code",
-          "starting_date",
-          "avatar",
-          "function",
-          "role_application",
-          "employee_qualification_id",
+        "firstname",
+        "lastname",
+        "email",
+        "password",
+        "phone_number",
+        "mobile_number",
+        "address",
+        "zip_code",
+        "date_of_birth",
+        "social_security_number",
+        "starting_date",
+        "function",
+        "avatar",
+        "role_application",
+        "employee_qualification_id",
           "created_at";`,
       [
         user.firstname,
         user.lastname,
         user.email,
         user.password,
-        user.social_security_number,
-        user.date_of_birth,
+        user.phone_number,
+        user.mobile_number,
         user.address,
         user.zip_code,
+        user.date_of_birth,
+        user.social_security_number,
         user.starting_date,
-        user.avatar,
         user.function,
+        user.avatar,
         user.role_application,
         user.employee_qualification_id,
       ],
@@ -198,21 +215,25 @@ module.exports = {
         "firstname" = $2,
         "lastname" = $3,
         "email" = $4,
-        "social_security_number" = $5,
-        "date_of_birth" = $6,
+        "phone_number" = $5,
+        "mobile_number" = $6,
         "address" = $7,
         "zip_code" = $8,
-        "starting_date" = $9,
-        "avatar" = $10,
-        "function" = $11,
-        "role_application" = $12,
-        "employee_qualification_id" = $13,
+        "date_of_birth" = $9,
+        "social_security_number" = $10,
+        "starting_date" = $11,
+        "function" = $12,
+        "avatar" = $13,
+        "role_application" = $14,
+        "employee_qualification_id" = $15,
         "updated_at" = NOW()
       WHERE "id"= $1
       RETURNING 
         "firstname",
         "lastname",
         "email",
+        "phone_number",
+        "mobile_number",
         "social_security_number",
         "date_of_birth",
         "address",
@@ -228,13 +249,15 @@ module.exports = {
         user.firstname,
         user.lastname,
         user.email,
-        user.social_security_number,
-        user.date_of_birth,
+        user.phone_number,
+        user.mobile_number,
         user.address,
         user.zip_code,
+        user.date_of_birth,
+        user.social_security_number,
         user.starting_date,
-        user.avatar,
         user.function,
+        user.avatar,
         user.role_application,
         user.employee_qualification_id,
       ],

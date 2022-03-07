@@ -14,6 +14,10 @@ module.exports = Joi.object({
     .iso()
     .less('now')
     .required(),
+  phone_number: Joi.string()
+    .required(),
+  mobile_number: Joi.string()
+    .required(),
   address: Joi.string()
     .required(),
   zip_code: Joi.number()
