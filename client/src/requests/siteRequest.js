@@ -29,3 +29,12 @@ export async function updateSite(id, siteDatas) {
     return err.response;
   }
 }
+
+export async function deleteSite(id) {
+  try {
+    const response = await apiAxios.delete(`/api/admin/site/${id}`);
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
