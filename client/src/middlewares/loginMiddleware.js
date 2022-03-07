@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { requestLogin } from '../requests/loginRequest';
 import { setBearerToken, removeBearerToken } from '../requests';
 import * as actions from '../actions';
@@ -10,17 +11,22 @@ const loginMiddleware = (store) => (next) => async (action) => {
 
       const response = await requestLogin(login.email, login.password);
       if (response.status === 200) {
-        store.dispatch(actions.actionSetUserId(response.data.id));
+        const {
+          id, firstname, lastname, avatar, token,
+        } = response.data;
 
-        if (response.data.role_application === 'admin') {
+        const roleApplication = response.data.role_application;
+
+        store.dispatch(actions.actionGetUserInformations({
+          id, firstname, lastname, avatar,
+        }));
+
+        if (roleApplication === 'admin') {
           store.dispatch(actions.actionSetUserIsAdmin(true));
         }
 
-        store.dispatch(actions.actionSetUserFirstname(response.data.firstname));
-        store.dispatch(actions.actionSetUserLastname(response.data.lastname));
-        store.dispatch(actions.actionSetUserAvatar(response.data.avatar));
         store.dispatch(actions.actionSetIsLogged(true));
-        setBearerToken(response.data.token);
+        setBearerToken(token);
       } else {
         store.dispatch(actions.actionSetIsLogged(false));
       }

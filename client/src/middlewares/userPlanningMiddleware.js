@@ -7,11 +7,12 @@ const userPlanningMiddleware = (store) => (next) => async (action) => {
       const { user } = store.getState();
 
       const response = await requestUserPlanning(user.id);
-      console.log(response);
+
       if (response.status === 200) {
-        store.dispatch(actions.actionSetUserAssignements(response.data.assignements));
-        store.dispatch(actions.actionSetUserLabel(response.data.label));
-        store.dispatch(actions.actionSetUserQualification(response.data.employee_qualification_id));
+        const { label, assignments } = response.data;
+
+        store.dispatch(actions.actionGetUserAssignments(assignments));
+        store.dispatch(actions.actionGetUserLabel(label));
       }
       return;
     }
