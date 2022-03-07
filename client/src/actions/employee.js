@@ -1,13 +1,43 @@
+// request employee
+export const REQUEST_EMPLOYEE_INFORMATIONS = 'REQUEST_EMPLOYEE_INFORMATIONS';
+export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
+export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
+export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
+
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
 
-// update employee informations
+// create or update employee informations
 export const SET_EMPLOYEE_INFORMATION = 'SET_EMPLOYEE_INFORMATION';
 
 // reset employee informations
 export const RESET_EMPLOYEE_INFORMATIONS = 'RESET_EMPLOYEE_INFORMATIONS';
 
-export function actionGetEmployeeId({
+export function actionRequestEmployInformations() {
+  return {
+    type: REQUEST_EMPLOYEE_INFORMATIONS,
+  };
+}
+
+export function actionCreateEmployee() {
+  return {
+    type: CREATE_EMPLOYEE,
+  };
+}
+
+export function actionUpdateEmployee() {
+  return {
+    type: UPDATE_EMPLOYEE,
+  };
+}
+
+export function actionDeleteEmployee() {
+  return {
+    type: DELETE_EMPLOYEE,
+  };
+}
+
+export function actionGetEmployeeInformations({
   id,
   firstname,
   lastname,
@@ -20,9 +50,7 @@ export function actionGetEmployeeId({
   avatar,
   fonction,
   roleApplication,
-  qualificationId,
   label,
-  assignments,
 }) {
   return {
     type: GET_EMPLOYEE_INFORMATIONS,
@@ -39,14 +67,12 @@ export function actionGetEmployeeId({
       avatar,
       fonction,
       roleApplication,
-      qualificationId,
       label,
-      assignments,
     },
   };
 }
 
-export function actionSetEmployeeInformation({ key, value }) {
+export function actionSetEmployeeInformation(key, value) {
   return {
     type: SET_EMPLOYEE_INFORMATION, payload: { key, value },
   };
