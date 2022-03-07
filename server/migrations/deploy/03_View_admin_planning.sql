@@ -6,6 +6,8 @@ CREATE VIEW get_week_admin_planning AS
     SELECT
 	"company"."id" AS company_id,
 	"company"."name" AS company_name,
+    "assignment"."starting_date",
+    "assignment"."ending_date",
 	json_agg( 
 		json_build_object(
 			'id',"site"."id" ,
@@ -32,8 +34,6 @@ FROM "company"
 LEFT JOIN "site" ON "site"."company_id" = "company"."id"
 LEFT JOIN "assignment" ON "site"."id" = "assignment"."site_id"
 LEFT JOIN "employee" ON "employee"."id" = "assignment"."employee_id"
-WHERE "assignment"."starting_date" = assignment.starting_date  
-AND "assignment"."ending_date" = assignment.starting_date 
-GROUP BY "company"."id";
+GROUP BY "company"."id","assignment"."starting_date","assignment"."ending_date";
 
 COMMIT;

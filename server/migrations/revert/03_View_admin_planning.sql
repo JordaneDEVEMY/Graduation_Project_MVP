@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP VIEW get_week_admin_planning;
+DROP VIEW get_Week_admin_planning;
 
 COMMIT;
