@@ -3,8 +3,6 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import entreprises from '../../dataTest/entreprises';
-import sites from '../../dataTest/sites';
 import './searchcontainer.scss';
 import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete';
 import SelectWeek from '../SelectWeek/SelectWeek';
@@ -25,7 +23,7 @@ function SearchContainer({
     >
       <SelectWeek isAdmin={isAdmin} />
       {isAdmin && (
-        <SearchAutocomplete sites={sites} entreprises={entreprises} />
+        <SearchAutocomplete />
       )}
     </Box>
   );
