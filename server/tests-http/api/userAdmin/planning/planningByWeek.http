@@ -9,7 +9,7 @@
 GET {{ endpoint }}/azertyuiop
 
 ### Get week planning
-GET {{ endpoint }}/2021-09
+GET {{ endpoint }}/2022-10
 
 ### Get week planning not planned
 GET {{ endpoint }}/2021-10
