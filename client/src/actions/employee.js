@@ -2,11 +2,12 @@
 export const REQUEST_EMPLOYEE_INFORMATIONS = 'REQUEST_EMPLOYEE_INFORMATIONS';
 export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
 export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
+export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
 
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
 
-// update employee informations
+// create or update employee informations
 export const SET_EMPLOYEE_INFORMATION = 'SET_EMPLOYEE_INFORMATION';
 
 // reset employee informations
@@ -27,6 +28,12 @@ export function actionCreateEmployee() {
 export function actionUpdateEmployee() {
   return {
     type: UPDATE_EMPLOYEE,
+  };
+}
+
+export function actionDeleteEmployee() {
+  return {
+    type: DELETE_EMPLOYEE,
   };
 }
 

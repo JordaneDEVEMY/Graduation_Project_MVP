@@ -115,6 +115,14 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       }
       return;
     }
+    case actions.DELETE_EMPLOYEE: {
+      const { employee } = store.getState();
+      const response = await deleteEmployee(employee.id);
+      if (response.status === 200) {
+        store.dispatch(actions.actionResetEmployeeInformations());
+      }
+      return;
+    }
     default: {
       next(action);
     }
