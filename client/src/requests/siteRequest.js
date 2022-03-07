@@ -8,3 +8,15 @@ export async function getOneSite(id) {
     return err.response;
   }
 }
+
+export async function createSite(siteDatas) {
+  try {
+    const response = await apiAxios.post(
+      '/api/admin/site',
+      siteDatas,
+    );
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
