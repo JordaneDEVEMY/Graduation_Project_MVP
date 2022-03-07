@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FormControl, FormLabel, RadioGroup, FormControlLabel, Radio,
 } from '@mui/material';
 
-function RoleFieldForm() {
-  const [formValues, setFormValues] = useState('user');
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
-
+function RoleFieldForm({
+  handleInputChange,
+  formValues,
+}) {
   return (
     <FormControl>
       <FormLabel>Rôle</FormLabel>
@@ -38,5 +33,12 @@ function RoleFieldForm() {
     </FormControl>
   );
 }
+
+RoleFieldForm.propTypes = {
+  handleInputChange: PropTypes.func.isRequired,
+  formValues: PropTypes.shape({
+    role_application: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default React.memo(RoleFieldForm);

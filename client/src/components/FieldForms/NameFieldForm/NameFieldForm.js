@@ -5,7 +5,7 @@ import {
 
 function NameFieldForm() {
   return (
-    <TextField required type="text" name="name" label="Nom" variant="Outlined" />
+    <TextField required type="text" name="name" label="Nom" variant="outlined" />
   );
 }
 

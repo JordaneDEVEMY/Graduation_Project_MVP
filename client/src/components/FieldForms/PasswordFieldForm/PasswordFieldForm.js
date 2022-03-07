@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
-  TextField, InputAdornment, VisibilityOffIcon, VisibilityIcon, IconButton,
+  TextField, InputAdornment, IconButton,
 } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-function PasswordlFieldForm() {
+function PasswordlFieldForm({
+  handleInputChange,
+  formValues,
+}) {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   return (
@@ -12,6 +18,8 @@ function PasswordlFieldForm() {
       type={passwordVisibility ? 'text' : 'password'}
       label="password"
       variant="outlined"
+      value={formValues.password}
+      onChange={handleInputChange}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -27,5 +35,12 @@ function PasswordlFieldForm() {
     />
   );
 }
+
+PasswordlFieldForm.propTypes = {
+  handleInputChange: PropTypes.func.isRequired,
+  formValues: PropTypes.shape({
+    password: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default React.memo(PasswordlFieldForm);
