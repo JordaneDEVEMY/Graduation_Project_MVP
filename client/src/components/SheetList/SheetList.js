@@ -15,6 +15,7 @@ function SheetList({
   employees,
   isMobile,
 }) {
+  console.log(employees);
   const theme = useTheme();
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState(false);
@@ -47,7 +48,7 @@ function SheetList({
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {employees.map((person, index) => (
+              {employees.map((employee, index) => (
                 <Draggable key={`card-${cardIid}-sheet-${index}`} draggableId={`card-${cardIid}-sheet-${index}`} index={index}>
                   {(provided, snapshot) => (
                     <Box
@@ -64,7 +65,7 @@ function SheetList({
                         handleChange={handleChange}
                         expandedSheet={expandedSheet}
                         isMobile={isMobile}
-                        {...person}
+                        {...employee}
                       />
                     </Box>
                   )}
@@ -97,7 +98,7 @@ SheetList.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   employees: PropTypes.arrayOf(
     PropTypes.shape({
-      color: PropTypes.string.isRequired,
+      color: PropTypes.string,
       id: PropTypes.number.isRequired,
       firstname: PropTypes.string.isRequired,
       lastname: PropTypes.string.isRequired,

@@ -6,13 +6,14 @@ import './assignment_form.scss';
 
 function AssignmentForm({
   week,
+  assignment,
 }) {
   const fromDate = week.dates[0];
   // const theme = useTheme();
 
   return (
     <p>
-      {`ASSIGNMENT FORM ${fromDate}`}
+      {`ASSIGNMENT FORM ${fromDate} ${assignment.from}`}
     </p>
   );
 }
@@ -23,6 +24,13 @@ AssignmentForm.propTypes = {
     dates: PropTypes.arrayOf(
       PropTypes.string.isRequired,
     ).isRequired,
+  }).isRequired,
+  assignment: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    from: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
+    fromIndex: PropTypes.number.isRequired,
+    toIndex: PropTypes.number.isRequired,
   }).isRequired,
 };
 

@@ -18,77 +18,23 @@ function Cards({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [modalOpened, setModalOpened] = React.useState(false);
+  const [assignment, setAssignment] = React.useState({});
 
   const handleModal = () => {
-    setModalOpened((stateModal) => !stateModal);
+    // force opened state
+    setModalOpened((stateModal) => {
+      if (stateModal) {
+        return true;
+      }
+      return !stateModal;
+    });
   };
-
-  // TODO SET EMPLOYEES
-  const employees = [
-    {
-      id: 1,
-      firstname: 'John',
-      lastname: 'Doe',
-      email: 'string@alo.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#f44336',
-    },
-    {
-      id: 2,
-      firstname: 'Alain',
-      lastname: 'Benet',
-      email: 'benet.al@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#2196f3',
-    },
-    {
-      id: 3,
-      firstname: 'Bernard',
-      lastname: 'De La Vitre arrière',
-      email: 'bernard@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#4caf50',
-    },
-    {
-      id: 4,
-      firstname: 'Yves',
-      lastname: 'Jacquard',
-      email: 'jacquard@orange.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#ffeb3b',
-    },
-    {
-      id: 5,
-      firstname: 'Christine',
-      lastname: 'Pinson',
-      email: 'chrispinson@free.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#ff9800',
-    },
-    {
-      id: 6,
-      firstname: 'William',
-      lastname: 'Guiscard',
-      email: 'guiscard.william@sfr.fr',
-      avatar: 'string',
-      role_application: 'string',
-      color: '#8e00ff',
-    },
-  ];
-  assignments.forEach((assignment) => {
-    assignment.employees = employees;
-  });
 
   return (
     <>
       {isMobile
-        ? <Carousel assignments={assignments} handleModal={handleModal} />
-        : <CardsWrapper assignments={assignments} handleModal={handleModal} />}
+        ? <Carousel assignments={assignments} handleAssignment={setAssignment} />
+        : <CardsWrapper assignments={assignments} handleAssignment={setAssignment} />}
 
       {!isAdmin
         && (
@@ -102,7 +48,7 @@ function Cards({
           open={modalOpened}
           onClose={handleModal}
         >
-          <AssignmentForm week={week} />
+          <AssignmentForm week={week} assignment={assignment} />
         </Modal>
         )}
     </>

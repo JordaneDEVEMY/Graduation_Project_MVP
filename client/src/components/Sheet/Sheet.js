@@ -29,8 +29,10 @@ function Sheet({
   firstname,
   lastname,
 }) {
+  console.log(color);
   const isAdmin = true;
   const theme = useTheme();
+
   return (
 
     <Accordion
@@ -108,7 +110,7 @@ function Sheet({
 }
 
 Sheet.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   expandedSheet: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
@@ -117,5 +119,6 @@ Sheet.propTypes = {
   lastname: PropTypes.string.isRequired,
 };
 Sheet.defaultProps = {
+  color: '#ed6c02',
 };
 export default React.memo(Sheet);

@@ -56,7 +56,7 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningContainer />
                     )}
                 />
               </Route>
@@ -66,7 +66,7 @@ function App({
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningContainer />
                     )}
                 />
               </Route>

@@ -26,15 +26,15 @@ const dragReducer = produce((draft, action) => {
 
 function CardsWrapper({
   assignments,
-  handleModal,
+  handleAssignment,
 }) {
   const theme = useTheme();
 
   // structure initial state as an object containing
   // an array of sheets for each card
   const draggableSheets = {};
-  assignments.forEach(({ id, employees }) => {
-    draggableSheets[`card-${id}`] = employees;
+  assignments.forEach(({ id, colleagues }) => {
+    draggableSheets[`card-${id}`] = colleagues;
   });
 
   // set sheets in state
@@ -59,7 +59,7 @@ function CardsWrapper({
       console.log('source', result.source);
       console.log('destination', result.destination);
 
-      handleModal(result);
+      handleAssignment(state);
     }
   }, []);
 
@@ -93,7 +93,7 @@ CardsWrapper.propTypes = {
       id: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
-  handleModal: PropTypes.func.isRequired,
+  handleAssignment: PropTypes.func.isRequired,
 };
 
 export default React.memo(CardsWrapper);
