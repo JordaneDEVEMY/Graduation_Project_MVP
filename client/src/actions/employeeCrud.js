@@ -1,4 +1,7 @@
-export const SET_EMPLOYEE_ID = 'SET_EMPLOYEE_ID';
+// get employee informations
+export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
+
+// update employee informations
 export const SET_EMPLOYEE_FIRSTNAME = 'SET_EMPLOYEE_FIRSTNAME';
 export const SET_EMPLOYEE_LASTNAME = 'SET_EMPLOYEE_LASTNAME';
 export const SET_EMPLOYEE_EMAIL = 'SET_EMPLOYEE_EMAIL';
@@ -13,15 +16,47 @@ export const SET_EMPLOYEE_FUNCTION = 'SET_EMPLOYEE_FUNCTION';
 export const SET_EMPLOYEE_ROLE_APPLICATION = 'SET_EMPLOYEE_ROLE_APPLICATION';
 export const SET_EMPLOYEE_QUALIFICATION = 'SET_EMPLOYEE_QUALIFICATION';
 export const SET_EMPLOYEE_LABEL = 'SET_EMPLOYEE_LABEL';
-export const SET_EMPLOYEE_ISADMIN = 'SET_EMPLOYEE_ISADMIN';
 export const SET_EMPLOYEE_ASSIGNEMENTS = 'SET_EMPLOYEE_ASSIGNEMENTS';
-export const GET_EMPLOYEE_PLANNING = 'GET_EMPLOYEE_PLANNING';
-export const SET_EMPLOYEE_LOGOUT = 'SET_EMPLOYEE_LOGOUT';
+
+// reset employee informations
 export const RESET_EMPLOYEE_INFORMATIONS = 'RESET_EMPLOYEE_INFORMATIONS';
 
-export function actionSetEmployeeId(id) {
+export function actionGetEmployeeId({
+  id,
+  firstname,
+  lastname,
+  email,
+  socialSecurityNumber,
+  dateOfBirth,
+  adress,
+  zipCode,
+  startingDate,
+  avatar,
+  fonction,
+  roleApplication,
+  qualificationId,
+  label,
+  assignements,
+}) {
   return {
-    type: SET_EMPLOYEE_ID, payload: id,
+    type: GET_EMPLOYEE_INFORMATIONS,
+    payload: {
+      id,
+      firstname,
+      lastname,
+      email,
+      socialSecurityNumber,
+      dateOfBirth,
+      adress,
+      zipCode,
+      startingDate,
+      avatar,
+      fonction,
+      roleApplication,
+      qualificationId,
+      label,
+      assignements,
+    },
   };
 }
 
@@ -109,27 +144,9 @@ export function actionSetEmployeeLabel(label) {
   };
 }
 
-export function actionSetEmployeeIsAdmin(boolean) {
-  return {
-    type: SET_EMPLOYEE_ISADMIN, payload: boolean,
-  };
-}
-
 export function actionSetEmployeeAssignements(assignements) {
   return {
     type: SET_EMPLOYEE_ASSIGNEMENTS, payload: assignements,
-  };
-}
-
-export function actionGetEmployeePlanning() {
-  return {
-    type: GET_EMPLOYEE_PLANNING,
-  };
-}
-
-export function actionSetEmployeeLogout() {
-  return {
-    type: SET_EMPLOYEE_LOGOUT,
   };
 }
 
