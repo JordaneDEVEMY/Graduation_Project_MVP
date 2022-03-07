@@ -20,3 +20,12 @@ export async function createSite(siteDatas) {
     return err.response;
   }
 }
+
+export async function updateSite(id, siteDatas) {
+  try {
+    const response = await apiAxios.patch(`/api/admin/site/${id}`, siteDatas);
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
