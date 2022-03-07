@@ -2,6 +2,12 @@ const client = require('../../config/database');
 // const { ApiError } = require('../../helpers/errorHandler');
 
 /**
+ * @typedef {object} Week
+ * @property {string} weekPeriod - Monday to Sunday week
+ * @property {Planning} planning - Array of the planning for this period
+ */
+
+/**
  * @typedef {array} Planning
  * @property {number} company_id - Company PK in database
  * @property {string} company_name - Company name
