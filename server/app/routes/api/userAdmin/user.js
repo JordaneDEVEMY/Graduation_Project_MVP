@@ -41,7 +41,7 @@ router
    * @summary Update one user
    * @tags 3.UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
-   * @param {User} request.body.required - All for updating user
+   * @param {UserToUpdate} request.body.required - All for updating user
    * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
