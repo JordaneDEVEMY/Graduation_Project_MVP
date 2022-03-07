@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  TextField,
+  TextField, InputAdornment, VisibilityOffIcon, VisibilityIcon, IconButton,
 } from '@mui/material';
 
 function PasswordlFieldForm() {
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+
   return (
-    <TextField required type="password" label="Champ requis" variant="Outlined" />
+    <TextField
+      required
+      type={passwordVisibility ? 'text' : 'password'}
+      label="Champ requis"
+      variant="outlined"
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={() => setPasswordVisibility((x) => !x)}
+            >
+              {passwordVisibility ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+    />
   );
 }
 
