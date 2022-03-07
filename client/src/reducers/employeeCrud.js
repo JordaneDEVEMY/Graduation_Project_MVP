@@ -17,7 +17,7 @@ const initialState = {
   roleApplication: '',
   qualificationId: 0,
   label: '',
-  assignements: [],
+  assignments: [],
 };
 
 function reducer(state = initialState, action) {
@@ -40,7 +40,13 @@ function reducer(state = initialState, action) {
         roleApplication: action.payload.roleApplication,
         qualificationId: action.payload.qualificationId,
         label: action.payload.label,
-        assignements: action.payload.assignements,
+        assignments: action.payload.assignments,
+      };
+    // set employee informations
+    case actions.SET_EMPLOYEE_INFORMATION:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value,
       };
     // reset employee informations
     case actions.RESET_EMPLOYEE_INFORMATIONS:
@@ -60,7 +66,7 @@ function reducer(state = initialState, action) {
         roleApplication: initialState.roleApplication,
         qualificationId: initialState.qualificationId,
         label: initialState.label,
-        assignements: initialState.assignements,
+        assignments: initialState.assignments,
       };
     default:
       return state;
