@@ -65,6 +65,42 @@ const siteMiddleware = (store) => (next) => async (action) => {
       }
       return;
     }
+    case actions.UPDATE_SITE: {
+      const { site } = store.getState();
+      const {
+        name,
+        adress,
+        zipCode,
+        managerName,
+        estimatedDuration,
+        companyId,
+        createdAt,
+        updatedAt,
+      } = site;
+      const siteDatas = {
+        name,
+        adress,
+        zipCode,
+        managerName,
+        estimatedDuration,
+        companyId,
+        createdAt,
+        updatedAt,
+      };
+      const response = await updateSite(site.id, siteDatas);
+      if (response.status === 200) {
+        store.dispatch(actions.actionRequestSiteInformations(response.data.id));
+      }
+      return;
+    }
+    case actions.DELETE_SITE: {
+      const { site } = store.getState();
+      const response = await deleteSite(site.id);
+      if (response.status === 200) {
+        store.dispatch(actions.actionRequestSiteInformations());
+      }
+      return;
+    }
     default: {
       next(action);
     }
