@@ -18,7 +18,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @typedef {array} Sites
  * @property {number} id - Database primary key of site
  * @property {string} site_name - site name
- * @property {Assignments} assignements - Assignments
+ * @property {Assignments} assignments - Assignments
  */
 
 /**
