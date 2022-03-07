@@ -10,6 +10,9 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import Card from '../Card/Card';
 import './cards_wrapper.scss';
 
+/**
+ * receive state and return the new state
+ */
 const dragReducer = produce((draft, action) => {
   switch (action.type) {
     case 'MOVE': {
@@ -26,7 +29,8 @@ function CardsWrapper({
 }) {
   const theme = useTheme();
 
-  // get cards sheets
+  // structure initial state as an object containing
+  // an array of sheets for each card
   const draggableSheets = {};
   assignements.forEach(({ id, employees }) => {
     draggableSheets[`card-${id}`] = employees;
@@ -35,6 +39,9 @@ function CardsWrapper({
   // set sheets in state
   const [state, dispatch] = useReducer(dragReducer, draggableSheets);
 
+  /**
+   * dispatch actions on drag end
+   */
   const onDragEnd = useCallback((result) => {
     if (result.reason === 'DROP') {
       if (!result.destination) {

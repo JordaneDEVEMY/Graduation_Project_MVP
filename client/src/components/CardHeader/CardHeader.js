@@ -6,7 +6,6 @@ import { Typography } from '@mui/material';
 import './cardheader.scss';
 
 function CardHeader({
-  cardIid,
   site,
 }) {
   const theme = useTheme();
@@ -23,14 +22,15 @@ function CardHeader({
         marginBottom: theme.spacing(2),
       }}
     >
-      {`#${cardIid}-${site.name}`}
+      {`${site.name}`}
     </Typography>
   );
 }
 
 CardHeader.propTypes = {
-  cardIid: PropTypes.number.isRequired,
-  site: PropTypes.object.isRequired,
+  site: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 CardHeader.defaultProps = {
 };

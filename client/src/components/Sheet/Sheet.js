@@ -20,13 +20,17 @@ const Accordion = styled((props) => (
   color: theme.palette.sheet.main,
 }));
 
-function Sheet(props) {
+function Sheet({
+  color,
+  expandedSheet,
+  handleChange,
+  index,
+  isMobile,
+  firstname,
+  lastname,
+}) {
   const isAdmin = true;
   const theme = useTheme();
-  const {
-    color, expandedSheet, id, handleChange, index, isMobile, firstname, lastname,
-  } = props;
-
   return (
 
     <Accordion
@@ -58,7 +62,7 @@ function Sheet(props) {
             whiteSpace: 'nowrap',
           }}
         >
-          {`#${id}-${firstname} ${lastname}`}
+          {`${firstname} ${lastname}`}
         </Typography>
 
         {!isMobile && isAdmin
@@ -107,7 +111,6 @@ Sheet.propTypes = {
   color: PropTypes.string.isRequired,
   expandedSheet: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
   firstname: PropTypes.string.isRequired,

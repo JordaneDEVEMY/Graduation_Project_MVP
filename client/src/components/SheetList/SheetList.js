@@ -16,9 +16,15 @@ function SheetList({
   isMobile,
 }) {
   const theme = useTheme();
+  // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState(false);
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpandedSheet(isExpanded ? panel : false);
+  /**
+   * set expanded state
+   * @param {string} accordionId accordion id
+   * @returns {string|boolean} accordion id or false
+   */
+  const handleChange = (accordionId) => (event, isExpanded) => {
+    setExpandedSheet(isExpanded ? accordionId : false);
   };
 
   return (

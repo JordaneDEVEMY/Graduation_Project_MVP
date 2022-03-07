@@ -28,9 +28,7 @@ function Card({
       }}
     >
       <CardHeader
-        cardIid={id}
         site={site}
-        isMobile={isMobile}
       />
       <SheetList employees={employees} cardIid={id} isMobile={isMobile} />
     </Box>
