@@ -5,6 +5,7 @@ import { Typography } from '@mui/material';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import Cards from '../Cards/Cards';
 import dateFunctions from '../../utils/dateFunctions';
+import planningFunctions from '../../utils/planningFunctions';
 import './planning_admin.scss';
 
 function PlanningAdmin({
@@ -12,61 +13,12 @@ function PlanningAdmin({
   planning,
   startDate,
 }) {
-  const companies = [];
-  console.log('startDate', startDate);
-  planning.forEach(({ company_name, sites }) => {
-    console.log(company_name, sites);
-    const company = {
-      name: company_name,
-      assignments: [],
-    };
-
-    // group assignments by company sites
-    const companySitesIds = [];
-    sites.forEach(({ id, site_name: name }) => {
-      if (!companySitesIds.includes(id)) {
-        company.assignments.push({
-          id,
-          site: {
-            name,
-          },
-          colleagues: [],
-        });
-        companySitesIds.push(id);
-      }
-    });
-
-    // get each assignment of company
-    company.assignments.map((assignment) => {
-      const sitesById = sites.filter((item) => item.id === assignment.id);
-      sitesById.forEach(({
-        assignments,
-      }) => {
-        const {
-          color, starting_date, ending_date, employees,
-        } = assignments;
-
-        const { id, firstname, lastname } = employees;
-
-        assignment.colleagues.push({
-          id,
-          color,
-          firstname,
-          lastname,
-          starting_date,
-          ending_date,
-        });
-      });
-
-      return assignment;
-    });
-
-    companies.push(company);
-  });
-
-  console.log('companies', companies);
+  const companies = planningFunctions.adminPlanningToCards(planning);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
+
+  console.log('startDate', startDate);
+  console.log('companies', companies);
 
   return (
     <>
