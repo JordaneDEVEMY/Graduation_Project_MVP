@@ -25,8 +25,14 @@ const controller = {
 
       const getColleagues = await userDatamapper.findColleagues(starting_date, ending_date, siteId, userId);
 
+      getColleagues.forEach((_, index) => {
+        Object.assign(getColleagues[index], { color: '#OFO' });
+      });
+
       Object.assign(user.assignments[index], { colleagues: [...getColleagues] });
     }));
+
+    Object.assign(user, { color: '#FOF' });
 
     //! I Keep this in comment for Sprint 03 if necessary
     // const newSet = new Set();
