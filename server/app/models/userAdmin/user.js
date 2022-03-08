@@ -12,7 +12,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {number} social_security_number - User social security number
+ * @property {string} social_security_number - User social security number
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
@@ -32,7 +32,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {number} social_security_number - User social security number
+ * @property {string} social_security_number - User social security number
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
@@ -50,7 +50,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {number} social_security_number - User social security number
+ * @property {string} social_security_number - User social security number
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
@@ -70,7 +70,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {number} social_security_number - User social security number
+ * @property {string} social_security_number - User social security number
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
@@ -91,7 +91,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
- * @property {number} social_security_number - User social security number
+ * @property {string} social_security_number - User social security number
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar

@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 const userDatamapper = require('../../../models/user');
 const { ApiError } = require('../../../helpers/errorHandler');
+const { getRandomColor } = require('../../../helpers/randomMUIColors');
 
 const controller = {
   /**
@@ -25,14 +26,14 @@ const controller = {
 
       const getColleagues = await userDatamapper.findColleagues(starting_date, ending_date, siteId, userId);
 
-      getColleagues.forEach((_, index) => {
-        Object.assign(getColleagues[index], { color: '#OFO' });
+      getColleagues.forEach((_, i) => {
+        Object.assign(getColleagues[i], { color: getRandomColor() });
       });
 
       Object.assign(user.assignments[index], { colleagues: [...getColleagues] });
     }));
 
-    Object.assign(user, { color: '#FOF' });
+    Object.assign(user, { color: getRandomColor() });
 
     //! I Keep this in comment for Sprint 03 if necessary
     // const newSet = new Set();
