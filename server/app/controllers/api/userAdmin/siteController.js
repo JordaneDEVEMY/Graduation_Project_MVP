@@ -3,6 +3,23 @@ const { ApiError } = require('../../../helpers/errorHandler');
 
 const controller = {
   /**
+   * UserAdmin controller to get all sites
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id params
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async getAll(req, res) {
+    const sites = await siteAdminDatamapper.findAll();
+
+    if (!sites) {
+      throw new ApiError(404, 'Sites introuvables');
+    }
+
+    return res.json(sites);
+  },
+
+  /**
    * UserAdmin controller to get a site
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id params

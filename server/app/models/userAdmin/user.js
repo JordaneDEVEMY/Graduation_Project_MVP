@@ -99,7 +99,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} role_application - User role in web application
  * @property {string} employee_qualification_id - FK of User qualification
  * @property {string} qualification_label - FK of User qualification label
- * @property {number} updated_at - timestamp for the update in DB
+ * @property {string} updated_at - timestamp for the update in DB
  */
 
 /**
@@ -110,6 +110,43 @@ const { ApiError } = require('../../helpers/errorHandler');
  */
 
 module.exports = {
+  /**
+   * Find all users
+   * @returns {User|undefined} - response of all users or undefined if no users found
+   */
+  async findAll() {
+    const result = await client.query(`
+      SELECT
+        "employee"."id",
+        "employee"."firstname",
+        "employee"."lastname",
+        "employee"."email",
+        "employee"."phone_number",
+        "employee"."mobile_number",
+        "employee"."address",
+        "employee"."zip_code",
+        "employee"."date_of_birth",
+        "employee"."social_security_number",
+        "employee"."starting_date",
+        "employee"."fonction",
+        "employee"."avatar",
+        "employee"."role_application",
+        "employee"."employee_qualification_id",
+        "employee_qualification"."label" AS "label",
+        "employee"."created_at"
+      FROM
+        "employee"
+      JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
+      ORDER BY "employee"."id";
+    `);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Aucun utilisateur trouvé');
+    }
+
+    return result.rows;
+  },
+
   /**
    * Find an User by his id
    * @param {number} userId - User ID
