@@ -51,7 +51,7 @@ function CreateCompanyForm({
             <TextInput
               handleChange={changeField}
               type="number"
-              nameValue="zip_code"
+              nameValue="zipCode"
               label="Code postal"
             />
           </Grid>
