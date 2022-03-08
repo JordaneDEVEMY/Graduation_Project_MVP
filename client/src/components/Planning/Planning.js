@@ -7,12 +7,11 @@ import dateFunctions from '../../utils/dateFunctions';
 import './planning.scss';
 
 function Planning({
-  assignments,
   handleStartDate,
   startDate,
   user,
 }) {
-  const { isAdmin } = user;
+  const { assignments } = user;
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
 
@@ -27,9 +26,13 @@ function Planning({
 
   return (
     <>
-      <SearchContainer isAdmin={isAdmin} date={startDate} handleCurrentWeek={handleStartDate} />
+      <SearchContainer isAdmin={false} date={startDate} handleCurrentWeek={handleStartDate} />
 
-      {!isAdmin && absences.map((absence) => (
+      <Typography variant="h1" sx={{ textAlign: 'center' }}>
+        {'Planning d\'intervention'}
+      </Typography>
+
+      {absences.map((absence) => (
         <Alert severity="success">
           {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MM YYYY')} 
           au ${dateFunctions.getDate(absence.ending_date).format('DD MM YYYY')} : 
@@ -37,12 +40,8 @@ function Planning({
         </Alert>
       ))}
 
-      <Typography variant="h1" sx={{ textAlign: 'center' }}>
-        {'Planning d\'intervention'}
-      </Typography>
-
       {currentAssignments.length
-        ? (<Cards assignments={currentAssignments} week={currentWeek} isAdmin={isAdmin} />)
+        ? (<Cards assignments={currentAssignments} week={currentWeek} isAdmin={false} />)
         : (
           <Typography sx={{ textAlign: 'center' }}>
             Aucun planning à afficher.
@@ -53,14 +52,14 @@ function Planning({
 }
 
 Planning.propTypes = {
-  assignments: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
   handleStartDate: PropTypes.func.isRequired,
   startDate: PropTypes.string.isRequired,
   user: PropTypes.shape({
+    assignments: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+      }).isRequired,
+    ).isRequired,
     id: PropTypes.number.isRequired,
     isAdmin: PropTypes.bool.isRequired,
   }).isRequired,
