@@ -1,35 +1,16 @@
 /* eslint-disable no-alert */
 /* eslint-disable camelcase */
 import {
-  getOneCompany, createCompany, updateCompany, deleteCompany,
+  getAllCompanies, createCompany, updateCompany, deleteCompany,
 } from '../requests/companyRequest';
 import * as actions from '../actions';
 
 const companyMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
-    case actions.REQUEST_COMPANY_INFORMATIONS: {
-      const { company } = store.getState();
-      const response = await getOneCompany(company.id);
+    case actions.REQUEST_ALL_COMPANIES: {
+      const response = await getAllCompanies();
       if (response.status === 200) {
-        const {
-          id,
-          name,
-          address,
-          zip_code: zipCode,
-          type,
-          created_at: createdAt,
-          updated_at: updatedAt,
-        } = response.data;
-
-        store.dispatch(actions.actionGetCompanyInformations({
-          id,
-          name,
-          address,
-          zipCode,
-          type,
-          createdAt,
-          updatedAt,
-        }));
+        store.dispatch(actions.actionGetAllCompanies(response.data));
       }
       return;
     }
