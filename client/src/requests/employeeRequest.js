@@ -2,7 +2,7 @@ import apiAxios from './index';
 
 export async function getAllEmployees() {
   try {
-    const response = await apiAxios.get('/api/admin/employee');
+    const response = await apiAxios.get('/api/admin/user');
     return response;
   } catch (err) {
     return err.response;

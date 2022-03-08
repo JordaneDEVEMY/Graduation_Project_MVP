@@ -6,3 +6,4 @@ export * from './admin';
 export * from './company';
 export * from './allCompanies';
 export * from './allSites';
+export * from './allEmployees';
