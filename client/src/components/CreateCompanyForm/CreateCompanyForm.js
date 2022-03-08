@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { PropTypes } from 'prop-types';
@@ -5,7 +6,7 @@ import {
   Grid, Button, Typography, Box,
 } from '@mui/material';
 
-import TextFieldForm from '../FieldForms/TextFieldForm/TextFieldForm';
+import TextInput from '../FieldForms/TextInput';
 
 function CreateCompanyForm({
   handleCreateCompany,
@@ -24,7 +25,36 @@ function CreateCompanyForm({
         </Typography>
         <Grid container spacing={1} mt={1}>
           <Grid item xs={12} md={6}>
-            <TextFieldForm handleChange={changeField} />
+            <TextInput
+              handleChange={changeField}
+              type="text"
+              name="name"
+              label="Nom"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextInput
+              handleChange={changeField}
+              type="text"
+              name="type"
+              label="Type"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextInput
+              handleChange={changeField}
+              type="text"
+              name="adress"
+              label="Adresse postale"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextInput
+              handleChange={changeField}
+              type="number"
+              name="zip_code"
+              label="Code postal"
+            />
           </Grid>
           <Grid item xs={12}>
             <Button variant="outlined" type="submit">
