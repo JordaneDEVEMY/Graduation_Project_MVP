@@ -10,6 +10,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
     case actions.REQUEST_ALL_COMPANIES: {
       const response = await getAllCompanies();
       if (response.status === 200) {
+        console.log(response);
         store.dispatch(actions.actionGetAllCompanies(response.data));
       }
       return;
@@ -17,14 +18,12 @@ const companyMiddleware = (store) => (next) => async (action) => {
     case actions.CREATE_COMPANY: {
       const { company } = store.getState();
       const {
-        id,
         name,
         address,
         zipCode: zip_code,
         type,
       } = company;
       const companyDatas = {
-        id,
         name,
         address,
         zip_code,
@@ -33,6 +32,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const response = await createCompany(companyDatas);
       if (response.status === 200) {
         store.dispatch(actions.actionGetCompanyId(response.data.id));
+        store.dispatch(actions.actionRequestAllCompanies());
         alert('Company created successfully');
       }
       return;
