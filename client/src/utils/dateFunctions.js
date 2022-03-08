@@ -141,6 +141,17 @@ const dateFunctions = {
 
     return fromString;
   },
+
+  /**
+   * Get current year and week as string
+   * @returns {string} YYYY-<week number>
+   */
+  getCurrentWeekAsString: () => {
+    const year = dateFunctions.getDate().format('YYYY');
+    const weekNum = dateFunctions.getDate().isoWeek();
+
+    return `${year}-${weekNum}`;
+  },
 };
 
 export default dateFunctions;
