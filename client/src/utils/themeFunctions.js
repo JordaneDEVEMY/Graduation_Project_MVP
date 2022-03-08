@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 const themeFunctions = {
   avalaibleModes: ['dark', 'light'],
   defaultMode: 'dark',
@@ -12,6 +15,22 @@ const themeFunctions = {
     }
 
     return themeFunctions.defaultMode;
+  },
+
+  /**
+   * Get a color from theme palette
+   * @param {object} palette - A theme palette
+   * @returns {string} a palette color
+   */
+  getRandomColor: (palette) => {
+    const colors = [];
+
+    for (const color in palette) {
+      palette[color]?.main && colors.push(palette[color].main);
+    }
+    const randomIndex = Math.floor(Math.random() * (colors.length - 1));
+
+    return colors[randomIndex];
   },
 
   /**

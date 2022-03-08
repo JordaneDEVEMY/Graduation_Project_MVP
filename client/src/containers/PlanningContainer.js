@@ -3,25 +3,36 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionGetUserPlanning } from '../actions/user';
 import Planning from '../components/Planning/Planning';
+import dateFunctions from '../utils/dateFunctions';
 
 function PlanningContainer({
-  isAdmin,
+  date,
 }) {
   const dispatch = useDispatch();
-  const userAssignements = useSelector((state) => state.user.assignements);
+  const user = useSelector((state) => state.user);
+  const { assignments } = user;
+  const [startDate, setStartDate] = React.useState(date);
 
   useEffect(() => {
-    console.log('je suis dans le useEffect');
     dispatch(actionGetUserPlanning());
   }, []);
 
   return (
-    <Planning userAssignements={userAssignements} isAdmin={isAdmin} />
+    <Planning
+      user={user}
+      assignments={assignments}
+      startDate={startDate}
+      handleStartDate={setStartDate}
+    />
   );
 }
 
 PlanningContainer.propTypes = {
-  isAdmin: PropTypes.bool.isRequired,
+  date: PropTypes.string,
 };
-PlanningContainer.defaultProps = {};
+
+PlanningContainer.defaultProps = {
+  date: dateFunctions.getDate().format('YYYY-MM-DD'),
+};
+
 export default React.memo(PlanningContainer);

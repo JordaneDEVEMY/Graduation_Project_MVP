@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import {
   Grid, Button, IconButton, MenuItem, Select,
@@ -8,17 +8,17 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import PropTypes from 'prop-types';
 // import { useTheme } from '@mui/material/styles';
-import utils from '../../utils';
 import './selectweek.scss';
 import dateFunctions from '../../utils/dateFunctions';
 
 function SelectWeek({
-  isAdmin,
   date,
+  handleCurrentWeek,
+  isAdmin,
 }) {
   const theme = useTheme();
-  const [week, setWeek] = useState(utils.dateFunctions.getWeek(date));
-  const currentYear = utils.dateFunctions.getDate(week.current.dates[0]).year();
+  const week = dateFunctions.getWeek(date);
+  const currentYear = dateFunctions.getDate(week.current.dates[0]).year();
   const maxOldYear = new Date().getFullYear() - 10;
   const disabledPrev = isAdmin
     ? (currentYear === maxOldYear) && (week.current.num === 1)
@@ -47,11 +47,11 @@ function SelectWeek({
    * @returns {array} List of MenuItem components
    */
   const getWeeks = () => {
-    const nbWeeks = utils.dateFunctions.getDate(`${currentYear}-01-01`).isoWeeksInYear();
+    const nbWeeks = dateFunctions.getDate(`${currentYear}-01-01`).isoWeeksInYear();
     const weeks = [];
     let i = 1;
     while (i <= nbWeeks) {
-      const period = utils.dateFunctions.getWeekPeriod(currentYear, i);
+      const period = dateFunctions.getWeekPeriod(currentYear, i);
       weeks.push(<MenuItem key={i} value={i}>{`S${i < 10 ? '0' : ''}${i} - ${period}`}</MenuItem>);
       i += 1;
     }
@@ -64,33 +64,33 @@ function SelectWeek({
     let weekMonday;
 
     if (selectedWeek >= week.current.num) {
-      weekMonday = utils.dateFunctions.getDate(week.current.dates[0]).add(selectedWeek - week.current.num, 'week').format('YYYY-MM-DD');
+      weekMonday = dateFunctions.getDate(week.current.dates[0]).add(selectedWeek - week.current.num, 'week').format('YYYY-MM-DD');
     } else {
-      weekMonday = utils.dateFunctions.getDate(week.current.dates[0]).subtract(week.current.num - selectedWeek, 'week').format('YYYY-MM-DD');
+      weekMonday = dateFunctions.getDate(week.current.dates[0]).subtract(week.current.num - selectedWeek, 'week').format('YYYY-MM-DD');
     }
 
-    setWeek(utils.dateFunctions.getWeek(weekMonday));
+    handleCurrentWeek(weekMonday);
   };
 
   const handleYearSelect = (event) => {
     const selectedYear = event.target.value;
-    const firstMonday = utils.dateFunctions.getDate(week.current.dates[0]).subtract(currentYear - selectedYear, 'year').format('YYYY-MM-DD');
+    const firstMonday = dateFunctions.getDate(week.current.dates[0]).subtract(currentYear - selectedYear, 'year').format('YYYY-MM-DD');
 
-    setWeek(utils.dateFunctions.getWeek(firstMonday));
+    handleCurrentWeek(firstMonday);
   };
 
   const handleNextButton = () => {
     const nextMonday = week.next.dates[0];
-    setWeek(utils.dateFunctions.getWeek(nextMonday));
+    handleCurrentWeek(nextMonday);
   };
 
   const handlePrevButton = () => {
     const lastMonday = week.prev.dates[0];
-    setWeek(utils.dateFunctions.getWeek(lastMonday));
+    handleCurrentWeek(lastMonday);
   };
 
   const handleRefreshButton = () => {
-    setWeek(utils.dateFunctions.getWeek(date));
+    handleCurrentWeek(date);
   };
 
   return (
@@ -163,10 +163,8 @@ function SelectWeek({
 }
 
 SelectWeek.propTypes = {
+  handleCurrentWeek: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
-  date: PropTypes.string,
-};
-SelectWeek.defaultProps = {
-  date: utils.dateFunctions.getDate().format('YYYY-MM-DD'),
+  date: PropTypes.string.isRequired,
 };
 export default React.memo(SelectWeek);
