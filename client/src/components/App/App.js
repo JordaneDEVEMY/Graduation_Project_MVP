@@ -12,12 +12,14 @@ import Footer from '../Footer/Footer';
 import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
+import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
+import CreateUserFormContainer from '../../containers/CreateUserFormContainer';
 
 function App({
   isAdmin,
@@ -56,10 +58,15 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <PlanningContainer />
+                    <Planning isAdmin={isAdmin} />
                     )}
                 />
-
+                <Route
+                  path="staff"
+                  element={(
+                    <CreateUserFormContainer />
+                    )}
+                />
               </Route>
             </Route>
             <Route element={<RequireUser />}>
@@ -67,7 +74,7 @@ function App({
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <PlanningContainer />
+                    <PlanningContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
