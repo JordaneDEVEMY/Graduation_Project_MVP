@@ -40,21 +40,6 @@ function SearchAutocomplete() {
       mt={1}
     >
       <Grid item xs={12} sm={6}>
-        <Autocomplete
-          size="small"
-          getOptionLabel={(datas) => `${datas.title}`}
-          options={datas}
-          sx={{ width: '100%' }}
-          renderInput={(params) => (
-            <TextField {...params} label="Rechercher..." />
-          )}
-          value={autocompleteValue}
-          onChange={(_event, newValue) => {
-            setAutocompleteValue(newValue);
-          }}
-        />
-      </Grid>
-      <Grid item xs={12} sm={6}>
         <FormControl sx={{ width: '100%' }}>
           <InputLabel id="select-search-label" size="small">Dans</InputLabel>
           <Select
@@ -70,6 +55,21 @@ function SearchAutocomplete() {
             <MenuItem value="employees">Employés</MenuItem>
           </Select>
         </FormControl>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <Autocomplete
+          size="small"
+          getOptionLabel={(datas) => `${datas.title}`}
+          options={datas}
+          sx={{ width: '100%' }}
+          renderInput={(params) => (
+            <TextField {...params} label="Rechercher..." />
+          )}
+          value={autocompleteValue}
+          onChange={(_event, newValue) => {
+            setAutocompleteValue(newValue);
+          }}
+        />
       </Grid>
     </Grid>
 
