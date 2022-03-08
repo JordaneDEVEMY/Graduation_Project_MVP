@@ -3,7 +3,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} Week
- * @property {string} weekPeriod - Monday to Sunday week
+ * @property {string} weekStart - Monday start of the week
  * @property {Planning} planning - Array of the planning for this period
  */
 
