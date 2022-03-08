@@ -13,6 +13,15 @@ const router = express.Router();
 router
   .route('/')
   /**
+   * GET /api/admin/user
+   * @summary Get all users
+   * @tags 3.UserAdmin - User CRUD section
+   * @return {array.<User>} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
+  .get(controllerHandler(userAdminUserController.getAll))
+  /**
    * POST /api/admin/user
    * @summary Create one user
    * @tags 3.UserAdmin - User CRUD section
