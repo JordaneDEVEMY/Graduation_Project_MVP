@@ -17,14 +17,14 @@ function SheetList({
 }) {
   const theme = useTheme();
   // accordion state
-  const [expandedSheet, setExpandedSheet] = React.useState(false);
+  const [expandedSheet, setExpandedSheet] = React.useState('');
   /**
    * set expanded state
    * @param {string} accordionId accordion id
    * @returns {string|boolean} accordion id or false
    */
   const handleChange = (accordionId) => (event, isExpanded) => {
-    setExpandedSheet(isExpanded ? accordionId : false);
+    setExpandedSheet(isExpanded ? accordionId : '');
   };
 
   return (

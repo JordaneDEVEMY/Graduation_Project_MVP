@@ -42,7 +42,6 @@ function Sheet({
   const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
 
   return (
-
     <Accordion
       expanded={expandedSheet === `panel${index}`}
       onChange={handleChange(`panel${index}`)}
@@ -53,7 +52,6 @@ function Sheet({
       }}
     >
       <AccordionSummary
-        disableGutters
         aria-controls={`panel${index}-content`}
         id={`panel${index}-header`}
         sx={{
@@ -134,7 +132,7 @@ function Sheet({
 Sheet.propTypes = {
   color: PropTypes.string,
   ending_date: PropTypes.string.isRequired,
-  expandedSheet: PropTypes.bool.isRequired,
+  expandedSheet: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isMobile: PropTypes.bool.isRequired,
