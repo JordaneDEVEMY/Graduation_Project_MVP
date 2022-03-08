@@ -19,7 +19,7 @@ function PlanningContainer({
   }, []);
 
   return (
-    isAdmin
+    !isAdmin
       ? (
         <Planning
           user={user}
