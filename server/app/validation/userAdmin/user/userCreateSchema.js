@@ -27,15 +27,13 @@ module.exports = Joi.object({
   starting_date: Joi.date()
     .iso()
     .required(),
-  avatar: Joi.string()
-    .required(),
+  avatar: Joi.string(),
   function: Joi.string()
     .required(),
   role_application: Joi.string()
     .required(),
-  employee_qualification_id: Joi.number()
-    .min(1)
-    .required(),
-  // qualification_label: Joi.string()
-  // .required(),
+  // employee_qualification_id: Joi.number()
+  //   .min(1)
+  //   .required(),
+  qualification_label: Joi.string(),
 }).required();

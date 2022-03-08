@@ -1,10 +1,8 @@
 const Joi = require('joi');
 
 module.exports = Joi.object({
-  firstname: Joi.string()
-    .required(),
-  lastname: Joi.string()
-    .required(),
+  firstname: Joi.string(),
+  lastname: Joi.string(),
   email: Joi.string()
   // ? .pattern(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/)
     .required(),
@@ -25,15 +23,13 @@ module.exports = Joi.object({
   starting_date: Joi.date()
     .iso()
     .required(),
-  avatar: Joi.string()
-    .required(),
+  avatar: Joi.string(),
   function: Joi.string()
     .required(),
   role_application: Joi.string()
     .required(),
-  employee_qualification_id: Joi.number()
-    .min(1)
-    .required(),
-  // qualification_label: Joi.string()
-  // .required(),
+  // employee_qualification_id: Joi.number()
+  //   .min(1)
+  //   .required(),
+  qualification_label: Joi.string(),
 }).required();

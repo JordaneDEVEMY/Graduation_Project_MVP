@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   getOneSite, createSite, updateSite, deleteSite,
 } from '../requests/siteRequest';
@@ -38,26 +39,20 @@ const siteMiddleware = (store) => (next) => async (action) => {
     case actions.CREATE_SITE: {
       const { site } = store.getState();
       const {
-        id,
         name,
         adress,
-        zipCode,
-        managerName,
-        estimatedDuration,
-        companyId,
-        createdAt,
-        updatedAt,
+        zipCode: zip_code,
+        managerName: manager_name,
+        estimatedDuration: estimated_duration,
+        companyId: company_id,
       } = site;
       const siteDatas = {
-        id,
         name,
         adress,
-        zipCode,
-        managerName,
-        estimatedDuration,
-        companyId,
-        createdAt,
-        updatedAt,
+        zip_code,
+        manager_name,
+        estimated_duration,
+        company_id,
       };
       const response = await createSite(siteDatas);
       if (response.status === 200) {
@@ -70,22 +65,18 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const {
         name,
         adress,
-        zipCode,
-        managerName,
-        estimatedDuration,
-        companyId,
-        createdAt,
-        updatedAt,
+        zipCode: zip_code,
+        managerName: manager_name,
+        estimatedDuration: estimated_duration,
+        companyId: company_id,
       } = site;
       const siteDatas = {
         name,
         adress,
-        zipCode,
-        managerName,
-        estimatedDuration,
-        companyId,
-        createdAt,
-        updatedAt,
+        zip_code,
+        manager_name,
+        estimated_duration,
+        company_id,
       };
       const response = await updateSite(site.id, siteDatas);
       if (response.status === 200) {
@@ -97,7 +88,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const { site } = store.getState();
       const response = await deleteSite(site.id);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestSiteInformations());
+        store.dispatch(actions.actionResetSiteInformations());
       }
       return;
     }

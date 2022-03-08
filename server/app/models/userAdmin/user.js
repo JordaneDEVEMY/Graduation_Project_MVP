@@ -17,7 +17,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {number} employee_qualification_id - FK of User qualification
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
@@ -36,7 +37,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
@@ -54,7 +55,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
@@ -75,6 +76,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
  * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  * @property {string} created_at - timestamp for the create in DB
  */
 
@@ -95,6 +97,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
  * @property {string} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  * @property {number} updated_at - timestamp for the update in DB
  */
 
@@ -133,6 +136,12 @@ module.exports = {
    * @returns {UserCreate} - Return the new user
    */
   async insert(user) {
+    const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
+
+    if (qualificationId.rowCount === 0) {
+      throw new ApiError(400, 'Cette qualification n\'existe pas');
+    }
+
     const userToCreate = await client.query(
       `
         INSERT INTO "employee" 
@@ -172,7 +181,7 @@ module.exports = {
         "avatar",
         "role_application",
         "employee_qualification_id",
-          "created_at";`,
+        "created_at";`,
       [
         user.firstname,
         user.lastname,
@@ -188,9 +197,11 @@ module.exports = {
         user.function,
         user.avatar,
         user.role_application,
-        user.employee_qualification_id,
+        qualificationId.rows[0].id,
       ],
     );
+
+    Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });
 
     return userToCreate.rows[0];
   },
@@ -206,6 +217,12 @@ module.exports = {
 
     if (result.rowCount === 0) {
       throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+    }
+
+    const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
+
+    if (qualificationId.rowCount === 0) {
+      throw new ApiError(400, 'Cette qualification n\'existe pas');
     }
 
     const userToSave = await client.query(
@@ -259,9 +276,11 @@ module.exports = {
         user.function,
         user.avatar,
         user.role_application,
-        user.employee_qualification_id,
+        qualificationId.rows[0].id,
       ],
     );
+
+    Object.assign(userToSave.rows[0], { qualification_label: qualificationId.rows[0].label });
 
     // ? Standby Code for update function in SQL
     // const userToUpdate = result.rows[0];
