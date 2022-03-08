@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION "insert_user" ( 
+DROP FUNCTION "insert_user";
 
 COMMIT;
