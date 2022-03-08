@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable camelcase */
 import {
   getOneSite, createSite, updateSite, deleteSite,
@@ -56,7 +57,8 @@ const siteMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createSite(siteDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestSiteInformations(response.data.id));
+        store.dispatch(actions.actionGetSiteId(response.data.id));
+        alert('Site created successfully');
       }
       return;
     }
@@ -80,7 +82,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateSite(site.id, siteDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestSiteInformations(response.data.id));
+        alert('Site updated successfully');
       }
       return;
     }
@@ -89,6 +91,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const response = await deleteSite(site.id);
       if (response.status === 200) {
         store.dispatch(actions.actionResetSiteInformations());
+        alert('Site deleted successfully');
       }
       return;
     }

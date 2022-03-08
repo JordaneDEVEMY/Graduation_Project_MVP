@@ -6,6 +6,7 @@ export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
 
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
+export const GET_EMPLOYEE_ID = 'GET_EMPLOYEE_ID';
 
 // create or update employee informations
 export const SET_EMPLOYEE_INFORMATION = 'SET_EMPLOYEE_INFORMATION';
@@ -69,6 +70,12 @@ export function actionGetEmployeeInformations({
       roleApplication,
       label,
     },
+  };
+}
+
+export function actionGetEmployeeId(id) {
+  return {
+    type: GET_EMPLOYEE_ID, payload: id,
   };
 }
 

@@ -25,6 +25,11 @@ function reducer(state = initialState, action) {
         createdAt: action.payload.createdAt,
         updatedAt: action.payload.updatedAt,
       };
+    case actions.GET_COMPANY_ID:
+      return {
+        ...state,
+        id: action.payload,
+      };
       // set site information
     case actions.SET_COMPANY_INFORMATION:
       return {

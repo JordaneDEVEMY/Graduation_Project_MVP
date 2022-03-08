@@ -6,6 +6,7 @@ export const DELETE_COMPANY = 'DELETE_COMPANY';
 
 // get site informations
 export const GET_COMPANY_INFORMATIONS = 'GET_COMPANY_INFORMATIONS';
+export const GET_COMPANY_ID = 'GET_COMPANY_ID';
 
 // create or update site informations
 export const SET_COMPANY_INFORMATION = 'SET_COMPANY_INFORMATION';
@@ -57,6 +58,12 @@ export function actionGetCompanyInformations({
       createdAt,
       updatedAt,
     },
+  };
+}
+
+export function actionGetCompanyId(id) {
+  return {
+    type: GET_COMPANY_ID, payload: id,
   };
 }
 

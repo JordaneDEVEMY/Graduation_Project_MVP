@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable camelcase */
 import {
   getOneEmployee, createEmployee, updateEmployee, deleteEmployee,
@@ -86,7 +87,8 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createEmployee(employeeDatas);
       if (response.status === 200) {
-        console.log(response.data);
+        store.dispatch(actions.actionGetEmployeeId(response.data.id));
+        alert('Employee created successfully');
       }
       return;
     }
@@ -128,7 +130,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateEmployee(employee.id, employeeDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestEmployInformations(response.data.id));
+        alert('Employee updated successfully');
       }
       return;
     }
@@ -137,6 +139,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       const response = await deleteEmployee(employee.id);
       if (response.status === 200) {
         store.dispatch(actions.actionResetEmployeeInformations());
+        alert('Employee deleted successfully');
       }
       return;
     }

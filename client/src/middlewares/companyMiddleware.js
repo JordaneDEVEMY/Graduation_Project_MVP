@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable camelcase */
 import {
   getOneCompany, createCompany, updateCompany, deleteCompany,
@@ -50,7 +51,8 @@ const companyMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createCompany(companyDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestCompanyInformations(response.data.id));
+        store.dispatch(actions.actionGetCompanyId(response.data.id));
+        alert('Company created successfully');
       }
       return;
     }
@@ -70,7 +72,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateCompany(company.id, companyDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestCompanyInformations(response.data.id));
+        alert('Company updated successfully');
       }
       return;
     }
@@ -79,6 +81,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const response = await deleteCompany(company.id);
       if (response.status === 200) {
         store.dispatch(actions.actionResetCompanyInformations());
+        alert('Company deleted successfully');
       }
       return;
     }
