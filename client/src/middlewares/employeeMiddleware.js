@@ -86,41 +86,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createEmployee(employeeDatas);
       if (response.status === 200) {
-        console.log(response);
-        const {
-          id,
-          firstname,
-          lastname,
-          email,
-          address,
-          avatar,
-          phone_number: phoneNumber,
-          mobile_number: mobileNumber,
-          social_security_number: socialSecurityNumber,
-          date_of_birth: dateOfBirth,
-          zip_code: zipCode,
-          starting_date: startingDate,
-          fonction,
-          role_application: roleApplication,
-          qualification_label: label,
-        } = response.data;
-        store.dispatch(actions.actionGetEmployeeInformations({
-          id,
-          firstname,
-          lastname,
-          email,
-          phoneNumber,
-          mobileNumber,
-          address,
-          zipCode,
-          socialSecurityNumber,
-          dateOfBirth,
-          startingDate,
-          avatar,
-          fonction,
-          roleApplication,
-          label,
-        }));
+        console.log(response.data);
       }
       return;
     }
