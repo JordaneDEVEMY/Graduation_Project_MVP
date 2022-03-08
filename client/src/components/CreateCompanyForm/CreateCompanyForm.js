@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { PropTypes } from 'prop-types';
@@ -28,7 +27,7 @@ function CreateCompanyForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              name="name"
+              nameValue="name"
               label="Nom"
             />
           </Grid>
@@ -36,7 +35,7 @@ function CreateCompanyForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              name="type"
+              nameValue="type"
               label="Type"
             />
           </Grid>
@@ -44,7 +43,7 @@ function CreateCompanyForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              name="adress"
+              nameValue="adress"
               label="Adresse postale"
             />
           </Grid>
@@ -52,7 +51,7 @@ function CreateCompanyForm({
             <TextInput
               handleChange={changeField}
               type="number"
-              name="zip_code"
+              nameValue="zip_code"
               label="Code postal"
             />
           </Grid>

@@ -5,12 +5,7 @@ import {
   Grid, Button, Typography, Box,
 } from '@mui/material';
 
-import NameFieldForm from '../FieldForms/NameFieldForm/NameFieldForm';
-import AddressFieldForm from '../FieldForms/AddressFieldForm/AddressFieldForm';
-import ZipFieldForm from '../FieldForms/ZipFieldForm/ZipFieldForm';
-import CompanyIdFieldForm from '../FieldForms/CompanyIdFieldForm/CompanyIdFieldForm';
-import EstimatedDurationFieldForm from '../FieldForms/EstimatedDurationFieldForm/EstimatedDurationFieldForm';
-import ManagerNameFieldForm from '../FieldForms/ManagerNameFieldForm/ManagerNameFieldForm';
+import TextInput from '../FieldForms/TextInput';
 
 function CreateUserForm({
   handleCreateSite,
@@ -29,31 +24,53 @@ function CreateUserForm({
         </Typography>
         <Grid container spacing={1} mt={1}>
           <Grid item xs={12} md={6}>
-            <NameFieldForm handleChange={changeField} />
+            <TextInput
+              handleChange={changeField}
+              type="text"
+              nameValue="name"
+              label="Nom"
+            />
           </Grid>
           <Grid item xs={12} md={6}>
-            <CompanyIdFieldForm handleChange={changeField} />
+            <TextInput
+              handleChange={changeField}
+              type="number"
+              nameValue="companyId"
+              label="ID Compagnie"
+            />
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <AddressFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="adress"
+              label="Adresse postale"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <ZipFieldForm
+            <TextInput
               handleChange={changeField}
+              type="number"
+              nameValue="zipCode"
+              label="Code postal"
             />
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <EstimatedDurationFieldForm
+            <TextInput
               handleChange={changeField}
+              type="number"
+              nameValue="estimatedDuration"
+              label="Durée estimée"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <ManagerNameFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="managerName"
+              label="Nom du manager"
             />
           </Grid>
           <Grid item xs={12}>
