@@ -1,0 +1,45 @@
+/* eslint-disable react/no-unescaped-entities */
+import React from 'react';
+import { PropTypes } from 'prop-types';
+import {
+  Grid, Button, Typography, Box,
+} from '@mui/material';
+
+import TextFieldForm from '../FieldForms/TextFieldForm/TextFieldForm';
+
+function CreateCompanyForm({
+  handleCreateCompany,
+  changeField,
+}) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleCreateCompany();
+  };
+
+  return (
+    <Box>
+      <form onSubmit={handleSubmit}>
+        <Typography variant="h1">
+          Ajouter un client / une compagnie
+        </Typography>
+        <Grid container spacing={1} mt={1}>
+          <Grid item xs={12} md={6}>
+            <TextFieldForm handleChange={changeField} />
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="outlined" type="submit">
+              Submit
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </Box>
+  );
+}
+
+CreateCompanyForm.propTypes = {
+  handleCreateCompany: PropTypes.func.isRequired,
+  changeField: PropTypes.func.isRequired,
+};
+
+export default React.memo(CreateCompanyForm);
