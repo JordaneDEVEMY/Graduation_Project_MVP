@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
@@ -8,27 +10,39 @@ import SheetList from '../SheetList/SheetList';
 import './card.scss';
 
 function Card({
-  className,
+  employees,
+  id,
+  isMobile,
+  site,
 }) {
   const theme = useTheme();
 
   return (
     <Box
-      className={className}
       sx={{
-        width: '300px', height: '500px', backgroundColor: theme.palette.grey[700], marginBottom: '10px',
+        position: 'relative',
+        backgroundColor: theme.palette.background.component,
+        color: theme.palette.text.primary,
+        p: theme.spacing(2),
+        width: `calc(300px + ${theme.spacing(4)})`,
+        overflow: 'hidden',
       }}
     >
-      <CardHeader />
-      <SheetList />
+      <CardHeader
+        site={site}
+      />
+      <SheetList employees={employees} cardIid={id} isMobile={isMobile} />
     </Box>
   );
 }
 
 Card.propTypes = {
-  className: PropTypes.string,
+  employees: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  site: PropTypes.object.isRequired,
 };
 Card.defaultProps = {
-  className: '',
+
 };
 export default React.memo(Card);

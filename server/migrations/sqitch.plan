@@ -6,4 +6,6 @@
 03_View_admin_planning 2022-03-03T13:41:07Z Hicham Chrita <student@teleporter> # Add admin view
 04_constraint_social_number 2022-03-04T13:42:08Z Hicham Chrita <student@teleporter> # Add domain for social security number
 05_View_user_colleagues 2022-03-07T12:21:27Z Hicham Chrita <student@teleporter> # Add user_colleagues View
+06_View_user_by_admin 2022-03-07T14:06:23Z Hicham Chrita <student@teleporter> # Add view user by admin
+07_Domain_mobile_number 2022-03-07T14:18:51Z Hicham Chrita <student@teleporter> # Add domain for mobile phone
 08_Function_Insert_user 2022-03-07T21:26:13Z Hicham Chrita <student@teleporter> # Function to add new user
