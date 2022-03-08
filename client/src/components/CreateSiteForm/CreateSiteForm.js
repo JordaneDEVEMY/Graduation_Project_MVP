@@ -5,13 +5,17 @@ import {
   Grid, Button, Typography, Box,
 } from '@mui/material';
 
+import NameFieldForm from '../FieldForms/NameFieldForm/NameFieldForm';
+import AddressFieldForm from '../FieldForms/AddressFieldForm/AddressFieldForm';
+import ZipFieldForm from '../FieldForms/ZipFieldForm/ZipFieldForm';
+
 function CreateUserForm({
-  handleCreateUser,
+  handleCreateSite,
   changeField,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCreateUser();
+    handleCreateSite();
   };
 
   return (
@@ -21,7 +25,20 @@ function CreateUserForm({
           Ajouter un site de production
         </Typography>
         <Grid container spacing={1} mt={1}>
-          <Grid item xs={12} />
+          <Grid item xs={12}>
+            <NameFieldForm handleChange={changeField} />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <AddressFieldForm
+              handleChange={changeField}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <ZipFieldForm
+              handleChange={changeField}
+            />
+          </Grid>
           <Grid item xs={12}>
             <Button variant="outlined" type="submit">
               Submit
@@ -34,7 +51,7 @@ function CreateUserForm({
 }
 
 CreateUserForm.propTypes = {
-  handleCreateUser: PropTypes.func.isRequired,
+  handleCreateSite: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
 };
 
