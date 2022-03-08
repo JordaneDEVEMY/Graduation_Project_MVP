@@ -4,68 +4,36 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { useTheme } from '@mui/material/styles';
 import Sheet from '../Sheet/Sheet';
 import sheetListBg from '../../Assets/images/sheet-bg.png';
 import './sheetlist.scss';
 
 function SheetList({
-  cardIid,
+  cardId,
   employees,
-  isMobile,
+  expandedSheet,
+  handleChange,
 }) {
   const theme = useTheme();
-  // accordion state
-  const [expandedSheet, setExpandedSheet] = React.useState('');
-  /**
-   * set expanded state
-   * @param {string} accordionId accordion id
-   * @returns {string|boolean} accordion id or false
-   */
-  const handleChange = (accordionId) => (event, isExpanded) => {
-    setExpandedSheet(isExpanded ? accordionId : '');
-  };
 
   return (
     <Box
+      id={`card-${cardId}`}
       sx={{
         position: 'relative',
       }}
     >
-      <Droppable droppableId={`card-${cardIid}`} type="SITES">
-        {(provided) => (
-          <Box
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
-            {employees.map((employee, index) => (
-              <Draggable key={`card-${cardIid}-sheet-${index}`} draggableId={`card-${cardIid}-sheet-${index}`} index={index}>
-                {(provided, snapshot) => (
-                  <Box
-                    sx={{
-                      opacity: snapshot.isDragging ? '0.5' : 1,
-                    }}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <Sheet
-                      key={index}
-                      index={index}
-                      handleChange={handleChange}
-                      expandedSheet={expandedSheet}
-                      isMobile={isMobile}
-                      {...employee}
-                    />
-                  </Box>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </Box>
-        )}
-      </Droppable>
+      {employees.map((employee, index) => (
+        <Sheet
+          key={index}
+          index={index}
+          handleChange={handleChange}
+          expandedSheet={expandedSheet}
+          isMobile={false}
+          {...employee}
+        />
+      ))}
       {employees.length % 10 !== 0 && (
       <Box
         sx={{
@@ -84,8 +52,7 @@ function SheetList({
 }
 
 SheetList.propTypes = {
-  cardIid: PropTypes.number.isRequired,
-  isMobile: PropTypes.bool.isRequired,
+  cardId: PropTypes.number.isRequired,
   employees: PropTypes.arrayOf(
     PropTypes.shape({
       color: PropTypes.string,
@@ -94,6 +61,8 @@ SheetList.propTypes = {
       lastname: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+  expandedSheet: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 SheetList.defaultProps = {
 };

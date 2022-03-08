@@ -74,7 +74,12 @@ function CardsWrapper({
     >
       <DragDropContext onDragEnd={onDragEnd}>
         {assignments.map((assignment) => (
-          <Card key={assignment.id} isMobile={false} {...assignment} employees={state[`card-${assignment.id}`]} />
+          <Card
+            key={assignment.id}
+            isMobile={false}
+            {...assignment}
+            employees={state[`card-${assignment.id}`]}
+          />
         ))}
       </DragDropContext>
     </Box>

@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import CardHeader from '../CardHeader/CardHeader';
 import SheetList from '../SheetList/SheetList';
+import SheetListDroppable from '../SheetListDroppable/SheetListDroppable';
 
 import './card.scss';
 
@@ -16,6 +17,18 @@ function Card({
   site,
 }) {
   const theme = useTheme();
+
+  // accordion state
+  const [expandedSheet, setExpandedSheet] = React.useState('');
+
+  /**
+   * set expanded state
+   * @param {string} accordionId accordion id
+   * @returns {string|boolean} accordion id or false
+   */
+  const handleChange = (accordionId) => (event, isExpanded) => {
+    setExpandedSheet(isExpanded ? accordionId : '');
+  };
 
   return (
     <Box
@@ -31,7 +44,23 @@ function Card({
       <CardHeader
         site={site}
       />
-      <SheetList employees={employees} cardIid={id} isMobile={isMobile} />
+      {isMobile
+        ? (
+          <SheetList
+            employees={employees}
+            cardId={id}
+            handleChange={handleChange}
+            expandedSheet={expandedSheet}
+          />
+        )
+        : (
+          <SheetListDroppable
+            employees={employees}
+            cardId={id}
+            handleChange={handleChange}
+            expandedSheet={expandedSheet}
+          />
+        )}
     </Box>
   );
 }

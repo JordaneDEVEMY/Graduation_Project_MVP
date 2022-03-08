@@ -59,7 +59,12 @@ function Carousel({
                   width: '100%',
                 }}
               >
-                <Card key={assignment.id} isMobile={isMobile} {...assignment} />
+                <Card
+                  key={assignment.id}
+                  isMobile={isMobile}
+                  {...assignment}
+                  employees={assignment.colleagues}
+                />
               </Box>
             ) : null}
           </div>
