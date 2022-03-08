@@ -11,7 +11,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} phone_number - User phone number
  * @property {string} mobile_number - User mobile number
  * @property {string} starting_date - User starting_date
- * @property {string} function - User function
+ * @property {string} fonction - User function
  * @property {number} employee_qualification_id - User qualification key
  * @property {string} label - User qualification label
  * @property {array.<Assignments>} assignments - User assignments
