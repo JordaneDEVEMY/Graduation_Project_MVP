@@ -11,7 +11,7 @@ DROP TABLE
 "assignment", 
 "employee", 
 "absence",
-"employee_qualification"; 
+"employee_qualification" CASCADE; 
 
 
 COMMIT;

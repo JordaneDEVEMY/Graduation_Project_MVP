@@ -17,7 +17,7 @@ CREATE OR REPLACE FUNCTION insert_user (u json) RETURNS employee AS $$
             "date_of_birth",
             "social_security_number",
             "starting_date",
-            "function",
+            "fonction",
             "avatar",
             "role_application",
             "employee_qualification_id"
