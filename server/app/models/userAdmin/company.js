@@ -8,8 +8,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} address - Company address
  * @property {number} zip_code - Company zip code
  * @property {string} type - Company type
- * @property {number} created_at - Db timestamptz of create
- * @property {number} updated_at - Db timestamptz of update
+ * @property {string} created_at - Db timestamptz of create
+ * @property {string} updated_at - Db timestamptz of update
  */
 
 /**

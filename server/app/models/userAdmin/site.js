@@ -10,8 +10,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} manager_name - Site manager name
  * @property {number} estimated_duration - Site estimated duration
  * @property {number} company_id - Site company id owner
- * @property {number} created_at - Db timestamptz of create
- * @property {number} updated_at - Db timestamptz of update
+ * @property {string} created_at - Db timestamptz of create
+ * @property {string} updated_at - Db timestamptz of update
  */
 
 /**

@@ -99,7 +99,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} role_application - User role in web application
  * @property {string} employee_qualification_id - FK of User qualification
  * @property {string} qualification_label - FK of User qualification label
- * @property {number} updated_at - timestamp for the update in DB
+ * @property {string} updated_at - timestamp for the update in DB
  */
 
 /**
