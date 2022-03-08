@@ -4,7 +4,7 @@ const userController = require('./api/user');
 const userAdminUserController = require('./api/userAdmin/userController');
 const userAdminSiteController = require('./api/userAdmin/siteController');
 const userAdminCompanyController = require('./api/userAdmin/companyController');
-const userAdminPlanningController = require('./api/userAdmin/planningController');
+const userAdminPlanningController = require('./api/userAdmin/planning/planningController');
 
 module.exports = {
   websiteController,

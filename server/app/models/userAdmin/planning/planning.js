@@ -1,5 +1,5 @@
-const client = require('../../config/database');
-const { ApiError } = require('../../helpers/errorHandler');
+const client = require('../../../config/database');
+const { ApiError } = require('../../../helpers/errorHandler');
 
 /**
  * @typedef {object} Week
