@@ -1,49 +1,28 @@
 /* eslint-disable no-alert */
 /* eslint-disable camelcase */
 import {
-  getOneCompany, createCompany, updateCompany, deleteCompany,
+  getAllCompanies, createCompany, updateCompany, deleteCompany,
 } from '../requests/companyRequest';
 import * as actions from '../actions';
 
 const companyMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
-    case actions.REQUEST_COMPANY_INFORMATIONS: {
-      const { company } = store.getState();
-      const response = await getOneCompany(company.id);
+    case actions.REQUEST_ALL_COMPANIES: {
+      const response = await getAllCompanies();
       if (response.status === 200) {
-        const {
-          id,
-          name,
-          address,
-          zip_code: zipCode,
-          type,
-          created_at: createdAt,
-          updated_at: updatedAt,
-        } = response.data;
-
-        store.dispatch(actions.actionGetCompanyInformations({
-          id,
-          name,
-          address,
-          zipCode,
-          type,
-          createdAt,
-          updatedAt,
-        }));
+        store.dispatch(actions.actionGetAllCompanies(response.data));
       }
       return;
     }
     case actions.CREATE_COMPANY: {
       const { company } = store.getState();
       const {
-        id,
         name,
         address,
         zipCode: zip_code,
         type,
       } = company;
       const companyDatas = {
-        id,
         name,
         address,
         zip_code,
@@ -51,7 +30,8 @@ const companyMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createCompany(companyDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionGetCompanyId(response.data.id));
+        store.dispatch(actions.actionResetCompanyInformations());
+        store.dispatch(actions.actionRequestAllCompanies());
         alert('Company created successfully');
       }
       return;
@@ -72,6 +52,8 @@ const companyMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateCompany(company.id, companyDatas);
       if (response.status === 200) {
+        store.dispatch(actions.actionResetCompanyInformations());
+        store.dispatch(actions.actionRequestAllCompanies());
         alert('Company updated successfully');
       }
       return;
@@ -81,6 +63,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const response = await deleteCompany(company.id);
       if (response.status === 200) {
         store.dispatch(actions.actionResetCompanyInformations());
+        store.dispatch(actions.actionRequestAllCompanies());
         alert('Company deleted successfully');
       }
       return;

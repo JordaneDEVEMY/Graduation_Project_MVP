@@ -61,6 +61,7 @@ function CreateUserForm({
               handleChange={changeField}
               type="text"
               nameValue="dateOfBirth"
+              placeHolder="yyyy-mm-dd"
               label="Date de naissance"
             />
           </Grid>
