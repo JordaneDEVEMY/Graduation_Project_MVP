@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import './searchcontainer.scss';
-import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete';
+import SearchAutocompleteContainer from '../../containers/SearchAutocompleteContainer';
 import SelectWeek from '../SelectWeek/SelectWeek';
 
 function SearchContainer({
@@ -25,7 +25,7 @@ function SearchContainer({
     >
       <SelectWeek date={date} isAdmin={isAdmin} handleCurrentWeek={handleCurrentWeek} />
       {isAdmin && (
-        <SearchAutocomplete />
+        <SearchAutocompleteContainer />
       )}
     </Box>
   );

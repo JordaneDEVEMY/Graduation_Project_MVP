@@ -1,10 +1,18 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SearchAutocomplete from '../components/SearchAutocomplete/SearchAutocomplete';
 
 function SearchAutocompleteContainer() {
+  const allEmployees = useSelector((state) => state.allEmployees.employees);
+  const allSites = useSelector((state) => state.allSites.sites);
+  const allCompanies = useSelector((state) => state.allCompanies.companies);
+
   return (
-    <SearchAutocomplete />
+    <SearchAutocomplete
+      allEmployees={allEmployees}
+      allSites={allSites}
+      allCompanies={allCompanies}
+    />
   );
 }
 
