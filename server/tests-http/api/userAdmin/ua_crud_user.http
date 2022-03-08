@@ -8,6 +8,9 @@
 ### 404
 GET {{ endpoint }}/azertyuiop
 
+### Get all users
+GET {{ endpoint }}
+
 ### Get one user
 GET {{ endpoint }}/1
 
