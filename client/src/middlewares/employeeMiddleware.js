@@ -23,7 +23,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
           date_of_birth: dateOfBirth,
           zip_code: zipCode,
           starting_date: startingDate,
-          function: fonction,
+          fonction,
           role_application: roleApplication,
           qualification_label: label,
         } = response.data;
