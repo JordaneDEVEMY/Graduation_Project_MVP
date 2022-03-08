@@ -8,6 +8,12 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case actions.GET_ADMIN_PLANNING:
+      return {
+        ...state,
+        weekStart: action.payload.weekStart,
+        planning: action.payload.planning,
+      };
     default:
       return state;
   }
