@@ -4,12 +4,14 @@ import loginMiddleware from '../middlewares/loginMiddleware';
 import userPlanningMiddleware from '../middlewares/userPlanningMiddleware';
 import employeeMiddleware from '../middlewares/employeeMiddleware';
 import siteMiddleware from '../middlewares/siteMiddleware';
+import adminPlanningMiddleware from '../middlewares/adminPlanningMiddleware';
 
 const allMiddlewares = applyMiddleware(
   loginMiddleware,
   userPlanningMiddleware,
   employeeMiddleware,
   siteMiddleware,
+  adminPlanningMiddleware,
 );
 
 //  to use redux dev tool
