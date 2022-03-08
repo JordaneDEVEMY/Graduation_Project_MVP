@@ -16,7 +16,7 @@ const loginMiddleware = (store) => (next) => async (action) => {
         } = response.data;
 
         const roleApplication = response.data.role_application;
-
+        store.dispatch(actions.actionResetPassword());
         store.dispatch(actions.actionGetUserInformations({
           id, firstname, lastname, avatar,
         }));
