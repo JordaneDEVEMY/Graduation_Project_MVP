@@ -1,6 +1,6 @@
 import apiAxios from './index';
 
-export async function getAllEmployee() {
+export async function getAllEmployees() {
   try {
     const response = await apiAxios.get('/api/admin/employee');
     return response;

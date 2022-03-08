@@ -1,6 +1,6 @@
 import apiAxios from './index';
 
-export async function getAllSite() {
+export async function getAllSites() {
   try {
     const response = await apiAxios.get('/api/admin/site');
     return response;

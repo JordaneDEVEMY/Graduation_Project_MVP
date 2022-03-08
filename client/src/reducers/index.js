@@ -7,6 +7,7 @@ import siteReducer from './site';
 import adminReducer from './admin';
 import companyReducer from './company';
 import allCompaniesReducer from './allCompanies';
+import allSitesReducer from './allSites';
 
 export default combineReducers({
   login: loginReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   admin: adminReducer,
   company: companyReducer,
   allCompanies: allCompaniesReducer,
+  allSites: allSitesReducer,
 });

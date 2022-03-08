@@ -10,7 +10,6 @@ const companyMiddleware = (store) => (next) => async (action) => {
     case actions.REQUEST_ALL_COMPANIES: {
       const response = await getAllCompanies();
       if (response.status === 200) {
-        console.log(response);
         store.dispatch(actions.actionGetAllCompanies(response.data));
       }
       return;
@@ -31,7 +30,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createCompany(companyDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionGetCompanyId(response.data.id));
+        store.dispatch(actions.actionResetCompanyInformations());
         store.dispatch(actions.actionRequestAllCompanies());
         alert('Company created successfully');
       }
@@ -53,6 +52,8 @@ const companyMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateCompany(company.id, companyDatas);
       if (response.status === 200) {
+        store.dispatch(actions.actionResetCompanyInformations());
+        store.dispatch(actions.actionRequestAllCompanies());
         alert('Company updated successfully');
       }
       return;
@@ -62,6 +63,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const response = await deleteCompany(company.id);
       if (response.status === 200) {
         store.dispatch(actions.actionResetCompanyInformations());
+        store.dispatch(actions.actionRequestAllCompanies());
         alert('Company deleted successfully');
       }
       return;
