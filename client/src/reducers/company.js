@@ -14,7 +14,7 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     // get site informations
-    case actions.GET_SITE_INFORMATIONS:
+    case actions.GET_COMPANY_INFORMATIONS:
       return {
         ...state,
         id: action.payload.id,
@@ -26,13 +26,13 @@ function reducer(state = initialState, action) {
         updatedAt: action.payload.updatedAt,
       };
       // set site information
-    case actions.SET_SITE_INFORMATION:
+    case actions.SET_COMPANY_INFORMATION:
       return {
         ...state,
         [action.payload.key]: action.payload.value,
       };
       // reset site informations
-    case actions.RESET_SITE_INFORMATIONS:
+    case actions.RESET_COMPANY_INFORMATIONS:
       return {
         ...state,
         id: initialState.id,
