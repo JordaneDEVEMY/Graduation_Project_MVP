@@ -12,7 +12,6 @@ import Footer from '../Footer/Footer';
 import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
-import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
@@ -57,7 +56,7 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <Planning isAdmin={isAdmin} />
+                    <PlanningContainer />
                     )}
                 />
 
@@ -68,7 +67,7 @@ function App({
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningContainer />
                     )}
                 />
               </Route>

@@ -1,46 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import { useTheme } from '@mui/material/styles';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography } from '@mui/material';
-import useWindowWidth from '../../hooks/useWindowWidth';
-import Carousel from '../Carousel/Carousel';
+import { Alert, Typography } from '@mui/material';
 import SearchContainer from '../SearchContainer/SearchContainer';
+import Cards from '../Cards/Cards';
+import dateFunctions from '../../utils/dateFunctions';
 import './planning.scss';
 
 function Planning({
-  isAdmin,
+  assignments,
+  handleStartDate,
+  startDate,
+  user,
 }) {
-  const [displayCarousel, setDisplayCarousel] = useState(false);
+  const { isAdmin } = user;
+  const week = dateFunctions.getWeek(startDate);
+  const { current: currentWeek } = week;
 
-  const theme = useTheme();
-  const width = useWindowWidth();
-  const minWidth = theme.breakpoints.values.sm;
+  // get only current week assignments
+  const currentAssignments = assignments.filter((assignment) => {
+    const startingDate = dateFunctions.getDate(assignment.starting_date).format('YYYY-MM-DD');
+    return currentWeek.dates.includes(startingDate);
+  });
 
-  useEffect(() => {
-    if (width < minWidth) {
-      setDisplayCarousel(true);
-    }
-
-    if (width >= minWidth) {
-      setDisplayCarousel(false);
-    }
-  }, [width]);
+  // has absence ?
+  const absences = currentAssignments.filter((assignment) => assignment.absence.id !== null);
 
   return (
     <>
-      <SearchContainer isAdmin={isAdmin} />
-      <Typography paragraph sx={{ color: 'text.primary' }}>
-        {`Planning en mode ${isAdmin ? 'admin' : 'user'}`}
+      <SearchContainer isAdmin={isAdmin} date={startDate} handleCurrentWeek={handleStartDate} />
+
+      {!isAdmin && absences.map((absence) => (
+        <Alert severity="success">
+          {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MM YYYY')} 
+          au ${dateFunctions.getDate(absence.ending_date).format('DD MM YYYY')} : 
+          ${absence.reason}`}
+        </Alert>
+      ))}
+
+      <Typography variant="h1" sx={{ textAlign: 'center' }}>
+        {'Planning d\'intervention'}
       </Typography>
-      {displayCarousel && (
-        <Carousel />
-      )}
+
+      {currentAssignments.length
+        ? (<Cards assignments={currentAssignments} week={currentWeek} isAdmin={isAdmin} />)
+        : (
+          <Typography sx={{ textAlign: 'center' }}>
+            Aucun planning à afficher.
+          </Typography>
+        )}
     </>
   );
 }
 
 Planning.propTypes = {
-  isAdmin: PropTypes.bool.isRequired,
+  assignments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
+  handleStartDate: PropTypes.func.isRequired,
+  startDate: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default React.memo(Planning);

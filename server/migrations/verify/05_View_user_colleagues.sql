@@ -2,6 +2,7 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT * FROM get_user_colleagues;
 
 ROLLBACK;
+                        
