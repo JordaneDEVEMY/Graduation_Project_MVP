@@ -27,7 +27,7 @@ function reducer(state = initialState, action) {
         estimatedDuration: action.payload.estimatedDuration,
         companyId: action.payload.companyId,
         createdAt: action.payload.createdAt,
-        updated: action.payload.updated,
+        updatedAt: action.payload.updatedAt,
       };
       // set site information
     case actions.SET_SITE_INFORMATION:
@@ -47,7 +47,7 @@ function reducer(state = initialState, action) {
         estimatedDuration: initialState.estimatedDuration,
         companyId: initialState.companyId,
         createdAt: initialState.createdAt,
-        updated: initialState.updated,
+        updatedAt: initialState.updatedAt,
       };
     default:
       return state;
