@@ -8,6 +8,9 @@ import {
 import NameFieldForm from '../FieldForms/NameFieldForm/NameFieldForm';
 import AddressFieldForm from '../FieldForms/AddressFieldForm/AddressFieldForm';
 import ZipFieldForm from '../FieldForms/ZipFieldForm/ZipFieldForm';
+import CompanyIdFieldForm from '../FieldForms/CompanyIdFieldForm/CompanyIdFieldForm';
+import EstimatedDurationFieldForm from '../FieldForms/EstimatedDurationFieldForm/EstimatedDurationFieldForm';
+import ManagerNameFieldForm from '../FieldForms/ManagerNameFieldForm/ManagerNameFieldForm';
 
 function CreateUserForm({
   handleCreateSite,
@@ -25,8 +28,11 @@ function CreateUserForm({
           Ajouter un site de production
         </Typography>
         <Grid container spacing={1} mt={1}>
-          <Grid item xs={12}>
+          <Grid item xs={12} md={6}>
             <NameFieldForm handleChange={changeField} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <CompanyIdFieldForm handleChange={changeField} />
           </Grid>
 
           <Grid item xs={12} md={6}>
@@ -36,6 +42,17 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <ZipFieldForm
+              handleChange={changeField}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <EstimatedDurationFieldForm
+              handleChange={changeField}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <ManagerNameFieldForm
               handleChange={changeField}
             />
           </Grid>
