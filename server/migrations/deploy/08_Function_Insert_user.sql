@@ -34,7 +34,7 @@ CREATE OR REPLACE FUNCTION insert_user (u json) RETURNS employee AS $$
             (u->> 'date_of_birth')::timestamptz,
             (u->> 'social_security_number')::text,
             (u->> 'starting_date')::timestamptz,
-            (u->> 'function')::text,
+            (u->> 'fonction')::text,
             (u->> 'avatar')::text,
             (u->> 'role_application')::text,
             (u->> 'employee_qualification_id')::int

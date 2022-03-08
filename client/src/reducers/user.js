@@ -75,6 +75,8 @@ function reducer(state = initialState, action) {
         lastname: initialState.lastname,
         password: initialState.password,
         avatar: initialState.avatar,
+        phoneNumber: initialState.phoneNumber,
+        mobileNumber: initialState.mobileNumber,
         isAdmin: initialState.isAdmin,
         label: initialState.label,
         assignments: initialState.assignments,

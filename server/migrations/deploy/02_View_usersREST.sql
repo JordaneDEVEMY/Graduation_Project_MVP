@@ -13,7 +13,7 @@ CREATE VIEW get_user_rest AS
         "employee"."phone_number",
         "employee"."mobile_number", 
         "employee"."starting_date", 
-        "employee"."function", 
+        "employee"."fonction", 
         "employee"."employee_qualification_id",
         "employee_qualification"."label",
         json_agg

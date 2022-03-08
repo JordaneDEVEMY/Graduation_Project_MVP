@@ -2,6 +2,23 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT * FROM insert_user(
+	'{
+		"firstname": "test",
+		"lastname": "test",
+		"email": "test",
+		"password": "test",
+		"phone_number": "test",
+		"mobile_number": "test",
+		"address": "test",
+		"zip_code": 31100,
+		"date_of_birth": "2022-03-07 00:00:00+00",
+		"social_security_number": "test",
+		"starting_date": "2022-03-07 00:00:00+00",
+		"fonction": "test",
+		"avatar": "test",
+		"role_application": "test",
+		"employee_qualification_id": 1
+	}');
 
 ROLLBACK;
