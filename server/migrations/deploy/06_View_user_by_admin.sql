@@ -16,7 +16,7 @@ CREATE VIEW get_user_by_admin AS
             "employee"."date_of_birth", 
             "employee"."starting_date", 
             "employee"."avatar", 
-            "employee"."function", 
+            "employee"."fonction", 
             "employee"."role_application", 
             "employee_qualification"."label" AS qualification_label
         FROM "employee"

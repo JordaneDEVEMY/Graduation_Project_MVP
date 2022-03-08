@@ -24,7 +24,7 @@ module.exports = Joi.object({
     .iso()
     .required(),
   avatar: Joi.string(),
-  function: Joi.string()
+  fonction: Joi.string()
     .required(),
   role_application: Joi.string()
     .required(),

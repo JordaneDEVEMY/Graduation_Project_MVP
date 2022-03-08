@@ -15,7 +15,7 @@ SELECT * FROM insert_user(
 		"date_of_birth": "2022-03-07 00:00:00+00",
 		"social_security_number": "test",
 		"starting_date": "2022-03-07 00:00:00+00",
-		"function": "test",
+		"fonction": "test",
 		"avatar": "test",
 		"role_application": "test",
 		"employee_qualification_id": 1
