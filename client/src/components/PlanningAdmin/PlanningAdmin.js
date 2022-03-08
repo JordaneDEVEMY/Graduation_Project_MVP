@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
@@ -11,8 +12,56 @@ function PlanningAdmin({
   planning,
   startDate,
 }) {
-  console.log('planning', planning);
-  const companies = planning;
+  const companies = [];
+  console.log('startDate', startDate);
+  planning.forEach(({ company_name, sites }) => {
+    console.log(company_name, sites);
+    const company = {
+      name: company_name,
+      assignments: [],
+    };
+
+    // group assignments by company sites
+    const companySitesIds = [];
+    sites.forEach(({ id, site_name: name }) => {
+      if (!companySitesIds.includes(id)) {
+        company.assignments.push({
+          site: {
+            id,
+            name,
+          },
+        });
+        companySitesIds.push(id);
+      }
+    });
+
+    // get each assignment of company
+    companySitesIds.forEach((siteId, index) => {
+      sites.forEach(({
+        assignments: assignment,
+        color,
+        employees: colleagues,
+        id,
+      }) => {
+        if (id === siteId) {
+          const { id: assignmentId, starting_date, ending_date } = assignment;
+          const assignmentItem = company.assignments[index];
+          company.assignments[index] = {
+            ...assignmentItem[index],
+            id: assignmentId,
+            color,
+            starting_date,
+            ending_date,
+            colleagues,
+          };
+        }
+      });
+    });
+
+    companies.push(company);
+  });
+
+  console.log('planning Admin', companies);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
 
@@ -63,11 +112,11 @@ PlanningAdmin.propTypes = {
       company_name: PropTypes.string.isRequired,
       sites: PropTypes.arrayOf(
         PropTypes.shape({
-          assignments: PropTypes.arrayOf(
-            PropTypes.shape({
-              id: PropTypes.number.isRequired,
-            }).isRequired,
-          ).isRequired,
+          id: PropTypes.number.isRequired,
+          site_name: PropTypes.string.isRequired,
+          assignments: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+          }).isRequired,
         }).isRequired,
       ).isRequired,
     }).isRequired,
