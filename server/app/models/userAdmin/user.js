@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const client = require('../../config/database');
 const { ApiError } = require('../../helpers/errorHandler');
 
@@ -15,7 +16,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
  * @property {number} employee_qualification_id - FK of User qualification
  * @property {string} qualification_label - FK of User qualification label
@@ -35,7 +36,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
  * @property {string} qualification_label - FK of User qualification label
  */
@@ -53,7 +54,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
  * @property {string} qualification_label - FK of User qualification label
  */
@@ -73,9 +74,9 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {number} employee_qualification_id - FK of User qualification
  * @property {string} qualification_label - FK of User qualification label
  * @property {string} created_at - timestamp for the create in DB
  */
@@ -94,9 +95,9 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
- * @property {string} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} employee_qualification_id - FK of User qualification
  * @property {string} qualification_label - FK of User qualification label
  * @property {number} updated_at - timestamp for the update in DB
  */
@@ -157,7 +158,7 @@ module.exports = {
           "date_of_birth",
           "social_security_number",
           "starting_date",
-          "function",
+          "fonction",
           "avatar",
           "role_application",
           "employee_qualification_id"
@@ -177,7 +178,7 @@ module.exports = {
         "date_of_birth",
         "social_security_number",
         "starting_date",
-        "function",
+        "fonction",
         "avatar",
         "role_application",
         "employee_qualification_id",
@@ -194,7 +195,7 @@ module.exports = {
         user.date_of_birth,
         user.social_security_number,
         user.starting_date,
-        user.function,
+        user.fonction,
         user.avatar,
         user.role_application,
         qualificationId.rows[0].id,
@@ -239,7 +240,7 @@ module.exports = {
         "date_of_birth" = $9,
         "social_security_number" = $10,
         "starting_date" = $11,
-        "function" = $12,
+        "fonction" = $12,
         "avatar" = $13,
         "role_application" = $14,
         "employee_qualification_id" = $15,
@@ -257,7 +258,7 @@ module.exports = {
         "zip_code",
         "starting_date",
         "avatar",
-        "function",
+        "fonction",
         "role_application",
         "employee_qualification_id",
         "updated_at";`,
@@ -273,7 +274,7 @@ module.exports = {
         user.date_of_birth,
         user.social_security_number,
         user.starting_date,
-        user.function,
+        user.fonction,
         user.avatar,
         user.role_application,
         qualificationId.rows[0].id,
@@ -282,7 +283,7 @@ module.exports = {
 
     Object.assign(userToSave.rows[0], { qualification_label: qualificationId.rows[0].label });
 
-    // ? Standby Code for update function in SQL
+    // ? Standby Code for update fonction in SQL
     // const userToUpdate = result.rows[0];
     // const userUpdated = { ...userToUpdate, ...user };
 
