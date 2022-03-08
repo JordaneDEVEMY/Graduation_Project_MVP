@@ -7,6 +7,8 @@ const initialState = {
   lastname: '',
   password: '',
   avatar: '',
+  phoneNumber: '',
+  mobileNumber: '',
   label: '',
   isAdmin: false,
   assignments: [],
@@ -39,6 +41,18 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         label: action.payload,
+      };
+
+    case actions.GET_USER_PHONENUMBER:
+      return {
+        ...state,
+        phoneNumber: action.payload,
+      };
+
+    case actions.GET_USER_MOBILENUMBER:
+      return {
+        ...state,
+        mobileNumber: action.payload,
       };
 
     case actions.SET_USER_ISADMIN:
