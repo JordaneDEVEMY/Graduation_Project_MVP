@@ -2,6 +2,13 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT * FROM insert_site(
+	'{
+		"name": "test1",
+		"address": "test1",
+		"zip_code": "75005",
+		"manager_name": "Hicham chrita",
+		"company_id": "1"
+	}');
 
 ROLLBACK;
