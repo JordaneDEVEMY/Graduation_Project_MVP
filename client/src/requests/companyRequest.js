@@ -1,5 +1,14 @@
 import apiAxios from './index';
 
+export async function getAllCompany() {
+  try {
+    const response = await apiAxios.get('/api/admin/company');
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
+
 export async function getOneCompany(id) {
   try {
     const response = await apiAxios.get(`/api/admin/company/${id}`);

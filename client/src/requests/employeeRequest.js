@@ -1,5 +1,14 @@
 import apiAxios from './index';
 
+export async function getAllEmployee() {
+  try {
+    const response = await apiAxios.get('/api/admin/employee');
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
+
 export async function getOneEmployee(id) {
   try {
     const response = await apiAxios.get(`/api/admin/user/${id}`);

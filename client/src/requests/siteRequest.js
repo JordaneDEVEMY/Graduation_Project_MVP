@@ -1,5 +1,14 @@
 import apiAxios from './index';
 
+export async function getAllSite() {
+  try {
+    const response = await apiAxios.get('/api/admin/site');
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
+
 export async function getOneSite(id) {
   try {
     const response = apiAxios.get(`/api/admin/site/${id}`);
