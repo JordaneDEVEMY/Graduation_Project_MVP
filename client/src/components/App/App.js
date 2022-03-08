@@ -21,6 +21,7 @@ import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
 import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
 import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
+import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
 
 function App({
   isAdmin,
@@ -72,6 +73,12 @@ function App({
                   path="sites"
                   element={(
                     <CreateSiteFormContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path="customers"
+                  element={(
+                    <CreateCompanyFormContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
