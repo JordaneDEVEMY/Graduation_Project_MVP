@@ -5,16 +5,14 @@ import {
 } from '@mui/material';
 
 function RoleFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
-    <FormControl>
+    <FormControl
+      required
+    >
       <FormLabel>Rôle</FormLabel>
       <RadioGroup
-        name="role_application"
-        value={formValues.role_application}
-        onChange={handleInputChange}
         row
       >
         <FormControlLabel
@@ -22,12 +20,16 @@ function RoleFieldForm({
           value="admin"
           control={<Radio size="small" />}
           label="Administrateur"
+          name="roleApplication"
+          onChange={(event) => handleChange('roleApplication', event.target.value)}
         />
         <FormControlLabel
           key="user"
           value="user"
           control={<Radio size="small" />}
           label="Employé"
+          name="roleApplication"
+          onChange={(event) => handleChange('roleApplication', event.target.value)}
         />
       </RadioGroup>
     </FormControl>
@@ -35,10 +37,7 @@ function RoleFieldForm({
 }
 
 RoleFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    role_application: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(RoleFieldForm);

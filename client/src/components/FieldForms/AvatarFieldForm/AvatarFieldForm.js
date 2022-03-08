@@ -5,26 +5,22 @@ import {
 } from '@mui/material';
 
 function AvatarFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
+      required
       type="text"
       name="avatar"
       label="Avatar"
       variant="outlined"
-      value={formValues.avatar}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('avatar', event.target.value)}
     />
   );
 }
 
 AvatarFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(AvatarFieldForm);

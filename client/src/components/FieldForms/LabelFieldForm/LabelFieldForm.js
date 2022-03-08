@@ -4,23 +4,23 @@ import {
   TextField,
 } from '@mui/material';
 
-function ZipFieldForm({
+function LabelFieldForm({
   handleChange,
 }) {
   return (
     <TextField
       required
-      type="number"
-      name="zipCode"
-      label="Code postal"
+      type="text"
+      name="label"
+      label="Label du poste occupé"
       variant="outlined"
-      onChange={(event) => handleChange('zipCode', event.target.value)}
+      onChange={(event) => handleChange('label', event.target.value)}
     />
   );
 }
 
-ZipFieldForm.propTypes = {
+LabelFieldForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
 };
 
-export default React.memo(ZipFieldForm);
+export default React.memo(LabelFieldForm);

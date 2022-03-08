@@ -5,8 +5,7 @@ import {
 } from '@mui/material';
 
 function EmailFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
@@ -15,17 +14,13 @@ function EmailFieldForm({
       name="email"
       label="E-mail"
       variant="outlined"
-      value={formValues.email}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('email', event.target.value)}
     />
   );
 }
 
 EmailFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(EmailFieldForm);

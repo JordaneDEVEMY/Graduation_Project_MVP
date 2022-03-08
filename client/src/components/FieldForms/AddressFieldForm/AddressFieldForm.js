@@ -5,27 +5,22 @@ import {
 } from '@mui/material';
 
 function AddressFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
       required
       type="text"
-      name="address"
+      name="adress"
       label="Adresse postale"
       variant="outlined"
-      value={formValues.address}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('adress', event.target.value)}
     />
   );
 }
 
 AddressFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    address: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(AddressFieldForm);

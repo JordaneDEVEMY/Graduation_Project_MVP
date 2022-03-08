@@ -5,8 +5,7 @@ import {
 } from '@mui/material';
 
 function FirstnameFieldForm({
-  handleInputChange,
-  firstname,
+  handleChange,
 }) {
   return (
     <TextField
@@ -14,16 +13,14 @@ function FirstnameFieldForm({
       type="text"
       name="firstname"
       label="Prénom"
-      value={firstname}
       variant="outlined"
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('firstname', event.target.value)}
     />
   );
 }
 
 FirstnameFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  firstname: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(FirstnameFieldForm);

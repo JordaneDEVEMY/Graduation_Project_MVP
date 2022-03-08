@@ -5,27 +5,22 @@ import {
 } from '@mui/material';
 
 function SocialNumberFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
       required
       type="number"
-      name="social_security_number"
+      name="socialSecurityNumber"
       label="Numéro de sécurité sociale"
       variant="outlined"
-      value={formValues.social_security_number}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('socialSecurityNumber', event.target.value)}
     />
   );
 }
 
 SocialNumberFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    social_security_number: PropTypes.number.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(SocialNumberFieldForm);

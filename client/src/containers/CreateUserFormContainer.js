@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { actionCreateEmployee } from '../actions/employee';
+import { useDispatch } from 'react-redux';
+import { actionCreateEmployee, actionSetEmployeeInformation } from '../actions/employee';
 import CreateUserForm from '../components/CreateUserForm/CreateUserForm';
 
 function CreateUserFormContainer() {
   const dispatch = useDispatch();
 
-  const firstnameValue = useSelector((state) => state.employee.firstname);
+  const changeField = (key, value) => {
+    dispatch(actionSetEmployeeInformation(key, value));
+  };
 
   const handleCreateUser = () => {
     dispatch(actionCreateEmployee());
@@ -14,7 +16,7 @@ function CreateUserFormContainer() {
 
   return (
     <CreateUserForm
-      firstnameValue={firstnameValue}
+      changeField={changeField}
       handleCreateUser={handleCreateUser}
     />
   );

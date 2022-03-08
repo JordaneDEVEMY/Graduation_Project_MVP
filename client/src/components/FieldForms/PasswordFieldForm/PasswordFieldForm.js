@@ -7,8 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function PasswordlFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
@@ -18,8 +17,7 @@ function PasswordlFieldForm({
       type={passwordVisibility ? 'text' : 'password'}
       label="password"
       variant="outlined"
-      value={formValues.password}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('password', event.target.value)}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -37,10 +35,7 @@ function PasswordlFieldForm({
 }
 
 PasswordlFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    password: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(PasswordlFieldForm);

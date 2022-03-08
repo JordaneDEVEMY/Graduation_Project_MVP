@@ -5,8 +5,7 @@ import {
 } from '@mui/material';
 
 function LastnameFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
@@ -15,17 +14,13 @@ function LastnameFieldForm({
       name="lastname"
       label="Nom"
       variant="outlined"
-      value={formValues.lastname}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('lastname', event.target.value)}
     />
   );
 }
 
 LastnameFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    lastname: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(LastnameFieldForm);

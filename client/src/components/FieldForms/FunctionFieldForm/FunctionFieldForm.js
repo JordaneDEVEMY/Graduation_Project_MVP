@@ -5,26 +5,22 @@ import {
 } from '@mui/material';
 
 function FunctionFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
+      required
       type="text"
-      name="function"
-      label="Poste occupé"
+      name="fonction"
+      label="Fonction"
       variant="outlined"
-      value={formValues.function}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('fonction', event.target.value)}
     />
   );
 }
 
 FunctionFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    function: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(FunctionFieldForm);

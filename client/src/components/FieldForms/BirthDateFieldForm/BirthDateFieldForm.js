@@ -5,27 +5,22 @@ import {
 } from '@mui/material';
 
 function BirthDateFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
       required
       type="date"
-      name="date_of_birth"
+      name="dateOfBirth"
       label="Date de naissance"
       variant="outlined"
-      value={formValues.date_of_birth}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('dateOfBirth', event.target.value)}
     />
   );
 }
 
 BirthDateFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    date_of_birth: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(BirthDateFieldForm);

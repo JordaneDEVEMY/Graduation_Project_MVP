@@ -5,27 +5,22 @@ import {
 } from '@mui/material';
 
 function StartingDateFieldForm({
-  handleInputChange,
-  formValues,
+  handleChange,
 }) {
   return (
     <TextField
       required
       type="date"
-      name="starting_date"
+      name="startingDate"
       label="Date de début"
       variant="outlined"
-      value={formValues.starting_date}
-      onChange={handleInputChange}
+      onChange={(event) => handleChange('startingDate', event.target.value)}
     />
   );
 }
 
 StartingDateFieldForm.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    starting_date: PropTypes.string.isRequired,
-  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default React.memo(StartingDateFieldForm);
