@@ -4,23 +4,23 @@ import {
   TextField,
 } from '@mui/material';
 
-function FunctionFieldForm({
+function ManagerNameFieldForm({
   handleChange,
 }) {
   return (
     <TextField
       required
       type="text"
-      name="fonction"
-      label="Fonction"
+      name="managerName"
+      label="Nom du manager"
       variant="outlined"
-      onChange={(event) => handleChange('fonction', event.target.value)}
+      onChange={(event) => handleChange('managerName', event.target.value)}
     />
   );
 }
 
-FunctionFieldForm.propTypes = {
+ManagerNameFieldForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
 };
 
-export default React.memo(FunctionFieldForm);
+export default React.memo(ManagerNameFieldForm);

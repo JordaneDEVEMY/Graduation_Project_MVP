@@ -4,7 +4,7 @@ import * as actions from '../actions';
 const initialState = {
   id: 0,
   name: '',
-  adress: '',
+  address: '',
   zipCode: 0,
   type: '',
   createdAt: 0,
@@ -14,30 +14,30 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     // get site informations
-    case actions.GET_SITE_INFORMATIONS:
+    case actions.GET_COMPANY_INFORMATIONS:
       return {
         ...state,
         id: action.payload.id,
         name: action.payload.name,
-        adress: action.payload.address,
+        address: action.payload.address,
         zipCode: action.payload.zipCode,
         type: action.payload.type,
         createdAt: action.payload.createdAt,
         updatedAt: action.payload.updatedAt,
       };
       // set site information
-    case actions.SET_SITE_INFORMATION:
+    case actions.SET_COMPANY_INFORMATION:
       return {
         ...state,
         [action.payload.key]: action.payload.value,
       };
       // reset site informations
-    case actions.RESET_SITE_INFORMATIONS:
+    case actions.RESET_COMPANY_INFORMATIONS:
       return {
         ...state,
         id: initialState.id,
         name: initialState.name,
-        adress: initialState.adress,
+        address: initialState.address,
         zipCode: initialState.zipCode,
         type: initialState.type,
         createdAt: initialState.createdAt,

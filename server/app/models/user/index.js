@@ -4,8 +4,8 @@ const { ApiError } = require('../../helpers/errorHandler');
 /**
  * @typedef {object} RestUser
  * @property {number} id - Database primary key of User
- * @property {number} social_security_number - User SSN
- * @property {number} date_of_birth - User date_of_birth
+ * @property {string} social_security_number - User SSN
+ * @property {string} date_of_birth - User date_of_birth
  * @property {string} address - User address
  * @property {number} zip_code - User zip_code
  * @property {string} phone_number - User phone number
@@ -14,7 +14,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} fonction - User function
  * @property {number} employee_qualification_id - User qualification key
  * @property {string} label - User qualification label
- * @property {array.<Assignments>} assignments - User assignments
+ * @property {string} color - User color for card
+ * @property {array.<UserAssignments>} assignments - User assignments
  */
 
 /**
@@ -27,7 +28,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  */
 
 /**
- * @typedef {array} Assignments
+ * @typedef {array} UserAssignments
  * @property {number} id - Database primary key of assignment
  * @property {string} starting_date - assignment starting date
  * @property {string} ending_date - assignment ending date
@@ -63,12 +64,14 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {number} id - Database primary key of this colleague
  * @property {string} firstname - Colleagues firstname
  * @property {string} lastname - Colleagues lastname
- * @property {number} phone_number - User phone number
- * @property {number} mobile_number - User mobile number
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {number} site_id - Colleagues site assignment
  * @property {string} starting_date - Colleagues starting date of assignment
  * @property {string} ending_date - Colleagues ending date of assignment
+ * @property {string} color - User color for card
  */
+
 module.exports = {
   /**
    * Find an User by his id

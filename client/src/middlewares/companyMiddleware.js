@@ -13,7 +13,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
         const {
           id,
           name,
-          adress,
+          address,
           zip_code: zipCode,
           type,
           created_at: createdAt,
@@ -23,7 +23,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actions.actionGetCompanyInformations({
           id,
           name,
-          adress,
+          address,
           zipCode,
           type,
           createdAt,
@@ -37,14 +37,14 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const {
         id,
         name,
-        adress,
+        address,
         zipCode: zip_code,
         type,
       } = company;
       const companyDatas = {
         id,
         name,
-        adress,
+        address,
         zip_code,
         type,
       };
@@ -58,13 +58,13 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const { company } = store.getState();
       const {
         name,
-        adress,
+        address,
         zipCode: zip_code,
         type,
       } = company;
       const companyDatas = {
         name,
-        adress,
+        address,
         zip_code,
         type,
       };

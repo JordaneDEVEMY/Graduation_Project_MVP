@@ -4,23 +4,23 @@ import {
   TextField,
 } from '@mui/material';
 
-function ZipFieldForm({
+function EstimatedDurationFieldForm({
   handleChange,
 }) {
   return (
     <TextField
       required
       type="number"
-      name="zipCode"
-      label="Code postal"
+      name="estimatedDuration"
+      label="Durée estimée"
       variant="outlined"
-      onChange={(event) => handleChange('zipCode', event.target.value)}
+      onChange={(event) => handleChange('estimatedDuration', event.target.value)}
     />
   );
 }
 
-ZipFieldForm.propTypes = {
+EstimatedDurationFieldForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
 };
 
-export default React.memo(ZipFieldForm);
+export default React.memo(EstimatedDurationFieldForm);

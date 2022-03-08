@@ -4,23 +4,23 @@ import {
   TextField,
 } from '@mui/material';
 
-function NameFieldForm({
+function CompanyIdFieldForm({
   handleChange,
 }) {
   return (
     <TextField
       required
-      type="text"
-      name="name"
-      label="Nom"
-      onChange={(event) => handleChange('name', event.target.value)}
+      type="number"
+      name="companyId"
+      label="ID client"
       variant="outlined"
+      onChange={(event) => handleChange('companyId', event.target.value)}
     />
   );
 }
 
-NameFieldForm.propTypes = {
+CompanyIdFieldForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
 };
 
-export default React.memo(NameFieldForm);
+export default React.memo(CompanyIdFieldForm);

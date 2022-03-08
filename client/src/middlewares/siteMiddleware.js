@@ -13,7 +13,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
         const {
           id,
           name,
-          adress,
+          address,
           zip_code: zipCode,
           manager_name: managerName,
           estimated_duration: estimatedDuration,
@@ -25,7 +25,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actions.actionGetSiteInformations({
           id,
           name,
-          adress,
+          address,
           zipCode,
           managerName,
           estimatedDuration,
@@ -40,7 +40,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const { site } = store.getState();
       const {
         name,
-        adress,
+        address,
         zipCode: zip_code,
         managerName: manager_name,
         estimatedDuration: estimated_duration,
@@ -48,7 +48,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       } = site;
       const siteDatas = {
         name,
-        adress,
+        address,
         zip_code,
         manager_name,
         estimated_duration,
@@ -64,7 +64,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const { site } = store.getState();
       const {
         name,
-        adress,
+        address,
         zipCode: zip_code,
         managerName: manager_name,
         estimatedDuration: estimated_duration,
@@ -72,7 +72,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       } = site;
       const siteDatas = {
         name,
-        adress,
+        address,
         zip_code,
         manager_name,
         estimated_duration,

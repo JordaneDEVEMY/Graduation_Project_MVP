@@ -4,22 +4,8 @@ import { PropTypes } from 'prop-types';
 import {
   Grid, Button, Typography, Divider, Box,
 } from '@mui/material';
-
-import FirstnameFieldForm from '../FieldForms/FirstnameFieldForm/FirstnameFieldForm';
-import LastnameFieldForm from '../FieldForms/LastnameFieldForm/LastnameFieldForm';
-import EmailFieldForm from '../FieldForms/EmailFieldForm/EmailFieldForm';
-import PhoneNumberFieldForm from '../FieldForms/PhoneNumberFieldForm/PhoneNumberFieldForm';
-import MobileNumberFieldForm from '../FieldForms/MobileNumberFieldForm/MobileNumberFieldForm';
-import PasswordFieldForm from '../FieldForms/PasswordFieldForm/PasswordFieldForm';
-import SocialNumberFieldForm from '../FieldForms/SocialNumberFieldForm/SocialNumberFieldForm';
-import BirthDateFieldForm from '../FieldForms/BirthDateFieldForm/BirthDateFieldForm';
-import AddressFieldForm from '../FieldForms/AddressFieldForm/AddressFieldForm';
-import ZipFieldForm from '../FieldForms/ZipFieldForm/ZipFieldForm';
-import StartingDateFieldForm from '../FieldForms/StartingDateFieldForm/StartingDateFieldForm';
-import AvatarFieldForm from '../FieldForms/AvatarFieldForm/AvatarFieldForm';
-import FunctionFieldForm from '../FieldForms/FunctionFieldForm/FunctionFieldForm';
-import RoleFieldForm from '../FieldForms/RoleFieldForm/RoleFieldForm';
-import LabelFieldForm from '../FieldForms/LabelFieldForm/LabelFieldForm';
+import RoleFieldForm from '../FieldForms/RoleFieldForm';
+import TextInput from '../FieldForms/TextInput';
 
 function CreateUserForm({
   handleCreateUser,
@@ -47,48 +33,83 @@ function CreateUserForm({
         <Divider />
         <Grid container spacing={1} mt={1}>
           <Grid item xs={12} md={6}>
-            <FirstnameFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="firstname"
+              label="Prénom"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <LastnameFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="lastname"
+              label="Nom"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <EmailFieldForm
+            <TextInput
               handleChange={changeField}
+              type="email"
+              nameValue="email"
+              label="E-mail"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <BirthDateFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="dateOfBirth"
+              label="Date de naissance"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <PhoneNumberFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="phoneNumber"
+              label="Téléphone Fixe"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <MobileNumberFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="mobileNumber"
+              label="Téléphone Portable"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <AddressFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="address"
+              label="Adresse"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <ZipFieldForm
+            <TextInput
               handleChange={changeField}
+              type="number"
+              nameValue="zipCode"
+              label="Code Postal"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <SocialNumberFieldForm
+            <TextInput
               handleChange={changeField}
+              type="number"
+              nameValue="socialSecurityNumber"
+              label="Numéro Sécurité Sociale"
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextInput
+              handleChange={changeField}
+              type="password"
+              nameValue="password"
+              label="Mot de passe"
             />
           </Grid>
         </Grid>
@@ -100,29 +121,36 @@ function CreateUserForm({
         <Grid container spacing={1} mt={1}>
 
           <Grid item xs={12} md={6}>
-            <StartingDateFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="startingDate"
+              label="Date d'entrée"
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <FunctionFieldForm
+            <TextInput
               handleChange={changeField}
+              type="text"
+              nameValue="fonction"
+              label="Fonction"
             />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <AvatarFieldForm
-              handleChange={changeField}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <LabelFieldForm
-              handleChange={changeField}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <PasswordFieldForm
-              handleChange={changeField}
-            />
+            <Grid item xs={12} md={6}>
+              <TextInput
+                handleChange={changeField}
+                type="text"
+                nameValue="avatar"
+                label="Avatar"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                handleChange={changeField}
+                type="text"
+                nameValue="label"
+                label="Label"
+              />
+            </Grid>
           </Grid>
 
           <Grid item xs={12}>

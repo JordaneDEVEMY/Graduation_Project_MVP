@@ -7,20 +7,20 @@ import {
 
 import TextInput from '../FieldForms/TextInput';
 
-function CreateUserForm({
-  handleCreateSite,
+function CreateCompanyForm({
+  handleCreateCompany,
   changeField,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCreateSite();
+    handleCreateCompany();
   };
 
   return (
     <Box>
       <form onSubmit={handleSubmit}>
         <Typography variant="h1">
-          Ajouter un site de production
+          Ajouter un client / une compagnie
         </Typography>
         <Grid container spacing={1} mt={1}>
           <Grid item xs={12} md={6}>
@@ -34,12 +34,11 @@ function CreateUserForm({
           <Grid item xs={12} md={6}>
             <TextInput
               handleChange={changeField}
-              type="number"
-              nameValue="companyId"
-              label="ID Compagnie"
+              type="text"
+              nameValue="type"
+              label="Type"
             />
           </Grid>
-
           <Grid item xs={12} md={6}>
             <TextInput
               handleChange={changeField}
@@ -56,23 +55,6 @@ function CreateUserForm({
               label="Code postal"
             />
           </Grid>
-
-          <Grid item xs={12} md={6}>
-            <TextInput
-              handleChange={changeField}
-              type="number"
-              nameValue="estimatedDuration"
-              label="Durée estimée"
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextInput
-              handleChange={changeField}
-              type="text"
-              nameValue="managerName"
-              label="Nom du manager"
-            />
-          </Grid>
           <Grid item xs={12}>
             <Button variant="outlined" type="submit">
               Submit
@@ -84,9 +66,9 @@ function CreateUserForm({
   );
 }
 
-CreateUserForm.propTypes = {
-  handleCreateSite: PropTypes.func.isRequired,
+CreateCompanyForm.propTypes = {
+  handleCreateCompany: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
 };
 
-export default React.memo(CreateUserForm);
+export default React.memo(CreateCompanyForm);
