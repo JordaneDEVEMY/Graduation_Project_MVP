@@ -9,6 +9,8 @@ import {
 import FirstnameFieldForm from '../FieldForms/FirstnameFieldForm/FirstnameFieldForm';
 import LastnameFieldForm from '../FieldForms/LastnameFieldForm/LastnameFieldForm';
 import EmailFieldForm from '../FieldForms/EmailFieldForm/EmailFieldForm';
+import PhoneNumberFieldForm from '../FieldForms/PhoneNumberFieldForm/PhoneNumberFieldForm';
+import MobileNumberFieldForm from '../FieldForms/MobileNumberFieldForm/MobileNumberFieldForm';
 import PasswordFieldForm from '../FieldForms/PasswordFieldForm/PasswordFieldForm';
 import SocialNumberFieldForm from '../FieldForms/SocialNumberFieldForm/SocialNumberFieldForm';
 import BirthDateFieldForm from '../FieldForms/BirthDateFieldForm/BirthDateFieldForm';
@@ -54,6 +56,15 @@ function CreateUserForm({
               handleChange={changeField}
             />
           </Grid>
+
+          <PhoneNumberFieldForm
+            handleChange={changeField}
+          />
+
+          <MobileNumberFieldForm
+            handleChange={changeField}
+          />
+
           <Grid item xs={12}>
             <PasswordFieldForm
               handleChange={changeField}

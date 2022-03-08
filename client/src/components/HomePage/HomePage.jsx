@@ -14,7 +14,6 @@ import teamIcon from '../../Assets/images/team-icon.svg';
 import encartImg from '../../Assets/images/Design team-amico.svg';
 import calendarImg from '../../Assets/images/CalendarImgSvg.svg';
 import LoginContainer from '../../containers/LoginContainer';
-import CreateUserFormContainer from '../../containers/CreateUserFormContainer';
 
 function HomePage() {
   const theme = useTheme();
@@ -22,7 +21,6 @@ function HomePage() {
 
   return (
     <>
-      <CreateUserFormContainer />
       <Box
         sx={{
           display: 'flex',
