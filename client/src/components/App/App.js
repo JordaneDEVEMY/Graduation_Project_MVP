@@ -19,6 +19,7 @@ import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
+import CreateUserFormContainer from '../../containers/CreateUserFormContainer';
 
 function App({
   isAdmin,
@@ -57,7 +58,13 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <Planning isAdmin={isAdmin} />
+                    <PlanningContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path="staff"
+                  element={(
+                    <CreateUserFormContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>

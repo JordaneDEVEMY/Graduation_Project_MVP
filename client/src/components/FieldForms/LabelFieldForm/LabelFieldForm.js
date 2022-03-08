@@ -10,9 +10,9 @@ function LabelFieldForm({
   return (
     <TextField
       required
-      type="text"
+      type="number"
       name="label"
-      label="Label du poste occupé"
+      label="Label du poste occupé (number?)"
       variant="outlined"
       onChange={(event) => handleChange('label', event.target.value)}
     />
