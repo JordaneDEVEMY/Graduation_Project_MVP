@@ -42,6 +42,11 @@ function reducer(state = initialState, action) {
         roleApplication: action.payload.roleApplication,
         label: action.payload.label,
       };
+    case actions.GET_EMPLOYEE_ID:
+      return {
+        ...state,
+        id: action.payload,
+      };
     // set employee informations
     case actions.SET_EMPLOYEE_INFORMATION:
       return {
