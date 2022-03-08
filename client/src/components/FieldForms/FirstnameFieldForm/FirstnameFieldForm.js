@@ -6,7 +6,7 @@ import {
 
 function FirstnameFieldForm({
   handleInputChange,
-  formValues,
+  firstname,
 }) {
   return (
     <TextField
@@ -14,8 +14,8 @@ function FirstnameFieldForm({
       type="text"
       name="firstname"
       label="Prénom"
+      value={firstname}
       variant="outlined"
-      value={formValues.firstname}
       onChange={handleInputChange}
     />
   );
@@ -23,9 +23,7 @@ function FirstnameFieldForm({
 
 FirstnameFieldForm.propTypes = {
   handleInputChange: PropTypes.func.isRequired,
-  formValues: PropTypes.shape({
-    firstname: PropTypes.string.isRequired,
-  }).isRequired,
+  firstname: PropTypes.string.isRequired,
 };
 
 export default React.memo(FirstnameFieldForm);

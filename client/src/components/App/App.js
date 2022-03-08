@@ -60,6 +60,7 @@ function App({
                     <Planning isAdmin={isAdmin} />
                     )}
                 />
+
               </Route>
             </Route>
             <Route element={<RequireUser />}>
