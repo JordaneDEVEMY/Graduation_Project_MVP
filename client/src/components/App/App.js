@@ -19,7 +19,7 @@ import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
-import CreateUserFormContainer from '../../containers/CreateUserFormContainer';
+import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
 import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
 
 function App({
@@ -65,7 +65,7 @@ function App({
                 <Route
                   path="staff"
                   element={(
-                    <CreateUserFormContainer isAdmin={isAdmin} />
+                    <CreateEmployeeFormContainer isAdmin={isAdmin} />
                     )}
                 />
                 <Route

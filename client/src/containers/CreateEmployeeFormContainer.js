@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { actionCreateEmployee, actionSetEmployeeInformation } from '../actions/employee';
-import CreateUserForm from '../components/CreateUserForm/CreateUserForm';
+import CreateUserForm from '../components/CreateEmployeeForm/CreateEmployeeForm';
 
-function CreateUserFormContainer() {
+function CreateEmployeeFormContainer() {
   const dispatch = useDispatch();
 
   const changeField = (key, value) => {
@@ -22,6 +22,6 @@ function CreateUserFormContainer() {
   );
 }
 
-CreateUserFormContainer.propTypes = {};
-CreateUserFormContainer.defaultProps = {};
-export default React.memo(CreateUserFormContainer);
+CreateEmployeeFormContainer.propTypes = {};
+CreateEmployeeFormContainer.defaultProps = {};
+export default React.memo(CreateEmployeeFormContainer);
