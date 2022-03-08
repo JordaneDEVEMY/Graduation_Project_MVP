@@ -13,7 +13,7 @@ router
   .route('/:id(\\d+)')
   /**
    * POST /api/admin/planning/assignment/user/{id}
-   * @summary Create User assignment in a planning week
+   * @summary Create User assignment
    * @tags 6.UserAdmin - Planning CRUD section
    * @param {string} id.path.required - User Identifier
    * @return {TODOJSDOC} 200 - success response - application/json
