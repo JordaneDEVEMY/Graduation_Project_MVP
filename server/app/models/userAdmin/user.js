@@ -17,7 +17,8 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {number} employee_qualification_id - FK of User qualification
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
@@ -36,7 +37,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
@@ -54,7 +55,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} avatar - User avatar
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
@@ -75,6 +76,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
  * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  * @property {string} created_at - timestamp for the create in DB
  */
 
@@ -95,6 +97,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} function - User function
  * @property {string} role_application - User role in web application
  * @property {string} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
  * @property {number} updated_at - timestamp for the update in DB
  */
 
@@ -197,6 +200,8 @@ module.exports = {
         qualificationId.rows[0].id,
       ],
     );
+
+    Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });
 
     return userToCreate.rows[0];
   },
