@@ -18,11 +18,11 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @typedef {array} Sites
  * @property {number} id - Database primary key of site
  * @property {string} site_name - site name
- * @property {Assignments} assignments - Assignments
+ * @property {array.<Assignments>} assignments - Assignments
  */
 
 /**
- * @typedef {object} Assignments
+ * @typedef {array} Assignments
  * @property {number} id - Database primary key of assignment
  * @property {string} starting_date - assignment starting date
  * @property {string} ending_date - assignment ending date
