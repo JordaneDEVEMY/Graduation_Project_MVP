@@ -1,6 +1,7 @@
 export const UPDATE_LOGIN_INPUT = 'UPDATE_LOGIN_INPUT';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const SET_IS_LOGGED = 'SET_IS_LOGGED';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const LOGOUT = 'LOGOUT';
 
 export function actionUpdateLoginInput(name, value) {
@@ -18,6 +19,12 @@ export function actionSetIsLogged(isLogged) {
 export function actionSubmitLogin() {
   return {
     type: SUBMIT_LOGIN,
+  };
+}
+
+export function actionResetPassword() {
+  return {
+    type: RESET_PASSWORD,
   };
 }
 

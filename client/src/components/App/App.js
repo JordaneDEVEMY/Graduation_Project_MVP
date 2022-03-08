@@ -12,12 +12,15 @@ import Footer from '../Footer/Footer';
 import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
+import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
+import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
+import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
 
 function App({
   isAdmin,
@@ -56,7 +59,19 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <PlanningContainer />
+                    <PlanningContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path="staff"
+                  element={(
+                    <CreateEmployeeFormContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path="sites"
+                  element={(
+                    <CreateSiteFormContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
@@ -66,7 +81,7 @@ function App({
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <PlanningContainer />
+                    <PlanningContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>

@@ -2,8 +2,8 @@
 import * as actions from '../actions';
 
 const initialState = {
-  email: 'j.andy@protonmail.com',
-  password: 'KPP18YZC3OE',
+  email: '',
+  password: '',
   isLogged: false,
 };
 
@@ -19,6 +19,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         isLogged: action.payload,
+      };
+
+    case actions.RESET_PASSWORD:
+      return {
+        ...state,
+        password: initialState.password,
       };
 
     case actions.LOGOUT:
