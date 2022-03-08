@@ -9,10 +9,14 @@ const userPlanningMiddleware = (store) => (next) => async (action) => {
       const response = await requestUserPlanning(user.id);
 
       if (response.status === 200) {
-        const { label, assignments } = response.data;
+        const {
+          label, assignments, phone_number: phoneNumber, mobile_number: mobileNumber,
+        } = response.data;
 
         store.dispatch(actions.actionGetUserAssignments(assignments));
         store.dispatch(actions.actionGetUserLabel(label));
+        store.dispatch(actions.actionGetUserPhoneNumber(phoneNumber));
+        store.dispatch(actions.actionGetUserMobileNumber(mobileNumber));
       }
       return;
     }
