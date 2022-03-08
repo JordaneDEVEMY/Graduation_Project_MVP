@@ -167,6 +167,7 @@ module.exports = {
           $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15
         )
         RETURNING 
+        "id",
         "firstname",
         "lastname",
         "email",
@@ -203,7 +204,7 @@ module.exports = {
     );
 
     Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });
-
+    console.log(userToCreate.rows[0]);
     return userToCreate.rows[0];
   },
 

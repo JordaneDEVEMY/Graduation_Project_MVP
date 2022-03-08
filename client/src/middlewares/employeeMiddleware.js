@@ -15,7 +15,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
           firstname,
           lastname,
           email,
-          adress,
+          address,
           avatar,
           phone_number: phoneNumber,
           mobile_number: mobileNumber,
@@ -35,7 +35,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
           email,
           phoneNumber,
           mobileNumber,
-          adress,
+          address,
           zipCode,
           socialSecurityNumber,
           dateOfBirth,
@@ -57,7 +57,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
         password,
         phoneNumber: phone_number,
         mobileNumber: mobile_number,
-        adress,
+        address,
         zipCode: zip_code,
         socialSecurityNumber: social_security_number,
         dateOfBirth: date_of_birth,
@@ -74,7 +74,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
         password,
         phone_number,
         mobile_number,
-        adress,
+        address,
         zip_code,
         social_security_number,
         date_of_birth,
@@ -86,7 +86,41 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createEmployee(employeeDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestEmployInformations(response.data.id));
+        console.log(response);
+        const {
+          id,
+          firstname,
+          lastname,
+          email,
+          address,
+          avatar,
+          phone_number: phoneNumber,
+          mobile_number: mobileNumber,
+          social_security_number: socialSecurityNumber,
+          date_of_birth: dateOfBirth,
+          zip_code: zipCode,
+          starting_date: startingDate,
+          fonction,
+          role_application: roleApplication,
+          qualification_label: label,
+        } = response.data;
+        store.dispatch(actions.actionGetEmployeeInformations({
+          id,
+          firstname,
+          lastname,
+          email,
+          phoneNumber,
+          mobileNumber,
+          address,
+          zipCode,
+          socialSecurityNumber,
+          dateOfBirth,
+          startingDate,
+          avatar,
+          fonction,
+          roleApplication,
+          label,
+        }));
       }
       return;
     }
@@ -99,7 +133,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
         password,
         phoneNumber: phone_number,
         mobileNumber: mobile_number,
-        adress,
+        address,
         zipCode: zip_code,
         socialSecurityNumber: social_security_number,
         dateOfBirth: date_of_birth,
@@ -116,7 +150,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
         password,
         phone_number,
         mobile_number,
-        adress,
+        address,
         zip_code,
         social_security_number,
         date_of_birth,
