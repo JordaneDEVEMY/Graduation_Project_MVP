@@ -12,11 +12,14 @@ function PlanningContainer({
 }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const weekPeriod = useSelector((state) => state.admin.weekStart);
+  const planning = useSelector((state) => state.admin.planning);
 
-  const { weekPeriod, planning } = useSelector((state) => state.admin);
   const { isAdmin } = user;
   const [startDate, setStartDate] = React.useState(date);
-  console.log('useSelector((state) => state.admin)', useSelector((state) => state.admin));
+  console.log('isAdmin', isAdmin);
+  console.log('weekPeriod', weekPeriod);
+  console.log('planning', planning);
 
   useEffect(() => {
     dispatch(actionGetUserPlanning());
