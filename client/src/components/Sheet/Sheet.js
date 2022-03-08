@@ -28,12 +28,11 @@ function Sheet({
   ending_date,
   handleChange,
   index,
-  isMobile,
+  isDroppable,
   firstname,
   lastname,
   starting_date,
 }) {
-  const isAdmin = true;
   const theme = useTheme();
   const week = dateFunctions.getWeek(starting_date);
   const firstDayofWeek = dateFunctions.getDate(week.current.dates[0]).format('YYYY-MM-DD');
@@ -89,7 +88,7 @@ function Sheet({
           </Typography>
           )}
 
-        {!isMobile && isAdmin
+        {isDroppable
           && (
             <DragIndicatorIcon
               fontSize="small"
@@ -135,7 +134,7 @@ Sheet.propTypes = {
   expandedSheet: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  isMobile: PropTypes.bool.isRequired,
+  isDroppable: PropTypes.bool.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   starting_date: PropTypes.string.isRequired,

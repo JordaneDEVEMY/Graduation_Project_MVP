@@ -13,6 +13,7 @@ import './card.scss';
 function Card({
   employees,
   id,
+  isAdmin,
   isMobile,
   site,
 }) {
@@ -44,7 +45,7 @@ function Card({
       <CardHeader
         site={site}
       />
-      {isMobile
+      {(isMobile || !isAdmin)
         ? (
           <SheetList
             employees={employees}
@@ -68,6 +69,7 @@ function Card({
 Card.propTypes = {
   employees: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   site: PropTypes.object.isRequired,
 };

@@ -16,6 +16,7 @@ import './carousel.scss';
 
 function Carousel({
   assignments,
+  isAdmin,
 }) {
   const isMobile = true;
   const theme = useTheme();
@@ -62,6 +63,7 @@ function Carousel({
                 <Card
                   key={assignment.id}
                   isMobile={isMobile}
+                  isAdmin={isAdmin}
                   {...assignment}
                   employees={assignment.colleagues}
                 />
@@ -97,7 +99,7 @@ function Carousel({
 
 Carousel.propTypes = {
   assignments: PropTypes.array.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
-Carousel.defaultProps = {
-};
+
 export default React.memo(Carousel);

@@ -35,8 +35,20 @@ function Cards({
   return (
     <>
       {isMobile
-        ? <Carousel assignments={assignments} handleAssignment={setAssignment} />
-        : <CardsWrapper assignments={assignments} handleAssignment={setAssignment} />}
+        ? (
+          <Carousel
+            assignments={assignments}
+            handleAssignment={setAssignment}
+            isAdmin={isAdmin}
+          />
+        )
+        : (
+          <CardsWrapper
+            assignments={assignments}
+            handleAssignment={setAssignment}
+            isAdmin={isAdmin}
+          />
+        )}
 
       {isAdmin
         && (

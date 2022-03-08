@@ -30,7 +30,7 @@ function SheetList({
           index={index}
           handleChange={handleChange}
           expandedSheet={expandedSheet}
-          isMobile={false}
+          isDroppable={false}
           {...employee}
         />
       ))}

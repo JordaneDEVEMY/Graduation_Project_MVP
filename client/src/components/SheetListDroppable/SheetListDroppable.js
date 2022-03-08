@@ -49,6 +49,7 @@ function SheetListDroppable({
                       index={index}
                       handleChange={handleChange}
                       expandedSheet={expandedSheet}
+                      isDroppable
                       isMobile
                       {...employee}
                     />

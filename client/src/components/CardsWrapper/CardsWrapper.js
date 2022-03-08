@@ -27,6 +27,7 @@ const dragReducer = produce((draft, action) => {
 function CardsWrapper({
   assignments,
   handleAssignment,
+  isAdmin,
 }) {
   const theme = useTheme();
 
@@ -77,6 +78,7 @@ function CardsWrapper({
           <Card
             key={assignment.id}
             isMobile={false}
+            isAdmin={isAdmin}
             {...assignment}
             employees={state[`card-${assignment.id}`]}
           />
@@ -93,6 +95,7 @@ CardsWrapper.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 export default React.memo(CardsWrapper);
