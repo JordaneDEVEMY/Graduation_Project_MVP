@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
+import { actionRequestAdminPlanning } from '../actions/admin';
 import { actionGetUserPlanning } from '../actions/user';
 import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import Planning from '../components/Planning/Planning';
@@ -11,11 +12,17 @@ function PlanningContainer({
 }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
+  const { weekStart, planning } = useSelector((state) => state.admin);
   const { isAdmin } = user;
   const [startDate, setStartDate] = React.useState(date);
 
   useEffect(() => {
     dispatch(actionGetUserPlanning());
+
+    if (isAdmin) {
+      dispatch(actionRequestAdminPlanning());
+    }
   }, []);
 
   return (
@@ -29,7 +36,9 @@ function PlanningContainer({
       )
       : (
         <PlanningAdmin
-          startDate={startDate}
+          planning={planning}
+          user={user}
+          startDate={weekStart}
           handleStartDate={setStartDate}
         />
       )

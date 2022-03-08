@@ -60,8 +60,6 @@ Planning.propTypes = {
         id: PropTypes.number.isRequired,
       }).isRequired,
     ).isRequired,
-    id: PropTypes.number.isRequired,
-    isAdmin: PropTypes.bool.isRequired,
   }).isRequired,
 };
 

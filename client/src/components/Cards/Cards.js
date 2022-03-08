@@ -15,6 +15,7 @@ function Cards({
   isAdmin,
   week,
 }) {
+  console.log('assignments', assignments);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [modalOpened, setModalOpened] = React.useState(false);

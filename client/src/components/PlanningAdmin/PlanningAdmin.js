@@ -8,12 +8,11 @@ import './planning_admin.scss';
 
 function PlanningAdmin({
   handleStartDate,
+  planning,
   startDate,
 }) {
-  const companies = [{
-    company_name: 'tt',
-    assignments: [],
-  }];
+  console.log('planning', planning);
+  const companies = planning;
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
 
@@ -32,8 +31,15 @@ function PlanningAdmin({
               {company.company_name}
             </Typography>
 
-            {company.assignments.length
-              ? (<Cards assignments={company.assignments} week={currentWeek} isAdmin />)
+            {company.sites.length
+              ? company.sites.map((site) => (
+                <Cards
+                  siteName={site.site_name}
+                  assignments={site.assignments}
+                  week={currentWeek}
+                  isAdmin
+                />
+              ))
               : (
                 <Typography sx={{ textAlign: 'center' }}>
                   Aucun planning à afficher.
@@ -52,15 +58,23 @@ function PlanningAdmin({
 
 PlanningAdmin.propTypes = {
   handleStartDate: PropTypes.func.isRequired,
+  planning: PropTypes.arrayOf(
+    PropTypes.shape({
+      company_name: PropTypes.string.isRequired,
+      sites: PropTypes.arrayOf(
+        PropTypes.shape({
+          assignments: PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.number.isRequired,
+            }).isRequired,
+          ).isRequired,
+        }).isRequired,
+      ).isRequired,
+    }).isRequired,
+  ).isRequired,
   startDate: PropTypes.string.isRequired,
   user: PropTypes.shape({
-    assignments: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-      }).isRequired,
-    ).isRequired,
     id: PropTypes.number.isRequired,
-    isAdmin: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
