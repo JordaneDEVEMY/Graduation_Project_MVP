@@ -33,7 +33,25 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 module.exports = {
   /**
-   * Find a Site by his id
+   * Find all sites
+   * @returns {Site|ApiError} - response of all sites or ApiError if no sites found
+   */
+  async findAll() {
+    const result = await client.query(
+      `
+        SELECT * FROM "site";
+      `,
+    );
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Aucun site trouvé');
+    }
+
+    return result.rows;
+  },
+
+  /**
+   * Find a site by his id
    * @param {number} siteId - Site ID
    * @returns {Site|ApiError} - REST response of Site or ApiError if no site found
    */

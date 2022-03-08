@@ -21,6 +21,7 @@ router
    * @return {ApiError} 404 - User not found - application/json
    */
   .get(controllerHandler(userAdminUserController.getAll))
+
   /**
    * POST /api/admin/user
    * @summary Create one user

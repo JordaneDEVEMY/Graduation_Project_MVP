@@ -12,6 +12,16 @@ const router = express.Router();
 router
   .route('/')
   /**
+   * GET /api/admin/site
+   * @summary Get all sites
+   * @tags 4.UserAdmin - Site CRUD section
+   * @return {array.<SiteInDatabase>} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
+  .get(controllerHandler(userAdminSiteController.getAll))
+
+  /**
    * POST /api/admin/site
    * @summary Create one site
    * @tags 4.UserAdmin - Site CRUD section
