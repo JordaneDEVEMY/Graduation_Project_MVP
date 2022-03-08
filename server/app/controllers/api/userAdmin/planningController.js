@@ -34,9 +34,10 @@ const controller = {
     }
 
     if (!Array.isArray(week)) {
-      console.log('pas un array');
+      // TODO: Sprint 3 - TESTING
       return;
     }
+
     const filteredWeek = [];
 
     /**
@@ -57,9 +58,9 @@ const controller = {
       }
     });
 
-    const periods = { weekPeriod: period, planning: filteredWeek };
+    const periods = { weekStart: monday, planning: filteredWeek };
 
-    return res.json(periods);
+    res.json(periods);
   },
 };
 
