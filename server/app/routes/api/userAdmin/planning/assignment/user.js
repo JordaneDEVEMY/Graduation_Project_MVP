@@ -1,7 +1,7 @@
 const express = require('express');
 
 const validate = require('../../../../../validation');
-const userAssignmentSchema = require('../../../../../validation/userAdmin/site');
+const userAssignmentSchema = require('../../../../../validation/userAdmin/planning/createAssignment');
 
 const { assignmentUserController } = require('../../../../../controllers');
 
