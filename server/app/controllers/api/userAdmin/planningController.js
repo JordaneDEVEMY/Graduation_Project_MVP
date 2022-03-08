@@ -62,6 +62,18 @@ const controller = {
 
     res.json(periods);
   },
+
+  /**
+   * UserAdmin controller to create user assignment in a week
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id and body params
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async create(req, res) {
+    const userAssignment = await planningAdminDatamapper.insert(req.params, req.body);
+    return res.json(userAssignment);
+  },
 };
 
 module.exports = controller;

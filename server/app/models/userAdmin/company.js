@@ -29,7 +29,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 module.exports = {
   /**
-   * Find a companies
+   * Find all companies
    * @returns {Company|ApiError} - response of companies or ApiError if no companies found
    */
   async findAll() {

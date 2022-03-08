@@ -62,4 +62,31 @@ module.exports = {
     return result.rows;
   },
 
+  // /**
+  //  * Insert User assignment
+  //  * @param {object} user - Body request with email and password required
+  //  * @returns {UserCreate} - Return the new user
+  //  */
+  // async insert(reqParams, assignment) {
+  //   const { slugYearWeekId, userId } = reqParams;
+
+  //   // const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
+
+  //   // if (qualificationId.rowCount === 0) {
+  //   //   throw new ApiError(400, 'Cette qualification n\'existe pas');
+  //   // }
+
+  //   // const userToCreate = await client.query(
+  //   //   `
+  //   //   ;`,
+  //   //   [
+
+  //   //   ],
+  //   // );
+
+  //   // Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });
+  //   // console.log(userToCreate.rows[0]);
+  //   // userToCreate.rows[0];
+  // },
+
 };
