@@ -29,6 +29,24 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 module.exports = {
   /**
+   * Find a companies
+   * @returns {Company|ApiError} - response of companies or ApiError if no companies found
+   */
+  async findAll() {
+    const result = await client.query(
+      `
+        SELECT * FROM "company";
+      `,
+    );
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Aucune entreprise trouvée');
+    }
+
+    return result.rows;
+  },
+
+  /**
    * Find a Company by his id
    * @param {number} companyId - Company ID
    * @returns {Company|ApiError} - REST response of Company or ApiError if no company found

@@ -8,6 +8,9 @@
 ### 404
 GET {{ endpoint }}/azertyuiop
 
+### Get all companies
+GET {{ endpoint }}
+
 ### Get one company
 GET {{ endpoint }}/1
 

@@ -11,6 +11,16 @@ const router = express.Router();
 
 router
   .route('/')
+/**
+   * GET /api/admin/company
+   * @summary Get all companies
+   * @tags 5.UserAdmin - Company CRUD section
+   * @return {array.<CompanyInDatabase>} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
+  .get(controllerHandler(userAdminCompanyController.getAll))
+
   /**
    * POST /api/admin/company
    * @summary Create one company
