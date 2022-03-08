@@ -10,19 +10,21 @@ import dateFunctions from '../utils/dateFunctions';
 function PlanningContainer({
   date,
 }) {
+  let weekStart;
+  let planning;
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const admin = useSelector((state) => state.admin);
-  // const weekPeriod = useSelector((state) => state.admin.weekStart);
-  // const planning = useSelector((state) => state.admin.planning);
-  const planning = [];
-  const weekPeriod = 'hh';
-
   const { isAdmin } = user;
-  const [startDate, setStartDate] = React.useState(date);
-  console.log('isAdmin', admin);
-  // console.log('weekPeriod', weekPeriod);
-  // console.log('planning', planning);
+
+  if (isAdmin) {
+    weekStart = useSelector((state) => state.admin.weekStart);
+    planning = useSelector((state) => state.admin.planning);
+  } else {
+    weekStart = date;
+  }
+
+  const [startDate, setStartDate] = React.useState(weekStart);
 
   useEffect(() => {
     dispatch(actionGetUserPlanning());
@@ -44,8 +46,7 @@ function PlanningContainer({
       : (
         <PlanningAdmin
           planning={planning}
-          user={user}
-          startDate={weekPeriod}
+          startDate={startDate}
           handleStartDate={setStartDate}
         />
       )

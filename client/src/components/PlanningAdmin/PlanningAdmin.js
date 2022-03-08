@@ -26,42 +26,45 @@ function PlanningAdmin({
     sites.forEach(({ id, site_name: name }) => {
       if (!companySitesIds.includes(id)) {
         company.assignments.push({
+          id,
           site: {
-            id,
             name,
           },
+          colleagues: [],
         });
         companySitesIds.push(id);
       }
     });
 
     // get each assignment of company
-    companySitesIds.forEach((siteId, index) => {
-      sites.forEach(({
-        assignments: assignment,
-        color,
-        employees: colleagues,
-        id,
+    company.assignments.map((assignment) => {
+      const sitesById = sites.filter((item) => item.id === assignment.id);
+      sitesById.forEach(({
+        assignments,
       }) => {
-        if (id === siteId) {
-          const { id: assignmentId, starting_date, ending_date } = assignment;
-          const assignmentItem = company.assignments[index];
-          company.assignments[index] = {
-            ...assignmentItem[index],
-            id: assignmentId,
-            color,
-            starting_date,
-            ending_date,
-            colleagues,
-          };
-        }
+        const {
+          color, starting_date, ending_date, employees,
+        } = assignments;
+
+        const { id, firstname, lastname } = employees;
+
+        assignment.colleagues.push({
+          id,
+          color,
+          firstname,
+          lastname,
+          starting_date,
+          ending_date,
+        });
       });
+
+      return assignment;
     });
 
     companies.push(company);
   });
 
-  console.log('planning Admin', companies);
+  console.log('companies', companies);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
 
@@ -74,21 +77,20 @@ function PlanningAdmin({
       </Typography>
 
       {companies.length
-        ? (companies.map((company) => (
+        ? (companies.map(({ name, assignments }) => (
           <>
             <Typography variant="h2" sx={{ textAlign: 'center' }}>
-              {company.company_name}
+              {name}
             </Typography>
 
-            {company.sites.length
-              ? company.sites.map((site) => (
+            {assignments.length
+              ? (
                 <Cards
-                  siteName={site.site_name}
-                  assignments={site.assignments}
+                  assignments={assignments}
                   week={currentWeek}
                   isAdmin
                 />
-              ))
+              )
               : (
                 <Typography sx={{ textAlign: 'center' }}>
                   Aucun planning à afficher.
@@ -122,9 +124,6 @@ PlanningAdmin.propTypes = {
     }).isRequired,
   ).isRequired,
   startDate: PropTypes.string.isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default React.memo(PlanningAdmin);
