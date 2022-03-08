@@ -6,9 +6,7 @@ const initialState = {
   name: '',
   adress: '',
   zipCode: 0,
-  managerName: '',
-  estimatedDuration: 0,
-  companyId: 0,
+  type: '',
   createdAt: 0,
   updatedAt: 0,
 };
@@ -23,9 +21,7 @@ function reducer(state = initialState, action) {
         name: action.payload.name,
         adress: action.payload.address,
         zipCode: action.payload.zipCode,
-        managerName: action.payload.managerName,
-        estimatedDuration: action.payload.estimatedDuration,
-        companyId: action.payload.companyId,
+        type: action.payload.type,
         createdAt: action.payload.createdAt,
         updatedAt: action.payload.updatedAt,
       };
@@ -43,9 +39,7 @@ function reducer(state = initialState, action) {
         name: initialState.name,
         adress: initialState.adress,
         zipCode: initialState.zipCode,
-        managerName: initialState.managerName,
-        estimatedDuration: initialState.estimatedDuration,
-        companyId: initialState.companyId,
+        type: initialState.type,
         createdAt: initialState.createdAt,
         updatedAt: initialState.updatedAt,
       };
