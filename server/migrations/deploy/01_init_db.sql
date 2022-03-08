@@ -30,7 +30,7 @@ CREATE TABLE "employee" (
     "password" TEXT NOT NULL,
     "starting_date" DATE NOT NULL DEFAULT now(),
     "avatar" TEXT,
-    "function" TEXT NOT NULL,
+    "fonction" TEXT NOT NULL,
     "role_application" TEXT NOT NULL,
     "employee_qualification_id" INT NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),

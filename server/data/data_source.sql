@@ -18,7 +18,7 @@ VALUES
 ('Formation'),
 ('Maladie');
 
-INSERT INTO "employee" ("social_security_number","firstname","lastname","date_of_birth","address","zip_code","email","mobile_number","phone_number","password","avatar","function","role_application","employee_qualification_id")
+INSERT INTO "employee" ("social_security_number","firstname","lastname","date_of_birth","address","zip_code","email","mobile_number","phone_number","password","avatar","fonction","role_application","employee_qualification_id")
 VALUES
 (22473299333059,'Jelani','Andy','2018-06-22 02:23:17','2448 Orci Street',31000,'j.andy@protonmail.com','0561166116','0612996644','KPP18YZC3OE','/images/66.jpg','Lorem','admin',4),
 (21975437080659,'Mufutau','Vincent','2018-06-20 22:03:09','464-6625 Turpis Av.',31000,'vincent-mufutau@yahoo.edu','0561166116','0612996644','BMF33MEX8YA','/images/32.jpg','Lorem','admin',2),
@@ -112,7 +112,7 @@ VALUES
   ('2022-03-14 00:00:00+00','2021-03-27 00:00:00+00','#c0a9f2',15,16);
 
 
-INSERT INTO "contact" ("email","firstname","lastname","mobile_number","function","company_id")
+INSERT INTO "contact" ("email","firstname","lastname","mobile_number","fonction","company_id")
 VALUES
 ('burton_harriet5889@edf.com','Harriet','Burton','0602182411','Assistant_technique',1),
 ('j_keaton@sncf.fr','Jenette','Keaton','0702182422','Responsable_maintenance',2),
