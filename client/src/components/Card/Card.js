@@ -8,7 +8,6 @@ import { useTheme } from '@mui/material/styles';
 import { Droppable } from 'react-beautiful-dnd';
 import CardHeader from '../CardHeader/CardHeader';
 import SheetList from '../SheetList/SheetList';
-// import SheetListDroppable from '../SheetListDroppable/SheetListDroppable';
 
 import './card.scss';
 
@@ -53,7 +52,7 @@ function Card({
       />
       {(isDropable)
         ? (
-          <Droppable droppableId={`card-${id}`} type="SITE">
+          <Droppable droppableId={`card-${id}`} type="SITES">
             {(provided) => (
               <Box
                 ref={provided.innerRef}

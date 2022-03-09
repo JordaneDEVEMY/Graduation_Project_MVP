@@ -45,7 +45,7 @@ function SheetList({
                   {...provided.dragHandleProps}
                 >
                   <Sheet
-                    key={index}
+                    key={`card-${cardId}-employee-${employee.id}`}
                     index={index}
                     handleAssignment={handleAssignment}
                     handleCollapse={handleCollapse}
@@ -62,7 +62,7 @@ function SheetList({
           )
           : (
             <Sheet
-              key={index}
+              key={`card-${cardId}-employee-${employee.id}`}
               index={index}
               handleAssignment={handleAssignment}
               handleCollapse={handleCollapse}

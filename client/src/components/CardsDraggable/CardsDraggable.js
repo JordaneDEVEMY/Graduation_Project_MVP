@@ -24,31 +24,16 @@ const dragReducer = produce((draft, action) => {
 });
 
 function CardsDraggable({
+  cards,
   companies,
   handleAssignment,
   week,
 }) {
-  console.log('companies', companies);
-  // structure initial state as an object containing
-  // an array of sheets for each card
-  const draggableSheets = {};
-  companies.forEach(({ assignments }) => {
-    assignments.forEach((assignment) => {
-      const { id, colleagues } = assignment;
-      draggableSheets[`card-${id}`] = colleagues;
-    });
-  });
+  // set cards in state
+  const [dragState, setDragState] = useReducer(dragReducer, cards);
 
-  // set sheets in state
-  const [state, dispatch] = useReducer(dragReducer, draggableSheets);
+  console.log('dragState', dragState);
 
-  console.log('draggableSheets', draggableSheets);
-
-  console.log('state', state);
-
-  const onDragStart = useCallback((result) => {
-    console.log('on drag end', result);
-  }, []);
   /**
    * dispatch actions on drag end
    */
@@ -57,7 +42,7 @@ function CardsDraggable({
       if (!result.destination) {
         return;
       }
-      dispatch({
+      setDragState({
         type: 'MOVE',
         from: result.source.droppableId,
         to: result.destination.droppableId,
@@ -65,14 +50,14 @@ function CardsDraggable({
         toIndex: result.destination.index,
       });
       console.log('on drag end', result);
-      handleAssignment(state);
+      handleAssignment(dragState);
     }
   }, []);
 
   return (
-    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <Companies
-        assignments={state}
+        cards={dragState}
         companies={companies}
         handleAssignment={handleAssignment}
         isDropable
@@ -83,6 +68,7 @@ function CardsDraggable({
 }
 
 CardsDraggable.propTypes = {
+  cards: PropTypes.shape().isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

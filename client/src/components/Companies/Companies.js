@@ -1,52 +1,47 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Cards from '../Cards/Cards';
 import './companies.scss';
 
 function Companies({
-  assignments,
+  cards,
   companies,
   handleAssignment,
   isDropable,
   week,
 }) {
-  // sort assignements by company
-  const companiesAssignments = {};
-  companies.forEach(({ id: companyId, assignments: companyAssignments }) => {
-    if (assignments) {
-      const result = [];
-      companyAssignments.forEach((item) => {
-        result.push({
-          ...item,
-          assignments: assignments[`card-${item.id}`],
-        });
+  // sort cards by company
+  const companyCards = {};
+  companies.forEach((company) => {
+    companyCards[company.id] = [];
+    company.assignments.forEach((assignment) => {
+      companyCards[company.id].push({
+        ...assignment,
+        assignments: cards[`card-${assignment.id}`],
       });
-      companiesAssignments[companyId] = result;
-    } else {
-      companiesAssignments[companyId] = companyAssignments;
-    }
+    });
   });
-  console.log('companiesAssignments', companiesAssignments);
 
   return (
     (companies.length
       ? (companies.map(({ id, name }) => (
-        <>
+        <Box
+          key={`company-${id}-box`}
+        >
           <Typography
             variant="h2"
             sx={{ textAlign: 'center' }}
-            id={`company-${id}-title`}
             key={`company-${id}-title`}
           >
             {name}
           </Typography>
 
-          {companiesAssignments[id].length
+          {companyCards[id].length
             ? (
               <Cards
-                assignments={companiesAssignments[id]}
+                assignments={companyCards[id]}
                 id={`company-${id}-sites`}
                 key={`company-${id}-sites`}
                 isDropable={isDropable}
@@ -65,7 +60,7 @@ function Companies({
                 Aucun planning à afficher.
               </Typography>
             )}
-        </>
+        </Box>
       )))
       : (
         <Typography sx={{ textAlign: 'center' }}>
@@ -76,7 +71,7 @@ function Companies({
 }
 
 Companies.propTypes = {
-  assignments: PropTypes.shape(),
+  cards: PropTypes.shape().isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -99,7 +94,6 @@ Companies.propTypes = {
 };
 
 Companies.defaultProps = {
-  assignments: undefined,
   handleAssignment: undefined,
 };
 

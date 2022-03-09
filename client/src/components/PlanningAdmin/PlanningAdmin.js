@@ -21,12 +21,22 @@ function PlanningAdmin({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  // set an object of all cards
+  const cards = {};
+  companies.forEach(({ assignments }) => {
+    assignments.forEach((assignment) => {
+      const { id, colleagues } = assignment;
+      cards[`card-${id}`] = colleagues;
+    });
+  });
+
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
 
   console.log('planning', planning);
   console.log('startDate', startDate);
   console.log('companies', companies);
+  console.log('cards', cards);
 
   const handleAssignment = (result) => {
     console.log('HANDLE ASSIGNMENT', result);
@@ -60,6 +70,7 @@ function PlanningAdmin({
         ? !isMobile
           && (
           <CardsDraggable
+            cards={cards}
             companies={companies}
             handleAssignment={handleAssignment}
             week={currentWeek}
@@ -67,6 +78,7 @@ function PlanningAdmin({
           )
         : (
           <Companies
+            cards={cards}
             companies={companies}
             handleAssignment={handleAssignment}
             isDropable={false}
