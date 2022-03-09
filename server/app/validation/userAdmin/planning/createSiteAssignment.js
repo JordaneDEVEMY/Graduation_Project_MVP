@@ -1,9 +1,11 @@
 const Joi = require('joi');
 
 module.exports = Joi.object({
-  starting_date: Joi.string()
+  starting_date: Joi.date()
+    .iso()
     .required(),
-  ending_date: Joi.string()
+  ending_date: Joi.date()
+    .iso()
     .required(),
   color: Joi.string()
     .required(),
