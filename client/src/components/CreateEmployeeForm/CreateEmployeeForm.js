@@ -157,14 +157,6 @@ function CreateUserForm({
                 value={employee.socialSecurityNumber}
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <TextInput
-                handleChange={changeField}
-                type="password"
-                nameValue="password"
-                label="Mot de passe"
-              />
-            </Grid>
           </Grid>
 
           <Typography variant="h2">
@@ -177,6 +169,7 @@ function CreateUserForm({
             <Grid item xs={12} md={6}>
               <RoleFieldForm
                 handleChange={changeField}
+                value={employee.roleApplication}
               />
             </Grid>
           </Grid>
