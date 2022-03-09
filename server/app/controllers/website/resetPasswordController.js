@@ -11,7 +11,7 @@ const userAdminDatamapper = require('../../models/userAdmin/user');
 const { ApiError } = require('../../helpers/errorHandler');
 
 const controller = {
-  async resetPassword(req, res) {
+  async passwordToReset(req, res) {
     const { id, token } = req.params;
 
     const user = await userAdminDatamapper.findByPkReturnPassword(id);
@@ -23,9 +23,35 @@ const controller = {
     const secret = process.env.JWT_SECRET + user.password;
 
     const payload = jwt.verify(token, secret);
+    console.log('file: resetPasswordController.js ~ line 26 ~ passwordToReset ~ payload', payload);
 
     res.render('reset-password', { email: user.email });
   },
+
+  async resetPassword(req, res) {
+    const { id, token } = req.params;
+    const { password, confirmpassword } = req.body;
+
+    if (password !== confirmpassword) {
+      throw new ApiError(400, 'Les mots de passes doivent être identiques');
+    }
+
+    const user = await userAdminDatamapper.findByPkReturnPassword(id);
+
+    if (!user) {
+      throw new ApiError(404, 'Utilisateur introuvable');
+    }
+
+    const secret = process.env.JWT_SECRET + user.password;
+
+    const payload = jwt.verify(token, secret);
+    console.log('file: resetPasswordController.js ~ line 47 ~ resetPassword ~ payload', payload);
+
+    const userWithNewPassword = await userAdminDatamapper.updatePassword(id, password);
+
+    res.json(userWithNewPassword);
+  },
+
 };
 
 module.exports = controller;

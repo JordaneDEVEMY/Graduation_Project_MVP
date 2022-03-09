@@ -397,4 +397,29 @@ module.exports = {
 
     return !result.rowCount;
   },
+
+  async updatePassword(userId, password) {
+    const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+    }
+
+    // TODO: SPRINT 3 - Modifier le returning
+    const userToUpdate = await client.query(
+      `
+      UPDATE "employee" 
+      SET 
+        "password" = $2,
+        "updated_at" = NOW()
+      WHERE "id"= $1
+      RETURNING *;`,
+      [
+        userId,
+        password,
+      ],
+    );
+
+    return userToUpdate.rows[0];
+  },
 };

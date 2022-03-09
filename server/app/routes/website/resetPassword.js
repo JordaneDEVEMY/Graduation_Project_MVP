@@ -21,6 +21,8 @@ router
   //  * @return {WebsiteError} 422 - Incorrect email - application/json
   //  * @return {WebsiteError} 500 - Internal server error - application/json
   //  */
-  .get(controllerHandler(resetPasswordController.resetPassword));
+  .get(controllerHandler(resetPasswordController.passwordToReset))
+  // TODO JSDOC
+  .post(controllerHandler(resetPasswordController.resetPassword));
 
 module.exports = router;
