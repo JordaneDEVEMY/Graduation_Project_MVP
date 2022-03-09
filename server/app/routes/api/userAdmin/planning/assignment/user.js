@@ -34,6 +34,17 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Week not found - application/json
    */
-  .patch(validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.update));
+  .patch(validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.update))
+
+  /**
+   * DELETE /api/admin/planning/assignment/{id}/user
+   * @summary Delete User assignment
+   * @tags 6.UserAdmin - Planning CRUD section
+   * @param {number} id.path.required - assignment identifier
+   * @return {AssignmentDelete} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
+  .delete(controllerHandler(assignmentUserController.delete));
 
 module.exports = router;

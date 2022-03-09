@@ -63,3 +63,9 @@ PATCH {{ endpoint }}/47/user
   "site_id": 5,
   "absence_id": 5
 }
+
+### Delete an assignment
+DELETE {{ endpoint }}/47/user
+
+### Delete an inexistant assignment
+DELETE {{ endpoint }}/999/user

@@ -75,6 +75,24 @@ const controller = {
 
     return res.json(userAssignment);
   },
+
+  /**
+   * UserAdmin controller to delete an assignment
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id
+   * @param {object} res Express response object
+   * @returns {object} Route API JSON response
+   */
+  async delete(req, res) {
+    const assignmentDelete = await userAssignmentDatamapper.delete(req.params.id);
+
+    return res.status(200).json({
+      isDeleted: assignmentDelete,
+      statusCode: 200,
+      message: 'Affectation supprimée',
+    });
+  },
+
 };
 
 module.exports = controller;

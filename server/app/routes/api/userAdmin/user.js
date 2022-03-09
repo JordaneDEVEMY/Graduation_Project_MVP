@@ -68,4 +68,5 @@ router
    * @return {ApiError} 404 - User not found - application/json
    */
   .delete(controllerHandler(userAdminUserController.delete));
+
 module.exports = router;

@@ -28,6 +28,13 @@ const { ApiError } = require('../../../../helpers/errorHandler');
  * @property {number} absence_id - absence PK id assigned or null
  */
 
+/**
+ * @typedef {object} AssignmentDelete
+ * @property {boolean} isDeleted - Status
+ * @property {number} statusCode - HTTP Status code
+ * @property {string} message - Status message
+ */
+
 module.exports = {
   /**
    * Insert User assignment to a Site
@@ -110,4 +117,22 @@ module.exports = {
 
     return siteToSave.rows[0];
   },
+
+  /**
+   * Remove assignment
+   * @param {number} assignmentId - Assignment ID
+   * @returns {boolean|ApiError} - Return boolean or ApiError if assignment not found
+   */
+  async delete(assignmentId) {
+    const result = await client.query('SELECT * FROM "assignment" WHERE "id" = $1;', [assignmentId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cette affectation n\'existe pas');
+    }
+
+    const assignmentToDelete = await client.query('DELETE FROM "assignment" WHERE "id" = $1;', [assignmentId]);
+
+    return !!assignmentToDelete.rowCount;
+  },
+
 };
