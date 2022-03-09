@@ -8,6 +8,9 @@
 ### 404
 GET {{ endpoint }}/azertyuiop
 
+### Get all sites
+GET {{ endpoint }}
+
 ### Get one site
 GET {{ endpoint }}/1
 

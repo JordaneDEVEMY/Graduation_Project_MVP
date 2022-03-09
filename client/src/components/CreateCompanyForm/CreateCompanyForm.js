@@ -43,7 +43,7 @@ function CreateCompanyForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="adress"
+              nameValue="address"
               label="Adresse postale"
             />
           </Grid>

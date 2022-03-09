@@ -6,6 +6,7 @@ export const DELETE_SITE = 'DELETE_SITE';
 
 // get site informations
 export const GET_SITE_INFORMATIONS = 'GET_SITE_INFORMATIONS';
+export const GET_SITE_ID = 'GET_SITE_ID';
 
 // create or update site informations
 export const SET_SITE_INFORMATION = 'SET_SITE_INFORMATION';
@@ -61,6 +62,12 @@ export function actionGetSiteInformations({
       createdAt,
       updatedAt,
     },
+  };
+}
+
+export function actionGetSiteId(id) {
+  return {
+    type: GET_SITE_ID, payload: id,
   };
 }
 

@@ -3,6 +3,23 @@ const { ApiError } = require('../../../helpers/errorHandler');
 
 const controller = {
   /**
+   * UserAdmin controller to get all companies
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id params
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async getAll(req, res) {
+    const companies = await companyAdminDatamapper.findAll();
+
+    if (!companies) {
+      throw new ApiError(404, 'Entreprises introuvables');
+    }
+
+    return res.json(companies);
+  },
+
+  /**
    * UserAdmin controller to get a company
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id params

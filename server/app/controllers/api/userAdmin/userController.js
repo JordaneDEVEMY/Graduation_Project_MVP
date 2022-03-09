@@ -4,6 +4,23 @@ const { ApiError } = require('../../../helpers/errorHandler');
 
 const controller = {
   /**
+   * UserAdmin controller to get all users
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id params
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async getAll(req, res) {
+    const users = await userAdminDatamapper.findAll();
+
+    if (!users) {
+      throw new ApiError(404, 'Utilisateurs introuvables');
+    }
+
+    return res.json(users);
+  },
+
+  /**
    * UserAdmin controller to get an user
    * ExpressMiddleware signature
    * @param {object} req Express req.object used for url id params
