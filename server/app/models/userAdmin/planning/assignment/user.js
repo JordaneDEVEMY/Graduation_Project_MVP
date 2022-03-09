@@ -15,7 +15,7 @@ const { ApiError } = require('../../../../helpers/errorHandler');
  */
 
 /**
- * @typedef {array} AssignmentToCreateInSite
+ * @typedef {array} AssignmentToCreate
  * @property {string} starting_date - assignment starting date
  * @property {string} ending_date - assignment ending date
  * @property {string} color - assignment card color
@@ -23,17 +23,7 @@ const { ApiError } = require('../../../../helpers/errorHandler');
  * @property {boolean} visibility - planning visibility for the User/employee
  * @property {number} employee_id - employee PK id assigned
  * @property {number} site_id - site PK id assigned or null
- */
-
-/**
- * @typedef {array} AssignmentToCreateInSite
- * @property {string} starting_date - assignment starting date
- * @property {string} ending_date - assignment ending date
- * @property {string} color - assignment card color
- * @property {number} position - card position
- * @property {boolean} visibility - planning visibility for the User/employee
- * @property {number} employee_id - employee PK id assigned
- * @property {number} site_id - site PK id assigned or null
+ * @property {number} absence_id - absence PK id assigned or null
  */
 
 module.exports = {
@@ -42,7 +32,7 @@ module.exports = {
    * @param {AssignmentToCreateInAbsence} assignment - Body request
    * @returns {Assignment} - Return the new user
    */
-  async insertWithSite(assignment) {
+  async insert(assignment) {
     const assignmentToCreate = await client.query(
       `
       INSERT INTO "assignment"
@@ -53,10 +43,11 @@ module.exports = {
         "position",
         "visibility",
         "site_id",
+        "absence_id",
         "employee_id"
       )
       VALUES (
-        $1, $2, $3, $4, $5, $6, $7
+        $1, $2, $3, $4, $5, $6, $7, $8
       )
       RETURNING *;`,
       [
@@ -66,6 +57,7 @@ module.exports = {
         assignment.position,
         assignment.visibility,
         assignment.site_id,
+        assignment.absence_id,
         assignment.employee_id,
       ],
     );

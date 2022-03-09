@@ -15,7 +15,7 @@ router
    * POST /api/admin/planning/assignment/user
    * @summary Create User assignment in site_id OR absence_id
    * @tags 6.UserAdmin - Planning CRUD section
-   * @param {AssignmentToCreateInSite} request.body.required - Assignment request
+   * @param {AssignmentToCreate} request.body.required - Assignment request
    * @return {Assignment} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Week not found - application/json

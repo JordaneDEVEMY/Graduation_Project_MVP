@@ -26,10 +26,6 @@ const controller = {
       if (!site) {
         throw new ApiError(404, 'Site introuvable');
       }
-
-      const userAssignment = await userAssignmentDatamapper.insertWithSite(req.body);
-
-      return res.json(userAssignment);
     }
 
     if (req.body.absence_id) {
@@ -38,12 +34,11 @@ const controller = {
       if (!absence) {
         throw new ApiError(404, 'Absence introuvable');
       }
-
-      const userAssignment = await userAssignmentDatamapper.insertWithAbsence(req.body);
-      return res.json(userAssignment);
     }
 
-    throw new ApiError(500, 'Internal Server Error');
+    const userAssignment = await userAssignmentDatamapper.insert(req.body);
+
+    return res.json(userAssignment);
   },
 
 };
