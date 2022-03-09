@@ -2,7 +2,7 @@
 
 BEGIN;
 
-CREATE OR REPLACE FUNCTION update_employee(json) RETURNS void AS $$
+CREATE OR REPLACE FUNCTION update_employee_by_admin(json) RETURNS void AS $$
 	UPDATE "employee"
 	SET social_security_number = ($1 ->> 'social_security_number')::text,
 		firstname = ($1 ->> 'firstname')::text,
@@ -13,7 +13,6 @@ CREATE OR REPLACE FUNCTION update_employee(json) RETURNS void AS $$
 		email = ($1 ->> 'email')::text,
 		mobile_number = ($1 ->> 'mobile_number')::text,
 		phone_number = ($1 ->> 'phone_number')::text,
-		password = ($1 ->> 'password')::text,
 		starting_date = ($1 ->> 'starting_date')::timestamptz,
 		avatar = ($1 ->> 'avatar')::text,
 		fonction = ($1 ->> 'fonction')::text,
