@@ -2,7 +2,6 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionUpdateUserPassword } from '../actions/user';
-import { actionSetEmployeeInformation, actionGetEmployeeInformations } from '../actions/employee';
 import ProfilPage from '../components/ProfilPage/ProfilPage';
 
 function ProfilPageContainer() {
@@ -11,16 +10,12 @@ function ProfilPageContainer() {
 
   const dispatch = useDispatch();
 
+  // const changeField = (name, value) => {
+  //   dispatch();
+  // };
+
   const updateUserPassword = () => {
     dispatch(actionUpdateUserPassword());
-  };
-
-  const changeField = (key, value) => {
-    dispatch(actionSetEmployeeInformation(key, value));
-  };
-
-  const handleUpdateUser = (data) => {
-    dispatch(actionGetEmployeeInformations(data));
   };
 
   return (
@@ -28,8 +23,7 @@ function ProfilPageContainer() {
       isLogged={isLogged}
       user={user}
       updateUserPassword={updateUserPassword}
-      changeField={changeField}
-      handleUpdateUser={handleUpdateUser}
+      // changeField={changeField}
     />
   );
 }
