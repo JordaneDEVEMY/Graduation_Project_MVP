@@ -169,6 +169,7 @@ function CreateUserForm({
             <Grid item xs={12} md={6}>
               <RoleFieldForm
                 handleChange={changeField}
+                value={employee.roleApplication}
               />
             </Grid>
           </Grid>
