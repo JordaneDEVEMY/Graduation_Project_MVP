@@ -3,9 +3,9 @@ const express = require('express');
 // const validate = require('../../../validation');
 // const Schema = require('../../../validation/userAdmin/site');
 
-const { userAdminPlanningController } = require('../../../controllers');
+const { userAdminPlanningController } = require('../../../../controllers');
 
-const controllerHandler = require('../../../helpers/apiControllerHandler');
+const controllerHandler = require('../../../../helpers/apiControllerHandler');
 
 const router = express.Router();
 

@@ -3,10 +3,69 @@
 # REST Client for VSCode needed
 # https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 ################################################################################
-@endpoint = http://localhost:{{$dotenv PORT}}/api/admin/planning
+@endpoint = http://localhost:{{$dotenv PORT}}/api/admin/planning/assignment
 
 ### 404
 GET {{ endpoint }}/azertyuiop
 
-### Update employee affectation
-PATCH {{ endpoint }}/1/assignment/user/1
+### Create employee assignment WITH SITE
+POST {{ endpoint }}/user/
+content-type: application/json
+
+{
+"starting_date": "2022-12-13",
+"ending_date": "2022-12-13",
+"color": "#0F0",
+"position": 0,
+"visibility": true,
+"employee_id": 5,
+"site_id": 5,
+"absence_id": 5
+}
+
+### Create employee assignment WITH ABSENCE
+POST {{ endpoint }}/user/
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": 5,
+  "absence_id": 5
+}
+
+### Update employee assignment WITH SITE
+PATCH {{ endpoint }}/47/user
+content-type: application/json
+
+{
+  "starting_date": "2022-12-11",
+  "ending_date": "2022-12-11",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": 5,
+  "absence_id": 5
+}
+
+### Update employee assignment WITH ABSENCE
+PATCH {{ endpoint }}/47/user
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": 5,
+  "absence_id": 5
+}
+
+### Delete an assignment
+DELETE {{ endpoint }}/47/user
+
+### Delete an inexistant assignment
+DELETE {{ endpoint }}/999/user
