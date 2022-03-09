@@ -29,6 +29,8 @@ const controller = {
 
     const week = await planningAdminDatamapper.findByDates(monday, sunday);
 
+    const absences = await planningAdminDatamapper.findByAbsenceDates(monday, sunday);
+
     if (!week) {
       throw new ApiError(404, 'Semaine introuvable');
     }
@@ -58,7 +60,11 @@ const controller = {
       }
     });
 
-    const periods = { weekStart: monday, planning: filteredWeek };
+    absences.forEach((item) => {
+      delete item.starting_date;
+      delete item.ending_date;
+    });
+    const periods = { weekStart: monday, planning: filteredWeek, absences };
 
     res.json(periods);
   },

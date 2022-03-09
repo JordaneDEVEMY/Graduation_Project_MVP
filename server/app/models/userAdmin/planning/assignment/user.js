@@ -12,6 +12,8 @@ const { ApiError } = require('../../../../helpers/errorHandler');
  * @property {number} employee_id - employee PK id assigned
  * @property {number} absence_id - absence PK id assigned or null
  * @property {number} site_id - site PK id assigned or null
+ * @property {string} created_at - Db timestamptz of create
+ * @property {string} updated_at - Db timestamptz of update
  */
 
 /**
