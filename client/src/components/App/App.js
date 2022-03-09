@@ -22,6 +22,7 @@ import PlanningContainer from '../../containers/PlanningContainer';
 import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
 import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
 import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
+import ProfilPageContainer from '../../containers/ProfilPageContainer';
 
 function App({
   isAdmin,
@@ -89,6 +90,12 @@ function App({
                   path={`:${userId}/planning`}
                   element={(
                     <PlanningContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
