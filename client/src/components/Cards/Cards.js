@@ -19,8 +19,6 @@ function Cards({
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(assignment.id !== undefined);
-  console.log('assignments', assignments);
-  console.log('isMobile', isMobile);
 
   const handleModal = () => {
     // force opened state
@@ -31,6 +29,10 @@ function Cards({
       return !stateModal;
     });
   };
+
+  React.useEffect(() => {
+    console.log('update assignement', assignment);
+  }, [assignment]);
 
   return (
     <>
