@@ -7,9 +7,9 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       const response = await requestAdminPlanning();
 
       if (response.status === 200) {
-        const { weekStart, planning } = response.data;
+        const { weekStart, absences, planning } = response.data;
 
-        store.dispatch(actions.actionGetAdminPlanning({ weekStart, planning }));
+        store.dispatch(actions.actionGetAdminPlanning({ weekStart, absences, planning }));
         store.dispatch(actions.actionGetUserPlanning());
       }
       return;
