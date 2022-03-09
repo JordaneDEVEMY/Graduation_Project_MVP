@@ -12,31 +12,39 @@ const { ApiError } = require('../../../../helpers/errorHandler');
  */
 
 module.exports = {
-  // /**
-  //  * Insert User assignment
-  //  * @param {object} user - Body request with email and password required
-  //  * @returns {UserCreate} - Return the new user
-  //  */
-  // async insert(reqParams, assignment) {
-  //   const { slugYearWeekId, userId } = reqParams;
+  /**
+   * Insert User assignment
+   * @param {object} user - Body request with email and password required
+   * @returns {UserCreate} - Return the new user
+   */
+  async insertWithSite(assignment) {
+    const assignmentToCreate = await client.query(
+      `
+      INSERT INTO "assignment"
+      (
+        "starting_date",
+        "ending_date",
+        "color",
+        "position",
+        "visibility",
+        "site_id"
+      )
+      VALUES (
+        $1, $2, $3, $4, $5, $6
+      )
+      RETURNING *;`,
+      [
+        assignment.starting_date,
+        assignment.ending_date,
+        assignment.color,
+        assignment.position,
+        assignment.visibility,
+        assignment.site_id,
+      ],
+    );
 
-  //   // const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
+    return assignmentToCreate.rows[0];
+  },
 
-  //   // if (qualificationId.rowCount === 0) {
-  //   //   throw new ApiError(400, 'Cette qualification n\'existe pas');
-  //   // }
-
-  //   // const userToCreate = await client.query(
-  //   //   `
-  //   //   ;`,
-  //   //   [
-
-  //   //   ],
-  //   // );
-
-  //   // Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });
-  //   // console.log(userToCreate.rows[0]);
-  //   // userToCreate.rows[0];
-  // },
-
+  //TODO insertWithAbsence
 };

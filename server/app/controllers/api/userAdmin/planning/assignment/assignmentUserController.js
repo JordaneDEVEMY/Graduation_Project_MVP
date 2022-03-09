@@ -1,5 +1,7 @@
 const userAssignmentDatamapper = require('../../../../../models/userAdmin/planning/assignment/user');
 const userAdminDatamapper = require('../../../../../models/userAdmin/user');
+const siteAdminDatamapper = require('../../../../../models/userAdmin/site');
+const absenceAdminDatamapper = require('../../../../../models/userAdmin/planning/assignment/absence');
 
 const { ApiError } = require('../../../../../helpers/errorHandler');
 
@@ -22,19 +24,20 @@ const controller = {
       throw new ApiError(404, 'Utilisateur introuvable');
     }
 
-    const absence = await userAssignmentDatamapper.findAbsenceById(req.body.absence_id);
-
-    if (!absence) {
-      throw new ApiError(404, 'Absence introuvable');
-    }
-
-    const site = await userAssignmentDatamapper.findSiteById(req.body.site_id);
+    const site = await siteAdminDatamapper.findByPk(req.body.site_id);
 
     if (!site) {
       throw new ApiError(404, 'Site introuvable');
     }
 
     const userAssignment = await userAssignmentDatamapper.insert(req.body);
+
+    // TODO: Gérer absence if site or absence...
+    // const absence = await absenceAdminDatamapper.findAbsenceById(req.body.absence_id);
+
+    // if (!absence) {
+    //   throw new ApiError(404, 'Absence introuvable');
+    // }
 
     return res.json(userAssignment);
   },
