@@ -80,6 +80,7 @@ function Sheet({
               ml: 'auto',
               display: 'inline-block',
               fontSize: '.75rem',
+              lineHeight: '1.5rem',
             }}
           >
             {`${dateFunctions.getDate(starting_date).format('DD-MM')} 
