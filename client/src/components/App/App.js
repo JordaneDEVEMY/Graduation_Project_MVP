@@ -24,6 +24,7 @@ import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
 import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
 import ForgotPasswordContainer from '../../containers/ForgotPasswordContainer';
 import ResetPassword from '../ResetPassword/ResetPassword';
+import ProfilPageContainer from '../../containers/ProfilPageContainer';
 
 function App({
   isAdmin,
@@ -91,6 +92,12 @@ function App({
                   path={`:${userId}/planning`}
                   element={(
                     <PlanningContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
