@@ -96,17 +96,15 @@ function Sidebar() {
             disablePadding
             button
             component={RouterLink}
-            to="/admins/staff"
+            to="/admins/employees"
           >
-            <ListItemButton
-              disabled
-            >
+            <ListItemButton>
               <ListItemIcon>
                 <AssignmentIndIcon />
               </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
-                primary="Personnel"
+                primary="Employés"
               />
             </ListItemButton>
           </ListItem>
@@ -116,9 +114,7 @@ function Sidebar() {
             component={RouterLink}
             to="/admins/sites"
           >
-            <ListItemButton
-              disabled
-            >
+            <ListItemButton>
               <ListItemIcon>
                 <BusinessIcon />
               </ListItemIcon>
@@ -132,17 +128,15 @@ function Sidebar() {
             disablePadding
             button
             component={RouterLink}
-            to="/admins/customers"
+            to="/admins/companies"
           >
-            <ListItemButton
-              disabled
-            >
+            <ListItemButton>
               <ListItemIcon>
                 <SupervisorAccountIcon />
               </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
-                primary="Clients"
+                primary="Entreprises"
               />
             </ListItemButton>
           </ListItem>

@@ -37,9 +37,9 @@ function NavTabs() {
         scrollButtons="auto"
       >
         <Tab key="Planning" icon={<DateRangeRoundedIcon />} label="Planning" component={Link} to="/admins/planning" value="/admins/planning" />
-        <Tab key="Personnel" icon={<AssignmentIndIcon />} label="Personnel" component={Link} to="/admins/staff" value="/admins/personnel" />
+        <Tab key="Employees" icon={<AssignmentIndIcon />} label="Employés" component={Link} to="/admins/employees" value="/admins/employees" />
         <Tab key="Sites" icon={<BusinessIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
-        <Tab key="Clients" icon={<SupervisorAccountIcon />} label="Clients" component={Link} to="/admins/customers" value="/admins/sites" />
+        <Tab key="Entreprises" icon={<SupervisorAccountIcon />} label="Entreprises" component={Link} to="/admins/companies" value="/admins/companies" />
       </Tabs>
     </Box>
   );
