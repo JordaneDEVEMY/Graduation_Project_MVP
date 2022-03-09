@@ -11,6 +11,6 @@ CREATE OR REPLACE FUNCTION update_site(json) RETURNS void AS $$
 		estimated_duration = ($1 ->> 'estimated_duration')::int,
 		company_id = ($1 ->> 'company_id')::int
 	WHERE id = ($1->>'id')::int;
-$$ LANGUAGE sql
+$$ LANGUAGE sql;
 
 COMMIT;
