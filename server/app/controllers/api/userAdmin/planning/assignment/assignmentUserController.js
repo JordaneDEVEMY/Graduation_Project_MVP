@@ -1,11 +1,28 @@
 const userAssignmentDatamapper = require('../../../../../models/userAdmin/planning/assignment/user');
 const userAdminDatamapper = require('../../../../../models/userAdmin/user');
-const siteAdminDatamapper = require('../../../../../models/userAdmin/site');
+const assignmentUserAdminDatamapper = require('../../../../../models/userAdmin/planning/assignment');
 const absenceAdminDatamapper = require('../../../../../models/userAdmin/planning/assignment/absence');
 
 const { ApiError } = require('../../../../../helpers/errorHandler');
 
 const controller = {
+  /**
+   * UserAdmin controller to get all assignments
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async getAll(req, res) {
+    const assignments = await assignmentUserAdminDatamapper.findAll();
+
+    if (!assignments) {
+      throw new ApiError(404, 'Affectations introuvables');
+    }
+
+    return res.json(assignments);
+  },
+
   /**
    * UserAdmin controller to create an user assignment
    * ExpressMiddleware signature
