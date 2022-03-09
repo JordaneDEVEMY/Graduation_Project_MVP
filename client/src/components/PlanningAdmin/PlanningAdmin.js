@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -44,10 +43,10 @@ function PlanningAdmin({
     });
   };
 
-  React.useEffect(() => {
-    // setModalOpened(true);
-    console.log('update assignement', assignment);
-  }, [assignment]);
+  // React.useEffect(() => {
+  //   // setModalOpened(true);
+  //   console.log('update assignement', assignment);
+  // }, [assignment]);
 
   return (
     <>
@@ -63,13 +62,8 @@ function PlanningAdmin({
           <CardsDraggable
             companies={companies}
             handleAssignment={handleAssignment}
-          >
-            <Companies
-              companies={companies}
-              isDropable
-              week={currentWeek}
-            />
-          </CardsDraggable>
+            week={currentWeek}
+          />
           )
         : (
           <Companies

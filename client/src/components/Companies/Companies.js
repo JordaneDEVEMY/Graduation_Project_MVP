@@ -1,22 +1,39 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import Cards from '../Cards/Cards';
 import './companies.scss';
 
 function Companies({
+  assignments,
   companies,
   handleAssignment,
   isDropable,
   week,
 }) {
+  // sort assignements by company
+  const companiesAssignments = {};
+  companies.forEach(({ id: companyId, assignments: companyAssignments }) => {
+    if (assignments) {
+      const result = [];
+      companyAssignments.forEach((item) => {
+        result.push({
+          ...item,
+          assignments: assignments[`card-${item.id}`],
+        });
+      });
+      companiesAssignments[companyId] = result;
+    } else {
+      companiesAssignments[companyId] = companyAssignments;
+    }
+  });
+  console.log('companiesAssignments', companiesAssignments);
+
   return (
     (companies.length
-      ? (companies.map(({ id, name, assignments }) => (
-        <Box
-          key={`company-${id}`}
-        >
+      ? (companies.map(({ id, name }) => (
+        <>
           <Typography
             variant="h2"
             sx={{ textAlign: 'center' }}
@@ -26,12 +43,12 @@ function Companies({
             {name}
           </Typography>
 
-          {assignments.length
+          {companiesAssignments[id].length
             ? (
               <Cards
+                assignments={companiesAssignments[id]}
                 id={`company-${id}-sites`}
                 key={`company-${id}-sites`}
-                assignments={assignments}
                 isDropable={isDropable}
                 isMobile={!isDropable}
                 handleAssignment={handleAssignment}
@@ -48,7 +65,7 @@ function Companies({
                 Aucun planning à afficher.
               </Typography>
             )}
-        </Box>
+        </>
       )))
       : (
         <Typography sx={{ textAlign: 'center' }}>
@@ -59,6 +76,7 @@ function Companies({
 }
 
 Companies.propTypes = {
+  assignments: PropTypes.shape(),
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -81,6 +99,7 @@ Companies.propTypes = {
 };
 
 Companies.defaultProps = {
+  assignments: undefined,
   handleAssignment: undefined,
 };
 

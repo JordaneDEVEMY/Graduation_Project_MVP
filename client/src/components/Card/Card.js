@@ -1,12 +1,14 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { Droppable } from 'react-beautiful-dnd';
 import CardHeader from '../CardHeader/CardHeader';
 import SheetList from '../SheetList/SheetList';
-import SheetListDroppable from '../SheetListDroppable/SheetListDroppable';
+// import SheetListDroppable from '../SheetListDroppable/SheetListDroppable';
 
 import './card.scss';
 
@@ -51,21 +53,28 @@ function Card({
       />
       {(isDropable)
         ? (
-          <SheetListDroppable
-            cardId={id}
-          >
-            <SheetList
-              cardId={id}
-              employees={employees}
-              expandedSheet={expandedSheet}
-              handleAssignment={handleAssignment}
-              handleCollapse={handleCollapse}
-              isAdmin
-              isDraggable
-              isMobile={false}
-              week={week}
-            />
-          </SheetListDroppable>
+          <Droppable droppableId={`card-${id}`} type="SITE">
+            {(provided) => (
+              <Box
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                <SheetList
+                  cardId={id}
+                  employees={employees}
+                  expandedSheet={expandedSheet}
+                  handleAssignment={handleAssignment}
+                  handleCollapse={handleCollapse}
+                  isAdmin
+                  isDraggable
+                  isMobile={false}
+                  week={week}
+                />
+
+                {provided.placeholder}
+              </Box>
+            )}
+          </Droppable>
         )
         : (
           <SheetList

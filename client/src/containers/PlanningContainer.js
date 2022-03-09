@@ -13,17 +13,12 @@ import dateFunctions from '../utils/dateFunctions';
 function PlanningContainer({
   date,
 }) {
-  let weekStart = date;
-  let planning;
-
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { isAdmin } = user;
 
-  if (isAdmin) {
-    weekStart = useSelector((state) => state.admin.weekStart);
-    planning = useSelector((state) => state.admin.planning);
-  }
+  const weekStart = isAdmin ? useSelector((state) => state.admin.weekStart) : date;
+  const planning = isAdmin && useSelector((state) => state.admin.planning);
 
   const [startDate, setStartDate] = React.useState(weekStart);
 
@@ -36,6 +31,7 @@ function PlanningContainer({
       dispatch(actionRequestAllCompanies());
       dispatch(actionRequestAdminPlanning());
     }
+    setStartDate(weekStart);
   }, []);
 
   return (

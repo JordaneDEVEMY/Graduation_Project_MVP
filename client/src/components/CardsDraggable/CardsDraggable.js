@@ -6,6 +6,7 @@ import produce from 'immer';
 import React, { useCallback, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
+import Companies from '../Companies/Companies';
 import './cards_draggable.scss';
 
 /**
@@ -23,21 +24,31 @@ const dragReducer = produce((draft, action) => {
 });
 
 function CardsDraggable({
-  children,
   companies,
   handleAssignment,
+  week,
 }) {
+  console.log('companies', companies);
   // structure initial state as an object containing
   // an array of sheets for each card
   const draggableSheets = {};
   companies.forEach(({ assignments }) => {
-    const { id, colleagues } = assignments;
-    draggableSheets[`card-${id}`] = colleagues;
+    assignments.forEach((assignment) => {
+      const { id, colleagues } = assignment;
+      draggableSheets[`card-${id}`] = colleagues;
+    });
   });
 
   // set sheets in state
   const [state, dispatch] = useReducer(dragReducer, draggableSheets);
 
+  console.log('draggableSheets', draggableSheets);
+
+  console.log('state', state);
+
+  const onDragStart = useCallback((result) => {
+    console.log('on drag end', result);
+  }, []);
   /**
    * dispatch actions on drag end
    */
@@ -53,23 +64,25 @@ function CardsDraggable({
         fromIndex: result.source.index,
         toIndex: result.destination.index,
       });
-      console.log('on drag end');
+      console.log('on drag end', result);
       handleAssignment(state);
     }
   }, []);
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      {children}
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+      <Companies
+        assignments={state}
+        companies={companies}
+        handleAssignment={handleAssignment}
+        isDropable
+        week={week}
+      />
     </DragDropContext>
   );
 }
 
 CardsDraggable.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node).isRequired,
-    PropTypes.node.isRequired,
-  ]).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -82,6 +95,12 @@ CardsDraggable.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  week: PropTypes.shape({
+    num: PropTypes.number.isRequired,
+    dates: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ).isRequired,
+  }).isRequired,
 };
 
 export default React.memo(CardsDraggable);

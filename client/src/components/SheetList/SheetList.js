@@ -5,8 +5,9 @@ import React from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
+import { Draggable } from 'react-beautiful-dnd';
 import Sheet from '../Sheet/Sheet';
-import SheetDraggable from '../SheetDraggable/SheetDraggable';
+// import SheetDraggable from '../SheetDraggable/SheetDraggable';
 import sheetListBg from '../../Assets/images/sheet-bg.png';
 import './sheetlist.scss';
 
@@ -24,33 +25,40 @@ function SheetList({
   const theme = useTheme();
 
   return (
-    <Box
-      id={`card-${cardId}`}
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <>
       {employees.map((employee, index) => (
         isDraggable
           ? (
-            <SheetDraggable
-              key={index}
-              cardId={cardId}
+            <Draggable
+              key={`card-${cardId}-sheet-${index}`}
+              draggableId={`card-${cardId}-sheet-${employee.id}`}
               index={index}
             >
-              <Sheet
-                key={index}
-                index={index}
-                handleAssignment={handleAssignment}
-                handleCollapse={handleCollapse}
-                expandedSheet={expandedSheet}
-                isAdmin={isAdmin}
-                isDraggable
-                isMobile={isMobile}
-                week={week}
-                {...employee}
-              />
-            </SheetDraggable>
+              {(provided, snapshot) => (
+                <Box
+                  sx={{
+                    opacity: snapshot.isDragging ? '0.5' : 1,
+                  }}
+                  ref={provided.innerRef}
+                  key={`card-${cardId}-employee-${employee.id}-wrapper`}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                >
+                  <Sheet
+                    key={index}
+                    index={index}
+                    handleAssignment={handleAssignment}
+                    handleCollapse={handleCollapse}
+                    expandedSheet={expandedSheet}
+                    isAdmin={isAdmin}
+                    isDraggable
+                    isMobile={isMobile}
+                    week={week}
+                    {...employee}
+                  />
+                </Box>
+              )}
+            </Draggable>
           )
           : (
             <Sheet
@@ -80,7 +88,7 @@ function SheetList({
         }}
       />
       )}
-    </Box>
+    </>
   );
 }
 
