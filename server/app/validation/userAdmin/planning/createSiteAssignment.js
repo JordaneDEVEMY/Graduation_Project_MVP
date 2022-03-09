@@ -13,6 +13,6 @@ module.exports = Joi.object({
     .required(),
   employee_id: Joi.number()
     .required(),
-  site_id: Joi.number()
-    .required(),
+  site_id: Joi.number(),
+  absence_id: Joi.number(),
 }).required();

@@ -8,7 +8,7 @@
 ### 404
 GET {{ endpoint }}/azertyuiop
 
-### Create employee affectation
+### Create employee assignment WITH SITE
 POST {{ endpoint }}/assignment/user/
 content-type: application/json
 
@@ -20,4 +20,16 @@ content-type: application/json
 "visibility": true,
 "employee_id": 5,
 "site_id": 5
+}
+
+### Create employee assignment WITH ABSENCE
+POST {{ endpoint }}/assignment/user/
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "absence_id": 5
 }

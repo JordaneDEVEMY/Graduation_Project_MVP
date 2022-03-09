@@ -1,7 +1,7 @@
 const userAssignmentDatamapper = require('../../../../../models/userAdmin/planning/assignment/user');
-// const userAdminDatamapper = require('../../../../../models/userAdmin/user');
+const userAdminDatamapper = require('../../../../../models/userAdmin/user');
 const siteAdminDatamapper = require('../../../../../models/userAdmin/site');
-// const absenceAdminDatamapper = require('../../../../../models/userAdmin/planning/assignment/absence');
+const absenceAdminDatamapper = require('../../../../../models/userAdmin/planning/assignment/absence');
 
 const { ApiError } = require('../../../../../helpers/errorHandler');
 
@@ -14,32 +14,36 @@ const controller = {
    * @returns {string} Route API JSON response
    */
   async create(req, res) {
-    // TODO: Sprint 3 après retour d'utilisation par les fronts
-    // if (req.params.id !== employee.id) {
-    // }
+    const user = await userAdminDatamapper.findByPk(req.body.employee_id);
 
-    // const user = await userAdminDatamapper.findByPk(req.params.id);
-
-    // if (!user) {
-    //   throw new ApiError(404, 'Utilisateur introuvable');
-    // }
-
-    const site = await siteAdminDatamapper.findByPk(req.body.site_id);
-
-    if (!site) {
-      throw new ApiError(404, 'Site introuvable');
+    if (!user) {
+      throw new ApiError(404, 'Utilisateur introuvable');
     }
 
-    const userAssignment = await userAssignmentDatamapper.insertWithSite(req.body);
+    if (req.body.site_id) {
+      const site = await siteAdminDatamapper.findByPk(req.body.site_id);
 
-    // TODO: Gérer absence if site or absence...
-    // const absence = await absenceAdminDatamapper.findAbsenceById(req.body.absence_id);
+      if (!site) {
+        throw new ApiError(404, 'Site introuvable');
+      }
 
-    // if (!absence) {
-    //   throw new ApiError(404, 'Absence introuvable');
-    // }
+      const userAssignment = await userAssignmentDatamapper.insertWithSite(req.body);
 
-    return res.json(userAssignment);
+      return res.json(userAssignment);
+    }
+
+    if (req.body.absence_id) {
+      const absence = await absenceAdminDatamapper.findByPk(req.body.absence_id);
+
+      if (!absence) {
+        throw new ApiError(404, 'Absence introuvable');
+      }
+
+      const userAssignment = await userAssignmentDatamapper.insertWithAbsence(req.body);
+      return res.json(userAssignment);
+    }
+
+    throw new ApiError(500, 'Internal Server Error');
   },
 
 };
