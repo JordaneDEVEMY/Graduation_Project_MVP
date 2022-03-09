@@ -49,7 +49,9 @@ module.exports = {
     const result = await client.query(
       `
       SELECT * FROM get_Week_admin_planning 
-      WHERE starting_date >= $1 
+      WHERE starting_date >= $1
+      AND starting_date <= $2
+      AND ending_date >= $1
       AND ending_date <= $2
       `,
       [mondayIsoDate, sundayIsoDate],
