@@ -1,23 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { actionCreateSite, actionSetSiteInformation } from '../actions/site';
+import { useSelector } from 'react-redux';
 import CreateSiteForm from '../components/CreateSiteForm/CreateSiteForm';
 
 function CreateSiteFormContainer() {
-  const dispatch = useDispatch();
-
-  const changeField = (key, value) => {
-    dispatch(actionSetSiteInformation(key, value));
-  };
-
-  const handleCreateSite = () => {
-    dispatch(actionCreateSite());
-  };
+  const allSites = useSelector((state) => state.allSites.sites);
+  console.log(allSites);
 
   return (
     <CreateSiteForm
-      changeField={changeField}
-      handleCreateSite={handleCreateSite}
+      datas={allSites}
     />
   );
 }
