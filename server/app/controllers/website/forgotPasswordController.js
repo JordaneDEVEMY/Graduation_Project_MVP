@@ -1,11 +1,10 @@
-// const emailValidator = require('email-validator');
+const emailValidator = require('email-validator');
+const jwt = require('jsonwebtoken');
 // // ? const bcrypt = require('bcryptjs');
 // const { generateToken } = require('../../helpers/generateToken');
 // const authDatamapper = require('../../models/website/auth');
-// const { WebsiteError } = require('../../helpers/errorHandler');
+const { WebsiteError } = require('../../helpers/errorHandler');
 // const { sendResetLink } = require('../../helpers/sendResetLink');
-
-const jwt = require('jsonwebtoken');
 
 const forgotPasswordDatamapper = require('../../models/website/forgotPassword');
 const { ApiError } = require('../../helpers/errorHandler');
@@ -14,6 +13,15 @@ const controller = {
   async forgotPassword(req, res) {
     const { email } = req.body;
 
+    if (!email) {
+      throw new WebsiteError(400, 'L\'email est requis');
+    }
+
+    const isEmailValid = emailValidator.validate(email);
+
+    if (!isEmailValid) {
+      throw new WebsiteError(400, 'Cet email n\'est pas valide');
+    }
     const user = await forgotPasswordDatamapper.getEmail(email);
 
     if (!user) {
