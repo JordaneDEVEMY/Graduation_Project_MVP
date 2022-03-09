@@ -241,7 +241,7 @@ module.exports = {
     );
 
     Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });
-    console.log(userToCreate.rows[0]);
+
     return userToCreate.rows[0];
   },
 
