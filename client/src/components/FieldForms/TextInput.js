@@ -8,7 +8,7 @@ function TextInput({
   handleChange,
   type,
   nameValue,
-  label,
+  value,
 }) {
   return (
     <TextField
@@ -16,7 +16,7 @@ function TextInput({
       required
       type={type}
       name={nameValue}
-      label={label}
+      value={value}
       variant="outlined"
       onChange={(event) => handleChange(nameValue, event.target.value)}
     />
@@ -27,7 +27,7 @@ TextInput.propTypes = {
   handleChange: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   nameValue: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default React.memo(TextInput);
