@@ -50,7 +50,7 @@ function CardsDraggable({
         toIndex: result.destination.index,
       });
       console.log('on drag end', result);
-      handleAssignment(dragState);
+      // handleAssignment(dragState);
     }
   }, []);
 
