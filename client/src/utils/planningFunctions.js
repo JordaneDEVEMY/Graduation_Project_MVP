@@ -23,6 +23,7 @@ const planningFunctions = {
           company.assignments.push({
             id,
             site: {
+              id,
               name,
             },
             colleagues: [],
@@ -35,13 +36,13 @@ const planningFunctions = {
       company.assignments.map((assignment) => {
         const sitesById = sites.filter((item) => item.id === assignment.id);
         sitesById.forEach(({
-          assignments,
+          assignment: assignmentData,
         }) => {
           const {
-            color, starting_date, ending_date, employees,
-          } = assignments;
+            color, starting_date, ending_date, employee,
+          } = assignmentData;
 
-          const { id, firstname, lastname } = employees;
+          const { id, firstname, lastname } = employee;
 
           assignment.colleagues.push({
             id,

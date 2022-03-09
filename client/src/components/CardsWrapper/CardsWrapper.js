@@ -40,6 +40,14 @@ function CardsWrapper({
 
   // set sheets in state
   const [state, dispatch] = useReducer(dragReducer, draggableSheets);
+  const [draggedSheet, setDraggedSheet] = React.useState({});
+
+  console.log(draggedSheet);
+
+  const onDragStart = useCallback((result) => {
+    setDraggedSheet(result);
+    console.log('dragStart', result);
+  });
 
   /**
    * dispatch actions on drag end
@@ -57,10 +65,11 @@ function CardsWrapper({
         toIndex: result.destination.index,
       });
       // TODO: update request
-      console.log('source', result.source);
-      console.log('destination', result.destination);
-
-      handleAssignment(state);
+      // state.sheet = draggedSheet;
+      // console.log('dragEnd', result);
+      const assignement = { ...state.result, sheet: draggedSheet };
+      console.log('update assignement', assignement);
+      handleAssignment(assignement);
     }
   }, []);
 
@@ -73,7 +82,7 @@ function CardsWrapper({
         justifyContent: 'center',
       }}
     >
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         {assignments.map((assignment) => (
           <Card
             key={assignment.id}

@@ -61,7 +61,7 @@ SheetList.propTypes = {
       lastname: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  expandedSheet: PropTypes.func.isRequired,
+  expandedSheet: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 SheetList.defaultProps = {

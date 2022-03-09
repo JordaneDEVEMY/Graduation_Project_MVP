@@ -13,6 +13,7 @@ function PlanningAdmin({
   planning,
   startDate,
 }) {
+  console.log('planning', planning);
   const companies = planningFunctions.adminPlanningToCards(planning);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
@@ -29,22 +30,30 @@ function PlanningAdmin({
       </Typography>
 
       {companies.length
-        ? (companies.map(({ name, assignments }) => (
+        ? (companies.map(({ id, name, assignments }) => (
           <>
-            <Typography variant="h2" sx={{ textAlign: 'center' }}>
+            <Typography
+              variant="h2"
+              sx={{ textAlign: 'center' }}
+              key={`title-${id}`}
+            >
               {name}
             </Typography>
 
             {assignments.length
               ? (
                 <Cards
+                  key={`cards-${id}`}
                   assignments={assignments}
                   week={currentWeek}
                   isAdmin
                 />
               )
               : (
-                <Typography sx={{ textAlign: 'center' }}>
+                <Typography
+                  key={`nocards-${id}`}
+                  sx={{ textAlign: 'center' }}
+                >
                   Aucun planning à afficher.
                 </Typography>
               )}

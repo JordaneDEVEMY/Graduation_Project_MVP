@@ -17,8 +17,8 @@ function Cards({
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [modalOpened, setModalOpened] = React.useState(false);
   const [assignment, setAssignment] = React.useState({});
+  const [modalOpened, setModalOpened] = React.useState(assignment.id !== undefined);
   console.log('assignments', assignments);
   console.log('isMobile', isMobile);
 

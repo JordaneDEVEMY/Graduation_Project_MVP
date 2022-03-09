@@ -55,13 +55,12 @@ function Sheet({
         id={`panel${index}-header`}
         sx={{
           height: 50,
+          alignItems: 'center',
         }}
       >
         <Typography
           component="span"
           sx={{
-            alignSelf: 'center',
-            lineHeight: 1,
             fontFamily: 'Sriracha',
             fontSize: '1rem',
             color: theme.palette.sheet.main,

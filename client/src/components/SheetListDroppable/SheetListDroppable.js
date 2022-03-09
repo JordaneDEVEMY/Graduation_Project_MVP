@@ -34,7 +34,10 @@ function SheetListDroppable({
             {...provided.droppableProps}
           >
             {employees.map((employee, index) => (
-              <Draggable key={`card-${cardId}-sheet-${index}`} draggableId={`card-${cardId}-sheet-${index}`} index={index}>
+              <Draggable
+                draggableId={`card-${cardId}-sheet-${index}`}
+                index={index}
+              >
                 {(provided, snapshot) => (
                   <Box
                     sx={{
@@ -88,7 +91,7 @@ SheetListDroppable.propTypes = {
       lastname: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
-  expandedSheet: PropTypes.func.isRequired,
+  expandedSheet: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 export default React.memo(SheetListDroppable);

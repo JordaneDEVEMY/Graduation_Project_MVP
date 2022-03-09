@@ -15,6 +15,7 @@ function Card({
   id,
   isAdmin,
   isMobile,
+  setDraggedSheetId,
   site,
 }) {
   const theme = useTheme();
@@ -41,6 +42,7 @@ function Card({
         width: `calc(300px + ${theme.spacing(4)})`,
         overflow: 'hidden',
       }}
+      id={site.id}
     >
       <CardHeader
         site={site}
@@ -60,6 +62,7 @@ function Card({
             cardId={id}
             handleChange={handleChange}
             expandedSheet={expandedSheet}
+            setDraggedSheetId={setDraggedSheetId}
           />
         )}
     </Box>
@@ -72,8 +75,9 @@ Card.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   site: PropTypes.object.isRequired,
+  setDraggedSheetId: PropTypes.func,
 };
 Card.defaultProps = {
-
+  setDraggedSheetId: undefined,
 };
 export default React.memo(Card);
