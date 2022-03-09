@@ -8,5 +8,16 @@
 ### 404
 GET {{ endpoint }}/azertyuiop
 
-### Update employee affectation
-PATCH {{ endpoint }}/1/assignment/user/1
+### Create employee affectation
+POST {{ endpoint }}/assignment/user/
+content-type: application/json
+
+{
+"starting_date": "2022-12-13",
+"ending_date": "2022-12-13",
+"color": "#0F0",
+"position": 0,
+"visibility": true,
+"employee_id": 5,
+"site_id": 5
+}
