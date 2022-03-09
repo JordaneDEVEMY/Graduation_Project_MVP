@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 // const { generateToken } = require('../../helpers/generateToken');
 // const authDatamapper = require('../../models/website/auth');
 const { WebsiteError } = require('../../helpers/errorHandler');
-// const { sendResetLink } = require('../../helpers/sendResetLink');
+const sendResetPasswordLink = require('../../helpers/sendResetPasswordLink');
 
 const forgotPasswordDatamapper = require('../../models/website/forgotPassword');
 const { ApiError } = require('../../helpers/errorHandler');
@@ -35,6 +35,8 @@ const controller = {
     };
     const token = jwt.sign(payload, secret, { expiresIn: '15m' });
     const link = `http://localhost:${process.env.PORT}/reset-password/${user.id}/${token}`;
+
+    sendResetPasswordLink(email, user.firstname, user.lastname, link);
 
     console.log(link);
     res.send('Password reset link has been sent to ur email...');

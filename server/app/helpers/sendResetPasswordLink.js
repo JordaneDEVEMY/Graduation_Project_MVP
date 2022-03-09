@@ -1,32 +1,34 @@
 const nodemailer = require('nodemailer');
-// require('dotenv').config();
 
 // async..await is not allowed in global scope, must use a wrapper
-// module.exports =
-async function main() {
+module.exports = async function main(email, firstname, lastname, link) {
   // create reusable transporter object using the default SMTP transport
-  console.log(process.env.NODE_ENV);
-  console.log('file: sendResetPasswordLink.js ~ line 17 ~ main ~ process.env.MAILER_PASS', process.env.MAILER_PASS);
-  console.log('file: sendResetPasswordLink.js ~ line 9 ~ main ~ process.env.MAILER_HOST', process.env.MAILER_HOST);
-  console.log('file: sendResetPasswordLink.js ~ line 11 ~ main ~ process.env.MAILER_PORT', process.env.MAILER_PORT);
-  console.log('file: sendResetPasswordLink.js ~ line 15 ~ main ~ process.env.MAILER_USER', process.env.MAILER_USER);
+  // TODO : Utiliser DOTENV
   const transporter = nodemailer.createTransport({
-    host: process.env.MAILER_HOST,
-    port: process.env.MAILER_PORT,
+    host: 'smtp.gmail.com',
+    port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.MAILER_USER, // generated ethereal user
-      pass: process.env.MAILER_PASS, // generated ethereal password
+      user: 'olleks.planning@gmail.com', // generated ethereal user
+      pass: 'hduqzddpdzuvsqwa', // generated ethereal password
     },
   });
 
   // send mail with defined transport object
   const info = await transporter.sendMail({
     from: '"Olleks 🗓" <olleks.planning@gmail.com>', // sender address
-    to: 'olleks.planning@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
-    html: '<b>Hello world?</b>', // html body
+    to: email, // list of receivers
+    subject: `Hello ${firstname}`, // Subject line
+    // text: 'Hello ?', // plain text body
+    html:
+      `
+      <b>Bonjour, ${firstname} ${lastname}</b>
+      <br>
+      <br>
+      <b>Ci-joint le lien pour modifier ton mot de passe :<b>
+      <br>
+      ${link}
+      `, // html body
   });
 
   console.log('Message sent: %s', info.messageId);
@@ -35,6 +37,6 @@ async function main() {
   // Preview only available when sending through an Ethereal account
   console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-}
+};
 
-main().catch(console.error);
+// main().catch(console.error);
