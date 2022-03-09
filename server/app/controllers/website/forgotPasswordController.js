@@ -11,7 +11,7 @@ const forgotPasswordDatamapper = require('../../models/website/forgotPassword');
 const { ApiError } = require('../../helpers/errorHandler');
 
 const controller = {
-  async resetPassword(req, res) {
+  async forgotPassword(req, res) {
     const { email } = req.body;
 
     const user = await forgotPasswordDatamapper.getEmail(email);
@@ -26,10 +26,10 @@ const controller = {
       email: user.email,
     };
     const token = jwt.sign(payload, secret, { expiresIn: '15m' });
-    const link = `http://localhost:3000/reset-password/${user.id}/${token}`;
+    const link = `http://localhost:${process.env.PORT}/reset-password/${user.id}/${token}`;
 
     console.log(link);
-    res.send(`Password reset at ${link}`);
+    res.send('Password reset link has been sent to ur email...');
   },
 };
 

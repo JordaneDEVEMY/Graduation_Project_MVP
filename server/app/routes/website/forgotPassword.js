@@ -22,24 +22,8 @@ router
   //  * @return {WebsiteError} 500 - Internal server error - application/json
   //  */
   .get((req, res) => {
-    res.send('FORGOT PASSWORD IN DEVELOPMENT');
+    res.render('forgot-password', { title: "O'lleks - API" });
   })
-  .post(controllerHandler(forgotPasswordController.resetPassword));
+  .post(controllerHandler(forgotPasswordController.forgotPassword));
 
-router
-  .route('/:id/:token')
-  // /**
-  //  * POST /forgot-password
-  //  * @summary Forgot password to connect on website
-  //  * @tags 1.Authentification
-  //  * @param {ForgotInput} request.body.required - User email/password
-  //  * @return {AuthUser} 200 - success response - application/json
-  //  * @return {WebsiteError} 400 - Bad request response - application/json
-  //  * @return {WebsiteError} 422 - Incorrect email - application/json
-  //  * @return {WebsiteError} 500 - Internal server error - application/json
-  //  */
-  .get((req, res) => {
-    const { id, token } = req.params;
-    res.send(req.params);
-  });
 module.exports = router;
