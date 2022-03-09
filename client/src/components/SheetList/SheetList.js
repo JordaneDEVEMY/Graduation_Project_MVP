@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import { Draggable } from 'react-beautiful-dnd';
 import Sheet from '../Sheet/Sheet';
-// import SheetDraggable from '../SheetDraggable/SheetDraggable';
 import sheetListBg from '../../Assets/images/sheet-bg.png';
 import './sheetlist.scss';
 
