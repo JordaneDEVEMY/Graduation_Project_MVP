@@ -139,7 +139,7 @@ module.exports = {
    * @param {number} endingDate - Ending date of site affectation
    * @param {number} siteId - Site ID
    * @param {number} userId - User ID
-   * @returns {TODO|ApiError} - Colleagues response
+   * @returns {Colleagues|ApiError} - Colleagues response
    */
   async findColleagues(startingDate, endingDate, siteId, userId) {
     const result = await client.query(
