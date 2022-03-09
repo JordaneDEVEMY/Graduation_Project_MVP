@@ -3,6 +3,7 @@ import * as actions from '../actions';
 
 const initialState = {
   weekStart: '',
+  absences: [],
   planning: [],
 };
 
@@ -12,6 +13,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         weekStart: action.payload.weekStart,
+        absences: action.payload.absences,
         planning: action.payload.planning,
       };
     default:

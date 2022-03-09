@@ -7,8 +7,8 @@ export function actionRequestAdminPlanning() {
   };
 }
 
-export function actionGetAdminPlanning({ weekStart, planning }) {
+export function actionGetAdminPlanning({ weekStart, absences, planning }) {
   return {
-    type: GET_ADMIN_PLANNING, payload: { weekStart, planning },
+    type: GET_ADMIN_PLANNING, payload: { weekStart, absences, planning },
   };
 }
