@@ -68,38 +68,46 @@ module.exports = {
   },
 
   /**
-   * Insert User assignment to an Absence
-   * @param {AssignmentToCreateInAbsence} assignment - Body request
-   * @returns {Assignment} - Return the new user
+   * Update Assignment
+   * @param {number} assignmentId - Assignment ID
+   * @param {object} site - Body request
+   * @returns {Assignment|ApiError} - Return updated site or ApiError if site not found
    */
-  async insertWithAbsence(assignment) {
-    const assignmentToCreate = await client.query(
+  async update(assignmentId, assignment) {
+    const result = await client.query('SELECT * FROM "assignment" WHERE "id" = $1', [assignmentId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cette affectation n\'existe pas');
+    }
+
+    const siteToSave = await client.query(
       `
-      INSERT INTO "assignment"
-      (
-        "starting_date",
-        "ending_date",
-        "color",
-        "position",
-        "visibility",
-        "absence_id",
-        "employee_id"
-      )
-      VALUES (
-        $1, $2, $3, $4, $5, $6, $7
-      )
-      RETURNING *;`,
+        UPDATE "assignment"
+        SET
+          "starting_date" = $2,
+          "ending_date" = $3,
+          "color" = $4,
+          "position" = $5,
+          "visibility" = $6,
+          "site_id" = $7,
+          "absence_id" = $8,
+          "employee_id" = $9,
+          "updated_at" = NOW()
+        WHERE "id" = $1
+        RETURNING *;`,
       [
+        assignmentId,
         assignment.starting_date,
         assignment.ending_date,
         assignment.color,
         assignment.position,
         assignment.visibility,
+        assignment.site_id,
         assignment.absence_id,
         assignment.employee_id,
       ],
     );
 
-    return assignmentToCreate.rows[0];
+    return siteToSave.rows[0];
   },
 };

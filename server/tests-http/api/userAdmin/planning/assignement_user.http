@@ -3,13 +3,13 @@
 # REST Client for VSCode needed
 # https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 ################################################################################
-@endpoint = http://localhost:{{$dotenv PORT}}/api/admin/planning
+@endpoint = http://localhost:{{$dotenv PORT}}/api/admin/planning/assignment
 
 ### 404
 GET {{ endpoint }}/azertyuiop
 
 ### Create employee assignment WITH SITE
-POST {{ endpoint }}/assignment/user/
+POST {{ endpoint }}/user/
 content-type: application/json
 
 {
@@ -19,11 +19,12 @@ content-type: application/json
 "position": 0,
 "visibility": true,
 "employee_id": 5,
-"site_id": 5
+"site_id": 5,
+"absence_id": 5
 }
 
 ### Create employee assignment WITH ABSENCE
-POST {{ endpoint }}/assignment/user/
+POST {{ endpoint }}/user/
 {
   "starting_date": "2022-12-12",
   "ending_date": "2022-12-12",
@@ -31,5 +32,34 @@ POST {{ endpoint }}/assignment/user/
   "position": 0,
   "visibility": true,
   "employee_id": 5,
+  "site_id": 5,
+  "absence_id": 5
+}
+
+### Update employee assignment WITH SITE
+PATCH {{ endpoint }}/47/user
+content-type: application/json
+
+{
+  "starting_date": "2022-12-11",
+  "ending_date": "2022-12-11",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": 5,
+  "absence_id": 5
+}
+
+### Update employee assignment WITH ABSENCE
+PATCH {{ endpoint }}/47/user
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": 5,
   "absence_id": 5
 }
