@@ -2,16 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-import { Typography, Modal, useMediaQuery } from '@mui/material';
-import AssignmentForm from '../AssignmentForm/AssignmentForm';
+import { Typography, useMediaQuery } from '@mui/material';
 import SearchContainer from '../SearchContainer/SearchContainer';
+import Cards from '../Cards/Cards';
 import CardsDraggable from '../CardsDraggable/CardsDraggable';
-import Companies from '../Companies/Companies';
 import dateFunctions from '../../utils/dateFunctions';
 import planningFunctions from '../../utils/planningFunctions';
-import './planning_admin.scss';
+import './company.scss';
 
-function PlanningAdmin({
+function Company({
   handleStartDate,
   planning,
   startDate,
@@ -22,32 +21,9 @@ function PlanningAdmin({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const [assignment, setAssignment] = React.useState({});
-  const [modalOpened, setModalOpened] = React.useState(false);
-
   console.log('planning', planning);
   console.log('startDate', startDate);
   console.log('companies', companies);
-
-  const handleAssignment = (result) => {
-    console.log('HANDLE ASSIGNMENT', result);
-    setAssignment(result);
-  };
-
-  const handleModal = () => {
-    // force opened state
-    setModalOpened((stateModal) => {
-      if (stateModal) {
-        return true;
-      }
-      return !stateModal;
-    });
-  };
-
-  React.useEffect(() => {
-    // setModalOpened(true);
-    console.log('update assignement', assignment);
-  }, [assignment]);
 
   return (
     <>
@@ -58,45 +34,53 @@ function PlanningAdmin({
       </Typography>
 
       {companies.length
-        ? !isMobile
-          && (
-          <CardsDraggable
+        ? !isMobile &&
+          (<CardsDraggable
             companies={companies}
-            handleAssignment={handleAssignment}
-          >
-            <Companies
-              companies={companies}
-              isDropable
-              week={currentWeek}
-            />
-          </CardsDraggable>
-          )
-        : (
-          <Companies
-            companies={companies}
-            handleAssignment={handleAssignment}
-            isDropable={false}
             week={currentWeek}
-          />
-        )}
+          />)
+        : (companies.map(({ id, name, assignments }) => (
+          <>
+            <Typography
+              variant="h2"
+              sx={{ textAlign: 'center' }}
+              id={`company-${id}-title`}
+              key={`company-${id}-title`}
+            >
+              {name}
+            </Typography>
 
-      <Modal
-        sx={{
-          width: '90vw',
-          maxWidth: '30rem',
-          mx: 'auto',
-          mt: '25vh',
-        }}
-        open={modalOpened}
-        onClose={handleModal}
-      >
-        <AssignmentForm week={week} assignment={assignment} />
-      </Modal>
+            {assignments.length
+              ? (
+                <Cards
+                  id={`company-${id}-sites`}
+                  key={`company-${id}-sites`}
+                  assignments={assignments}
+                  week={currentWeek}
+                  isAdmin
+                />
+              )
+              : (
+                <Typography
+                  id={`company-${id}-nosites`}
+                  key={`company-${id}-nosites`}
+                  sx={{ textAlign: 'center' }}
+                >
+                  Aucun planning à afficher.
+                </Typography>
+              )}
+          </>
+        )))
+        : (
+          <Typography sx={{ textAlign: 'center' }}>
+            Aucune entreprise à afficher.
+          </Typography>
+        )}
     </>
   );
 }
 
-PlanningAdmin.propTypes = {
+Company.propTypes = {
   handleStartDate: PropTypes.func.isRequired,
   planning: PropTypes.arrayOf(
     PropTypes.shape({
@@ -115,4 +99,4 @@ PlanningAdmin.propTypes = {
   startDate: PropTypes.string.isRequired,
 };
 
-export default React.memo(PlanningAdmin);
+export default React.memo(Company);

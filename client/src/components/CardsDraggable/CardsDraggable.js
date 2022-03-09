@@ -1,14 +1,12 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable default-case */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-props-no-spreading */
 import produce from 'immer';
 import React, { useCallback, useReducer } from 'react';
-import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
 import { DragDropContext } from 'react-beautiful-dnd';
-import Card from '../Card/Card';
-import './cards_wrapper.scss';
+import './cards_draggable.scss';
 
 /**
  * receive state and return the new state
@@ -24,17 +22,16 @@ const dragReducer = produce((draft, action) => {
   }
 });
 
-function CardsWrapper({
-  assignments,
+function CardsDraggable({
+  children,
+  companies,
   handleAssignment,
-  isAdmin,
 }) {
-  const theme = useTheme();
-
   // structure initial state as an object containing
   // an array of sheets for each card
   const draggableSheets = {};
-  assignments.forEach(({ id, colleagues }) => {
+  companies.forEach(({ assignments }) => {
+    const { id, colleagues } = assignments;
     draggableSheets[`card-${id}`] = colleagues;
   });
 
@@ -57,44 +54,34 @@ function CardsWrapper({
         toIndex: result.destination.index,
       });
       console.log('on drag end');
-      handleAssignment(result);
+      handleAssignment(state);
     }
   }, []);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        gap: theme.spacing(2),
-        flexWrap: 'nowrap',
-        justifyContent: 'center',
-      }}
-    >
-      <DragDropContext onDragEnd={onDragEnd}>
-        {assignments.map((assignment) => (
-          <Card
-            id={assignment.id}
-            key={assignment.id}
-            isMobile={false}
-            isAdmin={isAdmin}
-            {...assignment}
-            employees={state[`card-${assignment.id}`]}
-          />
-        ))}
-      </DragDropContext>
-    </Box>
+    <DragDropContext onDragEnd={onDragEnd}>
+      {children}
+    </DragDropContext>
   );
 }
 
-CardsWrapper.propTypes = {
-  assignments: PropTypes.arrayOf(
+CardsDraggable.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node).isRequired,
+    PropTypes.node.isRequired,
+  ]).isRequired,
+  companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      assignments: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+        }).isRequired,
+      ).isRequired,
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  isAdmin: PropTypes.bool.isRequired,
 };
 
-export default React.memo(CardsWrapper);
+export default React.memo(CardsDraggable);

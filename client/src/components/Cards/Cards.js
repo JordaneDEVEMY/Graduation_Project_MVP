@@ -2,74 +2,60 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Modal, useMediaQuery } from '@mui/material';
+import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import Card from '../Card/Card';
 import Carousel from '../Carousel/Carousel';
-import CardsWrapper from '../CardsWrapper/CardsWrapper';
-import AssignmentForm from '../AssignmentForm/AssignmentForm';
 import './cards.scss';
 
 function Cards({
   assignments,
+  handleAssignment,
+  id,
   isAdmin,
+  isDropable,
+  isMobile,
   week,
 }) {
-  console.log('CARDS');
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const [assignment, setAssignment] = React.useState({});
-  const [modalOpened, setModalOpened] = React.useState(false);
-
-  const handleModal = () => {
-    // force opened state
-    setModalOpened((stateModal) => {
-      if (stateModal) {
-        return true;
-      }
-      return !stateModal;
-    });
-  };
-
-  React.useEffect(() => {
-    setModalOpened(true);
-    console.log('update assignement', assignment);
-  }, [assignment]);
 
   return (
-    <>
-      {isMobile
-        ? (
-          <Carousel
-            assignments={assignments}
-            handleAssignment={setAssignment}
-            isAdmin={isAdmin}
-          />
-        )
-        : (
-          <CardsWrapper
-            assignments={assignments}
-            handleAssignment={setAssignment}
-            isAdmin={isAdmin}
-          />
-        )}
-
-      {isAdmin
-        && (
-        <Modal
+    isMobile
+      ? (
+        <Carousel
+          assignments={assignments}
+          handleAssignment={handleAssignment}
+          id={`carousel-${id}`}
+          isAdmin={isAdmin}
+          key={`carousel-${id}`}
+          week={week}
+        />
+      )
+      : (
+        <Box
+          id={`cards-${id}`}
           sx={{
-            width: '90vw',
-            maxWidth: '30rem',
-            mx: 'auto',
-            mt: '25vh',
+            display: 'flex',
+            gap: theme.spacing(2),
+            flexWrap: 'nowrap',
+            justifyContent: 'center',
           }}
-          open={modalOpened}
-          onClose={handleModal}
         >
-          <AssignmentForm week={week} assignment={assignment} />
-        </Modal>
-        )}
-    </>
+          {assignments.map((assignment) => (
+            <Card
+              {...assignment}
+              employees={assignment.colleagues}
+              handleAssignment={handleAssignment}
+              isAdmin={isAdmin}
+              isDropable={isDropable}
+              isMobile={false}
+              key={assignment.id}
+              week={week}
+            />
+          ))}
+        </Box>
+      )
   );
 }
 
@@ -79,13 +65,21 @@ Cards.propTypes = {
       id: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
+  handleAssignment: PropTypes.func,
+  id: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  isDropable: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
+};
+
+Cards.defaultProps = {
+  handleAssignment: undefined,
 };
 
 export default React.memo(Cards);

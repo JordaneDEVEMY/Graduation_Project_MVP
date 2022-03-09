@@ -10,8 +10,9 @@ const planningFunctions = {
   adminPlanningToCards: (planning) => {
     const companies = [];
 
-    planning.forEach(({ company_name, sites }) => {
+    planning.forEach(({ company_id, company_name, sites }) => {
       const company = {
+        id: company_id,
         name: company_name,
         assignments: [],
       };

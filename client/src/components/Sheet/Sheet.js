@@ -7,6 +7,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Avatar,
+  Box,
   Grid,
   Typography,
 } from '@mui/material';
@@ -26,24 +27,26 @@ function Sheet({
   color,
   expandedSheet,
   ending_date,
-  handleChange,
+  handleAssignment,
+  handleCollapse,
   index,
-  isDroppable,
+  isAdmin,
+  isDraggable,
   firstname,
   lastname,
   starting_date,
+  week,
 }) {
   const theme = useTheme();
-  const week = dateFunctions.getWeek(starting_date);
-  const firstDayofWeek = dateFunctions.getDate(week.current.dates[0]).format('YYYY-MM-DD');
-  const lastDayofWeek = dateFunctions.getDate(week.current.dates[4]).format('YYYY-MM-DD');
+  const firstDayofWeek = dateFunctions.getDate(week.dates[0]).format('YYYY-MM-DD');
+  const lastDayofWeek = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
   const startOnMonday = dateFunctions.getDate(starting_date).format('YYYY-MM-DD') === firstDayofWeek;
   const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
 
   return (
     <Accordion
       expanded={expandedSheet === `panel${index}`}
-      onChange={handleChange(`panel${index}`)}
+      onChange={handleCollapse(`panel${index}`)}
       sx={{
         borderTop: '1px solid rgb(0 0 0 / 10%)',
         background: color,
@@ -88,8 +91,8 @@ function Sheet({
           </Typography>
           )}
 
-        {isDroppable
-          && (
+        {isDraggable
+          ? (
             <DragIndicatorIcon
               fontSize="small"
               color="sheet"
@@ -101,7 +104,15 @@ function Sheet({
                 },
               }}
             />
-          )}
+          )
+          : (isAdmin
+              && (
+              <Box
+                onClick={handleAssignment}
+              >
+                UP
+              </Box>
+              ))}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -132,14 +143,24 @@ Sheet.propTypes = {
   color: PropTypes.string,
   ending_date: PropTypes.string.isRequired,
   expandedSheet: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleAssignment: PropTypes.func,
+  handleCollapse: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  isDroppable: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  isDraggable: PropTypes.bool.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   starting_date: PropTypes.string.isRequired,
+  week: PropTypes.shape({
+    num: PropTypes.number.isRequired,
+    dates: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ).isRequired,
+  }).isRequired,
 };
+
 Sheet.defaultProps = {
   color: '#ed6c02',
+  handleAssignment: undefined,
 };
 export default React.memo(Sheet);

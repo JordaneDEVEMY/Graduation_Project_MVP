@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Sheet from '../Sheet/Sheet';
+import SheetDraggable from '../SheetDraggable/SheetDraggable';
 import sheetListBg from '../../Assets/images/sheet-bg.png';
 import './sheetlist.scss';
 
@@ -13,7 +14,12 @@ function SheetList({
   cardId,
   employees,
   expandedSheet,
-  handleChange,
+  handleAssignment,
+  handleCollapse,
+  isAdmin,
+  isDraggable,
+  isMobile,
+  week,
 }) {
   const theme = useTheme();
 
@@ -25,14 +31,40 @@ function SheetList({
       }}
     >
       {employees.map((employee, index) => (
-        <Sheet
-          key={index}
-          index={index}
-          handleChange={handleChange}
-          expandedSheet={expandedSheet}
-          isDroppable={false}
-          {...employee}
-        />
+        isDraggable
+          ? (
+            <SheetDraggable
+              key={index}
+              cardId={cardId}
+              index={index}
+            >
+              <Sheet
+                key={index}
+                index={index}
+                handleAssignment={handleAssignment}
+                handleCollapse={handleCollapse}
+                expandedSheet={expandedSheet}
+                isAdmin={isAdmin}
+                isDraggable
+                isMobile={isMobile}
+                week={week}
+                {...employee}
+              />
+            </SheetDraggable>
+          )
+          : (
+            <Sheet
+              key={index}
+              index={index}
+              handleAssignment={handleAssignment}
+              handleCollapse={handleCollapse}
+              expandedSheet={expandedSheet}
+              isAdmin={isAdmin}
+              isDraggable={false}
+              isMobile={isMobile}
+              {...employee}
+            />
+          )
       ))}
       {employees.length % 10 !== 0 && (
       <Box
@@ -44,6 +76,7 @@ function SheetList({
           height: 500 - (Math.ceil(employees.length % 10) * 50),
           background: `${theme.palette.background.component} url('${sheetListBg}') repeat-y center top`,
           zIndex: employees.length,
+          opacity: '.5',
         }}
       />
       )}
@@ -62,8 +95,19 @@ SheetList.propTypes = {
     }).isRequired,
   ).isRequired,
   expandedSheet: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleAssignment: PropTypes.func,
+  handleCollapse: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  isDraggable: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  week: PropTypes.shape({
+    num: PropTypes.number.isRequired,
+    dates: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ).isRequired,
+  }).isRequired,
 };
 SheetList.defaultProps = {
+  handleAssignment: undefined,
 };
 export default React.memo(SheetList);

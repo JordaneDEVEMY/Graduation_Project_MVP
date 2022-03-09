@@ -12,11 +12,13 @@ import './card.scss';
 
 function Card({
   employees,
+  handleAssignment,
   id,
   isAdmin,
+  isDropable,
   isMobile,
-  setDraggedSheetId,
   site,
+  week,
 }) {
   const theme = useTheme();
 
@@ -28,7 +30,7 @@ function Card({
    * @param {string} accordionId accordion id
    * @returns {string|boolean} accordion id or false
    */
-  const handleChange = (accordionId) => (event, isExpanded) => {
+  const handleCollapse = (accordionId) => (event, isExpanded) => {
     setExpandedSheet(isExpanded ? accordionId : '');
   };
 
@@ -47,22 +49,35 @@ function Card({
       <CardHeader
         site={site}
       />
-      {(isMobile || !isAdmin)
+      {(isDropable)
         ? (
-          <SheetList
-            employees={employees}
+          <SheetListDroppable
             cardId={id}
-            handleChange={handleChange}
-            expandedSheet={expandedSheet}
-          />
+          >
+            <SheetList
+              cardId={id}
+              employees={employees}
+              expandedSheet={expandedSheet}
+              handleAssignment={handleAssignment}
+              handleCollapse={handleCollapse}
+              isAdmin
+              isDraggable
+              isMobile={false}
+              week={week}
+            />
+          </SheetListDroppable>
         )
         : (
-          <SheetListDroppable
-            employees={employees}
+          <SheetList
             cardId={id}
-            handleChange={handleChange}
+            employees={employees}
             expandedSheet={expandedSheet}
-            setDraggedSheetId={setDraggedSheetId}
+            handleAssignment={handleAssignment}
+            handleCollapse={handleCollapse}
+            isAdmin={isAdmin}
+            isDraggable={false}
+            isMobile={isMobile}
+            week={week}
           />
         )}
     </Box>
@@ -71,13 +86,22 @@ function Card({
 
 Card.propTypes = {
   employees: PropTypes.array.isRequired,
+  handleAssignment: PropTypes.func,
   id: PropTypes.number.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   site: PropTypes.object.isRequired,
-  setDraggedSheetId: PropTypes.func,
+  week: PropTypes.shape({
+    num: PropTypes.number.isRequired,
+    dates: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ).isRequired,
+  }).isRequired,
 };
+
 Card.defaultProps = {
-  setDraggedSheetId: undefined,
+  handleAssignment: undefined,
 };
+
 export default React.memo(Card);

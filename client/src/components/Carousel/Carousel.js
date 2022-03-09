@@ -16,9 +16,10 @@ import './carousel.scss';
 
 function Carousel({
   assignments,
+  handleAssignment,
   isAdmin,
+  week,
 }) {
-  const isMobile = true;
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = assignments.length;
@@ -52,8 +53,7 @@ function Carousel({
           <div key={assignment.id}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
-                key={assignment.id}
-                component="div"
+                key={`slide-${assignment.id}`}
                 sx={{
                   display: 'block',
                   overflow: 'hidden',
@@ -61,11 +61,14 @@ function Carousel({
                 }}
               >
                 <Card
-                  key={assignment.id}
-                  isMobile={isMobile}
-                  isAdmin={isAdmin}
                   {...assignment}
                   employees={assignment.colleagues}
+                  handleAssignment={handleAssignment}
+                  isAdmin={isAdmin}
+                  isDropable={false}
+                  isMobile
+                  key={assignment.id}
+                  week={week}
                 />
               </Box>
             ) : null}
@@ -99,7 +102,18 @@ function Carousel({
 
 Carousel.propTypes = {
   assignments: PropTypes.array.isRequired,
+  handleAssignment: PropTypes.func,
   isAdmin: PropTypes.bool.isRequired,
+  week: PropTypes.shape({
+    num: PropTypes.number.isRequired,
+    dates: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ).isRequired,
+  }).isRequired,
+};
+
+Carousel.defaultProps = {
+  handleAssignment: undefined,
 };
 
 export default React.memo(Carousel);
