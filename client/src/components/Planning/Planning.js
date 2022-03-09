@@ -41,7 +41,16 @@ function Planning({
       ))}
 
       {currentAssignments.length
-        ? (<Cards assignments={currentAssignments} week={currentWeek} isAdmin={false} />)
+        ? (
+          <Cards
+            assignments={currentAssignments}
+            week={currentWeek}
+            isAdmin={false}
+            isDropable={false}
+            isMobile={false}
+            id="cards-1"
+          />
+        )
         : (
           <Typography sx={{ textAlign: 'center' }}>
             Aucun planning à afficher.
