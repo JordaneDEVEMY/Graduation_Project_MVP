@@ -81,7 +81,7 @@ CREATE TABLE "contact" (
     "lastname" TEXT NOT NULL,
     "phone_number" TEXT,
     "mobile_number" TEXT NOT NULL UNIQUE,
-    "function" TEXT NOT NULL,
+    "fonction" TEXT NOT NULL,
     "company_id" INT NOT NULL UNIQUE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ

@@ -64,7 +64,7 @@ function App({
                     )}
                 />
                 <Route
-                  path="staff"
+                  path="employees"
                   element={(
                     <CreateEmployeeFormContainer isAdmin={isAdmin} />
                     )}
@@ -76,7 +76,7 @@ function App({
                     )}
                 />
                 <Route
-                  path="customers"
+                  path="companies"
                   element={(
                     <CreateCompanyFormContainer isAdmin={isAdmin} />
                     )}

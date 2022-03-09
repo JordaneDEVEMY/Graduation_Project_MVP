@@ -1,39 +1,16 @@
 /* eslint-disable no-alert */
 /* eslint-disable camelcase */
 import {
-  getOneSite, createSite, updateSite, deleteSite,
+  getAllSites, createSite, updateSite, deleteSite,
 } from '../requests/siteRequest';
 import * as actions from '../actions';
 
 const siteMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
-    case actions.REQUEST_SITE_INFORMATIONS: {
-      const { site } = store.getState();
-      const response = await getOneSite(site.id);
+    case actions.REQUEST_ALL_SITES: {
+      const response = await getAllSites();
       if (response.status === 200) {
-        const {
-          id,
-          name,
-          address,
-          zip_code: zipCode,
-          manager_name: managerName,
-          estimated_duration: estimatedDuration,
-          company_id: companyId,
-          created_at: createdAt,
-          updated_at: updatedAt,
-        } = response.data;
-
-        store.dispatch(actions.actionGetSiteInformations({
-          id,
-          name,
-          address,
-          zipCode,
-          managerName,
-          estimatedDuration,
-          companyId,
-          createdAt,
-          updatedAt,
-        }));
+        store.dispatch(actions.actionGetAllSites(response.data));
       }
       return;
     }
@@ -57,7 +34,8 @@ const siteMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createSite(siteDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionGetSiteId(response.data.id));
+        store.dispatch(actions.actionResetSiteInformations());
+        store.dispatch(actions.actionRequestAllSites());
         alert('Site created successfully');
       }
       return;
@@ -82,6 +60,8 @@ const siteMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateSite(site.id, siteDatas);
       if (response.status === 200) {
+        store.dispatch(actions.actionResetSiteInformations());
+        store.dispatch(actions.actionRequestAllSites());
         alert('Site updated successfully');
       }
       return;
@@ -91,6 +71,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const response = await deleteSite(site.id);
       if (response.status === 200) {
         store.dispatch(actions.actionResetSiteInformations());
+        store.dispatch(actions.actionRequestAllSites());
         alert('Site deleted successfully');
       }
       return;

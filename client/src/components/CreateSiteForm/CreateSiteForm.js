@@ -17,12 +17,14 @@ function CreateUserForm({
   };
 
   return (
-    <Box>
+    <Box
+      sx={{ maxWidth: '80vw', margin: '0 auto' }}
+    >
       <form onSubmit={handleSubmit}>
-        <Typography variant="h1">
+        <Typography variant="h1" sx={{ textAlign: 'center' }}>
           Ajouter un site de production
         </Typography>
-        <Grid container spacing={1} mt={1}>
+        <Grid container spacing={1} mt={1} sx={{ textAlign: 'center' }}>
           <Grid item xs={12} md={6}>
             <TextInput
               handleChange={changeField}
@@ -44,7 +46,7 @@ function CreateUserForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="adress"
+              nameValue="address"
               label="Adresse postale"
             />
           </Grid>
@@ -73,10 +75,16 @@ function CreateUserForm({
               label="Nom du manager"
             />
           </Grid>
-          <Grid item xs={12}>
-            <Button variant="outlined" type="submit">
-              Submit
-            </Button>
+          <Grid container spacing={1} mt={1} sx={{ textAlign: 'center' }}>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                size="large"
+                variant="contained"
+              >
+                Valider
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </form>

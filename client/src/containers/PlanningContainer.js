@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionGetUserPlanning } from '../actions/user';
 import { actionRequestAdminPlanning } from '../actions/admin';
+import { actionRequestAllCompanies } from '../actions/allCompanies';
+import { actionRequestAllSites } from '../actions/allSites';
+import { actionRequestAllEmployees } from '../actions/allEmployees';
 import Planning from '../components/Planning/Planning';
 import dateFunctions from '../utils/dateFunctions';
 
@@ -16,6 +19,9 @@ function PlanningContainer({
 
   useEffect(() => {
     if (user.isAdmin) {
+      dispatch(actionRequestAllEmployees());
+      dispatch(actionRequestAllSites());
+      dispatch(actionRequestAllCompanies());
       dispatch(actionRequestAdminPlanning());
     }
     dispatch(actionGetUserPlanning());

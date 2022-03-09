@@ -6,6 +6,7 @@ import {
 
 function RoleFieldForm({
   handleChange,
+  value,
 }) {
   return (
     <FormControl
@@ -14,6 +15,7 @@ function RoleFieldForm({
       <FormLabel>Rôle</FormLabel>
       <RadioGroup
         row
+        defaultValue={value}
       >
         <FormControlLabel
           key="admin"
@@ -38,6 +40,7 @@ function RoleFieldForm({
 
 RoleFieldForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default React.memo(RoleFieldForm);
