@@ -56,7 +56,7 @@ function CardsWrapper({
         fromIndex: result.source.index,
         toIndex: result.destination.index,
       });
-
+      console.log('on drag end');
       handleAssignment(result);
     }
   }, []);
