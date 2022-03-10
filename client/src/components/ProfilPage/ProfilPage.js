@@ -22,6 +22,21 @@ function ProfilPage({
   const theme = useTheme();
 
   const [modalOpened, setModalOpened] = useState(false);
+  const [currentPhoneValues, setNewPhoneValues] = useState(true);
+  const [currentMobileValues, setNewMobileValues] = useState(true);
+
+  const togglePhoneForm = () => {
+    setNewPhoneValues(false);
+  };
+
+  const toggleMobileForm = () => {
+    setNewMobileValues(false);
+  };
+
+  const cancelChange = () => {
+    setNewPhoneValues(true);
+    setNewMobileValues(true);
+  };
 
   const confirmChange = (e) => {
     e.preventDefault();
@@ -56,27 +71,102 @@ function ProfilPage({
             {user.label}
           </Typography>
           <Divider sx={{ mb: '1em', mt: '1em' }} />
-          <Typography variant="h4">
-            Numéro de téléphone fixe
-            <EditIcon
-              // onClick={handleModal}
-              fontSize="small"
-            />
-          </Typography>
-          <Typography>
-            {user.phoneNumber}
-          </Typography>
+
+          { currentPhoneValues ? (
+            <>
+              <Typography variant="h4">
+                Numéro de téléphone fixe
+                <EditIcon
+                  onClick={togglePhoneForm}
+                  fontSize="small"
+                />
+              </Typography>
+              <Typography>
+                {user.phoneNumber}
+              </Typography>
+            </>
+          )
+            : (
+              <Grid container rowSpacing={2}>
+                <Grid item xs={12}>
+                  <TextInput
+                    handleChange={changeField}
+                    type="text"
+                    nameValue="phoneNumber"
+                    label="Nouveau numéro de fixe"
+                    defaultValue={user.phoneNumber}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                // onClick={confirmChange}
+                    variant="outlined"
+                  >
+                    Confirmer
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    color="error"
+                    onClick={cancelChange}
+                    variant="outlined"
+                  >
+                    Annuler
+                  </Button>
+                </Grid>
+              </Grid>
+            )}
+
           <Divider sx={{ mb: '1em', mt: '1em' }} />
-          <Typography variant="h4">
-            Numéro de téléphone portable
-            <EditIcon
-              // onClick={handleModal}
-              fontSize="small"
-            />
-          </Typography>
-          <Typography>
-            {user.mobileNumber}
-          </Typography>
+          { currentMobileValues ? (
+            <>
+              <Typography variant="h4">
+                Numéro de téléphone portable
+                <EditIcon
+                  onClick={toggleMobileForm}
+                  fontSize="small"
+                />
+              </Typography>
+              <Typography>
+                {user.mobileNumber}
+              </Typography>
+            </>
+          )
+            : (
+              <Grid container rowSpacing={2}>
+                <Grid item xs={12}>
+                  <TextInput
+                    handleChange={changeField}
+                    type="text"
+                    nameValue="mobileNumber"
+                    label="Nouveau numéro de mobile"
+                    defaultValue={user.mobileNumber}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                // onClick={confirmChange}
+                    variant="outlined"
+                  >
+                    Confirmer
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    color="error"
+                    onClick={cancelChange}
+                    variant="outlined"
+                  >
+                    Annuler
+                  </Button>
+                </Grid>
+              </Grid>
+            )}
+
           <Divider sx={{ mb: '1em', mt: '1em' }} />
           <Typography variant="h4">
             Mot de passe
