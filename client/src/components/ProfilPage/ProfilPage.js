@@ -78,7 +78,9 @@ function ProfilPage({
               <Typography variant="h4">
                 Numéro de téléphone fixe
                 <EditIcon
+                  sx={{ marginLeft: theme.spacing(1) }}
                   onClick={togglePhoneForm}
+                  color="primary"
                   fontSize="small"
                 />
               </Typography>
@@ -127,6 +129,8 @@ function ProfilPage({
               <Typography variant="h4">
                 Numéro de téléphone portable
                 <EditIcon
+                  sx={{ marginLeft: theme.spacing(1) }}
+                  color="primary"
                   onClick={toggleMobileForm}
                   fontSize="small"
                 />
@@ -228,6 +232,7 @@ function ProfilPage({
                     type="password"
                     nameValue="confirmPassword"
                     label="Confirmez votre nouveau mot de passe"
+                    helperText="Erreur! Le mot de passe doit être identique"
                     defaultValue=""
                     onChange={(event) => changeField('confirmPassword', event.target.value)}
                   />
