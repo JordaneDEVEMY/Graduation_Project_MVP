@@ -22,8 +22,8 @@ const controller = {
 
     const secret = process.env.JWT_SECRET + user.password;
 
-    const payload = jwt.verify(token, secret);
-    console.log('file: resetPasswordController.js ~ line 26 ~ passwordToReset ~ payload', payload);
+    // ? const payload = jwt.verify(token, secret);
+    jwt.verify(token, secret);
 
     res.render('reset-password', { email: user.email });
   },
@@ -44,8 +44,8 @@ const controller = {
 
     const secret = process.env.JWT_SECRET + user.password;
 
-    const payload = jwt.verify(token, secret);
-    console.log('file: resetPasswordController.js ~ line 47 ~ resetPassword ~ payload', payload);
+    // ? const payload = jwt.verify(token, secret);
+    jwt.verify(token, secret);
 
     const userWithNewPassword = await userAdminDatamapper.updatePassword(id, password);
 
