@@ -17,7 +17,7 @@ function ProfilPage({
   user,
   userPassword,
   userConfirmPassword,
-  resetUserPassword,
+  updateUserInformations,
 }) {
   console.log(user);
   const theme = useTheme();
@@ -45,8 +45,7 @@ function ProfilPage({
     if (userPassword !== userConfirmPassword) {
       setErrorDisplay(false);
     } else {
-      alert('Mot de passe modifié avec succès !');
-      resetUserPassword();
+      updateUserInformations();
       setModalOpened(false);
     }
   };
@@ -90,7 +89,7 @@ function ProfilPage({
             </>
           )
             : (
-              <form> //TODO : handleSubmit to confirm phone number change.
+              <form>
                 <Grid container rowSpacing={2}>
                   <Grid item xs={12}>
                     <TextField
@@ -141,7 +140,7 @@ function ProfilPage({
             </>
           )
             : (
-              <form> //TODO : handleSubmit to confirm mobile number change.
+              <form>
                 <Grid container rowSpacing={2}>
                   <Grid item xs={12}>
                     <TextField
@@ -259,7 +258,7 @@ ProfilPage.propTypes = {
   user: PropTypes.object.isRequired,
   userPassword: PropTypes.string.isRequired,
   userConfirmPassword: PropTypes.string.isRequired,
-  resetUserPassword: PropTypes.func.isRequired,
+  updateUserInformations: PropTypes.func.isRequired,
 };
 
 export default React.memo(ProfilPage);
