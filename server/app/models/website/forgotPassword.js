@@ -1,5 +1,10 @@
 const client = require('../../config/database');
 
+/**
+ * @typedef {object} ForgotPassword
+ * @property {string} email - User email
+ */
+
 module.exports = {
   /**
    * Search if SSN already exist in db

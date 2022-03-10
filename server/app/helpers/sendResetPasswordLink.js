@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 module.exports = async function main(email, firstname, lastname, link) {
   // create reusable transporter object using the default SMTP transport
   // TODO : Utiliser DOTENV
+  // console.log('DOTENV ==>', process.env.NODE_ENV);
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,

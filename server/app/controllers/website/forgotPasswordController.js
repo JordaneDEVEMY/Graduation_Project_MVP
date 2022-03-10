@@ -8,6 +8,13 @@ const forgotPasswordDatamapper = require('../../models/website/forgotPassword');
 const { ApiError } = require('../../helpers/errorHandler');
 
 const controller = {
+  /**
+   * Forgot Password action
+   * ExpressMiddleware signature
+   * @param {object} req Express request object
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
   async forgotPassword(req, res) {
     const { email } = req.body;
 
@@ -34,7 +41,6 @@ const controller = {
       email: user.email,
     };
     const duration = String(process.env.RESET_PASSWORD_TOKEN_DURATION);
-    console.log('file: forgotPasswordController.js ~ line 37 ~ forgotPassword ~ duration', duration);
 
     const token = generateResetPasswordToken(payload, secret, duration);
 
@@ -48,6 +54,7 @@ const controller = {
 
     res.send('Password reset link has been sent to ur email...');
   },
+
 };
 
 module.exports = controller;
