@@ -36,7 +36,7 @@ const controller = {
     const duration = String(process.env.RESET_PASSWORD_TOKEN_DURATION);
     console.log('file: forgotPasswordController.js ~ line 37 ~ forgotPassword ~ duration', duration);
 
-    const token = generateResetPasswordToken(payload, secret, { duration });
+    const token = generateResetPasswordToken(payload, secret, duration);
 
     const link = `http://localhost:${process.env.PORT}/reset-password/${user.id}/${token}`;
 
