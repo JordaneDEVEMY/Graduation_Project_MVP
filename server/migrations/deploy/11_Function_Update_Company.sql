@@ -9,6 +9,6 @@ CREATE OR REPLACE FUNCTION update_company(json) RETURNS void AS $$
 		zip_Code = ($1 ->> 'zip_code')::int,
 		type = ($1 ->> 'type')::text
 	WHERE id = ($1->>'id')::int;
-$$ LANGUAGE sql
+$$ LANGUAGE sql;
 
 COMMIT;
