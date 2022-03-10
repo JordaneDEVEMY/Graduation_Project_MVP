@@ -1,113 +1,6 @@
 /* eslint-disable max-len */
-const client = require('../../config/database');
-const { ApiError } = require('../../helpers/errorHandler');
-
-/**
- * @typedef {object} User
- * @property {number} id - User Pk in database
- * @property {string} firstname - User firstname
- * @property {string} lastname - User lastname
- * @property {string} email - User email
- * @property {string} phone_number - User phone number
- * @property {string} mobile_number - User mobile number
- * @property {string} address - User address
- * @property {number} zip_code - User zip code
- * @property {string} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
- * @property {string} starting_date - User starting date
- * @property {string} avatar - User avatar
- * @property {string} fonction - User fonction
- * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification
- * @property {string} qualification_label - FK of User qualification label
- */
-
-/**
- * @typedef {object} UserToCreate
- * @property {string} firstname - User firstname
- * @property {string} lastname - User lastname
- * @property {string} email - User email
- * @property {string} password - User password
- * @property {string} phone_number - User phone number
- * @property {string} mobile_number - User mobile number
- * @property {string} address - User address
- * @property {number} zip_code - User zip code
- * @property {string} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
- * @property {string} starting_date - User starting date
- * @property {string} avatar - User avatar
- * @property {string} fonction - User fonction
- * @property {string} role_application - User role in web application
- * @property {string} qualification_label - FK of User qualification label
- */
-
-/**
- * @typedef {object} UserToUpdate
- * @property {string} firstname - User firstname
- * @property {string} lastname - User lastname
- * @property {string} email - User email
- * @property {string} phone_number - User phone number
- * @property {string} mobile_number - User mobile number
- * @property {string} address - User address
- * @property {number} zip_code - User zip code
- * @property {string} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
- * @property {string} starting_date - User starting date
- * @property {string} avatar - User avatar
- * @property {string} fonction - User fonction
- * @property {string} role_application - User role in web application
- * @property {string} qualification_label - FK of User qualification label
- */
-
-/**
- * @typedef {object} UserCreate
- * @property {number} id - User Pk in database
- * @property {string} firstname - User firstname
- * @property {string} lastname - User lastname
- * @property {string} email - User email
- * @property {string} password - User password
- * @property {string} phone_number - User phone number
- * @property {string} mobile_number - User mobile number
- * @property {string} address - User address
- * @property {number} zip_code - User zip code
- * @property {string} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
- * @property {string} starting_date - User starting date
- * @property {string} avatar - User avatar
- * @property {string} fonction - User fonction
- * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification
- * @property {string} qualification_label - FK of User qualification label
- * @property {string} created_at - timestamp for the create in DB
- */
-
-/**
- * @typedef {object} UserUpdate
- * @property {number} id - User Pk in database
- * @property {string} firstname - User firstname
- * @property {string} lastname - User lastname
- * @property {string} email - User email
- * @property {string} phone_number - User phone number
- * @property {string} mobile_number - User mobile number
- * @property {string} address - User address
- * @property {number} zip_code - User zip code
- * @property {string} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
- * @property {string} starting_date - User starting date
- * @property {string} avatar - User avatar
- * @property {string} fonction - User fonction
- * @property {string} role_application - User role in web application
- * @property {string} employee_qualification_id - FK of User qualification
- * @property {string} qualification_label - FK of User qualification label
- * @property {string} updated_at - timestamp for the update in DB
- */
-
-/**
- * @typedef {object} UserDelete
- * @property {boolean} isDeleted - Status
- * @property {number} statusCode - HTTP Status code
- * @property {string} message - Status message
- */
+const client = require('../../../../config/database');
+const { ApiError } = require('../../../../helpers/errorHandler');
 
 module.exports = {
   /**
@@ -115,33 +8,10 @@ module.exports = {
    * @returns {User|undefined} - response of all users or undefined if no users found
    */
   async findAll() {
-    const result = await client.query(`
-      SELECT
-        "employee"."id",
-        "employee"."firstname",
-        "employee"."lastname",
-        "employee"."email",
-        "employee"."phone_number",
-        "employee"."mobile_number",
-        "employee"."address",
-        "employee"."zip_code",
-        "employee"."date_of_birth",
-        "employee"."social_security_number",
-        "employee"."starting_date",
-        "employee"."fonction",
-        "employee"."avatar",
-        "employee"."role_application",
-        "employee"."employee_qualification_id",
-        "employee_qualification"."label" AS "label",
-        "employee"."created_at"
-      FROM
-        "employee"
-      JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
-      ORDER BY "employee"."id";
-    `);
+    const result = await client.query('SELECT * FROM "assignment" ORDER BY "id";');
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Aucun utilisateur trouvé');
+      throw new ApiError(400, 'Aucune affectation trouvée');
     }
 
     return result.rows;

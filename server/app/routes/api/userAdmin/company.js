@@ -67,4 +67,5 @@ router
    * @return {ApiError} 404 - Company not found - application/json
    */
   .delete(controllerHandler(userAdminCompanyController.delete));
+
 module.exports = router;

@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-const planningAdminDatamapper = require('../../../models/userAdmin/planning');
-const { ApiError } = require('../../../helpers/errorHandler');
+const planningAdminDatamapper = require('../../../../models/userAdmin/planning/planning');
+const { ApiError } = require('../../../../helpers/errorHandler');
 
-const { getWeekPeriod, getWeekMonday, getDate } = require('../../../helpers/dateFunctions');
+const { getWeekPeriod, getWeekMonday, getDate } = require('../../../../helpers/dateFunctions');
 
 const controller = {
   /**
@@ -28,6 +28,8 @@ const controller = {
     const sunday = getDate(monday).add(6, 'day').format('YYYY-MM-DD');
 
     const week = await planningAdminDatamapper.findByDates(monday, sunday);
+
+    const absences = await planningAdminDatamapper.findByAbsenceDates(monday, sunday);
 
     if (!week) {
       throw new ApiError(404, 'Semaine introuvable');
@@ -58,9 +60,25 @@ const controller = {
       }
     });
 
-    const periods = { weekStart: monday, planning: filteredWeek };
+    absences.forEach((item) => {
+      delete item.starting_date;
+      delete item.ending_date;
+    });
+    const periods = { weekStart: monday, planning: filteredWeek, absences };
 
     res.json(periods);
+  },
+
+  /**
+   * UserAdmin controller to create user assignment in a week
+   * ExpressMiddleware signature
+   * @param {object} req Express req.object used for url id and body params
+   * @param {object} res Express response object
+   * @returns {string} Route API JSON response
+   */
+  async create(req, res) {
+    const userAssignment = await planningAdminDatamapper.insert(req.params, req.body);
+    return res.json(userAssignment);
   },
 };
 

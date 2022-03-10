@@ -1,17 +1,17 @@
-// request site
+// request company
 export const REQUEST_COMPANY_INFORMATIONS = 'REQUEST_COMPANY_INFORMATIONS';
 export const CREATE_COMPANY = 'CREATE_COMPANY';
 export const UPDATE_COMPANY = 'UPDATE_COMPANY';
 export const DELETE_COMPANY = 'DELETE_COMPANY';
 
-// get site informations
+// get company informations
 export const GET_COMPANY_INFORMATIONS = 'GET_COMPANY_INFORMATIONS';
 export const GET_COMPANY_ID = 'GET_COMPANY_ID';
 
-// create or update site informations
+// create or update company informations
 export const SET_COMPANY_INFORMATION = 'SET_COMPANY_INFORMATION';
 
-// reset site informations
+// reset company informations
 export const RESET_COMPANY_INFORMATIONS = 'RESET_COMPANY_INFORMATIONS';
 
 export function actionRequestCompanyInformations() {

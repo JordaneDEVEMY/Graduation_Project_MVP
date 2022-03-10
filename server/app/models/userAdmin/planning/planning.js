@@ -1,5 +1,5 @@
-const client = require('../../config/database');
-const { ApiError } = require('../../helpers/errorHandler');
+const client = require('../../../config/database');
+const { ApiError } = require('../../../helpers/errorHandler');
 
 /**
  * @typedef {object} Week
@@ -49,15 +49,36 @@ module.exports = {
     const result = await client.query(
       `
       SELECT * FROM get_Week_admin_planning 
-      WHERE starting_date >= $1 
+      WHERE starting_date >= $1
+      AND starting_date <= $2
+      AND ending_date >= $1
       AND ending_date <= $2
       `,
       [mondayIsoDate, sundayIsoDate],
     );
 
-    if (result.rowCount === 0) {
-      throw new ApiError(400, 'Semaine non planifiée pour le moment');
-    }
+    // if (result.rowCount === 0) {
+    //   throw new ApiError(400, 'Semaine non planifiée pour le moment');
+    // }
+
+    return result.rows;
+  },
+
+  async findByAbsenceDates(mondayIsoDate, sundayIsoDate) {
+    const result = await client.query(
+      `
+      SELECT * FROM get_Week_absence_admin_planning 
+      WHERE starting_date >= $1
+      AND starting_date <= $2
+      AND ending_date >= $1
+      AND ending_date <= $2
+      `,
+      [mondayIsoDate, sundayIsoDate],
+    );
+
+    // if (result.rowCount === 0) {
+    //   throw new ApiError(400, ''Semaine non planifiée pour le moment');
+    // }
 
     return result.rows;
   },
