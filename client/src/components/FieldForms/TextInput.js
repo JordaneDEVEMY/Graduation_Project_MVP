@@ -9,6 +9,7 @@ function TextInput({
   type,
   nameValue,
   label,
+  defaultValue,
   value,
 }) {
   return (
@@ -19,7 +20,7 @@ function TextInput({
       name={nameValue}
       value={value}
       label={label}
-      defaultValue=""
+      defaultValue={defaultValue}
       variant="outlined"
       onChange={(event) => handleChange(nameValue, event.target.value)}
     />
@@ -32,6 +33,7 @@ TextInput.propTypes = {
   nameValue: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired,
 };
 
 export default React.memo(TextInput);

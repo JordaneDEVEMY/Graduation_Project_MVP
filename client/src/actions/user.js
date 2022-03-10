@@ -20,7 +20,7 @@ export function actionGetUserInformations({
   };
 }
 
-export function actionUpdateUserPassword(key, value) {
+export function actionUpdateUserInput(key, value) {
   return {
     type: UPDATE_USER_INPUT, payload: { key, value },
   };
