@@ -48,6 +48,11 @@ function PlanningAdmin({
     });
   };
 
+  const handleSubmitAssignment = (data) => {
+    console.log('PATCH REQUEST', data);
+    setModalOpened(false);
+  };
+
   React.useEffect(() => {
     setModalOpened(assignment.site !== undefined);
   }, [assignment]);
@@ -94,6 +99,7 @@ function PlanningAdmin({
       >
         <AssignmentForm
           assignment={assignment}
+          handleSubmit={handleSubmitAssignment}
         />
       </Modal>
       )}
