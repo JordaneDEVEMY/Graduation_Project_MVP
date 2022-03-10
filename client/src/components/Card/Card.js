@@ -74,7 +74,6 @@ function Card({
                 {...provided.droppableProps}
               >
                 <SheetList
-                  cardId={id}
                   employees={employees}
                   expandedSheet={expandedSheet}
                   handleAssignment={handleAssignment}
@@ -92,7 +91,6 @@ function Card({
         )
         : (
           <SheetList
-            cardId={id}
             employees={employees}
             expandedSheet={expandedSheet}
             handleAssignment={handleAssignment}
@@ -115,7 +113,10 @@ Card.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  site: PropTypes.object.isRequired,
+  site: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   starting_date: PropTypes.string,
   user: PropTypes.shape({
     assignments: PropTypes.arrayOf(

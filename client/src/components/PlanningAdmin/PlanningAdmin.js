@@ -21,14 +21,11 @@ function PlanningAdmin({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  // set an object of all cards
-  const cards = {};
-  companies.forEach(({ assignments }) => {
-    assignments.forEach((assignment) => {
-      const { id, colleagues } = assignment;
-      cards[`card-${id}`] = colleagues;
-    });
-  });
+  console.log('planning', planning);
+  console.log('companies', companies);
+
+  // get an object of all cards
+  const cards = planningFunctions.setPlanningCards(companies);
 
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);

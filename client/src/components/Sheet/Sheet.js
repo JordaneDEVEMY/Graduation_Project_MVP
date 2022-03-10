@@ -24,11 +24,13 @@ const Accordion = styled((props) => (
 }));
 
 function Sheet({
+  assignmentId,
   color,
   expandedSheet,
   ending_date,
   handleAssignment,
   handleCollapse,
+  id,
   index,
   isAdmin,
   isDraggable,
@@ -72,7 +74,29 @@ function Sheet({
             whiteSpace: 'nowrap',
           }}
         >
+          <Typography
+            component="small"
+            sx={{
+              marginRight: '.5rem',
+              opacity: '.5',
+              display: 'none',
+            }}
+          >
+            {`#${assignmentId}`}
+          </Typography>
+
           {`${firstname} ${lastname}`}
+
+          <Typography
+            component="small"
+            sx={{
+              marginRight: '.5rem',
+              opacity: '.5',
+              display: 'none',
+            }}
+          >
+            {`#${id}`}
+          </Typography>
         </Typography>
 
         {(!startOnMonday || !finishOnFriday)
@@ -140,11 +164,13 @@ function Sheet({
 }
 
 Sheet.propTypes = {
+  assignmentId: PropTypes.number.isRequired,
   color: PropTypes.string,
   ending_date: PropTypes.string.isRequired,
   expandedSheet: PropTypes.string.isRequired,
   handleAssignment: PropTypes.func,
   handleCollapse: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isDraggable: PropTypes.bool.isRequired,

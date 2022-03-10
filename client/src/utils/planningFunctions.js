@@ -40,12 +40,13 @@ const planningFunctions = {
           assignment: assignmentData,
         }) => {
           const {
-            color, starting_date, ending_date, employee,
+            color, id: assignmentId, starting_date, ending_date, employee,
           } = assignmentData;
 
           const { id, firstname, lastname } = employee;
 
           assignment.colleagues.push({
+            assignmentId,
             id,
             color,
             firstname,
@@ -72,7 +73,7 @@ const planningFunctions = {
     let result = {};
     const { destination, draggableId, source } = drag;
     const cardId = Number(destination.droppableId.replace('card-', ''));
-    const assignmentId = Number(draggableId.replace('employee-', ''));
+    const employeeId = Number(draggableId.replace('employee-', ''));
 
     // get site
     companies.forEach((company) => {
@@ -84,8 +85,9 @@ const planningFunctions = {
     });
 
     // get assignment
-    const assignment = cards[source.droppableId].filter(({ id }) => id === assignmentId);
+    const assignment = cards[source.droppableId].filter(({ id }) => id === employeeId);
     const {
+      assignmentId,
       id: employee_id,
       color,
       ending_date,
@@ -96,6 +98,7 @@ const planningFunctions = {
 
     result = {
       ...result,
+      id: assignmentId,
       employee_id,
       color,
       ending_date,
@@ -106,6 +109,24 @@ const planningFunctions = {
     };
 
     return result;
+  },
+
+  /**
+   * Get all cards of pallning stored in an object
+   * @param {object} companies - Companies data
+   * @returns {object} Object wich contains arrays.
+   */
+  setPlanningCards: (companies) => {
+    const cards = {};
+    companies.forEach(({ assignments }) => {
+      assignments.forEach((assignment) => {
+        const { site, colleagues } = assignment;
+        const { id } = site;
+        cards[`card-${id}`] = colleagues;
+      });
+    });
+
+    return cards;
   },
 };
 

@@ -43,6 +43,7 @@ function SheetList({
                   {...provided.dragHandleProps}
                 >
                   <Sheet
+                    assignmentId={employee.assignmentId}
                     key={`employee-${employee.id}`}
                     index={index}
                     handleAssignment={handleAssignment}
@@ -60,6 +61,7 @@ function SheetList({
           )
           : (
             <Sheet
+              assignmentId={employee.assignmentId}
               key={`employee-${employee.id}`}
               index={index}
               handleAssignment={handleAssignment}
@@ -93,6 +95,7 @@ function SheetList({
 SheetList.propTypes = {
   employees: PropTypes.arrayOf(
     PropTypes.shape({
+      assignmentId: PropTypes.number.isRequired,
       color: PropTypes.string,
       id: PropTypes.number.isRequired,
       firstname: PropTypes.string.isRequired,
