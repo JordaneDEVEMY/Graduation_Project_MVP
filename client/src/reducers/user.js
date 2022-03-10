@@ -25,10 +25,10 @@ function reducer(state = initialState, action) {
         avatar: action.payload.avatar,
       };
 
-    case actions.UPDATE_USER_PASSWORD:
+    case actions.UPDATE_USER_INPUT:
       return {
         ...state,
-        password: action.payload.password,
+        [action.payload.name]: action.payload.value,
       };
 
     case actions.RESET_USER_PASSWORD:
