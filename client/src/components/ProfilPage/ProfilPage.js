@@ -22,6 +22,7 @@ function ProfilPage({
   const theme = useTheme();
 
   const [modalOpened, setModalOpened] = useState(false);
+  const [errorDisplay, setErrorDisplay] = useState(false);
   const [currentPhoneValues, setNewPhoneValues] = useState(true);
   const [currentMobileValues, setNewMobileValues] = useState(true);
 
@@ -41,7 +42,8 @@ function ProfilPage({
   const confirmChange = (e) => {
     e.preventDefault();
     if (userPassword !== userConfirmPassword) {
-      alert('Attention, votre mot de passe doit être identique !');
+      // alert('Attention, votre mot de passe doit être identique !');
+      setErrorDisplay(true);
     }
   };
 
@@ -211,6 +213,7 @@ function ProfilPage({
             </Grid>
             <Grid item xs={12}>
               <TextInput
+                errorDisplay={errorDisplay}
                 handleChange={changeField}
                 type="password"
                 nameValue="confirmPassword"
