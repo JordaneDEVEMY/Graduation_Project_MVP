@@ -21,6 +21,8 @@ function Planning({
     return currentWeek.dates.includes(startingDate);
   });
 
+  console.log('currentAssignments', currentAssignments);
+
   // has absence ?
   const absences = currentAssignments.filter((assignment) => assignment.absence.id !== null);
 
@@ -44,11 +46,12 @@ function Planning({
         ? (
           <Cards
             assignments={currentAssignments}
-            week={currentWeek}
+            id="cards-1"
             isAdmin={false}
             isDropable={false}
             isMobile={false}
-            id="cards-1"
+            week={currentWeek}
+            user={user}
           />
         )
         : (

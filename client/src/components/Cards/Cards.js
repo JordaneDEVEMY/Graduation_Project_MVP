@@ -16,6 +16,7 @@ function Cards({
   isAdmin,
   isDropable,
   isMobile,
+  user,
   week,
 }) {
   const theme = useTheme();
@@ -30,6 +31,7 @@ function Cards({
           isAdmin={isAdmin}
           key={`carousel-${id}`}
           week={week}
+          user={user}
         />
       )
       : (
@@ -52,6 +54,7 @@ function Cards({
               isMobile={false}
               key={assignment.id}
               week={week}
+              user={user}
             />
           ))}
         </Box>
@@ -70,6 +73,13 @@ Cards.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    assignments: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+      }).isRequired,
+    ).isRequired,
+  }),
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
@@ -80,6 +90,7 @@ Cards.propTypes = {
 
 Cards.defaultProps = {
   handleAssignment: undefined,
+  user: undefined,
 };
 
 export default React.memo(Cards);

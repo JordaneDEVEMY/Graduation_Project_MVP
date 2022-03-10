@@ -18,6 +18,7 @@ function Carousel({
   assignments,
   handleAssignment,
   isAdmin,
+  user,
   week,
 }) {
   const theme = useTheme();
@@ -68,6 +69,7 @@ function Carousel({
                   isDropable={false}
                   isMobile
                   key={assignment.id}
+                  user={user}
                   week={week}
                 />
               </Box>
@@ -110,10 +112,18 @@ Carousel.propTypes = {
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
+  user: PropTypes.shape({
+    assignments: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+      }).isRequired,
+    ).isRequired,
+  }),
 };
 
 Carousel.defaultProps = {
   handleAssignment: undefined,
+  user: undefined,
 };
 
 export default React.memo(Carousel);
