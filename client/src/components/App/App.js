@@ -22,7 +22,7 @@ import PlanningContainer from '../../containers/PlanningContainer';
 import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
 import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
 import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
-import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import ForgotPasswordContainer from '../../containers/ForgotPasswordContainer';
 import ResetPassword from '../ResetPassword/ResetPassword';
 
 function App({
@@ -97,7 +97,7 @@ function App({
             </Route>
           </Route>
           <Route path="/mentions-legales" element={<Legals />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password" element={<ForgotPasswordContainer />} />
           <Route path={`/reset-password/${userId}/{token}`} element={<ResetPassword />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
