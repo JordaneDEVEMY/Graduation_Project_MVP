@@ -10,6 +10,7 @@ import allCompaniesReducer from './allCompanies';
 import allSitesReducer from './allSites';
 import allEmployeesReducer from './allEmployees';
 import assignmentReducer from './assignment';
+import forgotPasswordReducer from './forgotPassword';
 
 export default combineReducers({
   login: loginReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
   allSites: allSitesReducer,
   allEmployees: allEmployeesReducer,
   assignment: assignmentReducer,
+  forgotPassword: forgotPasswordReducer,
 });
