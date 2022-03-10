@@ -3,7 +3,11 @@ import * as actions from '../actions';
 
 const initialState = {
   email: 'aurliencaleb3012@hotmail.ca',
+<<<<<<< HEAD
   password: 'LTK85EWH8HM',
+=======
+  password: 'XVY63DPU4XY',
+>>>>>>> 2917f16 (add condition to the confirm password)
   isLogged: false,
 };
 

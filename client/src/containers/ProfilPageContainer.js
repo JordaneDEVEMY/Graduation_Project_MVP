@@ -1,29 +1,29 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionUpdateUserPassword } from '../actions/user';
+import { actionUpdateUserInput } from '../actions/user';
 import ProfilPage from '../components/ProfilPage/ProfilPage';
 
 function ProfilPageContainer() {
   const isLogged = useSelector((state) => state.login.isLogged);
   const user = useSelector((state) => state.user);
 
+  const userPassword = useSelector((state) => state.user.password);
+  const userConfirmPassword = useSelector((state) => state.user.confirmPassword);
+
   const dispatch = useDispatch();
 
-  // const changeField = (name, value) => {
-  //   dispatch();
-  // };
-
-  const updateUserPassword = () => {
-    dispatch(actionUpdateUserPassword());
+  const changeField = (name, value) => {
+    dispatch(actionUpdateUserInput(name, value));
   };
 
   return (
     <ProfilPage
       isLogged={isLogged}
       user={user}
-      updateUserPassword={updateUserPassword}
-      // changeField={changeField}
+      changeField={changeField}
+      userPassword={userPassword}
+      userConfirmPassword={userConfirmPassword}
     />
   );
 }

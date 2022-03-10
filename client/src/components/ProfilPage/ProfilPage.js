@@ -15,19 +15,23 @@ import TextInput from '../FieldForms/TextInput';
 function ProfilPage({
   changeField,
   user,
-  updateUserPassword,
+  userPassword,
+  userConfirmPassword,
 }) {
   console.log(user);
   const theme = useTheme();
 
   const [modalOpened, setModalOpened] = useState(false);
-  const handleModal = () => {
-    setModalOpened((stateModal) => !stateModal);
+
+  const confirmChange = (e) => {
+    e.preventDefault();
+    if (userPassword !== userConfirmPassword) {
+      alert('Attention, votre mot de passe doit être identique !');
+    }
   };
 
-  const handleUpdatePassword = (e) => {
-    e.preventDefault();
-    updateUserPassword();
+  const handleModal = () => {
+    setModalOpened((stateModal) => !stateModal);
   };
 
   return (
@@ -116,9 +120,19 @@ function ProfilPage({
               />
             </Grid>
             <Grid item xs={12}>
+              <TextInput
+                handleChange={changeField}
+                type="password"
+                nameValue="confirmPassword"
+                label="Confirmez votre nouveau mot de passe"
+                defaultValue=""
+              />
+            </Grid>
+            <Grid item xs={12}>
               <Button
+                type="submit"
+                onClick={confirmChange}
                 variant="outlined"
-                onClick={handleUpdatePassword}
               >
                 Confirmer
               </Button>
@@ -132,8 +146,9 @@ function ProfilPage({
 
 ProfilPage.propTypes = {
   changeField: PropTypes.func.isRequired,
-  updateUserPassword: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  userPassword: PropTypes.string.isRequired,
+  userConfirmPassword: PropTypes.string.isRequired,
 };
 
 export default React.memo(ProfilPage);

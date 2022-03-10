@@ -7,6 +7,7 @@ import {
 function TextInput({
   type,
   label,
+  defaultValue,
   value,
 }) {
   return (
@@ -17,6 +18,10 @@ function TextInput({
       name={nameValue}
       value={value}
       label={label}
+<<<<<<< HEAD
+=======
+      defaultValue={defaultValue}
+>>>>>>> 2917f16 (add condition to the confirm password)
       variant="outlined"
     />
   );
@@ -27,6 +32,7 @@ TextInput.propTypes = {
   nameValue: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired,
 };
 
 export default React.memo(TextInput);
