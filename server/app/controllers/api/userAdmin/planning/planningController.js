@@ -1,8 +1,7 @@
 /* eslint-disable no-param-reassign */
 const planningAdminDatamapper = require('../../../../models/userAdmin/planning/planning');
 const { ApiError } = require('../../../../helpers/errorHandler');
-
-const { getWeekPeriod, getWeekMonday, getDate } = require('../../../../helpers/dateFunctions');
+const { getWeekPeriod, getWeekMonday, getWeekDates } = require('../../../../helpers/dateFunctions');
 
 const controller = {
   /**
@@ -25,11 +24,11 @@ const controller = {
     }
 
     const monday = getWeekMonday(yearId, weekId);
-    const sunday = getDate(monday).add(6, 'day').format('YYYY-MM-DD');
+    const weekDates = getWeekDates(monday);
 
-    const week = await planningAdminDatamapper.findByDates(monday, sunday);
+    const week = await planningAdminDatamapper.findByDates(weekDates);
 
-    const absences = await planningAdminDatamapper.findByAbsenceDates(monday, sunday);
+    const absences = await planningAdminDatamapper.findByAbsenceDates(weekDates);
 
     if (!week) {
       throw new ApiError(404, 'Semaine introuvable');
