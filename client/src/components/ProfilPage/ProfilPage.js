@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
@@ -16,6 +17,7 @@ function ProfilPage({
   user,
   userPassword,
   userConfirmPassword,
+  resetUserPassword,
 }) {
   console.log(user);
   const theme = useTheme();
@@ -41,8 +43,11 @@ function ProfilPage({
   const confirmChange = (e) => {
     e.preventDefault();
     if (userPassword !== userConfirmPassword) {
-      // alert('Attention, votre mot de passe doit être identique !');
       setErrorDisplay(false);
+    } else {
+      alert('Mot de passe modifié avec succès !');
+      resetUserPassword();
+      setModalOpened(false);
     }
   };
 
@@ -83,36 +88,37 @@ function ProfilPage({
             </>
           )
             : (
-              <Grid container rowSpacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    type="text"
-                    name="phoneNumber"
-                    label="Nouveau numéro de mobile"
-                    defaultValue={user.mobileNumber}
-                    onChange={(event) => changeField('phoneNumber', event.target.value)}
-                  />
+              <form> //TODO : handleSubmit to confirm phone number change.
+                <Grid container rowSpacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      type="text"
+                      name="phoneNumber"
+                      label="Nouveau numéro de mobile"
+                      defaultValue={user.mobileNumber}
+                      onChange={(event) => changeField('phoneNumber', event.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                  // onClick={confirmChange}
+                      variant="outlined"
+                    >
+                      Confirmer
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      color="error"
+                      onClick={cancelChange}
+                      variant="outlined"
+                    >
+                      Annuler
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                // onClick={confirmChange}
-                    variant="outlined"
-                  >
-                    Confirmer
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    color="error"
-                    onClick={cancelChange}
-                    variant="outlined"
-                  >
-                    Annuler
-                  </Button>
-                </Grid>
-              </Grid>
+              </form>
             )}
 
           <Divider sx={{ mb: '1em', mt: '1em' }} />
@@ -131,36 +137,37 @@ function ProfilPage({
             </>
           )
             : (
-              <Grid container rowSpacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    type="text"
-                    name="mobileNumber"
-                    label="Nouveau numéro de mobile"
-                    defaultValue={user.mobileNumber}
-                    onChange={(event) => changeField('mobileNumber', event.target.value)}
-                  />
+              <form> //TODO : handleSubmit to confirm mobile number change.
+                <Grid container rowSpacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      type="text"
+                      name="mobileNumber"
+                      label="Nouveau numéro de mobile"
+                      defaultValue={user.mobileNumber}
+                      onChange={(event) => changeField('mobileNumber', event.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                  // onClick={confirmChange}
+                      variant="outlined"
+                    >
+                      Confirmer
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      color="error"
+                      onClick={cancelChange}
+                      variant="outlined"
+                    >
+                      Annuler
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                // onClick={confirmChange}
-                    variant="outlined"
-                  >
-                    Confirmer
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    color="error"
-                    onClick={cancelChange}
-                    variant="outlined"
-                  >
-                    Annuler
-                  </Button>
-                </Grid>
-              </Grid>
+              </form>
             )}
 
           <Divider sx={{ mb: '1em', mt: '1em' }} />
@@ -195,46 +202,47 @@ function ProfilPage({
             Modifier votre mot de passe
           </Typography>
           <Divider sx={{ mb: theme.spacing(2) }} />
-          <Grid container rowSpacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                type="password"
-                nameValue="password"
-                label="Nouveau mot de passe"
-                defaultValue=""
-                onChange={(event) => changeField('password', event.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              { errorDisplay ? (
+          <form onSubmit={confirmChange}>
+            <Grid container rowSpacing={2}>
+              <Grid item xs={12}>
                 <TextField
                   type="password"
-                  nameValue="confirmPassword"
-                  label="Confirmez votre nouveau mot de passe"
+                  nameValue="password"
+                  label="Nouveau mot de passe"
                   defaultValue=""
-                  onChange={(event) => changeField('confirmPassword', event.target.value)}
+                  onChange={(event) => changeField('password', event.target.value)}
                 />
-              ) : (
-                <TextField
-                  error
-                  type="password"
-                  nameValue="confirmPassword"
-                  label="Confirmez votre nouveau mot de passe"
-                  defaultValue=""
-                  onChange={(event) => changeField('confirmPassword', event.target.value)}
-                />
-              )}
+              </Grid>
+              <Grid item xs={12}>
+                { errorDisplay ? (
+                  <TextField
+                    type="password"
+                    nameValue="confirmPassword"
+                    label="Confirmez votre nouveau mot de passe"
+                    defaultValue=""
+                    onChange={(event) => changeField('confirmPassword', event.target.value)}
+                  />
+                ) : (
+                  <TextField
+                    error
+                    type="password"
+                    nameValue="confirmPassword"
+                    label="Confirmez votre nouveau mot de passe"
+                    defaultValue=""
+                    onChange={(event) => changeField('confirmPassword', event.target.value)}
+                  />
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="outlined"
+                >
+                  Confirmer
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                onClick={confirmChange}
-                variant="outlined"
-              >
-                Confirmer
-              </Button>
-            </Grid>
-          </Grid>
+          </form>
         </Box>
       </Modal>
     </>
@@ -246,6 +254,7 @@ ProfilPage.propTypes = {
   user: PropTypes.object.isRequired,
   userPassword: PropTypes.string.isRequired,
   userConfirmPassword: PropTypes.string.isRequired,
+  resetUserPassword: PropTypes.func.isRequired,
 };
 
 export default React.memo(ProfilPage);

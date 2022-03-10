@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionUpdateUserInput } from '../actions/user';
+import { actionUpdateUserInput, actionResetUserPassword } from '../actions/user';
 import ProfilPage from '../components/ProfilPage/ProfilPage';
 
 function ProfilPageContainer() {
@@ -17,11 +17,16 @@ function ProfilPageContainer() {
     dispatch(actionUpdateUserInput(name, value));
   };
 
+  const resetUserPassword = () => {
+    dispatch(actionResetUserPassword());
+  };
+
   return (
     <ProfilPage
       isLogged={isLogged}
       user={user}
       changeField={changeField}
+      resetUserPassword={resetUserPassword}
       userPassword={userPassword}
       userConfirmPassword={userConfirmPassword}
     />
