@@ -1,5 +1,7 @@
 const websiteController = require('./website');
-const websiteAuth = require('./website/auth');
+const websiteAuth = require('./website/authController');
+const forgotPasswordController = require('./website/forgotPasswordController');
+const resetPasswordController = require('./website/resetPasswordController');
 const userController = require('./api/user');
 const userAdminUserController = require('./api/userAdmin/userController');
 const userAdminSiteController = require('./api/userAdmin/siteController');
@@ -11,6 +13,8 @@ module.exports = {
   // == Website ==
   websiteController,
   websiteAuth,
+  forgotPasswordController,
+  resetPasswordController,
   // == API ==
   // - User -
   userController,
