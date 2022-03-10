@@ -107,4 +107,30 @@ ALTER TABLE "employee_contract" ADD FOREIGN KEY ("employee_id") REFERENCES "empl
 ALTER TABLE "site" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
 ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
 
+
+CREATE DOMAIN posint AS int
+    CHECK(VALUE > 0);
+
+ALTER TABLE "employee"
+    ALTER COLUMN "employee_qualification_id" TYPE posint;
+
+ALTER TABLE "assignment"
+    ALTER COLUMN "position" TYPE posint
+    ALTER COLUMN "employee_id" TYPE posint
+    ALTER COLUMN "absence_id" TYPE posint
+    ALTER COLUMN "site_id" TYPE posint;
+
+ALTER TABLE "employee_contract"
+    ALTER COLUMN "duration" TYPE posint
+    ALTER COLUMN "company_id" TYPE posint
+    ALTER COLUMN "employee_id" TYPE posint;
+
+
+ALTER TABLE "site"
+    ALTER COLUMN "estimated_duration" TYPE posint
+    ALTER COLUMN "company_id" TYPE posint;
+
+ALTER TABLE "contact"
+    ALTER COLUMN "company_id" TYPE posint;
+
 COMMIT;
