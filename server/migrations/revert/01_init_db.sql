@@ -15,5 +15,4 @@ DROP TABLE
 
 DROP DOMAIN posint;
 
-
 COMMIT;
