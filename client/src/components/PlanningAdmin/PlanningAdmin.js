@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import { Typography, Modal, useMediaQuery } from '@mui/material';
-import AssignmentForm from '../AssignmentForm/AssignmentForm';
+// import AssignmentForm from '../AssignmentForm/AssignmentForm';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import CardsDraggable from '../CardsDraggable/CardsDraggable';
 import Companies from '../Companies/Companies';
@@ -31,7 +31,9 @@ function PlanningAdmin({
   });
 
   const [assignment, setAssignment] = React.useState({});
+  console.log('assignment', assignment);
   const [modalOpened, setModalOpened] = React.useState(false);
+  console.log('modalOpened', modalOpened);
 
   console.log('planning', planning);
   console.log('startDate', startDate);
@@ -53,10 +55,10 @@ function PlanningAdmin({
     });
   };
 
-  // React.useEffect(() => {
-  //   // setModalOpened(true);
-  //   console.log('update assignement', assignment);
-  // }, [assignment]);
+  React.useEffect(() => {
+    setModalOpened(assignment.draggableId !== undefined);
+    console.log('update assignement', assignment);
+  }, [assignment]);
 
   return (
     <>
@@ -96,7 +98,8 @@ function PlanningAdmin({
         open={modalOpened}
         onClose={handleModal}
       >
-        <AssignmentForm week={week} assignment={assignment} />
+        {/* <AssignmentForm week={week} assignment={assignment} /> */}
+        <p>TOTO</p>
       </Modal>
     </>
   );
