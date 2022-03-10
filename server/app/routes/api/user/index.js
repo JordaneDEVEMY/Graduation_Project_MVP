@@ -1,4 +1,5 @@
 const express = require('express');
+const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const userSchema = require('../../../validation/userSchema');
@@ -19,7 +20,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .get(controllerHandler(userController.getOne));
+  .get(cache.route(), controllerHandler(userController.getOne));
 
 router
   .route('/:id(\\d+)/profil')
@@ -33,6 +34,6 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .patch(validate('body', userSchema), controllerHandler(userController.update));
+  .patch(cache.del(), validate('body', userSchema), controllerHandler(userController.update));
 
 module.exports = router;

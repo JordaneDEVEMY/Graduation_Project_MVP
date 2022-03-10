@@ -1,4 +1,5 @@
 const express = require('express');
+const cache = require('../../../../../helpers/redisCache');
 
 const userRouter = require('./user');
 
@@ -22,7 +23,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .get(controllerHandler(assignmentUserController.getAll));
+  .get(cache.route(), controllerHandler(assignmentUserController.getAll));
 
 router.use(() => {
   throw new ApiError(404, 'Page introuvable');

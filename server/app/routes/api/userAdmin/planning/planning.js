@@ -1,4 +1,5 @@
 const express = require('express');
+const cache = require('../../../../helpers/redisCache');
 
 // const validate = require('../../../validation');
 // const Schema = require('../../../validation/userAdmin/site');
@@ -20,6 +21,6 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Week not found - application/json
    */
-  .get(controllerHandler(userAdminPlanningController.getOne));
+  .get(cache.route(), controllerHandler(userAdminPlanningController.getOne));
 
 module.exports = router;

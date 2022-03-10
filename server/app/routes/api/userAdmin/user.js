@@ -1,4 +1,5 @@
 const express = require('express');
+const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const userPatchSchema = require('../../../validation/userAdmin/user/userPatchSchema');
@@ -20,7 +21,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .get(controllerHandler(userAdminUserController.getAll))
+  .get(cache.route(), controllerHandler(userAdminUserController.getAll))
 
   /**
    * POST /api/admin/user
@@ -31,7 +32,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .post(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
+  .post(cache.del(), validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
 
 router
   .route('/:id(\\d+)')
@@ -44,7 +45,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .get(controllerHandler(userAdminUserController.getOne))
+  .get(cache.route(), controllerHandler(userAdminUserController.getOne))
 
   /**
    * PATCH /api/admin/user/{id}
@@ -56,7 +57,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .patch(validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
+  .patch(cache.del(), validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
 
   /**
    * DELETE /api/admin/user/{id}
@@ -67,6 +68,6 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .delete(controllerHandler(userAdminUserController.delete));
+  .delete(cache.del(), controllerHandler(userAdminUserController.delete));
 
 module.exports = router;
