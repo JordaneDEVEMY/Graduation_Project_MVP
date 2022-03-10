@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import {
   Grid, Card, CardContent, CardActions, Link, Typography, Button, IconButton, TextField, InputAdornment,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
@@ -132,6 +133,8 @@ function Login({
           Valider
         </Button>
         <Link
+          component={RouterLink}
+          to="/forgot-password"
           sx={{ ml: 'auto', cursor: 'pointer' }}
         >
           Mot de passe oublié
