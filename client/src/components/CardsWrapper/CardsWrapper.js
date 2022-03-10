@@ -27,6 +27,7 @@ const dragReducer = produce((draft, action) => {
 function CardsWrapper({
   assignments,
   handleAssignment,
+  isAdmin,
 }) {
   const theme = useTheme();
 
@@ -55,11 +56,8 @@ function CardsWrapper({
         fromIndex: result.source.index,
         toIndex: result.destination.index,
       });
-      // TODO: update request
-      console.log('source', result.source);
-      console.log('destination', result.destination);
-
-      handleAssignment(state);
+      console.log('on drag end');
+      handleAssignment(result);
     }
   }, []);
 
@@ -74,7 +72,14 @@ function CardsWrapper({
     >
       <DragDropContext onDragEnd={onDragEnd}>
         {assignments.map((assignment) => (
-          <Card key={assignment.id} isMobile={false} {...assignment} employees={state[`card-${assignment.id}`]} />
+          <Card
+            id={assignment.id}
+            key={assignment.id}
+            isMobile={false}
+            isAdmin={isAdmin}
+            {...assignment}
+            employees={state[`card-${assignment.id}`]}
+          />
         ))}
       </DragDropContext>
     </Box>
@@ -88,6 +93,8 @@ CardsWrapper.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
 };
 
 export default React.memo(CardsWrapper);
