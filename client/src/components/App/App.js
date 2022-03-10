@@ -19,7 +19,7 @@ import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
-import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
+import DatagridEmployeeContainer from '../../containers/DatagridEmployeeContainer';
 import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
 import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
 
@@ -66,7 +66,7 @@ function App({
                 <Route
                   path="employees"
                   element={(
-                    <CreateEmployeeFormContainer isAdmin={isAdmin} />
+                    <DatagridEmployeeContainer isAdmin={isAdmin} />
                     )}
                 />
                 <Route
