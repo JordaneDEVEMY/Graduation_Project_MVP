@@ -12,8 +12,6 @@ function Companies({
   isDropable,
   week,
 }) {
-  console.log('companies from companies', companies);
-  console.log('cards from companies', cards);
   // sort cards by company
   const companyCards = {};
   companies.forEach((company) => {

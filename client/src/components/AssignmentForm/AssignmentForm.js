@@ -1,46 +1,29 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable camelcase */
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
-import { Box, TextField } from '@mui/material';
+// import { useTheme } from '@mui/material/styles';
+// import PropTypes from 'prop-types';
+import { Box } from '@mui/material';
 import './assignment_form.scss';
 
 function AssignmentForm({
-  firstname,
-  lastname,
-}) {
-  const theme = useTheme();
-
+  assignment,
+}, ref) {
+  // const theme = useTheme();
+  const { site } = assignment;
+  console.log('site', site);
   return (
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-        bgcolor: theme.palette.background.component,
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue={firstname}
-        />
-        <TextField
-          disabled
-          id="outlined-disabled"
-          label="Disabled"
-          defaultValue={lastname}
-        />
-      </div>
+    <Box ref={ref}>
+      {`${site.name}`}
     </Box>
   );
 }
 
-AssignmentForm.propTypes = {
-  firstname: PropTypes.string.isRequired,
-  lastname: PropTypes.string.isRequired,
-};
+// AssignmentForm.propTypes = {
+//   site: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//   }).isRequired,
+// };
 
-export default React.memo(AssignmentForm);
+export default React.memo(React.forwardRef(AssignmentForm));

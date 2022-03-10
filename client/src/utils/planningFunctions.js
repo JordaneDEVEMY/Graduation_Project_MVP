@@ -63,6 +63,50 @@ const planningFunctions = {
 
     return companies;
   },
+
+  /**
+   * Prepare dragEnd data to assignment form
+   * @returns {object} Datas ready for Assignment form
+   */
+  getDragEndData: (companies, cards, drag) => {
+    let result = {};
+    const { destination, draggableId, source } = drag;
+    const cardId = Number(destination.droppableId.replace('card-', ''));
+    const assignmentId = Number(draggableId.replace('employee-', ''));
+
+    // get site
+    companies.forEach((company) => {
+      const { assignments } = company;
+      const assignment = assignments.filter(({ id }) => id === cardId);
+      if (assignment.length === 1) {
+        result.site = assignment[0].site;
+      }
+    });
+
+    // get assignment
+    const assignment = cards[source.droppableId].filter(({ id }) => id === assignmentId);
+    const {
+      id: employee_id,
+      color,
+      ending_date,
+      firstname,
+      lastname,
+      starting_date,
+    } = assignment[0];
+
+    result = {
+      ...result,
+      employee_id,
+      color,
+      ending_date,
+      firstname,
+      lastname,
+      starting_date,
+      position: destination.index,
+    };
+
+    return result;
+  },
 };
 
 export default planningFunctions;

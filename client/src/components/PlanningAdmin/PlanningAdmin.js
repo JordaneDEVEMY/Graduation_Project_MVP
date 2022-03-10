@@ -31,14 +31,7 @@ function PlanningAdmin({
   });
 
   const [assignment, setAssignment] = React.useState({});
-  console.log('assignment', assignment);
   const [modalOpened, setModalOpened] = React.useState(false);
-  console.log('modalOpened', modalOpened);
-
-  console.log('planning', planning);
-  console.log('startDate', startDate);
-  console.log('companies', companies);
-  console.log('cards', cards);
 
   const handleAssignment = (result) => {
     console.log('HANDLE ASSIGNMENT', result);
@@ -56,8 +49,7 @@ function PlanningAdmin({
   };
 
   React.useEffect(() => {
-    setModalOpened(assignment.draggableId !== undefined);
-    console.log('update assignement', assignment);
+    setModalOpened(assignment.site !== undefined);
   }, [assignment]);
 
   return (
@@ -88,6 +80,8 @@ function PlanningAdmin({
           />
         )}
 
+      {modalOpened
+      && (
       <Modal
         sx={{
           width: '90vw',
@@ -95,15 +89,14 @@ function PlanningAdmin({
           mx: 'auto',
           mt: '25vh',
         }}
-        open={modalOpened}
+        open
         onClose={handleModal}
       >
         <AssignmentForm
-          firstname="Alain"
-          lastname="terieur"
-          week={week}
+          assignment={assignment}
         />
       </Modal>
+      )}
     </>
   );
 }
