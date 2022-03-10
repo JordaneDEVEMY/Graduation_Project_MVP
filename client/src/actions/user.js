@@ -1,5 +1,5 @@
 export const GET_USER_INFORMATIONS = 'GET_USER_INFORMATIONS';
-export const UPDATE_USER_PASSWORD = 'UPDATE_USER_PASSWORD';
+export const UPDATE_USER_INPUT = 'UPDATE_USER_INPUT';
 export const RESET_USER_PASSWORD = 'RESET_USER_PASSWORD';
 export const GET_USER_LABEL = 'GET_USER_LABEL';
 export const GET_USER_PHONENUMBER = 'GET_USER_PHONENUMBER';
@@ -20,9 +20,9 @@ export function actionGetUserInformations({
   };
 }
 
-export function actionUpdateUserPassword(password) {
+export function actionUpdateUserPassword(key, value) {
   return {
-    type: UPDATE_USER_PASSWORD, payload: password,
+    type: UPDATE_USER_INPUT, payload: { key, value },
   };
 }
 
