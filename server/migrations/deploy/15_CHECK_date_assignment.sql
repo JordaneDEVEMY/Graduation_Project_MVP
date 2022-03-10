@@ -2,6 +2,7 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+ALTER TABLE "assignment"
+    ADD CHECK ("starting_date" <= "ending_date");
 
 COMMIT;

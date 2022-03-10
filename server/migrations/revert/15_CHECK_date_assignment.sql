@@ -2,6 +2,7 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+ALTER TABLE "assignment"
+    DROP CONSTRAINT assignment_check;
 
 COMMIT;
