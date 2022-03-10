@@ -13,5 +13,7 @@ DROP TABLE
 "absence",
 "employee_qualification" CASCADE; 
 
+DROP DOMAIN posint;
+
 
 COMMIT;
