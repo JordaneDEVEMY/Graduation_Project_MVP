@@ -95,6 +95,8 @@ function App({
             </Route>
           </Route>
           <Route path="/mentions-legales" element={<Legals />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path={`/reset-password/${userId}/{token}`} element={<ResetPassword />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />
