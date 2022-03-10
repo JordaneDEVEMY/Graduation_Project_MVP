@@ -45,16 +45,35 @@ module.exports = {
    * @param {string} sundayIsoDate - Week sunday ISO date ID
    * @returns {Week[]|ApiError} - Response of Week or ApiError if no week found
    */
-  async findByDates(mondayIsoDate, sundayIsoDate) {
+  async findByDates(weekDates) {
     const result = await client.query(
       `
       SELECT * FROM get_Week_admin_planning 
-      WHERE starting_date >= $1
-      AND starting_date <= $2
-      AND ending_date >= $1
-      AND ending_date <= $2
+      WHERE 
+        $1 
+        BETWEEN starting_date AND ending_date
+        OR $2 
+        BETWEEN starting_date AND ending_date
+        OR $3
+        BETWEEN starting_date AND ending_date
+        OR $4 
+        BETWEEN starting_date AND ending_date
+        OR $5
+        BETWEEN starting_date AND ending_date
+        OR $6 
+        BETWEEN starting_date AND ending_date
+        OR $7
+        BETWEEN starting_date AND ending_date
       `,
-      [mondayIsoDate, sundayIsoDate],
+      [
+        weekDates[0],
+        weekDates[1],
+        weekDates[2],
+        weekDates[3],
+        weekDates[4],
+        weekDates[5],
+        weekDates[6],
+      ],
     );
 
     // if (result.rowCount === 0) {
@@ -64,16 +83,35 @@ module.exports = {
     return result.rows;
   },
 
-  async findByAbsenceDates(mondayIsoDate, sundayIsoDate) {
+  async findByAbsenceDates(weekDates) {
     const result = await client.query(
       `
       SELECT * FROM get_Week_absence_admin_planning 
-      WHERE starting_date >= $1
-      AND starting_date <= $2
-      AND ending_date >= $1
-      AND ending_date <= $2
+      WHERE 
+        $1 
+        BETWEEN starting_date AND ending_date
+        OR $2 
+        BETWEEN starting_date AND ending_date
+        OR $3
+        BETWEEN starting_date AND ending_date
+        OR $4 
+        BETWEEN starting_date AND ending_date
+        OR $5
+        BETWEEN starting_date AND ending_date
+        OR $6 
+        BETWEEN starting_date AND ending_date
+        OR $7
+        BETWEEN starting_date AND ending_date
       `,
-      [mondayIsoDate, sundayIsoDate],
+      [
+        weekDates[0],
+        weekDates[1],
+        weekDates[2],
+        weekDates[3],
+        weekDates[4],
+        weekDates[5],
+        weekDates[6],
+      ],
     );
 
     // if (result.rowCount === 0) {
