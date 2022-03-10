@@ -53,4 +53,31 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Find one user
+   * @param {InputsAuth} inputsAuth - Email for authentication
+   * @returns {AuthUser|null} - Return User or null if no user found
+   */
+  async findForgotOne(email) {
+    const result = await client.query(
+      `
+    SELECT 
+      "id", 
+      "firstname", 
+      "lastname", 
+      "email", 
+      "avatar",
+      "role_application" 
+    FROM "employee" WHERE "email" = $1
+    `,
+      [email],
+    );
+
+    if (result.rowCount === 0) {
+      return null;
+    }
+
+    return result.rows[0];
+  },
+
 };
