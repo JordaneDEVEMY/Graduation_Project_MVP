@@ -2,8 +2,6 @@
 
 BEGIN;
 
-DROP DOMAIN posint;
-
 DROP TABLE 
  
 "company", 
@@ -14,5 +12,7 @@ DROP TABLE
 "employee", 
 "absence",
 "employee_qualification" CASCADE; 
+
+DROP DOMAIN posint;
 
 COMMIT;
