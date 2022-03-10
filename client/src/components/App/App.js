@@ -22,6 +22,8 @@ import PlanningContainer from '../../containers/PlanningContainer';
 import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
 import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
 import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import ResetPassword from '../ResetPassword/ResetPassword';
 
 function App({
   isAdmin,
