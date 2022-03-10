@@ -30,9 +30,9 @@ const controller = {
 
   async resetPassword(req, res) {
     const { id, token } = req.params;
-    const { password, confirmpassword } = req.body;
+    const { password, confirmPassword } = req.body;
 
-    if (password !== confirmpassword) {
+    if (password !== confirmPassword) {
       throw new ApiError(400, 'Les mots de passes doivent être identiques');
     }
 
