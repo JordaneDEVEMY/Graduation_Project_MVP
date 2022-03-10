@@ -68,14 +68,6 @@ function ProfilPage({
         </Box>
         <Divider sx={{ mb: '1em', mt: '1em' }} />
         <Box component="div">
-          <Typography variant="h4">
-            Poste occupé
-          </Typography>
-          <Typography>
-            {user.label}
-          </Typography>
-          <Divider sx={{ mb: '1em', mt: '1em' }} />
-
           { currentPhoneValues ? (
             <>
               <Typography variant="h4">
