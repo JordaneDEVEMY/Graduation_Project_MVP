@@ -45,6 +45,8 @@ function AssignmentForm({
     event.preventDefault();
     const values = {
       ...assignment,
+      color,
+      visibility,
       starting_date,
       ending_date,
     };

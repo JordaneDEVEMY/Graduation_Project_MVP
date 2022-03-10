@@ -79,7 +79,7 @@ function Sheet({
             sx={{
               marginRight: '.5rem',
               opacity: '.5',
-              display: 'none',
+              fontSize: '.75rem',
             }}
           >
             {`#${assignmentId}`}
@@ -92,7 +92,6 @@ function Sheet({
             sx={{
               marginRight: '.5rem',
               opacity: '.5',
-              display: 'none',
             }}
           >
             {`#${id}`}
@@ -105,7 +104,7 @@ function Sheet({
             component="small"
             sx={{
               ml: 'auto',
-              display: 'inline-block',
+              display: 'none',
               fontSize: '.75rem',
               lineHeight: '1.5rem',
             }}

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import { Typography, Modal, useMediaQuery } from '@mui/material';
-import AssignmentForm from '../AssignmentForm/AssignmentForm';
+import AssignmentFormContainer from '../../containers/AssignmentFormContainer';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import CardsDraggable from '../CardsDraggable/CardsDraggable';
 import Companies from '../Companies/Companies';
@@ -21,9 +21,6 @@ function PlanningAdmin({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  console.log('planning', planning);
-  console.log('companies', companies);
-
   // get an object of all cards
   const cards = planningFunctions.setPlanningCards(companies);
 
@@ -31,7 +28,6 @@ function PlanningAdmin({
   const [modalOpened, setModalOpened] = React.useState(false);
 
   const handleAssignment = (result) => {
-    console.log('HANDLE ASSIGNMENT', result);
     setAssignment(result);
   };
 
@@ -43,11 +39,6 @@ function PlanningAdmin({
       }
       return !stateModal;
     });
-  };
-
-  const handleSubmitAssignment = (data) => {
-    console.log('PATCH REQUEST', data);
-    setModalOpened(false);
   };
 
   React.useEffect(() => {
@@ -94,9 +85,9 @@ function PlanningAdmin({
         open
         onClose={handleModal}
       >
-        <AssignmentForm
+        <AssignmentFormContainer
           assignment={assignment}
-          handleSubmit={handleSubmitAssignment}
+          setModalOpened={setModalOpened}
         />
       </Modal>
       )}

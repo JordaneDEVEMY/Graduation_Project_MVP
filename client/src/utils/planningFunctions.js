@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
+import dateFunctions from './dateFunctions';
+
 const planningFunctions = {
 
   /**
@@ -101,10 +103,10 @@ const planningFunctions = {
       id: assignmentId,
       employee_id,
       color,
-      ending_date,
+      ending_date: dateFunctions.getDate(ending_date).format('YYYY-MM-DD'),
       firstname,
       lastname,
-      starting_date,
+      starting_date: dateFunctions.getDate(starting_date).format('YYYY-MM-DD'),
       position: destination.index,
     };
 

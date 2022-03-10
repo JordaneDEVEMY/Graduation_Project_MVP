@@ -49,7 +49,6 @@ function CardsDraggable({
         fromIndex: result.source.index,
         toIndex: result.destination.index,
       });
-      console.log(result);
       const data = planningFunctions.getDragEndData(companies, cards, result);
 
       handleAssignment(data);
