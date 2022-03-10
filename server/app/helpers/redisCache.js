@@ -3,7 +3,7 @@ const { promisify } = require('util');
 const cache = require('express-redis-cache')({
   auth_pass: process.env.REDIS_PASSWORD,
   prefix: process.env.REDIS_PREFIX,
-  // expire: parseInt(process.env.REDIS_EXPIRE, 10),
+  expire: parseInt(process.env.REDIS_EXPIRE, 10),
 });
 
 const debug = require('debug')('app:cache');
