@@ -6,11 +6,10 @@ import React, { useState }
   from 'react';
 import { PropTypes } from 'prop-types';
 import {
-  Avatar, Box, Typography, Divider, Button, useTheme, Grid,
+  Avatar, Box, Typography, Divider, Button, useTheme, Grid, TextField,
 } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import EditIcon from '@mui/icons-material/Edit';
-import TextInput from '../FieldForms/TextInput';
 
 function ProfilPage({
   changeField,
@@ -22,7 +21,7 @@ function ProfilPage({
   const theme = useTheme();
 
   const [modalOpened, setModalOpened] = useState(false);
-  const [errorDisplay, setErrorDisplay] = useState(false);
+  const [errorDisplay, setErrorDisplay] = useState(true);
   const [currentPhoneValues, setNewPhoneValues] = useState(true);
   const [currentMobileValues, setNewMobileValues] = useState(true);
 
@@ -43,12 +42,15 @@ function ProfilPage({
     e.preventDefault();
     if (userPassword !== userConfirmPassword) {
       // alert('Attention, votre mot de passe doit être identique !');
-      setErrorDisplay(true);
+      setErrorDisplay(false);
     }
   };
 
   const handleModal = () => {
     setModalOpened((stateModal) => !stateModal);
+    if (errorDisplay === false) {
+      setErrorDisplay(true);
+    }
   };
 
   return (
@@ -91,12 +93,12 @@ function ProfilPage({
             : (
               <Grid container rowSpacing={2}>
                 <Grid item xs={12}>
-                  <TextInput
-                    handleChange={changeField}
+                  <TextField
                     type="text"
-                    nameValue="phoneNumber"
-                    label="Nouveau numéro de fixe"
-                    defaultValue={user.phoneNumber}
+                    name="phoneNumber"
+                    label="Nouveau numéro de mobile"
+                    defaultValue={user.mobileNumber}
+                    onChange={(event) => changeField('phoneNumber', event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -139,12 +141,12 @@ function ProfilPage({
             : (
               <Grid container rowSpacing={2}>
                 <Grid item xs={12}>
-                  <TextInput
-                    handleChange={changeField}
+                  <TextField
                     type="text"
-                    nameValue="mobileNumber"
+                    name="mobileNumber"
                     label="Nouveau numéro de mobile"
                     defaultValue={user.mobileNumber}
+                    onChange={(event) => changeField('mobileNumber', event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -203,23 +205,33 @@ function ProfilPage({
           <Divider sx={{ mb: theme.spacing(2) }} />
           <Grid container rowSpacing={2}>
             <Grid item xs={12}>
-              <TextInput
-                handleChange={changeField}
+              <TextField
                 type="password"
                 nameValue="password"
                 label="Nouveau mot de passe"
                 defaultValue=""
+                onChange={(event) => changeField('password', event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextInput
-                errorDisplay={errorDisplay}
-                handleChange={changeField}
-                type="password"
-                nameValue="confirmPassword"
-                label="Confirmez votre nouveau mot de passe"
-                defaultValue=""
-              />
+              { errorDisplay ? (
+                <TextField
+                  type="password"
+                  nameValue="confirmPassword"
+                  label="Confirmez votre nouveau mot de passe"
+                  defaultValue=""
+                  onChange={(event) => changeField('confirmPassword', event.target.value)}
+                />
+              ) : (
+                <TextField
+                  error
+                  type="password"
+                  nameValue="confirmPassword"
+                  label="Confirmez votre nouveau mot de passe"
+                  defaultValue=""
+                  onChange={(event) => changeField('confirmPassword', event.target.value)}
+                />
+              )}
             </Grid>
             <Grid item xs={12}>
               <Button
