@@ -9,6 +9,8 @@ export const GET_USER_PLANNING = 'GET_USER_PLANNING';
 export const GET_USER_ASSIGNMENTS = 'GET_USER_ASSIGNMENTS';
 export const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
 
+export const UPDATE_USER_INFORMATIONS = 'UPDATE_USER_INFORMATIONS';
+
 export function actionGetUserInformations({
   id, firstname, lastname, avatar,
 }) {
@@ -23,6 +25,12 @@ export function actionGetUserInformations({
 export function actionUpdateUserInput(key, value) {
   return {
     type: UPDATE_USER_INPUT, payload: { key, value },
+  };
+}
+
+export function actionUpdateUserInformations() {
+  return {
+    type: UPDATE_USER_INFORMATIONS,
   };
 }
 
