@@ -11,6 +11,7 @@ import './layout.scss';
 function Layout({
   isAdmin,
 }) {
+  console.log('layout', isAdmin);
   return (
     <Box sx={{
       display: 'flex',

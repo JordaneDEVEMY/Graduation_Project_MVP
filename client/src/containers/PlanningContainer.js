@@ -7,6 +7,7 @@ import { actionRequestAllCompanies } from '../actions/allCompanies';
 import { actionRequestAllSites } from '../actions/allSites';
 import { actionRequestAllEmployees } from '../actions/allEmployees';
 import Planning from '../components/Planning/Planning';
+import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import dateFunctions from '../utils/dateFunctions';
 
 function PlanningContainer({
@@ -14,26 +15,41 @@ function PlanningContainer({
 }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const { assignments } = user;
-  const [startDate, setStartDate] = React.useState(date);
+  const { isAdmin } = user;
+
+  const weekStart = isAdmin ? useSelector((state) => state.admin.weekStart) : date;
+  const planning = isAdmin && useSelector((state) => state.admin.planning);
+
+  const [startDate, setStartDate] = React.useState(weekStart);
 
   useEffect(() => {
-    if (user.isAdmin) {
+    dispatch(actionGetUserPlanning());
+
+    if (isAdmin) {
       dispatch(actionRequestAllEmployees());
       dispatch(actionRequestAllSites());
       dispatch(actionRequestAllCompanies());
       dispatch(actionRequestAdminPlanning());
     }
-    dispatch(actionGetUserPlanning());
+    setStartDate(weekStart);
   }, []);
 
   return (
-    <Planning
-      user={user}
-      assignments={assignments}
-      startDate={startDate}
-      handleStartDate={setStartDate}
-    />
+    !isAdmin
+      ? (
+        <Planning
+          user={user}
+          startDate={startDate}
+          handleStartDate={setStartDate}
+        />
+      )
+      : (
+        <PlanningAdmin
+          planning={planning}
+          startDate={startDate}
+          handleStartDate={setStartDate}
+        />
+      )
   );
 }
 
