@@ -35,6 +35,39 @@ function CardsDraggable({
   console.log('dragState', dragState);
 
   /**
+   * prepare assignement to assignment form
+   */
+  const assignmentPrepareData = (data) => {
+    const result = {};
+    const { source, destination, draggableId } = data;
+    const cardId = Number(destination.droppableId.replace('card-', ''));
+    // get site
+    companies.forEach((company) => {
+      const { assignments } = company;
+      console.log('assignmentPrepareData cardId', cardId);
+      console.log('assignmentPrepareData assignments', assignments);
+      const assignment = assignments.filter(({ id }) => id === cardId);
+      if (assignment.length === 1) {
+        console.log('assignmentPrepareData assignment', assignment);
+        result.site = assignment[0].site;
+      }
+    });
+    console.log('prepare data', result, source, draggableId);
+    // const card = cards[source.droppableId][source.index];
+    // {
+    //   starting_date: "string",
+    //   ending_date: "string",
+    //   color: "string",
+    //   position: 0,
+    //   visibility: true,
+    //   employee_id: 0,
+    //   site_id: 0,
+    //   absence_id: 0
+    // }
+    handleAssignment(data);
+  };
+
+  /**
    * dispatch actions on drag end
    */
   const onDragEnd = useCallback((result) => {
@@ -50,7 +83,7 @@ function CardsDraggable({
         toIndex: result.destination.index,
       });
       console.log('on drag end', result);
-      handleAssignment(result);
+      assignmentPrepareData(result);
     }
   }, []);
 

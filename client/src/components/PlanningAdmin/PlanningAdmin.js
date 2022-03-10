@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import { Typography, Modal, useMediaQuery } from '@mui/material';
-// import AssignmentForm from '../AssignmentForm/AssignmentForm';
+import AssignmentForm from '../AssignmentForm/AssignmentForm';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import CardsDraggable from '../CardsDraggable/CardsDraggable';
 import Companies from '../Companies/Companies';
@@ -98,8 +98,11 @@ function PlanningAdmin({
         open={modalOpened}
         onClose={handleModal}
       >
-        {/* <AssignmentForm week={week} assignment={assignment} /> */}
-        <p>TOTO</p>
+        <AssignmentForm
+          firstname="Alain"
+          lastname="terieur"
+          week={week}
+        />
       </Modal>
     </>
   );

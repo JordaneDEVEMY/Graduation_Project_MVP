@@ -11,7 +11,6 @@ import sheetListBg from '../../Assets/images/sheet-bg.png';
 import './sheetlist.scss';
 
 function SheetList({
-  cardId,
   employees,
   expandedSheet,
   handleAssignment,
@@ -29,8 +28,8 @@ function SheetList({
         isDraggable
           ? (
             <Draggable
-              key={`card-${cardId}-sheet-${index}`}
-              draggableId={`card-${cardId}-sheet-${employee.id}`}
+              key={`employee-${index}`}
+              draggableId={`employee-${employee.id}`}
               index={index}
             >
               {(provided, snapshot) => (
@@ -39,12 +38,12 @@ function SheetList({
                     opacity: snapshot.isDragging ? '0.5' : 1,
                   }}
                   ref={provided.innerRef}
-                  key={`card-${cardId}-employee-${employee.id}-wrapper`}
+                  key={`employee-${employee.id}-wrapper`}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
                   <Sheet
-                    key={`card-${cardId}-employee-${employee.id}`}
+                    key={`employee-${employee.id}`}
                     index={index}
                     handleAssignment={handleAssignment}
                     handleCollapse={handleCollapse}
@@ -61,7 +60,7 @@ function SheetList({
           )
           : (
             <Sheet
-              key={`card-${cardId}-employee-${employee.id}`}
+              key={`employee-${employee.id}`}
               index={index}
               handleAssignment={handleAssignment}
               handleCollapse={handleCollapse}
@@ -92,7 +91,6 @@ function SheetList({
 }
 
 SheetList.propTypes = {
-  cardId: PropTypes.number.isRequired,
   employees: PropTypes.arrayOf(
     PropTypes.shape({
       color: PropTypes.string,
