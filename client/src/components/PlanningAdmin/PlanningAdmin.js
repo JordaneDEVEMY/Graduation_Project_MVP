@@ -15,6 +15,9 @@ function PlanningAdmin({
   planning,
   startDate,
 }) {
+  console.log('start date from planning admin', startDate);
+  console.log('planning from planning admin', planning);
+
   const companies = planningFunctions.adminPlanningToCards(planning);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;

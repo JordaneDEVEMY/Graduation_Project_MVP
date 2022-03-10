@@ -22,6 +22,8 @@ function PlanningContainer({
 
   const [startDate, setStartDate] = React.useState(weekStart);
 
+  console.log('start date from planning container', startDate);
+
   useEffect(() => {
     dispatch(actionGetUserPlanning());
 
@@ -31,8 +33,16 @@ function PlanningContainer({
       dispatch(actionRequestAllCompanies());
       dispatch(actionRequestAdminPlanning());
     }
-    setStartDate(weekStart);
+    // setStartDate(weekStart);
   }, []);
+
+  useEffect(() => {
+    if (startDate !== '') {
+      const week = dateFunctions.getWeek(startDate);
+      const year = dateFunctions.getDate(startDate).format('YYYY');
+      console.log(`get planning : ${year}-${week.current.num}`);
+    }
+  }, [startDate]);
 
   return (
     !isAdmin
