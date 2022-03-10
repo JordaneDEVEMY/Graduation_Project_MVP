@@ -22,13 +22,14 @@ function CardHeader({
         marginBottom: theme.spacing(2),
       }}
     >
-      {`${site.name}`}
+      {`#${site.id} ${site.name}`}
     </Typography>
   );
 }
 
 CardHeader.propTypes = {
   site: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 };
