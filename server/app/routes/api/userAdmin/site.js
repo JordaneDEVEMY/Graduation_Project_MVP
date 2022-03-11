@@ -1,4 +1,5 @@
 const express = require('express');
+const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const siteSchema = require('../../../validation/userAdmin/site');
@@ -19,7 +20,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .get(controllerHandler(userAdminSiteController.getAll))
+  .get(cache.route(), controllerHandler(userAdminSiteController.getAll))
 
   /**
    * POST /api/admin/site
@@ -30,7 +31,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - site not found - application/json
    */
-  .post(validate('body', siteSchema), controllerHandler(userAdminSiteController.create));
+  .post(cache.del(), validate('body', siteSchema), controllerHandler(userAdminSiteController.create));
 
 router
   .route('/:id(\\d+)')
@@ -43,7 +44,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - site not found - application/json
    */
-  .get(controllerHandler(userAdminSiteController.getOne))
+  .get(cache.route(), controllerHandler(userAdminSiteController.getOne))
 
   /**
    * PATCH /api/admin/site/{id}
@@ -55,7 +56,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Site not found - application/json
    */
-  .patch(validate('body', siteSchema), controllerHandler(userAdminSiteController.update))
+  .patch(cache.del(), validate('body', siteSchema), controllerHandler(userAdminSiteController.update))
 
   /**
    * DELETE /api/admin/site/{id}
@@ -66,6 +67,6 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Site not found - application/json
    */
-  .delete(controllerHandler(userAdminSiteController.delete));
+  .delete(cache.del(), controllerHandler(userAdminSiteController.delete));
 
 module.exports = router;
