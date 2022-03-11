@@ -7,6 +7,7 @@ import {
 function TextInput({
   type,
   label,
+  defaultValue,
   value,
 }) {
   return (
@@ -27,6 +28,7 @@ TextInput.propTypes = {
   nameValue: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired,
 };
 
 export default React.memo(TextInput);
