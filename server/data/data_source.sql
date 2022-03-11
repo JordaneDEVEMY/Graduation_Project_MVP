@@ -42,7 +42,9 @@ VALUES
 (18329772321063,'Malachi','Tristan','2018-06-05 13:07:12','9184 Fringilla St.',31000,'malachi.tristan@icloud.couk','0561166116','0612996644','LIQ49BKK8IB','/images/55.jpg','Lorem','user',5),
 (22222273125963,'Prescott','Geoffrey','2018-06-13 03:47:00','Ap #488-2475 Turpis St.',31000,'g.prescott2267@google.net','0561166116','0612996644','TUO65GTP6PO','/images/48.jpg','Lorem','user',3),
 (13748551417541,'Ashton','Alexandre','2018-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'alexandre-ashton5369@icloud.edu','0561166116','0612996644','VKM73KHB1ND','/images/67.jpg','Lorem','user',3),
-(13748551417541,'Chrita','hicham','2018-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'hicham@oclock.com','0561166116','0612996644','mypassword','/images/67.jpg','Lorem','user',3);
+(13748551417541,'Chrita','hicham','2018-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'hicham@oclock.com','0561166116','0612996644','mypassword','/images/67.jpg','Lorem','user',3),
+(22473294533059,'Mathieu','Lebreton','2018-06-22 02:23:17','2448 Orci Street',31000,'mathieu.lebreton2@gmail.com','0561166116','0612996644','password','/images/66.jpg','Lorem','user',4),
+(22473294533043,'Ben','Guillemot','2018-06-22 02:23:17','2448 Orci Street',31000,'ben.guillemot1@gmail.com','0561166116','0612996644','password','/images/66.jpg','Lorem','user',4);
 
 INSERT INTO "company" ("name","address","zip_code","type")
 VALUES
