@@ -28,6 +28,8 @@ function Card({
 }) {
   const theme = useTheme();
 
+  console.log('from card', employees, ending_date, user, week);
+
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
 

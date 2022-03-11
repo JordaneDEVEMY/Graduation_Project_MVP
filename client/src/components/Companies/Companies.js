@@ -12,6 +12,7 @@ function Companies({
   isDropable,
   week,
 }) {
+  console.log('cards from companies', cards);
   // sort cards by company
   const companyCards = {};
   companies.forEach((company) => {
@@ -21,8 +22,11 @@ function Companies({
         ...assignment,
         colleagues: cards[`card-${assignment.site.id}`],
       });
+      console.log(`card-${assignment.site.id}`, cards[`card-${assignment.site.id}`]);
     });
   });
+  console.log('companies', companies);
+  console.log('companyCards', companyCards);
 
   return (
     (companies.length

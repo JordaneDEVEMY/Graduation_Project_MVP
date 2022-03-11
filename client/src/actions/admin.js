@@ -1,9 +1,10 @@
 export const REQUEST_ADMIN_PLANNING = 'REQUEST_ADMIN_PLANNING';
 export const GET_ADMIN_PLANNING = 'GET_ADMIN_PLANNING';
 
-export function actionRequestAdminPlanning() {
+export function actionRequestAdminPlanning(week) {
   return {
     type: REQUEST_ADMIN_PLANNING,
+    payload: week,
   };
 }
 

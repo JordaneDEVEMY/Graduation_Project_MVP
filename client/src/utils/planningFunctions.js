@@ -130,6 +130,17 @@ const planningFunctions = {
 
     return cards;
   },
+
+  /**
+   * Get current year and week as string
+   * @returns {string} YYYY-<week number>
+   */
+  getSlugFromDate: (date) => {
+    const year = dateFunctions.getDate(date).format('YYYY');
+    const weekNum = dateFunctions.getDate(date).isoWeek();
+
+    return `${year}-${weekNum}`;
+  },
 };
 
 export default planningFunctions;

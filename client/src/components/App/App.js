@@ -18,6 +18,7 @@ import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
 import './app.scss';
+import PlanningAdminContainer from '../../containers/PlanningAdminContainer';
 import PlanningContainer from '../../containers/PlanningContainer';
 import CreateEmployeeFormContainer from '../../containers/CreateEmployeeFormContainer';
 import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
@@ -60,9 +61,16 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningAdminContainer isAdmin={isAdmin} />
                     )}
-                />
+                >
+                  <Route
+                    path=":weekStart"
+                    element={(
+                      <PlanningAdminContainer isAdmin={isAdmin} />
+                      )}
+                  />
+                </Route>
                 <Route
                   path="employees"
                   element={(

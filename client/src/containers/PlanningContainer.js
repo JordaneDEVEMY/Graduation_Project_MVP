@@ -2,12 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionGetUserPlanning } from '../actions/user';
-import { actionRequestAdminPlanning } from '../actions/admin';
-import { actionRequestAllCompanies } from '../actions/allCompanies';
-import { actionRequestAllSites } from '../actions/allSites';
-import { actionRequestAllEmployees } from '../actions/allEmployees';
 import Planning from '../components/Planning/Planning';
-import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import dateFunctions from '../utils/dateFunctions';
 
 function PlanningContainer({
@@ -15,51 +10,25 @@ function PlanningContainer({
 }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const { isAdmin } = user;
 
-  const weekStart = isAdmin ? useSelector((state) => state.admin.weekStart) : date;
-  const planning = isAdmin && useSelector((state) => state.admin.planning);
-
-  const [startDate, setStartDate] = React.useState(weekStart);
-
-  console.log('start date from planning container', startDate);
+  const [startDate, setStartDate] = React.useState(date);
 
   useEffect(() => {
     dispatch(actionGetUserPlanning());
-
-    if (isAdmin) {
-      dispatch(actionRequestAllEmployees());
-      dispatch(actionRequestAllSites());
-      dispatch(actionRequestAllCompanies());
-      dispatch(actionRequestAdminPlanning());
-    }
-    // setStartDate(weekStart);
   }, []);
 
   useEffect(() => {
     if (startDate !== '') {
-      const week = dateFunctions.getWeek(startDate);
-      const year = dateFunctions.getDate(startDate).format('YYYY');
-      console.log(`get planning : ${year}-${week.current.num}`);
+      console.log(`REQUEST GET ${startDate}`);
     }
   }, [startDate]);
 
   return (
-    !isAdmin
-      ? (
-        <Planning
-          user={user}
-          startDate={startDate}
-          handleStartDate={setStartDate}
-        />
-      )
-      : (
-        <PlanningAdmin
-          planning={planning}
-          startDate={startDate}
-          handleStartDate={setStartDate}
-        />
-      )
+    <Planning
+      user={user}
+      startDate={startDate}
+      handleStartDate={setStartDate}
+    />
   );
 }
 

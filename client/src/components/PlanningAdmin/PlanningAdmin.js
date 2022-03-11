@@ -26,6 +26,7 @@ function PlanningAdmin({
 
   // get an object of all cards
   const cards = planningFunctions.setPlanningCards(companies);
+  console.log('cards planning admin', cards);
 
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
