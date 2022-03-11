@@ -53,6 +53,7 @@ function reducer(state = initialState, action) {
         ...state,
         [action.payload.key]: action.payload.value,
       };
+
     // reset employee informations
     case actions.RESET_EMPLOYEE_INFORMATIONS:
       return {
