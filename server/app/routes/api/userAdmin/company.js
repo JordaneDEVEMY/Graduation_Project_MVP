@@ -1,5 +1,5 @@
 const express = require('express');
-const cache = require('../../../helpers/redisCache');
+// ? const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const companySchema = require('../../../validation/userAdmin/company');
@@ -20,7 +20,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
    */
-  .get(cache.route(), controllerHandler(userAdminCompanyController.getAll))
+  .get(controllerHandler(userAdminCompanyController.getAll))
 
   /**
    * POST /api/admin/company
@@ -31,7 +31,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - company not found - application/json
    */
-  .post(cache.del(), validate('body', companySchema), controllerHandler(userAdminCompanyController.create));
+  .post(validate('body', companySchema), controllerHandler(userAdminCompanyController.create));
 
 router
   .route('/:id(\\d+)')
@@ -44,7 +44,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - company not found - application/json
    */
-  .get(cache.route(), controllerHandler(userAdminCompanyController.getOne))
+  .get(controllerHandler(userAdminCompanyController.getOne))
 
   /**
    * PATCH /api/admin/company/{id}
@@ -56,7 +56,7 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Company not found - application/json
    */
-  .patch(cache.del(), validate('body', companySchema), controllerHandler(userAdminCompanyController.update))
+  .patch(validate('body', companySchema), controllerHandler(userAdminCompanyController.update))
 
 /**
    * DELETE /api/admin/company/{id}
@@ -67,6 +67,6 @@ router
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Company not found - application/json
    */
-  .delete(cache.del(), controllerHandler(userAdminCompanyController.delete));
+  .delete(controllerHandler(userAdminCompanyController.delete));
 
 module.exports = router;
