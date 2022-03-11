@@ -32,10 +32,16 @@ function reducer(state = initialState, action) {
         [action.payload.key]: action.payload.value,
       };
 
-    case actions.UPDATE_USER_INFORMATIONS:
+    case actions.UPDATE_USER_PHONE_NUMBER:
       return {
         ...state,
-        [action.payload.key]: action.payload.value,
+        phoneNumber: action.payload,
+      };
+
+    case actions.UPDATE_USER_MOBILE_NUMBER:
+      return {
+        ...state,
+        mobileNumber: action.payload,
       };
 
     case actions.RESET_USER_PASSWORD:

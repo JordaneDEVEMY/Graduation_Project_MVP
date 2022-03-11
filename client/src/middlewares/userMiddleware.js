@@ -1,6 +1,7 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-alert */
 /* eslint-disable camelcase */
-import { updateUserInformations } from '../requests/userRequest';
+import { updateUserInformations } from '../requests/userPlanningRequest';
 import * as actions from '../actions';
 
 const userMiddleware = (store) => (next) => async (action) => {
@@ -9,17 +10,18 @@ const userMiddleware = (store) => (next) => async (action) => {
       const { user } = store.getState();
       const {
         password,
-        phoneNumber: phone_number,
-        mobileNumber: mobile_number,
+        phoneNumber,
+        mobileNumber,
       } = user;
       const userDatas = {
         password,
-        phone_number,
-        mobile_number,
+        phoneNumber,
+        mobileNumber,
       };
       const response = await updateUserInformations(user.id, userDatas);
       if (response.status === 200) {
         alert('Informations modifiées avec succès !');
+        store.dispatch(actions.actionGetUserPlanning());
       }
 
       return;
