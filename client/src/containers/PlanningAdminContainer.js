@@ -32,7 +32,8 @@ function PlanningAdminContainer() {
   }, []);
 
   useEffect(() => {
-    dispatch(actionRequestAdminPlanning(weekStart));
+    const slug = planningFunctions.getSlugFromDate(startDate);
+    dispatch(actionRequestAdminPlanning(slug));
   }, [startDate]);
 
   return (

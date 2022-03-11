@@ -3,36 +3,23 @@
 /* eslint-disable default-case */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-props-no-spreading */
-import produce from 'immer';
-import React, { useCallback, useReducer } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Companies from '../Companies/Companies';
 import planningFunctions from '../../utils/planningFunctions';
 import './cards_draggable.scss';
 
-/**
- * receive state and return the new state
- */
-const dragReducer = produce((draft, action) => {
-  switch (action.type) {
-    case 'MOVE': {
-      draft[action.from] = draft[action.from] || [];
-      draft[action.to] = draft[action.to] || [];
-      const [removed] = draft[action.from].splice(action.fromIndex, 1);
-      draft[action.to].splice(action.toIndex, 0, removed);
-    }
-  }
-});
-
 function CardsDraggable({
   cards,
+  dragState,
   companies,
   handleAssignment,
+  setDragState,
   week,
 }) {
-  // set cards in state
-  const [dragState, setDragState] = useReducer(dragReducer, cards);
+  console.log('cards draggable admin', cards);
+  console.log('cards draggable dragState', dragState);
 
   /**
    * dispatch actions on drag end
@@ -81,7 +68,9 @@ CardsDraggable.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
+  dragState: PropTypes.shape().isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  setDragState: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
