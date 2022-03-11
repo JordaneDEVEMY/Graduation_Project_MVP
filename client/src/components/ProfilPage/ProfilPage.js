@@ -40,7 +40,13 @@ function ProfilPage({
     setNewMobileValues(true);
   };
 
-  const confirmChange = (e) => {
+  const confirmPhoneChange = (e) => {
+    e.preventDefault();
+    setModalOpened(false);
+    updateUserInformations();
+  };
+
+  const confirmPasswordChange = (e) => {
     e.preventDefault();
     if (userPassword !== userConfirmPassword) {
       setErrorDisplay(false);
@@ -89,7 +95,7 @@ function ProfilPage({
             </>
           )
             : (
-              <form>
+              <form onSubmit={confirmPhoneChange}>
                 <Grid container rowSpacing={2}>
                   <Grid item xs={12}>
                     <TextField
@@ -101,9 +107,18 @@ function ProfilPage({
                     />
                   </Grid>
                   <Grid item xs={12}>
+                    <TextField
+                      required
+                      type="password"
+                      nameValue="password"
+                      label="Mot de passe"
+                      defaultValue=""
+                      onChange={(event) => changeField('password', event.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
                     <Button
                       type="submit"
-                  // onClick={confirmChange}
                       variant="outlined"
                     >
                       Confirmer
@@ -140,7 +155,7 @@ function ProfilPage({
             </>
           )
             : (
-              <form>
+              <form onSubmit={confirmPhoneChange}>
                 <Grid container rowSpacing={2}>
                   <Grid item xs={12}>
                     <TextField
@@ -152,9 +167,18 @@ function ProfilPage({
                     />
                   </Grid>
                   <Grid item xs={12}>
+                    <TextField
+                      required
+                      type="password"
+                      nameValue="password"
+                      label="Mot de passe"
+                      defaultValue=""
+                      onChange={(event) => changeField('password', event.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
                     <Button
                       type="submit"
-                  // onClick={confirmChange}
                       variant="outlined"
                     >
                       Confirmer
@@ -205,7 +229,7 @@ function ProfilPage({
             Modifier votre mot de passe
           </Typography>
           <Divider sx={{ mb: theme.spacing(2) }} />
-          <form onSubmit={confirmChange}>
+          <form onSubmit={confirmPasswordChange}>
             <Grid container rowSpacing={2}>
               <Grid item xs={12}>
                 <TextField

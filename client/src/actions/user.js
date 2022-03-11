@@ -10,6 +10,8 @@ export const GET_USER_ASSIGNMENTS = 'GET_USER_ASSIGNMENTS';
 export const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
 
 export const UPDATE_USER_INFORMATIONS = 'UPDATE_USER_INFORMATIONS';
+export const UPDATE_USER_PHONE_NUMBER = 'UPDATE_USER_PHONE_NUMBER';
+export const UPDATE_USER_MOBILE_NUMBER = 'UPDATE_USER_MOBILE_NUMBER';
 
 export function actionGetUserInformations({
   id, firstname, lastname, avatar,
@@ -79,5 +81,17 @@ export function actionGetUserAssignments(assignments) {
 export function actionSetUserLogout() {
   return {
     type: SET_USER_LOGOUT,
+  };
+}
+
+export function actionUpdateUserPhoneNumber(phoneNumber) {
+  return {
+    type: UPDATE_USER_PHONE_NUMBER, payload: phoneNumber,
+  };
+}
+
+export function actionUpdateUserMobileNumber(mobileNumber) {
+  return {
+    type: UPDATE_USER_MOBILE_NUMBER, payload: mobileNumber,
   };
 }
