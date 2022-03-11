@@ -6,7 +6,7 @@ export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
 
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
-export const GET_EMPLOYEE_ID = 'GET_EMPLOYEE_ID';
+export const GET_EMPLOYEE_ID_TO_DELETE = 'GET_EMPLOYEE_ID_TO_DELETE';
 
 // create or update employee informations
 export const SET_EMPLOYEE_INFORMATION = 'SET_EMPLOYEE_INFORMATION';
@@ -77,9 +77,9 @@ export function actionGetEmployeeInformations({
   };
 }
 
-export function actionGetEmployeeId(id) {
+export function actionGetEmployeeIdToDelete(ids) {
   return {
-    type: GET_EMPLOYEE_ID, payload: id,
+    type: GET_EMPLOYEE_ID_TO_DELETE, payload: ids,
   };
 }
 
