@@ -9,7 +9,6 @@ function TextInput({
   label,
   nameValue,
   value,
-  nameValue,
   handleChange,
 }) {
   return (

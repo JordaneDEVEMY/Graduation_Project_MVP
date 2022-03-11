@@ -115,7 +115,7 @@ function DataGridEmployee({
       </Typography>
       <Box sx={{ height: '80%', width: 'auto' }}>
         {showAlert && (
-          <Alert severity="error">Vous devez sélectionner un employé à supprimer</Alert>
+          <Alert sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center' }} severity="error">Vous devez sélectionner un employé à supprimer</Alert>
         )}
         <Button
           variant="contained"
@@ -142,7 +142,8 @@ function DataGridEmployee({
           Supprimer un employé
         </Button>
         <DataGrid
-          disableMultipleSelection
+          sx={{ fontSize: '1.2rem' }}
+          disableColumnMenu
           checkboxSelection
           onSelectionModelChange={(newSelectionModel) => {
             setSelectionModel(newSelectionModel);
