@@ -2,7 +2,11 @@
 import * as actions from '../actions';
 
 const initialState = {
+<<<<<<< HEAD
   email: 'aurliencaleb3012@hotmail.ca',
+=======
+  email: 'xavier_caleb4493@yahoo.edu',
+>>>>>>> b88dcbb3c97c59bd9d6ccad198cdc3b3e6f2de2c
   password: 'LTK85EWH8HM',
   isLogged: false,
 };
