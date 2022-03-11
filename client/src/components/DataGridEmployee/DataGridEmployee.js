@@ -3,11 +3,10 @@
 /* eslint-disable no-restricted-syntax */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-// import {
-//   EditIcon, DeleteIcon, SaveIcon, CancelIcon,
-// } from '@mui/icons-material/Edit';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 function DataGridEmployee({
   employees,
@@ -74,6 +73,18 @@ function DataGridEmployee({
   const rows = employees;
   return (
     <Box sx={{ height: '80%', width: 'auto' }}>
+      <Button
+        variant="contained"
+        startIcon={(
+          <AddOutlinedIcon />
+        )}
+        sx={{ margin: '10px' }}
+      >
+        Ajouter un employé
+      </Button>
+      <Button variant="contained" startIcon={<DeleteOutlinedIcon />}>
+        Supprimer un employé
+      </Button>
       <DataGrid
         editMode="cell"
         onCellEditCommit={(params) => {
