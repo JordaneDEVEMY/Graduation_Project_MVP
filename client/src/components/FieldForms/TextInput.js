@@ -7,28 +7,34 @@ import {
 function TextInput({
   type,
   label,
-  defaultValue,
+  nameValue,
   value,
+  handleChange,
 }) {
   return (
     <TextField
-      sx={{ width: '400px' }}
+      sx={{ maxWidth: '400px', minWidth: '300px' }}
       required
       type={type}
-      name={nameValue}
       value={value}
       label={label}
+      nameValue={nameValue}
       variant="outlined"
+      onChange={(event) => handleChange(nameValue, event.target.value)}
     />
   );
 }
 
 TextInput.propTypes = {
   type: PropTypes.string.isRequired,
-  nameValue: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string.isRequired,
+  nameValue: PropTypes.string.isRequired,
+  handleChange: PropTypes.func,
+};
+
+TextInput.defaultProps = {
+  handleChange: null,
 };
 
 export default React.memo(TextInput);

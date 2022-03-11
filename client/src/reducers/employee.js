@@ -10,7 +10,7 @@ const initialState = {
   mobileNumber: '',
   password: '',
   address: '',
-  zipCode: '',
+  zipCode: 0,
   socialSecurityNumber: '',
   dateOfBirth: '',
   startingDate: '',
@@ -18,6 +18,7 @@ const initialState = {
   fonction: '',
   roleApplication: '',
   label: '',
+  employeesToDelete: [],
 };
 
 function reducer(state = initialState, action) {
@@ -42,10 +43,10 @@ function reducer(state = initialState, action) {
         roleApplication: action.payload.roleApplication,
         label: action.payload.label,
       };
-    case actions.GET_EMPLOYEE_ID:
+    case actions.GET_EMPLOYEE_ID_TO_DELETE:
       return {
         ...state,
-        id: action.payload,
+        employeesToDelete: action.payload,
       };
     // set employee informations
     case actions.SET_EMPLOYEE_INFORMATION:

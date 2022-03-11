@@ -102,12 +102,15 @@ const employeeMiddleware = (store) => (next) => async (action) => {
     }
     case actions.DELETE_EMPLOYEE: {
       const { employee } = store.getState();
-      const response = await deleteEmployee(employee.id);
-      if (response.status === 200) {
-        store.dispatch(actions.actionResetEmployeeInformations());
-        store.dispatch(actions.actionRequestAllEmployees());
-        alert('Employee deleted successfully');
-      }
+      employee.employeesToDelete.map(async (id) => {
+        const response = await deleteEmployee(id);
+        if (response.status === 200) {
+          store.dispatch(actions.actionRequestAllEmployees());
+          alert('Employee deleted successfully');
+        }
+      });
+      alert('Employee deleted successfully');
+      store.dispatch(actions.actionResetEmployeeInformations());
       return;
     }
     default: {

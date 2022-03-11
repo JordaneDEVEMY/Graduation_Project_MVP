@@ -25,6 +25,7 @@ import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContai
 import ProfilPageContainer from '../../containers/ProfilPageContainer';
 import ForgotPasswordContainer from '../../containers/ForgotPasswordContainer';
 import ResetPassword from '../ResetPassword/ResetPassword';
+import ProfilPageContainer from '../../containers/ProfilPageContainer';
 
 function App({
   isAdmin,
