@@ -61,6 +61,12 @@ function App({
             <Route element={<RequireAdmin />}>
               <Route path="admins" element={<Layout isAdmin={isAdmin} />}>
                 <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
                   path="planning"
                   element={(
                     <PlanningContainer isAdmin={isAdmin} />
@@ -82,6 +88,12 @@ function App({
                   path="companies"
                   element={(
                     <CreateCompanyFormContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
