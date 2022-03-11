@@ -66,15 +66,17 @@ function ProfilPage({
   return (
     <>
       <Box>
-        <Avatar
-          alt={`${user.firstname} ${user.lastname}`}
-          src={user.avatar}
-          sx={{
-            width: 80, height: 80, mx: 'auto',
-          }}
-        />
-        <Box component="span" sx={{ textAlign: 'center' }}>
-          <Typography variant="h1" sx={{ mb: '.5em', mt: '.5em' }}>{`${user.firstname} ${user.lastname}`}</Typography>
+        <Box>
+          <Avatar
+            alt={`${user.firstname} ${user.lastname}`}
+            src={user.avatar}
+            sx={{
+              width: 80, height: 80, mx: 'auto',
+            }}
+          />
+          <Box component="span" sx={{ textAlign: 'center' }}>
+            <Typography variant="h1" sx={{ mb: '.5em', mt: '.5em' }}>{`${user.firstname} ${user.lastname}`}</Typography>
+          </Box>
         </Box>
         <Divider sx={{ mb: '1em', mt: '1em' }} />
         <Box component="div">
@@ -101,8 +103,8 @@ function ProfilPage({
                     <TextField
                       type="text"
                       name="phoneNumber"
-                      label="Nouveau numéro de mobile"
-                      defaultValue={user.mobileNumber}
+                      label="Nouveau numéro de téléphone fixe"
+                      defaultValue={user.phoneNumber}
                       onChange={(event) => changeField('phoneNumber', event.target.value)}
                     />
                   </Grid>
