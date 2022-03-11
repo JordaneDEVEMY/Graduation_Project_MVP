@@ -1,7 +1,4 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable default-case */
 import React from 'react';
-import produce from 'immer';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import { Typography, Modal, useMediaQuery } from '@mui/material';
@@ -12,20 +9,6 @@ import Companies from '../Companies/Companies';
 import dateFunctions from '../../utils/dateFunctions';
 import planningFunctions from '../../utils/planningFunctions';
 import './planning_admin.scss';
-
-/**
- * receive state and return the new state
- */
-const dragReducer = produce((draft, action) => {
-  switch (action.type) {
-    case 'MOVE': {
-      draft[action.from] = draft[action.from] || [];
-      draft[action.to] = draft[action.to] || [];
-      const [removed] = draft[action.from].splice(action.fromIndex, 1);
-      draft[action.to].splice(action.toIndex, 0, removed);
-    }
-  }
-});
 
 function PlanningAdmin({
   handleStartDate,
@@ -44,10 +27,6 @@ function PlanningAdmin({
   // get an object of all cards
   const cards = planningFunctions.setPlanningCards(companies);
   console.log('cards planning admin', cards);
-
-  // set cards in state
-  const [dragState, setDragState] = React.useReducer(dragReducer, cards);
-  console.log('dragState planning admin', dragState);
 
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
@@ -83,17 +62,14 @@ function PlanningAdmin({
           && (
           <CardsDraggable
             cards={cards}
-            dragState={dragState}
             companies={companies}
             handleAssignment={handleAssignment}
             week={currentWeek}
-            setDragState={setDragState}
           />
           )
         : (
           <Companies
             cards={cards}
-            dragState={dragState}
             companies={companies}
             handleAssignment={handleAssignment}
             isDropable={false}
