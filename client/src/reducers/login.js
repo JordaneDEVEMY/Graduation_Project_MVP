@@ -2,7 +2,11 @@
 import * as actions from '../actions';
 
 const initialState = {
+<<<<<<< HEAD
   email: 'aurliencaleb3012@hotmail.ca',
+=======
+  email: 'xavier_caleb4493@yahoo.edu',
+>>>>>>> dd310d7 (change user in initialState to help the merge)
   password: 'LTK85EWH8HM',
   isLogged: false,
 };
