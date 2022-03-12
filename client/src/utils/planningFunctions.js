@@ -79,15 +79,18 @@ const planningFunctions = {
     // get site destination
     let toSite;
     companies.forEach(({ sites }) => {
-      [toSite] = sites.filter(({ id }) => id === siteId);
+      sites.forEach((item) => {
+        if (item.id === siteId) {
+          toSite = item;
+        }
+      });
     });
 
     // get assignment
     if (toSite) {
-      const { assignments: fromAssignments } = toSite;
+      const { name, assignments: fromAssignments } = toSite;
       const [assignment] = fromAssignments.filter(({ id }) => id === assignmentId);
 
-      console.log('assignment', assignment);
       const {
         color, employee, ending_date, id, starting_date,
       } = assignment;
@@ -104,6 +107,10 @@ const planningFunctions = {
         lastname,
         starting_date: startDate,
         position: destination.index,
+        site: {
+          id: siteId,
+          name,
+        },
       };
     }
 
@@ -131,7 +138,6 @@ const planningFunctions = {
         }
       });
     });
-    console.log('fromSite', fromSite);
 
     if (fromSite) {
       // get site destination
@@ -143,13 +149,12 @@ const planningFunctions = {
           }
         });
       });
-      console.log('toSite', toSite);
 
       if (toSite) {
         let { assignments: fromAssignments } = fromSite;
         const { assignments: toAssignments } = toSite;
         const [assignment] = fromAssignments.filter(({ id }) => id === assignmentId);
-        console.log(fromSite, toSite);
+
         // position only
         if (fromSiteId === toSiteId) {
           assignment.position = destination.index;
@@ -200,7 +205,18 @@ const planningFunctions = {
    * Get current year and week as string
    * @returns {string} YYYY-<week number>
    */
-  getSlugFromDate: (date) => {
+  getCurrentWeekSlug: () => {
+    const year = dateFunctions.getDate().format('YYYY');
+    const weekNum = dateFunctions.getDate().isoWeek();
+
+    return `${year}-${weekNum}`;
+  },
+
+  /**
+   * Get current year and week as string
+   * @returns {string} YYYY-<week number>
+   */
+  getWeekSlugFromDate: (date) => {
     const year = dateFunctions.getDate(date).format('YYYY');
     const weekNum = dateFunctions.getDate(date).isoWeek();
 

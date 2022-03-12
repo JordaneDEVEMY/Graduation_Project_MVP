@@ -47,6 +47,7 @@ function Assignment({
     <Accordion
       expanded={expandedSheet === `panel${index}`}
       onChange={handleCollapse(`panel${index}`)}
+      id={`assignment-${id}`}
       sx={{
         borderTop: '1px solid rgb(0 0 0 / 10%)',
         background: color,
@@ -55,7 +56,6 @@ function Assignment({
     >
       <AccordionSummary
         aria-controls={`panel${index}-content`}
-        id={`panel${index}-header`}
         sx={{
           height: 50,
           alignItems: 'center',
@@ -72,28 +72,7 @@ function Assignment({
             whiteSpace: 'nowrap',
           }}
         >
-          <Typography
-            component="small"
-            sx={{
-              marginRight: '.5rem',
-              opacity: '.5',
-              fontSize: '.75rem',
-            }}
-          >
-            {`#${id}`}
-          </Typography>
-
           {`${employee.firstname} ${employee.lastname}`}
-
-          <Typography
-            component="small"
-            sx={{
-              marginRight: '.5rem',
-              opacity: '.5',
-            }}
-          >
-            {`#${employee.id}`}
-          </Typography>
         </Typography>
 
         {(!startOnMonday || !finishOnFriday)
@@ -102,7 +81,6 @@ function Assignment({
             component="small"
             sx={{
               ml: 'auto',
-              display: 'none',
               fontSize: '.75rem',
               lineHeight: '1.5rem',
             }}

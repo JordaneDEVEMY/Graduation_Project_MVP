@@ -43,7 +43,7 @@ function AssignmentForm({
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    const values = {
+    const data = {
       ...assignment,
       color,
       visibility,
@@ -51,7 +51,7 @@ function AssignmentForm({
       ending_date,
     };
 
-    handleSubmit(values);
+    handleSubmit(data);
   };
 
   return (

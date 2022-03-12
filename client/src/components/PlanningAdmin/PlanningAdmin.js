@@ -13,6 +13,7 @@ function PlanningAdmin({
   companies,
   startDate,
 }) {
+  console.log('start date', startDate);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
   const theme = useTheme();
@@ -20,9 +21,11 @@ function PlanningAdmin({
 
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
-
+  console.log('assignment', assignment, assignment.id, assignment.id !== undefined);
+  console.log('modalOpened', modalOpened);
   const handleAssignment = (result) => {
     setAssignment(result);
+    console.log('handleAssignment', result);
   };
 
   const handleModal = () => {
@@ -42,7 +45,7 @@ function PlanningAdmin({
   // }, []);
 
   React.useEffect(() => {
-    setModalOpened(assignment.site !== undefined);
+    setModalOpened(assignment.id !== undefined);
   }, [assignment]);
 
   return (

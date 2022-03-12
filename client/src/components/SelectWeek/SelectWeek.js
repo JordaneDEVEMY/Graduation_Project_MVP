@@ -29,7 +29,7 @@ function SelectWeek({
     : (week.current.num === dateFunctions.getDate().isoWeek() + 1);
 
   const handleCurrentWeek = (dateStart) => {
-    const slug = planningFunctions.getSlugFromDate(dateStart);
+    const slug = planningFunctions.getWeekSlugFromDate(dateStart);
     console.log(slug);
   };
 
@@ -85,11 +85,6 @@ function SelectWeek({
     handleCurrentWeek(firstMonday);
   };
 
-  const handlePrevButton = () => {
-    const lastMonday = week.prev.dates[0];
-    handleCurrentWeek(lastMonday);
-  };
-
   const handleRefreshButton = () => {
     handleCurrentWeek(date);
   };
@@ -116,9 +111,10 @@ function SelectWeek({
       )}
       <Grid item sm="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <IconButton
+          component={Link}
+          to={`/admins/planning/${planningFunctions.getWeekSlugFromDate(week.prev.dates[0])}`}
+          title={`Semaine ${week.next.num}`}
           disabled={disabledPrev}
-          onClick={handlePrevButton}
-          title={`Semaine ${week.prev.num}`}
         >
           <KeyboardArrowLeftIcon />
         </IconButton>
@@ -153,7 +149,7 @@ function SelectWeek({
       <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <IconButton
           component={Link}
-          to={`/admins/planning/${planningFunctions.getSlugFromDate(week.next.dates[0])}`}
+          to={`/admins/planning/${planningFunctions.getWeekSlugFromDate(week.next.dates[0])}`}
           title={`Semaine ${week.next.num}`}
           disabled={disabledNext}
         >

@@ -63,13 +63,13 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <PlanningAdminContainer isAdmin={isAdmin} />
+                    <PlanningAdminContainer />
                     )}
                 >
                   <Route
                     path=":weekSlug"
                     element={(
-                      <PlanningAdminContainer isAdmin={isAdmin} />
+                      <PlanningAdminContainer />
                       )}
                   />
                 </Route>

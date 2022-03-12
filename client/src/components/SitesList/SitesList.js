@@ -19,7 +19,7 @@ function SitesList({
   const theme = useTheme();
   const { id, name, sites } = company;
 
-  console.log(`company ${name} sites`, sites);
+  console.log(`company ${name}`, sites);
 
   return (
     isMobile

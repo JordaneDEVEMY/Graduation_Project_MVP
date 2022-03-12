@@ -14,8 +14,8 @@ import './nav_tabs.scss';
 function NavTabs() {
   const { pathname } = useLocation();
   const theme = useTheme();
-  const { weekStart } = useParams();
-  const planningTabValue = `/admins/planning${weekStart ? `/${weekStart}` : ''}`;
+  const { weekSlug } = useParams();
+  const planningTabValue = `/admins/planning${weekSlug ? `/${weekSlug}` : ''}`;
 
   return (
     <Box
