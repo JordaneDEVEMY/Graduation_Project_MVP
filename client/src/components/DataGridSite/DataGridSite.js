@@ -110,6 +110,7 @@ function DataGridSite({
           Supprimer un site
         </Button>
         <DataGrid
+          disableSelectionOnClick
           sx={{ fontSize: '1.2rem' }}
           disableColumnMenu
           checkboxSelection

@@ -103,6 +103,7 @@ function DataGridCompany({
           Supprimer une entreprise
         </Button>
         <DataGrid
+          disableSelectionOnClick
           sx={{ fontSize: '1.2rem' }}
           disableColumnMenu
           checkboxSelection
