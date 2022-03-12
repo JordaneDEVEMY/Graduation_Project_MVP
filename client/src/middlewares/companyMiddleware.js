@@ -19,7 +19,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const {
         name,
         address,
-        zipCode: zip_code,
+        zip_code,
         type,
       } = company;
       const companyDatas = {
@@ -41,7 +41,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       const {
         name,
         address,
-        zipCode: zip_code,
+        zip_code,
         type,
       } = company;
       const companyDatas = {
@@ -60,12 +60,14 @@ const companyMiddleware = (store) => (next) => async (action) => {
     }
     case actions.DELETE_COMPANY: {
       const { company } = store.getState();
-      const response = await deleteCompany(company.id);
-      if (response.status === 200) {
-        store.dispatch(actions.actionResetCompanyInformations());
-        store.dispatch(actions.actionRequestAllCompanies());
-        alert('Company deleted successfully');
-      }
+      company.companiesToDelete.map(async (id) => {
+        const response = await deleteCompany(id);
+        if (response.status === 200) {
+          store.dispatch(actions.actionRequestAllCompanies());
+          alert('Company deleted successfully');
+        }
+      });
+      store.dispatch(actions.actionResetCompanyInformations());
       return;
     }
     default: {
