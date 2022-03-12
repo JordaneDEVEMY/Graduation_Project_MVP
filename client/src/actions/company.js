@@ -6,7 +6,7 @@ export const DELETE_COMPANY = 'DELETE_COMPANY';
 
 // get company informations
 export const GET_COMPANY_INFORMATIONS = 'GET_COMPANY_INFORMATIONS';
-export const GET_COMPANY_ID = 'GET_COMPANY_ID';
+export const GET_COMPANY_ID_TO_DELETE = 'GET_COMPANY_ID_TO_DELETE';
 
 // create or update company informations
 export const SET_COMPANY_INFORMATION = 'SET_COMPANY_INFORMATION';
@@ -41,29 +41,25 @@ export function actionDeleteCompany() {
 export function actionGetCompanyInformations({
   id,
   name,
-  adress,
-  zipCode,
+  address,
+  zip_code,
   type,
-  createdAt,
-  updatedAt,
 }) {
   return {
     type: GET_COMPANY_INFORMATIONS,
     payload: {
       id,
       name,
-      adress,
-      zipCode,
+      address,
+      zip_code,
       type,
-      createdAt,
-      updatedAt,
     },
   };
 }
 
-export function actionGetCompanyId(id) {
+export function actionGetCompanyIdToDelete(ids) {
   return {
-    type: GET_COMPANY_ID, payload: id,
+    type: GET_COMPANY_ID_TO_DELETE, payload: ids,
   };
 }
 
