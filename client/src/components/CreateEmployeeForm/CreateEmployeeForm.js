@@ -76,28 +76,28 @@ function CreateUserForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="dateOfBirth"
-              placeHolder="yyyy-mm-dd"
+              nameValue="date_of_birth"
+              placeholder="yyyy-mm-dd"
               label="Date de naissance"
-              value={employee.dateOfBirth}
+              value={employee.date_of_birth}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="phoneNumber"
+              nameValue="phone_number"
               label="Téléphone Fixe"
-              value={employee.phoneNumber}
+              value={employee.phone_number}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="mobileNumber"
+              nameValue="mobile_number"
               label="Téléphone Portable"
-              value={employee.mobileNumber}
+              value={employee.mobile_number}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -113,18 +113,18 @@ function CreateUserForm({
             <TextInput
               handleChange={changeField}
               type="number"
-              nameValue="zipCode"
+              nameValue="zip_code"
               label="Code Postal"
-              value={employee.zipCode}
+              value={employee.zip_code}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="socialSecurityNumber"
+              nameValue="social_security_number"
               label="Numéro Sécurité Sociale"
-              value={employee.socialSecurityNumber}
+              value={employee.social_security_number}
             />
           </Grid>
         </Grid>
@@ -139,7 +139,7 @@ function CreateUserForm({
           <Grid item xs={12} md={6}>
             <RoleFieldForm
               handleChange={changeField}
-              value={employee.roleApplication}
+              value={employee.role_application}
             />
           </Grid>
         </Grid>
@@ -148,9 +148,10 @@ function CreateUserForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="startingDate"
+              nameValue="starting_date"
+              placeholder="yyyy-mm-dd"
               label="Date d'entrée"
-              value={employee.startingDate}
+              value={employee.starting_date}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -175,9 +176,9 @@ function CreateUserForm({
             <TextInput
               handleChange={changeField}
               type="text"
-              nameValue="label"
+              nameValue="qualification_label"
               label="Label"
-              value={employee.label}
+              value={employee.qualification_label}
             />
           </Grid>
 

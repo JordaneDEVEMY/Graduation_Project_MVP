@@ -54,34 +54,34 @@ function DataGridEmployee({
       field: 'email', headerName: 'Email', width: 150, editable: true,
     },
     {
-      field: 'phone_number', headerName: 'Téléphone fixe', width: 150, hide: true, editable: true,
+      field: 'phone_number', headerName: 'Téléphone fixe', width: 150, editable: true,
     },
     {
       field: 'mobile_number', headerName: 'Téléphone portable', width: 150, editable: true,
     },
     {
-      field: 'address', headerName: 'Adresse', width: 150, hide: true, editable: true,
+      field: 'address', headerName: 'Adresse', width: 150, editable: true,
     },
     {
-      field: 'zip_code', headerName: 'Code postal', width: 80, hide: true, editable: true,
+      field: 'zip_code', headerName: 'Code postal', width: 80, editable: true, valueParser: (value) => Number(value),
     },
     {
-      field: 'social_security_number', headerName: 'Numéro de sécurité sociale', width: 150, hide: true, editable: true,
+      field: 'social_security_number', headerName: 'Numéro de sécurité sociale', width: 150, editable: true,
     },
     {
-      field: 'date_of_birth', headerName: 'Date de naissance', width: 150, hide: true, editable: true,
+      field: 'date_of_birth', headerName: 'Date de naissance', width: 150, editable: true,
     },
     {
-      field: 'starting_date', headerName: "Date d'entrée", width: 150, hide: true, editable: true,
+      field: 'starting_date', headerName: "Date d'entrée", width: 150, editable: true,
     },
     {
-      field: 'avatar', headerName: 'Avatar', width: 150, hide: true, editable: true,
+      field: 'avatar', headerName: 'Avatar', width: 150, editable: true,
     },
     {
       field: 'fonction', headerName: 'Fonction', width: 150, editable: true,
     },
     {
-      field: 'role_application', headerName: 'Rôle', width: 150, hide: true, editable: true,
+      field: 'role_application', headerName: 'Rôle', width: 150, editable: true,
     },
     {
       field: 'label', headerName: 'Qualification', width: 150, editable: true,
@@ -137,6 +137,7 @@ function DataGridEmployee({
           Supprimer un employé
         </Button>
         <DataGrid
+          disableSelectionOnClick
           sx={{ fontSize: '1.2rem' }}
           disableColumnMenu
           checkboxSelection
