@@ -21,6 +21,7 @@ import './app.scss';
 import PlanningContainer from '../../containers/PlanningContainer';
 import DatagridEmployeeContainer from '../../containers/DatagridEmployeeContainer';
 import DatagridSiteContainer from '../../containers/DatagridSiteContainer';
+import DatagridCompanyContainer from '../../containers/DatagridCompanyContainer';
 import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
 import ProfilPageContainer from '../../containers/ProfilPageContainer';
 import ForgotPasswordContainer from '../../containers/ForgotPasswordContainer';
@@ -87,7 +88,7 @@ function App({
                 <Route
                   path="companies"
                   element={(
-                    <CreateCompanyFormContainer isAdmin={isAdmin} />
+                    <DatagridCompanyContainer isAdmin={isAdmin} />
                     )}
                 />
                 <Route

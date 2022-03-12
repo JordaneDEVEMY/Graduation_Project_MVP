@@ -5,10 +5,9 @@ const initialState = {
   id: 0,
   name: '',
   address: '',
-  zipCode: 0,
+  zip_code: 0,
   type: '',
-  createdAt: 0,
-  updatedAt: 0,
+  companiesToDelete: [],
 };
 
 function reducer(state = initialState, action) {
@@ -20,15 +19,13 @@ function reducer(state = initialState, action) {
         id: action.payload.id,
         name: action.payload.name,
         address: action.payload.address,
-        zipCode: action.payload.zipCode,
+        zip_code: action.payload.zip_code,
         type: action.payload.type,
-        createdAt: action.payload.createdAt,
-        updatedAt: action.payload.updatedAt,
       };
-    case actions.GET_COMPANY_ID:
+    case actions.GET_COMPANY_ID_TO_DELETE:
       return {
         ...state,
-        id: action.payload,
+        companiesToDelete: action.payload,
       };
       // set site information
     case actions.SET_COMPANY_INFORMATION:
@@ -43,7 +40,7 @@ function reducer(state = initialState, action) {
         id: initialState.id,
         name: initialState.name,
         address: initialState.address,
-        zipCode: initialState.zipCode,
+        zip_code: initialState.zip_code,
         type: initialState.type,
         createdAt: initialState.createdAt,
         updatedAt: initialState.updatedAt,

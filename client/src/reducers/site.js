@@ -9,7 +9,7 @@ const initialState = {
   manager_name: '',
   estimated_duration: 0,
   company_id: 0,
-  siteToDelete: [],
+  sitesToDelete: [],
 };
 
 function reducer(state = initialState, action) {
@@ -29,7 +29,7 @@ function reducer(state = initialState, action) {
     case actions.GET_SITE_ID_TO_DELETE:
       return {
         ...state,
-        siteToDelete: action.payload,
+        sitesToDelete: action.payload,
       };
       // set site information
     case actions.SET_SITE_INFORMATION:

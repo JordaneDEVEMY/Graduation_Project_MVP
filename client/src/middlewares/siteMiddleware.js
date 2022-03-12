@@ -68,7 +68,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
     }
     case actions.DELETE_SITE: {
       const { site } = store.getState();
-      site.siteToDelete.map(async (id) => {
+      site.sitesToDelete.map(async (id) => {
         const response = await deleteSite(id);
         if (response.status === 200) {
           store.dispatch(actions.actionRequestAllSites());
