@@ -109,7 +109,6 @@ const employeeMiddleware = (store) => (next) => async (action) => {
           alert('Employee deleted successfully');
         }
       });
-      alert('Employee deleted successfully');
       store.dispatch(actions.actionResetEmployeeInformations());
       return;
     }
