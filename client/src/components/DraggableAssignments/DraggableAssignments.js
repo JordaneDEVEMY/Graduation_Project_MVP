@@ -41,11 +41,11 @@ function DraggableAssignments({
       if (!result.destination) {
         return;
       }
-      const refreshList = planningFunctions.refreshCardsPosition(result, companies);
+      const refreshList = planningFunctions.setAssignmentPosition(result, assignmentsPositions);
+      const assignment = planningFunctions.getDraggedAssignment(result, assignmentsPositions);
 
       setAssignmentsPositions(refreshList);
-
-      // handleAssignment(data);
+      handleAssignment(assignment);
     }
   }, []);
 

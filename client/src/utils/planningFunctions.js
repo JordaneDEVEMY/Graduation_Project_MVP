@@ -89,44 +89,42 @@ const planningFunctions = {
    * Prepare dragEnd data to assignment form
    * @returns {object} Datas ready for Assignment form
    */
-  getDragEndData: (companies, cards, drag) => {
+  getDraggedAssignment: (drag, companies) => {
     let result = {};
-    const { destination, draggableId, source } = drag;
-    const cardId = Number(destination.droppableId.replace('card-', ''));
-    const employeeId = Number(draggableId.replace('employee-', ''));
-
-    // get site
-    companies.forEach((company) => {
-      const { assignments } = company;
-      const assignment = assignments.filter(({ id }) => id === cardId);
-      if (assignment.length === 1) {
-        result.site = assignment[0].site;
-      }
+    const { destination, draggableId } = drag;
+    const siteId = Number(destination.droppableId.replace('site-', ''));
+    const assignmentId = Number(draggableId.replace('assignment-', ''));
+    console.log(siteId, assignmentId, companies);
+    // get site destination
+    let toSite;
+    companies.forEach(({ sites }) => {
+      [toSite] = sites.filter(({ id }) => id === siteId);
     });
 
     // get assignment
-    const assignment = cards[source.droppableId].filter(({ id }) => id === employeeId);
-    const {
-      assignmentId,
-      id: employee_id,
-      color,
-      ending_date,
-      firstname,
-      lastname,
-      starting_date,
-    } = assignment[0];
+    if (toSite) {
+      const { assignments: fromAssignments } = toSite;
+      const [assignment] = fromAssignments.filter(({ id }) => id === assignmentId);
 
-    result = {
-      ...result,
-      id: assignmentId,
-      employee_id,
-      color,
-      ending_date: dateFunctions.getDate(ending_date).format('YYYY-MM-DD'),
-      firstname,
-      lastname,
-      starting_date: dateFunctions.getDate(starting_date).format('YYYY-MM-DD'),
-      position: destination.index,
-    };
+      console.log('assignment', assignment);
+      const {
+        color, employee, ending_date, id, starting_date,
+      } = assignment;
+      const { firstname, id: employee_id, lastname } = employee;
+      const endDate = dateFunctions.getDate(ending_date).format('YYYY-MM-DD');
+      const startDate = dateFunctions.getDate(starting_date).format('YYYY-MM-DD');
+
+      result = {
+        id,
+        employee_id,
+        color,
+        ending_date: endDate,
+        firstname,
+        lastname,
+        starting_date: startDate,
+        position: destination.index,
+      };
+    }
 
     return result;
   },
@@ -136,23 +134,56 @@ const planningFunctions = {
    * @param {object} companies - Companies data
    * @returns {object} Object wich contains arrays.
    */
-  refreshCardsPosition: (result, cards) => {
-    const refresh = { ...cards };
+  setAssignmentPosition: (result, companies) => {
+    const refresh = [...companies];
     const { source, destination, draggableId } = result;
-    const cardFrom = source.droppableId;
-    const cardTo = destination.droppableId;
-    // get assignment
-    const employeeId = Number(draggableId.replace('employee-', ''));
-    const assignment = refresh[cardFrom].filter(({ id }) => id === employeeId);
-    // remove assignment from source
-    refresh[cardFrom] = refresh[cardFrom].filter(({ id }) => id !== employeeId);
-    // add assignment to destination
-    // if (destination.index + 1 <= cards[cardTo].length) {
-    //   cards[cardTo].splice(destination.index, 0, assignment);
-    // } else {
-    //   cards[cardTo].push(assignment);
-    // }
-    refresh[cardTo].push(assignment[0]);
+    const fromSiteId = Number(source.droppableId.replace('site-', ''));
+    const toSiteId = Number(destination.droppableId.replace('site-', ''));
+    const assignmentId = Number(draggableId.replace('assignment-', ''));
+
+    if (fromSiteId === toSiteId) {
+      return companies;
+    }
+
+    // get site source
+    let fromSite;
+    refresh.forEach(({ sites }) => {
+      [fromSite] = sites.filter(({ id }) => id === fromSiteId);
+    });
+
+    if (fromSite) {
+      // get site destination
+      let toSite;
+      refresh.forEach(({ sites }) => {
+        [toSite] = sites.filter(({ id }) => id === toSiteId);
+      });
+
+      if (toSite) {
+        let { assignments: fromAssignments } = fromSite;
+        let { assignments: toAssignments } = toSite;
+        const [assignment] = fromAssignments.filter(({ id }) => id === assignmentId);
+
+        // remove from source
+        fromAssignments = fromAssignments.filter(({ id }) => id !== assignmentId);
+
+        // add to destination
+        toAssignments = [...toAssignments, assignment];
+
+        // add to destination
+        refresh.map((company) => {
+          company.sites.map((site) => {
+            if (site.id === fromSiteId) {
+              site.assignments = fromAssignments;
+            } else if (site.id === toSiteId) {
+              site.assignments = toAssignments;
+            }
+            return site;
+          });
+
+          return company;
+        });
+      }
+    }
 
     return refresh;
   },
