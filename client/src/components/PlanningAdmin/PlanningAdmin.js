@@ -6,7 +6,7 @@ import SearchContainer from '../SearchContainer/SearchContainer';
 import DraggableAssignments from '../DraggableAssignments/DraggableAssignments';
 import Companies from '../Companies/Companies';
 import dateFunctions from '../../utils/dateFunctions';
-import useBreakpointDown from '../../hooks/useBreakpointDown';
+// import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
 function PlanningAdmin({
@@ -16,7 +16,7 @@ function PlanningAdmin({
   console.log('start date', startDate);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-  const isMobile = useBreakpointDown();
+  const isMobile = false; // useBreakpointDown();
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
   console.log('assignment', assignment, assignment.id, assignment.id !== undefined);

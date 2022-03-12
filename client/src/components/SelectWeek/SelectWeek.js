@@ -58,8 +58,20 @@ function SelectWeek({
     const weeks = [];
     let i = 1;
     while (i <= nbWeeks) {
+      const weekNum = `${i < 10 ? '0' : ''}${i}`;
       const period = dateFunctions.getWeekPeriod(currentYear, i);
-      weeks.push(<MenuItem key={i} value={i}>{`S${i < 10 ? '0' : ''}${i} - ${period}`}</MenuItem>);
+      const slug = `${currentYear}-${weekNum}`;
+      weeks.push(
+        <MenuItem
+          key={i}
+          value={i}
+          component={Link}
+          to={`/admins/planning/${slug}`}
+        >
+          {`S${weekNum} - ${period}`}
+
+        </MenuItem>,
+      );
       i += 1;
     }
 
