@@ -6,20 +6,20 @@ import SearchContainer from '../SearchContainer/SearchContainer';
 import DraggableAssignments from '../DraggableAssignments/DraggableAssignments';
 import Companies from '../Companies/Companies';
 import dateFunctions from '../../utils/dateFunctions';
-// import useBreakpointDown from '../../hooks/useBreakpointDown';
+import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
 function PlanningAdmin({
   companies,
   startDate,
 }) {
-  console.log('start date', startDate);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-  const isMobile = false; // useBreakpointDown();
+  const isMobile = useBreakpointDown();
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
-  console.log('assignment', assignment, assignment.id, assignment.id !== undefined);
+  console.log('start date', startDate);
+  console.log('update assignment', assignment);
   console.log('modalOpened', modalOpened);
   console.log('isMobile', isMobile);
 
@@ -38,12 +38,6 @@ function PlanningAdmin({
     });
   };
 
-  // React.useEffect(() => {
-  //   const ddd = planningFunctions.setPlanningCards(companies);
-  //   console.log(ddd);
-  //   setSites(ddd);
-  // }, []);
-
   React.useEffect(() => {
     setModalOpened(assignment.id !== undefined);
   }, [assignment]);
@@ -57,14 +51,14 @@ function PlanningAdmin({
       </Typography>
 
       {companies.length
-        ? !isMobile
-          && (
+        && !isMobile
+        ? (
           <DraggableAssignments
             companies={companies}
             handleAssignment={handleAssignment}
             week={currentWeek}
           />
-          )
+        )
         : (
           <Companies
             companies={companies}

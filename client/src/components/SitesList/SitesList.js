@@ -8,15 +8,14 @@ import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Site from '../Site/Site';
 import Carousel from '../Carousel/Carousel';
-import useBreakpointDown from '../../hooks/useBreakpointDown';
 
 function SitesList({
   company,
   handleAssignment,
   isDropable,
+  isMobile,
   week,
 }) {
-  const isMobile = useBreakpointDown();
   const theme = useTheme();
   const { id, name, sites } = company;
 
@@ -86,6 +85,7 @@ SitesList.propTypes = {
   }).isRequired,
   handleAssignment: PropTypes.func,
   isDropable: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

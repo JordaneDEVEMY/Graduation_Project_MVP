@@ -7,6 +7,7 @@ import { Box, Typography } from '@mui/material';
 import SitesList from '../SitesList/SitesList';
 
 function Companies({
+  isMobile,
   companies,
   handleAssignment,
   isDropable,
@@ -32,6 +33,11 @@ function Companies({
           <Typography
             variant="h2"
             key={`company-${company.id}-title`}
+            sx={{
+              [theme.breakpoints.down('md')]: {
+                textAlign: 'center',
+              },
+            }}
           >
             {company.name}
           </Typography>
@@ -43,6 +49,7 @@ function Companies({
                 handleAssignment={handleAssignment}
                 id={`company-${company.id}`}
                 isDropable={isDropable}
+                isMobile={isMobile}
                 key={`company-${company.id}`}
                 week={week}
               />
@@ -80,6 +87,7 @@ Companies.propTypes = {
   ).isRequired,
   handleAssignment: PropTypes.func,
   isDropable: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 
 const useBreakpointDown = () => {
   const theme = useTheme();
-  const breakpoint = theme.breakpoints.values.md;
-  const query = `(max-width: ${breakpoint}px)`;
-  const [matches, setMatches] = useState(false);
+  const query = `(max-width: ${theme.breakpoints.values.md}px)`;
+  const isMobile = useMediaQuery(theme.breakpoints.up('md'));
+  const [matches, setMatches] = useState(isMobile);
 
   useEffect(() => {
     const media = window.matchMedia(query);
