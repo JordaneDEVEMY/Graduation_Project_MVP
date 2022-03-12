@@ -9,59 +9,77 @@ const planningFunctions = {
    * @param {object} planning - Planning data
    * @returns {object} dayjs object.
    */
-  adminPlanningToCards: (planning) => {
+  adminPlanningToCompanies: (planning) => {
     const companies = [];
 
-    planning.forEach(({ company_id, company_name, sites }) => {
+    planning.forEach(({ company_id, company_name, sites: companySites }) => {
       const company = {
         id: company_id,
         name: company_name,
-        assignments: [],
+        sites: [],
       };
 
-      // group assignments by company sites
+      // group company sites by id
       const companySitesIds = [];
-      sites.forEach(({ id, site_name: name }) => {
+      companySites.forEach(({ id, site_name: name }) => {
         if (!companySitesIds.includes(id)) {
-          company.assignments.push({
+          company.sites.push({
             id,
-            site: {
-              id,
-              name,
-            },
-            colleagues: [],
+            name,
+            assignments: [],
           });
           companySitesIds.push(id);
         }
       });
 
-      // get each assignment of company
-      company.assignments.map((assignment) => {
-        const sitesById = sites.filter((item) => item.id === assignment.id);
-        sitesById.forEach(({
-          assignment: assignmentData,
-        }) => {
-          const {
-            color, id: assignmentId, starting_date, ending_date, employee,
-          } = assignmentData;
+      // get assignments of each site
+      company.sites.forEach((site) => {
+        const siteAssignments = companySites.filter(({ id }) => id === site.id);
 
-          const { id, firstname, lastname } = employee;
-
-          assignment.colleagues.push({
-            assignmentId,
-            id,
-            color,
-            firstname,
-            lastname,
-            starting_date,
-            ending_date,
-          });
+        siteAssignments.forEach(({ assignment }) => {
+          site.assignments.push(assignment);
         });
 
-        return assignment;
+        return site;
       });
 
       companies.push(company);
+    });
+
+    return companies;
+  },
+
+  /**
+   * Get all sites stored in an object
+   * @param {object} companies - Companies data
+   * @returns {object} Object of sites wich contains arrays.
+   */
+  getPlanningSites: (companies) => {
+    const planningSites = {};
+    companies.forEach(({ sites }) => {
+      sites.forEach((site) => {
+        planningSites[`site-${site.id}`] = site.assignments;
+      });
+    });
+
+    return planningSites;
+  },
+
+  /**
+   * Get all sites stored in an object
+   * @param {object} companies - Companies data
+   * @returns {object} Object of sites wich contains arrays.
+   */
+  refreshAssignmentsPosition: (companies, assignmentsPosition) => {
+    if (assignmentsPosition === undefined) {
+      return companies;
+    }
+
+    companies.forEach(({ sites }) => {
+      sites.map((site) => {
+        site.assignments = assignmentsPosition[`site-${site.id}`];
+        return site;
+      });
     });
 
     return companies;
@@ -118,17 +136,25 @@ const planningFunctions = {
    * @param {object} companies - Companies data
    * @returns {object} Object wich contains arrays.
    */
-  setPlanningCards: (companies) => {
-    const cards = {};
-    companies.forEach(({ assignments }) => {
-      assignments.forEach((assignment) => {
-        const { site, colleagues } = assignment;
-        const { id } = site;
-        cards[`card-${id}`] = colleagues;
-      });
-    });
+  refreshCardsPosition: (result, cards) => {
+    const refresh = { ...cards };
+    const { source, destination, draggableId } = result;
+    const cardFrom = source.droppableId;
+    const cardTo = destination.droppableId;
+    // get assignment
+    const employeeId = Number(draggableId.replace('employee-', ''));
+    const assignment = refresh[cardFrom].filter(({ id }) => id === employeeId);
+    // remove assignment from source
+    refresh[cardFrom] = refresh[cardFrom].filter(({ id }) => id !== employeeId);
+    // add assignment to destination
+    // if (destination.index + 1 <= cards[cardTo].length) {
+    //   cards[cardTo].splice(destination.index, 0, assignment);
+    // } else {
+    //   cards[cardTo].push(assignment);
+    // }
+    refresh[cardTo].push(assignment[0]);
 
-    return cards;
+    return refresh;
   },
 
   /**
@@ -140,6 +166,19 @@ const planningFunctions = {
     const weekNum = dateFunctions.getDate(date).isoWeek();
 
     return `${year}-${weekNum}`;
+  },
+
+  /**
+   * Get current year and week as string
+   * @returns {string} YYYY-<week number>
+   */
+  getDateFromSlug: (slug) => {
+    const regex = /^([0-9]{4})-([0-9]{2})$/;
+    const matches = slug.match(regex);
+    const year = matches[1];
+    const week = matches[2];
+
+    return dateFunctions.getWeekMonday(year, week);
   },
 };
 

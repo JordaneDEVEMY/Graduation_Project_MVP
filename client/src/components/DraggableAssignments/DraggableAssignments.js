@@ -8,43 +8,51 @@ import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Companies from '../Companies/Companies';
 import planningFunctions from '../../utils/planningFunctions';
-import './cards_draggable.scss';
 
-function CardsDraggable({
-  cards,
+/**
+ * receive state and return the new state
+ */
+// const dragReducer = produce((draft, action) => {
+//   switch (action.type) {
+//     case 'MOVE': {
+//       draft[action.from] = draft[action.from] || [];
+//       draft[action.to] = draft[action.to] || [];
+//       const [removed] = draft[action.from].splice(action.fromIndex, 1);
+//       draft[action.to].splice(action.toIndex, 0, removed);
+//     }
+//   }
+// });
+
+function DraggableAssignments({
   companies,
   handleAssignment,
   week,
-  setDragState,
 }) {
-  console.log('cards draggable admin', cards);
+  // save initial companies object
+  const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
+  console.log('assignmentsPositions', assignmentsPositions);
 
   /**
-   * dispatch actions on drag end
+   * Refresh assignments on drag end
+   * Open assignment update modal
    */
   const onDragEnd = useCallback((result) => {
     if (result.reason === 'DROP') {
       if (!result.destination) {
         return;
       }
-      setDragState({
-        type: 'MOVE',
-        from: result.source.droppableId,
-        to: result.destination.droppableId,
-        fromIndex: result.source.index,
-        toIndex: result.destination.index,
-      });
-      const data = planningFunctions.getDragEndData(companies, cards, result);
+      const refreshList = planningFunctions.refreshCardsPosition(result, companies);
 
-      handleAssignment(data);
+      setAssignmentsPositions(refreshList);
+
+      // handleAssignment(data);
     }
   }, []);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
-        cards={cards}
-        companies={companies}
+        companies={assignmentsPositions}
         handleAssignment={handleAssignment}
         isDropable
         week={week}
@@ -53,13 +61,12 @@ function CardsDraggable({
   );
 }
 
-CardsDraggable.propTypes = {
-  cards: PropTypes.shape().isRequired,
+DraggableAssignments.propTypes = {
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      assignments: PropTypes.arrayOf(
+      sites: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,
         }).isRequired,
@@ -67,7 +74,6 @@ CardsDraggable.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func.isRequired,
-  setDragState: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
@@ -76,4 +82,4 @@ CardsDraggable.propTypes = {
   }).isRequired,
 };
 
-export default React.memo(CardsDraggable);
+export default React.memo(DraggableAssignments);

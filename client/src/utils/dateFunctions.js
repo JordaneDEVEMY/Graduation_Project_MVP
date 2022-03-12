@@ -152,19 +152,6 @@ const dateFunctions = {
 
     return `${year}-${weekNum}`;
   },
-
-  /**
-   * Get current year and week as string
-   * @returns {string} YYYY-<week number>
-   */
-  getDateFromPlanningSlug: (slug) => {
-    const regex = /^([0-9]{4})-([0-9]{2})$/;
-    const matches = slug.match(regex);
-    const year = matches[1];
-    const week = matches[2];
-
-    return dateFunctions.getWeekMonday(year, week);
-  },
 };
 
 export default dateFunctions;

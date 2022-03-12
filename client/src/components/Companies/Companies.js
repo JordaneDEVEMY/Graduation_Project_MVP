@@ -1,64 +1,48 @@
+/* eslint-disable max-len */
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Typography } from '@mui/material';
-import Cards from '../Cards/Cards';
-import './companies.scss';
+import SitesList from '../SitesList/SitesList';
 
 function Companies({
-  cards,
   companies,
   handleAssignment,
   isDropable,
   week,
 }) {
-  console.log('cards from companies', cards);
-  // sort cards by company
-  const companyCards = {};
-  companies.forEach((company) => {
-    companyCards[company.id] = [];
-    company.assignments.forEach((assignment) => {
-      companyCards[company.id].push({
-        ...assignment,
-        colleagues: cards[`card-${assignment.site.id}`],
-      });
-      console.log(`card-${assignment.site.id}`, cards[`card-${assignment.site.id}`]);
-    });
-  });
-  console.log('companies', companies);
-  console.log('companyCards', companyCards);
+  console.log('company', companies);
 
   return (
     (companies.length
-      ? (companies.map(({ id, name }) => (
+      ? (companies.map((company) => (
         <Box
-          key={`company-${id}-box`}
+          key={`company-${company.id}-wrapper`}
         >
           <Typography
             variant="h2"
             sx={{ textAlign: 'center' }}
-            key={`company-${id}-title`}
+            key={`company-${company.id}-title`}
           >
-            {name}
+            {company.name}
           </Typography>
 
-          {companyCards[id].length
+          {company.sites.length
             ? (
-              <Cards
-                assignments={companyCards[id]}
-                id={`company-${id}-sites`}
-                key={`company-${id}-sites`}
+              <SitesList
+                company={company}
+                handleAssignment={handleAssignment}
+                id={`company-${company.id}`}
                 isDropable={isDropable}
                 isMobile={!isDropable}
-                handleAssignment={handleAssignment}
-                isAdmin
+                key={`company-${company.id}`}
                 week={week}
               />
             )
             : (
               <Typography
-                id={`company-${id}-nosites`}
-                key={`company-${id}-nosites`}
+                id={`empty-company-${company.id}`}
+                key={`empty-company-${company.id}`}
                 sx={{ textAlign: 'center' }}
               >
                 Aucun planning à afficher.
@@ -75,12 +59,11 @@ function Companies({
 }
 
 Companies.propTypes = {
-  cards: PropTypes.shape().isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      assignments: PropTypes.arrayOf(
+      sites: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,
         }).isRequired,

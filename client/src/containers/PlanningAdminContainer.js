@@ -11,36 +11,33 @@ import dateFunctions from '../utils/dateFunctions';
 import planningFunctions from '../utils/planningFunctions';
 
 function PlanningAdminContainer() {
-  let { weekStart } = useParams();
-
-  if (weekStart === undefined) {
-    const today = dateFunctions.getDate().format('YYYY-MM-DD');
-    weekStart = planningFunctions.getSlugFromDate(today);
-  }
-  const [startDate, setStartDate] = React.useState(dateFunctions.getDateFromPlanningSlug(weekStart));
-
-  console.log('startDate', startDate);
-
   const dispatch = useDispatch();
   const planning = useSelector((state) => state.admin.planning);
+  let { weekSlug } = useParams();
+
+  if (weekSlug === undefined) {
+    const today = dateFunctions.getDate().format('YYYY-MM-DD');
+    weekSlug = planningFunctions.getSlugFromDate(today);
+  }
+  const startDate = weekSlug;
+  // sort planning by companies
+  const companies = planningFunctions.adminPlanningToCompanies(planning);
+
+  console.log('companies', companies);
+  console.log('startDate', startDate);
 
   useEffect(() => {
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllSites());
     dispatch(actionRequestAllCompanies());
-    dispatch(actionRequestAdminPlanning(weekStart));
+    dispatch(actionRequestAdminPlanning(weekSlug));
   }, []);
-
-  useEffect(() => {
-    const slug = planningFunctions.getSlugFromDate(startDate);
-    dispatch(actionRequestAdminPlanning(slug));
-  }, [startDate]);
 
   return (
     <PlanningAdmin
+      companies={companies}
       planning={planning}
       startDate={startDate}
-      handleStartDate={setStartDate}
     />
   );
 }

@@ -10,20 +10,18 @@ import SwipeableViews from 'react-swipeable-views';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useTheme } from '@mui/material/styles';
-import Card from '../Card/Card';
+import Site from '../Card/Card';
 
 import './carousel.scss';
 
 function Carousel({
-  assignments,
+  sites,
   handleAssignment,
-  isAdmin,
-  user,
   week,
 }) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = assignments.length;
+  const maxSteps = sites.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -50,26 +48,23 @@ function Carousel({
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {assignments.map((assignment, index) => (
-          <div key={assignment.id}>
+        {sites.map((site, index) => (
+          <div key={site.id}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
-                key={`slide-${assignment.id}`}
+                key={`slide-${site.id}`}
                 sx={{
                   display: 'block',
                   overflow: 'hidden',
                   width: '100%',
                 }}
               >
-                <Card
-                  {...assignment}
-                  employees={assignment.colleagues}
+                <Site
+                  {...site}
                   handleAssignment={handleAssignment}
-                  isAdmin={isAdmin}
                   isDropable={false}
                   isMobile
-                  key={assignment.id}
-                  user={user}
+                  key={site.id}
                   week={week}
                 />
               </Box>
@@ -103,27 +98,22 @@ function Carousel({
 }
 
 Carousel.propTypes = {
-  assignments: PropTypes.array.isRequired,
   handleAssignment: PropTypes.func,
-  isAdmin: PropTypes.bool.isRequired,
+  sites: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
-  user: PropTypes.shape({
-    assignments: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-      }).isRequired,
-    ).isRequired,
-  }),
 };
 
 Carousel.defaultProps = {
   handleAssignment: undefined,
-  user: undefined,
 };
 
 export default React.memo(Carousel);

@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { Box, Tabs, Tab } from '@mui/material';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
@@ -14,6 +14,8 @@ import './nav_tabs.scss';
 function NavTabs() {
   const { pathname } = useLocation();
   const theme = useTheme();
+  const { weekStart } = useParams();
+  const planningTabValue = `/admins/planning${weekStart ? `/${weekStart}` : ''}`;
 
   return (
     <Box
@@ -36,7 +38,7 @@ function NavTabs() {
         variant="scrollable"
         scrollButtons="auto"
       >
-        <Tab key="Planning" icon={<DateRangeRoundedIcon />} label="Planning" component={Link} to="/admins/planning" value="/admins/planning" />
+        <Tab key="Planning" icon={<DateRangeRoundedIcon />} label="Planning" component={Link} to="/admins/planning" value={planningTabValue} />
         <Tab key="Employees" icon={<AssignmentIndIcon />} label="Employés" component={Link} to="/admins/employees" value="/admins/employees" />
         <Tab key="Sites" icon={<BusinessIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
         <Tab key="Entreprises" icon={<SupervisorAccountIcon />} label="Entreprises" component={Link} to="/admins/companies" value="/admins/companies" />

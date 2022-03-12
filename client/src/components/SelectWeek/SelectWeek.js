@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import {
   Grid, Button, IconButton, MenuItem, Select,
@@ -10,10 +11,10 @@ import PropTypes from 'prop-types';
 // import { useTheme } from '@mui/material/styles';
 import './selectweek.scss';
 import dateFunctions from '../../utils/dateFunctions';
+import planningFunctions from '../../utils/planningFunctions';
 
 function SelectWeek({
   date,
-  handleCurrentWeek,
   isAdmin,
 }) {
   const theme = useTheme();
@@ -26,6 +27,11 @@ function SelectWeek({
   const disabledNext = isAdmin
     ? false
     : (week.current.num === dateFunctions.getDate().isoWeek() + 1);
+
+  const handleCurrentWeek = (dateStart) => {
+    const slug = planningFunctions.getSlugFromDate(dateStart);
+    console.log(slug);
+  };
 
   /**
    * Get last ten years
@@ -77,11 +83,6 @@ function SelectWeek({
     const firstMonday = dateFunctions.getDate(week.current.dates[0]).subtract(currentYear - selectedYear, 'year').format('YYYY-MM-DD');
 
     handleCurrentWeek(firstMonday);
-  };
-
-  const handleNextButton = () => {
-    const nextMonday = week.next.dates[0];
-    handleCurrentWeek(nextMonday);
   };
 
   const handlePrevButton = () => {
@@ -151,7 +152,8 @@ function SelectWeek({
       </Grid>
       <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <IconButton
-          onClick={handleNextButton}
+          component={Link}
+          to={`/admins/planning/${planningFunctions.getSlugFromDate(week.next.dates[0])}`}
           title={`Semaine ${week.next.num}`}
           disabled={disabledNext}
         >
@@ -163,7 +165,7 @@ function SelectWeek({
 }
 
 SelectWeek.propTypes = {
-  handleCurrentWeek: PropTypes.func.isRequired,
+  // handleCurrentWeek: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   date: PropTypes.string.isRequired,
 };

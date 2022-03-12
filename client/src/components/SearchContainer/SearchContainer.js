@@ -9,7 +9,6 @@ import SelectWeek from '../SelectWeek/SelectWeek';
 
 function SearchContainer({
   date,
-  handleCurrentWeek,
   isAdmin,
 }) {
   const theme = useTheme();
@@ -23,7 +22,7 @@ function SearchContainer({
         background: theme.palette.background.component,
       }}
     >
-      <SelectWeek date={date} isAdmin={isAdmin} handleCurrentWeek={handleCurrentWeek} />
+      <SelectWeek date={date} isAdmin={isAdmin} />
       {isAdmin && (
         <SearchAutocompleteContainer />
       )}
@@ -33,7 +32,6 @@ function SearchContainer({
 
 SearchContainer.propTypes = {
   date: PropTypes.string.isRequired,
-  handleCurrentWeek: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
 };
 

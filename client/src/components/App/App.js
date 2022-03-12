@@ -67,7 +67,7 @@ function App({
                     )}
                 >
                   <Route
-                    path=":weekStart"
+                    path=":weekSlug"
                     element={(
                       <PlanningAdminContainer isAdmin={isAdmin} />
                       )}
