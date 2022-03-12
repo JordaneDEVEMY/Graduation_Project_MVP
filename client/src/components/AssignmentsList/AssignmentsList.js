@@ -4,11 +4,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import { Draggable } from 'react-beautiful-dnd';
 import Assignment from '../Assignment/Assignment';
-import assignmentBg from '../../Assets/images/sheet-bg.png';
-import './sheetlist.scss';
 
 function AssignmentsList({
   assignments,
@@ -19,8 +16,6 @@ function AssignmentsList({
   isMobile,
   week,
 }) {
-  const theme = useTheme();
-
   return (
     <>
       {assignments.map((assignment, index) => (
@@ -70,21 +65,6 @@ function AssignmentsList({
             />
           )
       ))}
-      {assignments.length % 10 !== 0 && (
-      <Box
-        sx={{
-          position: 'sticky',
-          top: Math.ceil(assignments.length % 10) * 50,
-          display: 'none',
-          left: 0,
-          width: '100%',
-          height: 500 - (Math.ceil(assignments.length % 10) * 50),
-          background: `${theme.palette.background.component} url('${assignmentBg}') repeat-y center top`,
-          zIndex: assignments.length,
-          opacity: '.5',
-        }}
-      />
-      )}
     </>
   );
 }

@@ -11,7 +11,8 @@ function SiteHeader({
 
   return (
     <Typography
-      variant="h3"
+      variant="h4"
+      component="h3"
       sx={{
         overflow: 'hidden',
         textOverflow: 'ellipsis',

@@ -39,13 +39,13 @@ function Site({
   return (
     <Box
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
         position: 'relative',
-        backgroundColor: theme.palette.background.component,
-        background: `${theme.palette.background.component} url('${assignmentBg}') no-repeat center bottom ${theme.spacing(2)}`,
         borderRadius: '.25rem',
         color: theme.palette.text.primary,
+        bgcolor: `${theme.palette.background.component}`,
         p: theme.spacing(2),
-        pb: `calc(50px + ${theme.spacing(2)})`,
         width: `calc(300px + ${theme.spacing(4)})`,
         overflow: 'hidden',
       }}
@@ -62,6 +62,11 @@ function Site({
               <Box
                 ref={provided.innerRef}
                 {...provided.droppableProps}
+                sx={{
+                  pb: '50px',
+                  flexGrow: '1',
+                  background: `url('${assignmentBg}') repeat-y center bottom ${theme.spacing(2)}`,
+                }}
               >
                 <AssignmentsList
                   assignments={assignments}
@@ -79,15 +84,23 @@ function Site({
           </Droppable>
         )
         : (
-          <AssignmentsList
-            assignments={assignments}
-            expandedSheet={expandedSheet}
-            handleAssignment={handleAssignment}
-            handleCollapse={handleCollapse}
-            isDraggable={false}
-            isMobile={isMobile}
-            week={week}
-          />
+          <Box
+            sx={{
+              pb: '50px',
+              flexGrow: '1',
+              background: `url('${assignmentBg}') repeat-y center bottom ${theme.spacing(2)}`,
+            }}
+          >
+            <AssignmentsList
+              assignments={assignments}
+              expandedSheet={expandedSheet}
+              handleAssignment={handleAssignment}
+              handleCollapse={handleCollapse}
+              isDraggable={false}
+              isMobile={isMobile}
+              week={week}
+            />
+          </Box>
         )}
     </Box>
   );
