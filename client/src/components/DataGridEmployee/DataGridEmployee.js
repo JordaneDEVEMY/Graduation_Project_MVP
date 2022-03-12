@@ -24,8 +24,8 @@ function DataGridEmployee({
   resetEmployeeInformations,
 }) {
   const theme = useTheme();
-  const [selectionModel, setSelectionModel] = React.useState([]);
-  const [modalOpened, setModalOpened] = React.useState(false);
+  const [selectionModel, setSelectionModel] = useState([]);
+  const [modalOpened, setModalOpened] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [filterModel, setFilterModel] = useState({
     items: [
@@ -94,16 +94,11 @@ function DataGridEmployee({
     handleDeleteEmployee();
   };
 
-  const handleResetEmploy = () => {
+  const handleResetEmployee = () => {
     resetEmployeeInformations();
   };
 
-  const handleClickCreateEmployee = () => {
-
-  };
-
   const handleClose = () => {
-    // force opened state
     setModalOpened(false);
     resetEmployeeInformations();
   };
@@ -115,14 +110,14 @@ function DataGridEmployee({
       </Typography>
       <Box sx={{ height: '80%', width: 'auto' }}>
         {showAlert && (
-          <Alert sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center' }} severity="error">Vous devez sélectionner un employé à supprimer</Alert>
+          <Alert sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center' }} severity="error">Vous devez sélectionner au moins un employé à supprimer</Alert>
         )}
         <Button
           variant="contained"
           startIcon={(<AddOutlinedIcon />)}
           sx={{ margin: '10px' }}
           onClick={() => {
-            handleResetEmploy();
+            handleResetEmployee();
             setModalOpened(true);
           }}
         >

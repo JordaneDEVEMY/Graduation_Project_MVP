@@ -19,10 +19,10 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const {
         name,
         address,
-        zipCode: zip_code,
-        managerName: manager_name,
-        estimatedDuration: estimated_duration,
-        companyId: company_id,
+        zip_code,
+        manager_name,
+        estimated_duration,
+        company_id,
       } = site;
       const siteDatas = {
         name,
@@ -45,10 +45,10 @@ const siteMiddleware = (store) => (next) => async (action) => {
       const {
         name,
         address,
-        zipCode: zip_code,
-        managerName: manager_name,
-        estimatedDuration: estimated_duration,
-        companyId: company_id,
+        zip_code,
+        manager_name,
+        estimated_duration,
+        company_id,
       } = site;
       const siteDatas = {
         name,
@@ -68,12 +68,14 @@ const siteMiddleware = (store) => (next) => async (action) => {
     }
     case actions.DELETE_SITE: {
       const { site } = store.getState();
-      const response = await deleteSite(site.id);
-      if (response.status === 200) {
-        store.dispatch(actions.actionResetSiteInformations());
-        store.dispatch(actions.actionRequestAllSites());
-        alert('Site deleted successfully');
-      }
+      site.siteToDelete.map(async (id) => {
+        const response = await deleteSite(id);
+        if (response.status === 200) {
+          store.dispatch(actions.actionRequestAllSites());
+          alert('Site deleted successfully');
+        }
+      });
+      store.dispatch(actions.actionResetSiteInformations());
       return;
     }
     default: {

@@ -5,12 +5,11 @@ const initialState = {
   id: 0,
   name: '',
   address: '',
-  zipCode: 0,
-  managerName: '',
-  estimatedDuration: 0,
-  companyId: 0,
-  createdAt: 0,
-  updatedAt: 0,
+  zip_code: '',
+  manager_name: '',
+  estimated_duration: 0,
+  company_id: 0,
+  siteToDelete: [],
 };
 
 function reducer(state = initialState, action) {
@@ -22,17 +21,15 @@ function reducer(state = initialState, action) {
         id: action.payload.id,
         name: action.payload.name,
         address: action.payload.address,
-        zipCode: action.payload.zipCode,
-        managerName: action.payload.managerName,
-        estimatedDuration: action.payload.estimatedDuration,
-        companyId: action.payload.companyId,
-        createdAt: action.payload.createdAt,
-        updatedAt: action.payload.updatedAt,
+        zip_code: action.payload.zip_code,
+        manager_name: action.payload.manager_name,
+        estimated_duration: action.payload.estimated_duration,
+        company_id: action.payload.company_id,
       };
-    case actions.GET_SITE_ID:
+    case actions.GET_SITE_ID_TO_DELETE:
       return {
         ...state,
-        id: action.payload,
+        siteToDelete: action.payload,
       };
       // set site information
     case actions.SET_SITE_INFORMATION:
@@ -46,13 +43,11 @@ function reducer(state = initialState, action) {
         ...state,
         id: initialState.id,
         name: initialState.name,
-        address: initialState.adress,
-        zipCode: initialState.zipCode,
-        managerName: initialState.managerName,
-        estimatedDuration: initialState.estimatedDuration,
-        companyId: initialState.companyId,
-        createdAt: initialState.createdAt,
-        updatedAt: initialState.updatedAt,
+        address: initialState.address,
+        zip_code: initialState.zip_code,
+        manager_name: initialState.manager_name,
+        estimated_duration: initialState.estimated_duration,
+        company_id: initialState.company_id,
       };
     default:
       return state;
