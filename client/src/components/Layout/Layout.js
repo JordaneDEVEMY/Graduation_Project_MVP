@@ -2,6 +2,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Main from '../Main/Main';
 import NavTabs from '../NavTabs/NavTabs';
@@ -11,12 +12,16 @@ import './layout.scss';
 function Layout({
   isAdmin,
 }) {
+  const theme = useTheme();
+
   return (
     <Box sx={{
-      display: 'flex',
-      flexGrow: 1,
-      flexWrap: 'wrap',
-      position: 'relative',
+      [theme.breakpoints.up('md')]: {
+        display: 'flex',
+        flexGrow: 1,
+        flexWrap: 'wrap',
+        position: 'relative',
+      },
     }}
     >
       {isAdmin

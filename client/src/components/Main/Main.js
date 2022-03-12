@@ -13,10 +13,10 @@ function Main(props) {
     <Box
       component="main"
       sx={{
-        flexGrow: 1,
-        boxSizing: 'border-box',
         [theme.breakpoints.up('md')]: {
           padding: theme.spacing(3, 6),
+          flexGrow: 1,
+          boxSizing: 'border-box',
         },
         [theme.breakpoints.down('md')]: {
           width: '100%',

@@ -41,6 +41,7 @@ function Carousel({
       sx={{
         margin: '0 auto',
         maxWidth: 332,
+        bgcolor: `${theme.palette.background.component}`,
       }}
     >
       <SwipeableViews

@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Routes, Route } from 'react-router-dom';
@@ -12,12 +9,10 @@ import Footer from '../Footer/Footer';
 import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
-import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
-import './app.scss';
 import PlanningAdminContainer from '../../containers/PlanningAdminContainer';
 import PlanningContainer from '../../containers/PlanningContainer';
 import DatagridEmployeeContainer from '../../containers/DatagridEmployeeContainer';
@@ -46,11 +41,15 @@ function App({
       <CssBaseline />
       <Box
         className="app"
-        sx={
-          {
-            backgroundColor: theme.palette.background.default,
-          }
-        }
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          [theme.breakpoints.up('md')]: {
+            display: 'flex',
+            flexDirection: 'column',
+            height: 'auto',
+            minHeight: '100vh',
+          },
+        }}
       >
         <HeaderContainer
           handleMode={handleThemeMode}
