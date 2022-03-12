@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import {
   Grid, Button, IconButton, MenuItem, Select,
@@ -31,6 +31,7 @@ function SelectWeek({
   const handleCurrentWeek = (dateStart) => {
     const slug = planningFunctions.getWeekSlugFromDate(dateStart);
     console.log(slug);
+    return (<Navigate to={`/admins/planning/${slug}`} />);
   };
 
   /**
@@ -85,10 +86,6 @@ function SelectWeek({
     handleCurrentWeek(firstMonday);
   };
 
-  const handleRefreshButton = () => {
-    handleCurrentWeek(date);
-  };
-
   return (
     <Grid
       container
@@ -99,9 +96,10 @@ function SelectWeek({
       {isAdmin && (
         <Grid item xs="auto">
           <Button
+            component={Link}
+            to={`/admins/planning/${planningFunctions.getCurrentWeekSlug()}`}
             variant="outlined"
             size="small"
-            onClick={handleRefreshButton}
             title="Semaine en cours"
             disabled={week.current.num === dateFunctions.getDate().isoWeek()}
           >

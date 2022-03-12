@@ -23,6 +23,7 @@ function PlanningAdmin({
   const [modalOpened, setModalOpened] = React.useState(false);
   console.log('assignment', assignment, assignment.id, assignment.id !== undefined);
   console.log('modalOpened', modalOpened);
+
   const handleAssignment = (result) => {
     setAssignment(result);
     console.log('handleAssignment', result);

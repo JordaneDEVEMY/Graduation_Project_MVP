@@ -25,16 +25,20 @@ import planningFunctions from '../../utils/planningFunctions';
 
 function DraggableAssignments({
   companies,
-  handleAssignment,
   week,
 }) {
   // save initial companies object
+  const [brands, setBrands] = React.useState(companies);
   const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
-  console.log('companies', assignmentsPositions);
+  console.log('draggable companies', brands);
 
   React.useEffect(() => {
-    setAssignmentsPositions(companies);
+    setBrands(companies);
   }, [companies]);
+
+  const handleAssignment = (assignment) => {
+    console.log(assignment);
+  };
 
   /**
    * Refresh assignments on drag end
@@ -57,7 +61,7 @@ function DraggableAssignments({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
-        companies={assignmentsPositions}
+        companies={brands}
         handleAssignment={handleAssignment}
         isDropable
         week={week}
@@ -78,7 +82,6 @@ DraggableAssignments.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
-  handleAssignment: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

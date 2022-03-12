@@ -36,7 +36,7 @@ function PlanningAdminContainer() {
 
   useEffect(() => {
     setCompanies(planningFunctions.adminPlanningToCompanies(planning));
-  }, [planning]);
+  }, [startDate]);
 
   return (
     <PlanningAdmin
