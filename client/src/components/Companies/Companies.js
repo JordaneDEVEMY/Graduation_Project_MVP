@@ -2,6 +2,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
 import SitesList from '../SitesList/SitesList';
 
@@ -12,6 +13,7 @@ function Companies({
   week,
 }) {
   const [brands, setBrands] = React.useState(companies);
+  const theme = useTheme();
   console.log('companies', brands);
 
   React.useEffect(() => {
@@ -20,9 +22,12 @@ function Companies({
 
   return (
     (brands.length
-      ? (brands.map((company) => (
+      ? (brands.map((company, index) => (
         <Box
           key={`company-${company.id}-wrapper`}
+          sx={{
+            mt: index !== 0 ? theme.spacing(2) : undefined,
+          }}
         >
           <Typography
             variant="h2"
