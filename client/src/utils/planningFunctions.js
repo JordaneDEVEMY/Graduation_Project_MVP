@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
 import dateFunctions from './dateFunctions';
@@ -66,26 +67,6 @@ const planningFunctions = {
   },
 
   /**
-   * Get all sites stored in an object
-   * @param {object} companies - Companies data
-   * @returns {object} Object of sites wich contains arrays.
-   */
-  refreshAssignmentsPosition: (companies, assignmentsPosition) => {
-    if (assignmentsPosition === undefined) {
-      return companies;
-    }
-
-    companies.forEach(({ sites }) => {
-      sites.map((site) => {
-        site.assignments = assignmentsPosition[`site-${site.id}`];
-        return site;
-      });
-    });
-
-    return companies;
-  },
-
-  /**
    * Prepare dragEnd data to assignment form
    * @returns {object} Datas ready for Assignment form
    */
@@ -94,7 +75,7 @@ const planningFunctions = {
     const { destination, draggableId } = drag;
     const siteId = Number(destination.droppableId.replace('site-', ''));
     const assignmentId = Number(draggableId.replace('assignment-', ''));
-    console.log(siteId, assignmentId, companies);
+
     // get site destination
     let toSite;
     companies.forEach(({ sites }) => {
@@ -141,47 +122,74 @@ const planningFunctions = {
     const toSiteId = Number(destination.droppableId.replace('site-', ''));
     const assignmentId = Number(draggableId.replace('assignment-', ''));
 
-    if (fromSiteId === toSiteId) {
-      return companies;
-    }
-
     // get site source
     let fromSite;
     refresh.forEach(({ sites }) => {
-      [fromSite] = sites.filter(({ id }) => id === fromSiteId);
+      sites.forEach((item) => {
+        if (item.id === fromSiteId) {
+          fromSite = item;
+        }
+      });
     });
+    console.log('fromSite', fromSite);
 
     if (fromSite) {
       // get site destination
       let toSite;
       refresh.forEach(({ sites }) => {
-        [toSite] = sites.filter(({ id }) => id === toSiteId);
+        sites.forEach((item) => {
+          if (item.id === toSiteId) {
+            toSite = item;
+          }
+        });
       });
+      console.log('toSite', toSite);
 
       if (toSite) {
         let { assignments: fromAssignments } = fromSite;
-        let { assignments: toAssignments } = toSite;
+        const { assignments: toAssignments } = toSite;
         const [assignment] = fromAssignments.filter(({ id }) => id === assignmentId);
+        console.log(fromSite, toSite);
+        // position only
+        if (fromSiteId === toSiteId) {
+          assignment.position = destination.index;
+          // remove from source
+          fromAssignments = fromAssignments.filter(({ id }) => id !== assignmentId);
+          // add to source
+          fromAssignments.splice(destination.index, 0, assignment);
 
-        // remove from source
-        fromAssignments = fromAssignments.filter(({ id }) => id !== assignmentId);
-
-        // add to destination
-        toAssignments = [...toAssignments, assignment];
-
-        // add to destination
-        refresh.map((company) => {
-          company.sites.map((site) => {
-            if (site.id === fromSiteId) {
-              site.assignments = fromAssignments;
-            } else if (site.id === toSiteId) {
-              site.assignments = toAssignments;
-            }
-            return site;
+          // refresh position
+          refresh.map((company) => {
+            company.sites.map((site) => {
+              if (site.id === fromSiteId) {
+                site.assignments = fromAssignments;
+              }
+              return site;
+            });
+            return company;
           });
 
-          return company;
-        });
+        // from a site to another
+        } else {
+          // remove from source
+          fromAssignments = fromAssignments.filter(({ id }) => id !== assignmentId);
+
+          // add to destination
+          toAssignments.splice(destination.index, 0, assignment);
+
+          // add to destination
+          refresh.map((company) => {
+            company.sites.map((site) => {
+              if (site.id === fromSiteId) {
+                site.assignments = fromAssignments;
+              } else if (site.id === toSiteId) {
+                site.assignments = toAssignments;
+              }
+              return site;
+            });
+            return company;
+          });
+        }
       }
     }
 

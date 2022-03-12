@@ -41,6 +41,8 @@ function DraggableAssignments({
       if (!result.destination) {
         return;
       }
+      console.log('result', result);
+      console.log('assignmentsPositions', assignmentsPositions);
       const refreshList = planningFunctions.setAssignmentPosition(result, assignmentsPositions);
       const assignment = planningFunctions.getDraggedAssignment(result, assignmentsPositions);
 
