@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material/styles';
 import { Droppable } from 'react-beautiful-dnd';
 import SiteHeader from '../SiteHeader/SiteHeader';
 import AssignmentsList from '../AssignmentsList/AssignmentsList';
+import assignmentBg from '../../Assets/images/sheet-bg.png';
 
 function Site({
   assignments,
@@ -40,15 +41,17 @@ function Site({
       sx={{
         position: 'relative',
         backgroundColor: theme.palette.background.component,
+        background: `${theme.palette.background.component} url('${assignmentBg}') no-repeat center bottom ${theme.spacing(2)}`,
+        borderRadius: '.25rem',
         color: theme.palette.text.primary,
         p: theme.spacing(2),
+        pb: `calc(50px + ${theme.spacing(2)})`,
         width: `calc(300px + ${theme.spacing(4)})`,
         overflow: 'hidden',
       }}
       id={`site-${id}`}
     >
       <SiteHeader
-        id={id}
         name={name}
       />
       {assignments.length

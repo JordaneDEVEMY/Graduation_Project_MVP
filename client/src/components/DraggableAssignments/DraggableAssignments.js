@@ -67,6 +67,7 @@ function DraggableAssignments({
         companies={assignmentsPositions}
         handleAssignment={handleAssignment}
         isDropable
+        isMobile={false}
         week={week}
       />
     </DragDropContext>

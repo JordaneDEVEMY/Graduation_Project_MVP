@@ -75,6 +75,7 @@ function AssignmentsList({
         sx={{
           position: 'sticky',
           top: Math.ceil(assignments.length % 10) * 50,
+          display: 'none',
           left: 0,
           width: '100%',
           height: 500 - (Math.ceil(assignments.length % 10) * 50),

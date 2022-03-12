@@ -26,7 +26,6 @@ function Companies({
         >
           <Typography
             variant="h2"
-            sx={{ textAlign: 'center' }}
             key={`company-${company.id}-title`}
           >
             {company.name}
@@ -39,7 +38,6 @@ function Companies({
                 handleAssignment={handleAssignment}
                 id={`company-${company.id}`}
                 isDropable={isDropable}
-                isMobile={!isDropable}
                 key={`company-${company.id}`}
                 week={week}
               />

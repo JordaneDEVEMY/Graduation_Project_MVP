@@ -5,30 +5,28 @@ import PropTypes from 'prop-types';
 import { Typography } from '@mui/material';
 
 function SiteHeader({
-  id,
   name,
 }) {
   const theme = useTheme();
 
   return (
     <Typography
-      component="h2"
+      variant="h3"
       sx={{
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         textAlign: 'center',
-        fontSize: '1.2rem',
+        textShadow: '1px 1px 0 rgb(0 0 0 / 10%)',
         marginBottom: theme.spacing(2),
       }}
     >
-      {`#${id} ${name}`}
+      {`${name}`}
     </Typography>
   );
 }
 
 SiteHeader.propTypes = {
-  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
 };
 

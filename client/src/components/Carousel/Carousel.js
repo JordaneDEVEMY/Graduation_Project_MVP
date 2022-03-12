@@ -10,15 +10,16 @@ import SwipeableViews from 'react-swipeable-views';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useTheme } from '@mui/material/styles';
-import Site from '../Card/Card';
+import Site from '../Site/Site';
 
 import './carousel.scss';
 
 function Carousel({
-  sites,
   handleAssignment,
+  sites,
   week,
 }) {
+  console.log('carousel', sites);
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = sites.length;

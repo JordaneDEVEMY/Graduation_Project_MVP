@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import { Typography, Modal, useMediaQuery } from '@mui/material';
+import { Typography, Modal } from '@mui/material';
 import AssignmentFormContainer from '../../containers/AssignmentFormContainer';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import DraggableAssignments from '../DraggableAssignments/DraggableAssignments';
 import Companies from '../Companies/Companies';
 import dateFunctions from '../../utils/dateFunctions';
+import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
 function PlanningAdmin({
@@ -16,13 +16,12 @@ function PlanningAdmin({
   console.log('start date', startDate);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
+  const isMobile = useBreakpointDown();
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
   console.log('assignment', assignment, assignment.id, assignment.id !== undefined);
   console.log('modalOpened', modalOpened);
+  console.log('isMobile', isMobile);
 
   const handleAssignment = (result) => {
     setAssignment(result);
@@ -71,6 +70,7 @@ function PlanningAdmin({
             companies={companies}
             handleAssignment={handleAssignment}
             isDropable={false}
+            isMobile
             week={currentWeek}
           />
         )}

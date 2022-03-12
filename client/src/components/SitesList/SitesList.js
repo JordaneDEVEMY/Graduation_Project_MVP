@@ -8,18 +8,20 @@ import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Site from '../Site/Site';
 import Carousel from '../Carousel/Carousel';
+import useBreakpointDown from '../../hooks/useBreakpointDown';
 
 function SitesList({
   company,
   handleAssignment,
   isDropable,
-  isMobile,
   week,
 }) {
+  const isMobile = useBreakpointDown();
   const theme = useTheme();
   const { id, name, sites } = company;
 
   console.log(`company ${name}`, sites);
+  console.log(`company ${name} is mobile, ${isMobile}`);
 
   return (
     isMobile
@@ -39,7 +41,6 @@ function SitesList({
             display: 'flex',
             gap: theme.spacing(2),
             flexWrap: 'nowrap',
-            justifyContent: 'center',
           }}
         >
           {sites.map((site) => (
@@ -85,7 +86,6 @@ SitesList.propTypes = {
   }).isRequired,
   handleAssignment: PropTypes.func,
   isDropable: PropTypes.bool.isRequired,
-  isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
