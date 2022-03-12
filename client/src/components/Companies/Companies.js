@@ -11,17 +11,16 @@ function Companies({
   isDropable,
   week,
 }) {
-  // save initial companies object
-  const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
-  console.log('companies', companies);
+  const [brands, setBrands] = React.useState(companies);
+  console.log('companies', brands);
 
   React.useEffect(() => {
-    setAssignmentsPositions(companies);
+    setBrands(companies);
   }, [companies]);
 
   return (
-    (assignmentsPositions.length
-      ? (assignmentsPositions.map((company) => (
+    (brands.length
+      ? (brands.map((company) => (
         <Box
           key={`company-${company.id}-wrapper`}
         >
