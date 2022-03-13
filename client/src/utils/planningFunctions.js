@@ -7,27 +7,77 @@ const planningFunctions = {
 
   /**
    * Convert user API data to a companies list
-   * @param {object} assignments and absences- Assignments list from API request
-   * @returns {object} object of Sites list containing assignments, and absences.
+   * @param {object} data - API data
+   * @param {string} weekSlug - current week
+   * @returns {array} List of user absences in week defined by startDate.
    */
-  userPlanningToSites: (userData) => {
-    const sites = [];
+  userPlanningToAbsences: (data, weekSlug) => {
     const absences = [];
-    const { assignments } = userData;
-    console.log('userData', userData);
+    const { assignments } = data;
+    console.log(assignments, weekSlug);
+    assignments.forEach((item) => {
+      const {
+        absence, ending_date, starting_date,
+      } = item;
+      const assignmentSlug = planningFunctions.getWeekSlugFromDate(starting_date);
 
-    assignments.forEach((assignment) => {
-      const { absence, colleagues, site } = assignment;
-      console.log(absence.id === null);
-      if (absence.id === null) {
-        site.assignments = colleagues;
-        sites.push(site);
-      } else {
-        absences.push(absence);
+      // push absence wich match startDate
+      if ((assignmentSlug === weekSlug) && (absence.id !== null)) {
+        absences.push({
+          ...absence,
+          ending_date,
+          starting_date,
+        });
       }
     });
 
-    return { absences, sites };
+    return absences;
+  },
+
+  /**
+   * Convert user API data to a companies list
+   * @param {object} data - API data
+   * @param {string} weekSlug - current week
+   * @returns {array} List of user assignments in week defined by startDate.
+   */
+  userPlanningToAssignments: (data, weekSlug) => {
+    const assignments = [];
+    const {
+      assignments: userAssignments,
+      id: userId,
+      firstname,
+      lastname,
+      phoneNumber: phone_number,
+      mobileNumber: mobile_number,
+    } = data;
+
+    userAssignments.forEach((item) => {
+      console.log(item);
+      const {
+        absence, colleagues, ending_date, id, site, starting_date,
+      } = item;
+      const assignmentSlug = planningFunctions.getWeekSlugFromDate(starting_date);
+
+      // push assignment wich match startDate
+      if ((assignmentSlug === weekSlug) && (absence.id === null)) {
+        const assignmentUser = {
+          id: userId,
+          ending_date,
+          firstname,
+          lastname,
+          phone_number,
+          mobile_number,
+          starting_date,
+        };
+        assignments.push({
+          id,
+          site,
+          employees: [assignmentUser, ...colleagues],
+        });
+      }
+    });
+
+    return assignments;
   },
 
   /**

@@ -39,7 +39,6 @@ function SitesList({
           sx={{
             display: 'flex',
             gap: theme.spacing(2),
-            flexWrap: 'nowrap',
           }}
         >
           {sites.map((site) => (

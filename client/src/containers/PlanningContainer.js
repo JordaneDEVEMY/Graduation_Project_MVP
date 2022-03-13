@@ -1,25 +1,30 @@
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionGetUserPlanning } from '../actions/user';
 import Planning from '../components/Planning/Planning';
 import dateFunctions from '../utils/dateFunctions';
 import planningFunctions from '../utils/planningFunctions';
 
-function PlanningContainer({
-  date,
-}) {
+function PlanningContainer() {
+  let { weekSlug } = useParams();
+  if (weekSlug === undefined) {
+    weekSlug = planningFunctions.getCurrentWeekSlug();
+  }
+
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user);
   const user = planningFunctions.userFromData(userData);
-  const [startDate, setStartDate] = React.useState(date);
-  // const { absences, sites } = planningFunctions.userPlanningToSites(assignments, startDate);
-  // console.log('start date', startDate);
+  const [startDate, setStartDate] = React.useState(dateFunctions.getDate().format('YYYY-MM-DD'));
+  const [absences, setAbsences] = React.useState(planningFunctions.userPlanningToAbsences(userData, weekSlug));
+  const [assignments, setAssignments] = React.useState(planningFunctions.userPlanningToAssignments(userData, weekSlug));
+
+  console.log('start date', startDate);
   console.log('userData', userData);
-  // console.log('sites', sites);
-  // console.log('absences', absences);
-  console.log('user', userData);
+  console.log('assignments', assignments);
+  console.log('absences', absences);
+  console.log('user', user);
 
   useEffect(() => {
     dispatch(actionGetUserPlanning());
@@ -27,12 +32,10 @@ function PlanningContainer({
 
   useEffect(() => {
     console.log('date data change');
-    setStartDate(date);
-  }, [date]);
-
-  useEffect(() => {
-    console.log('user data change');
-  }, [userData]);
+    setStartDate(planningFunctions.getDateFromSlug(weekSlug));
+    setAbsences(planningFunctions.userPlanningToAbsences(userData, weekSlug));
+    setAssignments(planningFunctions.userPlanningToAssignments(userData, weekSlug));
+  }, [weekSlug]);
 
   // useEffect(() => {
   //   if (startDate !== '') {
@@ -42,19 +45,12 @@ function PlanningContainer({
 
   return (
     <Planning
-      user={user}
+      absences={absences}
+      assignments={assignments}
       startDate={startDate}
-      handleStartDate={setStartDate}
+      user={user}
     />
   );
 }
-
-PlanningContainer.propTypes = {
-  date: PropTypes.string,
-};
-
-PlanningContainer.defaultProps = {
-  date: dateFunctions.getDate().format('YYYY-MM-DD'),
-};
 
 export default React.memo(PlanningContainer);
