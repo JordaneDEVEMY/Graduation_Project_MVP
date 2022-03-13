@@ -16,8 +16,10 @@ import utils from '../../utils';
 import PlanningAdminContainer from '../../containers/PlanningAdminContainer';
 import PlanningContainer from '../../containers/PlanningContainer';
 import DatagridEmployeeContainer from '../../containers/DatagridEmployeeContainer';
-import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
+import DatagridSiteContainer from '../../containers/DatagridSiteContainer';
+import DatagridCompanyContainer from '../../containers/DatagridCompanyContainer';
 import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
+import ProfilPageContainer from '../../containers/ProfilPageContainer';
 import ForgotPasswordContainer from '../../containers/ForgotPasswordContainer';
 import ResetPassword from '../ResetPassword/ResetPassword';
 
@@ -60,6 +62,12 @@ function App({
             <Route element={<RequireAdmin />}>
               <Route path="admins" element={<Layout isAdmin={isAdmin} />}>
                 <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
                   path="planning"
                   element={(
                     <PlanningAdminContainer />
@@ -81,13 +89,19 @@ function App({
                 <Route
                   path="sites"
                   element={(
-                    <CreateSiteFormContainer isAdmin={isAdmin} />
+                    <DatagridSiteContainer isAdmin={isAdmin} />
                     )}
                 />
                 <Route
                   path="companies"
                   element={(
-                    <CreateCompanyFormContainer isAdmin={isAdmin} />
+                    <DatagridCompanyContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
@@ -98,6 +112,12 @@ function App({
                   path={`:${userId}/planning`}
                   element={(
                     <PlanningContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>

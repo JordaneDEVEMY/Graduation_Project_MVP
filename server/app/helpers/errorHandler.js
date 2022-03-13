@@ -1,5 +1,7 @@
 const ApiError = require('../errors/apiError');
 const WebsiteError = require('../errors/websiteError');
+const logger = require('./logger');
+
 /**
   * Middleware that respond to a next method with an error as argument
   * @param {object} err Error class
@@ -11,7 +13,7 @@ const errorHandler = (err, res) => {
   statusCode = statusCode ?? 500;
 
   if (statusCode === 500) {
-    console.error(err);
+    logger.error(err);
     message = 'Internal Server Error';
   }
 

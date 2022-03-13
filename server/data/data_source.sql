@@ -19,30 +19,31 @@ VALUES
 ('Formation'),
 ('Maladie');
 
+
 INSERT INTO "employee" ("social_security_number","firstname","lastname","date_of_birth","address","zip_code","email","mobile_number","phone_number","password","avatar","fonction","role_application","employee_qualification_id")
 VALUES
-(22473299333059,'Jelani','Andy','2018-06-22 02:23:17','2448 Orci Street',31000,'j.andy@protonmail.com','0561166116','0612996644','KPP18YZC3OE','/images/66.jpg','Lorem','user',4),
-(21975437080659,'Mufutau','Vincent','2018-06-20 22:03:09','464-6625 Turpis Av.',31000,'vincent-mufutau@yahoo.edu','0561166116','0612996644','BMF33MEX8YA','/images/32.jpg','Lorem','user',2),
-(21491953038094,'Hop','Gilles','2018-07-03 07:10:08','248-4810 Nunc Avenue',31000,'gilles_hop@outlook.edu','0561166116','0612996644','DGF16TFD5JT','/images/63.jpg','Lorem','user',2),
-(13525401103351,'William','Maxime','2018-03-25 00:07:34','Ap #164-7462 Quisque Rd.',31000,'maximewilliam@hotmail.couk','0561166116','0612996644','FPM76GII4PV','/images/54.jpg','Lorem','user',3),
-(13500573697405,'Caleb','Xavier','2018-02-03 11:00:23','P.O. Box 728, 8256 Molestie Avenue',31000,'xavier_caleb4493@yahoo.edu','0561166116','0612996644','LTK85EWH8HM','/images/91.jpg','Lorem','admin',6),
-(14845337820734,'William','Thibaut','2018-05-14 20:49:18','Ap #675-2785 Duis St.',31000,'thibautwilliam@yahoo.ca','0561166116','0612996644','UUA47QNU3WK','/images/33.jpg','Lorem','user',2),
-(21363460708791,'Palmer','Lucas','2018-05-15 07:39:54','P.O. Box 688, 8413 Libero. Street',31000,'l.palmer1751@outlook.net','0561166116','0612996644','JXC37HRS2QG','/images/98.jpg','Lorem','user',2),
-(21843468137427,'Caleb','Aurélien','2018-06-22 06:47:34','Ap #529-7467 Praesent Avenue',31000,'aurliencaleb3012@hotmail.ca','0561166116','0612996644','XVY63DPU4XY','/images/50.jpg','Lorem','user',2),
-(13679528249282,'Leonard','Yannick','2018-05-25 16:09:28','8445 Nunc St.',31000,'y_leonard1597@protonmail.couk','0561166116','0612996644','EUQ68HMQ8TD','/images/03.jpg','Lorem','user',5),
-(22777472544899,'Harding','Robin','2018-06-13 20:59:04','2846 Pharetra Avenue',31000,'robin.harding5490@google.edu','0561166116','0612996644','EPO09VXQ6WF','/images/44.jpg','Lorem','user',5),
-(22840331437801,'Joshua','Adrien','2018-05-06 13:39:59','Ap #551-5627 Aenean Street',31000,'joshuaadrien@hotmail.couk','0561166116','0612996644','WHB35IEM8DD','/images/77.jpg','Lorem','user',5),
-(22082956417100,'Brady','Andy','2018-05-16 10:52:29','8934 Vivamus Rd.',31000,'andybrady8712@aol.ca','0561166116','0612996644','NDD50FYM5LK','/images/33.jpg','Lorem','user',2),
-(19706400364033,'Luke','Clement','2018-06-07 22:56:44','883-2732 Lobortis Road',31000,'clement.luke2929@yahoo.ca','0561166116','0612996644','SGY13JHW3SP','/images/78.jpg','Lorem','user',3),
-(22181142242711,'Elvis','Cyril','2018-03-12 06:14:18','622-2285 Varius Av.',31000,'ecyril200@icloud.com','0561166116','0612996644','SFC88SAC5OM','/images/92.jpg','Lorem','user',1),
-(14741869956144,'Kasper','Arthur','2018-02-26 19:49:41','Ap #876-6499 Neque. Rd.',31000,'karthur1138@yahoo.couk','0561166116','0612996644','SBB15WYQ8RO','/images/29.jpg','Lorem','user',5),
-(20627742917255,'Denton','William','2018-02-19 03:37:54','4255 Elit, Rd.',31000,'williamdenton@protonmail.couk','0561166116','0612996644','STW87QUT9UP','/images/89.jpg','Lorem','user',3),
-(22563080062864,'Wylie','Benoît','2018-07-05 16:44:18','240-9317 Risus Street',31000,'wyliebenot3325@outlook.couk','0561166116','0612996644','CSO25VTY7LD','/images/63.jpg','Lorem','user',1),
-(15867620023867,'Sylvester','Valentin','2018-04-09 03:55:35','Ap #374-4540 Arcu St.',31000,'v-sylvester@outlook.net','0561166116','0612996644','UXS33RBZ8GD','/images/57.jpg','Lorem','user',2),
-(18329772321063,'Malachi','Tristan','2018-06-05 13:07:12','9184 Fringilla St.',31000,'malachi.tristan@icloud.couk','0561166116','0612996644','LIQ49BKK8IB','/images/55.jpg','Lorem','user',5),
-(22222273125963,'Prescott','Geoffrey','2018-06-13 03:47:00','Ap #488-2475 Turpis St.',31000,'g.prescott2267@google.net','0561166116','0612996644','TUO65GTP6PO','/images/48.jpg','Lorem','user',3),
-(13748551417541,'Ashton','Alexandre','2018-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'alexandre-ashton5369@icloud.edu','0561166116','0612996644','VKM73KHB1ND','/images/67.jpg','Lorem','user',3),
-(13748551417541,'Chrita','hicham','2018-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'hicham@oclock.com','0561166116','0612996644','mypassword','/images/67.jpg','Lorem','user',3);
+(21411953038094,'Jelani','Andy','2018-06-22 02:23:17','2448 Orci Street',31000,'j.andy@protonmail.com','0561166116','0612996644','KPP18YZC3OE','/images/66.jpg','Lorem','user',4),
+(13515401103351,'Mufutau','Vincent','2018-06-20 22:03:09','464-6625 Turpis Av.',31000,'vincent-mufutau@yahoo.edu','0561166116','0612996644','BMF33MEX8YA','/images/32.jpg','Lorem','user',2),
+(13501573697405,'Hop','Gilles','2018-07-03 07:10:08','248-4810 Nunc Avenue',31000,'gilles_hop@outlook.edu','0561166116','0612996644','DGF16TFD5JT','/images/63.jpg','Lorem','user',2),
+(14818337820734,'William','Maxime','2018-03-25 00:07:34','Ap #164-7462 Quisque Rd.',31000,'maximewilliam@hotmail.couk','0561166116','0612996644','FPM76GII4PV','/images/54.jpg','Lorem','user',3),
+(21313460708791,'Caleb','Xavier','2018-02-03 11:00:23','P.O. Box 728, 8256 Molestie Avenue',31000,'xavier_caleb4493@yahoo.edu','0561166116','0612996644','LTK85EWH8HM','/images/91.jpg','Lorem','admin',6),
+(21813468137427,'William','Thibaut','2018-05-14 20:49:18','Ap #675-2785 Duis St.',31000,'thibautwilliam@yahoo.ca','0561166116','0612996644','UUA47QNU3WK','/images/33.jpg','Lorem','user',2),
+(13119528249282,'Palmer','Lucas','2018-05-15 07:39:54','P.O. Box 688, 8413 Libero. Street',31000,'l.palmer1751@outlook.net','0561166116','0612996644','JXC37HRS2QG','/images/98.jpg','Lorem','user',2),
+(22717472544899,'Caleb','Aurélien','2018-06-22 06:47:34','Ap #529-7467 Praesent Avenue',31000,'aurliencaleb3012@hotmail.ca','0561166116','0612996644','XVY63DPU4XY','/images/50.jpg','Lorem','user',2),
+(22811331437801,'Leonard','Yannick','2018-05-25 16:09:28','8445 Nunc St.',31000,'y_leonard1597@protonmail.couk','0561166116','0612996644','EUQ68HMQ8TD','/images/03.jpg','Lorem','user',5),
+(22012956417100,'Harding','Robin','2018-06-13 20:59:04','2846 Pharetra Avenue',31000,'robin.harding5490@google.edu','0561166116','0612996644','EPO09VXQ6WF','/images/44.jpg','Lorem','user',5),
+(19706400364033,'Joshua','Adrien','2018-05-06 13:39:59','Ap #551-5627 Aenean Street',31000,'joshuaadrien@hotmail.couk','0561166116','0612996644','WHB35IEM8DD','/images/77.jpg','Lorem','user',5),
+(22111142242711,'Brady','Andy','2018-05-16 10:52:29','8934 Vivamus Rd.',31000,'andybrady8712@aol.ca','0561166116','0612996644','NDD50FYM5LK','/images/33.jpg','Lorem','user',2),
+(14711869956144,'Luke','Clement','2018-06-07 22:56:44','883-2732 Lobortis Road',31000,'clement.luke2929@yahoo.ca','0561166116','0612996644','SGY13JHW3SP','/images/78.jpg','Lorem','user',3),
+(20617742917255,'Elvis','Cyril','2018-03-12 06:14:18','622-2285 Varius Av.',31000,'ecyril200@icloud.com','0561166116','0612996644','SFC88SAC5OM','/images/92.jpg','Lorem','user',1),
+(22513080062864,'Kasper','Arthur','2018-02-26 19:49:41','Ap #876-6499 Neque. Rd.',31000,'karthur1138@yahoo.couk','0561166116','0612996644','SBB15WYQ8RO','/images/29.jpg','Lorem','user',5),
+(15817620023867,'Denton','William','2018-02-19 03:37:54','4255 Elit, Rd.',31000,'williamdenton@protonmail.couk','0561166116','0612996644','STW87QUT9UP','/images/89.jpg','Lorem','user',3),
+(18319772321063,'Wylie','Benoît','2018-07-05 16:44:18','240-9317 Risus Street',31000,'wyliebenot3325@outlook.couk','0561166116','0612996644','CSO25VTY7LD','/images/63.jpg','Lorem','user',1),
+(22212273125963,'Sylvester','Valentin','2018-04-09 03:55:35','Ap #374-4540 Arcu St.',31000,'v-sylvester@outlook.net','0561166116','0612996644','UXS33RBZ8GD','/images/57.jpg','Lorem','user',2),
+(13718551417541,'Malachi','Tristan','2018-06-05 13:07:12','9184 Fringilla St.',31000,'malachi.tristan@icloud.couk','0561166116','0612996644','LIQ49BKK8IB','/images/55.jpg','Lorem','user',5),
+(13718551417541,'Prescott','Geoffrey','2018-06-13 03:47:00','Ap #488-2475 Turpis St.',31000,'g.prescott2267@google.net','0561166116','0612996644','TUO65GTP6PO','/images/48.jpg','Lorem','user',3),
+(18403993508485,'Ashton','Alexandre','2018-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'alexandre-ashton5369@icloud.edu','0561166116','0612996644','VKM73KHB1ND','/images/67.jpg','Lorem','user',3),
+(18403993508485,'Chrita','hicham','2018-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'hicham@oclock.com','0561166116','0612996644','mypassword','/images/67.jpg','Lorem','user',3);
 
 INSERT INTO "company" ("name","address","zip_code","type")
 VALUES

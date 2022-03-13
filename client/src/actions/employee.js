@@ -6,7 +6,7 @@ export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
 
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
-export const GET_EMPLOYEE_ID = 'GET_EMPLOYEE_ID';
+export const GET_EMPLOYEE_ID_TO_DELETE = 'GET_EMPLOYEE_ID_TO_DELETE';
 
 // create or update employee informations
 export const SET_EMPLOYEE_INFORMATION = 'SET_EMPLOYEE_INFORMATION';
@@ -43,16 +43,16 @@ export function actionGetEmployeeInformations({
   firstname,
   lastname,
   email,
-  phone_number: phoneNumber,
-  mobile_number: mobileNumber,
-  social_security_number: socialSecurityNumber,
-  date_of_birth: dateOfBirth,
+  phone_number,
+  mobile_number,
+  social_security_number,
+  date_of_birth,
   address,
-  zip_code: zipCode,
-  starting_date: startingDate,
+  zip_code,
+  starting_date,
   avatar,
   fonction,
-  role_application: roleApplication,
+  role_application,
   label,
 }) {
   return {
@@ -62,24 +62,24 @@ export function actionGetEmployeeInformations({
       firstname,
       lastname,
       email,
-      phoneNumber,
-      mobileNumber,
-      socialSecurityNumber,
-      dateOfBirth,
+      phone_number,
+      mobile_number,
+      social_security_number,
+      date_of_birth,
       address,
-      zipCode,
-      startingDate,
+      zip_code,
+      starting_date,
       avatar,
       fonction,
-      roleApplication,
+      role_application,
       label,
     },
   };
 }
 
-export function actionGetEmployeeId(id) {
+export function actionGetEmployeeIdToDelete(ids) {
   return {
-    type: GET_EMPLOYEE_ID, payload: id,
+    type: GET_EMPLOYEE_ID_TO_DELETE, payload: ids,
   };
 }
 
