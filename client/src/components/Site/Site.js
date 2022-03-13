@@ -34,6 +34,10 @@ function Site({
     setExpandedSheet(isExpanded ? accordionId : '');
   };
 
+  const handleAddAssignment = () => () => {
+    console.log('add assignment');
+  };
+
   return (
     <Box
       sx={{
@@ -51,6 +55,7 @@ function Site({
     >
       <SiteHeader
         name={name}
+        handleAddAssignment={handleAddAssignment}
       />
       {assignments.length
         && isDropable

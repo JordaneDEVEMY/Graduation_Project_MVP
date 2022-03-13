@@ -40,11 +40,11 @@ function PlanningAdmin({
 
   return (
     <>
-      <SearchContainer isAdmin date={startDate} />
-
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
       </Typography>
+
+      <SearchContainer isAdmin date={startDate} />
 
       {companies.length
         && !isMobile

@@ -34,7 +34,6 @@ function Assignment({
   index,
   starting_date,
   userId,
-  visibility,
   week,
 }) {
   const theme = useTheme();
@@ -126,23 +125,40 @@ function Assignment({
           padding: '0 40px 10px',
         }}
       >
-        <Grid container spacing={1} mt={0}>
+        <Grid container spacing={2} mt={-2}>
           <Grid item xs="auto">
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Grid>
-          <Grid item xs>
+          <Grid item xs="auto">
             <Typography
-              component="p"
+              component="ul"
+              sx={{
+                listStyle: 'none',
+                pl: 0,
+              }}
             >
-              <strong>
-                Visibility:
-                {' '}
-                {`${visibility ? 'oui' : 'non'}`}
-              </strong>
+              {employee.visibility !== undefined
+              && (
+              <Typography component="li">
+                <Typography sx={{ display: 'block' }}><strong>Visibilité :</strong></Typography>
+                {`<br>${employee.visibility ? 'oui' : 'non'}`}
+              </Typography>
+              )}
+              {employee.mobile_number !== undefined
+              && (
+              <Typography component="li">
+                <Typography sx={{ display: 'block' }}><strong>Tél. portable :</strong></Typography>
+                {employee.mobile_number}
+              </Typography>
+              )}
+              {employee.phone_number !== undefined
+              && (
+              <Typography component="li">
+                <Typography sx={{ display: 'block' }}><strong>Tél. mobile :</strong></Typography>
+                {employee.phone_number}
+              </Typography>
+              )}
             </Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
-            varius pulvinar diam eros in elit. Pellentesque convallis laoreet
-            laoreet.
           </Grid>
         </Grid>
       </AccordionDetails>
@@ -156,6 +172,9 @@ Assignment.propTypes = {
     firstname: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     lastname: PropTypes.string.isRequired,
+    phone_number: PropTypes.bool,
+    mobile_number: PropTypes.bool,
+    visibility: PropTypes.bool,
   }).isRequired,
   ending_date: PropTypes.string.isRequired,
   expandedSheet: PropTypes.string.isRequired,

@@ -23,11 +23,11 @@ function Planning({
 
   return (
     <>
-      <SearchContainer isAdmin={false} userId={userId} date={startDate} />
-
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
       </Typography>
+
+      <SearchContainer isAdmin={false} userId={userId} date={startDate} />
 
       {absences.map((absence) => (
         <Alert
@@ -39,8 +39,8 @@ function Planning({
             mx: 'auto',
           }}
         >
-          {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MM YYYY')} 
-          au ${dateFunctions.getDate(absence.ending_date).format('DD MM YYYY')} : 
+          {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MMM YYYY')} 
+          au ${dateFunctions.getDate(absence.ending_date).format('DD MMM YYYY')} : 
           ${absence.reason}`}
         </Alert>
       ))}

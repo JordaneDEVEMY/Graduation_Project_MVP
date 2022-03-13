@@ -18,7 +18,7 @@ function SearchContainer({
     <Box
       sx={{
         maxWidth: '600px',
-        margin: `0 auto ${theme.spacing(2)}`,
+        margin: `0 auto ${theme.spacing(6)}`,
         padding: theme.spacing(1),
         background: theme.palette.background.component,
       }}

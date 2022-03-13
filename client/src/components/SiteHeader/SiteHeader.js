@@ -2,11 +2,15 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Box, Typography } from '@mui/material';
+import {
+  Box, IconButton, Tooltip, Typography,
+} from '@mui/material';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
 function SiteHeader({
   address,
+  handleAddAssignment,
   manager_name,
   name,
 }) {
@@ -14,8 +18,23 @@ function SiteHeader({
 
   return (
     <Box>
+      {handleAddAssignment
+      && (
+        <Tooltip title="Ajouter un assignement" placement="top">
+          <IconButton
+            color="primary"
+            sx={{
+              position: 'absolute',
+              top: theme.spacing(1),
+              left: theme.spacing(2),
+            }}
+          >
+            <PersonAddAlt1Icon />
+          </IconButton>
+        </Tooltip>
+      )}
       <Typography
-        variant="h4"
+        variant="h5"
         component="h3"
         sx={{
           overflow: 'hidden',
@@ -74,12 +93,14 @@ function SiteHeader({
 
 SiteHeader.propTypes = {
   address: PropTypes.string,
+  handleAddAssignment: PropTypes.func,
   manager_name: PropTypes.string,
   name: PropTypes.string.isRequired,
 };
 
 SiteHeader.defaultProps = {
   address: undefined,
+  handleAddAssignment: undefined,
   manager_name: undefined,
 };
 

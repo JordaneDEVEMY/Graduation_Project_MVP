@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import {
-  Grid, Button, IconButton, MenuItem, Select,
+  Grid, Button, IconButton, MenuItem, Select, Tooltip,
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -117,27 +117,29 @@ function SelectWeek({
     >
       {isAdmin && (
         <Grid item xs="auto">
-          <Button
-            component={Link}
-            to={`${path}/${planningFunctions.getCurrentWeekSlug()}`}
-            variant="outlined"
-            size="small"
-            title="Semaine en cours"
-            disabled={week.current.num === dateFunctions.getDate().isoWeek()}
-          >
-            Auj.
-          </Button>
+          <Tooltip title={`Semaine ${dateFunctions.getDate().isoWeek()}`} placement="top">
+            <Button
+              component={Link}
+              to={`${path}/${planningFunctions.getCurrentWeekSlug()}`}
+              variant="outlined"
+              size="small"
+              disabled={week.current.num === dateFunctions.getDate().isoWeek()}
+            >
+              Auj.
+            </Button>
+          </Tooltip>
         </Grid>
       )}
       <Grid item sm="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
-        <IconButton
-          component={Link}
-          to={`${path}/${planningFunctions.getWeekSlugFromDate(week.prev.dates[0])}`}
-          title={`Semaine ${week.prev.num}`}
-          disabled={disabledPrev}
-        >
-          <KeyboardArrowLeftIcon />
-        </IconButton>
+        <Tooltip title={`Semaine ${week.prev.num}`} placement="top">
+          <IconButton
+            component={Link}
+            to={`${path}/${planningFunctions.getWeekSlugFromDate(week.prev.dates[0])}`}
+            disabled={disabledPrev}
+          >
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+        </Tooltip>
       </Grid>
       {isAdmin && (
         <Grid item xs sm="auto">
@@ -167,14 +169,15 @@ function SelectWeek({
         </Select>
       </Grid>
       <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
-        <IconButton
-          component={Link}
-          to={`${path}/${planningFunctions.getWeekSlugFromDate(week.next.dates[0])}`}
-          title={`Semaine ${week.next.num}`}
-          disabled={disabledNext}
-        >
-          <KeyboardArrowRightIcon />
-        </IconButton>
+        <Tooltip title={`Semaine ${week.next.num}`} placement="top">
+          <IconButton
+            component={Link}
+            to={`${path}/${planningFunctions.getWeekSlugFromDate(week.next.dates[0])}`}
+            disabled={disabledNext}
+          >
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        </Tooltip>
       </Grid>
     </Grid>
   );
