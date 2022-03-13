@@ -47,6 +47,9 @@ function App({
             height: 'auto',
             minHeight: '100vh',
           },
+          [theme.breakpoints.down('md')]: {
+            paddingBottom: theme.spacing(6),
+          },
         }}
       >
         <HeaderContainer
