@@ -30,11 +30,10 @@ function PlanningContainer() {
     setAssignments(planningFunctions.userPlanningToAssignments(userData, weekSlug));
   }, [weekSlug]);
 
-  // useEffect(() => {
-  //   if (startDate !== '') {
-  //     console.log(`REQUEST GET ${startDate}`);
-  //   }
-  // }, [startDate]);
+  useEffect(() => {
+    setAbsences(planningFunctions.userPlanningToAbsences(userData, weekSlug));
+    setAssignments(planningFunctions.userPlanningToAssignments(userData, weekSlug));
+  }, [userData]);
 
   return (
     <Planning
