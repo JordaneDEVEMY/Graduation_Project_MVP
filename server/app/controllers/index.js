@@ -8,6 +8,7 @@ const userAdminSiteController = require('./api/userAdmin/siteController');
 const userAdminCompanyController = require('./api/userAdmin/companyController');
 const userAdminPlanningController = require('./api/userAdmin/planning/planningController');
 const assignmentUserController = require('./api/userAdmin/planning/assignment/assignmentUserController');
+const userAdminQualificationController = require('./api/userAdmin/qualificationController');
 
 module.exports = {
   // == Website ==
@@ -24,4 +25,5 @@ module.exports = {
   userAdminCompanyController,
   userAdminPlanningController,
   assignmentUserController,
+  userAdminQualificationController,
 };
