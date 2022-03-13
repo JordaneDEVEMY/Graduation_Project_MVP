@@ -33,6 +33,7 @@ function Assignment({
   id,
   index,
   starting_date,
+  userId,
   visibility,
   week,
 }) {
@@ -42,10 +43,16 @@ function Assignment({
   const startOnMonday = dateFunctions.getDate(starting_date).format('YYYY-MM-DD') === firstDayofWeek;
   const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
 
+  const onUserClick = (e) => {
+    e.stopPropagation();
+    console.log("I'm not expanding!");
+  };
+
   return (
     <Accordion
       expanded={expandedSheet === `panel${index}`}
       onChange={handleCollapse(`panel${index}`)}
+      onClick={(e) => (userId === employee.id ? onUserClick(e) : true)}
       id={`assignment-${id}`}
       sx={{
         borderTop: '1px solid rgb(0 0 0 / 10%)',
@@ -156,6 +163,7 @@ Assignment.propTypes = {
   index: PropTypes.number.isRequired,
   isDraggable: PropTypes.bool.isRequired,
   starting_date: PropTypes.string.isRequired,
+  userId: PropTypes.number,
   visibility: PropTypes.bool.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
@@ -167,5 +175,6 @@ Assignment.propTypes = {
 
 Assignment.defaultProps = {
   handleAssignment: undefined,
+  userId: undefined,
 };
 export default React.memo(Assignment);

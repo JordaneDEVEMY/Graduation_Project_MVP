@@ -20,18 +20,11 @@ function PlanningContainer() {
   const [absences, setAbsences] = React.useState(planningFunctions.userPlanningToAbsences(userData, weekSlug));
   const [assignments, setAssignments] = React.useState(planningFunctions.userPlanningToAssignments(userData, weekSlug));
 
-  console.log('start date', startDate);
-  console.log('userData', userData);
-  console.log('assignments', assignments);
-  console.log('absences', absences);
-  console.log('user', user);
-
   useEffect(() => {
     dispatch(actionGetUserPlanning());
   }, []);
 
   useEffect(() => {
-    console.log('date data change');
     setStartDate(planningFunctions.getDateFromSlug(weekSlug));
     setAbsences(planningFunctions.userPlanningToAbsences(userData, weekSlug));
     setAssignments(planningFunctions.userPlanningToAssignments(userData, weekSlug));

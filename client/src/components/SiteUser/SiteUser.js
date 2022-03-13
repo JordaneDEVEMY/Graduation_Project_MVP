@@ -17,11 +17,13 @@ function SiteUser({
   id,
   site,
   startDate,
+  user,
 }) {
   const theme = useTheme();
   const week = dateFunctions.getWeek(startDate);
   const isMobile = useBreakpointDown();
   const { current: currentWeek } = week;
+  const { id: userId } = user;
 
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
@@ -62,17 +64,21 @@ function SiteUser({
               background: `url('${assignmentBg}') repeat-y center bottom ${theme.spacing(2)}`,
             }}
           >
-            {employees.map((employee) => (
+            {employees.map((employee, index) => (
               <Assignment
                 color={employee.color || theme.palette.warning.main}
                 employee={employee}
                 ending_date={employee.ending_date}
                 expandedSheet={expandedSheet}
                 handleCollapse={handleCollapse}
+                id={employee.id}
+                index={index}
                 key={`employee-${employee.id}`}
                 isDraggable={false}
                 isMobile={isMobile}
                 starting_date={employee.starting_date}
+                userId={userId}
+                visibility
                 week={currentWeek}
               />
             ))}
@@ -104,6 +110,9 @@ SiteUser.propTypes = {
     zip_code: PropTypes.number.isRequired,
   }).isRequired,
   startDate: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default React.memo(SiteUser);

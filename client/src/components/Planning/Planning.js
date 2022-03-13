@@ -16,6 +16,7 @@ function Planning({
 }) {
   const theme = useTheme();
   console.log('assignments', assignments);
+  console.log('absences', absences);
 
   return (
     <>

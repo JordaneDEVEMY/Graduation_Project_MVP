@@ -14,7 +14,7 @@ const planningFunctions = {
   userPlanningToAbsences: (data, weekSlug) => {
     const absences = [];
     const { assignments } = data;
-    console.log(assignments, weekSlug);
+
     assignments.forEach((item) => {
       const {
         absence, ending_date, starting_date,
@@ -52,7 +52,6 @@ const planningFunctions = {
     } = data;
 
     userAssignments.forEach((item) => {
-      console.log(item);
       const {
         absence, colleagues, ending_date, id, site, starting_date,
       } = item;
@@ -69,6 +68,7 @@ const planningFunctions = {
           mobile_number,
           starting_date,
         };
+
         assignments.push({
           id,
           site,
