@@ -3,7 +3,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import {
   Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
@@ -28,6 +28,7 @@ const Aside = styled('aside')(({ theme }) => ({
 function Sidebar() {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
+  const { weekSlug } = useParams();
 
   const handleDrawer = () => {
     setOpen((oldOpen) => !oldOpen);
@@ -80,7 +81,7 @@ function Sidebar() {
             disablePadding
             button
             component={RouterLink}
-            to="/admins/planning"
+            to={`/admins/planning${weekSlug ? `/${weekSlug}` : ''}`}
           >
             <ListItemButton>
               <ListItemIcon>
