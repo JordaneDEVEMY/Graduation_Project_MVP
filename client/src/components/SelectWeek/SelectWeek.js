@@ -28,7 +28,7 @@ function SelectWeek({
   const disabledNext = isAdmin
     ? false
     : (week.current.num === dateFunctions.getDate().isoWeek() + 1);
-  const path = isAdmin ? '/admins/planning/' : `/users/${userId}/planning`;
+  const path = isAdmin ? '/admins/planning' : `/users/${userId}/planning`;
 
   const handleCurrentWeek = (dateStart) => {
     const slug = planningFunctions.getWeekSlugFromDate(dateStart);
@@ -124,7 +124,7 @@ function SelectWeek({
         <IconButton
           component={Link}
           to={`${path}/${planningFunctions.getWeekSlugFromDate(week.prev.dates[0])}`}
-          title={`Semaine ${week.next.num}`}
+          title={`Semaine ${week.prev.num}`}
           disabled={disabledPrev}
         >
           <KeyboardArrowLeftIcon />

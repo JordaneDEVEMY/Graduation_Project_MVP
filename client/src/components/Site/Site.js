@@ -22,8 +22,6 @@ function Site({
 }) {
   const theme = useTheme();
 
-  console.log(`site : ${name}`, assignments);
-
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
 

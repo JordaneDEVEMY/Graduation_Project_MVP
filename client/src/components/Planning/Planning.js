@@ -16,9 +16,10 @@ function Planning({
 }) {
   const theme = useTheme();
   const { id: userId } = user;
+  const week = dateFunctions.getWeek(startDate);
+  const { current: currentWeek } = week;
   console.log('assignments', assignments);
   console.log('absences', absences);
-  console.log('user', user);
 
   return (
     <>
@@ -29,7 +30,15 @@ function Planning({
       </Typography>
 
       {absences.map((absence) => (
-        <Alert severity="success" key={absence.id}>
+        <Alert
+          severity="success"
+          key={absence.id}
+          sx={{
+            mb: theme.spacing(2),
+            maxWidth: '30rem',
+            mx: 'auto',
+          }}
+        >
           {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MM YYYY')} 
           au ${dateFunctions.getDate(absence.ending_date).format('DD MM YYYY')} : 
           ${absence.reason}`}
@@ -42,16 +51,18 @@ function Planning({
             sx={{
               display: 'flex',
               gap: theme.spacing(2),
+              justifyContent: 'center',
+              flexWrap: 'wrap',
             }}
           >
             {assignments.map((assignment) => (
-              <SiteUser user={user} key={assignment.id} startDate={startDate} {...assignment} />
+              <SiteUser user={user} key={assignment.id} week={currentWeek} {...assignment} />
             ))}
           </Box>
         )
         : (
-          <Typography sx={{ textAlign: 'center' }}>
-            {'Aucun site d\'intervention à afficher.'}
+          <Typography sx={{ textAlign: 'center', mt: theme.spacing(2) }}>
+            {`Aucune intervention prévue en semaine ${currentWeek.num}.`}
           </Typography>
         )}
     </>

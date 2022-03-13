@@ -18,14 +18,10 @@ function PlanningAdmin({
   const isMobile = useBreakpointDown();
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
-  console.log('start date', startDate);
-  console.log('update assignment', assignment);
-  console.log('modalOpened', modalOpened);
-  console.log('isMobile', isMobile);
 
   const handleAssignment = (result) => {
     setAssignment(result);
-    console.log('handleAssignment', result);
+    console.log('updateAssignment', result);
   };
 
   const handleModal = () => {

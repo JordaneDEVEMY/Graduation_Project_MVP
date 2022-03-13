@@ -9,20 +9,17 @@ import { useTheme } from '@mui/material/styles';
 import SiteHeader from '../SiteHeader/SiteHeader';
 import Assignment from '../Assignment/Assignment';
 import assignmentBg from '../../Assets/images/sheet-bg.png';
-import dateFunctions from '../../utils/dateFunctions';
 import useBreakpointDown from '../../hooks/useBreakpointDown';
 
 function SiteUser({
   employees,
   id,
   site,
-  startDate,
   user,
+  week,
 }) {
   const theme = useTheme();
-  const week = dateFunctions.getWeek(startDate);
   const isMobile = useBreakpointDown();
-  const { current: currentWeek } = week;
   const { id: userId } = user;
 
   // accordion state
@@ -54,6 +51,7 @@ function SiteUser({
     >
       <SiteHeader
         name={site.name}
+        {...site}
       />
       {employees.length
         && (
@@ -79,7 +77,7 @@ function SiteUser({
                 starting_date={employee.starting_date}
                 userId={userId}
                 visibility
-                week={currentWeek}
+                week={week}
               />
             ))}
           </Box>
@@ -109,9 +107,14 @@ SiteUser.propTypes = {
     name: PropTypes.string.isRequired,
     zip_code: PropTypes.number.isRequired,
   }).isRequired,
-  startDate: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
+  }).isRequired,
+  week: PropTypes.shape({
+    num: PropTypes.number.isRequired,
+    dates: PropTypes.arrayOf(
+      PropTypes.string.isRequired,
+    ).isRequired,
   }).isRequired,
 };
 

@@ -27,10 +27,7 @@ function App({
   userId,
 }) {
   const [mode, setMode] = useState(utils.themeFunctions.getThemeMode());
-
   const theme = responsiveFontSizes(utils.getTheme(mode));
-
-  console.log(theme);
 
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);

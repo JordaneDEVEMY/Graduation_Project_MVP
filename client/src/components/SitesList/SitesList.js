@@ -17,10 +17,7 @@ function SitesList({
   week,
 }) {
   const theme = useTheme();
-  const { id, name, sites } = company;
-
-  console.log(`company ${name}`, sites);
-  console.log(`company ${name} is mobile, ${isMobile}`);
+  const { id, sites } = company;
 
   return (
     isMobile

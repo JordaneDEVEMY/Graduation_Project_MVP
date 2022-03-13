@@ -19,10 +19,6 @@ function PlanningAdminContainer() {
     weekSlug = planningFunctions.getCurrentWeekSlug();
   }
 
-  console.log('companies', companies);
-  console.log('startDate', startDate);
-  console.log('weekSlug', weekSlug);
-
   useEffect(() => {
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllSites());
