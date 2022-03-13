@@ -16,6 +16,7 @@ import planningFunctions from '../../utils/planningFunctions';
 function SelectWeek({
   date,
   isAdmin,
+  userId,
 }) {
   const theme = useTheme();
   const week = dateFunctions.getWeek(date);
@@ -27,11 +28,11 @@ function SelectWeek({
   const disabledNext = isAdmin
     ? false
     : (week.current.num === dateFunctions.getDate().isoWeek() + 1);
+  const path = isAdmin ? '/admins/planning/' : `/users/${userId}/planning`;
 
   const handleCurrentWeek = (dateStart) => {
     const slug = planningFunctions.getWeekSlugFromDate(dateStart);
-    console.log(slug);
-    return (<Navigate to={`/admins/planning/${slug}`} />);
+    return (<Navigate to={`${path}/${slug}`} />);
   };
 
   /**
@@ -66,7 +67,7 @@ function SelectWeek({
           key={i}
           value={i}
           component={Link}
-          to={`/admins/planning/${slug}`}
+          to={`${path}/${slug}`}
         >
           {`S${weekNum} - ${period}`}
 
@@ -109,7 +110,7 @@ function SelectWeek({
         <Grid item xs="auto">
           <Button
             component={Link}
-            to={`/admins/planning/${planningFunctions.getCurrentWeekSlug()}`}
+            to={`${path}/${planningFunctions.getCurrentWeekSlug()}`}
             variant="outlined"
             size="small"
             title="Semaine en cours"
@@ -122,7 +123,7 @@ function SelectWeek({
       <Grid item sm="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <IconButton
           component={Link}
-          to={`/admins/planning/${planningFunctions.getWeekSlugFromDate(week.prev.dates[0])}`}
+          to={`${path}/${planningFunctions.getWeekSlugFromDate(week.prev.dates[0])}`}
           title={`Semaine ${week.next.num}`}
           disabled={disabledPrev}
         >
@@ -159,7 +160,7 @@ function SelectWeek({
       <Grid item xs="auto" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <IconButton
           component={Link}
-          to={`/admins/planning/${planningFunctions.getWeekSlugFromDate(week.next.dates[0])}`}
+          to={`${path}/${planningFunctions.getWeekSlugFromDate(week.next.dates[0])}`}
           title={`Semaine ${week.next.num}`}
           disabled={disabledNext}
         >
@@ -174,5 +175,11 @@ SelectWeek.propTypes = {
   // handleCurrentWeek: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   date: PropTypes.string.isRequired,
+  userId: PropTypes.number,
 };
+
+SelectWeek.defaultProps = {
+  userId: undefined,
+};
+
 export default React.memo(SelectWeek);

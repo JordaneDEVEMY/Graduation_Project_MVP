@@ -112,7 +112,14 @@ function App({
                   element={(
                     <PlanningContainer />
                     )}
-                />
+                >
+                  <Route
+                    path=":weekSlug"
+                    element={(
+                      <PlanningContainer />
+                      )}
+                  />
+                </Route>
                 <Route
                   path={`:${userId}/profil`}
                   element={(

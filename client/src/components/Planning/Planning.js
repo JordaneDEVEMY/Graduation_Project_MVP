@@ -15,12 +15,14 @@ function Planning({
   user,
 }) {
   const theme = useTheme();
+  const { id: userId } = user;
   console.log('assignments', assignments);
   console.log('absences', absences);
+  console.log('user', user);
 
   return (
     <>
-      <SearchContainer isAdmin={false} date={startDate} />
+      <SearchContainer isAdmin={false} userId={userId} date={startDate} />
 
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
