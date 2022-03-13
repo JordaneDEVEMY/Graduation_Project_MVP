@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, Typography } from '@mui/material';
 import SearchContainer from '../SearchContainer/SearchContainer';
-import Cards from '../Cards/Cards';
+import SitesList from '../SitesList/SitesList';
 import dateFunctions from '../../utils/dateFunctions';
 import './planning.scss';
 
@@ -44,7 +44,7 @@ function Planning({
 
       {currentAssignments.length
         ? (
-          <Cards
+          <SitesList
             assignments={currentAssignments}
             id="cards-1"
             isAdmin={false}

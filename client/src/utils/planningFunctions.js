@@ -6,9 +6,61 @@ import dateFunctions from './dateFunctions';
 const planningFunctions = {
 
   /**
-   * Convert admin data in assignments array
-   * @param {object} planning - Planning data
-   * @returns {object} dayjs object.
+   * Convert user API data to a companies list
+   * @param {object} assignments and absences- Assignments list from API request
+   * @returns {object} object of Sites list containing assignments, and absences.
+   */
+  userPlanningToSites: (userData) => {
+    const sites = [];
+    const absences = [];
+    const { assignments } = userData;
+    console.log('userData', userData);
+
+    assignments.forEach((assignment) => {
+      const { absence, colleagues, site } = assignment;
+      console.log(absence.id === null);
+      if (absence.id === null) {
+        site.assignments = colleagues;
+        sites.push(site);
+      } else {
+        absences.push(absence);
+      }
+    });
+
+    return { absences, sites };
+  },
+
+  /**
+   * Get user infos from API data object
+   * @param {object} data - API data
+   * @returns {object} User data.
+   */
+  userFromData: (data) => {
+    const {
+      avatar,
+      firstname,
+      id,
+      label,
+      lastname,
+      mobileNumber,
+      phoneNumber,
+    } = data;
+
+    return ({
+      avatar,
+      firstname,
+      id,
+      label,
+      lastname,
+      mobileNumber,
+      phoneNumber,
+    });
+  },
+
+  /**
+   * Convert admin API data to a companies list
+   * @param {object} planning - Planning list from API request
+   * @returns {array} Companies list.
    */
   adminPlanningToCompanies: (planning) => {
     const companies = [];
@@ -51,24 +103,10 @@ const planningFunctions = {
   },
 
   /**
-   * Get all sites stored in an object
-   * @param {object} companies - Companies data
-   * @returns {object} Object of sites wich contains arrays.
-   */
-  getPlanningSites: (companies) => {
-    const planningSites = {};
-    companies.forEach(({ sites }) => {
-      sites.forEach((site) => {
-        planningSites[`site-${site.id}`] = site.assignments;
-      });
-    });
-
-    return planningSites;
-  },
-
-  /**
-   * Prepare dragEnd data to assignment form
-   * @returns {object} Datas ready for Assignment form
+   * Prepare data to assignment form after a drag and drop
+   * @param {object} drag - Drag and drop data
+   * @param {object} companies - Companies object
+   * @returns {object} Datas sended to Assignment form
    */
   getDraggedAssignment: (drag, companies) => {
     let result = {};
@@ -118,9 +156,10 @@ const planningFunctions = {
   },
 
   /**
-   * Get all cards of pallning stored in an object
-   * @param {object} companies - Companies data
-   * @returns {object} Object wich contains arrays.
+   * Refresh assignments position after a drag and drop
+   * @param {object} result - Drag and drop data
+   * @param {object} companies - Companies object
+   * @returns {object} Companies containing sorted assignments
    */
   setAssignmentPosition: (result, companies) => {
     const refresh = [...companies];
@@ -202,8 +241,8 @@ const planningFunctions = {
   },
 
   /**
-   * Get current year and week as string
-   * @returns {string} YYYY-<week number>
+   * Get current week slug
+   * @returns {string} Slug as YYYY-<week number>
    */
   getCurrentWeekSlug: () => {
     const year = dateFunctions.getDate().format('YYYY');
@@ -213,8 +252,8 @@ const planningFunctions = {
   },
 
   /**
-   * Get current year and week as string
-   * @returns {string} YYYY-<week number>
+   * Get week slug from a date string
+   * @returns {string} Slug as YYYY-<week number>
    */
   getWeekSlugFromDate: (date) => {
     const year = dateFunctions.getDate(date).format('YYYY');
@@ -224,8 +263,8 @@ const planningFunctions = {
   },
 
   /**
-   * Get current year and week as string
-   * @returns {string} YYYY-<week number>
+   * Get monday date as a string from a week slug
+   * @returns {string} YYYY-MM-DD date
    */
   getDateFromSlug: (slug) => {
     const regex = /^([0-9]{4})-([0-9]{2})$/;

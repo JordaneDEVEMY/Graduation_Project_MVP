@@ -110,7 +110,7 @@ function App({
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningContainer />
                     )}
                 />
                 <Route
