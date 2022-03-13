@@ -43,7 +43,16 @@ function SelectWeek({
     let y = new Date().getFullYear();
     const years = [];
     while (y >= maxOldYear) {
-      years.push(<MenuItem key={y} value={y}>{y}</MenuItem>);
+      years.push(
+        <MenuItem
+          key={y}
+          value={y}
+          component={Link}
+          to={`${path}/${y}-${week.current.num}`}
+        >
+          {y}
+        </MenuItem>,
+      );
       y -= 1;
     }
 
