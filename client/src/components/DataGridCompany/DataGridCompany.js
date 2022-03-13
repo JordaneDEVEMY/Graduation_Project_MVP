@@ -39,19 +39,19 @@ function DataGridCompany({
   }, [selectionModel]);
   const columns = [
     {
-      field: 'id', headerName: 'Id', width: 150, hide: true,
+      field: 'id', headerName: 'Id', width: 50, hide: true,
     },
     {
-      field: 'name', headerName: 'Nom', width: 150, editable: true,
+      field: 'name', headerName: 'Nom', width: 200, editable: true,
     },
     {
-      field: 'address', headerName: 'Adresse postale', width: 150, editable: true,
+      field: 'address', headerName: 'Adresse', width: 450, editable: true,
     },
     {
       field: 'zip_code', headerName: 'Code postal', width: 150, editable: true, valueParser: (value) => Number(value),
     },
     {
-      field: 'type', headerName: 'Type', width: 150, editable: true,
+      field: 'type', headerName: 'Type', width: 200, editable: true,
     },
   ];
   const rows = companies;

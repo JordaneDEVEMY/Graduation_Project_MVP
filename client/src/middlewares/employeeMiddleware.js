@@ -31,7 +31,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
         avatar,
         fonction,
         role_application,
-        label: qualification_label,
+        qualification_label,
       } = employee;
       const employeeDatas = {
         firstname,
