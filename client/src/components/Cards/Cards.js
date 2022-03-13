@@ -19,7 +19,6 @@ function Cards({
   week,
 }) {
   const theme = useTheme();
-
   return (
     isMobile
       ? (

@@ -44,7 +44,6 @@ function Sheet({
   const lastDayofWeek = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
   const startOnMonday = dateFunctions.getDate(starting_date).format('YYYY-MM-DD') === firstDayofWeek;
   const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
-
   return (
     <Accordion
       expanded={expandedSheet === `panel${index}`}
