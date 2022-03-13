@@ -40,25 +40,25 @@ function DataGridSite({
 
   const columns = [
     {
-      field: 'id', headerName: 'Id', width: 150, hide: true,
+      field: 'id', headerName: 'Id', width: 50, hide: true,
     },
     {
-      field: 'name', headerName: 'Nom', width: 150, editable: true,
+      field: 'name', headerName: 'Nom', width: 200, editable: true,
     },
     {
-      field: 'address', headerName: 'Adresse postale', width: 150, editable: true,
+      field: 'address', headerName: 'Adresse', width: 450, editable: true,
     },
     {
       field: 'zip_code', headerName: 'Code postal', width: 150, editable: true, valueParser: (value) => Number(value),
     },
     {
-      field: 'manager_name', headerName: 'Manager', width: 150, editable: true,
+      field: 'manager_name', headerName: 'Manager', width: 200, editable: true,
     },
     {
-      field: 'estimated_duration', headerName: 'Durée estimée (j)', width: 150, editable: true, valueParser: (value) => Number(value),
+      field: 'estimated_duration', headerName: 'Durée estimée (j)', width: 200, editable: true, valueParser: (value) => Number(value),
     },
     {
-      field: 'company_id', headerName: 'Compagnie parente', width: 150, editable: true, valueParser: (value) => Number(value),
+      field: 'company_id', headerName: 'Compagnie parente', width: 200, editable: true, valueParser: (value) => Number(value),
     },
   ];
   const rows = sites;

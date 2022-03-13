@@ -42,49 +42,49 @@ function DataGridEmployee({
   }, [selectionModel]);
   const columns = [
     {
-      field: 'id', headerName: 'Id', width: 150, hide: true,
+      field: 'id', headerName: 'Id', width: 50, hide: true,
     },
     {
-      field: 'firstname', headerName: 'Prénom', width: 150, editable: true,
+      field: 'firstname', headerName: 'Prénom', width: 200, editable: true,
     },
     {
-      field: 'lastname', headerName: 'Nom', width: 150, editable: true,
+      field: 'lastname', headerName: 'Nom', width: 200, editable: true,
     },
     {
-      field: 'email', headerName: 'Email', width: 150, editable: true,
+      field: 'email', headerName: 'Email', width: 400, editable: true,
     },
     {
-      field: 'phone_number', headerName: 'Téléphone fixe', width: 150, editable: true,
+      field: 'phone_number', headerName: 'Téléphone fixe', width: 200, editable: true,
     },
     {
-      field: 'mobile_number', headerName: 'Téléphone portable', width: 150, editable: true,
+      field: 'mobile_number', headerName: 'Téléphone portable', width: 200, editable: true,
     },
     {
-      field: 'address', headerName: 'Adresse', width: 150, editable: true,
+      field: 'address', headerName: 'Adresse', width: 450, editable: true,
     },
     {
-      field: 'zip_code', headerName: 'Code postal', width: 80, editable: true, valueParser: (value) => Number(value),
+      field: 'zip_code', headerName: 'Code postal', width: 150, editable: true, valueParser: (value) => Number(value),
     },
     {
-      field: 'social_security_number', headerName: 'Numéro de sécurité sociale', width: 150, editable: true,
+      field: 'social_security_number', headerName: 'Numéro de sécurité sociale', width: 300, editable: true,
     },
     {
-      field: 'date_of_birth', headerName: 'Date de naissance', width: 150, editable: true,
+      field: 'date_of_birth', headerName: 'Date de naissance', width: 300, editable: true,
     },
     {
-      field: 'starting_date', headerName: "Date d'entrée", width: 150, editable: true,
+      field: 'starting_date', headerName: "Date d'entrée", width: 300, editable: true,
     },
     {
-      field: 'avatar', headerName: 'Avatar', width: 150, editable: true,
+      field: 'avatar', headerName: 'Avatar', width: 200, editable: true,
     },
     {
-      field: 'fonction', headerName: 'Fonction', width: 150, editable: true,
+      field: 'fonction', headerName: 'Fonction', width: 200, editable: true,
     },
     {
-      field: 'role_application', headerName: 'Rôle', width: 150, editable: true,
+      field: 'role_application', headerName: 'Rôle', width: 200, editable: true,
     },
     {
-      field: 'label', headerName: 'Qualification', width: 150, editable: true,
+      field: 'label', headerName: 'Qualification', width: 200, editable: true,
     },
   ];
   const rows = employees;
@@ -106,7 +106,7 @@ function DataGridEmployee({
   return (
     <>
       <Typography variant="h2" sx={{ textAlign: 'center' }}>
-        Employés
+        Tous les Employés
       </Typography>
       <Box sx={{ height: '80%', width: 'auto' }}>
         {showAlert && (
@@ -138,7 +138,9 @@ function DataGridEmployee({
         </Button>
         <DataGrid
           disableSelectionOnClick
-          sx={{ fontSize: '1.2rem' }}
+          sx={{
+            fontSize: '1.2rem',
+          }}
           disableColumnMenu
           checkboxSelection
           onSelectionModelChange={(newSelectionModel) => {

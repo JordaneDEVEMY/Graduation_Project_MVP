@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import {
-  Grid, Button, Typography, Divider, Box,
+  Grid, Button, Typography, Divider, Box, Select, MenuItem, InputLabel, FormControl,
 } from '@mui/material';
 import RoleFieldForm from '../FieldForms/RoleFieldForm';
 import TextInput from '../FieldForms/TextInput';
@@ -14,6 +15,7 @@ function CreateUserForm({
   employee,
   handleClose,
 }) {
+  const qualifications = useSelector((state) => state.admin.allQualifications);
   const handleSubmit = (e) => {
     e.preventDefault();
     handleCreateEmployee();
@@ -173,13 +175,24 @@ function CreateUserForm({
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextInput
-              handleChange={changeField}
-              type="text"
-              nameValue="qualification_label"
-              label="Label"
-              value={employee.qualification_label}
-            />
+            <FormControl required sx={{ minWidth: 120 }}>
+              <InputLabel id="label">Label</InputLabel>
+              <Select
+                sx={{ maxWidth: '400px', minWidth: '300px' }}
+                labelId="label"
+                label="label *"
+                value={employee.qualification_label}
+                nameValue="qualification_label"
+                onChange={(event) => changeField('qualification_label', event.target.value)}
+              >
+                <MenuItem value="">Sélectionnez un label</MenuItem>
+                {
+                qualifications.map(({ id, label }) => (
+                  <MenuItem value={label} key={id}>{label}</MenuItem>
+                ))
+              }
+              </Select>
+            </FormControl>
           </Grid>
 
           <Grid container spacing={1} mt={1} sx={{ textAlign: 'center' }}>
