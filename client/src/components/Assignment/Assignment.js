@@ -14,7 +14,6 @@ import {
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import PropTypes from 'prop-types';
 import dateFunctions from '../../utils/dateFunctions';
-import './sheet.scss';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
