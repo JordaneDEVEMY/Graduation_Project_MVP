@@ -121,7 +121,7 @@ module.exports = {
         "employee"."firstname",
         "employee"."lastname",
         "employee"."email",
-        "employee"."phone_number",
+        "employee"."phone_number", 
         "employee"."mobile_number",
         "employee"."address",
         "employee"."zip_code",
