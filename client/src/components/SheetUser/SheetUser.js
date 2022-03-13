@@ -22,8 +22,6 @@ function SheetUser({
   const startOnMonday = dateFunctions.getDate(starting_date).format('YYYY-MM-DD') === firstDayofWeek;
   const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
   const color = '#ed6c02';
-  const { firstname, lastname } = user;
-
   return (
     <Box
       sx={{
@@ -47,7 +45,7 @@ function SheetUser({
           whiteSpace: 'nowrap',
         }}
       >
-        {`${firstname} ${lastname}`}
+        {`${user.firstname} ${user.lastname}`}
       </Typography>
 
       {(!startOnMonday || !finishOnFriday)
@@ -71,8 +69,6 @@ function SheetUser({
 
 SheetUser.propTypes = {
   ending_date: PropTypes.string.isRequired,
-  firstname: PropTypes.string.isRequired,
-  lastname: PropTypes.string.isRequired,
   starting_date: PropTypes.string.isRequired,
   user: PropTypes.shape({
     firstname: PropTypes.string.isRequired,

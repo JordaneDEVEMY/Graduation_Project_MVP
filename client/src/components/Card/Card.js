@@ -39,7 +39,7 @@ function Card({
   const handleCollapse = (accordionId) => (event, isExpanded) => {
     setExpandedSheet(isExpanded ? accordionId : '');
   };
-
+  console.log('user-card', user);
   return (
     <Box
       sx={{

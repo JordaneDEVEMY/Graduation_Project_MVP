@@ -22,7 +22,6 @@ function SheetList({
   week,
 }) {
   const theme = useTheme();
-
   return (
     <>
       {employees.map((employee, index) => (
@@ -69,6 +68,7 @@ function SheetList({
               isAdmin={isAdmin}
               isDraggable={false}
               isMobile={isMobile}
+              week={week}
               {...employee}
             />
           )
