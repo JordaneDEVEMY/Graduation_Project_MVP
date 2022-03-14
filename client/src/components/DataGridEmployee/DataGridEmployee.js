@@ -84,7 +84,7 @@ function DataGridEmployee({
       field: 'role_application', headerName: 'Rôle', width: 200, editable: true,
     },
     {
-      field: 'label', headerName: 'Qualification', width: 200, editable: true,
+      field: 'qualification_label', headerName: 'Qualification', width: 200, editable: true,
     },
   ];
   const rows = employees;

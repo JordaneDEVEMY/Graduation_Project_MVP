@@ -132,7 +132,7 @@ module.exports = {
         "employee"."avatar",
         "employee"."role_application",
         "employee"."employee_qualification_id",
-        "employee_qualification"."label" AS "label",
+        "employee_qualification"."label" AS qualification_label,
         "employee"."created_at"
       FROM
         "employee"

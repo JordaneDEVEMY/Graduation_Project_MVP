@@ -2,7 +2,7 @@
 
 BEGIN;
 
-CREATE OR REPLACE FUNCTION insert_company (s json) RETURNS company AS $$
+CREATE OR REPLACE FUNCTION insert_company (c json) RETURNS company AS $$
 	
 		INSERT INTO "company"
 			(
@@ -12,10 +12,10 @@ CREATE OR REPLACE FUNCTION insert_company (s json) RETURNS company AS $$
 				"type"
 			)
 			VALUES (
-				(s->> 'name')::text,
-				(s->> 'address')::text,
-				(s->> 'zip_code')::int,
-				(s->> 'type')::text
+				(c->> 'name')::text,
+				(c->> 'address')::text,
+				(c->> 'zip_code')::int,
+				(c->> 'type')::text
 			) RETURNING *;
 
 $$ LANGUAGE sql;
