@@ -34,6 +34,7 @@ function CreateUserForm({
         <Grid container spacing={1} mt={1} sx={{ textAlign: 'center', marginBottom: '15px' }}>
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="name"
@@ -43,6 +44,7 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="address"
@@ -52,6 +54,7 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="zip_code"
@@ -62,6 +65,7 @@ function CreateUserForm({
 
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="manager_name"
@@ -71,6 +75,7 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="estimated_duration"
