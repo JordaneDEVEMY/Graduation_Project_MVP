@@ -1,7 +1,7 @@
 // ? Datamapper ?
-const fs = require('fs');
-const { promisify } = require('util');
-const pipeline = promisify(require('stream').pipeline);
+// const fs = require('fs');
+// const { promisify } = require('util');
+// const pipeline = promisify(require('stream').pipeline);
 
 // ! const { ApiError } = require('../../../helpers/errorHandler');
 
@@ -14,11 +14,12 @@ const controller = {
    * @returns {string} Route API JSON response
    */
   async uploadAvatar(req, res) {
-    const { file } = req;
+    let { file } = req;
     console.log('file: uploadController.js ~ line 18 ~ uploadAvatar ~ file', file);
-    const fileName = `${req.body.name}.jpg`;
+    const fileName = `${req.body.lastname}-${req.body.social_security_number}.jpg`;
     console.log('file: uploadController.js ~ line 20 ~ uploadAvatar ~ fileName', fileName);
 
+    file = fileName;
     // await pipeline(
     //   req.file.stream,
     //   fs.createWriteStream(
@@ -26,7 +27,7 @@ const controller = {
     //   ),
     // );
     // console.log('file: uploadController.js ~ line 25 ~ uploadAvatar ~ pipeline', pipeline);
-    res.send('image upload');
+    res.send({ imagePath: `server/app/public/uploads/avatars/${fileName}` });
   },
 
 };
