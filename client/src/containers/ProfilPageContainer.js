@@ -8,6 +8,7 @@ function ProfilPageContainer() {
   const isLogged = useSelector((state) => state.login.isLogged);
   const user = useSelector((state) => state.user);
 
+  const userEmail = useSelector((state) => state.login.email);
   const userPassword = useSelector((state) => state.user.password);
   const userConfirmPassword = useSelector((state) => state.user.confirmPassword);
 
@@ -29,6 +30,7 @@ function ProfilPageContainer() {
       updateUserInformations={updateUserInformations}
       userPassword={userPassword}
       userConfirmPassword={userConfirmPassword}
+      userEmail={userEmail}
     />
   );
 }
