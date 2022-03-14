@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  Box, Typography, Grid, Button, Divider, useTheme, TextField,
+  Box, Typography, Grid, Button, Divider, useTheme,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-// import TextInput from '../FieldForms/TextInput';
+import TextInput from '../FieldForms/TextInput';
 
 function ForgotPassword({
-  handleChange,
+  changeField,
   sendEmail,
 }) {
   const theme = useTheme();
@@ -33,12 +33,12 @@ function ForgotPassword({
         <form onSubmit={handleSendEmail}>
           <Grid container rowSpacing={2}>
             <Grid item xs={12}>
-              <TextField
+              <TextInput
                 required
                 type="email"
-                name="email"
                 label="E-mail"
-                onChange={(event) => handleChange('email', event.target.value)}
+                nameValue="email"
+                handleChange={changeField}
               />
             </Grid>
             <Grid item xs={12}>
@@ -58,7 +58,7 @@ function ForgotPassword({
 }
 
 ForgotPassword.propTypes = {
-  handleChange: PropTypes.func.isRequired,
+  changeField: PropTypes.func.isRequired,
   sendEmail: PropTypes.func.isRequired,
 };
 

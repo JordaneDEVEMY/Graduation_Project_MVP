@@ -8,8 +8,8 @@ function ForgotPasswordContainer() {
 
   const dispatch = useDispatch();
 
-  const handleChange = (value) => {
-    dispatch(actionUpdateEmailInput(value));
+  const changeField = (key, value) => {
+    dispatch(actionUpdateEmailInput(key, value));
   };
 
   const sendEmail = () => {
@@ -20,7 +20,7 @@ function ForgotPasswordContainer() {
     <ForgotPassword
       email={email}
       sendEmail={sendEmail}
-      handleChange={handleChange}
+      changeField={changeField}
     />
   );
 }

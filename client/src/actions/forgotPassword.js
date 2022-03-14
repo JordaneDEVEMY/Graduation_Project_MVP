@@ -1,14 +1,14 @@
 export const UPDATE_EMAIL_INPUT = 'UPDATE_EMAIL_INPUT';
 export const SUBMIT_EMAIL = 'SEND_EMAIL';
 
-export function actionUpdateEmailInput(value) {
+export function actionUpdateEmailInput(key, value) {
   return {
-    type: UPDATE_EMAIL_INPUT, payload: value,
+    type: UPDATE_EMAIL_INPUT, payload: { key, value },
   };
 }
 
-export function actionSubmitEmail(email) {
+export function actionSubmitEmail() {
   return {
-    type: SUBMIT_EMAIL, payload: email,
+    type: SUBMIT_EMAIL,
   };
 }
