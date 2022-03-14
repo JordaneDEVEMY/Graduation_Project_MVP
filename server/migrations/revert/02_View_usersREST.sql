@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP VIEW get_user_rest;
+DROP VIEW get_user_rest CASCADE;
 
 COMMIT;
