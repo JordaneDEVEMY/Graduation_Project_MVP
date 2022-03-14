@@ -10,14 +10,16 @@ CREATE OR REPLACE FUNCTION insert_site (s json) RETURNS site AS $$
 				"address",
 				"zip_code",
 				"manager_name",
-				"company_id"
+				"company_id",
+				"estimated_duration"
 			)
 			VALUES (
 				(s->> 'name')::text,
 				(s->> 'address')::text,
 				(s->> 'zip_code')::int,
 				(s->> 'manager_name')::text,
-				(s->> 'company_id')::int
+				(s->> 'company_id')::int,
+				(s->> 'estimated_duration')::int
 			) RETURNING *;
 
 $$ LANGUAGE sql;
