@@ -195,7 +195,9 @@ module.exports = {
    * @returns {UserCreate} - Return the new user
    */
   async insert(user) {
+    console.log('file: user.js ~ line 198 ~ insert ~ user', user);
     const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
+    console.log('file: user.js ~ line 200 ~ insert ~ qualificationId', qualificationId);
 
     if (qualificationId.rowCount === 0) {
       throw new ApiError(400, 'Cette qualification n\'existe pas');

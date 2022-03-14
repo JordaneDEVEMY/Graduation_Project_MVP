@@ -15,19 +15,12 @@ const controller = {
    */
   async uploadAvatar(req, res) {
     let { file } = req;
-    console.log('file: uploadController.js ~ line 18 ~ uploadAvatar ~ file', file);
+
     const fileName = `${req.body.lastname}-${req.body.social_security_number}.jpg`;
-    console.log('file: uploadController.js ~ line 20 ~ uploadAvatar ~ fileName', fileName);
 
     file = fileName;
-    // await pipeline(
-    //   req.file.stream,
-    //   fs.createWriteStream(
-    //     `${__dirname}/../client/src/Assets/images/avatars/${fileName}`,
-    //   ),
-    // );
-    // console.log('file: uploadController.js ~ line 25 ~ uploadAvatar ~ pipeline', pipeline);
-    res.send({ imagePath: `server/app/public/uploads/avatars/${fileName}` });
+
+    res.send({ imagePath: `http://localhost:4000/uploads/avatars/${fileName}` });
   },
 
 };

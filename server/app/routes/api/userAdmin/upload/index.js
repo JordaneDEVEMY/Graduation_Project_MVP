@@ -1,14 +1,12 @@
 const express = require('express');
 
 const multer = require('multer');
-// const avatarRouter = require('./avatar');
+
 const uploadController = require('../../../../controllers/api/userAdmin/uploadController');
 const controllerHandler = require('../../../../helpers/apiControllerHandler');
 
 const router = express.Router();
 const { ApiError } = require('../../../../helpers/errorHandler');
-
-// const upload = multer({ dest: `${__dirname}/../../../../public/uploads/avatars` });
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -27,15 +25,16 @@ router
   .get((req, res) => {
     res.render('upload-avatar', { title: "O'lleks - API" });
   })
+  /**
+   * POST /api/admin/upload/avatar
+   * @summary Upload an avatar inside the server
+   * @tags 9.UserAdmin - Upload Section
+   * @param {AvatarToUpload} request.body.required - All for upload an avatar
+   * @return {UploadReturn} 200 - success response - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - User not found - application/json
+   */
   .post(upload.single('image'), controllerHandler(uploadController.uploadAvatar));
-
-router
-  .route('/avatar/getFile/:path')
-  .get((req, res) => {
-    const { path } = req.params;
-    res.setHeader('Content-type', 'text/html').write(`<img src="${__dirname}/../../../../public/uploads/avatars/${path}.jpg">`);
-    res.send();
-  });
 
 router.use(() => {
   throw new ApiError(404, 'Page introuvable');
