@@ -1,10 +1,11 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import {
-  Grid, Card, CardContent, CardActions, Link, Typography, Button, IconButton, TextField, InputAdornment,
+  Grid, Card, CardContent, CardActions, Link, Typography, Button, IconButton, TextField, InputAdornment, Alert,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -19,9 +20,11 @@ function Login({
   passwordValue,
   changeField,
   handleLogin,
+  // isLogged,
 }) {
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const theme = useTheme();
 
@@ -42,6 +45,9 @@ function Login({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin();
+    if (status.err === 422) {
+      setShowAlert(true);
+    }
   };
 
   /**
@@ -123,6 +129,9 @@ function Login({
           </Grid>
         </Grid>
       </CardContent>
+      {showAlert && (
+      <Alert sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center' }} severity="error">Attention, vos identifiants sont incorrects !</Alert>
+      )}
       <CardActions sx={{ p: theme.spacing(2) }}>
         <Button
           type="submit"
@@ -149,8 +158,10 @@ Login.propTypes = {
   passwordValue: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
+  // isLogged: PropTypes.bool,
 };
 Login.defaultProps = {
+  // isLogged: false,
 };
 
 export default React.memo(Login);
