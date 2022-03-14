@@ -1,64 +1,48 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionGetUserPlanning } from '../actions/user';
-import { actionRequestAdminPlanning } from '../actions/admin';
-import { actionRequestAllCompanies } from '../actions/allCompanies';
-import { actionRequestAllSites } from '../actions/allSites';
-import { actionRequestAllEmployees } from '../actions/allEmployees';
 import Planning from '../components/Planning/Planning';
-import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import dateFunctions from '../utils/dateFunctions';
+import planningFunctions from '../utils/planningFunctions';
 
-function PlanningContainer({
-  date,
-}) {
+function PlanningContainer() {
+  let { weekSlug } = useParams();
+  if (weekSlug === undefined) {
+    weekSlug = planningFunctions.getCurrentWeekSlug();
+  }
+
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const { isAdmin } = user;
-
-  const weekStart = isAdmin ? useSelector((state) => state.admin.weekStart) : date;
-  const planning = isAdmin && useSelector((state) => state.admin.planning);
-
-  const [startDate, setStartDate] = React.useState(weekStart);
+  const userData = useSelector((state) => state.user);
+  const user = planningFunctions.userFromData(userData);
+  const [startDate, setStartDate] = React.useState(dateFunctions.getDate().format('YYYY-MM-DD'));
+  const [absences, setAbsences] = React.useState(planningFunctions.userPlanningToAbsences(userData, weekSlug));
+  const [assignments, setAssignments] = React.useState(planningFunctions.userPlanningToAssignments(userData, weekSlug));
 
   useEffect(() => {
     dispatch(actionGetUserPlanning());
-
-    if (isAdmin) {
-      dispatch(actionRequestAllEmployees());
-      dispatch(actionRequestAllSites());
-      dispatch(actionRequestAllCompanies());
-      dispatch(actionRequestAdminPlanning());
-    }
-    setStartDate(weekStart);
   }, []);
 
+  useEffect(() => {
+    setStartDate(planningFunctions.getDateFromSlug(weekSlug));
+    setAbsences(planningFunctions.userPlanningToAbsences(userData, weekSlug));
+    setAssignments(planningFunctions.userPlanningToAssignments(userData, weekSlug));
+  }, [weekSlug]);
+
+  useEffect(() => {
+    setAbsences(planningFunctions.userPlanningToAbsences(userData, weekSlug));
+    setAssignments(planningFunctions.userPlanningToAssignments(userData, weekSlug));
+  }, [userData]);
+
   return (
-    !isAdmin
-      ? (
-        <Planning
-          user={user}
-          startDate={startDate}
-          handleStartDate={setStartDate}
-        />
-      )
-      : (
-        <PlanningAdmin
-          planning={planning}
-          startDate={startDate}
-          handleStartDate={setStartDate}
-        />
-      )
+    <Planning
+      absences={absences}
+      assignments={assignments}
+      startDate={startDate}
+      user={user}
+    />
   );
 }
-
-PlanningContainer.propTypes = {
-  date: PropTypes.string,
-};
-
-PlanningContainer.defaultProps = {
-  date: dateFunctions.getDate().format('YYYY-MM-DD'),
-};
 
 export default React.memo(PlanningContainer);

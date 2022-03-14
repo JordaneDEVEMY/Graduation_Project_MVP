@@ -3,18 +3,27 @@ import {
   createAssignment, updateAssignment, deleteAssignment,
 } from '../requests/assignmentRequest';
 import { requestAdminPlanning } from '../requests/adminPlanningRequest';
+import { requestAllQualifications } from '../requests/qualificationsRequest';
 import * as actions from '../actions';
 
 const adminPlanningMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case actions.REQUEST_ADMIN_PLANNING: {
-      const response = await requestAdminPlanning();
+      const response = await requestAdminPlanning(action.payload);
 
       if (response.status === 200) {
         const { weekStart, absences, planning } = response.data;
 
         store.dispatch(actions.actionGetAdminPlanning({ weekStart, absences, planning }));
         store.dispatch(actions.actionGetUserPlanning());
+        store.dispatch(actions.actionRequestAllQualifications());
+      }
+      return;
+    }
+    case actions.REQUEST_ALL_QUALIFICATIONS: {
+      const response = await requestAllQualifications();
+      if (response.status === 200) {
+        store.dispatch(actions.actionGetAllQualifications(response.data));
       }
       return;
     }

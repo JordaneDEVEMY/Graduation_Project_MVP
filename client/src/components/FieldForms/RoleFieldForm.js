@@ -22,16 +22,16 @@ function RoleFieldForm({
           value="admin"
           control={<Radio size="small" />}
           label="Administrateur"
-          name="roleApplication"
-          onChange={(event) => handleChange('roleApplication', event.target.value)}
+          name="role_application"
+          onChange={(event) => handleChange('role_application', event.target.value)}
         />
         <FormControlLabel
           key="user"
           value="user"
           control={<Radio size="small" />}
           label="Employé"
-          name="roleApplication"
-          onChange={(event) => handleChange('roleApplication', event.target.value)}
+          name="role_application"
+          onChange={(event) => handleChange('role_application', event.target.value)}
         />
       </RadioGroup>
     </FormControl>

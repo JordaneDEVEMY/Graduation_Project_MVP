@@ -24,11 +24,13 @@ const Accordion = styled((props) => (
 }));
 
 function Sheet({
+  assignmentId,
   color,
   expandedSheet,
   ending_date,
   handleAssignment,
   handleCollapse,
+  id,
   index,
   isAdmin,
   isDraggable,
@@ -42,7 +44,6 @@ function Sheet({
   const lastDayofWeek = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
   const startOnMonday = dateFunctions.getDate(starting_date).format('YYYY-MM-DD') === firstDayofWeek;
   const finishOnFriday = dateFunctions.getDate(ending_date).format('YYYY-MM-DD') === lastDayofWeek;
-
   return (
     <Accordion
       expanded={expandedSheet === `panel${index}`}
@@ -72,7 +73,28 @@ function Sheet({
             whiteSpace: 'nowrap',
           }}
         >
+          <Typography
+            component="small"
+            sx={{
+              marginRight: '.5rem',
+              opacity: '.5',
+              fontSize: '.75rem',
+            }}
+          >
+            {`#${assignmentId}`}
+          </Typography>
+
           {`${firstname} ${lastname}`}
+
+          <Typography
+            component="small"
+            sx={{
+              marginRight: '.5rem',
+              opacity: '.5',
+            }}
+          >
+            {`#${id}`}
+          </Typography>
         </Typography>
 
         {(!startOnMonday || !finishOnFriday)
@@ -81,7 +103,7 @@ function Sheet({
             component="small"
             sx={{
               ml: 'auto',
-              display: 'inline-block',
+              display: 'none',
               fontSize: '.75rem',
               lineHeight: '1.5rem',
             }}
@@ -140,11 +162,13 @@ function Sheet({
 }
 
 Sheet.propTypes = {
+  assignmentId: PropTypes.number.isRequired,
   color: PropTypes.string,
   ending_date: PropTypes.string.isRequired,
   expandedSheet: PropTypes.string.isRequired,
   handleAssignment: PropTypes.func,
   handleCollapse: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isDraggable: PropTypes.bool.isRequired,

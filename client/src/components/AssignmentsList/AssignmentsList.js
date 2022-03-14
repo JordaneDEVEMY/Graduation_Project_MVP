@@ -4,33 +4,26 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
 import { Draggable } from 'react-beautiful-dnd';
-import Sheet from '../Sheet/Sheet';
-import sheetListBg from '../../Assets/images/sheet-bg.png';
-import './sheetlist.scss';
+import Assignment from '../Assignment/Assignment';
 
-function SheetList({
-  cardId,
-  employees,
+function AssignmentsList({
+  assignments,
   expandedSheet,
   handleAssignment,
   handleCollapse,
-  isAdmin,
   isDraggable,
   isMobile,
   week,
 }) {
-  const theme = useTheme();
-
   return (
     <>
-      {employees.map((employee, index) => (
+      {assignments.map((assignment, index) => (
         isDraggable
           ? (
             <Draggable
-              key={`card-${cardId}-sheet-${index}`}
-              draggableId={`card-${cardId}-sheet-${employee.id}`}
+              key={`assignment-${assignment.id}-draggable`}
+              draggableId={`assignment-${assignment.id}`}
               index={index}
             >
               {(provided, snapshot) => (
@@ -39,72 +32,62 @@ function SheetList({
                     opacity: snapshot.isDragging ? '0.5' : 1,
                   }}
                   ref={provided.innerRef}
-                  key={`card-${cardId}-employee-${employee.id}-wrapper`}
+                  key={`assignment-${assignment.id}-wrapper`}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
-                  <Sheet
-                    key={`card-${cardId}-employee-${employee.id}`}
-                    index={index}
+                  <Assignment
+                    {...assignment}
+                    expandedSheet={expandedSheet}
                     handleAssignment={handleAssignment}
                     handleCollapse={handleCollapse}
-                    expandedSheet={expandedSheet}
-                    isAdmin={isAdmin}
+                    index={index}
+                    key={`assignment-${assignment.id}`}
                     isDraggable
-                    isMobile={isMobile}
+                    isMobile={false}
                     week={week}
-                    {...employee}
                   />
                 </Box>
               )}
             </Draggable>
           )
           : (
-            <Sheet
-              key={`card-${cardId}-employee-${employee.id}`}
-              index={index}
+            <Assignment
+              {...assignment}
+              expandedSheet={expandedSheet}
               handleAssignment={handleAssignment}
               handleCollapse={handleCollapse}
-              expandedSheet={expandedSheet}
-              isAdmin={isAdmin}
+              index={index}
+              key={`assignment-${assignment.id}`}
               isDraggable={false}
               isMobile={isMobile}
-              {...employee}
+              week={week}
             />
           )
       ))}
-      {employees.length % 10 !== 0 && (
-      <Box
-        sx={{
-          position: 'sticky',
-          top: Math.ceil(employees.length % 10) * 50,
-          left: 0,
-          width: '100%',
-          height: 500 - (Math.ceil(employees.length % 10) * 50),
-          background: `${theme.palette.background.component} url('${sheetListBg}') repeat-y center top`,
-          zIndex: employees.length,
-          opacity: '.5',
-        }}
-      />
-      )}
     </>
   );
 }
 
-SheetList.propTypes = {
-  cardId: PropTypes.number.isRequired,
-  employees: PropTypes.arrayOf(
+AssignmentsList.propTypes = {
+  assignments: PropTypes.arrayOf(
     PropTypes.shape({
-      color: PropTypes.string,
+      color: PropTypes.string.isRequired,
+      employee: PropTypes.shape({
+        firstname: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        lastname: PropTypes.string.isRequired,
+      }).isRequired,
+      ending_date: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
-      firstname: PropTypes.string.isRequired,
-      lastname: PropTypes.string.isRequired,
+      position: PropTypes.number.isRequired,
+      starting_date: PropTypes.string.isRequired,
+      visibility: PropTypes.bool.isRequired,
     }).isRequired,
   ).isRequired,
   expandedSheet: PropTypes.string.isRequired,
   handleAssignment: PropTypes.func,
   handleCollapse: PropTypes.func.isRequired,
-  isAdmin: PropTypes.bool.isRequired,
   isDraggable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({
@@ -114,7 +97,9 @@ SheetList.propTypes = {
     ).isRequired,
   }).isRequired,
 };
-SheetList.defaultProps = {
+
+AssignmentsList.defaultProps = {
   handleAssignment: undefined,
 };
-export default React.memo(SheetList);
+
+export default React.memo(AssignmentsList);

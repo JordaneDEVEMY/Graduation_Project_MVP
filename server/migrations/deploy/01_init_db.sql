@@ -113,10 +113,17 @@ CREATE DOMAIN posint AS int
 
 CREATE DOMAIN check_age AS timestamptz
 		CHECK (VALUE < now() - '17 years'::interval);
+    
+CREATE DOMAIN num_ss_fr AS text
+  CHECK(
+      VALUE ~ '^[1-2][0-9][0-9][0-1][1-9][0-9][0-9].{7}'
+); 
 
 ALTER TABLE "employee"
-    ALTER COLUMN "employee_qualification_id" TYPE posint,
-    ALTER COLUMN "date_of_birth" TYPE check_age;
+  ALTER COLUMN "employee_qualification_id" TYPE posint,
+  ALTER COLUMN "social_security_number" TYPE num_ss_fr,
+  ALTER COLUMN "date_of_birth" TYPE check_age;
+
 
 ALTER TABLE "assignment"
     ALTER COLUMN "position" TYPE posint

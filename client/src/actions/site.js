@@ -6,7 +6,7 @@ export const DELETE_SITE = 'DELETE_SITE';
 
 // get site informations
 export const GET_SITE_INFORMATIONS = 'GET_SITE_INFORMATIONS';
-export const GET_SITE_ID = 'GET_SITE_ID';
+export const GET_SITE_ID_TO_DELETE = 'GET_SITE_ID_TO_DELETE';
 
 // create or update site informations
 export const SET_SITE_INFORMATION = 'SET_SITE_INFORMATION';
@@ -41,33 +41,29 @@ export function actionDeleteSite() {
 export function actionGetSiteInformations({
   id,
   name,
-  adress,
-  zipCode,
-  managerName,
-  estimatedDuration,
-  companyId,
-  createdAt,
-  updatedAt,
+  address,
+  zip_code,
+  manager_name,
+  estimated_duration,
+  company_id,
 }) {
   return {
     type: GET_SITE_INFORMATIONS,
     payload: {
       id,
       name,
-      adress,
-      zipCode,
-      managerName,
-      estimatedDuration,
-      companyId,
-      createdAt,
-      updatedAt,
+      address,
+      zip_code,
+      manager_name,
+      estimated_duration,
+      company_id,
     },
   };
 }
 
-export function actionGetSiteId(id) {
+export function actionGetSiteIdToDelete(ids) {
   return {
-    type: GET_SITE_ID, payload: id,
+    type: GET_SITE_ID_TO_DELETE, payload: ids,
   };
 }
 
