@@ -9,11 +9,11 @@ SELECT insert_assignment(
 		"color": "#F0F",
 		"position": 0,
 		"visibility": true,
-		"employee_id": 24,
+		"employee_id": 1,
 		"absence_id": null,
 		"site_id": 8					
 	}'
 
-)
+);
 
 ROLLBACK;
