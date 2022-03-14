@@ -122,7 +122,6 @@ VALUES
 ('2022-03-14 00:00:00+00','2022-03-27 00:00:00+00','#b8c63b',14,null,16),
 ('2022-03-14 00:00:00+00','2022-03-27 00:00:00+00','#c0a9f2',15,null,16);
 
-
 INSERT INTO "contact" ("email","firstname","lastname","mobile_number","fonction","company_id")
 VALUES
 ('burton_harriet5889@edf.com','Harriet','Burton','0602182411','Assistant_technique',1),
@@ -156,3 +155,4 @@ VALUES
 ('Intérim','2022-03-01 10:01:35',6,19),
 ('Intérim','2022-03-01 18:32:12',6,20),
 ('Intérim','2022-03-01 19:41:06',7,21);
+

@@ -109,7 +109,7 @@ ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id")
 
 
 CREATE DOMAIN posint AS int
-    CHECK(VALUE > 0);
+    CHECK(VALUE > 0 OR VALUE = null);
 
 CREATE DOMAIN check_age AS timestamptz
 		CHECK (VALUE < now() - '17 years'::interval);
@@ -126,19 +126,19 @@ ALTER TABLE "employee"
 
 
 ALTER TABLE "assignment"
-    ALTER COLUMN "position" TYPE posint
-    ALTER COLUMN "employee_id" TYPE posint
-    ALTER COLUMN "absence_id" TYPE posint
+    ALTER COLUMN "position" TYPE posint,
+    ALTER COLUMN "employee_id" TYPE posint,
+    ALTER COLUMN "absence_id" TYPE posint,
     ALTER COLUMN "site_id" TYPE posint;
 
 ALTER TABLE "employee_contract"
-    ALTER COLUMN "duration" TYPE posint
-    ALTER COLUMN "company_id" TYPE posint
+    ALTER COLUMN "duration" TYPE posint,
+    ALTER COLUMN "company_id" TYPE posint,
     ALTER COLUMN "employee_id" TYPE posint;
 
 
 ALTER TABLE "site"
-    ALTER COLUMN "estimated_duration" TYPE posint
+    ALTER COLUMN "estimated_duration" TYPE posint,
     ALTER COLUMN "company_id" TYPE posint;
 
 ALTER TABLE "contact"
