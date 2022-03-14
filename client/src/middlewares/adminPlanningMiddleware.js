@@ -4,6 +4,7 @@ import {
 } from '../requests/assignmentRequest';
 import { requestAdminPlanning } from '../requests/adminPlanningRequest';
 import { requestAllQualifications } from '../requests/qualificationsRequest';
+import { requestAllAbsences } from '../requests/absencesRequest';
 import * as actions from '../actions';
 
 const adminPlanningMiddleware = (store) => (next) => async (action) => {
@@ -16,7 +17,6 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(actions.actionGetAdminPlanning({ weekStart, absences, planning }));
         store.dispatch(actions.actionGetUserPlanning());
-        store.dispatch(actions.actionRequestAllQualifications());
       }
       return;
     }
@@ -24,6 +24,13 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       const response = await requestAllQualifications();
       if (response.status === 200) {
         store.dispatch(actions.actionGetAllQualifications(response.data));
+      }
+      return;
+    }
+    case actions.REQUEST_ALL_ABSENCES: {
+      const response = await requestAllAbsences();
+      if (response.status === 200) {
+        store.dispatch(actions.actionGetAllAbsences(response.data));
       }
       return;
     }
