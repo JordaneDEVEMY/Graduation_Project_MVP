@@ -13,7 +13,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} starting_date - User starting_date
  * @property {string} fonction - User function
  * @property {number} employee_qualification_id - User qualification key
- * @property {string} label - User qualification label
+ * @property {string} qualification_label - User qualification qualification label
  * @property {string} color - User color for card
  * @property {array.<UserAssignments>} assignments - User assignments
  */
@@ -96,7 +96,7 @@ module.exports = {
   /**
    * Update and User by his id with email and password body request
    * @param {number} userId - User's ID
-   * @param {object<password, phoneNumber, mobileNumber>} user - Body request
+   * @param {object<password, phone_number, mobile_number>} user - Body request
    * @returns {UserUpdate|ApiError} - Return updated User or ApiError if user not found
    */
   async update(userId, user) {
@@ -121,7 +121,7 @@ module.exports = {
         "phone_number",
         "mobile_number",
         "updated_at";`,
-      [user.password, user.phoneNumber, user.mobileNumber, userId],
+      [user.password, user.phone_number, user.mobile_number, userId],
     );
 
     // ? Standby Code for update function in SQL

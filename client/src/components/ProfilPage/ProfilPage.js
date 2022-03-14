@@ -18,6 +18,7 @@ function ProfilPage({
   userPassword,
   userConfirmPassword,
   updateUserInformations,
+  userEmail,
 }) {
   console.log(user);
   const theme = useTheme();
@@ -80,6 +81,16 @@ function ProfilPage({
         </Box>
         <Divider sx={{ mb: '1em', mt: '1em' }} />
         <Box component="div">
+          <>
+            <Typography variant="h4">
+              E-mail
+            </Typography>
+            <Typography>
+              {userEmail}
+            </Typography>
+            <Divider sx={{ mb: '1em', mt: '1em' }} />
+          </>
+
           { currentPhoneValues ? (
             <>
               <Typography variant="h4">
@@ -282,6 +293,7 @@ function ProfilPage({
 ProfilPage.propTypes = {
   changeField: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  userEmail: PropTypes.string.isRequired,
   userPassword: PropTypes.string.isRequired,
   userConfirmPassword: PropTypes.string.isRequired,
   updateUserInformations: PropTypes.func.isRequired,

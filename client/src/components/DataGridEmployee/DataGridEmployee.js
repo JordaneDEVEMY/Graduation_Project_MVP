@@ -25,7 +25,8 @@ function DataGridEmployee({
 }) {
   const theme = useTheme();
   const [selectionModel, setSelectionModel] = useState([]);
-  const [modalOpened, setModalOpened] = useState(false);
+  const [modalCreateOpened, setModalCreateOpened] = useState(false);
+  const [modalDeleteOpened, setModalDeleteOpened] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [filterModel, setFilterModel] = useState({
     items: [
@@ -84,7 +85,7 @@ function DataGridEmployee({
       field: 'role_application', headerName: 'Rôle', width: 200, editable: true,
     },
     {
-      field: 'label', headerName: 'Qualification', width: 200, editable: true,
+      field: 'qualification_label', headerName: 'Qualification', width: 200, editable: true,
     },
   ];
   const rows = employees;
@@ -99,7 +100,8 @@ function DataGridEmployee({
   };
 
   const handleClose = () => {
-    setModalOpened(false);
+    setModalCreateOpened(false);
+    setModalDeleteOpened(false);
     resetEmployeeInformations();
   };
 
@@ -118,7 +120,7 @@ function DataGridEmployee({
           sx={{ margin: '10px' }}
           onClick={() => {
             handleResetEmployee();
-            setModalOpened(true);
+            setModalCreateOpened(true);
           }}
         >
           Ajouter un employé
@@ -131,7 +133,7 @@ function DataGridEmployee({
               setShowAlert(true);
               return;
             }
-            handleClickDeleteEmployee();
+            setModalDeleteOpened(true);
           }}
         >
           Supprimer un employé
@@ -164,7 +166,7 @@ function DataGridEmployee({
         />
       </Box>
       <Modal
-        open={modalOpened}
+        open={modalCreateOpened}
         onClose={handleClose}
         BackdropProps={{ invisible: false }}
       >
@@ -192,6 +194,58 @@ function DataGridEmployee({
             changeField={changeField}
             handleClose={handleClose}
           />
+        </Box>
+      </Modal>
+      <Modal
+        open={modalDeleteOpened}
+        onClose={handleClose}
+        BackdropProps={{ invisible: false }}
+      >
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.component,
+            width: '50%',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            padding: '10px',
+          }}
+        >
+          <Button
+            onClick={handleClose}
+            sx={{ textAlign: 'right' }}
+          >
+            Close
+
+          </Button>
+          <Typography
+            variant="h4"
+            sx={{ textAlign: 'center' }}
+          >
+            { selectionModel.length === 1 ? "Êtes-vous sûr de vouloir supprimer l'employé ?" : 'Êtes-vous sûr de vouloir les employés ?' }
+          </Typography>
+          <Box sx={{ textAlign: 'center' }}>
+            <Button
+              sx={{ margin: '10px' }}
+              size="large"
+              variant="contained"
+              onClick={() => {
+                handleClickDeleteEmployee();
+                handleClose();
+              }}
+            >
+              Confirmer
+            </Button>
+            <Button
+              sx={{ margin: '10px' }}
+              size="large"
+              variant="outlined"
+              onClick={handleClose}
+            >
+              Annuler
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </>

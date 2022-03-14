@@ -22,7 +22,8 @@ function DataGridSite({
 }) {
   const theme = useTheme();
   const [selectionModel, setSelectionModel] = useState([]);
-  const [modalOpened, setModalOpened] = useState(false);
+  const [modalCreateOpened, setModalCreateOpened] = useState(false);
+  const [modalDeleteOpened, setModalDeleteOpened] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [filterModel, setFilterModel] = useState({
     items: [
@@ -65,7 +66,7 @@ function DataGridSite({
 
   const handleClickDeleteSite = () => {
     setShowAlert(false);
-    handleDeleteSite();
+    setModalDeleteOpened(true);
   };
 
   const handleResetSite = () => {
@@ -73,7 +74,8 @@ function DataGridSite({
   };
 
   const handleClose = () => {
-    setModalOpened(false);
+    setModalCreateOpened(false);
+    setModalDeleteOpened(false);
     resetSiteInformations();
   };
   return (
@@ -91,7 +93,7 @@ function DataGridSite({
           sx={{ margin: '10px' }}
           onClick={() => {
             handleResetSite();
-            setModalOpened(true);
+            setModalCreateOpened(true);
           }}
         >
           Ajouter un site
@@ -135,7 +137,7 @@ function DataGridSite({
         />
       </Box>
       <Modal
-        open={modalOpened}
+        open={modalCreateOpened}
         onClose={handleClose}
         BackdropProps={{ invisible: false }}
       >
@@ -163,6 +165,58 @@ function DataGridSite({
             changeField={changeField}
             handleClose={handleClose}
           />
+        </Box>
+      </Modal>
+      <Modal
+        open={modalDeleteOpened}
+        onClose={handleClose}
+        BackdropProps={{ invisible: false }}
+      >
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.component,
+            width: '50%',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            padding: '10px',
+          }}
+        >
+          <Button
+            onClick={handleClose}
+            sx={{ textAlign: 'right' }}
+          >
+            Close
+
+          </Button>
+          <Typography
+            variant="h4"
+            sx={{ textAlign: 'center' }}
+          >
+            { selectionModel.length === 1 ? 'Êtes-vous sûr de vouloir supprimer le site ?' : 'Êtes-vous sûr de vouloir supprimer les sites ?' }
+          </Typography>
+          <Box sx={{ textAlign: 'center' }}>
+            <Button
+              sx={{ margin: '10px' }}
+              size="large"
+              variant="contained"
+              onClick={() => {
+                handleDeleteSite();
+                handleClose();
+              }}
+            >
+              Confirmer
+            </Button>
+            <Button
+              sx={{ margin: '10px' }}
+              size="large"
+              variant="outlined"
+              onClick={handleClose}
+            >
+              Annuler
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </>
