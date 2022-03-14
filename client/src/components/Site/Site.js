@@ -3,7 +3,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Box, Modal } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -27,13 +26,8 @@ function Site({
   const theme = useTheme();
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
-  const { employees } = useSelector((state) => state.allEmployees);
   // get employees list
-  const assignmentsEmployeeIDs = assignments.map(({ employee }) => employee.id);
-  const employeesList = employees.filter((employee) => (
-    !assignmentsEmployeeIDs.includes(employee.id)
-  ));
-  console.log('employeesList', employeesList);
+  const assignmentEmployeesIDs = assignments.map(({ employee }) => employee.id);
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
 
@@ -155,7 +149,7 @@ function Site({
           open
         >
           <AssignmentFormContainer
-            employeesList={employeesList}
+            assignmentEmployeesIDs={assignmentEmployeesIDs}
             assignment={assignment}
             setModalOpened={setModalOpened}
           />

@@ -10,6 +10,7 @@ import SitesList from '../SitesList/SitesList';
 function Companies({
   absences,
   companies,
+  employeesList,
   handleAbsence,
   handleAssignment,
   isDropable,
@@ -68,6 +69,7 @@ function Companies({
               ? (
                 <SitesList
                   company={company}
+                  employeesList={employeesList}
                   handleAssignment={handleAssignment}
                   id={`company-${company.id}`}
                   isDropable={isDropable}
@@ -112,6 +114,13 @@ Companies.propTypes = {
           id: PropTypes.number.isRequired,
         }).isRequired,
       ).isRequired,
+    }).isRequired,
+  ).isRequired,
+  employeesList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      firstname: PropTypes.string.isRequired,
+      lastname: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
   handleAbsence: PropTypes.func.isRequired,

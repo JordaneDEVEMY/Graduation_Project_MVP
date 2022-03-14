@@ -12,6 +12,7 @@ import './planning_admin.scss';
 function PlanningAdmin({
   absences,
   companies,
+  employeesList,
   startDate,
 }) {
   const week = dateFunctions.getWeek(startDate);
@@ -57,6 +58,7 @@ function PlanningAdmin({
           <DraggableAssignments
             absences={absences}
             companies={companies}
+            employeesList={employeesList}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             week={currentWeek}
@@ -66,6 +68,7 @@ function PlanningAdmin({
           <Companies
             absences={absences}
             companies={companies}
+            employeesList={employeesList}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             isDropable={false}
@@ -104,6 +107,13 @@ PlanningAdmin.propTypes = {
   ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape(),
+  ).isRequired,
+  employeesList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      firstname: PropTypes.string.isRequired,
+      lastname: PropTypes.string.isRequired,
+    }).isRequired,
   ).isRequired,
   startDate: PropTypes.string.isRequired,
 };

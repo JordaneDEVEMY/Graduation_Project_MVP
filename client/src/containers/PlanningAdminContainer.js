@@ -12,6 +12,7 @@ import planningFunctions from '../utils/planningFunctions';
 function PlanningAdminContainer() {
   const dispatch = useDispatch();
   const { admin } = useSelector((state) => state);
+  const { employees: employeesList } = useSelector((state) => state.allEmployees);
   const { absences: planningAbsences, planning, weekStart: startDate } = admin;
   const [absences, setAbsences] = React.useState(planningFunctions.adminPlanningToAbsences(planningAbsences));
   const [companies, setCompanies] = React.useState(planningFunctions.adminPlanningToCompanies(planning));
@@ -40,6 +41,7 @@ function PlanningAdminContainer() {
     <PlanningAdmin
       absences={absences}
       companies={companies}
+      employeesList={employeesList}
       planning={planning}
       startDate={startDate}
     />

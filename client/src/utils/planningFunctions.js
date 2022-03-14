@@ -313,6 +313,7 @@ const planningFunctions = {
   },
 
   createAssignment: () => ({
+    absence_id: null,
     id: null,
     employee_id: null,
     color: '',
