@@ -8,6 +8,4 @@
 /**
  * @typedef {object} UploadReturn
  * @property {string} imagePath - Path to the uploaded avatar
- * @property {string} social_security_number - User social security number
- * @property {string} file - file to upload
 */
