@@ -40,6 +40,8 @@ function CreateUserForm({
         <Grid container spacing={1} mt={1} sx={{ textAlign: 'center', marginBottom: '15px' }}>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="text"
               nameValue="firstname"
@@ -49,6 +51,8 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="text"
               nameValue="lastname"
@@ -58,6 +62,8 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="email"
               nameValue="email"
@@ -67,6 +73,8 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="password"
               nameValue="password"
@@ -76,6 +84,8 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="text"
               nameValue="date_of_birth"
@@ -86,15 +96,19 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
               handleChange={changeField}
               type="text"
               nameValue="phone_number"
               label="Téléphone Fixe"
+              default="0"
               value={employee.phone_number}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="text"
               nameValue="mobile_number"
@@ -104,6 +118,8 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="text"
               nameValue="address"
@@ -113,6 +129,8 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="number"
               nameValue="zip_code"
@@ -122,6 +140,8 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="text"
               nameValue="social_security_number"
@@ -148,6 +168,8 @@ function CreateUserForm({
         <Grid container spacing={1} mt={1} sx={{ textAlign: 'center' }}>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
+              required
               handleChange={changeField}
               type="text"
               nameValue="starting_date"
@@ -158,6 +180,7 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
               handleChange={changeField}
               type="text"
               nameValue="fonction"
@@ -167,11 +190,13 @@ function CreateUserForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              autoComplete="off"
               handleChange={changeField}
               type="file"
               accept="image/png, image/jpeg"
               nameValue="avatar"
               label="Avatar"
+              defaultValue=""
               value={employee.avatar}
             />
           </Grid>
