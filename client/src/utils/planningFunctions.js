@@ -109,6 +109,26 @@ const planningFunctions = {
 
   /**
    * Convert admin API data to a companies list
+   * @param {object} absences - Absences list from API request
+   * @returns {object} Absences Site containing an assignments list.
+   */
+  adminPlanningToAbsences: (absences) => {
+    const result = [];
+
+    absences.forEach((absence) => {
+      const { assignment, id, reason } = absence;
+      assignment.absence = {
+        id,
+        reason,
+      };
+      result.push(assignment);
+    });
+
+    return result;
+  },
+
+  /**
+   * Convert admin API data to a companies list
    * @param {object} planning - Planning list from API request
    * @returns {array} Companies list.
    */
@@ -159,7 +179,7 @@ const planningFunctions = {
    * @returns {object} Datas sended to Assignment form
    */
   getDraggedAssignment: (drag, companies) => {
-    let result = {};
+    let result = planningFunctions.createAssignment();
     const { destination, draggableId } = drag;
     const siteId = Number(destination.droppableId.replace('site-', ''));
     const assignmentId = Number(draggableId.replace('assignment-', ''));
@@ -187,6 +207,7 @@ const planningFunctions = {
       const startDate = dateFunctions.getDate(starting_date).format('YYYY-MM-DD');
 
       result = {
+        ...result,
         id,
         employee_id,
         color,
@@ -196,6 +217,7 @@ const planningFunctions = {
         starting_date: startDate,
         position: destination.index,
         site: {
+          ...result.site,
           id: siteId,
           name,
         },
@@ -289,6 +311,22 @@ const planningFunctions = {
 
     return refresh;
   },
+
+  createAssignment: () => ({
+    id: null,
+    employee_id: null,
+    color: '',
+    ending_date: '',
+    firstname: '',
+    lastname: '',
+    starting_date: '',
+    position: 0,
+    visibility: true,
+    site: {
+      id: null,
+      name: '',
+    },
+  }),
 
   /**
    * Get current week slug

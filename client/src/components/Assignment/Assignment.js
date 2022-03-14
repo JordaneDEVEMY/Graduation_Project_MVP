@@ -23,6 +23,7 @@ const Accordion = styled((props) => (
 }));
 
 function Assignment({
+  absence,
   color,
   employee,
   ending_date,
@@ -82,7 +83,7 @@ function Assignment({
           {`${employee.firstname} ${employee.lastname}`}
         </Typography>
 
-        {(!startOnMonday || !finishOnFriday)
+        {((!startOnMonday || !finishOnFriday) || (absence !== undefined))
           && (
           <Typography
             component="small"
@@ -137,6 +138,13 @@ function Assignment({
                 pl: 0,
               }}
             >
+              {absence !== undefined
+              && (
+              <Typography component="li">
+                <Typography sx={{ display: 'block' }}><strong>Raison :</strong></Typography>
+                {absence.reason}
+              </Typography>
+              )}
               {employee.visibility !== undefined
               && (
               <Typography component="li">
@@ -167,6 +175,10 @@ function Assignment({
 }
 
 Assignment.propTypes = {
+  absence: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    reason: PropTypes.string.isRequired,
+  }),
   color: PropTypes.string.isRequired,
   employee: PropTypes.shape({
     firstname: PropTypes.string.isRequired,
@@ -195,6 +207,7 @@ Assignment.propTypes = {
 };
 
 Assignment.defaultProps = {
+  absence: undefined,
   handleAssignment: undefined,
   userId: undefined,
 };

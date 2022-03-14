@@ -24,7 +24,9 @@ import planningFunctions from '../../utils/planningFunctions';
 // });
 
 function DraggableAssignments({
+  absences,
   companies,
+  handleAbsence,
   handleAssignment,
   week,
 }) {
@@ -46,6 +48,12 @@ function DraggableAssignments({
    * Open assignment update modal
    */
   const onDragEnd = useCallback((result) => {
+    console.log(result);
+
+    // if (result) {
+    //   return;
+    // }
+
     if (result.reason === 'DROP') {
       if (!result.destination) {
         return;
@@ -61,7 +69,9 @@ function DraggableAssignments({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
+        absences={absences}
         companies={assignmentsPositions}
+        handleAbsence={handleAbsence}
         handleAssignment={handleAssignment}
         isDropable
         isMobile={false}
@@ -72,6 +82,11 @@ function DraggableAssignments({
 }
 
 DraggableAssignments.propTypes = {
+  absences: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -83,6 +98,7 @@ DraggableAssignments.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
+  handleAbsence: PropTypes.func.isRequired,
   handleAssignment: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,

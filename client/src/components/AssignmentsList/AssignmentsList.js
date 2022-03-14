@@ -72,6 +72,10 @@ function AssignmentsList({
 AssignmentsList.propTypes = {
   assignments: PropTypes.arrayOf(
     PropTypes.shape({
+      absence: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        reason: PropTypes.string.isRequired,
+      }),
       color: PropTypes.string.isRequired,
       employee: PropTypes.shape({
         firstname: PropTypes.string.isRequired,

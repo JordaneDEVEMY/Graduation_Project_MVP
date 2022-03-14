@@ -36,6 +36,9 @@ function SitesList({
           sx={{
             display: 'flex',
             gap: theme.spacing(2),
+            [theme.breakpoints.up('md')]: {
+              flexDirection: 'column',
+            },
           }}
         >
           {sites.map((site) => (

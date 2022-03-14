@@ -10,6 +10,7 @@ import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
 function PlanningAdmin({
+  absences,
   companies,
   startDate,
 }) {
@@ -22,6 +23,10 @@ function PlanningAdmin({
   const handleAssignment = (result) => {
     setAssignment(result);
     console.log('updateAssignment', result);
+  };
+
+  const handleAbsence = (result) => {
+    console.log('updateAbsence', result);
   };
 
   const handleModal = () => {
@@ -50,14 +55,18 @@ function PlanningAdmin({
         && !isMobile
         ? (
           <DraggableAssignments
+            absences={absences}
             companies={companies}
+            handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             week={currentWeek}
           />
         )
         : (
           <Companies
+            absences={absences}
             companies={companies}
+            handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             isDropable={false}
             isMobile
@@ -88,6 +97,11 @@ function PlanningAdmin({
 }
 
 PlanningAdmin.propTypes = {
+  absences: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape(),
   ).isRequired,

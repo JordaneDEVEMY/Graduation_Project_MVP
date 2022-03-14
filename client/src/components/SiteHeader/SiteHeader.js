@@ -23,6 +23,7 @@ function SiteHeader({
         <Tooltip title="Ajouter un assignement" placement="top">
           <IconButton
             color="primary"
+            onClick={handleAddAssignment}
             sx={{
               position: 'absolute',
               top: theme.spacing(1),

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { actionGetAssignmentInformations, actionUpdateAssignment } from '../actions/assignment';
@@ -6,11 +7,18 @@ import AssignmentForm from '../components/AssignmentForm/AssignmentForm';
 
 function AssignmentFormContainer({
   assignment,
+  employeesList,
   setModalOpened,
 }, ref) {
   const dispatch = useDispatch();
 
   const handleSubmitAssignment = (data) => {
+    console.log(data);
+
+    if (data) {
+      return;
+    }
+
     const {
       id,
       starting_date: startingDate,
@@ -33,7 +41,6 @@ function AssignmentFormContainer({
       siteId: site.id,
       absenceId: null,
     };
-    console.log('PATCH REQUEST', updatedAssignment);
 
     dispatch(actionGetAssignmentInformations(updatedAssignment));
     dispatch(actionUpdateAssignment());
@@ -45,6 +52,8 @@ function AssignmentFormContainer({
     <AssignmentForm
       ref={ref}
       assignment={assignment}
+      employeesList={employeesList}
+      setModalOpened={setModalOpened}
       handleSubmit={handleSubmitAssignment}
     />
   );
