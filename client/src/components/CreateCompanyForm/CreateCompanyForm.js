@@ -32,6 +32,7 @@ function CreateCompanyForm({
         <Grid container spacing={1} mt={1} sx={{ textAlign: 'center', marginBottom: '15px' }}>
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="name"
@@ -41,6 +42,7 @@ function CreateCompanyForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="address"
@@ -50,6 +52,7 @@ function CreateCompanyForm({
           </Grid>
           <Grid item xs={12} md={6}>
             <TextInput
+              required
               handleChange={changeField}
               type="text"
               nameValue="zip_code"
