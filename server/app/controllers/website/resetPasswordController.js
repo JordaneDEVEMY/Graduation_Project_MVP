@@ -49,7 +49,9 @@ const controller = {
 
     const userWithNewPassword = await userAdminDatamapper.updatePassword(id, password);
 
-    res.json(userWithNewPassword);
+    if (userWithNewPassword) {
+      res.status(200).redirect(`http://localhost:${process.env.PORT_FRONT}/`);
+    }
   },
 
 };
