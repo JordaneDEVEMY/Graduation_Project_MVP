@@ -130,7 +130,14 @@ function Login({
         </Grid>
       </CardContent>
       {showAlert && (
-      <Alert sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center' }} severity="error">Attention, vos identifiants sont incorrects !</Alert>
+      <Alert
+        sx={{
+          fontSize: '.9em', mx: theme.spacing(2),
+        }}
+        severity="error"
+      >
+        Attention, vos identifiants sont incorrects !
+      </Alert>
       )}
       <CardActions sx={{ p: theme.spacing(2) }}>
         <Button
