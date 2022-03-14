@@ -15,7 +15,7 @@ CREATE VIEW get_user_rest AS
         "employee"."starting_date", 
         "employee"."fonction", 
         "employee"."employee_qualification_id",
-        "employee_qualification"."label",
+        "employee_qualification"."label" AS qualification_label,
         json_agg
             (
             json_build_object(
