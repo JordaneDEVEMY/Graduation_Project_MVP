@@ -168,7 +168,8 @@ function CreateUserForm({
           <Grid item xs={12} md={6}>
             <TextInput
               handleChange={changeField}
-              type="text"
+              type="file"
+              accept="image/png, image/jpeg"
               nameValue="avatar"
               label="Avatar"
               value={employee.avatar}
