@@ -307,9 +307,9 @@ const planningFunctions = {
    */
   getWeekSlugFromDate: (date) => {
     const year = dateFunctions.getDate(date).format('YYYY');
-    const weekNum = dateFunctions.getDate(date).isoWeek();
+    const weekNum = dateFunctions.getDate(date).isoWeek().toString();
 
-    return `${year}-${weekNum}`;
+    return `${year}-${weekNum.padStart(2, '0')}`;
   },
 
   /**
