@@ -17,7 +17,7 @@ const initialState = {
   avatar: '',
   fonction: '',
   role_application: '',
-  label: '',
+  qualification_label: '',
   employeesToDelete: [],
 };
 
@@ -41,7 +41,7 @@ function reducer(state = initialState, action) {
         avatar: action.payload.avatar,
         fonction: action.payload.fonction,
         role_application: action.payload.role_application,
-        label: action.payload.label,
+        qualification_label: action.payload.qualification_label,
       };
     case actions.GET_EMPLOYEE_ID_TO_DELETE:
       return {
@@ -74,7 +74,7 @@ function reducer(state = initialState, action) {
         avatar: initialState.avatar,
         fonction: initialState.fonction,
         role_application: initialState.role_application,
-        label: initialState.label,
+        qualification_label: initialState.qualification_label,
       };
     default:
       return state;
