@@ -36,7 +36,7 @@ function CreateCompanyForm({
               handleChange={changeField}
               type="text"
               nameValue="name"
-              label="Nom du site"
+              label="Nom de l'entreprise"
               value={company.name}
             />
           </Grid>

@@ -22,7 +22,8 @@ function DataGridCompany({
 }) {
   const theme = useTheme();
   const [selectionModel, setSelectionModel] = useState([]);
-  const [modalOpened, setModalOpened] = useState(false);
+  const [modalCreateOpened, setModalCreateOpened] = useState(false);
+  const [modalDeleteOpened, setModalDeleteOpened] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [filterModel, setFilterModel] = useState({
     items: [
@@ -36,6 +37,7 @@ function DataGridCompany({
 
   useEffect(() => {
     pushCompanyId(selectionModel);
+    setShowAlert(false);
   }, [selectionModel]);
   const columns = [
     {
@@ -58,7 +60,7 @@ function DataGridCompany({
 
   const handleClickDeleteCompany = () => {
     setShowAlert(false);
-    handleDeleteCompany();
+    setModalDeleteOpened(true);
   };
 
   const handleResetCompany = () => {
@@ -66,7 +68,8 @@ function DataGridCompany({
   };
 
   const handleClose = () => {
-    setModalOpened(false);
+    setModalCreateOpened(false);
+    setModalDeleteOpened(false);
     resetCompanyInformations();
   };
   return (
@@ -84,7 +87,7 @@ function DataGridCompany({
           sx={{ margin: '10px' }}
           onClick={() => {
             handleResetCompany();
-            setModalOpened(true);
+            setModalCreateOpened(true);
           }}
         >
           Ajouter une entreprise
@@ -97,6 +100,7 @@ function DataGridCompany({
               setShowAlert(true);
               return;
             }
+            setShowAlert(false);
             handleClickDeleteCompany();
           }}
         >
@@ -128,7 +132,7 @@ function DataGridCompany({
         />
       </Box>
       <Modal
-        open={modalOpened}
+        open={modalCreateOpened}
         onClose={handleClose}
         BackdropProps={{ invisible: false }}
       >
@@ -156,6 +160,58 @@ function DataGridCompany({
             changeField={changeField}
             handleClose={handleClose}
           />
+        </Box>
+      </Modal>
+      <Modal
+        open={modalDeleteOpened}
+        onClose={handleClose}
+        BackdropProps={{ invisible: false }}
+      >
+        <Box
+          sx={{
+            backgroundColor: theme.palette.background.component,
+            width: '50%',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            padding: '10px',
+          }}
+        >
+          <Button
+            onClick={handleClose}
+            sx={{ textAlign: 'right' }}
+          >
+            Close
+
+          </Button>
+          <Typography
+            variant="h4"
+            sx={{ textAlign: 'center' }}
+          >
+            { selectionModel.length === 1 ? "Êtes-vous sûr de vouloir supprimer l'entreprise ?" : 'Êtes-vous sûr de vouloir supprimer les entreprises ?' }
+          </Typography>
+          <Box sx={{ textAlign: 'center' }}>
+            <Button
+              sx={{ margin: '10px' }}
+              size="large"
+              variant="contained"
+              onClick={() => {
+                handleDeleteCompany();
+                handleClose();
+              }}
+            >
+              Confirmer
+            </Button>
+            <Button
+              sx={{ margin: '10px' }}
+              size="large"
+              variant="outlined"
+              onClick={handleClose}
+            >
+              Annuler
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </>
