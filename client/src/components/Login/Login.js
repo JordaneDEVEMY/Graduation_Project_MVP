@@ -20,7 +20,7 @@ function Login({
   passwordValue,
   changeField,
   handleLogin,
-  // isLogged,
+  isLogged,
 }) {
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -45,8 +45,8 @@ function Login({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin();
-    if (status.err === 422) {
-      setShowAlert(true);
+    if (!isLogged) {
+      setTimeout(setShowAlert, 200, true);
     }
   };
 
@@ -158,10 +158,9 @@ Login.propTypes = {
   passwordValue: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  // isLogged: PropTypes.bool,
+  isLogged: PropTypes.bool.isRequired,
 };
 Login.defaultProps = {
-  // isLogged: false,
 };
 
 export default React.memo(Login);
