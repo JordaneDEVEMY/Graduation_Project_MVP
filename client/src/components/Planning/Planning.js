@@ -1,62 +1,68 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Typography } from '@mui/material';
+import { Alert, Box, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import SearchContainer from '../SearchContainer/SearchContainer';
-import Cards from '../Cards/Cards';
+import SiteUser from '../SiteUser/SiteUser';
 import dateFunctions from '../../utils/dateFunctions';
 import './planning.scss';
 
 function Planning({
-  handleStartDate,
+  absences,
+  assignments,
   startDate,
   user,
 }) {
-  const { assignments } = user;
+  const theme = useTheme();
+  const { id: userId } = user;
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-
-  // get only current week assignments
-  const currentAssignments = assignments.filter((assignment) => {
-    const startingDate = dateFunctions.getDate(assignment.starting_date).format('YYYY-MM-DD');
-    return currentWeek.dates.includes(startingDate);
-  });
-
-  console.log('currentAssignments', currentAssignments);
-
-  // has absence ?
-  const absences = currentAssignments.filter((assignment) => assignment.absence.id !== null);
+  console.log('assignments', assignments);
+  console.log('absences', absences);
 
   return (
     <>
-      <SearchContainer isAdmin={false} date={startDate} handleCurrentWeek={handleStartDate} />
-
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
       </Typography>
 
+      <SearchContainer isAdmin={false} userId={userId} date={startDate} />
+
       {absences.map((absence) => (
-        <Alert severity="success">
-          {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MM YYYY')} 
-          au ${dateFunctions.getDate(absence.ending_date).format('DD MM YYYY')} : 
+        <Alert
+          severity="success"
+          key={absence.id}
+          sx={{
+            mb: theme.spacing(2),
+            maxWidth: '30rem',
+            mx: 'auto',
+          }}
+        >
+          {`Absence du ${dateFunctions.getDate(absence.starting_date).format('DD MMM YYYY')} 
+          au ${dateFunctions.getDate(absence.ending_date).format('DD MMM YYYY')} : 
           ${absence.reason}`}
         </Alert>
       ))}
 
-      {currentAssignments.length
+      {assignments.length
         ? (
-          <Cards
-            assignments={currentAssignments}
-            id="cards-1"
-            isAdmin={false}
-            isDropable={false}
-            isMobile={false}
-            week={currentWeek}
-            user={user}
-          />
+          <Box
+            sx={{
+              display: 'flex',
+              gap: theme.spacing(2),
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            {assignments.map((assignment) => (
+              <SiteUser user={user} key={assignment.id} week={currentWeek} {...assignment} />
+            ))}
+          </Box>
         )
         : (
-          <Typography sx={{ textAlign: 'center' }}>
-            Aucun planning à afficher.
+          <Typography sx={{ textAlign: 'center', mt: theme.spacing(2) }}>
+            {`Aucune intervention prévue en semaine ${currentWeek.num}.`}
           </Typography>
         )}
     </>
@@ -64,15 +70,21 @@ function Planning({
 }
 
 Planning.propTypes = {
-  handleStartDate: PropTypes.func.isRequired,
+  absences: PropTypes.arrayOf(
+    PropTypes.shape({
+      ending_date: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      reason: PropTypes.string.isRequired,
+      starting_date: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  assignments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
   startDate: PropTypes.string.isRequired,
-  user: PropTypes.shape({
-    assignments: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-      }).isRequired,
-    ).isRequired,
-  }).isRequired,
+  user: PropTypes.shape().isRequired,
 };
 
 export default React.memo(Planning);

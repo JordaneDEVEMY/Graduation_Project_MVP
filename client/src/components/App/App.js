@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Routes, Route } from 'react-router-dom';
@@ -12,16 +9,16 @@ import Footer from '../Footer/Footer';
 import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
-import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
-import './app.scss';
+import PlanningAdminContainer from '../../containers/PlanningAdminContainer';
 import PlanningContainer from '../../containers/PlanningContainer';
 import DatagridEmployeeContainer from '../../containers/DatagridEmployeeContainer';
-import CreateSiteFormContainer from '../../containers/CreateSiteFormContainer';
-import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
+import DatagridSiteContainer from '../../containers/DatagridSiteContainer';
+import DatagridCompanyContainer from '../../containers/DatagridCompanyContainer';
+import ProfilPageContainer from '../../containers/ProfilPageContainer';
 import ForgotPasswordContainer from '../../containers/ForgotPasswordContainer';
 import ResetPassword from '../ResetPassword/ResetPassword';
 
@@ -30,10 +27,7 @@ function App({
   userId,
 }) {
   const [mode, setMode] = useState(utils.themeFunctions.getThemeMode());
-
   const theme = responsiveFontSizes(utils.getTheme(mode));
-
-  console.log(theme);
 
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
@@ -45,11 +39,18 @@ function App({
       <CssBaseline />
       <Box
         className="app"
-        sx={
-          {
-            backgroundColor: theme.palette.background.default,
-          }
-        }
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          [theme.breakpoints.up('md')]: {
+            display: 'flex',
+            flexDirection: 'column',
+            height: 'auto',
+            minHeight: '100vh',
+          },
+          [theme.breakpoints.down('md')]: {
+            paddingBottom: theme.spacing(6),
+          },
+        }}
       >
         <HeaderContainer
           handleMode={handleThemeMode}
@@ -60,11 +61,24 @@ function App({
             <Route element={<RequireAdmin />}>
               <Route path="admins" element={<Layout isAdmin={isAdmin} />}>
                 <Route
-                  path="planning"
+                  path={`:${userId}/profil`}
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
+                <Route
+                  path="planning"
+                  element={(
+                    <PlanningAdminContainer />
+                    )}
+                >
+                  <Route
+                    path=":weekSlug"
+                    element={(
+                      <PlanningAdminContainer />
+                      )}
+                  />
+                </Route>
                 <Route
                   path="employees"
                   element={(
@@ -74,13 +88,19 @@ function App({
                 <Route
                   path="sites"
                   element={(
-                    <CreateSiteFormContainer isAdmin={isAdmin} />
+                    <DatagridSiteContainer isAdmin={isAdmin} />
                     )}
                 />
                 <Route
                   path="companies"
                   element={(
-                    <CreateCompanyFormContainer isAdmin={isAdmin} />
+                    <DatagridCompanyContainer isAdmin={isAdmin} />
+                    )}
+                />
+                <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>
@@ -90,7 +110,20 @@ function App({
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningContainer />
+                    )}
+                >
+                  <Route
+                    path=":weekSlug"
+                    element={(
+                      <PlanningContainer />
+                      )}
+                  />
+                </Route>
+                <Route
+                  path={`:${userId}/profil`}
+                  element={(
+                    <ProfilPageContainer isAdmin={isAdmin} />
                     )}
                 />
               </Route>

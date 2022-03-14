@@ -53,23 +53,6 @@ function SearchAutocomplete({
       mt={1}
     >
       <Grid item xs={12} sm={6}>
-        <FormControl sx={{ width: '100%' }}>
-          <InputLabel id="select-search-label" size="small">Dans</InputLabel>
-          <Select
-            size="small"
-            labelId="select-search-label"
-            id="select-search"
-            label="Dans"
-            value={searchIn}
-            onChange={handleChangeSearchTarget}
-          >
-            <MenuItem value="sites">Sites</MenuItem>
-            <MenuItem value="entreprises">Entreprises</MenuItem>
-            <MenuItem value="employees">Employés</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={12} sm={6}>
         <Autocomplete
           size="small"
           getOptionLabel={(datas) => {
@@ -88,6 +71,23 @@ function SearchAutocomplete({
             setAutocompleteValue(newValue);
           }}
         />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <FormControl sx={{ width: '100%' }}>
+          <InputLabel id="select-search-label" size="small">Dans</InputLabel>
+          <Select
+            size="small"
+            labelId="select-search-label"
+            id="select-search"
+            label="Dans"
+            value={searchIn}
+            onChange={handleChangeSearchTarget}
+          >
+            <MenuItem value="sites">Sites</MenuItem>
+            <MenuItem value="entreprises">Entreprises</MenuItem>
+            <MenuItem value="employees">Employés</MenuItem>
+          </Select>
+        </FormControl>
       </Grid>
     </Grid>
 

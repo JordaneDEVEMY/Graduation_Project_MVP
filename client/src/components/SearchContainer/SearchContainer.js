@@ -9,8 +9,8 @@ import SelectWeek from '../SelectWeek/SelectWeek';
 
 function SearchContainer({
   date,
-  handleCurrentWeek,
   isAdmin,
+  userId,
 }) {
   const theme = useTheme();
 
@@ -18,12 +18,12 @@ function SearchContainer({
     <Box
       sx={{
         maxWidth: '600px',
-        margin: `0 auto ${theme.spacing(2)}`,
+        margin: `0 auto ${theme.spacing(6)}`,
         padding: theme.spacing(1),
         background: theme.palette.background.component,
       }}
     >
-      <SelectWeek date={date} isAdmin={isAdmin} handleCurrentWeek={handleCurrentWeek} />
+      <SelectWeek date={date} isAdmin={isAdmin} userId={userId} />
       {isAdmin && (
         <SearchAutocompleteContainer />
       )}
@@ -33,8 +33,12 @@ function SearchContainer({
 
 SearchContainer.propTypes = {
   date: PropTypes.string.isRequired,
-  handleCurrentWeek: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  userId: PropTypes.number,
+};
+
+SearchContainer.defaultProps = {
+  userId: undefined,
 };
 
 export default React.memo(SearchContainer);

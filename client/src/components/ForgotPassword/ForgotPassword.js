@@ -29,7 +29,7 @@ function ForgotPassword({
           <Grid container rowSpacing={2}>
             <Grid item xs={12}>
               <TextField
-                fullWidth
+                sx={{ maxWidth: '400px', minWidth: '300px' }}
                 autoComplete="on"
                 required
                 type="email"

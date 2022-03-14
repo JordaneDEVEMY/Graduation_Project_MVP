@@ -14,6 +14,12 @@ function Footer() {
       sx={{
         p: theme.spacing(2),
         borderTop: `1px solid ${theme.palette.divider}`,
+        [theme.breakpoints.down('md')]: {
+          position: 'fixed',
+          width: '100vw',
+          bottom: 0,
+          left: 0,
+        },
       }}
     >
       <Typography sx={{

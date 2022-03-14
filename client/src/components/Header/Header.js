@@ -156,7 +156,7 @@ function Header({
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
-                <MenuItem component={RouterLink} to={`/${user.isAdmin ? 'admin' : 'user'}/${user.id}/profil`}>Profil</MenuItem>
+                <MenuItem component={RouterLink} to={`/${user.isAdmin ? 'admins' : 'users'}/${user.id}/profil`}>Profil</MenuItem>
                 <MenuItem component={Link} onClick={handleLogout}>Déconnexion</MenuItem>
               </Menu>
             </Box>

@@ -111,8 +111,14 @@ ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id")
 CREATE DOMAIN posint AS int
     CHECK(VALUE > 0 OR VALUE = null);
 
+CREATE DOMAIN num_ss_fr AS text
+    CHECK(
+        VALUE ~ '^[1-2][0-9][0-9][0-1][1-9][0-9][0-9].{7}'
+    );
+
 ALTER TABLE "employee"
-    ALTER COLUMN "employee_qualification_id" TYPE posint;
+    ALTER COLUMN "employee_qualification_id" TYPE posint,
+    ALTER COLUMN "social_security_number" TYPE num_ss_fr;
 
 ALTER TABLE "assignment"
     ALTER COLUMN "position" TYPE posint,

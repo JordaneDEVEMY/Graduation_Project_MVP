@@ -63,11 +63,13 @@ const getTheme = (mode) => ({
     h4: {
       ...themes[mode].typography.h4,
       fontSize: '1.5rem',
+      fontWeight: 300,
       marginBottom: '.5em',
     },
     h5: {
       ...themes[mode].typography.h5,
       fontSize: '1.25rem',
+      fontWeight: 300,
       marginBottom: '.5em',
     },
     h6: {
