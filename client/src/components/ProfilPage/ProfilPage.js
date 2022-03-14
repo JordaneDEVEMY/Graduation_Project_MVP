@@ -103,7 +103,7 @@ function ProfilPage({
                 />
               </Typography>
               <Typography>
-                {user.phoneNumber}
+                {user.phone_number}
               </Typography>
             </>
           )
@@ -113,10 +113,10 @@ function ProfilPage({
                   <Grid item xs={12}>
                     <TextField
                       type="text"
-                      name="phoneNumber"
+                      name="phone_number"
                       label="Nouveau numéro de téléphone fixe"
-                      defaultValue={user.phoneNumber}
-                      onChange={(event) => changeField('phoneNumber', event.target.value)}
+                      defaultValue={user.phone_number}
+                      onChange={(event) => changeField('phone_number', event.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -163,7 +163,7 @@ function ProfilPage({
                 />
               </Typography>
               <Typography>
-                {user.mobileNumber}
+                {user.mobile_number}
               </Typography>
             </>
           )
@@ -173,10 +173,10 @@ function ProfilPage({
                   <Grid item xs={12}>
                     <TextField
                       type="text"
-                      name="mobileNumber"
+                      name="mobile_number"
                       label="Nouveau numéro de mobile"
-                      defaultValue={user.mobileNumber}
-                      onChange={(event) => changeField('mobileNumber', event.target.value)}
+                      defaultValue={user.mobile_number}
+                      onChange={(event) => changeField('mobile_number', event.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12}>
