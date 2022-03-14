@@ -20,8 +20,8 @@ const client = require('../../config/database');
 /**
  * @typedef {object} AuthProfilUpdate
  * @property {string} password - Password to change
- * @property {string} phoneNumber - Phone number to change
- * @property {string} mobileNumber - Mobile number to change
+ * @property {string} phone_number - Phone number to change
+ * @property {string} mobile_number - Mobile number to change
  */
 
 module.exports = {

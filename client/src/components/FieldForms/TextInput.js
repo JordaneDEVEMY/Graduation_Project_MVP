@@ -11,11 +11,12 @@ function TextInput({
   value,
   handleChange,
   placeholder,
+  required,
 }) {
   return (
     <TextField
+      required={required}
       sx={{ maxWidth: '400px', minWidth: '300px' }}
-      required
       type={type}
       value={value}
       label={label}
@@ -34,11 +35,13 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   nameValue: PropTypes.string.isRequired,
   handleChange: PropTypes.func,
+  required: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
   handleChange: null,
   placeholder: '',
+  required: false,
 };
 
 export default React.memo(TextInput);

@@ -96,7 +96,7 @@ module.exports = {
   /**
    * Update and User by his id with email and password body request
    * @param {number} userId - User's ID
-   * @param {object<password, phoneNumber, mobileNumber>} user - Body request
+   * @param {object<password, phone_number, mobile_number>} user - Body request
    * @returns {UserUpdate|ApiError} - Return updated User or ApiError if user not found
    */
   async update(userId, user) {
@@ -121,7 +121,7 @@ module.exports = {
         "phone_number",
         "mobile_number",
         "updated_at";`,
-      [user.password, user.phoneNumber, user.mobileNumber, userId],
+      [user.password, user.phone_number, user.mobile_number, userId],
     );
 
     // ? Standby Code for update function in SQL
