@@ -19,7 +19,11 @@ SELECT
 			'employee', json_build_object(
 				'id', "employee"."id",
 				'firstname', "employee"."firstname",
-				'lastname', "employee"."lastname"
+				'lastname', "employee"."lastname",
+				'mobile_number', "employee"."mobile_number",
+				'phone_number', "employee"."phone_number",
+				'avatar', "employee"."avatar",
+				'fonction', "employee"."fonction"
 			)
 		) AS assignment
 FROM "absence"
