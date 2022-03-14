@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP VIEW get_user_colleagues;
+DROP VIEW get_user_colleagues CASCADE;
 
 COMMIT;

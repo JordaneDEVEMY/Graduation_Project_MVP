@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP VIEW get_user_by_admin;
+DROP VIEW get_user_by_admin CASCADE;
 
 COMMIT;

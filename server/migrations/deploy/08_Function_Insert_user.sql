@@ -38,7 +38,7 @@ CREATE OR REPLACE FUNCTION insert_user (u json) RETURNS employee AS $$
             (u->> 'avatar')::text,
             (u->> 'role_application')::text,
             (u->> 'employee_qualification_id')::int
-        );
+        ) RETURNING *;
 
 $$ LANGUAGE sql;
 
