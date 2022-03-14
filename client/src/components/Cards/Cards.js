@@ -10,13 +10,12 @@ import Carousel from '../Carousel/Carousel';
 import './cards.scss';
 
 function Cards({
-  assignments,
+  company,
   handleAssignment,
   id,
   isAdmin,
   isDropable,
   isMobile,
-  user,
   week,
 }) {
   const theme = useTheme();
@@ -30,7 +29,6 @@ function Cards({
           isAdmin={isAdmin}
           key={`carousel-${id}`}
           week={week}
-          user={user}
         />
       )
       : (
@@ -53,7 +51,6 @@ function Cards({
               isMobile={false}
               key={assignment.id}
               week={week}
-              user={user}
             />
           ))}
         </Box>

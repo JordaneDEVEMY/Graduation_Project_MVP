@@ -3,9 +3,10 @@ export const REQUEST_ALL_QUALIFICATIONS = 'REQUEST_ALL_QUALIFICATIONS';
 export const GET_ADMIN_PLANNING = 'GET_ADMIN_PLANNING';
 export const GET_ALL_QUALIFICATIONS = 'GET_ALL_QUALIFICATIONS';
 
-export function actionRequestAdminPlanning() {
+export function actionRequestAdminPlanning(week) {
   return {
     type: REQUEST_ADMIN_PLANNING,
+    payload: week,
   };
 }
 

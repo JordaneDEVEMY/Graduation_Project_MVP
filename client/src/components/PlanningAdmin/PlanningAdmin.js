@@ -1,46 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import { Typography, Modal, useMediaQuery } from '@mui/material';
-import AssignmentForm from '../AssignmentForm/AssignmentForm';
+import { Typography, Modal } from '@mui/material';
+import AssignmentFormContainer from '../../containers/AssignmentFormContainer';
 import SearchContainer from '../SearchContainer/SearchContainer';
-import CardsDraggable from '../CardsDraggable/CardsDraggable';
+import DraggableAssignments from '../DraggableAssignments/DraggableAssignments';
 import Companies from '../Companies/Companies';
 import dateFunctions from '../../utils/dateFunctions';
-import planningFunctions from '../../utils/planningFunctions';
+import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
 function PlanningAdmin({
-  handleStartDate,
-  planning,
+  companies,
   startDate,
 }) {
-  const companies = planningFunctions.adminPlanningToCards(planning);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
-  // set an object of all cards
-  const cards = {};
-  companies.forEach(({ assignments }) => {
-    assignments.forEach((assignment) => {
-      const { id, colleagues } = assignment;
-      cards[`card-${id}`] = colleagues;
-    });
-  });
-
+  const isMobile = useBreakpointDown();
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
 
-  console.log('planning', planning);
-  console.log('startDate', startDate);
-  console.log('companies', companies);
-  console.log('cards', cards);
-
   const handleAssignment = (result) => {
-    console.log('HANDLE ASSIGNMENT', result);
     setAssignment(result);
+    console.log('updateAssignment', result);
   };
 
   const handleModal = () => {
@@ -53,39 +34,39 @@ function PlanningAdmin({
     });
   };
 
-  // React.useEffect(() => {
-  //   // setModalOpened(true);
-  //   console.log('update assignement', assignment);
-  // }, [assignment]);
+  React.useEffect(() => {
+    setModalOpened(assignment.id !== undefined);
+  }, [assignment]);
 
   return (
     <>
-      <SearchContainer isAdmin date={startDate} handleCurrentWeek={handleStartDate} />
-
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
         {'Planning d\'intervention'}
       </Typography>
 
+      <SearchContainer isAdmin date={startDate} />
+
       {companies.length
-        ? !isMobile
-          && (
-          <CardsDraggable
-            cards={cards}
+        && !isMobile
+        ? (
+          <DraggableAssignments
             companies={companies}
             handleAssignment={handleAssignment}
             week={currentWeek}
           />
-          )
+        )
         : (
           <Companies
-            cards={cards}
             companies={companies}
             handleAssignment={handleAssignment}
             isDropable={false}
+            isMobile
             week={currentWeek}
           />
         )}
 
+      {modalOpened
+      && (
       <Modal
         sx={{
           width: '90vw',
@@ -93,30 +74,22 @@ function PlanningAdmin({
           mx: 'auto',
           mt: '25vh',
         }}
-        open={modalOpened}
+        open
         onClose={handleModal}
       >
-        <AssignmentForm week={week} assignment={assignment} />
+        <AssignmentFormContainer
+          assignment={assignment}
+          setModalOpened={setModalOpened}
+        />
       </Modal>
+      )}
     </>
   );
 }
 
 PlanningAdmin.propTypes = {
-  handleStartDate: PropTypes.func.isRequired,
-  planning: PropTypes.arrayOf(
-    PropTypes.shape({
-      company_name: PropTypes.string.isRequired,
-      sites: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          site_name: PropTypes.string.isRequired,
-          assignment: PropTypes.shape({
-            id: PropTypes.number.isRequired,
-          }).isRequired,
-        }).isRequired,
-      ).isRequired,
-    }).isRequired,
+  companies: PropTypes.arrayOf(
+    PropTypes.shape(),
   ).isRequired,
   startDate: PropTypes.string.isRequired,
 };

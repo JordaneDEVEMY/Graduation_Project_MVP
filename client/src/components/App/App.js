@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Routes, Route } from 'react-router-dom';
@@ -12,17 +9,15 @@ import Footer from '../Footer/Footer';
 import HomeContainer from '../../containers/HomeContainer';
 import Error404 from '../Error404/Error404';
 import Legals from '../Legals/Legals';
-import Planning from '../Planning/Planning';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import RequireAdmin from '../RequireAdmin/RequireAdmin';
 import RequireUser from '../RequireUser/RequireUser';
 import utils from '../../utils';
-import './app.scss';
+import PlanningAdminContainer from '../../containers/PlanningAdminContainer';
 import PlanningContainer from '../../containers/PlanningContainer';
 import DatagridEmployeeContainer from '../../containers/DatagridEmployeeContainer';
 import DatagridSiteContainer from '../../containers/DatagridSiteContainer';
 import DatagridCompanyContainer from '../../containers/DatagridCompanyContainer';
-import CreateCompanyFormContainer from '../../containers/CreateCompanyFormContainer';
 import ProfilPageContainer from '../../containers/ProfilPageContainer';
 import ForgotPasswordContainer from '../../containers/ForgotPasswordContainer';
 import ResetPassword from '../ResetPassword/ResetPassword';
@@ -32,10 +27,7 @@ function App({
   userId,
 }) {
   const [mode, setMode] = useState(utils.themeFunctions.getThemeMode());
-
   const theme = responsiveFontSizes(utils.getTheme(mode));
-
-  console.log(theme);
 
   const handleThemeMode = (themeMode) => {
     utils.themeFunctions.setThemeMode(themeMode);
@@ -47,11 +39,18 @@ function App({
       <CssBaseline />
       <Box
         className="app"
-        sx={
-          {
-            backgroundColor: theme.palette.background.default,
-          }
-        }
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          [theme.breakpoints.up('md')]: {
+            display: 'flex',
+            flexDirection: 'column',
+            height: 'auto',
+            minHeight: '100vh',
+          },
+          [theme.breakpoints.down('md')]: {
+            paddingBottom: theme.spacing(6),
+          },
+        }}
       >
         <HeaderContainer
           handleMode={handleThemeMode}
@@ -70,9 +69,16 @@ function App({
                 <Route
                   path="planning"
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningAdminContainer />
                     )}
-                />
+                >
+                  <Route
+                    path=":weekSlug"
+                    element={(
+                      <PlanningAdminContainer />
+                      )}
+                  />
+                </Route>
                 <Route
                   path="employees"
                   element={(
@@ -104,9 +110,16 @@ function App({
                 <Route
                   path={`:${userId}/planning`}
                   element={(
-                    <PlanningContainer isAdmin={isAdmin} />
+                    <PlanningContainer />
                     )}
-                />
+                >
+                  <Route
+                    path=":weekSlug"
+                    element={(
+                      <PlanningContainer />
+                      )}
+                  />
+                </Route>
                 <Route
                   path={`:${userId}/profil`}
                   element={(

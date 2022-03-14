@@ -9,7 +9,7 @@ import * as actions from '../actions';
 const adminPlanningMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case actions.REQUEST_ADMIN_PLANNING: {
-      const response = await requestAdminPlanning();
+      const response = await requestAdminPlanning(action.payload);
 
       if (response.status === 200) {
         const { weekStart, absences, planning } = response.data;

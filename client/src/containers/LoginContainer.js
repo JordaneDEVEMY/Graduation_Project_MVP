@@ -25,6 +25,4 @@ function LoginContainer() {
   );
 }
 
-LoginContainer.propTypes = {};
-LoginContainer.defaultProps = {};
-export default React.memo(LoginContainer);
+export default React.memo(React.forwardRef(LoginContainer));
