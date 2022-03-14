@@ -13,7 +13,7 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} starting_date - User starting_date
  * @property {string} fonction - User function
  * @property {number} employee_qualification_id - User qualification key
- * @property {string} label - User qualification label
+ * @property {string} qualification_label - User qualification qualification label
  * @property {string} color - User color for card
  * @property {array.<UserAssignments>} assignments - User assignments
  */

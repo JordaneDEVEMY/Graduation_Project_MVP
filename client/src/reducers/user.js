@@ -10,7 +10,7 @@ const initialState = {
   avatar: '',
   phoneNumber: '',
   mobileNumber: '',
-  label: '',
+  qualification_label: '',
   isAdmin: false,
   assignments: [],
 };
@@ -53,7 +53,7 @@ function reducer(state = initialState, action) {
     case actions.GET_USER_LABEL:
       return {
         ...state,
-        label: action.payload,
+        qualification_label: action.payload,
       };
 
     case actions.GET_USER_PHONENUMBER:
@@ -91,7 +91,7 @@ function reducer(state = initialState, action) {
         phoneNumber: initialState.phoneNumber,
         mobileNumber: initialState.mobileNumber,
         isAdmin: initialState.isAdmin,
-        label: initialState.label,
+        qualification_label: initialState.qualification_label,
         assignments: initialState.assignments,
       };
 
