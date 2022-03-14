@@ -7,9 +7,14 @@ import PropTypes from 'prop-types';
 
 function ForgotPassword({
   handleChange,
-  email,
+  sendEmail,
 }) {
   const theme = useTheme();
+
+  const handleSendEmail = (e) => {
+    e.preventDefault();
+    sendEmail();
+  };
 
   return (
     <Box sx={{ p: theme.spacing(2), textAlign: 'center' }}>
@@ -25,17 +30,15 @@ function ForgotPassword({
         component="div"
         sx={{ marginTop: theme.spacing(2) }}
       >
-        <form>
+        <form onSubmit={handleSendEmail}>
           <Grid container rowSpacing={2}>
             <Grid item xs={12}>
               <TextField
-                sx={{ maxWidth: '400px', minWidth: '300px' }}
-                autoComplete="on"
                 required
                 type="email"
-                label="email"
-                value={email}
-                onChange={(event) => handleChange(event)}
+                name="email"
+                label="E-mail"
+                onChange={(event) => handleChange('email', event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -56,7 +59,7 @@ function ForgotPassword({
 
 ForgotPassword.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
+  sendEmail: PropTypes.func.isRequired,
 };
 
 export default React.memo(ForgotPassword);

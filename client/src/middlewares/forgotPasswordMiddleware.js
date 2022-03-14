@@ -8,9 +8,8 @@ const forgotPasswordMiddleware = (store) => (next) => async (action) => {
 
       const response = await forgotPasswordRequest(forgotPassword.email);
       if (response.status === 200) {
-        alert('E-mail bien envoyé! ');
+        alert('Un e-mail a été envoyé sur votre boîte mail !');
       }
-
       return;
     }
 

@@ -7,8 +7,8 @@ export function actionUpdateEmailInput(value) {
   };
 }
 
-export function actionSubmitEmail() {
+export function actionSubmitEmail(email) {
   return {
-    type: SUBMIT_EMAIL,
+    type: SUBMIT_EMAIL, payload: email,
   };
 }
