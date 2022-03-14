@@ -39,7 +39,7 @@ module.exports = {
   async findAll() {
     const result = await client.query(
       `
-        SELECT * FROM "site";
+        SELECT * FROM "get_site_with_company_name";
       `,
     );
 
