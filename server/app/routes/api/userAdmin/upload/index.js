@@ -1,24 +1,14 @@
 const express = require('express');
 
-const path = require('path');
 const multer = require('multer');
 // const avatarRouter = require('./avatar');
-
-const { ApiError } = require('../../../../helpers/errorHandler');
+const uploadController = require('../../../../controllers/api/userAdmin/uploadController');
+const controllerHandler = require('../../../../helpers/apiControllerHandler');
 
 const router = express.Router();
+const { ApiError } = require('../../../../helpers/errorHandler');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'client/src/Assets/images');
-  },
-  filename: (req, file, cb) => {
-    console.log({ file });
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage });
+const upload = multer();
 
 router
   .route('/avatar')
@@ -26,9 +16,7 @@ router
   .get((req, res) => {
     res.render('upload-avatar', { title: "O'lleks - API" });
   })
-  .post(upload.single('image'), (req, res) => {
-    res.send('Image uploaded');
-  });
+  .post(upload.single('image'), controllerHandler(uploadController.uploadAvatar));
 
 router.use(() => {
   throw new ApiError(404, 'Page introuvable');

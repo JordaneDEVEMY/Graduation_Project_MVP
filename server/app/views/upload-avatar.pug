@@ -4,7 +4,10 @@ block append main
     h1 Upload image :
     div(id="image-upload")
         form(method="POST" action="" enctype="multipart/form-data")
+            div(class="employee-name")
+                label(for="name") Nom :
+                input(type="text" name="name" id="name")
             div(class="file-input")
-                label(for="file") image :
+                label(for="file") Image :
                 input(type="file" name="image" id="file")
             button(type="submit" value="upload") Ajouter l'image
