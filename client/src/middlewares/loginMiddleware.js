@@ -12,16 +12,15 @@ const loginMiddleware = (store) => (next) => async (action) => {
       const response = await requestLogin(login.email, login.password);
       if (response.status === 200) {
         const {
-          id, firstname, lastname, avatar, token,
+          id, firstname, lastname, avatar, token, role_application,
         } = response.data;
 
-        const roleApplication = response.data.role_application;
         store.dispatch(actions.actionResetPassword());
         store.dispatch(actions.actionGetUserInformations({
           id, firstname, lastname, avatar,
         }));
 
-        if (roleApplication === 'admin') {
+        if (role_application === 'admin') {
           store.dispatch(actions.actionSetUserIsAdmin(true));
         }
 

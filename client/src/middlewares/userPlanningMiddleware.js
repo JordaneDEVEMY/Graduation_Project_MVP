@@ -10,17 +10,17 @@ const userPlanningMiddleware = (store) => (next) => async (action) => {
 
       if (response.status === 200) {
         const {
-          qualification_label, assignments, phone_number: phoneNumber, mobile_number: mobileNumber,
+          qualification_label, assignments, phone_number, mobile_number,
         } = response.data;
         if (user.isAdmin) {
           store.dispatch(actions.actionGetUserLabel(qualification_label));
-          store.dispatch(actions.actionGetUserPhoneNumber(phoneNumber));
-          store.dispatch(actions.actionGetUserMobileNumber(mobileNumber));
+          store.dispatch(actions.actionGetUserPhoneNumber(phone_number));
+          store.dispatch(actions.actionGetUserMobileNumber(mobile_number));
         } else {
           store.dispatch(actions.actionGetUserAssignments(assignments));
           store.dispatch(actions.actionGetUserLabel(qualification_label));
-          store.dispatch(actions.actionGetUserPhoneNumber(phoneNumber));
-          store.dispatch(actions.actionGetUserMobileNumber(mobileNumber));
+          store.dispatch(actions.actionGetUserPhoneNumber(phone_number));
+          store.dispatch(actions.actionGetUserMobileNumber(mobile_number));
         }
       }
       return;

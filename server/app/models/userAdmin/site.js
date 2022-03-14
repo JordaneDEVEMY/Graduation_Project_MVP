@@ -78,27 +78,8 @@ module.exports = {
   async insert(site) {
     const siteToCreate = await client.query(
       `
-      INSERT INTO "site" 
-      (
-        "name",
-        "address",
-        "zip_code",
-        "manager_name",
-        "estimated_duration",
-        "company_id"
-      )
-      VALUES (
-        $1, $2, $3, $4, $5, $6
-      )
-      RETURNING *;`,
-      [
-        site.name,
-        site.address,
-        site.zip_code,
-        site.manager_name,
-        site.estimated_duration,
-        site.company_id,
-      ],
+      SELECT insert_site($1);`,
+      [site],
     );
 
     return siteToCreate.rows[0];

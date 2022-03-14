@@ -8,8 +8,8 @@ const initialState = {
   password: '',
   confirmPassword: '',
   avatar: '',
-  phoneNumber: '',
-  mobileNumber: '',
+  phone_number: '',
+  mobile_number: '',
   qualification_label: '',
   isAdmin: false,
   assignments: [],
@@ -35,13 +35,13 @@ function reducer(state = initialState, action) {
     case actions.UPDATE_USER_PHONE_NUMBER:
       return {
         ...state,
-        phoneNumber: action.payload,
+        phone_number: action.payload,
       };
 
     case actions.UPDATE_USER_MOBILE_NUMBER:
       return {
         ...state,
-        mobileNumber: action.payload,
+        mobile_numbermobileNumber: action.payload,
       };
 
     case actions.RESET_USER_PASSWORD:
@@ -59,13 +59,13 @@ function reducer(state = initialState, action) {
     case actions.GET_USER_PHONENUMBER:
       return {
         ...state,
-        phoneNumber: action.payload,
+        phone_number: action.payload,
       };
 
     case actions.GET_USER_MOBILENUMBER:
       return {
         ...state,
-        mobileNumber: action.payload,
+        mobile_number: action.payload,
       };
 
     case actions.SET_USER_ISADMIN:
@@ -87,9 +87,10 @@ function reducer(state = initialState, action) {
         firstname: initialState.firstname,
         lastname: initialState.lastname,
         password: initialState.password,
+        confirmPassword: initialState.confirmPassword,
         avatar: initialState.avatar,
-        phoneNumber: initialState.phoneNumber,
-        mobileNumber: initialState.mobileNumber,
+        phone_number: initialState.phone_number,
+        mobile_number: initialState.mobile_number,
         isAdmin: initialState.isAdmin,
         qualification_label: initialState.qualification_label,
         assignments: initialState.assignments,
