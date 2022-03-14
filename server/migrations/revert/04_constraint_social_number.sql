@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP DOMAIN num_ss_fr;
+
 
 COMMIT;

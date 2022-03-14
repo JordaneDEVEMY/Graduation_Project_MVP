@@ -1,21 +1,26 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ForgotPassword from '../components/ForgotPassword/ForgotPassword';
-import { actionUpdateEmailInput } from '../actions/forgotPassword';
+import { actionUpdateEmailInput, actionSubmitEmail } from '../actions/forgotPassword';
 
 function ForgotPasswordContainer() {
   const email = useSelector((state) => state.forgotPassword.email);
 
   const dispatch = useDispatch();
 
-  const handleChange = (value) => {
-    dispatch(actionUpdateEmailInput(value));
+  const changeField = (key, value) => {
+    dispatch(actionUpdateEmailInput(key, value));
+  };
+
+  const sendEmail = () => {
+    dispatch(actionSubmitEmail());
   };
 
   return (
     <ForgotPassword
       email={email}
-      handleChange={handleChange}
+      sendEmail={sendEmail}
+      changeField={changeField}
     />
   );
 }

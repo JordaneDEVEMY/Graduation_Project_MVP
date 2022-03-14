@@ -53,7 +53,7 @@ export function actionGetEmployeeInformations({
   avatar,
   fonction,
   role_application,
-  label,
+  qualification_label,
 }) {
   return {
     type: GET_EMPLOYEE_INFORMATIONS,
@@ -72,7 +72,7 @@ export function actionGetEmployeeInformations({
       avatar,
       fonction,
       role_application,
-      label,
+      qualification_label,
     },
   };
 }

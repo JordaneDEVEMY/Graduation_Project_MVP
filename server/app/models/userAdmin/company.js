@@ -74,23 +74,8 @@ module.exports = {
   async insert(company) {
     const companyToCreate = await client.query(
       `
-          INSERT INTO "company" 
-          (
-            "name",
-            "address",
-            "zip_code",
-            "type"
-          )
-          VALUES (
-            $1, $2, $3, $4
-          )
-          RETURNING *;`,
-      [
-        company.name,
-        company.address,
-        company.zip_code,
-        company.type,
-      ],
+      SELECT insert_company($1);`,
+      [company],
     );
 
     return companyToCreate.rows[0];

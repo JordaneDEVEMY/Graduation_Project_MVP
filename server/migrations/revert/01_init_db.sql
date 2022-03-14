@@ -2,8 +2,8 @@
 
 BEGIN;
 
-DROP TABLE 
- 
+
+DROP TABLE
 "company", 
 "contact", 
 "site", 
@@ -13,6 +13,8 @@ DROP TABLE
 "absence",
 "employee_qualification" CASCADE; 
 
+DROP DOMAIN num_ss_fr;
 DROP DOMAIN posint;
+DROP DOMAIN check_age;
 
 COMMIT;

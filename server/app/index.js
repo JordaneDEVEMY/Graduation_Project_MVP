@@ -14,6 +14,8 @@ app.set('views', './app/views');
 app.use(express.json());
 // Activation of parload urlencoded parser middleware
 app.use(express.urlencoded({ extended: true }));
+// Activation of public's folder
+app.use(express.static('app/public'));
 
 // No Restriction CORS
 app.use(cors(process.env.CORS_DOMAINS ?? '*'));
