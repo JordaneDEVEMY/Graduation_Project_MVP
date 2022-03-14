@@ -2,10 +2,12 @@
 
 BEGIN;
 
-CREATE DOMAIN num_ss_fr AS text
-    CHECK(
-        VALUE ~ '^[1-2][0-9][0-9][0-1][1-9][0-9][0-9].{8}'
-    );
+-- CREATE DOMAIN num_ss_fr AS text
+--     CHECK(
+--         VALUE ~ '^[1-2][0-9][0-9][0-1][1-9][0-9][0-9].{8}'
+--     );
+
+--   ALTER COLUMN "social_security_number" TYPE num_ss_fr;
 
 COMMIT;
                 
