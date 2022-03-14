@@ -6,6 +6,7 @@ const initialState = {
   absences: [],
   planning: [],
   allQualifications: [],
+  allAbscences: [],
 };
 
 function reducer(state = initialState, action) {
@@ -21,6 +22,11 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         allQualifications: action.payload,
+      };
+    case actions.GET_ALL_ABSENCES:
+      return {
+        ...state,
+        allAbscences: action.payload,
       };
     default:
       return state;
