@@ -22,6 +22,7 @@ function DataGridEmployee({
   handleCreateEmployee,
   pushEmployeeId,
   resetEmployeeInformations,
+  changeFile,
 }) {
   const theme = useTheme();
   const [selectionModel, setSelectionModel] = useState([]);
@@ -192,6 +193,7 @@ function DataGridEmployee({
             employee={oneEmployee}
             handleCreateEmployee={handleCreateEmployee}
             changeField={changeField}
+            changeFile={changeFile}
             handleClose={handleClose}
           />
         </Box>
@@ -262,6 +264,7 @@ DataGridEmployee.propTypes = {
   handleDeleteEmployee: PropTypes.func.isRequired,
   handleCreateEmployee: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
+  changeFile: PropTypes.func.isRequired,
   pushEmployeeId: PropTypes.func.isRequired,
   resetEmployeeInformations: PropTypes.func.isRequired,
 };

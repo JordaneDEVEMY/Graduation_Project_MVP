@@ -47,3 +47,12 @@ export async function deleteEmployee(id) {
     return err.response;
   }
 }
+
+export async function createEmployeeAvatar(data) {
+  try {
+    const response = await apiAxios.post('api/admin/upload/avatar', data);
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+}
