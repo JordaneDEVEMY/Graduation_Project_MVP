@@ -52,10 +52,8 @@ function AssignmentFormContainer({
     console.log('data', assignmentData);
     switch (method) {
       case 'POST':
-        dispatch(actionSetAssignmentInformation(assignmentData));
-        dispatch(actionCreateAssignment());
         dispatch(actionGetAssignmentInformations(assignmentData));
-        // const { employees: employeesList } = useSelector((state) => state.assignment);
+        dispatch(actionCreateAssignment());
         break;
       case 'PATCH':
         dispatch(actionGetAssignmentInformations(assignmentData));

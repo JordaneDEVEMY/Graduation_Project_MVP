@@ -55,7 +55,6 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
         employee_id,
         site_id,
         absence_id,
-        weekSlug,
       } = assignment;
 
       const assignmentDatas = {
@@ -70,7 +69,7 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createAssignment(assignmentDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionRequestAdminPlanning(weekSlug));
+        store.dispatch(actions.actionRequestAdminPlanning());
         alert('Assignment created successfully');
       }
       return;

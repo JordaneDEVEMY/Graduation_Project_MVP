@@ -4,7 +4,9 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import {
+  Box, Button, Dialog, DialogContent, DialogContentText, DialogActions,
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Droppable } from 'react-beautiful-dnd';
 import SiteHeader from '../SiteHeader/SiteHeader';
@@ -20,12 +22,33 @@ function Site({
   isDropable,
   isMobile,
   name,
+  // setStartDate,
   week,
 }) {
   const theme = useTheme();
 
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
+  // remove dialog
+  const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
+  // removed assignment
+  const [removedAssignmentId, setRemovedAssignmentId] = React.useState(null);
+
+  const handleClose = () => {
+    setOpenRemoveDialog(false);
+  };
+
+  const handleAgree = () => {
+    setOpenRemoveDialog(false);
+    // DELETE REQUEST
+    console.log('DELETE', removedAssignmentId);
+    // setStartDate();
+  };
+
+  const handleRemoveAssignment = (assignmentId) => {
+    setOpenRemoveDialog(true);
+    setRemovedAssignmentId(assignmentId);
+  };
 
   /**
    * set expanded state
@@ -58,76 +81,100 @@ function Site({
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',
-        borderRadius: '.25rem',
-        color: theme.palette.text.primary,
-        bgcolor: `${theme.palette.background.component}`,
-        p: theme.spacing(2),
-        width: `calc(300px + ${theme.spacing(4)})`,
-        overflow: 'hidden',
-        [theme.breakpoints.up('md')]: {
-          flex: '0 0 auto',
-        },
-      }}
-      id={`site-${id}`}
-    >
-      <SiteHeader
-        name={name}
-        handleAddAssignment={handleAddAssignment}
-      />
-      {assignments.length
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          borderRadius: '.25rem',
+          color: theme.palette.text.primary,
+          bgcolor: `${theme.palette.background.component}`,
+          p: theme.spacing(2),
+          width: `calc(300px + ${theme.spacing(4)})`,
+          overflow: 'hidden',
+          [theme.breakpoints.up('md')]: {
+            flex: '0 0 auto',
+          },
+        }}
+        id={`site-${id}`}
+      >
+        <SiteHeader
+          name={name}
+          handleAddAssignment={handleAddAssignment}
+        />
+        {assignments.length
           && isDropable
-        ? (
-          <Droppable droppableId={`site-${id}`} type="SITE">
-            {(provided) => (
-              <Box
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                sx={{
-                  pb: '50px',
-                  flexGrow: '1',
-                  background: `url('${assignmentBg}') repeat-y center bottom`,
-                }}
-              >
-                <AssignmentsList
-                  assignments={assignments}
-                  expandedSheet={expandedSheet}
-                  handleAssignment={handleAssignment}
-                  handleCollapse={handleCollapse}
-                  isDraggable
-                  isMobile={false}
-                  week={week}
-                />
+          ? (
+            <Droppable droppableId={`site-${id}`} type="SITE">
+              {(provided) => (
+                <Box
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  sx={{
+                    pb: '50px',
+                    flexGrow: '1',
+                    background: `url('${assignmentBg}') repeat-y center bottom`,
+                  }}
+                >
+                  <AssignmentsList
+                    assignments={assignments}
+                    expandedSheet={expandedSheet}
+                    handleAssignment={handleAssignment}
+                    handleRemoveAssignment={handleRemoveAssignment}
+                    handleCollapse={handleCollapse}
+                    isDraggable
+                    isMobile={false}
+                    week={week}
+                  />
 
-                {provided.placeholder}
-              </Box>
-            )}
-          </Droppable>
-        )
-        : (
-          <Box
-            sx={{
-              pb: '50px',
-              flexGrow: '1',
-              background: `url('${assignmentBg}') repeat-y center bottom`,
-            }}
-          >
-            <AssignmentsList
-              assignments={assignments}
-              expandedSheet={expandedSheet}
-              handleAssignment={handleAssignment}
-              handleCollapse={handleCollapse}
-              isDraggable={false}
-              isMobile={isMobile}
-              week={week}
-            />
-          </Box>
-        )}
-    </Box>
+                  {provided.placeholder}
+                </Box>
+              )}
+            </Droppable>
+          )
+          : (
+            <Box
+              sx={{
+                pb: '50px',
+                flexGrow: '1',
+                background: `url('${assignmentBg}') repeat-y center bottom`,
+              }}
+            >
+              <AssignmentsList
+                assignments={assignments}
+                expandedSheet={expandedSheet}
+                handleAssignment={handleAssignment}
+                handleCollapse={handleCollapse}
+                isDraggable={false}
+                isMobile={isMobile}
+                week={week}
+              />
+            </Box>
+          )}
+      </Box>
+
+      <div>
+        <Dialog
+          open={openRemoveDialog}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Supprimer cet assignement ?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} variant="outlined">Non</Button>
+            <Button onClick={handleAgree} autoFocus>
+              Oui
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </>
   );
 }
 
@@ -152,6 +199,7 @@ Site.propTypes = {
   handleAssignment: PropTypes.func,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  setStartDate: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

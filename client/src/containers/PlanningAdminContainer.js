@@ -22,6 +22,7 @@ function PlanningAdminContainer() {
   let { weekSlug } = useParams();
   if (weekSlug === undefined) {
     weekSlug = planningFunctions.getCurrentWeekSlug();
+    // action send weekSlug
   }
 
   useEffect(() => {

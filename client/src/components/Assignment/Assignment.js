@@ -8,6 +8,7 @@ import {
   AccordionSummary,
   Avatar,
   Box,
+  Button,
   Grid,
   Typography,
 } from '@mui/material';
@@ -29,6 +30,7 @@ function Assignment({
   ending_date,
   expandedSheet,
   handleAssignment,
+  handleRemoveAssignment,
   handleCollapse,
   isDraggable,
   id,
@@ -138,6 +140,16 @@ function Assignment({
                 pl: 0,
               }}
             >
+              {handleRemoveAssignment
+              && (
+              <Button onClick={() => {
+                console.log('click', id);
+                handleRemoveAssignment(id);
+              }}
+              >
+                REMOVE
+              </Button>
+              )}
               {absence !== undefined
               && (
               <Typography component="li">
@@ -191,6 +203,7 @@ Assignment.propTypes = {
   ending_date: PropTypes.string.isRequired,
   expandedSheet: PropTypes.string.isRequired,
   handleAssignment: PropTypes.func,
+  handleRemoveAssignment: PropTypes.func,
   handleCollapse: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
@@ -209,6 +222,7 @@ Assignment.propTypes = {
 Assignment.defaultProps = {
   absence: undefined,
   handleAssignment: undefined,
+  handleRemoveAssignment: undefined,
   userId: undefined,
 };
 export default React.memo(Assignment);
