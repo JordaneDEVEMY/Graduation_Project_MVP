@@ -6,6 +6,7 @@
   "scripts": {
     "resetDB": "sqitch revert -y; sqitch deploy;",
     "test": "jest",
+    "resetLocalDB": "sqitch revert -t dev -y; sqitch deploy dev;",
     "start": "node .",
     "dev": "DEBUG=*,-express:*,-nodemon*,-body-parser:* npx nodemon"
   },
