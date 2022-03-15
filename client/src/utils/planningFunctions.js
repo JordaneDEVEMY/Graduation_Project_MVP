@@ -173,6 +173,32 @@ const planningFunctions = {
   },
 
   /**
+   * Get employees list of a company site
+   * @param {object} drag - Drag and drop data
+   * @param {object} companies - Companies object
+   * @returns {object} Datas sended to Assignment form
+   */
+  getSiteEmployees: (companies, siteId) => {
+    const employees = [];
+
+    companies.forEach((company) => {
+      const { sites } = company;
+      const findedSite = sites.filter((site) => site.id === siteId);
+
+      if (findedSite.length === 1) {
+        console.log('finded site', findedSite);
+        const { assignments } = findedSite[0];
+
+        assignments.forEach(({ employee }) => {
+          employees.push(employee);
+        });
+      }
+    });
+
+    return employees;
+  },
+
+  /**
    * Prepare data to assignment form after a drag and drop
    * @param {object} drag - Drag and drop data
    * @param {object} companies - Companies object

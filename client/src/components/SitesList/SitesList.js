@@ -11,7 +11,6 @@ import Carousel from '../Carousel/Carousel';
 
 function SitesList({
   company,
-  employeesList,
   handleAssignment,
   isDropable,
   isMobile,
@@ -45,7 +44,6 @@ function SitesList({
           {sites.map((site) => (
             <Site
               {...site}
-              employeesList={employeesList}
               handleAssignment={handleAssignment}
               isDropable={isDropable}
               isMobile={false}
@@ -84,13 +82,6 @@ SitesList.propTypes = {
       }).isRequired,
     ).isRequired,
   }).isRequired,
-  employeesList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      firstname: PropTypes.string.isRequired,
-      lastname: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
   handleAssignment: PropTypes.func,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,

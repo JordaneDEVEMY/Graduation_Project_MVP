@@ -6,17 +6,27 @@ import { requestAdminPlanning } from '../requests/adminPlanningRequest';
 import { requestAllQualifications } from '../requests/qualificationsRequest';
 import { requestAllAbsences } from '../requests/absencesRequest';
 import * as actions from '../actions';
+import planningFunctions from '../utils/planningFunctions';
 
 const adminPlanningMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case actions.REQUEST_ADMIN_PLANNING: {
-      const response = await requestAdminPlanning(action.payload);
+      const { assignment } = store.getState();
+      const currentWeek = planningFunctions.getCurrentWeekSlug();
+
+      let response;
+      if (assignment.weekSlug === '') {
+        response = await requestAdminPlanning(currentWeek);
+      } else {
+        response = await requestAdminPlanning(assignment.weekSlug);
+      }
 
       if (response.status === 200) {
         const { weekStart, absences, planning } = response.data;
 
         store.dispatch(actions.actionGetAdminPlanning({ weekStart, absences, planning }));
         store.dispatch(actions.actionGetUserPlanning());
+        store.dispatch(actions.actionResetAssignmentInformations());
       }
       return;
     }
@@ -37,14 +47,15 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
     case actions.CREATE_ASSIGNMENT: {
       const { assignment } = store.getState();
       const {
-        startingDate: starting_date,
-        endingDate: ending_date,
+        starting_date,
+        ending_date,
         color,
         position,
         visibility,
-        employeeId: employee_id,
-        siteId: site_id,
-        absenceId: absence_id,
+        employee_id,
+        site_id,
+        absence_id,
+        weekSlug,
       } = assignment;
       const assignmentDatas = {
         starting_date,
@@ -55,11 +66,11 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
         employee_id,
         site_id,
         absence_id,
+        weekSlug,
       };
       const response = await createAssignment(assignmentDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionResetAssignmentInformations());
-        store.dispatch(actions.actionRequestAdminPlanning());
+        store.dispatch(actions.actionRequestAdminPlanning(weekSlug));
         alert('Assignment created successfully');
       }
       return;
@@ -67,14 +78,14 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
     case actions.UPDATE_ASSIGNMENT: {
       const { assignment } = store.getState();
       const {
-        startingDate: starting_date,
-        endingDate: ending_date,
+        starting_date,
+        ending_date,
         color,
         position,
         visibility,
-        employeeId: employee_id,
-        siteId: site_id,
-        absenceId: absence_id,
+        employee_id,
+        site_id,
+        absence_id,
       } = assignment;
       const assignmentDatas = {
         starting_date,
@@ -88,7 +99,6 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateAssignment(assignment.id, assignmentDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionResetAssignmentInformations());
         store.dispatch(actions.actionRequestAdminPlanning());
         alert('Assignment updated successfully');
       }

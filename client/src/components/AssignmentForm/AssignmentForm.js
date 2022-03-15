@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
@@ -30,15 +31,6 @@ function AssignmentForm({
   const method = assignment.id ? 'PATCH' : 'POST';
   const { employee_id, site } = assignment;
 
-  // Add assignment employee to employees list
-  if (employee_id !== null) {
-    employeesList.push({
-      id: employee_id,
-      firstname: assignment.firstname,
-      lastname: assignment.lastname,
-    });
-  }
-
   // set colors list
   const colorsList = [
     ['#f44336', 'Rouge'],
@@ -52,18 +44,23 @@ function AssignmentForm({
     ['#ffeb3b', 'Jaune'],
     ['#ff9800', 'Orange'],
   ];
+  if (assignment.color) {
+    const isFinded = colorsList.filter(([code]) => code === assignment.color);
+    if (isFinded.length === 0) {
+      colorsList.push([assignment.color, 'personnalisée']);
+    }
+  }
+
   const [employee, setEmployee] = React.useState(
     employee_id === null
-      ? null
+      ? employeesList[0]
       : employeesList.filter((item) => item.id === employee_id)[0],
   );
+  console.log('employee', employee);
   const [starting_date, setStartingDate] = React.useState(assignment.starting_date);
   const [ending_date, setEndingDate] = React.useState(assignment.ending_date);
   const [color, setColor] = React.useState(assignment.color || colorsList[0][0]);
   const [visibility, setVisibility] = React.useState(true);
-
-  console.log('employees', employeesList);
-  console.log('employee', employee);
 
   const handleChange = (event, fieldLabel) => {
     const { value } = event.target;
@@ -129,16 +126,16 @@ function AssignmentForm({
         >
           <Grid item xs={12}>
             <Autocomplete
-              getOptionLabel={(item) => `${item.firstname} ${item.lastname}`}
-              options={employeesList}
-              sx={{ width: '100%' }}
-              renderInput={(params) => (
-                <TextField {...params} label="Employé" required />
-              )}
               value={employee}
+              getOptionLabel={(option) => `${option.firstname} ${option.lastname}`}
               onChange={(_event, newValue) => {
                 setEmployee(newValue);
               }}
+              options={employeesList}
+              sx={{ width: '100%' }}
+              renderInput={(params) => (
+                <TextField {...params} label="controlled" required />
+              )}
             />
           </Grid>
           <Grid item xs={6}>

@@ -10,6 +10,7 @@ export const GET_ASSIGNMENT_ID = 'GET_ASSIGNMENT_ID';
 
 // create or update assignment informations
 export const SET_ASSIGNMENT_INFORMATION = 'SET_ASSIGNMENT_INFORMATION';
+export const SET_WEEKSLUG_INFORMATION = 'SET_WEEKSLUG_INFORMATION';
 
 // reset assignment informations
 export const RESET_ASSIGNMENT_INFORMATIONS = 'RESET_ASSIGNMENT_INFORMATIONS';
@@ -40,27 +41,29 @@ export function actionDeleteAssignment() {
 
 export function actionGetAssignmentInformations({
   id,
-  startingDate,
-  endingDate,
+  starting_date,
+  ending_date,
   color,
   position,
   visibility,
-  employeeId,
-  siteId,
-  absenceId,
+  employee_id,
+  site_id,
+  absence_id,
+  weekSlug,
 }) {
   return {
     type: GET_ASSIGNMENT_INFORMATIONS,
     payload: {
       id,
-      startingDate,
-      endingDate,
+      starting_date,
+      ending_date,
       color,
       position,
       visibility,
-      employeeId,
-      siteId,
-      absenceId,
+      employee_id,
+      site_id,
+      absence_id,
+      weekSlug,
     },
   };
 }
@@ -75,6 +78,13 @@ export function actionSetAssignmentInformation(key, value) {
   return {
     type: SET_ASSIGNMENT_INFORMATION,
     payload: { key, value },
+  };
+}
+
+export function actionSetWeekSlugInformation(weekSlug) {
+  return {
+    type: SET_WEEKSLUG_INFORMATION,
+    payload: weekSlug,
   };
 }
 

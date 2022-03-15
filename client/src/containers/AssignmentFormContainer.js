@@ -1,18 +1,24 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionGetAssignmentInformations, actionUpdateAssignment } from '../actions/assignment';
+import { useDispatch } from 'react-redux';
 import AssignmentForm from '../components/AssignmentForm/AssignmentForm';
-import { actionRequestAllEmployees } from '../actions/allEmployees';
+import {
+  actionRequestAllEmployees,
+  actionCreateAssignment,
+  actionSetAssignmentInformation,
+  actionGetAssignmentInformations,
+  actionUpdateAssignment,
+} from '../actions';
+import planningFunctions from '../utils/planningFunctions';
 
 function AssignmentFormContainer({
   assignment,
-  assignmentEmployeesIDs,
+  employeesList,
+  // setStartDate,
   setModalOpened,
 }, ref) {
   const dispatch = useDispatch();
-  const { employees: employeesList } = useSelector((state) => state.allEmployees);
   console.log('employeesList', employeesList);
 
   const handleSubmitAssignment = (formData) => {
@@ -41,13 +47,19 @@ function AssignmentFormContainer({
       employee_id,
       site_id: site.id,
       absence_id,
+      weekSlug: planningFunctions.getWeekSlugFromDate(starting_date),
     };
-
+    console.log('data', assignmentData);
     switch (method) {
       case 'POST':
+        dispatch(actionSetAssignmentInformation(assignmentData));
+        dispatch(actionCreateAssignment(assignmentData));
+        dispatch(actionGetAssignmentInformations(assignmentData));
+        // const { employees: employeesList } = useSelector((state) => state.assignment);
         break;
       case 'PATCH':
         dispatch(actionGetAssignmentInformations(assignmentData));
+        dispatch(actionSetAssignmentInformation(assignmentData));
         dispatch(actionUpdateAssignment());
         break;
       default:
@@ -55,6 +67,7 @@ function AssignmentFormContainer({
     }
 
     setModalOpened(false);
+    // setStartDate(assignmentData.starting_date);
   };
 
   React.useEffect(() => {
@@ -64,7 +77,6 @@ function AssignmentFormContainer({
   return (
     <AssignmentForm
       ref={ref}
-      assignmentEmployeesIDs={assignmentEmployeesIDs}
       assignment={assignment}
       employeesList={employeesList}
       setModalOpened={setModalOpened}

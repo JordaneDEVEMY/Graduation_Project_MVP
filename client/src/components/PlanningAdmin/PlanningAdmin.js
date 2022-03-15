@@ -6,6 +6,7 @@ import SearchContainer from '../SearchContainer/SearchContainer';
 import DraggableAssignments from '../DraggableAssignments/DraggableAssignments';
 import Companies from '../Companies/Companies';
 import dateFunctions from '../../utils/dateFunctions';
+import planningFunctions from '../../utils/planningFunctions';
 import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
@@ -13,17 +14,21 @@ function PlanningAdmin({
   absences,
   companies,
   employeesList,
+  setStartDate,
   startDate,
+  user,
 }) {
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
   const isMobile = useBreakpointDown();
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
+  const [employees, setEmployees] = React.useState(employeesList);
+  console.log('employees', employees);
 
   const handleAssignment = (result) => {
     setAssignment(result);
-    console.log('updateAssignment', result);
+    console.log('set assignment', result);
   };
 
   const handleAbsence = (result) => {
@@ -41,7 +46,22 @@ function PlanningAdmin({
   };
 
   React.useEffect(() => {
-    setModalOpened(assignment.id !== undefined);
+    if (assignment.site !== undefined) {
+      const { site } = assignment;
+      let assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
+      console.log('user', user);
+      if (assignment.employee_id !== undefined) {
+        const colleagues = assignmentEmployees.filter(
+          (item) => item.id !== assignment.employee_id,
+        );
+        const colleaguesIds = colleagues.map((item) => item.id);
+        assignmentEmployees = employeesList.filter(
+          ({ id }) => !colleaguesIds.includes(id),
+        );
+      }
+      setEmployees(assignmentEmployees);
+      setModalOpened(true);
+    }
   }, [assignment]);
 
   return (
@@ -58,7 +78,6 @@ function PlanningAdmin({
           <DraggableAssignments
             absences={absences}
             companies={companies}
-            employeesList={employeesList}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             week={currentWeek}
@@ -68,7 +87,6 @@ function PlanningAdmin({
           <Companies
             absences={absences}
             companies={companies}
-            employeesList={employeesList}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             isDropable={false}
@@ -91,6 +109,8 @@ function PlanningAdmin({
       >
         <AssignmentFormContainer
           assignment={assignment}
+          employeesList={employees}
+          setStartDate={setStartDate}
           setModalOpened={setModalOpened}
         />
       </Modal>
@@ -109,13 +129,13 @@ PlanningAdmin.propTypes = {
     PropTypes.shape(),
   ).isRequired,
   employeesList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      firstname: PropTypes.string.isRequired,
-      lastname: PropTypes.string.isRequired,
-    }).isRequired,
+    PropTypes.shape(),
   ).isRequired,
+  setStartDate: PropTypes.func.isRequired,
   startDate: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default React.memo(PlanningAdmin);
