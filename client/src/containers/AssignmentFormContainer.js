@@ -15,6 +15,7 @@ import planningFunctions from '../utils/planningFunctions';
 function AssignmentFormContainer({
   assignment,
   employeesList,
+  handleCancel,
   setModalOpened,
 }, ref) {
   const dispatch = useDispatch();
@@ -77,6 +78,7 @@ function AssignmentFormContainer({
       assignment={assignment}
       employeesList={employeesList}
       setModalOpened={setModalOpened}
+      handleCancel={handleCancel}
       handleSubmit={handleSubmitAssignment}
     />
   );

@@ -30,8 +30,7 @@ function DraggableAssignments({
   }, [brands]);
 
   /**
-   * Refresh assignments on drag end
-   * Open assignment update modal
+   * Open assignment insert / update modal
    */
   const onDragEnd = useCallback((result) => {
     console.log(result);
@@ -44,7 +43,7 @@ function DraggableAssignments({
       const assignment = planningFunctions.getDraggedAssignment(result, assignmentsPositions);
 
       setAssignmentsPositions(refreshList);
-      handleAssignment(assignment);
+      handleAssignment(assignment, result);
     }
   }, [brands]);
 

@@ -23,6 +23,7 @@ function AssignmentForm({
   assignment,
   employeesList,
   setModalOpened,
+  handleCancel,
   handleSubmit,
 }, ref) {
   const theme = useTheme();
@@ -42,7 +43,7 @@ function AssignmentForm({
     ['#ffeb3b', 'Jaune'],
     ['#ff9800', 'Orange'],
   ];
-  // add color into colors list if not
+  // add assignment color in colors list if not includes
   if (assignment.color) {
     const isFinded = colorsList.filter(([code]) => code === assignment.color);
     if (isFinded.length === 0) {
@@ -75,8 +76,9 @@ function AssignmentForm({
     }
   };
 
-  const handleCancel = () => {
+  const handleCancelForm = () => {
     setModalOpened(false);
+    handleCancel();
   };
 
   const handleSubmitForm = (event) => {
@@ -229,7 +231,7 @@ function AssignmentForm({
             <Button
               type="submit"
               variant="outlined"
-              onClick={handleCancel}
+              onClick={handleCancelForm}
               sx={{
                 mr: theme.spacing(1),
               }}

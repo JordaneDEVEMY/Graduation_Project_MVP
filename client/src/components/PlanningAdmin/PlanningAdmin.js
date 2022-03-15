@@ -22,10 +22,26 @@ function PlanningAdmin({
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
   const [employees, setEmployees] = React.useState(employeesList);
+  const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
+  const [dragEndResult, setDragEndResult] = React.useState({});
 
-  const handleAssignment = (result) => {
-    setAssignment(result);
-    console.log('set assignment', result);
+  const handleAssignment = (assignmentData, dragResult = undefined) => {
+    setAssignment(assignmentData);
+
+    if (dragResult) {
+      setDragEndResult(dragResult);
+    }
+  };
+
+  const handleCancel = () => {
+    setAssignment({});
+    const initialResult = {
+      ...dragEndResult,
+      source: dragEndResult.destination,
+      destination: dragEndResult.source,
+    };
+    const refreshList = planningFunctions.setAssignmentPosition(initialResult, draggableCompanies);
+    setDraggableCompanies(refreshList);
   };
 
   const handleAbsence = (result) => {
@@ -63,6 +79,10 @@ function PlanningAdmin({
     }
   }, [assignment]);
 
+  React.useEffect(() => {
+    setDraggableCompanies(companies);
+  }, [companies]);
+
   return (
     <>
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
@@ -76,7 +96,7 @@ function PlanningAdmin({
         ? (
           <DraggableAssignments
             absences={absences}
-            companies={companies}
+            companies={draggableCompanies}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             week={currentWeek}
@@ -109,6 +129,7 @@ function PlanningAdmin({
         <AssignmentFormContainer
           assignment={assignment}
           employeesList={employees}
+          handleCancel={handleCancel}
           setModalOpened={setModalOpened}
         />
       </Modal>
