@@ -15,7 +15,7 @@ import planningFunctions from '../utils/planningFunctions';
 function AssignmentFormContainer({
   assignment,
   employeesList,
-  // setStartDate,
+  setStartDate,
   setModalOpened,
 }, ref) {
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ function AssignmentFormContainer({
     switch (method) {
       case 'POST':
         dispatch(actionSetAssignmentInformation(assignmentData));
-        dispatch(actionCreateAssignment(assignmentData));
+        dispatch(actionCreateAssignment());
         dispatch(actionGetAssignmentInformations(assignmentData));
         // const { employees: employeesList } = useSelector((state) => state.assignment);
         break;
@@ -67,7 +67,9 @@ function AssignmentFormContainer({
     }
 
     setModalOpened(false);
-    // setStartDate(assignmentData.starting_date);
+
+    // Refresh planning
+    setStartDate(assignmentData.starting_date);
   };
 
   React.useEffect(() => {

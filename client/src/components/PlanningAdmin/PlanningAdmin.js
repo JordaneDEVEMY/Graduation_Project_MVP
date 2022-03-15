@@ -89,6 +89,7 @@ function PlanningAdmin({
             companies={companies}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
+            setStartDate={setStartDate}
             isDropable={false}
             isMobile
             week={currentWeek}

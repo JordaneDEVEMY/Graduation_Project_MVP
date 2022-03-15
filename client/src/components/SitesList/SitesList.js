@@ -14,6 +14,7 @@ function SitesList({
   handleAssignment,
   isDropable,
   isMobile,
+  setStartDate,
   week,
 }) {
   const theme = useTheme();
@@ -45,6 +46,7 @@ function SitesList({
             <Site
               {...site}
               handleAssignment={handleAssignment}
+              setStartDate={setStartDate}
               isDropable={isDropable}
               isMobile={false}
               key={site.id}
@@ -85,6 +87,7 @@ SitesList.propTypes = {
   handleAssignment: PropTypes.func,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  setStartDate: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
