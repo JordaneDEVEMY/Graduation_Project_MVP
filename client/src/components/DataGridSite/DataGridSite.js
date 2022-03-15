@@ -59,7 +59,14 @@ function DataGridSite({
       field: 'estimated_duration', headerName: 'Durée estimée (j)', width: 200, editable: true, valueParser: (value) => Number(value),
     },
     {
-      field: 'company_id', headerName: 'Compagnie parente', width: 200, editable: true, valueParser: (value) => Number(value),
+      field: 'company',
+      headerName: 'Entreprise',
+      width: 200,
+      valueGetter: (params) => {
+        const result = [];
+        result.push(params.row.company.company_name);
+        return result;
+      },
     },
   ];
   const rows = sites;
