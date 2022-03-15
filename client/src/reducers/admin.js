@@ -3,6 +3,7 @@ import * as actions from '../actions';
 
 const initialState = {
   weekStart: '',
+  weekSlug: '',
   absences: [],
   planning: [],
   allQualifications: [],
@@ -27,6 +28,11 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         allAbscences: action.payload,
+      };
+    case actions.SET_WEEKSLUG:
+      return {
+        ...state,
+        weekSlug: action.payload,
       };
     default:
       return state;
