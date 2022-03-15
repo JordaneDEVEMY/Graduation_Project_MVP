@@ -2,7 +2,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionRequestAdminPlanning, actionRequestAllQualifications, actionRequestAllAbsences } from '../actions/admin';
+import {
+  actionRequestAdminPlanning, actionRequestAllQualifications, actionRequestAllAbsences, actionSetWeekslug,
+} from '../actions';
 import { actionRequestAllCompanies } from '../actions/allCompanies';
 import { actionRequestAllSites } from '../actions/allSites';
 import { actionRequestAllEmployees } from '../actions/allEmployees';
@@ -23,13 +25,15 @@ function PlanningAdminContainer() {
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllSites());
     dispatch(actionRequestAllCompanies());
-    dispatch(actionRequestAdminPlanning(weekSlug));
+    dispatch(actionSetWeekslug(weekSlug));
+    dispatch(actionRequestAdminPlanning());
     dispatch(actionRequestAllQualifications());
     dispatch(actionRequestAllAbsences());
   }, []);
 
   useEffect(() => {
-    dispatch(actionRequestAdminPlanning(weekSlug));
+    dispatch(actionSetWeekslug(weekSlug));
+    dispatch(actionRequestAdminPlanning());
   }, [weekSlug]);
 
   useEffect(() => {
