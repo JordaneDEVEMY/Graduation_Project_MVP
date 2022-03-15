@@ -7,7 +7,7 @@ const initialState = {
   absences: [],
   planning: [],
   allQualifications: [],
-  allAbscences: [],
+  allAbsences: [],
 };
 
 function reducer(state = initialState, action) {
@@ -27,7 +27,7 @@ function reducer(state = initialState, action) {
     case actions.GET_ALL_ABSENCES:
       return {
         ...state,
-        allAbscences: action.payload,
+        allAbsences: action.payload,
       };
     case actions.SET_WEEKSLUG:
       return {
