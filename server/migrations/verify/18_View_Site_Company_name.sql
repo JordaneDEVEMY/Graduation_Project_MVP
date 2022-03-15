@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT * FROM get_site_with_company_name;
 
 ROLLBACK;

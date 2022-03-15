@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add verifications here.
+SELECT * FROM get_week_absence_admin_planning;
 
 ROLLBACK;
