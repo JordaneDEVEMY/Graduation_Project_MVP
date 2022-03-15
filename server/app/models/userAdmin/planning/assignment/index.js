@@ -8,7 +8,7 @@ module.exports = {
    * @returns {User|undefined} - response of all users or undefined if no users found
    */
   async findAll() {
-    const result = await client.query('SELECT * FROM "assignment" ORDER BY "id";');
+    const result = await client.query('SELECT * FROM "assignment" ORDER BY "position";');
 
     if (result.rowCount === 0) {
       throw new ApiError(400, 'Aucune affectation trouvée');

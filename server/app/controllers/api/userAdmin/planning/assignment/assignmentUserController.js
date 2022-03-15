@@ -21,9 +21,6 @@ const controller = {
       throw new ApiError(404, 'Affectations introuvables');
     }
 
-    // sort by position value
-    assignments.sort((a, b) => a.position - b.position);
-
     return res.json(assignments);
   },
 
