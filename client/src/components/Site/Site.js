@@ -27,7 +27,6 @@ function Site({
   isDropable,
   isMobile,
   name,
-  // setStartDate,
   week,
 }) {
   const dispatch = useDispatch();
@@ -46,11 +45,8 @@ function Site({
 
   const handleAgree = () => {
     setOpenRemoveDialog(false);
-    // DELETE REQUEST
-    console.log('DELETE', removedAssignmentId);
     dispatch(actionGetAssignmentInformations({ id: removedAssignmentId }));
     dispatch(actionDeleteAssignment());
-    // setStartDate();
   };
 
   const handleRemoveAssignment = (assignmentId) => {
@@ -207,7 +203,6 @@ Site.propTypes = {
   handleAssignment: PropTypes.func,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  setStartDate: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

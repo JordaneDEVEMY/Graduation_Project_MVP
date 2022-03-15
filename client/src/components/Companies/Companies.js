@@ -14,7 +14,6 @@ function Companies({
   handleAssignment,
   isDropable,
   isMobile,
-  setStartDate,
   week,
 }) {
   const [brands, setBrands] = React.useState(companies);
@@ -74,7 +73,6 @@ function Companies({
                   isDropable={isDropable}
                   isMobile={isMobile}
                   key={`company-${company.id}`}
-                  setStartDate={setStartDate}
                   week={week}
                 />
               )
@@ -120,7 +118,6 @@ Companies.propTypes = {
   handleAssignment: PropTypes.func.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  setStartDate: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

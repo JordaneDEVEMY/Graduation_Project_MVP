@@ -15,11 +15,9 @@ import planningFunctions from '../utils/planningFunctions';
 function AssignmentFormContainer({
   assignment,
   employeesList,
-  setStartDate,
   setModalOpened,
 }, ref) {
   const dispatch = useDispatch();
-  console.log('employeesList', employeesList);
 
   const handleSubmitAssignment = (formData) => {
     const { method } = formData;
@@ -49,7 +47,9 @@ function AssignmentFormContainer({
       absence_id,
       weekSlug: planningFunctions.getWeekSlugFromDate(starting_date),
     };
+
     console.log('data', assignmentData);
+
     switch (method) {
       case 'POST':
         dispatch(actionGetAssignmentInformations(assignmentData));
@@ -65,9 +65,6 @@ function AssignmentFormContainer({
     }
 
     setModalOpened(false);
-
-    // Refresh planning
-    setStartDate(assignmentData.starting_date);
   };
 
   React.useEffect(() => {

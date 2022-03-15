@@ -25,8 +25,6 @@ function AssignmentForm({
   setModalOpened,
   handleSubmit,
 }, ref) {
-  console.log('assignment', assignment);
-  console.log('employeesList', employeesList);
   const theme = useTheme();
   const method = assignment.id ? 'PATCH' : 'POST';
   const { employee_id, site } = assignment;
@@ -44,6 +42,7 @@ function AssignmentForm({
     ['#ffeb3b', 'Jaune'],
     ['#ff9800', 'Orange'],
   ];
+  // add color into colors list if not
   if (assignment.color) {
     const isFinded = colorsList.filter(([code]) => code === assignment.color);
     if (isFinded.length === 0) {
@@ -56,7 +55,6 @@ function AssignmentForm({
       ? employeesList[0]
       : employeesList.filter((item) => item.id === employee_id)[0],
   );
-  console.log('employee', employee);
   const [starting_date, setStartingDate] = React.useState(assignment.starting_date);
   const [ending_date, setEndingDate] = React.useState(assignment.ending_date);
   const [color, setColor] = React.useState(assignment.color || colorsList[0][0]);
