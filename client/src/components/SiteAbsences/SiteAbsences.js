@@ -45,18 +45,17 @@ function SiteAbsences({
         position: 'relative',
         borderRadius: '.25rem',
         color: theme.palette.text.primary,
-        bgcolor: theme.palette.mode === 'dark'
-          ? theme.palette.primary.dark
-          : theme.palette.grey['300'],
+        border: `1px solid ${theme.palette.divider}`,
+        background: theme.palette.background.component,
         p: theme.spacing(2),
         width: `calc(300px + ${theme.spacing(4)})`,
         overflow: 'hidden',
         [theme.breakpoints.up('md')]: {
           flex: '0 0 auto',
-          position: 'sticky',
-          top: 0,
-          left: 0,
-          zIndex: '1',
+        },
+        [theme.breakpoints.down('md')]: {
+          mx: 'auto',
+          mb: theme.spacing(2),
         },
       }}
       id={`site-${id}`}
