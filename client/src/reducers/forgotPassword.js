@@ -10,7 +10,7 @@ function reducer(state = initialState, action) {
     case actions.UPDATE_EMAIL_INPUT:
       return {
         ...state,
-        email: action.payload.value,
+        [action.payload.key]: action.payload.value,
       };
 
     default:

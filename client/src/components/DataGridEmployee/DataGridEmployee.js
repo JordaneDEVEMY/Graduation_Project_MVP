@@ -70,10 +70,10 @@ function DataGridEmployee({
       field: 'social_security_number', headerName: 'Numéro de sécurité sociale', width: 300, editable: true,
     },
     {
-      field: 'date_of_birth', headerName: 'Date de naissance', width: 300, editable: true,
+      field: 'date_of_birth', headerName: 'Date de naissance', width: 300, editable: true, type: 'date', valueGetter: ({ value }) => value && new Date(value),
     },
     {
-      field: 'starting_date', headerName: "Date d'entrée", width: 300, editable: true,
+      field: 'starting_date', headerName: "Date d'entrée", width: 300, editable: true, type: 'date', valueGetter: ({ value }) => value && new Date(value),
     },
     {
       field: 'avatar', headerName: 'Avatar', width: 200, editable: true,

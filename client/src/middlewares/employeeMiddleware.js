@@ -1,4 +1,4 @@
-/* eslint-disable no-alert */
+/* eslint-disable array-callback-return */
 /* eslint-disable camelcase */
 import {
   getAllEmployees, createEmployee, updateEmployee, deleteEmployee,
@@ -74,7 +74,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
         avatar,
         fonction,
         role_application,
-        label: qualification_label,
+        qualification_label,
       } = employee;
       const employeeDatas = {
         firstname,

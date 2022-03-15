@@ -11,7 +11,7 @@ DROP TABLE
 "assignment", 
 "employee", 
 "absence",
-"employee_qualification" CASCADE; 
+"employee_qualification"; 
 
 DROP DOMAIN num_ss_fr;
 DROP DOMAIN posint;

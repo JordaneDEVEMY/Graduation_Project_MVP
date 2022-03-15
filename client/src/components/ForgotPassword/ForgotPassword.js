@@ -1,15 +1,20 @@
 import React from 'react';
 import {
-  Box, Typography, Grid, Button, Divider, useTheme, TextField,
+  Box, Typography, Grid, Button, Divider, useTheme,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-// import TextInput from '../FieldForms/TextInput';
+import TextInput from '../FieldForms/TextInput';
 
 function ForgotPassword({
-  handleChange,
-  email,
+  changeField,
+  sendEmail,
 }) {
   const theme = useTheme();
+
+  const handleSendEmail = (e) => {
+    e.preventDefault();
+    sendEmail();
+  };
 
   return (
     <Box sx={{ p: theme.spacing(2), textAlign: 'center' }}>
@@ -25,17 +30,15 @@ function ForgotPassword({
         component="div"
         sx={{ marginTop: theme.spacing(2) }}
       >
-        <form>
+        <form onSubmit={handleSendEmail}>
           <Grid container rowSpacing={2}>
             <Grid item xs={12}>
-              <TextField
-                sx={{ maxWidth: '400px', minWidth: '300px' }}
-                autoComplete="on"
+              <TextInput
                 required
                 type="email"
-                label="email"
-                value={email}
-                onChange={(event) => handleChange(event)}
+                label="E-mail"
+                nameValue="email"
+                handleChange={changeField}
               />
             </Grid>
             <Grid item xs={12}>
@@ -55,8 +58,8 @@ function ForgotPassword({
 }
 
 ForgotPassword.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  sendEmail: PropTypes.func.isRequired,
 };
 
 export default React.memo(ForgotPassword);

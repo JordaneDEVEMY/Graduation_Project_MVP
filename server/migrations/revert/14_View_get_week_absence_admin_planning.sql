@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP VIEW get_week_absence_admin_planning;
+DROP VIEW get_week_absence_admin_planning CASCADE;
 
 COMMIT;
