@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "resetDB": "sqitch revert -y; sqitch deploy;",
-    "test": "jest",
+    "test": "jest --coverage --coverage-reporters=lcov",
+    "testFull": "jest",
+    "test:watch": "jest --watch",
     "resetLocalDB": "sqitch revert -t dev -y; sqitch deploy dev;",
     "start": "node .",
     "dev": "DEBUG=*,-express:*,-nodemon*,-body-parser:* npx nodemon"
