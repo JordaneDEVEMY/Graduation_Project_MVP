@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "resetDB": "sqitch revert -y; sqitch deploy;",
+    "resetLocalDB": "sqitch revert -t dev -y; sqitch deploy dev;",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
     "dev": "DEBUG=*,-express:*,-nodemon*,-body-parser:* npx nodemon"

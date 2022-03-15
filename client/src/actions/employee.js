@@ -1,15 +1,18 @@
 // request employee
 export const REQUEST_EMPLOYEE_INFORMATIONS = 'REQUEST_EMPLOYEE_INFORMATIONS';
 export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
+export const CREATE_EMPLOYEE_AVATAR = 'CREATE_EMPLOYEE_AVATAR';
 export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
 
 // get employee informations
 export const GET_EMPLOYEE_INFORMATIONS = 'GET_EMPLOYEE_INFORMATIONS';
 export const GET_EMPLOYEE_ID_TO_DELETE = 'GET_EMPLOYEE_ID_TO_DELETE';
+export const GET_EMPLOYEE_AVATAR = 'GET_EMPLOYEE_AVATAR';
 
 // create or update employee informations
 export const SET_EMPLOYEE_INFORMATION = 'SET_EMPLOYEE_INFORMATION';
+export const SET_EMPLOYEE_FILE = 'SET_EMPLOYEE_FILE';
 
 // reset employee informations
 export const RESET_EMPLOYEE_INFORMATIONS = 'RESET_EMPLOYEE_INFORMATIONS';
@@ -23,6 +26,12 @@ export function actionRequestEmployInformations() {
 export function actionCreateEmployee() {
   return {
     type: CREATE_EMPLOYEE,
+  };
+}
+
+export function actionCreateEmployeeAvatar() {
+  return {
+    type: CREATE_EMPLOYEE_AVATAR,
   };
 }
 
@@ -83,9 +92,21 @@ export function actionGetEmployeeIdToDelete(ids) {
   };
 }
 
+export function actionGetEmployeeAvatar(avatar) {
+  return {
+    type: GET_EMPLOYEE_AVATAR, payload: avatar,
+  };
+}
+
 export function actionSetEmployeeInformation(key, value) {
   return {
     type: SET_EMPLOYEE_INFORMATION, payload: { key, value },
+  };
+}
+
+export function actionSetEmployeeFile(value) {
+  return {
+    type: SET_EMPLOYEE_FILE, payload: value,
   };
 }
 

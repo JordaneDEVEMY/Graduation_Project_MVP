@@ -2,11 +2,14 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionGetUserPlanning } from '../actions/user';
-import { actionRequestAdminPlanning, actionRequestAllQualifications, actionRequestAllAbsences } from '../actions/admin';
-import { actionRequestAllCompanies } from '../actions/allCompanies';
-import { actionRequestAllSites } from '../actions/allSites';
-import { actionRequestAllEmployees } from '../actions/allEmployees';
+import {
+  actionGetUserPlanning,
+  actionRequestAdminPlanning,
+  actionRequestAllCompanies,
+  actionRequestAllSites,
+  actionRequestAllEmployees,
+  actionRequestAllQualifications, actionRequestAllAbsences, actionSetWeekslug,
+} from '../actions';
 import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import planningFunctions from '../utils/planningFunctions';
 
@@ -30,7 +33,8 @@ function PlanningAdminContainer() {
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllSites());
     dispatch(actionRequestAllCompanies());
-    dispatch(actionRequestAdminPlanning(weekSlug));
+    dispatch(actionSetWeekslug(weekSlug));
+    dispatch(actionRequestAdminPlanning());
     dispatch(actionRequestAllQualifications());
     dispatch(actionRequestAllAbsences());
     setAbsences(planningFunctions.adminPlanningToAbsences(planningAbsences));
@@ -38,7 +42,8 @@ function PlanningAdminContainer() {
   }, []);
 
   useEffect(() => {
-    dispatch(actionRequestAdminPlanning(weekSlug));
+    dispatch(actionSetWeekslug(weekSlug));
+    dispatch(actionRequestAdminPlanning());
   }, [weekSlug]);
 
   useEffect(() => {

@@ -4,6 +4,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import {
   Box, Button, Dialog, DialogContent, DialogContentText, DialogActions,
 } from '@mui/material';
@@ -14,6 +15,10 @@ import AssignmentsList from '../AssignmentsList/AssignmentsList';
 import dateFunctions from '../../utils/dateFunctions';
 import planningFunctions from '../../utils/planningFunctions';
 import assignmentBg from '../../Assets/images/sheet-bg.png';
+import {
+  actionDeleteAssignment,
+  actionGetAssignmentInformations,
+} from '../../actions';
 
 function Site({
   assignments,
@@ -25,6 +30,7 @@ function Site({
   // setStartDate,
   week,
 }) {
+  const dispatch = useDispatch();
   const theme = useTheme();
 
   // accordion state
@@ -42,6 +48,8 @@ function Site({
     setOpenRemoveDialog(false);
     // DELETE REQUEST
     console.log('DELETE', removedAssignmentId);
+    dispatch(actionGetAssignmentInformations({ id: removedAssignmentId }));
+    dispatch(actionDeleteAssignment());
     // setStartDate();
   };
 

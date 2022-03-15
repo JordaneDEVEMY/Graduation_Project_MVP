@@ -6,20 +6,13 @@ import { requestAdminPlanning } from '../requests/adminPlanningRequest';
 import { requestAllQualifications } from '../requests/qualificationsRequest';
 import { requestAllAbsences } from '../requests/absencesRequest';
 import * as actions from '../actions';
-import planningFunctions from '../utils/planningFunctions';
 
 const adminPlanningMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case actions.REQUEST_ADMIN_PLANNING: {
-      const { assignment } = store.getState();
-      const currentWeek = planningFunctions.getCurrentWeekSlug();
-
-      let response;
-      if (assignment.weekSlug === '') {
-        response = await requestAdminPlanning(currentWeek);
-      } else {
-        response = await requestAdminPlanning(assignment.weekSlug);
-      }
+      const { admin } = store.getState();
+      const { weekSlug } = admin;
+      const response = await requestAdminPlanning(weekSlug);
 
       if (response.status === 200) {
         const { weekStart, absences, planning } = response.data;

@@ -18,6 +18,7 @@ const initialState = {
   fonction: '',
   role_application: '',
   qualification_label: '',
+  file: null,
   employeesToDelete: [],
 };
 
@@ -48,11 +49,22 @@ function reducer(state = initialState, action) {
         ...state,
         employeesToDelete: action.payload,
       };
+    case actions.GET_EMPLOYEE_AVATAR:
+      return {
+        ...state,
+        avatar: action.payload,
+      };
     // set employee informations
     case actions.SET_EMPLOYEE_INFORMATION:
       return {
         ...state,
         [action.payload.key]: action.payload.value,
+      };
+
+    case actions.SET_EMPLOYEE_FILE:
+      return {
+        ...state,
+        file: action.payload,
       };
 
     // reset employee informations
