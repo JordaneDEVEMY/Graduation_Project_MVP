@@ -25,16 +25,15 @@ function PlanningAdminContainer() {
   let { weekSlug } = useParams();
   if (weekSlug === undefined) {
     weekSlug = planningFunctions.getCurrentWeekSlug();
-    // action send weekSlug
   }
 
   useEffect(() => {
+    dispatch(actionSetWeekslug(weekSlug));
+    dispatch(actionRequestAdminPlanning());
     dispatch(actionGetUserPlanning());
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllSites());
     dispatch(actionRequestAllCompanies());
-    dispatch(actionSetWeekslug(weekSlug));
-    dispatch(actionRequestAdminPlanning());
     dispatch(actionRequestAllQualifications());
     dispatch(actionRequestAllAbsences());
     setAbsences(planningFunctions.adminPlanningToAbsences(planningAbsences));
@@ -47,6 +46,7 @@ function PlanningAdminContainer() {
   }, [weekSlug]);
 
   useEffect(() => {
+    setStartDate(admin.weekStart);
     setAbsences(planningFunctions.adminPlanningToAbsences(planningAbsences));
     setCompanies(planningFunctions.adminPlanningToCompanies(planning));
   }, [admin]);

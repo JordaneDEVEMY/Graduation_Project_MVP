@@ -12,6 +12,7 @@ function SearchContainer({
   isAdmin,
   userId,
 }) {
+  console.log('search', date, isAdmin, userId);
   const theme = useTheme();
 
   return (
