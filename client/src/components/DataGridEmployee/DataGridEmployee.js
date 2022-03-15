@@ -111,7 +111,7 @@ function DataGridEmployee({
       <Typography variant="h2" sx={{ textAlign: 'center' }}>
         Tous les Employés
       </Typography>
-      <Box sx={{ height: '80%', width: 'auto' }}>
+      <Box sx={{ minHeight: '80%', width: 'auto' }}>
         {showAlert && (
           <Alert sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center' }} severity="error">Vous devez sélectionner au moins un employé à supprimer</Alert>
         )}
@@ -142,7 +142,7 @@ function DataGridEmployee({
         <DataGrid
           disableSelectionOnClick
           sx={{
-            fontSize: '1.2rem',
+            fontSize: '1.2rem', height: '80vh',
           }}
           disableColumnMenu
           checkboxSelection

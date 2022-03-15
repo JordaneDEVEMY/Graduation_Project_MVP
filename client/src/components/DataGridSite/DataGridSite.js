@@ -120,7 +120,7 @@ function DataGridSite({
         </Button>
         <DataGrid
           disableSelectionOnClick
-          sx={{ fontSize: '1.2rem' }}
+          sx={{ fontSize: '1.2rem', height: '80vh' }}
           disableColumnMenu
           checkboxSelection
           onSelectionModelChange={(newSelectionModel) => {
