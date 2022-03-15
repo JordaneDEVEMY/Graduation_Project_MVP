@@ -4,11 +4,11 @@ export const REQUEST_ALL_ABSENCES = 'REQUEST_ALL_ABSENCES';
 export const GET_ADMIN_PLANNING = 'GET_ADMIN_PLANNING';
 export const GET_ALL_QUALIFICATIONS = 'GET_ALL_QUALIFICATIONS';
 export const GET_ALL_ABSENCES = 'GET_ALL_ABSENCES';
+export const SET_WEEKSLUG = 'SET_WEEKSLUG';
 
-export function actionRequestAdminPlanning(week) {
+export function actionRequestAdminPlanning() {
   return {
     type: REQUEST_ADMIN_PLANNING,
-    payload: week,
   };
 }
 
@@ -39,5 +39,11 @@ export function actionGetAllQualifications(qualifications) {
 export function actionGetAllAbsences(absences) {
   return {
     type: GET_ALL_ABSENCES, payload: absences,
+  };
+}
+
+export function actionSetWeekslug(weekslug) {
+  return {
+    type: SET_WEEKSLUG, payload: weekslug,
   };
 }

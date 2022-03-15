@@ -63,6 +63,7 @@ const controller = {
       delete item.starting_date;
       delete item.ending_date;
     });
+
     const periods = { weekStart: monday, planning: filteredWeek, absences };
 
     res.json(periods);

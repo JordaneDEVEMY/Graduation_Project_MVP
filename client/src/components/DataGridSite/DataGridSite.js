@@ -59,7 +59,14 @@ function DataGridSite({
       field: 'estimated_duration', headerName: 'Durée estimée (j)', width: 200, editable: true, valueParser: (value) => Number(value),
     },
     {
-      field: 'company_id', headerName: 'Compagnie parente', width: 200, editable: true, valueParser: (value) => Number(value),
+      field: 'company',
+      headerName: 'Entreprise',
+      width: 200,
+      valueGetter: (params) => {
+        const result = [];
+        result.push(params.row.company.company_name);
+        return result;
+      },
     },
   ];
   const rows = sites;
@@ -113,7 +120,7 @@ function DataGridSite({
         </Button>
         <DataGrid
           disableSelectionOnClick
-          sx={{ fontSize: '1.2rem' }}
+          sx={{ fontSize: '1.2rem', height: '80vh' }}
           disableColumnMenu
           checkboxSelection
           onSelectionModelChange={(newSelectionModel) => {

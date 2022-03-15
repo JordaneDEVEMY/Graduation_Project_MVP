@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import {
-  Grid, Button, Typography, Divider, Box, Select, MenuItem, InputLabel, FormControl,
+  Grid, Button, Typography, Divider, Box, Select, MenuItem, InputLabel, FormControl, TextField,
 } from '@mui/material';
 import RoleFieldForm from '../FieldForms/RoleFieldForm';
 import TextInput from '../FieldForms/TextInput';
@@ -12,21 +12,20 @@ import TextInput from '../FieldForms/TextInput';
 function CreateUserForm({
   handleCreateEmployee,
   changeField,
+  changeFile,
   employee,
-  handleClose,
 }) {
   const qualifications = useSelector((state) => state.admin.allQualifications);
   const handleSubmit = (e) => {
     e.preventDefault();
     handleCreateEmployee();
-    handleClose();
   };
 
   return (
     <Box
       sx={{ margin: '0 auto', position: 'relative' }}
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <Typography
           variant="h1"
           sx={{ textAlign: 'center' }}
@@ -189,15 +188,15 @@ function CreateUserForm({
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <TextInput
-              autoComplete="off"
-              handleChange={changeField}
+            <TextField
               type="file"
-              accept="image/png, image/jpeg"
-              nameValue="avatar"
               label="Avatar"
-              defaultValue=""
-              value={employee.avatar}
+              onChange={(event) => {
+                const file = event.target.files[0];
+                const data = new FormData();
+                data.append('file', file);
+                changeFile(data);
+              }}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -240,8 +239,8 @@ function CreateUserForm({
 
 CreateUserForm.propTypes = {
   handleCreateEmployee: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
+  changeFile: PropTypes.func.isRequired,
   employee: PropTypes.shape().isRequired,
 };
 

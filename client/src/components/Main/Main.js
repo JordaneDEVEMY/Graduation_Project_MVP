@@ -16,7 +16,11 @@ function Main(props) {
         [theme.breakpoints.up('md')]: {
           padding: theme.spacing(3, 6),
           flexGrow: 1,
+          '.opened ~ &': {
+            maxWidth: 'calc(100vw - 240px)',
+          },
           boxSizing: 'border-box',
+          overflow: 'hidden',
         },
         [theme.breakpoints.down('md')]: {
           width: '100%',

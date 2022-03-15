@@ -22,6 +22,7 @@ function DataGridEmployee({
   handleCreateEmployee,
   pushEmployeeId,
   resetEmployeeInformations,
+  changeFile,
 }) {
   const theme = useTheme();
   const [selectionModel, setSelectionModel] = useState([]);
@@ -110,7 +111,7 @@ function DataGridEmployee({
       <Typography variant="h2" sx={{ textAlign: 'center' }}>
         Tous les Employés
       </Typography>
-      <Box sx={{ height: '80%', width: 'auto' }}>
+      <Box sx={{ minHeight: '80%', width: 'auto' }}>
         {showAlert && (
           <Alert sx={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center' }} severity="error">Vous devez sélectionner au moins un employé à supprimer</Alert>
         )}
@@ -141,7 +142,7 @@ function DataGridEmployee({
         <DataGrid
           disableSelectionOnClick
           sx={{
-            fontSize: '1.2rem',
+            fontSize: '1.2rem', height: '80vh',
           }}
           disableColumnMenu
           checkboxSelection
@@ -192,6 +193,7 @@ function DataGridEmployee({
             employee={oneEmployee}
             handleCreateEmployee={handleCreateEmployee}
             changeField={changeField}
+            changeFile={changeFile}
             handleClose={handleClose}
           />
         </Box>
@@ -262,6 +264,7 @@ DataGridEmployee.propTypes = {
   handleDeleteEmployee: PropTypes.func.isRequired,
   handleCreateEmployee: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
+  changeFile: PropTypes.func.isRequired,
   pushEmployeeId: PropTypes.func.isRequired,
   resetEmployeeInformations: PropTypes.func.isRequired,
 };

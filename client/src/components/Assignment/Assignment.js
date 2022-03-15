@@ -8,6 +8,7 @@ import {
   AccordionSummary,
   Avatar,
   Box,
+  Button,
   Grid,
   Typography,
 } from '@mui/material';
@@ -23,11 +24,13 @@ const Accordion = styled((props) => (
 }));
 
 function Assignment({
+  absence,
   color,
   employee,
   ending_date,
   expandedSheet,
   handleAssignment,
+  handleRemoveAssignment,
   handleCollapse,
   isDraggable,
   id,
@@ -82,7 +85,7 @@ function Assignment({
           {`${employee.firstname} ${employee.lastname}`}
         </Typography>
 
-        {(!startOnMonday || !finishOnFriday)
+        {((!startOnMonday || !finishOnFriday) || (absence !== undefined))
           && (
           <Typography
             component="small"
@@ -137,6 +140,23 @@ function Assignment({
                 pl: 0,
               }}
             >
+              {handleRemoveAssignment
+              && (
+              <Button onClick={() => {
+                console.log('click', id);
+                handleRemoveAssignment(id);
+              }}
+              >
+                REMOVE
+              </Button>
+              )}
+              {absence !== undefined
+              && (
+              <Typography component="li">
+                <Typography sx={{ display: 'block' }}><strong>Raison :</strong></Typography>
+                {absence.reason}
+              </Typography>
+              )}
               {employee.visibility !== undefined
               && (
               <Typography component="li">
@@ -167,6 +187,10 @@ function Assignment({
 }
 
 Assignment.propTypes = {
+  absence: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    reason: PropTypes.string.isRequired,
+  }),
   color: PropTypes.string.isRequired,
   employee: PropTypes.shape({
     firstname: PropTypes.string.isRequired,
@@ -179,6 +203,7 @@ Assignment.propTypes = {
   ending_date: PropTypes.string.isRequired,
   expandedSheet: PropTypes.string.isRequired,
   handleAssignment: PropTypes.func,
+  handleRemoveAssignment: PropTypes.func,
   handleCollapse: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
@@ -195,7 +220,9 @@ Assignment.propTypes = {
 };
 
 Assignment.defaultProps = {
+  absence: undefined,
   handleAssignment: undefined,
+  handleRemoveAssignment: undefined,
   userId: undefined,
 };
 export default React.memo(Assignment);
