@@ -19,7 +19,6 @@ function Layout({
       [theme.breakpoints.up('md')]: {
         display: 'flex',
         flexGrow: 1,
-        flexWrap: 'wrap',
         position: 'relative',
       },
     }}

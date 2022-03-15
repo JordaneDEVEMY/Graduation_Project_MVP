@@ -9,22 +9,10 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import Companies from '../Companies/Companies';
 import planningFunctions from '../../utils/planningFunctions';
 
-/**
- * receive state and return the new state
- */
-// const dragReducer = produce((draft, action) => {
-//   switch (action.type) {
-//     case 'MOVE': {
-//       draft[action.from] = draft[action.from] || [];
-//       draft[action.to] = draft[action.to] || [];
-//       const [removed] = draft[action.from].splice(action.fromIndex, 1);
-//       draft[action.to].splice(action.toIndex, 0, removed);
-//     }
-//   }
-// });
-
 function DraggableAssignments({
+  absences,
   companies,
+  handleAbsence,
   handleAssignment,
   week,
 }) {
@@ -46,6 +34,8 @@ function DraggableAssignments({
    * Open assignment update modal
    */
   const onDragEnd = useCallback((result) => {
+    console.log(result);
+
     if (result.reason === 'DROP') {
       if (!result.destination) {
         return;
@@ -61,7 +51,9 @@ function DraggableAssignments({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
+        absences={absences}
         companies={assignmentsPositions}
+        handleAbsence={handleAbsence}
         handleAssignment={handleAssignment}
         isDropable
         isMobile={false}
@@ -72,6 +64,11 @@ function DraggableAssignments({
 }
 
 DraggableAssignments.propTypes = {
+  absences: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -83,6 +80,7 @@ DraggableAssignments.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
+  handleAbsence: PropTypes.func.isRequired,
   handleAssignment: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,

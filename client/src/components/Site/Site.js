@@ -4,12 +4,21 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import {
+  Box, Button, Dialog, DialogContent, DialogContentText, DialogActions,
+} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { Droppable } from 'react-beautiful-dnd';
 import SiteHeader from '../SiteHeader/SiteHeader';
 import AssignmentsList from '../AssignmentsList/AssignmentsList';
+import dateFunctions from '../../utils/dateFunctions';
+import planningFunctions from '../../utils/planningFunctions';
 import assignmentBg from '../../Assets/images/sheet-bg.png';
+import {
+  actionDeleteAssignment,
+  actionGetAssignmentInformations,
+} from '../../actions';
 
 function Site({
   assignments,
@@ -20,10 +29,30 @@ function Site({
   name,
   week,
 }) {
+  const dispatch = useDispatch();
   const theme = useTheme();
 
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
+  // remove dialog
+  const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
+  // removed assignment
+  const [removedAssignmentId, setRemovedAssignmentId] = React.useState(null);
+
+  const handleClose = () => {
+    setOpenRemoveDialog(false);
+  };
+
+  const handleAgree = () => {
+    setOpenRemoveDialog(false);
+    dispatch(actionGetAssignmentInformations({ id: removedAssignmentId }));
+    dispatch(actionDeleteAssignment());
+  };
+
+  const handleRemoveAssignment = (assignmentId) => {
+    setOpenRemoveDialog(true);
+    setRemovedAssignmentId(assignmentId);
+  };
 
   /**
    * set expanded state
@@ -34,78 +63,122 @@ function Site({
     setExpandedSheet(isExpanded ? accordionId : '');
   };
 
-  const handleAddAssignment = () => () => {
-    console.log('add assignment');
+  /**
+   * add site assignment
+   * @param {string} accordionId accordion id
+   * @returns {void} call setAssignment
+   */
+  const handleAddAssignment = () => {
+    const newAssignement = planningFunctions.createAssignment();
+    const starting_date = dateFunctions.getDate().format('YYYY-MM-DD');
+    const ending_date = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
+
+    handleAssignment({
+      ...newAssignement,
+      ending_date,
+      starting_date,
+      site: {
+        id,
+        name,
+      },
+    });
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',
-        borderRadius: '.25rem',
-        color: theme.palette.text.primary,
-        bgcolor: `${theme.palette.background.component}`,
-        p: theme.spacing(2),
-        width: `calc(300px + ${theme.spacing(4)})`,
-        overflow: 'hidden',
-      }}
-      id={`site-${id}`}
-    >
-      <SiteHeader
-        name={name}
-        handleAddAssignment={handleAddAssignment}
-      />
-      {assignments.length
-        && isDropable
-        ? (
-          <Droppable droppableId={`site-${id}`} type="SITE">
-            {(provided) => (
-              <Box
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                sx={{
-                  pb: '50px',
-                  flexGrow: '1',
-                  background: `url('${assignmentBg}') repeat-y center bottom ${theme.spacing(2)}`,
-                }}
-              >
-                <AssignmentsList
-                  assignments={assignments}
-                  expandedSheet={expandedSheet}
-                  handleAssignment={handleAssignment}
-                  handleCollapse={handleCollapse}
-                  isDraggable
-                  isMobile={false}
-                  week={week}
-                />
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          borderRadius: '.25rem',
+          color: theme.palette.text.primary,
+          bgcolor: `${theme.palette.background.component}`,
+          p: theme.spacing(2),
+          width: `calc(300px + ${theme.spacing(4)})`,
+          overflow: 'hidden',
+          [theme.breakpoints.up('md')]: {
+            flex: '0 0 auto',
+          },
+        }}
+        id={`site-${id}`}
+      >
+        <SiteHeader
+          name={name}
+          handleAddAssignment={handleAddAssignment}
+        />
+        {assignments.length
+          && isDropable
+          ? (
+            <Droppable droppableId={`site-${id}`} type="SITE">
+              {(provided) => (
+                <Box
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  sx={{
+                    pb: '50px',
+                    flexGrow: '1',
+                    background: `url('${assignmentBg}') repeat-y center bottom`,
+                  }}
+                >
+                  <AssignmentsList
+                    assignments={assignments}
+                    expandedSheet={expandedSheet}
+                    handleAssignment={handleAssignment}
+                    handleRemoveAssignment={handleRemoveAssignment}
+                    handleCollapse={handleCollapse}
+                    isDraggable
+                    isMobile={false}
+                    week={week}
+                  />
 
-                {provided.placeholder}
-              </Box>
-            )}
-          </Droppable>
-        )
-        : (
-          <Box
-            sx={{
-              pb: '50px',
-              flexGrow: '1',
-              background: `url('${assignmentBg}') repeat-y center bottom ${theme.spacing(2)}`,
-            }}
-          >
-            <AssignmentsList
-              assignments={assignments}
-              expandedSheet={expandedSheet}
-              handleAssignment={handleAssignment}
-              handleCollapse={handleCollapse}
-              isDraggable={false}
-              isMobile={isMobile}
-              week={week}
-            />
-          </Box>
-        )}
-    </Box>
+                  {provided.placeholder}
+                </Box>
+              )}
+            </Droppable>
+          )
+          : (
+            <Box
+              sx={{
+                pb: '50px',
+                flexGrow: '1',
+                background: `url('${assignmentBg}') repeat-y center bottom`,
+              }}
+            >
+              <AssignmentsList
+                assignments={assignments}
+                expandedSheet={expandedSheet}
+                handleAssignment={handleAssignment}
+                handleCollapse={handleCollapse}
+                isDraggable={false}
+                isMobile={isMobile}
+                week={week}
+              />
+            </Box>
+          )}
+      </Box>
+
+      <div>
+        <Dialog
+          open={openRemoveDialog}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Supprimer cet assignement ?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} variant="outlined">Non</Button>
+            <Button onClick={handleAgree} autoFocus>
+              Oui
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    </>
   );
 }
 

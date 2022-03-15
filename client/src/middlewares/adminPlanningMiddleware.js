@@ -19,6 +19,7 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(actions.actionGetAdminPlanning({ weekStart, absences, planning }));
         store.dispatch(actions.actionGetUserPlanning());
+        store.dispatch(actions.actionResetAssignmentInformations());
       }
       return;
     }
@@ -39,15 +40,16 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
     case actions.CREATE_ASSIGNMENT: {
       const { assignment } = store.getState();
       const {
-        startingDate: starting_date,
-        endingDate: ending_date,
+        starting_date,
+        ending_date,
         color,
         position,
         visibility,
-        employeeId: employee_id,
-        siteId: site_id,
-        absenceId: absence_id,
+        employee_id,
+        site_id,
+        absence_id,
       } = assignment;
+
       const assignmentDatas = {
         starting_date,
         ending_date,
@@ -60,7 +62,6 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       };
       const response = await createAssignment(assignmentDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionResetAssignmentInformations());
         store.dispatch(actions.actionRequestAdminPlanning());
         alert('Assignment created successfully');
       }
@@ -69,14 +70,14 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
     case actions.UPDATE_ASSIGNMENT: {
       const { assignment } = store.getState();
       const {
-        startingDate: starting_date,
-        endingDate: ending_date,
+        starting_date,
+        ending_date,
         color,
         position,
         visibility,
-        employeeId: employee_id,
-        siteId: site_id,
-        absenceId: absence_id,
+        employee_id,
+        site_id,
+        absence_id,
       } = assignment;
       const assignmentDatas = {
         starting_date,
@@ -90,7 +91,6 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       };
       const response = await updateAssignment(assignment.id, assignmentDatas);
       if (response.status === 200) {
-        store.dispatch(actions.actionResetAssignmentInformations());
         store.dispatch(actions.actionRequestAdminPlanning());
         alert('Assignment updated successfully');
       }

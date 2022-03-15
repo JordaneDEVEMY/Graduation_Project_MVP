@@ -11,6 +11,7 @@ function AssignmentsList({
   assignments,
   expandedSheet,
   handleAssignment,
+  handleRemoveAssignment,
   handleCollapse,
   isDraggable,
   isMobile,
@@ -40,6 +41,7 @@ function AssignmentsList({
                     {...assignment}
                     expandedSheet={expandedSheet}
                     handleAssignment={handleAssignment}
+                    handleRemoveAssignment={handleRemoveAssignment}
                     handleCollapse={handleCollapse}
                     index={index}
                     key={`assignment-${assignment.id}`}
@@ -56,6 +58,7 @@ function AssignmentsList({
               {...assignment}
               expandedSheet={expandedSheet}
               handleAssignment={handleAssignment}
+              handleRemoveAssignment={handleRemoveAssignment}
               handleCollapse={handleCollapse}
               index={index}
               key={`assignment-${assignment.id}`}
@@ -72,6 +75,10 @@ function AssignmentsList({
 AssignmentsList.propTypes = {
   assignments: PropTypes.arrayOf(
     PropTypes.shape({
+      absence: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        reason: PropTypes.string.isRequired,
+      }),
       color: PropTypes.string.isRequired,
       employee: PropTypes.shape({
         firstname: PropTypes.string.isRequired,
@@ -88,6 +95,7 @@ AssignmentsList.propTypes = {
   expandedSheet: PropTypes.string.isRequired,
   handleAssignment: PropTypes.func,
   handleCollapse: PropTypes.func.isRequired,
+  handleRemoveAssignment: PropTypes.func,
   isDraggable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({
@@ -100,6 +108,7 @@ AssignmentsList.propTypes = {
 
 AssignmentsList.defaultProps = {
   handleAssignment: undefined,
+  handleRemoveAssignment: undefined,
 };
 
 export default React.memo(AssignmentsList);

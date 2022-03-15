@@ -3,14 +3,15 @@ import * as actions from '../actions';
 
 const initialState = {
   id: 0,
-  startingDate: '',
-  endingDate: '',
+  starting_date: '',
+  ending_date: '',
   color: '',
   position: 0,
   visibility: true,
-  employeeId: 0,
-  siteId: null,
-  absenceId: null,
+  employee_id: 0,
+  site_id: null,
+  absence_id: null,
+  weekSlug: '',
 };
 
 function reducer(state = initialState, action) {
@@ -20,14 +21,15 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         id: action.payload.id,
-        startingDate: action.payload.startingDate,
-        endingDate: action.payload.endingDate,
+        starting_date: action.payload.starting_date,
+        ending_date: action.payload.ending_date,
         color: action.payload.color,
         position: action.payload.position,
         visibility: action.payload.visibility,
-        employeeId: action.payload.employeeId,
-        siteId: action.payload.siteId,
-        absenceId: action.payload.absenceId,
+        employee_id: action.payload.employee_id,
+        site_id: action.payload.site_id,
+        absence_id: action.payload.absence_id,
+        weekSlug: action.payload.weekSlug,
       };
     case actions.GET_ASSIGNMENT_ID:
       return {
@@ -45,14 +47,15 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         id: action.payload.id,
-        startingDate: initialState.startingDate,
-        endingDate: initialState.endingDate,
+        starting_date: initialState.starting_date,
+        ending_date: initialState.ending_date,
         color: initialState.color,
         position: initialState.position,
         visibility: initialState.visibility,
-        employeeId: initialState.employeeId,
-        siteId: initialState.siteId,
-        absenceId: initialState.absenceId,
+        employee_id: initialState.employee_id,
+        site_id: initialState.site_id,
+        absence_id: initialState.absence_id,
+        weekSlug: action.payload.weekSlug,
       };
     default:
       return state;
