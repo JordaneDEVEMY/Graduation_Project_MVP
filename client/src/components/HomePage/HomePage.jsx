@@ -62,7 +62,7 @@ function HomePage() {
             O'lleks
           </Typography>
           <Typography variant="h2">
-            Your new planning-handling tool
+            Votre nouvel outil de gestion de planning
           </Typography>
 
           {/*
@@ -128,13 +128,14 @@ function HomePage() {
               }}
             />
             <Typography
-              variant="h3"
+              variant="h5"
               component="span"
               sx={{
                 marginTop: theme.spacing(2),
               }}
             >
-              Ipsum dolor sit, adipisicing amet consectetur
+              Disponible sur tous les supports,
+              gérez vos effectifs aussi bien au bureau qu'en déplacement.
             </Typography>
           </Grid>
 
@@ -156,13 +157,14 @@ function HomePage() {
               }}
             />
             <Typography
-              variant="h3"
+              variant="h5"
               component="span"
               sx={{
                 marginTop: theme.spacing(2),
               }}
             >
-              Lorem ipsum dolor sit amet consectetur
+              Gardez une vue d'ensemble sur vos équipes
+              afin de répondre plus efficacement à vos besoins.
             </Typography>
           </Grid>
 
@@ -184,13 +186,14 @@ function HomePage() {
               }}
             />
             <Typography
-              variant="h3"
+              variant="h5"
               component="span"
               sx={{
                 marginTop: theme.spacing(2),
               }}
             >
-              Lorem ipsum met consectetur adipisicing elit
+              Communiquez aisément avec vos collaborateurs via une plateforme claire
+              et facile d'utilisation.
             </Typography>
           </Grid>
         </Grid>
@@ -213,7 +216,7 @@ function HomePage() {
               color: theme.palette.background.default,
             }}
           >
-            Phrase d'accroche bis
+            La fiche en T dans l'ère du numérique
 
           </Typography>
           <Box
@@ -221,13 +224,14 @@ function HomePage() {
           >
             <Typography
               component="p"
-              variant="h3"
+              variant="h5"
               sx={{
                 color: theme.palette.text.secondary,
               }}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit, ipsum dolor sit.
-              Odio placeat excepturi non quaerat fuga libero.
+              Visant à la digitalisation des plannings en fiche en 'T', et avec
+              l'expérience utilisateur au coeur de sa conception, O'lleks propose un
+              éventail de fonctionnalités permettant une gestion d'effectif facile et efficace.
             </Typography>
             <img src={encartImg} alt="" className="encart--img" />
           </Box>
@@ -244,7 +248,7 @@ function HomePage() {
           }}
         >
           <Typography component="p" variant="h2">
-            L'équipe
+            Rencontrez notre équipe
           </Typography>
 
           {/*
@@ -255,7 +259,7 @@ function HomePage() {
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'space-evenly',
-              maxWidth: '900px',
+              maxWidth: '1200px',
               mx: 'auto',
               textAlign: 'center',
               color: theme.palette.text.primary,
@@ -263,61 +267,88 @@ function HomePage() {
           >
             <Box
               sx={{
-                margin: '1em',
-                width: '7em',
+                margin: '.5em',
+                width: '12em',
               }}
             >
               <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
+              <Typography variant="h5" mt={1}>
+                Jordane Dévemy
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Product Owner
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Lead développeur back-end
               </Typography>
             </Box>
 
             <Box
               sx={{
-                margin: '1em',
-                width: '7em',
+                margin: '.5em',
+                width: '12em',
               }}
             >
               <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
+              <Typography variant="h5" mt={1}>
+                Pascal Tassel
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Lead développeur front-end
               </Typography>
             </Box>
 
             <Box
               sx={{
-                margin: '1em',
-                width: '7em',
+                margin: '.5em',
+                width: '12em',
               }}
             >
               <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
+              <Typography variant="h5" mt={1}>
+                Hicham Chrita
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                SCRUM Master
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Développeur back-end
               </Typography>
             </Box>
 
             <Box
               sx={{
-                margin: '1em',
-                width: '7em',
+                margin: '.5em',
+                width: '12em',
               }}
             >
               <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
+              <Typography variant="h5" mt={1}>
+                Ben Guillemot
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Git Master
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Développeur front-end
               </Typography>
             </Box>
 
             <Box
               sx={{
-                margin: '1em',
-                width: '7em',
+                margin: '.5em',
+                width: '12em',
               }}
             >
               <img src={teamIcon} alt="" className="team--img" />
-              <Typography mt={1}>
-                Lorem Ipsum
+              <Typography variant="h5" mt={1}>
+                Mathieu Lebreton
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Référent technique
+              </Typography>
+              <Typography component="p" variant="caption" mt={1}>
+                Développeur front-end
               </Typography>
             </Box>
 
