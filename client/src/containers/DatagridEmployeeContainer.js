@@ -6,8 +6,9 @@ import {
   actionUpdateEmployee,
   actionDeleteEmployee,
   actionGetEmployeeIdToDelete,
-  actionCreateEmployee,
+  actionCreateEmployeeAvatar,
   actionResetEmployeeInformations,
+  actionSetEmployeeFile,
 } from '../actions';
 import DataGridEmployee from '../components/DataGridEmployee/DataGridEmployee';
 
@@ -34,7 +35,7 @@ function DatagridEmployeeContainer() {
   };
 
   const handleCreateEmployee = () => {
-    dispatch(actionCreateEmployee());
+    dispatch(actionCreateEmployeeAvatar());
   };
 
   const resetEmployeeInformations = () => {
@@ -43,6 +44,10 @@ function DatagridEmployeeContainer() {
 
   const changeField = (key, value) => {
     dispatch(actionSetEmployeeInformation(key, value));
+  };
+
+  const changeFile = (value) => {
+    dispatch(actionSetEmployeeFile(value));
   };
 
   return (
@@ -56,6 +61,7 @@ function DatagridEmployeeContainer() {
       pushEmployeeId={pushEmployeeId}
       changeField={changeField}
       resetEmployeeInformations={resetEmployeeInformations}
+      changeFile={changeFile}
     />
   );
 }
