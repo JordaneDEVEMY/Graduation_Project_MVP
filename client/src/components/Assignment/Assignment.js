@@ -12,6 +12,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import PropTypes from 'prop-types';
 import dateFunctions from '../../utils/dateFunctions';
@@ -140,16 +141,6 @@ function Assignment({
                 pl: 0,
               }}
             >
-              {handleRemoveAssignment
-              && (
-              <Button onClick={() => {
-                console.log('click', id);
-                handleRemoveAssignment(id);
-              }}
-              >
-                REMOVE
-              </Button>
-              )}
               {absence !== undefined
               && (
               <Typography component="li">
@@ -177,6 +168,23 @@ function Assignment({
                 <Typography sx={{ display: 'block' }}><strong>Tél. mobile :</strong></Typography>
                 {employee.phone_number}
               </Typography>
+              )}
+              {handleRemoveAssignment
+              && (
+              <Button
+                sx={{
+                  mt: theme.spacing(1),
+                }}
+                variant="contained"
+                color="inherit"
+                size="small"
+                startIcon={<DeleteIcon />}
+                onClick={() => {
+                  handleRemoveAssignment(id);
+                }}
+              >
+                Supprimer
+              </Button>
               )}
             </Typography>
           </Grid>

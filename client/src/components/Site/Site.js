@@ -48,6 +48,7 @@ function Site({
     setOpenRemoveDialog(false);
     dispatch(actionGetAssignmentInformations({ id: removedAssignmentId }));
     dispatch(actionDeleteAssignment());
+    setExpandedSheet('');
   };
 
   const handleRemoveAssignment = (assignmentId) => {
@@ -169,7 +170,7 @@ function Site({
         >
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Supprimer cet assignement ?
+              {`Supprimer ${isAbsence ? ' cette absence' : 'cet assignement'} ?`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
