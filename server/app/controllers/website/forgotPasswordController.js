@@ -48,9 +48,9 @@ const controller = {
 
     sendResetPasswordLink(email, user.firstname, user.lastname, link);
 
-    // TODO : == DEV LOG ==
+    // ?      == DEV LOG ==
     console.log({ link }, { duration });
-    //            =====
+    // ?          =====
 
     res.send('Password reset link has been sent to ur email...');
   },

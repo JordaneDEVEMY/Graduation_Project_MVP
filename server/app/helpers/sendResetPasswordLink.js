@@ -23,21 +23,27 @@ module.exports = async function main(email, firstname, lastname, link) {
     // text: 'Hello ?', // plain text body
     html:
       `
-      <b>Bonjour, ${firstname} ${lastname}</b>
+      <h3>Bonjour, <strong>${firstname} ${lastname}</strong></h3>
+      <h2>À vous de jouer !</h2>
+      <h1>Votre nouveau mot de passe :</h1>
+      <br>
+      <div>Vous avez souhaité changer de mot de passe.</div>
+      <br>
+      <h2>Pour le modifier, nous vous invitons à cliquer sur le lien ci-dessous :</h2>
+      <a href=${link} target="_blank" style="text-decoration:none;color:#000000;">Changer mon mot de passe</a>
       <br>
       <br>
-      <b>Ci-joint le lien pour modifier ton mot de passe :<b>
-      <br>
-      ${link}
+      <div>Ce lien est valide pendant <em>15 minutes<em>. Passé ce délai, veuillez renouveler l’opération « Mot de passe oublié » sur notre site.</div>
+      <div><em>Si vous n’êtes pas à l’origine de cette demande, vous pouvez ignorer cet e-mail : votre mot de passe actuel ne sera pas modifié.<em></div>
       `, // html body
   });
 
-  console.log('Message sent: %s', info.messageId);
+  // ? console.log('Message sent: %s', info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  // ? console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 };
 
-// main().catch(console.error);
+// ? main().catch(console.error);
