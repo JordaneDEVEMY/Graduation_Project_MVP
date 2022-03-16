@@ -17,7 +17,6 @@ function Companies({
 }) {
   const [brands, setBrands] = React.useState(companies);
   const theme = useTheme();
-  console.log('companies', brands);
 
   React.useEffect(() => {
     setBrands(companies);
