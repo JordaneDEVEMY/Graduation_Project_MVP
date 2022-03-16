@@ -129,8 +129,8 @@ function Assignment({
           padding: '0 40px 10px',
         }}
       >
-        <Grid container spacing={2} mt={-2}>
-          <Grid item xs="auto">
+        <Grid container spacing={1} mt={-1}>
+          <Grid item xs="auto" sx={{ display: 'none' }}>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Grid>
           <Grid item xs="auto">
@@ -139,6 +139,7 @@ function Assignment({
               sx={{
                 listStyle: 'none',
                 pl: 0,
+                fontSize: '.75rem',
               }}
             >
               {absence !== undefined
@@ -165,8 +166,22 @@ function Assignment({
               {employee.phone_number !== undefined
               && (
               <Typography component="li">
-                <Typography sx={{ display: 'block' }}><strong>Tél. mobile :</strong></Typography>
+                <Typography sx={{ display: 'block' }}><strong>Tél. Fixe :</strong></Typography>
                 {employee.phone_number}
+              </Typography>
+              )}
+              {employee.fonction !== undefined
+              && (
+              <Typography component="li">
+                <Typography sx={{ display: 'block' }}><strong>Fonction :</strong></Typography>
+                {employee.fonction}
+              </Typography>
+              )}
+              {employee.email !== undefined
+              && (
+              <Typography component="li">
+                <Typography sx={{ display: 'block' }}><strong>Courriel :</strong></Typography>
+                {employee.email}
               </Typography>
               )}
               {handleRemoveAssignment
@@ -201,7 +216,9 @@ Assignment.propTypes = {
   }),
   color: PropTypes.string.isRequired,
   employee: PropTypes.shape({
+    email: PropTypes.string.isRequired,
     firstname: PropTypes.string.isRequired,
+    fonction: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     lastname: PropTypes.string.isRequired,
     phone_number: PropTypes.string,
