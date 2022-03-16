@@ -74,7 +74,7 @@ module.exports = {
   async insert(company) {
     const companyToCreate = await client.query(
       `
-      SELECT insert_company($1);`,
+      SELECT * FROM insert_company($1);`,
       [company],
     );
 
