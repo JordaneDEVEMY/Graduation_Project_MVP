@@ -22,7 +22,6 @@ function AssignmentFormContainer({
 
   const handleSubmitAssignment = (formData) => {
     const { method } = formData;
-    const isAbsence = formData.site_id === 0;
 
     const {
       absence_id,
@@ -31,19 +30,19 @@ function AssignmentFormContainer({
       employee_id,
       ending_date,
       position,
-      site,
+      site_id,
       starting_date,
       visibility,
     } = formData;
 
     const assignmentData = {
-      absence_id: isAbsence ? absence_id : null,
+      absence_id,
       id,
       color,
       employee_id,
       ending_date,
       position,
-      site_id: isAbsence ? null : site.id,
+      site_id,
       starting_date,
       visibility,
       weekSlug: planningFunctions.getWeekSlugFromDate(starting_date),

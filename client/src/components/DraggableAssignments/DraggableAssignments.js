@@ -25,7 +25,7 @@ function DraggableAssignments({
       name: 'Absences',
       sites: [{
         id: 0,
-        name: 'Absences',
+        name: 'Gestion des absences',
         assignments: absencesList,
       }],
     },
@@ -40,7 +40,7 @@ function DraggableAssignments({
         name: 'Absences',
         sites: [{
           id: 0,
-          name: 'Absences',
+          name: 'Gestion des absences',
           assignments: absencesList,
         }],
       },
