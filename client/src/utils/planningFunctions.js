@@ -138,7 +138,10 @@ const planningFunctions = {
     // add absences into reason site
     company.sites.map((site) => {
       const { name } = site;
-      site.assignments = absences.filter(({ reason }) => reason === name);
+      const reasonAbsences = absences.filter(({ reason }) => reason === name);
+      reasonAbsences.forEach(({ assignment }) => {
+        site.assignments.push(assignment);
+      });
       return site;
     });
 

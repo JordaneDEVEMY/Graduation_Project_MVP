@@ -8,7 +8,6 @@ import { Box, Typography } from '@mui/material';
 import SitesList from '../SitesList/SitesList';
 
 function Companies({
-  absences,
   companies,
   // handleAbsence,
   handleAssignment,
@@ -18,7 +17,6 @@ function Companies({
 }) {
   const [brands, setBrands] = React.useState(companies);
   const theme = useTheme();
-  console.log('absences', absences);
   console.log('companies', brands);
 
   React.useEffect(() => {
@@ -37,13 +35,6 @@ function Companies({
         },
       }}
     >
-      {/* <SiteAbsences
-        absences={absences}
-        handleAbsence={handleAbsence}
-        isDropable={isDropable}
-        isMobile={isMobile}
-        week={week}
-      /> */}
       {brands.length
         ? (brands.map((company, index) => (
           <Box
@@ -98,11 +89,6 @@ function Companies({
 }
 
 Companies.propTypes = {
-  absences: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

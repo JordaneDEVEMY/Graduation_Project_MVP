@@ -79,7 +79,7 @@ SitesList.propTypes = {
             visibility: PropTypes.bool.isRequired,
           }).isRequired,
         ).isRequired,
-      }).isRequired,
+      }),
     ).isRequired,
   }).isRequired,
   handleAssignment: PropTypes.func,
