@@ -10,13 +10,13 @@ const userMiddleware = (store) => (next) => async (action) => {
       const { user } = store.getState();
       const {
         password,
-        phoneNumber,
-        mobileNumber,
+        phone_number,
+        mobile_number,
       } = user;
       const userDatas = {
         password,
-        phoneNumber,
-        mobileNumber,
+        phone_number,
+        mobile_number,
       };
       const response = await updateUserInformations(user.id, userDatas);
       if (response.status === 200) {
