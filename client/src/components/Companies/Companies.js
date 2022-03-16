@@ -29,9 +29,9 @@ function Companies({
         [theme.breakpoints.up('md')]: {
           display: 'flex',
           justifyContent: 'space-between',
-          gap: theme.spacing(2),
+          gap: theme.spacing(4),
           overflowX: 'auto',
-          pb: theme.spacing(2),
+          mb: theme.spacing(2),
         },
       }}
     >
@@ -41,7 +41,7 @@ function Companies({
             key={`company-${company.id}-wrapper`}
             sx={{
               [theme.breakpoints.down('md')]: {
-                mt: index !== 0 ? theme.spacing(2) : undefined,
+                mt: index !== 0 ? theme.spacing(4) : undefined,
               },
             }}
           >

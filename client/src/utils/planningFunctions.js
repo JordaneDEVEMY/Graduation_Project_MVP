@@ -110,9 +110,10 @@ const planningFunctions = {
   /**
    * Convert admin API data to a companies list
    * @param {object} absences - Absences list from API request
-   * @returns {object} Absences Site containing an assignments list.
+   * @param {object} absencesList - Absence Types list from API request
+   * @returns {object} Absence object containing reasons as sites.
    */
-  adminPlanningToAbsences: (absences) => {
+  adminPlanningToAbsences: (absences, absencesList) => {
     // set absences as a company
     const company = {
       id: 0,
@@ -122,16 +123,17 @@ const planningFunctions = {
 
     // set reasons as company sites
     const reasonsList = [];
-    let index = 0;
+
     absences.forEach(({ reason }) => {
       if (!reasonsList.includes(reason)) {
+        const { id } = absencesList.filter((item) => item.reason === reason)[0];
+
         company.sites.push({
-          id: index,
+          id,
           name: reason,
           assignments: [],
         });
         reasonsList.push(reason);
-        index += 1;
       }
     });
 
@@ -151,14 +153,18 @@ const planningFunctions = {
   /**
    * Convert admin API data to a companies list
    * @param {object} planning - Planning list from API request
+   * @param {object} absences - Absences list from API request
+   * @param {object} absencesList - Absence Types list from API request
    * @returns {array} Companies list.
    */
-  adminPlanningToCompanies: (planning, absences) => {
+  adminPlanningToCompanies: (planning, absences, absencesList = []) => {
     const companies = [];
 
     // Add absences as a company
-    const absencesCompany = planningFunctions.adminPlanningToAbsences(absences);
-    companies.push(absencesCompany);
+    if (absencesList.length) {
+      const absencesCompany = planningFunctions.adminPlanningToAbsences(absences, absencesList);
+      companies.push(absencesCompany);
+    }
 
     planning.forEach(({ company_id, company_name, sites: companySites }) => {
       const company = {
@@ -231,8 +237,17 @@ const planningFunctions = {
    */
   getDraggedAssignment: (drag, companies) => {
     let result = planningFunctions.createAssignment();
+    console.log('drag', drag);
     const { destination, draggableId } = drag;
-    const siteId = Number(destination.droppableId.replace('site-', ''));
+    let siteId;
+    // is absence ?
+    const absenceFounded = destination.droppableId.match(/absence-([0-9]+)/);
+    if (absenceFounded !== null) {
+      siteId = Number(destination.droppableId.replace('absence-', ''));
+      result.absence_id = siteId;
+    } else {
+      siteId = Number(destination.droppableId.replace('site-', ''));
+    }
     const assignmentId = Number(draggableId.replace('assignment-', ''));
 
     // get site destination

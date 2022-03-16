@@ -60,6 +60,7 @@ function PlanningAdmin({
 
   React.useEffect(() => {
     // build employeesList used in assignment modal
+    console.log('assignment', assignment);
     // open modal
     if (assignment.site !== undefined) {
       const { site } = assignment;

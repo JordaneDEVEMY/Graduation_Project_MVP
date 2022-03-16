@@ -24,6 +24,7 @@ function Site({
   assignments,
   handleAssignment,
   id,
+  isAbsence,
   isDropable,
   isMobile,
   name,
@@ -101,7 +102,7 @@ function Site({
             flex: '0 0 auto',
           },
         }}
-        id={`site-${id}`}
+        id={`${isAbsence ? 'absence' : 'site'}-${id}`}
       >
         <SiteHeader
           name={name}
@@ -110,7 +111,7 @@ function Site({
         {assignments.length
           && isDropable
           ? (
-            <Droppable droppableId={`site-${id}`} type="SITE">
+            <Droppable droppableId={`${isAbsence ? 'absence' : 'site'}-${id}`} type="SITE">
               {(provided) => (
                 <Box
                   ref={provided.innerRef}
@@ -201,6 +202,7 @@ Site.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func,
+  isAbsence: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({

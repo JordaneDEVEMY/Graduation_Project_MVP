@@ -35,7 +35,7 @@ function SitesList({
           id={`company-${id}-sites`}
           sx={{
             display: 'flex',
-            gap: theme.spacing(2),
+            gap: theme.spacing(1),
             [theme.breakpoints.up('md')]: {
               flexDirection: 'column',
             },
@@ -45,6 +45,7 @@ function SitesList({
             <Site
               {...site}
               handleAssignment={handleAssignment}
+              isAbsence={site.id === 0}
               isDropable={isDropable}
               isMobile={false}
               key={site.id}
