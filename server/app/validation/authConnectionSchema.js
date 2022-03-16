@@ -2,7 +2,10 @@ const Joi = require('joi');
 
 module.exports = Joi.object({
   email: Joi.string()
-  // ? .pattern(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/)
+    .min(3)
+    .email()
     .required(),
-  password: Joi.string().required(),
+  password: Joi.string()
+    .min(3)
+    .required(),
 }).required();

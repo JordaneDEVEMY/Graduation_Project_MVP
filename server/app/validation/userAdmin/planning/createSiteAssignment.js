@@ -14,6 +14,7 @@ module.exports = Joi.object({
   visibility: Joi.boolean()
     .required(),
   employee_id: Joi.number()
+    .min(1)
     .required(),
   site_id: Joi.number()
     .allow(null)
