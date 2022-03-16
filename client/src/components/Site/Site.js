@@ -24,6 +24,7 @@ function Site({
   assignments,
   handleAssignment,
   id,
+  isAbsence,
   isDropable,
   isMobile,
   name,
@@ -47,6 +48,7 @@ function Site({
     setOpenRemoveDialog(false);
     dispatch(actionGetAssignmentInformations({ id: removedAssignmentId }));
     dispatch(actionDeleteAssignment());
+    setExpandedSheet('');
   };
 
   const handleRemoveAssignment = (assignmentId) => {
@@ -72,9 +74,10 @@ function Site({
     const newAssignement = planningFunctions.createAssignment();
     const starting_date = dateFunctions.getDate().format('YYYY-MM-DD');
     const ending_date = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
-
+    console.log('isAbsence', isAbsence);
     handleAssignment({
       ...newAssignement,
+      absence_id: isAbsence ? id : null,
       ending_date,
       starting_date,
       site: {
@@ -101,7 +104,7 @@ function Site({
             flex: '0 0 auto',
           },
         }}
-        id={`site-${id}`}
+        id={`${isAbsence ? 'absence' : 'site'}-${id}`}
       >
         <SiteHeader
           name={name}
@@ -110,7 +113,7 @@ function Site({
         {assignments.length
           && isDropable
           ? (
-            <Droppable droppableId={`site-${id}`} type="SITE">
+            <Droppable droppableId={`${isAbsence ? 'absence' : 'site'}-${id}`} type="SITE">
               {(provided) => (
                 <Box
                   ref={provided.innerRef}
@@ -167,12 +170,12 @@ function Site({
         >
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Supprimer cet assignement ?
+              {`Supprimer ${isAbsence ? ' cette absence' : 'cet assignement'} ?`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} variant="outlined">Non</Button>
-            <Button onClick={handleAgree} autoFocus>
+            <Button onClick={handleAgree} variant="contained" autoFocus>
               Oui
             </Button>
           </DialogActions>
@@ -201,6 +204,7 @@ Site.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func,
+  isAbsence: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({

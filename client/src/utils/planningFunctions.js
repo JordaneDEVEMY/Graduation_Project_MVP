@@ -110,30 +110,63 @@ const planningFunctions = {
   /**
    * Convert admin API data to a companies list
    * @param {object} absences - Absences list from API request
-   * @returns {object} Absences Site containing an assignments list.
+   * @param {object} absencesList - Absence Types list from API request
+   * @returns {object} Absence object containing reasons as sites.
    */
-  adminPlanningToAbsences: (absences) => {
-    const result = [];
+  adminPlanningToAbsences: (absences, absencesList) => {
+    // set absences as a company
+    const company = {
+      id: 0,
+      name: 'Absences',
+      sites: [],
+    };
 
-    absences.forEach((absence) => {
-      const { assignment, id, reason } = absence;
-      assignment.absence = {
-        id,
-        reason,
-      };
-      result.push(assignment);
+    // set reasons as company sites
+    const reasonsList = [];
+
+    absences.forEach(({ reason }) => {
+      if (!reasonsList.includes(reason)) {
+        const { id } = absencesList.filter((item) => item.reason === reason)[0];
+
+        company.sites.push({
+          id,
+          name: reason,
+          assignments: [],
+        });
+        reasonsList.push(reason);
+      }
     });
 
-    return result;
+    // add absences into reason site
+    company.sites.map((site) => {
+      const { name } = site;
+      const reasonAbsences = absences.filter(({ reason }) => reason === name);
+      reasonAbsences.forEach(({ assignment }) => {
+        site.assignments.push(assignment);
+      });
+      return site;
+    });
+
+    return company;
   },
 
   /**
    * Convert admin API data to a companies list
    * @param {object} planning - Planning list from API request
+   * @param {object} absences - Absences list from API request
+   * @param {object} absencesList - Absence Types list from API request
    * @returns {array} Companies list.
    */
-  adminPlanningToCompanies: (planning) => {
+  adminPlanningToCompanies: (adminObject) => {
+    const { absences, planning, allAbsences: absencesList } = adminObject;
+
     const companies = [];
+
+    // Add absences as a company
+    if (absencesList.length) {
+      const absencesCompany = planningFunctions.adminPlanningToAbsences(absences, absencesList);
+      companies.push(absencesCompany);
+    }
 
     planning.forEach(({ company_id, company_name, sites: companySites }) => {
       const company = {
@@ -173,10 +206,33 @@ const planningFunctions = {
   },
 
   /**
-   * Get employees list of a company site
-   * @param {object} drag - Drag and drop data
+   * Get employees list of all companies sites
    * @param {object} companies - Companies object
-   * @returns {object} Datas sended to Assignment form
+   * @returns {array} List of employees
+   */
+  getAllSitesEmployees: (companies) => {
+    const employees = [];
+
+    companies.forEach((company) => {
+      const { sites } = company;
+
+      sites.forEach((site) => {
+        const { assignments } = site;
+
+        assignments.forEach(({ employee }) => {
+          employees.push(employee);
+        });
+      });
+    });
+
+    return employees;
+  },
+
+  /**
+   * Get employees list of a company site
+   * @param {object} companies - Companies object
+   * @param {object} siteId - Id of a company site
+   * @returns {array} List of assignments
    */
   getSiteEmployees: (companies, siteId) => {
     const employees = [];
@@ -199,6 +255,30 @@ const planningFunctions = {
   },
 
   /**
+   * Get employees list of an absence type
+   * @param {object} companies - Companies object
+   * @param {object} absenceId - Id of an absence type
+   * @returns {array} List of assignments
+   */
+  getAbsenceEmployees: (companies, absenceId) => {
+    const employees = [];
+
+    companies.forEach((company) => {
+      const { id } = company;
+      if (id === 0) {
+        const { sites } = company;
+        const { assignments } = sites.filter((site) => site.id === absenceId)[0];
+
+        assignments.forEach(({ employee }) => {
+          employees.push(employee);
+        });
+      }
+    });
+
+    return employees;
+  },
+
+  /**
    * Prepare data to assignment form after a drag and drop
    * @param {object} drag - Drag and drop data
    * @param {object} companies - Companies object
@@ -206,10 +286,23 @@ const planningFunctions = {
    */
   getDraggedAssignment: (drag, companies) => {
     let result = planningFunctions.createAssignment();
+    console.log('drag', drag);
+    console.log('companies', companies);
     const { destination, draggableId } = drag;
-    const siteId = Number(destination.droppableId.replace('site-', ''));
+    let siteId;
+    // is absence ?
+    const absenceFounded = destination.droppableId.match(/absence-([0-9]+)/);
+
+    if (absenceFounded !== null) {
+      siteId = Number(destination.droppableId.replace('absence-', ''));
+      result.absence_id = siteId;
+    } else {
+      siteId = Number(destination.droppableId.replace('site-', ''));
+    }
     const assignmentId = Number(draggableId.replace('assignment-', ''));
 
+    console.log('siteId', siteId);
+    console.log('assignmentId', assignmentId);
     // get site destination
     let toSite;
     companies.forEach(({ sites }) => {
@@ -223,8 +316,9 @@ const planningFunctions = {
     // get assignment
     if (toSite) {
       const { name, assignments: fromAssignments } = toSite;
+      console.log('fromAssignments', fromAssignments);
       const [assignment] = fromAssignments.filter(({ id }) => id === assignmentId);
-
+      console.log('assignment', assignment);
       const {
         color, employee, ending_date, id, starting_date,
       } = assignment;
@@ -262,8 +356,27 @@ const planningFunctions = {
   setAssignmentPosition: (result, companies) => {
     const refresh = [...companies];
     const { source, destination, draggableId } = result;
-    const fromSiteId = Number(source.droppableId.replace('site-', ''));
-    const toSiteId = Number(destination.droppableId.replace('site-', ''));
+    const regex = /absence-([0-9]+)/;
+    // const fromSiteId = Number(source.droppableId.replace('site-', ''));
+
+    let fromSiteId;
+    // is absence ?
+    const absenceFromFounded = source.droppableId.match(regex);
+    if (absenceFromFounded !== null) {
+      fromSiteId = Number(source.droppableId.replace('absence-', ''));
+    } else {
+      fromSiteId = Number(source.droppableId.replace('site-', ''));
+    }
+
+    // const toSiteId = Number(destination.droppableId.replace('site-', ''));
+    let toSiteId;
+    const absenceToFounded = destination.droppableId.match(regex);
+    if (absenceToFounded !== null) {
+      toSiteId = Number(destination.droppableId.replace('absence-', ''));
+    } else {
+      toSiteId = Number(destination.droppableId.replace('site-', ''));
+    }
+
     const assignmentId = Number(draggableId.replace('assignment-', ''));
 
     // get site source

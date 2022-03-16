@@ -10,59 +10,18 @@ import Companies from '../Companies/Companies';
 import planningFunctions from '../../utils/planningFunctions';
 
 function DraggableAssignments({
-  absences,
   companies,
   handleAbsence,
   handleAssignment,
   week,
 }) {
   // save initial companies object
-  const [companiesList, setCompaniesList] = React.useState(companies);
-  const [absencesList, setAbsencesList] = React.useState(absences);
-  const [assignmentsPositions, setAssignmentsPositions] = React.useState([
-    {
-      id: 0,
-      name: 'Absences',
-      sites: [{
-        id: 0,
-        name: 'Gestion des absences',
-        assignments: absencesList,
-      }],
-    },
-    ...companiesList,
-  ]);
+  const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
+  console.log('assignmentsPositions', assignmentsPositions);
 
   React.useEffect(() => {
-    setCompaniesList(companies);
-    setAssignmentsPositions([
-      {
-        id: 0,
-        name: 'Absences',
-        sites: [{
-          id: 0,
-          name: 'Gestion des absences',
-          assignments: absencesList,
-        }],
-      },
-      ...companies,
-    ]);
+    setAssignmentsPositions(companies);
   }, [companies]);
-
-  React.useEffect(() => {
-    setAbsencesList(absences);
-    setAssignmentsPositions([
-      {
-        id: 0,
-        name: 'Absences',
-        sites: [{
-          id: 0,
-          name: 'Absences',
-          assignments: absences,
-        }],
-      },
-      ...companiesList,
-    ]);
-  }, [absences]);
 
   /**
    * Open assignment insert / update modal
@@ -80,12 +39,11 @@ function DraggableAssignments({
       setAssignmentsPositions(refreshList);
       handleAssignment(assignment, result);
     }
-  }, [absencesList, companiesList]);
+  }, [assignmentsPositions]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
-        absences={absences}
         companies={assignmentsPositions}
         handleAbsence={handleAbsence}
         handleAssignment={handleAssignment}
@@ -98,11 +56,6 @@ function DraggableAssignments({
 }
 
 DraggableAssignments.propTypes = {
-  absences: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
