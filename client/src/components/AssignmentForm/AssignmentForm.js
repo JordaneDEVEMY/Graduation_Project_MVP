@@ -20,14 +20,18 @@ import dateFunctions from '../../utils/dateFunctions';
 import './assignment_form.scss';
 
 function AssignmentForm({
+  absencesList,
   assignment,
   employeesList,
   setModalOpened,
+  handleCancel,
   handleSubmit,
 }, ref) {
+  console.log('absencesList', absencesList);
   const theme = useTheme();
   const method = assignment.id ? 'PATCH' : 'POST';
-  const { employee_id, site } = assignment;
+  const { absence_id, employee_id, site } = assignment;
+  const isAbsence = site.id === 0;
 
   // set colors list
   const colorsList = [
@@ -42,7 +46,7 @@ function AssignmentForm({
     ['#ffeb3b', 'Jaune'],
     ['#ff9800', 'Orange'],
   ];
-  // add color into colors list if not
+  // add assignment color in colors list if not includes
   if (assignment.color) {
     const isFinded = colorsList.filter(([code]) => code === assignment.color);
     if (isFinded.length === 0) {
@@ -55,6 +59,13 @@ function AssignmentForm({
       ? employeesList[0]
       : employeesList.filter((item) => item.id === employee_id)[0],
   );
+  const [absence, setAbsence] = React.useState(
+    absence_id === null
+      ? absencesList[0]
+      : absencesList.filter((item) => item.id === absence_id)[0],
+  );
+  console.log('employee', employee);
+  console.log('absence', absence);
   const [starting_date, setStartingDate] = React.useState(assignment.starting_date);
   const [ending_date, setEndingDate] = React.useState(assignment.ending_date);
   const [color, setColor] = React.useState(assignment.color || colorsList[0][0]);
@@ -75,14 +86,17 @@ function AssignmentForm({
     }
   };
 
-  const handleCancel = () => {
+  const handleCancelForm = () => {
     setModalOpened(false);
+    handleCancel();
   };
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
     const data = {
       ...assignment,
+      absence_id: isAbsence ? absence.id : null,
+      site_id: isAbsence ? null : assignment.site.id,
       color,
       method,
       visibility,
@@ -129,6 +143,7 @@ function AssignmentForm({
               onChange={(_event, newValue) => {
                 setEmployee(newValue);
               }}
+              disabled={isAbsence}
               options={employeesList}
               sx={{ width: '100%' }}
               renderInput={(params) => (
@@ -136,6 +151,36 @@ function AssignmentForm({
               )}
             />
           </Grid>
+
+          {isAbsence
+            && (
+              <Grid item xs={12}>
+                <FormControl sx={{ width: '100%' }}>
+                  <InputLabel id="absence-label">{'Motif de l\'absence'}</InputLabel>
+                  <Select
+                    labelId="absence-label"
+                    id="field-absence"
+                    value={absence.id}
+                    label="Motif de l'absence"
+                    fullWidth
+                    onChange={(_event, newValue) => {
+                      console.log(newValue);
+                      const selected = absencesList.filter((item) => item.id === newValue.props.value)[0];
+                      setAbsence(selected);
+                    }}
+                  >
+                    {absencesList.map((a) => (
+                      <MenuItem
+                        key={a.id}
+                        value={a.id}
+                      >
+                        {a.reason}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            )}
           <Grid item xs={6}>
             <TextField
               id="field-startingDate"
@@ -229,7 +274,7 @@ function AssignmentForm({
             <Button
               type="submit"
               variant="outlined"
-              onClick={handleCancel}
+              onClick={handleCancelForm}
               sx={{
                 mr: theme.spacing(1),
               }}

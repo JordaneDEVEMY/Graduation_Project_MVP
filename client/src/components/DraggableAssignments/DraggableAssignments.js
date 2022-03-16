@@ -17,21 +17,55 @@ function DraggableAssignments({
   week,
 }) {
   // save initial companies object
-  const [brands, setBrands] = React.useState(companies);
-  const [assignmentsPositions, setAssignmentsPositions] = React.useState(brands);
+  const [companiesList, setCompaniesList] = React.useState(companies);
+  const [absencesList, setAbsencesList] = React.useState(absences);
+  const [assignmentsPositions, setAssignmentsPositions] = React.useState([
+    {
+      id: 0,
+      name: 'Absences',
+      sites: [{
+        id: 0,
+        name: 'Gestion des absences',
+        assignments: absencesList,
+      }],
+    },
+    ...companiesList,
+  ]);
 
   React.useEffect(() => {
-    setBrands(companies);
-    setAssignmentsPositions(companies);
+    setCompaniesList(companies);
+    setAssignmentsPositions([
+      {
+        id: 0,
+        name: 'Absences',
+        sites: [{
+          id: 0,
+          name: 'Gestion des absences',
+          assignments: absencesList,
+        }],
+      },
+      ...companies,
+    ]);
   }, [companies]);
 
   React.useEffect(() => {
-    setAssignmentsPositions(brands);
-  }, [brands]);
+    setAbsencesList(absences);
+    setAssignmentsPositions([
+      {
+        id: 0,
+        name: 'Absences',
+        sites: [{
+          id: 0,
+          name: 'Absences',
+          assignments: absences,
+        }],
+      },
+      ...companiesList,
+    ]);
+  }, [absences]);
 
   /**
-   * Refresh assignments on drag end
-   * Open assignment update modal
+   * Open assignment insert / update modal
    */
   const onDragEnd = useCallback((result) => {
     console.log(result);
@@ -44,9 +78,9 @@ function DraggableAssignments({
       const assignment = planningFunctions.getDraggedAssignment(result, assignmentsPositions);
 
       setAssignmentsPositions(refreshList);
-      handleAssignment(assignment);
+      handleAssignment(assignment, result);
     }
-  }, [brands]);
+  }, [absencesList, companiesList]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>

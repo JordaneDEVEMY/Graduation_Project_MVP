@@ -4,13 +4,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
-import SiteAbsences from '../SiteAbsences/SiteAbsences';
+// import SiteAbsences from '../SiteAbsences/SiteAbsences';
 import SitesList from '../SitesList/SitesList';
 
 function Companies({
   absences,
   companies,
-  handleAbsence,
+  // handleAbsence,
   handleAssignment,
   isDropable,
   isMobile,
@@ -37,13 +37,13 @@ function Companies({
         },
       }}
     >
-      <SiteAbsences
+      {/* <SiteAbsences
         absences={absences}
         handleAbsence={handleAbsence}
         isDropable={isDropable}
         isMobile={isMobile}
         week={week}
-      />
+      /> */}
       {brands.length
         ? (brands.map((company, index) => (
           <Box
@@ -114,7 +114,7 @@ Companies.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
-  handleAbsence: PropTypes.func.isRequired,
+  // handleAbsence: PropTypes.func.isRequired,
   handleAssignment: PropTypes.func.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
