@@ -66,6 +66,14 @@ const controller = {
 
     const periods = { weekStart: monday, planning: filteredWeek, absences };
 
+    const { planning } = periods;
+
+    planning.forEach((item) => {
+      const { sites } = item;
+
+      sites.sort((a, b) => a.assignment.position - b.assignment.position);
+    });
+
     res.json(periods);
   },
 
