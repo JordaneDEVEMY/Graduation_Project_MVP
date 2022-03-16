@@ -2,7 +2,7 @@
 
 BEGIN;
 
-CREATE OR REPLACE FUNCTION update_employee_by_admin(json) RETURNS void AS $$
+CREATE OR REPLACE FUNCTION update_employee_by_admin(json) RETURNS employee AS $$
 	UPDATE "employee"
 	SET social_security_number = ($1 ->> 'social_security_number')::text,
 		firstname = ($1 ->> 'firstname')::text,
@@ -18,7 +18,8 @@ CREATE OR REPLACE FUNCTION update_employee_by_admin(json) RETURNS void AS $$
 		fonction = ($1 ->> 'fonction')::text,
 		role_application = ($1 ->> 'role_application')::text,
 		updated_at = now()
-	WHERE id = ($1->>'id')::int;
+	WHERE id = ($1->>'id')::int
+	RETURNING *;
 $$ LANGUAGE sql;
 
 COMMIT;

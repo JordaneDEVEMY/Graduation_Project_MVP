@@ -44,31 +44,8 @@ module.exports = {
   async insert(assignment) {
     const assignmentToCreate = await client.query(
       `
-      INSERT INTO "assignment"
-      (
-        "starting_date",
-        "ending_date",
-        "color",
-        "position",
-        "visibility",
-        "site_id",
-        "absence_id",
-        "employee_id"
-      )
-      VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8
-      )
-      RETURNING *;`,
-      [
-        assignment.starting_date,
-        assignment.ending_date,
-        assignment.color,
-        assignment.position,
-        assignment.visibility,
-        assignment.site_id,
-        assignment.absence_id,
-        assignment.employee_id,
-      ],
+      SELECT insert_assignment($1);`,
+      [assignment],
     );
 
     return assignmentToCreate.rows[0];
@@ -87,32 +64,13 @@ module.exports = {
       throw new ApiError(400, 'Cette affectation n\'existe pas');
     }
 
+    Object.assign(assignment, {id : parseInt(assignmentId, 10)})
+
     const siteToSave = await client.query(
       `
-        UPDATE "assignment"
-        SET
-          "starting_date" = $2,
-          "ending_date" = $3,
-          "color" = $4,
-          "position" = $5,
-          "visibility" = $6,
-          "site_id" = $7,
-          "absence_id" = $8,
-          "employee_id" = $9,
-          "updated_at" = NOW()
-        WHERE "id" = $1
-        RETURNING *;`,
-      [
-        assignmentId,
-        assignment.starting_date,
-        assignment.ending_date,
-        assignment.color,
-        assignment.position,
-        assignment.visibility,
-        assignment.site_id,
-        assignment.absence_id,
-        assignment.employee_id,
-      ],
+      SELECT * FROM update_assignment($1);
+      `,
+      [assignment],
     );
 
     return siteToSave.rows[0];
