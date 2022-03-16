@@ -44,7 +44,7 @@ function NavTabs({
         <Tab key="Employees" icon={<AssignmentIndIcon />} label="Employés" component={Link} to="/admins/employees" value="/admins/employees" />
         <Tab key="Sites" icon={<BusinessIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
         <Tab key="Entreprises" icon={<SupervisorAccountIcon />} label="Entreprises" component={Link} to="/admins/companies" value="/admins/companies" />
-        <Tab key="Profil" icon={<SupervisorAccountIcon />} label="Profil" component={Link} to={`/admins/${userId}/profil`} value={`/admins/${userId}/profil`} />
+        <Tab key="Profil" icon={<SupervisorAccountIcon />} label="Profil" component={Link} to={`/admins/${userId}/profil`} value={`/admins/${userId}/profil`} sx={{ display: 'none' }} />
       </Tabs>
     </Box>
   );
