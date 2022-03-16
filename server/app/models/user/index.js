@@ -123,7 +123,12 @@ module.exports = {
         "phone_number",
         "mobile_number",
         "updated_at";`,
-      [password, phone_number, mobile_number, userId],
+      [
+        password,
+        phone_number,
+        mobile_number,
+        userId,
+      ],
     );
 
     return userUpdate.rows[0];
