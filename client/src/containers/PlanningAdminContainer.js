@@ -14,7 +14,6 @@ function PlanningAdminContainer() {
   const dispatch = useDispatch();
   const admin = useSelector((state) => state.admin);
   const { employees: employeesList } = useSelector((state) => state.allEmployees);
-  const { allAbsences: absencesList } = admin;
   const { weekStart } = admin;
   const [startDate, setStartDate] = React.useState(weekStart);
   const [companies, setCompanies] = React.useState(planningFunctions.adminPlanningToCompanies(admin));
@@ -47,7 +46,6 @@ function PlanningAdminContainer() {
 
   return (
     <PlanningAdmin
-      absencesList={absencesList}
       companies={companies}
       employeesList={employeesList}
       startDate={startDate}

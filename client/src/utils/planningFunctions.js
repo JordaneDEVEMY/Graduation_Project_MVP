@@ -206,6 +206,29 @@ const planningFunctions = {
   },
 
   /**
+   * Get employees list of all companies sites
+   * @param {object} companies - Companies object
+   * @returns {array} List of employees
+   */
+  getAllSitesEmployees: (companies) => {
+    const employees = [];
+
+    companies.forEach((company) => {
+      const { sites } = company;
+
+      sites.forEach((site) => {
+        const { assignments } = site;
+
+        assignments.forEach(({ employee }) => {
+          employees.push(employee);
+        });
+      });
+    });
+
+    return employees;
+  },
+
+  /**
    * Get employees list of a company site
    * @param {object} companies - Companies object
    * @param {object} siteId - Id of a company site

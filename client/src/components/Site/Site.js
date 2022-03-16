@@ -73,9 +73,10 @@ function Site({
     const newAssignement = planningFunctions.createAssignment();
     const starting_date = dateFunctions.getDate().format('YYYY-MM-DD');
     const ending_date = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
-
+    console.log('isAbsence', isAbsence);
     handleAssignment({
       ...newAssignement,
+      absence_id: isAbsence ? id : null,
       ending_date,
       starting_date,
       site: {
@@ -173,7 +174,7 @@ function Site({
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} variant="outlined">Non</Button>
-            <Button onClick={handleAgree} autoFocus>
+            <Button onClick={handleAgree} variant="contained" autoFocus>
               Oui
             </Button>
           </DialogActions>
