@@ -74,7 +74,7 @@ module.exports = {
   async insert(company) {
     const companyToCreate = await client.query(
       `
-      SELECT insert_company($1);`,
+      SELECT * FROM insert_company($1);`,
       [company],
     );
 
@@ -94,25 +94,13 @@ module.exports = {
       throw new ApiError(400, 'Cette entreprise n\'existe pas');
     }
 
+    Object.assign(company, { id: parseInt(companyId) });
+    
     const companyToSave = await client.query(
       `
-      UPDATE "company" 
-      SET 
-        "name" = $2,
-        "address" = $3,
-        "zip_code" = $4,
-        "type" = $5,
-        "updated_at" = NOW()
-      WHERE "id"= $1
-      RETURNING *;
+      SELECT * FROM update_company($1)
       `,
-      [
-        companyId,
-        company.name,
-        company.address,
-        company.zip_code,
-        company.type,
-      ],
+      [company],
     );
 
     return companyToSave.rows[0];
