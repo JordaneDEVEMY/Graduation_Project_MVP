@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Modal } from '@mui/material';
@@ -12,40 +13,62 @@ import './planning_admin.scss';
 
 function PlanningAdmin({
   companies,
+  companiesList,
   employeesList,
+  sitesList,
   startDate,
 }) {
+  console.log('companies', companies);
+  console.log('companiesList', companiesList);
+  console.log('sitesList', sitesList);
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
   const isMobile = useBreakpointDown();
+  const canAddCompany = (companies.length - 1) < companiesList.length;
+  // Instances used in forms
+  // assignment instance
   const [assignment, setAssignment] = React.useState({});
-  const [modalOpened, setModalOpened] = React.useState(false);
-  const [employees, setEmployees] = React.useState(employeesList);
+  // const [company, setCompany] = React.useState({});
+  // const [site, setSite] = React.useState({});
+  // lists used in forms
+  // const [companiesSelection, setCompaniesSelection] = React.useState(companiesList);
+  const [employeesSelection, setEmployeesSelection] = React.useState(employeesList);
+  // const [sitesSelection, setSitesSelection] = React.useState(sitesList);
+  // dragend
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
-  console.log('employeesList', employeesList);
+  // forms modal
+  const [modalOpened, setModalOpened] = React.useState(false);
 
-  const handleAssignment = (assignmentData, dragResult = undefined) => {
+  const handleAssignment = (assignmentData, dragResult = {}) => {
     setAssignment(assignmentData);
 
-    if (dragResult) {
+    if (dragResult?.draggableId) {
       setDragEndResult(dragResult);
     }
   };
 
+  // const handleCompany = (companyData) => {
+  //   setCompaniesSelection(companyData);
+  // };
+
+  // const handleSite = (siteData) => {
+  //   setSitesSelection(siteData);
+  // };
+
   const handleCancel = () => {
     setAssignment({});
-    const initialResult = {
-      ...dragEndResult,
-      source: dragEndResult.destination,
-      destination: dragEndResult.source,
-    };
-    const refreshList = planningFunctions.setAssignmentPosition(initialResult, draggableCompanies);
-    setDraggableCompanies(refreshList);
-  };
 
-  const handleAbsence = (result) => {
-    console.log('updateAbsence', result);
+    if (dragEndResult?.draggableId) {
+      const initialResult = {
+        ...dragEndResult,
+        source: dragEndResult.destination,
+        destination: dragEndResult.source,
+      };
+      const refreshList = planningFunctions.setAssignmentPosition(initialResult, draggableCompanies);
+      setDraggableCompanies(refreshList);
+      setDragEndResult({});
+    }
   };
 
   const handleModal = () => {
@@ -58,6 +81,9 @@ function PlanningAdmin({
     });
   };
 
+  /**
+   *
+   */
   React.useEffect(() => {
     console.log(assignment);
     // 1. build employeesList used in assignment modal
@@ -67,22 +93,11 @@ function PlanningAdmin({
       const method = employee_id !== null ? 'PATCH' : 'POST';
       // get all others sites employees
       const allSitesEmployees = planningFunctions.getAllSitesEmployees(companies);
-      console.log('allSitesEmployees', allSitesEmployees);
       const allSitesEmployeesIds = allSitesEmployees.map((item) => item.id);
-      console.log('allSitesEmployeesIds', allSitesEmployeesIds);
       // retrieve all assignments employees from employeesLIst
       const assignmentEmployees = employeesList.filter(
         ({ id }) => !allSitesEmployeesIds.includes(id),
       );
-
-      // // it's an assignment
-      // if (absence_id === null) {
-      //   assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
-      // // it's an absence
-      // } else {
-      //   const absences = planningFunctions.getAbsenceEmployees(companies, absence_id);
-      //   assignmentEmployees = absences;
-      // }
 
       // it's an update
       // add assignment employee to list
@@ -90,8 +105,7 @@ function PlanningAdmin({
         const employee = employeesList.filter(({ id }) => id === employee_id)[0];
         assignmentEmployees.push(employee);
       }
-      setEmployees(assignmentEmployees);
-      console.log('assignmentEmployees', assignmentEmployees);
+      setEmployeesSelection(assignmentEmployees);
       setModalOpened(true);
     }
   }, [assignment]);
@@ -108,12 +122,13 @@ function PlanningAdmin({
 
       <SearchContainer isAdmin date={startDate} />
 
+      {canAddCompany && ('TEST')}
+
       {companies.length
         && !isMobile
         ? (
           <DraggableAssignments
             companies={draggableCompanies}
-            handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             week={currentWeek}
           />
@@ -121,7 +136,6 @@ function PlanningAdmin({
         : (
           <Companies
             companies={companies}
-            handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             isDropable={false}
             isMobile
@@ -141,12 +155,15 @@ function PlanningAdmin({
         open
         onClose={handleModal}
       >
+        {assignment.id !== undefined
+        && (
         <AssignmentFormContainer
           assignment={assignment}
-          employeesList={employees}
+          employeesList={employeesSelection}
           handleCancel={handleCancel}
           setModalOpened={setModalOpened}
         />
+        )}
       </Modal>
       )}
     </>
@@ -157,7 +174,13 @@ PlanningAdmin.propTypes = {
   companies: PropTypes.arrayOf(
     PropTypes.shape(),
   ).isRequired,
+  companiesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   employeesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
+  sitesList: PropTypes.arrayOf(
     PropTypes.shape(),
   ).isRequired,
   startDate: PropTypes.string.isRequired,

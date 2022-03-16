@@ -11,7 +11,6 @@ import planningFunctions from '../../utils/planningFunctions';
 
 function DraggableAssignments({
   companies,
-  handleAbsence,
   handleAssignment,
   week,
 }) {
@@ -42,7 +41,6 @@ function DraggableAssignments({
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
         companies={assignmentsPositions}
-        handleAbsence={handleAbsence}
         handleAssignment={handleAssignment}
         isDropable
         isMobile={false}
@@ -64,7 +62,6 @@ DraggableAssignments.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
-  handleAbsence: PropTypes.func.isRequired,
   handleAssignment: PropTypes.func.isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,

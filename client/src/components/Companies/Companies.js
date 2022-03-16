@@ -9,7 +9,6 @@ import SitesList from '../SitesList/SitesList';
 
 function Companies({
   companies,
-  // handleAbsence,
   handleAssignment,
   isDropable,
   isMobile,
@@ -99,7 +98,6 @@ Companies.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
-  // handleAbsence: PropTypes.func.isRequired,
   handleAssignment: PropTypes.func.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,

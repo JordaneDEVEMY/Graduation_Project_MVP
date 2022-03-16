@@ -163,7 +163,7 @@ const planningFunctions = {
     const companies = [];
 
     // Add absences as a company
-    if (absencesList.length) {
+    if (absences.length) {
       const absencesCompany = planningFunctions.adminPlanningToAbsences(absences, absencesList);
       companies.push(absencesCompany);
     }
