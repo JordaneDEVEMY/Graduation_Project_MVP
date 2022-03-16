@@ -29,10 +29,10 @@ router
    * POST /api/admin/upload/avatar
    * @summary Upload an avatar inside the server
    * @tags 9.UserAdmin - Upload Section
-   * @param {AvatarToUpload} request.body.required - POST request for upload an avatar
+   * @param {AvatarToUpload} request.body.required - Body request for upload an avatar
    * @return {UploadReturn} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
-   * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .post(upload.single('image'), controllerHandler(uploadController.uploadAvatar));
 

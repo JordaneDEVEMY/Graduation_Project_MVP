@@ -30,7 +30,7 @@ router
    * @summary Update one user profile
    * @tags 2.User
    * @param {number} id.path.required - User identifier
-   * @param {AuthProfilUpdate} request.body.required - User email/password to update
+   * @param {AuthProfilUpdate} request.body.required - Body request with user phone number, mobile number or password to update
    * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json

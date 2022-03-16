@@ -16,6 +16,7 @@ router
    * @return {array.<Absence>} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(userAdminAbsenceController.getAll));
 

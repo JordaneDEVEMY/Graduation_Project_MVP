@@ -20,7 +20,7 @@ module.exports = Joi.object({
   mobile_number: Joi.string()
     .min(10)
     .required(),
-  social_security_number: Joi.number()
+  social_security_number: Joi.string()
     .min(13)
     .max(15)
     .required(),

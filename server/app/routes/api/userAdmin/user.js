@@ -20,7 +20,7 @@ router
    * @return {array.<User>} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
-   * @return {ApiError} 500 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(userAdminUserController.getAll))
 
@@ -28,11 +28,11 @@ router
    * POST /api/admin/user
    * @summary Create one user
    * @tags 3.UserAdmin - User CRUD section
-   * @param {UserToCreate} request.body.required - All for creating user
+   * @param {UserToCreate} request.body.required - Body request for create a new user
    * @return {UserCreate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
-   * @return {ApiError} 500 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .post(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
 
@@ -46,7 +46,7 @@ router
    * @return {User} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
-   * @return {ApiError} 500 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(userAdminUserController.getOne))
 
@@ -55,11 +55,11 @@ router
    * @summary Update one user
    * @tags 3.UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
-   * @param {UserToUpdate} request.body.required - All for updating user
+   * @param {UserToUpdate} request.body.required - Body request for update an user
    * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
-   * @return {ApiError} 500 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .patch(validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
 
@@ -71,7 +71,7 @@ router
    * @return {UserDelete} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
-   * @return {ApiError} 500 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .delete(controllerHandler(userAdminUserController.delete));
 
