@@ -95,7 +95,7 @@ module.exports = {
     }
 
     Object.assign(company, { id: parseInt(companyId, 10) });
-    
+
     const companyToSave = await client.query(
       `
       SELECT * FROM update_company($1)
