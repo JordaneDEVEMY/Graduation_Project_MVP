@@ -20,15 +20,18 @@ import dateFunctions from '../../utils/dateFunctions';
 import './assignment_form.scss';
 
 function AssignmentForm({
+  absencesList,
   assignment,
   employeesList,
   setModalOpened,
   handleCancel,
   handleSubmit,
 }, ref) {
+  console.log('absencesList', absencesList);
   const theme = useTheme();
   const method = assignment.id ? 'PATCH' : 'POST';
-  const { employee_id, site } = assignment;
+  const { absence_id, employee_id, site } = assignment;
+  const isAbsence = site.id === 0;
 
   // set colors list
   const colorsList = [
@@ -55,6 +58,11 @@ function AssignmentForm({
     employee_id === null
       ? employeesList[0]
       : employeesList.filter((item) => item.id === employee_id)[0],
+  );
+  const [absence, setAbsence] = React.useState(
+    absence_id === null
+      ? absencesList[0]
+      : absencesList.filter((item) => item.id === absence_id)[0],
   );
   const [starting_date, setStartingDate] = React.useState(assignment.starting_date);
   const [ending_date, setEndingDate] = React.useState(assignment.ending_date);
@@ -125,18 +133,45 @@ function AssignmentForm({
           spacing={2}
         >
           <Grid item xs={12}>
-            <Autocomplete
-              value={employee}
-              getOptionLabel={(option) => `${option.firstname} ${option.lastname}`}
-              onChange={(_event, newValue) => {
-                setEmployee(newValue);
-              }}
-              options={employeesList}
-              sx={{ width: '100%' }}
-              renderInput={(params) => (
-                <TextField {...params} label="Employé" required />
+            {isAbsence
+              ? (
+                <FormControl sx={{ width: '100%' }}>
+                  <InputLabel id="absence-label">{'Motif de l\'absence'}</InputLabel>
+                  <Select
+                    labelId="absence-label"
+                    id="field-absence"
+                    value={absence}
+                    label="Motif de l'absence"
+                    fullWidth
+                    onChange={(_event, newValue) => {
+                      setAbsence(newValue.props.value);
+                    }}
+                  >
+                    {absencesList.map((a) => (
+                      <MenuItem
+                        key={a.id}
+                        value={a.id}
+                      >
+                        {a.reason}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              )
+              : (
+                <Autocomplete
+                  value={employee}
+                  getOptionLabel={(option) => `${option.firstname} ${option.lastname}`}
+                  onChange={(_event, newValue) => {
+                    setEmployee(newValue);
+                  }}
+                  options={employeesList}
+                  sx={{ width: '100%' }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Employé" required />
+                  )}
+                />
               )}
-            />
           </Grid>
           <Grid item xs={6}>
             <TextField

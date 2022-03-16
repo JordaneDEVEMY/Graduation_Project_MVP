@@ -12,6 +12,7 @@ import './planning_admin.scss';
 
 function PlanningAdmin({
   absences,
+  absencesList,
   companies,
   employeesList,
   startDate,
@@ -63,7 +64,15 @@ function PlanningAdmin({
     // open modal
     if (assignment.site !== undefined) {
       const { site } = assignment;
-      let assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
+      let assignmentEmployees;
+
+      // it's an assignment
+      if (site.id !== 0) {
+        assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
+      // it's an absence
+      } else {
+        assignmentEmployees = absences;
+      }
 
       if (assignment.employee_id !== undefined) {
         const colleagues = assignmentEmployees.filter(
@@ -127,6 +136,7 @@ function PlanningAdmin({
         onClose={handleModal}
       >
         <AssignmentFormContainer
+          absencesList={absencesList}
           assignment={assignment}
           employeesList={employees}
           handleCancel={handleCancel}
@@ -143,6 +153,9 @@ PlanningAdmin.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,
+  ).isRequired,
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
   ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape(),

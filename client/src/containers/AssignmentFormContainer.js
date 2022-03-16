@@ -4,7 +4,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import AssignmentForm from '../components/AssignmentForm/AssignmentForm';
 import {
-  actionRequestAllEmployees,
   actionCreateAssignment,
   actionSetAssignmentInformation,
   actionGetAssignmentInformations,
@@ -13,6 +12,7 @@ import {
 import planningFunctions from '../utils/planningFunctions';
 
 function AssignmentFormContainer({
+  absencesList,
   assignment,
   employeesList,
   handleCancel,
@@ -22,30 +22,30 @@ function AssignmentFormContainer({
 
   const handleSubmitAssignment = (formData) => {
     const { method } = formData;
-    // const isAbsence = formData.absence_id !== null;
+    const isAbsence = formData.site_id === 0;
 
     const {
-      id,
-      starting_date,
-      ending_date,
-      color,
-      position,
-      visibility,
-      employee_id,
-      site,
       absence_id,
+      id,
+      color,
+      employee_id,
+      ending_date,
+      position,
+      site,
+      starting_date,
+      visibility,
     } = formData;
 
     const assignmentData = {
+      absence_id: isAbsence ? absence_id : null,
       id,
-      starting_date,
-      ending_date,
       color,
-      position,
-      visibility,
       employee_id,
-      site_id: site.id,
-      absence_id,
+      ending_date,
+      position,
+      site_id: isAbsence ? null : site.id,
+      starting_date,
+      visibility,
       weekSlug: planningFunctions.getWeekSlugFromDate(starting_date),
     };
 
@@ -68,13 +68,10 @@ function AssignmentFormContainer({
     setModalOpened(false);
   };
 
-  React.useEffect(() => {
-    dispatch(actionRequestAllEmployees());
-  }, []);
-
   return (
     <AssignmentForm
       ref={ref}
+      absencesList={absencesList}
       assignment={assignment}
       employeesList={employeesList}
       setModalOpened={setModalOpened}
