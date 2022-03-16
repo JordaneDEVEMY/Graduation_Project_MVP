@@ -15,10 +15,11 @@ router
    * POST /api/admin/planning/assignment/user
    * @summary Create User assignment in site_id OR absence_id
    * @tags 6.UserAdmin - Planning CRUD section
-   * @param {AssignmentToCreate} request.body.required - Assignment request
+   * @param {AssignmentToCreate} request.body.required - Body request for create an user assignment
    * @return {Assignment} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Week not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .post(validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.create));
 
@@ -29,10 +30,11 @@ router
    * @summary Patch User assignment in site_id OR absence_id
    * @tags 6.UserAdmin - Planning CRUD section
    * @param {number} id.path.required - assignment identifier
-   * @param {AssignmentToCreate} request.body.required - Assignment request
+   * @param {AssignmentToCreate} request.body.required - Body request for update an user assignment
    * @return {Assignment} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Week not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .patch(validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.update))
 
@@ -44,6 +46,7 @@ router
    * @return {AssignmentDelete} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .delete(controllerHandler(assignmentUserController.delete));
 
