@@ -69,6 +69,7 @@ router
    * @param {number} id.path.required - company identifier
    * @return {CompanyDelete} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - Company not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
   .delete(controllerHandler(userAdminCompanyController.delete));
