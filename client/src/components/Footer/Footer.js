@@ -38,7 +38,7 @@ function Footer() {
 
           </Link>
           {' '}
-          - Tous droits réservés © O'lleks 2022
+          - App illustrations by Storyset - Tous droits réservés © O'lleks 2022
         </small>
       </Typography>
     </Box>

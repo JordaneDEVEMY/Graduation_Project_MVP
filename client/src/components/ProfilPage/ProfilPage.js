@@ -3,14 +3,14 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState }
-  from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import {
-  Avatar, Box, Typography, Divider, Button, useTheme, Grid, TextField,
+  Avatar, Box, Typography, Divider, Button, useTheme, Grid,
 } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import EditIcon from '@mui/icons-material/Edit';
+import TextInput from '../FieldForms/TextInput';
 
 function ProfilPage({
   changeField,
@@ -27,6 +27,17 @@ function ProfilPage({
   const [errorDisplay, setErrorDisplay] = useState(true);
   const [currentPhoneValues, setNewPhoneValues] = useState(true);
   const [currentMobileValues, setNewMobileValues] = useState(true);
+  const [isButtonDisable, setIsButtonDisable] = useState(true);
+
+  useEffect(() => {
+    if (userPassword.trim() === '' || userConfirmPassword.trim() === '') {
+      if (isButtonDisable === false) {
+        setIsButtonDisable(true);
+      }
+    } else if (isButtonDisable === true) {
+      setIsButtonDisable(false);
+    }
+  }, [userPassword, userConfirmPassword]);
 
   const togglePhoneForm = () => {
     setNewPhoneValues(false);
@@ -96,7 +107,7 @@ function ProfilPage({
               <Typography variant="h4">
                 Numéro de téléphone fixe
                 <EditIcon
-                  sx={{ marginLeft: theme.spacing(1) }}
+                  sx={{ marginLeft: theme.spacing(1), cursor: 'pointer' }}
                   onClick={togglePhoneForm}
                   color="primary"
                   fontSize="small"
@@ -111,22 +122,25 @@ function ProfilPage({
               <form onSubmit={confirmPhoneChange}>
                 <Grid container rowSpacing={2}>
                   <Grid item xs={12}>
-                    <TextField
+                    <TextInput
+                      autoComplete="off"
+                      required
+                      handleChange={changeField}
                       type="text"
-                      name="phone_number"
+                      nameValue="phone_number"
                       label="Nouveau numéro de téléphone fixe"
-                      defaultValue={user.phone_number}
-                      onChange={(event) => changeField('phone_number', event.target.value)}
+                      value={user.phone_number}
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <TextInput
+                      autoComplete="off"
                       required
+                      handleChange={changeField}
                       type="password"
                       nameValue="password"
                       label="Mot de passe"
-                      defaultValue=""
-                      onChange={(event) => changeField('password', event.target.value)}
+                      value={userPassword}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -156,7 +170,7 @@ function ProfilPage({
               <Typography variant="h4">
                 Numéro de téléphone portable
                 <EditIcon
-                  sx={{ marginLeft: theme.spacing(1) }}
+                  sx={{ marginLeft: theme.spacing(1), cursor: 'pointer' }}
                   color="primary"
                   onClick={toggleMobileForm}
                   fontSize="small"
@@ -171,22 +185,25 @@ function ProfilPage({
               <form onSubmit={confirmPhoneChange}>
                 <Grid container rowSpacing={2}>
                   <Grid item xs={12}>
-                    <TextField
+                    <TextInput
+                      autoComplete="off"
+                      required
+                      handleChange={changeField}
                       type="text"
-                      name="mobile_number"
-                      label="Nouveau numéro de mobile"
-                      defaultValue={user.mobile_number}
-                      onChange={(event) => changeField('mobile_number', event.target.value)}
+                      nameValue="mobile_number"
+                      label="Nouveau numéro de téléphone portable"
+                      value={user.mobile_number}
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <TextInput
+                      autoComplete="off"
                       required
+                      handleChange={changeField}
                       type="password"
                       nameValue="password"
                       label="Mot de passe"
-                      defaultValue=""
-                      onChange={(event) => changeField('password', event.target.value)}
+                      value={userPassword}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -245,39 +262,32 @@ function ProfilPage({
           <form onSubmit={confirmPasswordChange}>
             <Grid container rowSpacing={2}>
               <Grid item xs={12}>
-                <TextField
+                <TextInput
+                  autoComplete="off"
+                  required
+                  handleChange={changeField}
                   type="password"
                   nameValue="password"
                   label="Nouveau mot de passe"
-                  defaultValue=""
-                  onChange={(event) => changeField('password', event.target.value)}
+                  value={userPassword}
                 />
               </Grid>
               <Grid item xs={12}>
-                { errorDisplay ? (
-                  <TextField
-                    type="password"
-                    nameValue="confirmPassword"
-                    label="Confirmez votre nouveau mot de passe"
-                    defaultValue=""
-                    onChange={(event) => changeField('confirmPassword', event.target.value)}
-                  />
-                ) : (
-                  <TextField
-                    error
-                    type="password"
-                    nameValue="confirmPassword"
-                    label="Confirmez votre nouveau mot de passe"
-                    helperText="Erreur! Le mot de passe doit être identique"
-                    defaultValue=""
-                    onChange={(event) => changeField('confirmPassword', event.target.value)}
-                  />
-                )}
+                <TextInput
+                  autoComplete="off"
+                  required
+                  handleChange={changeField}
+                  type="password"
+                  nameValue="confirmPassword"
+                  label="Confirmer le mot de passe"
+                  value={userConfirmPassword}
+                />
               </Grid>
               <Grid item xs={12}>
                 <Button
                   type="submit"
                   variant="outlined"
+                  disabled={isButtonDisable}
                 >
                   Confirmer
                 </Button>
