@@ -25,10 +25,10 @@ CREATE VIEW get_week_admin_planning AS
                             'id', "employee"."id",
                             'firstname', "employee"."firstname",
                             'lastname', "employee"."lastname",
-                            'fonction', "employee.fonction",
-                            'mobile_number', "employee.mobile_number",
-                            'phone_number', "employee.phone_number",
-                            'email', "employee.email"
+                            'fonction', "employee"."fonction",
+                            'mobile_number', "employee"."mobile_number",
+                            'phone_number', "employee"."phone_number",
+                            'email', "employee"."email"
                         )
 			)
 		)

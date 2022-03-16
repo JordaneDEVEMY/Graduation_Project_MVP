@@ -8,7 +8,7 @@
     "test": "jest --coverage --coverage-reporters=lcov",
     "testFull": "jest",
     "test:watch": "jest --watch",
-    "resetLocalDB": "sqitch revert -t dev -y; sqitch deploy dev;",
+    "resetLocalDB": "sqitch revert -t dev -y; sqitch deploy dev; psql -U spedata -d olleks -f ./data/data_source.sql;",
     "start": "node .",
     "dev": "DEBUG=*,-express:*,-nodemon*,-body-parser:* npx nodemon"
   },
