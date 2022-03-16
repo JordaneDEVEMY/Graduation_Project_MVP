@@ -21,7 +21,7 @@ router.use('/qualification', qualificationRouter);
 router.use('/absence', absenceRouter);
 
 router.use(() => {
-  throw new ApiError(404, 'Page introuvable');
+  throw new ApiError(404, '404 Not Found');
 });
 
 module.exports = router;

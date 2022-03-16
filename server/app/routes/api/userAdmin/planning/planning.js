@@ -1,8 +1,5 @@
 const express = require('express');
-// ? const cache = require('../../../../helpers/redisCache');
-
-// const validate = require('../../../validation');
-// const Schema = require('../../../validation/userAdmin/site');
+// ? NOT IN MVP - const cache = require('../../../../helpers/redisCache');
 
 const { userAdminPlanningController } = require('../../../../controllers');
 
@@ -20,6 +17,7 @@ router
    * @return {Week} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - Week not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(userAdminPlanningController.getOne));
 
