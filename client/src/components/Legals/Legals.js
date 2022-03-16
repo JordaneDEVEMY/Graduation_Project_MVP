@@ -54,7 +54,7 @@ function Legals() {
         className="legals--img"
       />
 
-      <LegalsSections>
+      <LegalsSections variant="h3">
         Édition du site
       </LegalsSections>
       <LegalsDivider />
@@ -83,7 +83,7 @@ function Legals() {
         olleks@oclock.com
       </LegalsText>
 
-      <LegalsSections>
+      <LegalsSections variant="h3">
         Limitations de responsabilité
       </LegalsSections>
       <LegalsDivider />
@@ -113,7 +113,7 @@ function Legals() {
         Des espaces interactifs sont à la disposition des utilisateurs. L'équipe O'lleks se réserve le droit de supprimer, sans mise en demeure préalable, tout contenu déposé dans cet espace qui contreviendrait à la législation applicable en France, en particulier aux dispositions relatives à la protection des données.
       </LegalsText>
 
-      <LegalsSections>
+      <LegalsSections variant="h3">
         CNIL et gestion des données personnelles
       </LegalsSections>
       <LegalsDivider />
@@ -126,7 +126,7 @@ function Legals() {
         dispose d’un droit d’accès, de modification et de suppression des informations collectées.
       </LegalsText>
 
-      <LegalsSections>
+      <LegalsSections variant="h3">
         Liens hypertextes et cookies
       </LegalsSections>
       <LegalsDivider />
@@ -151,7 +151,7 @@ function Legals() {
         Les cookies sont enregistrés pour une durée maximale de 1 mois.
       </LegalsText>
 
-      <LegalsSections>
+      <LegalsSections variant="h3">
         Droit applicable et attribution de juridiction
       </LegalsSections>
       <LegalsDivider />
