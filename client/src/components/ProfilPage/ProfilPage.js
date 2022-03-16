@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import {
-  Avatar, Box, Typography, Divider, Button, useTheme, Grid, TextField,
+  Avatar, Box, Typography, Divider, Button, useTheme, Grid,
 } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import EditIcon from '@mui/icons-material/Edit';
