@@ -4,17 +4,19 @@ BEGIN;
 
 CREATE VIEW get_user_rest AS
 
-    SELECT 
+        SELECT 
         "employee"."id", 
         "employee"."social_security_number", 
         "employee"."date_of_birth", 
         "employee"."address", 
         "employee"."zip_code", 
+        "employee"."phone_number",
+        "employee"."mobile_number", 
         "employee"."starting_date", 
-        "employee"."function", 
+        "employee"."fonction", 
         "employee"."employee_qualification_id",
-        "employee_qualification"."label",
-        array_agg
+        "employee_qualification"."label" AS qualification_label,
+        json_agg
             (
             json_build_object(
                 'id',
@@ -51,14 +53,14 @@ CREATE VIEW get_user_rest AS
                     )
                     )
             )
-        ) AS assignements
+        ) AS assignments
     FROM "employee"
     LEFT JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
     LEFT JOIN "assignment" ON "assignment"."employee_id" = "employee"."id"
-    LEFT JOIN "site" ON "site"."assignment_id" = "assignment"."id"
-    LEFT JOIN "absence" ON "absence"."assignment_id" = "assignment"."id"
+    LEFT JOIN "site" ON "assignment"."site_id" = "site"."id"
+    LEFT JOIN "absence" ON "assignment"."absence_id" = "absence"."id"
     LEFT JOIN "company" ON "company"."id" = "site"."company_id"
-    WHERE "employee"."id" = employee.id
     GROUP BY "employee"."id", "employee_qualification"."label"
-    ORDER BY "employee";
+    ORDER BY "employee"."id";
+
 COMMIT;

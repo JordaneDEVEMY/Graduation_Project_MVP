@@ -2,16 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import App from './components/App/App';
+import DateAdapter from '@mui/lab/AdapterDayjs';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AppContainer from './containers/AppContainer';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <LocalizationProvider dateAdapter={DateAdapter}>
+      <BrowserRouter>
+        <AppContainer />
+      </BrowserRouter>
+    </LocalizationProvider>
   </Provider>,
   document.getElementById('root'),
 );

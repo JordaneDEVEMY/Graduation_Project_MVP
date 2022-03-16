@@ -1,34 +1,62 @@
-export const SET_USER_ID = 'SET_USER_ID';
-export const SET_USER_FIRSTNAME = 'SET_USER_FIRSTNAME';
-export const SET_USER_LASTNAME = 'SET_USER_LASTNAME';
-export const SET_USER_AVATAR = 'SET_USER_AVATAR';
+export const GET_USER_INFORMATIONS = 'GET_USER_INFORMATIONS';
+export const UPDATE_USER_INPUT = 'UPDATE_USER_INPUT';
+export const RESET_USER_PASSWORD = 'RESET_USER_PASSWORD';
+export const GET_USER_LABEL = 'GET_USER_LABEL';
+export const GET_USER_PHONENUMBER = 'GET_USER_PHONENUMBER';
+export const GET_USER_MOBILENUMBER = 'GET_USER_MOBILENUMBER';
 export const SET_USER_ISADMIN = 'SET_USER_ISADMIN';
-export const SET_USER_QUALIFICATION = 'SET_USER_QUALIFICATION';
-export const SET_USER_LABEL = 'SET_USER_LABEL';
-export const SET_USER_ASSIGNEMENTS = 'SET_USER_ASSIGNEMENTS';
+export const GET_USER_PLANNING = 'GET_USER_PLANNING';
+export const GET_USER_ASSIGNMENTS = 'GET_USER_ASSIGNMENTS';
 export const SET_USER_LOGOUT = 'SET_USER_LOGOUT';
 
-export function actionSetUserId(id) {
+export const UPDATE_USER_INFORMATIONS = 'UPDATE_USER_INFORMATIONS';
+export const UPDATE_USER_PHONE_NUMBER = 'UPDATE_USER_PHONE_NUMBER';
+export const UPDATE_USER_MOBILE_NUMBER = 'UPDATE_USER_MOBILE_NUMBER';
+
+export function actionGetUserInformations({
+  id, firstname, lastname, avatar,
+}) {
   return {
-    type: SET_USER_ID, payload: id,
+    type: GET_USER_INFORMATIONS,
+    payload: {
+      id, firstname, lastname, avatar,
+    },
   };
 }
 
-export function actionSetUserFirstname(firstname) {
+export function actionUpdateUserInput(key, value) {
   return {
-    type: SET_USER_FIRSTNAME, payload: firstname,
+    type: UPDATE_USER_INPUT, payload: { key, value },
   };
 }
 
-export function actionSetUserLastname(lastname) {
+export function actionUpdateUserInformations() {
   return {
-    type: SET_USER_LASTNAME, payload: lastname,
+    type: UPDATE_USER_INFORMATIONS,
   };
 }
 
-export function actionSetUserAvatar(avatar) {
+export function actionResetUserPassword() {
   return {
-    type: SET_USER_AVATAR, payload: avatar,
+    type: RESET_USER_PASSWORD,
+  };
+}
+
+export function actionGetUserLabel(label) {
+  return {
+    type: GET_USER_LABEL, payload: label,
+  };
+}
+
+export function actionGetUserPhoneNumber(phoneNumber) {
+  return {
+    type: GET_USER_PHONENUMBER, payload: phoneNumber,
+  };
+}
+
+export function actionGetUserMobileNumber(mobileNumber) {
+  return {
+    type: GET_USER_MOBILENUMBER, payload: mobileNumber,
   };
 }
 
@@ -38,26 +66,32 @@ export function actionSetUserIsAdmin(boolean) {
   };
 }
 
-export function actionSetUserQualification(qualification) {
+export function actionGetUserPlanning() {
   return {
-    type: SET_USER_QUALIFICATION, payload: qualification,
+    type: GET_USER_PLANNING,
   };
 }
 
-export function actionSetUserLabel(label) {
+export function actionGetUserAssignments(assignments) {
   return {
-    type: SET_USER_LABEL, payload: label,
-  };
-}
-
-export function actionSetUserAssignements(assignements) {
-  return {
-    type: SET_USER_ASSIGNEMENTS, payload: assignements,
+    type: GET_USER_ASSIGNMENTS, payload: assignments,
   };
 }
 
 export function actionSetUserLogout() {
   return {
     type: SET_USER_LOGOUT,
+  };
+}
+
+export function actionUpdateUserPhoneNumber(phoneNumber) {
+  return {
+    type: UPDATE_USER_PHONE_NUMBER, payload: phoneNumber,
+  };
+}
+
+export function actionUpdateUserMobileNumber(mobileNumber) {
+  return {
+    type: UPDATE_USER_MOBILE_NUMBER, payload: mobileNumber,
   };
 }

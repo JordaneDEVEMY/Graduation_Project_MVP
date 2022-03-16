@@ -1,12 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import {
-  Box, Button, List, ListItem, ListItemButton, ListItemIcon, Link, ListItemText, Typography, Avatar,
+  Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText,
 } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
@@ -28,24 +25,13 @@ const Aside = styled('aside')(({ theme }) => ({
   },
 }));
 
-function Sidebar({
-  userId,
-  handleLogout,
-  userFirstname,
-  userLastname,
-  userAvatar,
-
-}) {
+function Sidebar() {
   const [open, setOpen] = React.useState(true);
   const theme = useTheme();
+  const { weekSlug } = useParams();
 
   const handleDrawer = () => {
     setOpen((oldOpen) => !oldOpen);
-  };
-
-  const onLogoutClick = (event) => {
-    event.preventDefault();
-    handleLogout();
   };
 
   return (
@@ -89,59 +75,13 @@ function Sidebar({
         </Box>
       </Button>
 
-      <Box
-        component="div"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          margin: theme.spacing(2),
-          paddingBottom: theme.spacing(2),
-          color: theme.palette.text.primary,
-          borderBottom: 1,
-          borderColor: 'divider',
-        }}
-      >
-        <Avatar
-          alt={`Avatar de ${userFirstname} ${userLastname}`}
-          src={userAvatar}
-          sx={{ width: 56, height: 56 }}
-        />
-        <Typography variant="h6">
-          {`${userFirstname} ${userLastname}`}
-        </Typography>
-
-        <Typography
-          variant="p"
-          sx={{
-            color: theme.palette.text.disabled,
-          }}
-        >
-          <small>
-            <Link
-              component={RouterLink}
-              to={`/user/${userId}/profil`}
-            >
-              Mon profil
-            </Link>
-            {' | '}
-            <Link
-              sx={{ width: 56, height: 56 }}
-              onClick={onLogoutClick}
-            >
-              Se déconnecter
-            </Link>
-
-          </small>
-        </Typography>
-      </Box>
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem
             disablePadding
             button
             component={RouterLink}
-            to="/admins/planning"
+            to={`/admins/planning${weekSlug ? `/${weekSlug}` : ''}`}
           >
             <ListItemButton>
               <ListItemIcon>
@@ -157,17 +97,15 @@ function Sidebar({
             disablePadding
             button
             component={RouterLink}
-            to="/admins/staff"
+            to="/admins/employees"
           >
-            <ListItemButton
-              disabled
-            >
+            <ListItemButton>
               <ListItemIcon>
                 <AssignmentIndIcon />
               </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
-                primary="Personnel"
+                primary="Employés"
               />
             </ListItemButton>
           </ListItem>
@@ -177,9 +115,7 @@ function Sidebar({
             component={RouterLink}
             to="/admins/sites"
           >
-            <ListItemButton
-              disabled
-            >
+            <ListItemButton>
               <ListItemIcon>
                 <BusinessIcon />
               </ListItemIcon>
@@ -193,17 +129,15 @@ function Sidebar({
             disablePadding
             button
             component={RouterLink}
-            to="/admins/customers"
+            to="/admins/companies"
           >
-            <ListItemButton
-              disabled
-            >
+            <ListItemButton>
               <ListItemIcon>
                 <SupervisorAccountIcon />
               </ListItemIcon>
               <ListItemText
                 sx={{ color: theme.palette.text.primary }}
-                primary="Clients"
+                primary="Entreprises"
               />
             </ListItemButton>
           </ListItem>
@@ -214,11 +148,6 @@ function Sidebar({
 }
 
 Sidebar.propTypes = {
-  userId: PropTypes.number.isRequired,
-  handleLogout: PropTypes.func.isRequired,
-  userFirstname: PropTypes.string.isRequired,
-  userLastname: PropTypes.string.isRequired,
-  userAvatar: PropTypes.string.isRequired,
 };
 
 export default React.memo(Sidebar);

@@ -17,6 +17,13 @@ const client = require('../../config/database');
  * @property {string} password - Password used for connection
  */
 
+/**
+ * @typedef {object} AuthProfilUpdate
+ * @property {string} password - Password to change
+ * @property {string} phone_number - Phone number to change
+ * @property {string} mobile_number - Mobile number to change
+ */
+
 module.exports = {
 
   /**
@@ -37,6 +44,33 @@ module.exports = {
     FROM "employee" WHERE "email" = $1 AND "password" = $2
     `,
       [inputsAuth.email, inputsAuth.password],
+    );
+
+    if (result.rowCount === 0) {
+      return null;
+    }
+
+    return result.rows[0];
+  },
+
+  /**
+   * Find one user
+   * @param {InputsAuth} inputsAuth - Email for authentication
+   * @returns {AuthUser|null} - Return User or null if no user found
+   */
+  async findForgotOne(email) {
+    const result = await client.query(
+      `
+    SELECT 
+      "id", 
+      "firstname", 
+      "lastname", 
+      "email", 
+      "avatar",
+      "role_application" 
+    FROM "employee" WHERE "email" = $1
+    `,
+      [email],
     );
 
     if (result.rowCount === 0) {

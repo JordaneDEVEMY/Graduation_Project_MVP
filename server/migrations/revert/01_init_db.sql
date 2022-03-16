@@ -2,7 +2,19 @@
 
 BEGIN;
 
-DROP TABLE 
-"employee_qualification", "absence", "employee", "assignment", "employee_contract", "site", "contact", "company"; 
+
+DROP TABLE
+"company", 
+"contact", 
+"site", 
+"employee_contract", 
+"assignment", 
+"employee", 
+"absence",
+"employee_qualification"; 
+
+DROP DOMAIN num_ss_fr;
+DROP DOMAIN posint;
+DROP DOMAIN check_age;
 
 COMMIT;

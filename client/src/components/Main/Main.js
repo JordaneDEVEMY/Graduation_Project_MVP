@@ -13,10 +13,14 @@ function Main(props) {
     <Box
       component="main"
       sx={{
-        flexGrow: 1,
-        boxSizing: 'border-box',
         [theme.breakpoints.up('md')]: {
           padding: theme.spacing(3, 6),
+          flexGrow: 1,
+          '.opened ~ &': {
+            maxWidth: 'calc(100vw - 240px)',
+          },
+          boxSizing: 'border-box',
+          overflow: 'hidden',
         },
         [theme.breakpoints.down('md')]: {
           width: '100%',

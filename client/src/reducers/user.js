@@ -5,37 +5,67 @@ const initialState = {
   id: 0,
   firstname: '',
   lastname: '',
+  password: '',
+  confirmPassword: '',
   avatar: '',
+  phone_number: '',
+  mobile_number: '',
+  qualification_label: '',
   isAdmin: false,
-  qualificationId: 0,
-  label: '',
-  assignements: [],
+  assignments: [],
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case actions.SET_USER_ID:
+    case actions.GET_USER_INFORMATIONS:
       return {
         ...state,
-        id: action.payload,
+        id: action.payload.id,
+        firstname: action.payload.firstname,
+        lastname: action.payload.lastname,
+        avatar: action.payload.avatar,
       };
 
-    case actions.SET_USER_FIRSTNAME:
+    case actions.UPDATE_USER_INPUT:
       return {
         ...state,
-        firstname: action.payload,
+        [action.payload.key]: action.payload.value,
       };
 
-    case actions.SET_USER_LASTNAME:
+    case actions.UPDATE_USER_PHONE_NUMBER:
       return {
         ...state,
-        lastname: action.payload,
+        phone_number: action.payload,
       };
 
-    case actions.SET_USER_AVATAR:
+    case actions.UPDATE_USER_MOBILE_NUMBER:
       return {
         ...state,
-        avatar: action.payload,
+        mobile_numbermobileNumber: action.payload,
+      };
+
+    case actions.RESET_USER_PASSWORD:
+      return {
+        ...state,
+        password: initialState.password,
+      };
+
+    case actions.GET_USER_LABEL:
+      return {
+        ...state,
+        qualification_label: action.payload,
+      };
+
+    case actions.GET_USER_PHONENUMBER:
+      return {
+        ...state,
+        phone_number: action.payload,
+      };
+
+    case actions.GET_USER_MOBILENUMBER:
+      return {
+        ...state,
+        mobile_number: action.payload,
       };
 
     case actions.SET_USER_ISADMIN:
@@ -44,22 +74,10 @@ function reducer(state = initialState, action) {
         isAdmin: action.payload,
       };
 
-    case actions.SET_USER_QUALIFICATION:
+    case actions.GET_USER_ASSIGNMENTS:
       return {
         ...state,
-        qualificationId: action.payload,
-      };
-
-    case actions.SET_USER_LABEL:
-      return {
-        ...state,
-        label: action.payload,
-      };
-
-    case actions.SET_USER_ASSIGNEMENTS:
-      return {
-        ...state,
-        assignements: action.payload,
+        assignments: action.payload,
       };
 
     case actions.SET_USER_LOGOUT:
@@ -68,11 +86,14 @@ function reducer(state = initialState, action) {
         id: initialState.id,
         firstname: initialState.firstname,
         lastname: initialState.lastname,
+        password: initialState.password,
+        confirmPassword: initialState.confirmPassword,
         avatar: initialState.avatar,
+        phone_number: initialState.phone_number,
+        mobile_number: initialState.mobile_number,
         isAdmin: initialState.isAdmin,
-        qualificationId: initialState.qualificationId,
-        label: initialState.label,
-        assignements: initialState.assignements,
+        qualification_label: initialState.qualification_label,
+        assignments: initialState.assignments,
       };
 
     default:

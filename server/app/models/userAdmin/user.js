@@ -1,20 +1,25 @@
+/* eslint-disable max-len */
 const client = require('../../config/database');
 const { ApiError } = require('../../helpers/errorHandler');
 
 /**
  * @typedef {object} User
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {string} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {number} employee_qualification_id - FK of User qualification
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
@@ -23,54 +28,81 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} lastname - User lastname
  * @property {string} email - User email
  * @property {string} password - User password
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {string} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {string} qualification_label - FK of User qualification label
+ */
+
+/**
+ * @typedef {object} UserToUpdate
+ * @property {string} firstname - User firstname
+ * @property {string} lastname - User lastname
+ * @property {string} email - User email
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
+ * @property {string} address - User address
+ * @property {number} zip_code - User zip code
+ * @property {string} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
+ * @property {string} starting_date - User starting date
+ * @property {string} avatar - User avatar
+ * @property {string} fonction - User fonction
+ * @property {string} role_application - User role in web application
+ * @property {string} qualification_label - FK of User qualification label
  */
 
 /**
  * @typedef {object} UserCreate
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
  * @property {string} password - User password
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {string} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
- * @property {number} employee_qualification_id - FK of User qualification (will be change with label)
+ * @property {number} employee_qualification_id - FK of User qualification
+ * @property {string} qualification_label - FK of User qualification label
  * @property {string} created_at - timestamp for the create in DB
  */
 
 /**
  * @typedef {object} UserUpdate
+ * @property {number} id - User Pk in database
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
- * @property {number} social_security_number - User social security number
- * @property {string} date_of_birth - User date of birth
+ * @property {string} phone_number - User phone number
+ * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
  * @property {number} zip_code - User zip code
+ * @property {string} social_security_number - User social security number
+ * @property {string} date_of_birth - User date of birth
  * @property {string} starting_date - User starting date
  * @property {string} avatar - User avatar
- * @property {string} function - User function
+ * @property {string} fonction - User fonction
  * @property {string} role_application - User role in web application
- * @property {string} employee_qualification_id - FK of User qualification (will be change with label)
- * @property {number} updated_at - timestamp for the update in DB
+ * @property {string} employee_qualification_id - FK of User qualification
+ * @property {string} qualification_label - FK of User qualification label
+ * @property {string} updated_at - timestamp for the update in DB
  */
 
 /**
- * Deleted user response
  * @typedef {object} UserDelete
  * @property {boolean} isDeleted - Status
  * @property {number} statusCode - HTTP Status code
@@ -79,31 +111,74 @@ const { ApiError } = require('../../helpers/errorHandler');
 
 module.exports = {
   /**
+   * Find all users
+   * @returns {User|undefined} - response of all users or undefined if no users found
+   */
+  async findAll() {
+    const result = await client.query(`
+      SELECT
+        "employee"."id",
+        "employee"."firstname",
+        "employee"."lastname",
+        "employee"."email",
+        "employee"."phone_number", 
+        "employee"."mobile_number",
+        "employee"."address",
+        "employee"."zip_code",
+        "employee"."date_of_birth",
+        "employee"."social_security_number",
+        "employee"."starting_date",
+        "employee"."fonction",
+        "employee"."avatar",
+        "employee"."role_application",
+        "employee"."employee_qualification_id",
+        "employee_qualification"."label" AS qualification_label,
+        "employee"."created_at"
+      FROM
+        "employee"
+      JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
+      ORDER BY "employee"."id";
+    `);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Aucun utilisateur trouvé');
+    }
+
+    return result.rows;
+  },
+
+  /**
    * Find an User by his id
-   * @param {number} userId - User's ID
+   * @param {number} userId - User ID
    * @returns {User|undefined} - REST response of an user or undefined if no user found
    */
   async findByPk(userId) {
     const result = await client.query(
       `
-      SELECT 
-        "employee"."id", 
-        "employee"."firstname", 
-        "employee"."lastname", 
-        "employee"."email", 
-        "employee"."social_security_number", 
-        "employee"."date_of_birth", 
-        "employee"."address", 
-        "employee"."zip_code", 
-        "employee"."starting_date", 
-        "employee"."avatar", 
-        "employee"."function", 
-        "employee"."role_application", 
-        "employee_qualification"."label" AS qualification_label
-      FROM "employee"
-      LEFT JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
-      WHERE "employee"."id" = $1;
+      SELECT * FROM get_user_by_admin
+      WHERE id = $1;
       `,
+      [userId],
+    );
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+    }
+
+    return result.rows[0];
+  },
+
+  /**
+   * Find an User by his id
+   * @param {number} userId - User ID
+   * @returns {UserToCreate|undefined} - REST response of an user or undefined if no user found
+   */
+  async findByPkReturnPassword(userId) {
+    const result = await client.query(
+      `
+        SELECT * FROM "employee"
+        WHERE id = $1;
+        `,
       [userId],
     );
 
@@ -117,9 +192,15 @@ module.exports = {
   /**
    * Insert User
    * @param {object} user - Body request with email and password required
-   * @returns {UserCreate|ApiError} - Return the new user or ApiError if user not found
+   * @returns {UserCreate} - Return the new user
    */
   async insert(user) {
+    const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
+
+    if (qualificationId.rowCount === 0) {
+      throw new ApiError(400, 'Cette qualification n\'existe pas');
+    }
+
     const userToCreate = await client.query(
       `
         INSERT INTO "employee" 
@@ -128,57 +209,66 @@ module.exports = {
           "lastname",
           "email",
           "password",
-          "social_security_number",
-          "date_of_birth",
+          "phone_number",
+          "mobile_number",
           "address",
           "zip_code",
+          "date_of_birth",
+          "social_security_number",
           "starting_date",
+          "fonction",
           "avatar",
-          "function",
           "role_application",
           "employee_qualification_id"
         )
         VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15
         )
         RETURNING 
-          "firstname",
-          "lastname",
-          "email",
-          "password",
-          "social_security_number",
-          "date_of_birth",
-          "address",
-          "zip_code",
-          "starting_date",
-          "avatar",
-          "function",
-          "role_application",
-          "employee_qualification_id",
-          "created_at";`,
+        "id",
+        "firstname",
+        "lastname",
+        "email",
+        "password",
+        "phone_number",
+        "mobile_number",
+        "address",
+        "zip_code",
+        "date_of_birth",
+        "social_security_number",
+        "starting_date",
+        "fonction",
+        "avatar",
+        "role_application",
+        "employee_qualification_id",
+        "created_at";`,
       [
         user.firstname,
         user.lastname,
         user.email,
         user.password,
-        user.social_security_number,
-        user.date_of_birth,
+        user.phone_number,
+        user.mobile_number,
         user.address,
         user.zip_code,
+        user.date_of_birth,
+        user.social_security_number,
         user.starting_date,
+        user.fonction,
         user.avatar,
-        user.function,
         user.role_application,
-        user.employee_qualification_id,
+        qualificationId.rows[0].id,
       ],
     );
+
+    Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });
 
     return userToCreate.rows[0];
   },
 
   /**
    * Update User
-   * @param {number} userId - User's ID
+   * @param {number} userId - User ID
    * @param {object} user - Body request with email and password required
    * @returns {UserUpdate|ApiError} - Return updated user or ApiError if user not found
    */
@@ -189,6 +279,12 @@ module.exports = {
       throw new ApiError(400, 'Cet utilisateur n\'existe pas');
     }
 
+    const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
+
+    if (qualificationId.rowCount === 0) {
+      throw new ApiError(400, 'Cette qualification n\'existe pas');
+    }
+
     const userToSave = await client.query(
       `
       UPDATE "employee" 
@@ -196,28 +292,32 @@ module.exports = {
         "firstname" = $2,
         "lastname" = $3,
         "email" = $4,
-        "social_security_number" = $5,
-        "date_of_birth" = $6,
+        "phone_number" = $5,
+        "mobile_number" = $6,
         "address" = $7,
         "zip_code" = $8,
-        "starting_date" = $9,
-        "avatar" = $10,
-        "function" = $11,
-        "role_application" = $12,
-        "employee_qualification_id" = $13,
+        "date_of_birth" = $9,
+        "social_security_number" = $10,
+        "starting_date" = $11,
+        "fonction" = $12,
+        "avatar" = $13,
+        "role_application" = $14,
+        "employee_qualification_id" = $15,
         "updated_at" = NOW()
       WHERE "id"= $1
       RETURNING 
         "firstname",
         "lastname",
         "email",
+        "phone_number",
+        "mobile_number",
         "social_security_number",
         "date_of_birth",
         "address",
         "zip_code",
         "starting_date",
         "avatar",
-        "function",
+        "fonction",
         "role_application",
         "employee_qualification_id",
         "updated_at";`,
@@ -226,19 +326,23 @@ module.exports = {
         user.firstname,
         user.lastname,
         user.email,
-        user.social_security_number,
-        user.date_of_birth,
+        user.phone_number,
+        user.mobile_number,
         user.address,
         user.zip_code,
+        user.date_of_birth,
+        user.social_security_number,
         user.starting_date,
+        user.fonction,
         user.avatar,
-        user.function,
         user.role_application,
-        user.employee_qualification_id,
+        qualificationId.rows[0].id,
       ],
     );
 
-    // ? Standby Code for update function in SQL
+    Object.assign(userToSave.rows[0], { qualification_label: qualificationId.rows[0].label });
+
+    // ? Standby Code for update fonction in SQL
     // const userToUpdate = result.rows[0];
     // const userUpdated = { ...userToUpdate, ...user };
 
@@ -249,9 +353,8 @@ module.exports = {
 
   /**
    * Remove User
-   * @param {number} userId - User's ID
-   * @param {object} user - Body request with email and password required
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @param {number} userId - User ID
+   * @returns {boolean|ApiError} - Return boolean or ApiError if user not found
    */
   async delete(userId) {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1;', [userId]);
@@ -268,8 +371,7 @@ module.exports = {
   /**
    * Search if SSN already exist in db
    * @param {number} userSsn - User Ssn to find
-   * @param {object} user - Body request
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @returns {boolean|ApiError} - Return boolean or ApiError if userSsn not found
    */
   async getSsn(userSsn) {
     const result = await client.query('SELECT social_security_number FROM "employee" WHERE social_security_number = $1', [userSsn]);
@@ -283,9 +385,8 @@ module.exports = {
 
   /**
    * Search if SSN already exist in db
-   * @param {number} userSsn - User Email to find
-   * @param {object} user - Body request
-   * @returns {boolean|ApiError} - Return updated user or ApiError if user not found
+   * @param {number} userEmail - User Email to find
+   * @returns {boolean|ApiError} - Return boolean or ApiError if userEmail not found
    */
   async getEmail(userEmail) {
     const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);
@@ -295,5 +396,30 @@ module.exports = {
     }
 
     return !result.rowCount;
+  },
+
+  async updatePassword(userId, password) {
+    const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
+
+    if (result.rowCount === 0) {
+      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+    }
+
+    // TODO: SPRINT 3 - Modifier le returning
+    const userToUpdate = await client.query(
+      `
+      UPDATE "employee" 
+      SET 
+        "password" = $2,
+        "updated_at" = NOW()
+      WHERE "id"= $1
+      RETURNING *;`,
+      [
+        userId,
+        password,
+      ],
+    );
+
+    return userToUpdate.rows[0];
   },
 };

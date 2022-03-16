@@ -1,19 +1,18 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import TextField from '@mui/material/TextField';
-import Email from '@mui/icons-material/Email';
+import {
+  Grid, Card, CardContent, CardActions, Link, Typography, Button, IconButton, TextField, InputAdornment, Alert,
+} from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+
+import EmailIcon from '@mui/icons-material/Email';
 import KeyIcon from '@mui/icons-material/Key';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './login.scss';
 
 function Login({
@@ -21,9 +20,11 @@ function Login({
   passwordValue,
   changeField,
   handleLogin,
+  isLogged,
 }) {
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const theme = useTheme();
 
@@ -44,6 +45,9 @@ function Login({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin();
+    if (!isLogged) {
+      setTimeout(setShowAlert, 500, true);
+    }
   };
 
   /**
@@ -58,18 +62,29 @@ function Login({
   return (
     <Card
       component="form"
-      className="loginForm"
       onSubmit={handleSubmit}
+      elevation={5}
       sx={{
         textAlign: 'center',
       }}
     >
-      <h2 className="login-title">Connexion</h2>
+      <Typography
+        component="p"
+        variant="h2"
+        sx={{
+          color: theme.palette.text.secondary,
+          mb: 0,
+          p: theme.spacing(2),
+        }}
+      >
+        Connexion
+      </Typography>
       <CardContent>
-        <Grid container spacing={2}>
+        <Grid container rowSpacing={2}>
           <Grid item xs={12}>
             <TextField
               fullWidth
+              autoComplete="on"
               required
               type="email"
               label="email"
@@ -78,7 +93,7 @@ function Login({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email />
+                    <EmailIcon />
                   </InputAdornment>
                 ),
               }}
@@ -87,6 +102,7 @@ function Login({
           <Grid item xs={12}>
             <TextField
               fullWidth
+              autoComplete="on"
               required
               type={passwordVisibility ? 'text' : 'password'}
               label="password"
@@ -104,7 +120,7 @@ function Login({
                       aria-label="toggle password visibility"
                       onClick={() => setPasswordVisibility((x) => !x)}
                     >
-                      {passwordVisibility ? <VisibilityOff /> : <Visibility />}
+                      {passwordVisibility ? <VisibilityOffIcon /> : <VisibilityIcon />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -113,30 +129,33 @@ function Login({
           </Grid>
         </Grid>
       </CardContent>
-      <Box
+      {showAlert && (
+      <Alert
         sx={{
-          display: 'flex',
-          mb: theme.spacing(1),
-          justifyContent: 'center',
+          fontSize: '.9em', mx: theme.spacing(2),
         }}
+        severity="error"
       >
-        <CardActions>
-          <Button
-            type="submit"
-            size="small"
-            variant="contained"
-            disabled={isButtonDisable}
-          >
-            Valider
-          </Button>
-          <Button
-            size="small"
-            variant="text"
-          >
-            Mot de passe oublié
-          </Button>
-        </CardActions>
-      </Box>
+        Attention, vos identifiants sont incorrects !
+      </Alert>
+      )}
+      <CardActions sx={{ p: theme.spacing(2) }}>
+        <Button
+          type="submit"
+          size="large"
+          variant="contained"
+          disabled={isButtonDisable}
+        >
+          Valider
+        </Button>
+        <Link
+          component={RouterLink}
+          to="/forgot-password"
+          sx={{ ml: 'auto', cursor: 'pointer' }}
+        >
+          Mot de passe oublié
+        </Link>
+      </CardActions>
     </Card>
   );
 }
@@ -146,6 +165,7 @@ Login.propTypes = {
   passwordValue: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 Login.defaultProps = {
 };

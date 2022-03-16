@@ -1,30 +1,39 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 // import { useTheme } from '@mui/material/styles';
 import {
   Autocomplete, TextField, InputLabel, Select, MenuItem, Grid, FormControl,
 } from '@mui/material';
-import PropTypes from 'prop-types';
 
 import './searchautocomplete.scss';
 
 function SearchAutocomplete({
-  sites,
-  entreprises,
+  allEmployees,
+  allSites,
+  allCompanies,
 }) {
   // const theme = useTheme();
   const [searchIn, setSearchIn] = useState('');
   const [datas, setDatas] = useState([]);
+  const [dataIsEmployees, setDataIsEmployees] = useState(false);
   const [autocompleteValue, setAutocompleteValue] = useState(null);
 
   useEffect(() => {
+    if (searchIn === 'employees') {
+      setDatas(allEmployees);
+      setDataIsEmployees(true);
+      setAutocompleteValue(null);
+    }
     if (searchIn === 'sites') {
-      setDatas(sites);
+      setDatas(allSites);
+      setDataIsEmployees(false);
       setAutocompleteValue(null);
     }
     if (searchIn === 'entreprises') {
-      setDatas(entreprises);
+      setDatas(allCompanies);
+      setDataIsEmployees(false);
       setAutocompleteValue(null);
     }
   }, [searchIn]);
@@ -46,7 +55,12 @@ function SearchAutocomplete({
       <Grid item xs={12} sm={6}>
         <Autocomplete
           size="small"
-          getOptionLabel={(datas) => `${datas.title}`}
+          getOptionLabel={(datas) => {
+            if (dataIsEmployees) {
+              return `${datas.firstname} ${datas.lastname}`;
+            }
+            return `${datas.name}`;
+          }}
           options={datas}
           sx={{ width: '100%' }}
           renderInput={(params) => (
@@ -81,15 +95,14 @@ function SearchAutocomplete({
 }
 
 SearchAutocomplete.propTypes = {
-  sites: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-    }).isRequired,
+  allEmployees: PropTypes.arrayOf(
+    PropTypes.shape().isRequired,
   ).isRequired,
-  entreprises: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-    }).isRequired,
+  allSites: PropTypes.arrayOf(
+    PropTypes.shape().isRequired,
+  ).isRequired,
+  allCompanies: PropTypes.arrayOf(
+    PropTypes.shape().isRequired,
   ).isRequired,
 };
 SearchAutocomplete.defaultProps = {

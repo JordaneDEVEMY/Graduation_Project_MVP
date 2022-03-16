@@ -3,38 +3,42 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import entreprises from '../../dataTest/entreprises';
-import sites from '../../dataTest/sites';
 import './searchcontainer.scss';
-import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete';
+import SearchAutocompleteContainer from '../../containers/SearchAutocompleteContainer';
 import SelectWeek from '../SelectWeek/SelectWeek';
 
 function SearchContainer({
+  date,
   isAdmin,
+  userId,
 }) {
   const theme = useTheme();
-
-  console.log(`uuuu${theme.typography.fontSize}`);
 
   return (
     <Box
       sx={{
         maxWidth: '600px',
-        margin: `0 auto ${theme.spacing(2)}`,
+        margin: `0 auto ${theme.spacing(6)}`,
         padding: theme.spacing(1),
         background: theme.palette.background.component,
       }}
     >
-      <SelectWeek isAdmin={isAdmin} />
+      <SelectWeek date={date} isAdmin={isAdmin} userId={userId} />
       {isAdmin && (
-        <SearchAutocomplete sites={sites} entreprises={entreprises} />
+        <SearchAutocompleteContainer />
       )}
     </Box>
   );
 }
 
 SearchContainer.propTypes = {
+  date: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  userId: PropTypes.number,
+};
+
+SearchContainer.defaultProps = {
+  userId: undefined,
 };
 
 export default React.memo(SearchContainer);

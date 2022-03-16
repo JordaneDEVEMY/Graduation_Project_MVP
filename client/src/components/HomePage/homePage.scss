@@ -1,12 +1,13 @@
 .encart {
   &--img {
-    width: 15em;
-    margin-top: 2rem;
+    min-width: 40%;
+    max-width: 25em;
   }
 }
 
 .team {
   &--img {
-    width: 100%;
+    width: 60%;
+    border-radius: 50%;
   }
 }

@@ -21,6 +21,12 @@ function reducer(state = initialState, action) {
         isLogged: action.payload,
       };
 
+    case actions.RESET_PASSWORD:
+      return {
+        ...state,
+        password: initialState.password,
+      };
+
     case actions.LOGOUT:
       return {
         ...state,

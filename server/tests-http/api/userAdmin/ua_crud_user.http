@@ -8,6 +8,9 @@
 ### 404
 GET {{ endpoint }}/azertyuiop
 
+### Get all users
+GET {{ endpoint }}
+
 ### Get one user
 GET {{ endpoint }}/1
 
@@ -32,7 +35,7 @@ content-type: application/json
   "zip_code": 0,
   "starting_date": "2018-07-10",
   "avatar": "string",
-  "function": "string",
+  "fonction": "string",
   "role_application": "string",
   "employee_qualification_id": 1
 }
@@ -51,7 +54,7 @@ content-type: application/json
   "address": "string",
   "zip_code": 0,
   "avatar": "string",
-  "function": "string",
+  "fonction": "string",
   "role_application": "string",
   "employee_qualification_id": 1
 }
@@ -71,7 +74,7 @@ content-type: application/json
   "zip_code": 0,
   "starting_date": "2018-07-10",
   "avatar": "string",
-  "function": "string",
+  "fonction": "string",
   "role_application": "string",
   "employee_qualification_id": 1
 }
@@ -91,17 +94,16 @@ content-type: application/json
   "zip_code": 0,
   "starting_date": "20-07-10",
   "avatar": "string",
-  "function": "string",
+  "fonction": "string",
   "role_application": "string",
   "employee_qualification_id": 1
 }
 
 ### Patch an user 
-PATCH {{ endpoint }}/2
+PATCH {{ endpoint }}/69
 content-type: application/json
 
 {
-  "id": 2,
   "firstname": "test",
   "lastname": "test",
   "email": "test@test.com",
@@ -111,27 +113,28 @@ content-type: application/json
   "zip_code": 34000,
   "starting_date": "2022-03-01T23:00:00.000Z",
   "avatar": "/oups/69.jps",
-  "function": "Operator",
+  "fonction": "Operator",
   "role_application": "user",
   "employee_qualification_id": 1
 }
 
-### Patch an user with a bad email
-PATCH {{ endpoint }}/1/profil
-content-type: application/json
-
-{
-    "email": "jaipasmislearobase",
-    "password": "TESTDEVANTLESREACT"
-}
-
 ### Patch an inexistant user
-PATCH {{ endpoint }}/999/profil
+PATCH {{ endpoint }}/999
 content-type: application/json
 
 {
-    "email": "j.andy@protonmail.com",
-    "password": "KPP18YZC3OE"
+  "firstname": "test",
+  "lastname": "test",
+  "email": "test@test.com",
+  "social_security_number": "22473299336969",
+  "date_of_birth": "2018-06-22T22:00:00.000Z",
+  "address": "464-6625 Tuuuuuuurpis Av.",
+  "zip_code": 34000,
+  "starting_date": "2022-03-01T23:00:00.000Z",
+  "avatar": "/oups/69.jps",
+  "fonction": "Operator",
+  "role_application": "user",
+  "employee_qualification_id": 1
 }
 
 ### Patch an inexistant user with id as a string
@@ -139,9 +142,22 @@ PATCH {{ endpoint }}/tartempion/profil
 content-type: application/json
 
 {
-    "email": "j.andy@protonmail.com",
-    "password": "KPP18YZC3OE"
+  "firstname": "test",
+  "lastname": "test",
+  "email": "test@test.com",
+  "social_security_number": "22473299336969",
+  "date_of_birth": "2018-06-22T22:00:00.000Z",
+  "address": "464-6625 Tuuuuuuurpis Av.",
+  "zip_code": 34000,
+  "starting_date": "2022-03-01T23:00:00.000Z",
+  "avatar": "/oups/69.jps",
+  "fonction": "Operator",
+  "role_application": "user",
+  "employee_qualification_id": 1
 }
 
 ### Delete an user
 DELETE {{ endpoint }}/99
+
+### Delete an inexistant user
+DELETE {{ endpoint }}/999

@@ -7,16 +7,19 @@ function LoginContainer() {
   const dispatch = useDispatch();
 
   const emailValue = useSelector((state) => state.login.email);
+  const isLogged = useSelector((state) => state.login.isLogged);
   const passwordValue = useSelector((state) => state.login.password);
 
   const changeField = (name, value) => {
     dispatch(actionUpdateLoginInput(name, value));
   };
+
   const handleLogin = () => {
     dispatch(actionSubmitLogin());
   };
   return (
     <Login
+      isLogged={isLogged}
       emailValue={emailValue}
       passwordValue={passwordValue}
       changeField={changeField}
@@ -25,6 +28,4 @@ function LoginContainer() {
   );
 }
 
-LoginContainer.propTypes = {};
-LoginContainer.defaultProps = {};
-export default React.memo(LoginContainer);
+export default React.memo(React.forwardRef(LoginContainer));
