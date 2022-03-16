@@ -1,5 +1,5 @@
 const express = require('express');
-// ? const cache = require('../../../helpers/redisCache');
+// ? NOT IN MVP - const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const companySchema = require('../../../validation/userAdmin/company');
@@ -12,7 +12,7 @@ const router = express.Router();
 
 router
   .route('/')
-/**
+  /**
    * GET /api/admin/company
    * @summary Get all companies
    * @tags 5.UserAdmin - Company CRUD section
@@ -58,7 +58,7 @@ router
    */
   .patch(validate('body', companySchema), controllerHandler(userAdminCompanyController.update))
 
-/**
+  /**
    * DELETE /api/admin/company/{id}
    * @summary Remove one company
    * @tags 5.UserAdmin - Company CRUD section

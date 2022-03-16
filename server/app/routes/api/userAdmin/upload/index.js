@@ -1,5 +1,4 @@
 const express = require('express');
-
 const multer = require('multer');
 
 const uploadController = require('../../../../controllers/api/userAdmin/uploadController');
@@ -22,14 +21,15 @@ const upload = multer({ storage });
 router
   .route('/avatar')
   // ! .get only for back-end dev devlopment = No docs on swagger
-  .get((req, res) => {
+  .get((_, res) => {
     res.render('upload-avatar', { title: "O'lleks - API" });
   })
+
   /**
    * POST /api/admin/upload/avatar
    * @summary Upload an avatar inside the server
    * @tags 9.UserAdmin - Upload Section
-   * @param {AvatarToUpload} request.body.required - All for upload an avatar
+   * @param {AvatarToUpload} request.body.required - POST request for upload an avatar
    * @return {UploadReturn} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
@@ -37,7 +37,7 @@ router
   .post(upload.single('image'), controllerHandler(uploadController.uploadAvatar));
 
 router.use(() => {
-  throw new ApiError(404, 'Page introuvable');
+  throw new ApiError(404, '404 NOT FOUND');
 });
 
 module.exports = router;

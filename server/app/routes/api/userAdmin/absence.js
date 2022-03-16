@@ -1,8 +1,5 @@
 const express = require('express');
-// ? const cache = require('../../../helpers/redisCache');
-
-// const validate = require('../../../validation');
-// const absenceSchema = require('../../../validation/userAdmin/qualification');
+// ? NOT IN MVP - const cache = require('../../../helpers/redisCache');
 
 const { userAdminAbsenceController } = require('../../../controllers');
 

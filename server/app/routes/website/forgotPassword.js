@@ -11,7 +11,7 @@ const router = express.Router();
 router
   .route('/')
   // ! .get only for back-end dev devlopment = No docs on swagger
-  .get((req, res) => {
+  .get((_, res) => {
     res.render('forgot-password', { title: "O'lleks - API" });
   })
 
