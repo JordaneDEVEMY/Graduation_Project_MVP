@@ -113,18 +113,36 @@ const planningFunctions = {
    * @returns {object} Absences Site containing an assignments list.
    */
   adminPlanningToAbsences: (absences) => {
-    const result = [];
+    // set absences as a company
+    const company = {
+      id: 0,
+      name: 'Absences',
+      sites: [],
+    };
 
-    absences.forEach((absence) => {
-      const { assignment, id, reason } = absence;
-      assignment.absence = {
-        id,
-        reason,
-      };
-      result.push(assignment);
+    // set reasons as company sites
+    const reasonsList = [];
+    let index = 0;
+    absences.forEach(({ reason }) => {
+      if (!reasonsList.includes(reason)) {
+        company.sites.push({
+          id: index,
+          name: reason,
+          assignments: [],
+        });
+        reasonsList.push(reason);
+        index += 1;
+      }
     });
 
-    return result;
+    // add absences into reason site
+    company.sites.map((site) => {
+      const { name } = site;
+      site.assignments = absences.filter(({ reason }) => reason === name);
+      return site;
+    });
+
+    return company;
   },
 
   /**
@@ -132,8 +150,12 @@ const planningFunctions = {
    * @param {object} planning - Planning list from API request
    * @returns {array} Companies list.
    */
-  adminPlanningToCompanies: (planning) => {
+  adminPlanningToCompanies: (planning, absences) => {
     const companies = [];
+
+    // Add absences as a company
+    const absencesCompany = planningFunctions.adminPlanningToAbsences(absences);
+    companies.push(absencesCompany);
 
     planning.forEach(({ company_id, company_name, sites: companySites }) => {
       const company = {

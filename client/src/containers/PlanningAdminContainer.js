@@ -20,13 +20,12 @@ function PlanningAdminContainer() {
   const { allAbsences: absencesList } = admin;
   const { absences: planningAbsences, planning, weekStart } = admin;
   const [startDate, setStartDate] = React.useState(weekStart);
-  const [absences, setAbsences] = React.useState(planningFunctions.adminPlanningToAbsences(planningAbsences));
-  const [companies, setCompanies] = React.useState(planningFunctions.adminPlanningToCompanies(planning));
+  const [companies, setCompanies] = React.useState(planningFunctions.adminPlanningToCompanies(planning, planningAbsences));
   let { weekSlug } = useParams();
   if (weekSlug === undefined) {
     weekSlug = planningFunctions.getCurrentWeekSlug();
   }
-
+  console.log('companies', companies);
   useEffect(() => {
     dispatch(actionSetWeekslug(weekSlug));
     dispatch(actionRequestAdminPlanning());
@@ -36,8 +35,7 @@ function PlanningAdminContainer() {
     dispatch(actionRequestAllSites());
     dispatch(actionRequestAllCompanies());
     dispatch(actionRequestAllQualifications());
-    setAbsences(planningFunctions.adminPlanningToAbsences(planningAbsences));
-    setCompanies(planningFunctions.adminPlanningToCompanies(planning));
+    setCompanies(planningFunctions.adminPlanningToCompanies(planning, planningAbsences));
   }, []);
 
   useEffect(() => {
@@ -47,13 +45,11 @@ function PlanningAdminContainer() {
 
   useEffect(() => {
     setStartDate(admin.weekStart);
-    setAbsences(planningFunctions.adminPlanningToAbsences(planningAbsences));
-    setCompanies(planningFunctions.adminPlanningToCompanies(planning));
+    setCompanies(planningFunctions.adminPlanningToCompanies(planning, planningAbsences));
   }, [admin]);
 
   return (
     <PlanningAdmin
-      absences={absences}
       absencesList={absencesList}
       companies={companies}
       employeesList={employeesList}
