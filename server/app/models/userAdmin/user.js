@@ -285,60 +285,19 @@ module.exports = {
       throw new ApiError(400, 'Cette qualification n\'existe pas');
     }
 
+    Object.assign(user, 
+      {
+        id : parseInt(userId, 10), 
+        employee_qualification_id : qualificationId.rows[0].id 
+      });
+
     const userToSave = await client.query(
       `
-      UPDATE "employee" 
-      SET 
-        "firstname" = $2,
-        "lastname" = $3,
-        "email" = $4,
-        "phone_number" = $5,
-        "mobile_number" = $6,
-        "address" = $7,
-        "zip_code" = $8,
-        "date_of_birth" = $9,
-        "social_security_number" = $10,
-        "starting_date" = $11,
-        "fonction" = $12,
-        "avatar" = $13,
-        "role_application" = $14,
-        "employee_qualification_id" = $15,
-        "updated_at" = NOW()
-      WHERE "id"= $1
-      RETURNING 
-        "firstname",
-        "lastname",
-        "email",
-        "phone_number",
-        "mobile_number",
-        "social_security_number",
-        "date_of_birth",
-        "address",
-        "zip_code",
-        "starting_date",
-        "avatar",
-        "fonction",
-        "role_application",
-        "employee_qualification_id",
-        "updated_at";`,
-      [
-        userId,
-        user.firstname,
-        user.lastname,
-        user.email,
-        user.phone_number,
-        user.mobile_number,
-        user.address,
-        user.zip_code,
-        user.date_of_birth,
-        user.social_security_number,
-        user.starting_date,
-        user.fonction,
-        user.avatar,
-        user.role_application,
-        qualificationId.rows[0].id,
-      ],
+      SELECT * FROM update_employee_by_admin($1)`,
+      [user],
     );
+
+    delete userToSave.rows[0].password;
 
     Object.assign(userToSave.rows[0], { qualification_label: qualificationId.rows[0].label });
 

@@ -116,7 +116,7 @@ CREATE DOMAIN check_age AS timestamptz
     
 CREATE DOMAIN num_ss_fr AS text
     CHECK(
-        VALUE ~ '^[1-2][0-9][0-9][0-1][1-9][0-9][0-9].{7}'
+        VALUE ~ '^[1-2][0-9][0-9][0-1][1-9][0-9][0-9].{5, 7}'
     );
 
 ALTER TABLE "employee"

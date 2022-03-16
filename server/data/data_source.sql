@@ -11,13 +11,12 @@ VALUES
 INSERT INTO "absence" ("reason")
 VALUES
 ('Maladie'),
-('Formation'),
+('Accident du travail'),
 ('Visite médicale'),
-('Maladie'),
+('Formation interne'),
+('Formation externe'),
 ('Congés'),
-('Congés'),
-('Formation'),
-('Maladie');
+('Congés parental');
 
 
 INSERT INTO "employee" ("social_security_number","firstname","lastname","date_of_birth","address","zip_code","email","mobile_number","phone_number","password","avatar","fonction","role_application","employee_qualification_id")
