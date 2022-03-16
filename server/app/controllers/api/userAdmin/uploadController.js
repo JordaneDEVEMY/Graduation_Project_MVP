@@ -1,10 +1,4 @@
-// ? Datamapper ?
-// const fs = require('fs');
-// const { promisify } = require('util');
-// const pipeline = promisify(require('stream').pipeline);
-
-// ! const { ApiError } = require('../../../helpers/errorHandler');
-
+/* eslint-disable no-unused-vars */
 const controller = {
   /**
    * UserAdmin controller to upload avatar
