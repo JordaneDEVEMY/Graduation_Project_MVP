@@ -11,7 +11,7 @@ import funct1 from '../../Assets/images/DropImgSvg.svg';
 import funct2 from '../../Assets/images/EventImgSvg.svg';
 import funct3 from '../../Assets/images/Calendar-bro.svg';
 // import teamIcon from '../../Assets/images/team-icon.svg';
-import encartImg from '../../Assets/images/Design team-amico.svg';
+import encartImg from '../../Assets/images/encartImg.svg';
 import calendarImg from '../../Assets/images/CalendarImgSvg.svg';
 import LoginContainer from '../../containers/LoginContainer';
 import Jordane from '../../Assets/images/avatar_Jordane.jpeg';
@@ -29,6 +29,9 @@ function HomePage() {
       <Box
         sx={{
           display: 'flex',
+          mb: {
+            xs: theme.spacing(3),
+          },
           alignItems: 'center',
           position: 'relative',
           backgroundImage: `url(${calendarImg})`,
@@ -38,7 +41,7 @@ function HomePage() {
             md: '42vw center',
           },
           backgroundSize: {
-            xs: '60vw auto',
+            // xs: '60vw auto',
             md: 'contain',
           },
           height: {
@@ -55,15 +58,15 @@ function HomePage() {
             md: '50vw',
           },
           [theme.breakpoints.down('md')]: {
-            marginTop: '55vw',
-            padding: theme.spacing(3),
+            marginTop: '75vw',
+            padding: theme.spacing(1),
           },
         }}
         >
           {/*
           Title and subtitle, with the connect zone, on display only on large screen.
           */}
-          <Typography variant="h1">
+          <Typography variant="h1" sx={{ fontSize: '4em', margin: '.5rem' }}>
             O'lleks
           </Typography>
           <Typography variant="h2">
@@ -109,13 +112,27 @@ function HomePage() {
           }}
           sx={{
             textAlign: 'center',
-            mt: '2em',
+            mx: 'auto',
+            py: {
+              xs: theme.spacing(3),
+            },
             px: {
               lg: theme.spacing(16),
+              xs: theme.spacing(2),
             },
           }}
         >
-          <Grid item xs={12} sm={4}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            sx={{
+              my: {
+                xs: theme.spacing(3),
+                md: theme.spacing(6),
+              },
+            }}
+          >
             <Box
               sx={{
                 height: 250,
@@ -144,7 +161,17 @@ function HomePage() {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            sx={{
+              my: {
+                xs: theme.spacing(3),
+                md: theme.spacing(6),
+              },
+            }}
+          >
             <Box
               sx={{
                 height: 250,
@@ -173,7 +200,17 @@ function HomePage() {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} sm={4}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            sx={{
+              my: {
+                xs: theme.spacing(3),
+                md: theme.spacing(6),
+              },
+            }}
+          >
             <Box
               sx={{
                 height: 250,
@@ -210,8 +247,8 @@ function HomePage() {
           component="section"
           sx={{
             textAlign: 'center',
-            padding: theme.spacing(4),
-            mt: theme.spacing(4),
+            pt: theme.spacing(6),
+            px: theme.spacing(3),
             backgroundColor: theme.palette.primary.main,
           }}
         >
@@ -249,7 +286,7 @@ function HomePage() {
           component="section"
           sx={{
             textAlign: 'center',
-            mt: theme.spacing(4),
+            my: theme.spacing(6),
           }}
         >
           <Typography component="p" variant="h2">
@@ -266,6 +303,7 @@ function HomePage() {
               justifyContent: 'space-evenly',
               maxWidth: '1200px',
               mx: 'auto',
+              mt: theme.spacing(4),
               textAlign: 'center',
               color: theme.palette.text.primary,
             }}
