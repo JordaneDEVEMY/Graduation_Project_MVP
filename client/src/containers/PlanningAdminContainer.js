@@ -17,11 +17,11 @@ function PlanningAdminContainer() {
   const dispatch = useDispatch();
   const { admin } = useSelector((state) => state);
   const { employees: employeesList } = useSelector((state) => state.allEmployees);
+  const { allAbsences: absencesList } = admin;
   const { absences: planningAbsences, planning, weekStart } = admin;
   const [startDate, setStartDate] = React.useState(weekStart);
   const [absences, setAbsences] = React.useState(planningFunctions.adminPlanningToAbsences(planningAbsences));
   const [companies, setCompanies] = React.useState(planningFunctions.adminPlanningToCompanies(planning));
-
   let { weekSlug } = useParams();
   if (weekSlug === undefined) {
     weekSlug = planningFunctions.getCurrentWeekSlug();
@@ -32,10 +32,10 @@ function PlanningAdminContainer() {
     dispatch(actionRequestAdminPlanning());
     dispatch(actionGetUserPlanning());
     dispatch(actionRequestAllEmployees());
+    dispatch(actionRequestAllAbsences());
     dispatch(actionRequestAllSites());
     dispatch(actionRequestAllCompanies());
     dispatch(actionRequestAllQualifications());
-    dispatch(actionRequestAllAbsences());
     setAbsences(planningFunctions.adminPlanningToAbsences(planningAbsences));
     setCompanies(planningFunctions.adminPlanningToCompanies(planning));
   }, []);
@@ -54,6 +54,7 @@ function PlanningAdminContainer() {
   return (
     <PlanningAdmin
       absences={absences}
+      absencesList={absencesList}
       companies={companies}
       employeesList={employeesList}
       startDate={startDate}

@@ -12,6 +12,7 @@ import './planning_admin.scss';
 
 function PlanningAdmin({
   absences,
+  absencesList,
   companies,
   employeesList,
   startDate,
@@ -22,10 +23,26 @@ function PlanningAdmin({
   const [assignment, setAssignment] = React.useState({});
   const [modalOpened, setModalOpened] = React.useState(false);
   const [employees, setEmployees] = React.useState(employeesList);
+  const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
+  const [dragEndResult, setDragEndResult] = React.useState({});
 
-  const handleAssignment = (result) => {
-    setAssignment(result);
-    console.log('set assignment', result);
+  const handleAssignment = (assignmentData, dragResult = undefined) => {
+    setAssignment(assignmentData);
+
+    if (dragResult) {
+      setDragEndResult(dragResult);
+    }
+  };
+
+  const handleCancel = () => {
+    setAssignment({});
+    const initialResult = {
+      ...dragEndResult,
+      source: dragEndResult.destination,
+      destination: dragEndResult.source,
+    };
+    const refreshList = planningFunctions.setAssignmentPosition(initialResult, draggableCompanies);
+    setDraggableCompanies(refreshList);
   };
 
   const handleAbsence = (result) => {
@@ -47,7 +64,15 @@ function PlanningAdmin({
     // open modal
     if (assignment.site !== undefined) {
       const { site } = assignment;
-      let assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
+      let assignmentEmployees;
+
+      // it's an assignment
+      if (site.id !== 0) {
+        assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
+      // it's an absence
+      } else {
+        assignmentEmployees = absences;
+      }
 
       if (assignment.employee_id !== undefined) {
         const colleagues = assignmentEmployees.filter(
@@ -63,6 +88,10 @@ function PlanningAdmin({
     }
   }, [assignment]);
 
+  React.useEffect(() => {
+    setDraggableCompanies(companies);
+  }, [companies]);
+
   return (
     <>
       <Typography variant="h1" sx={{ textAlign: 'center' }}>
@@ -76,7 +105,7 @@ function PlanningAdmin({
         ? (
           <DraggableAssignments
             absences={absences}
-            companies={companies}
+            companies={draggableCompanies}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
             week={currentWeek}
@@ -107,8 +136,10 @@ function PlanningAdmin({
         onClose={handleModal}
       >
         <AssignmentFormContainer
+          absencesList={absencesList}
           assignment={assignment}
           employeesList={employees}
+          handleCancel={handleCancel}
           setModalOpened={setModalOpened}
         />
       </Modal>
@@ -122,6 +153,9 @@ PlanningAdmin.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,
+  ).isRequired,
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
   ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape(),
