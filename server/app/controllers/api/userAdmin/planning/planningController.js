@@ -68,9 +68,14 @@ const controller = {
 
     const { planning } = periods;
 
+    planning.sort((a, b) => {
+      if (a.company_name < b.company_name) { return -1; }
+      if (a.company_name > b.company_name) { return 1; }
+      return 0;
+    });
+
     planning.forEach((item) => {
       const { sites } = item;
-
       sites.sort((a, b) => a.assignment.position - b.assignment.position);
     });
 
