@@ -94,7 +94,7 @@ module.exports = {
       throw new ApiError(400, 'Cette entreprise n\'existe pas');
     }
 
-    Object.assign(company, { id: parseInt(companyId) });
+    Object.assign(company, { id: parseInt(companyId, 10) });
     
     const companyToSave = await client.query(
       `

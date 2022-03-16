@@ -98,7 +98,7 @@ module.exports = {
       throw new ApiError(400, 'Ce site n\'existe pas');
     }
 
-    Object.assign(site, {id: parseInt(siteId)});
+    Object.assign(site, {id: parseInt(siteId, 10)});
 
     const siteToSave = await client.query(
       `
