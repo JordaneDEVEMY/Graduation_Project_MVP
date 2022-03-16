@@ -26,7 +26,6 @@ function Companies({
       sx={{
         [theme.breakpoints.up('md')]: {
           display: 'flex',
-          justifyContent: 'space-between',
           gap: theme.spacing(4),
           overflowX: 'auto',
           mb: theme.spacing(2),

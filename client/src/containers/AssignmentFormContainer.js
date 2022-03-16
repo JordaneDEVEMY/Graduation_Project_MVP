@@ -15,6 +15,7 @@ function AssignmentFormContainer({
   assignment,
   employeesList,
   handleCancel,
+  handleSubmit,
   setModalOpened,
 }, ref) {
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ function AssignmentFormContainer({
         break;
     }
 
-    setModalOpened(false);
+    handleSubmit();
   };
 
   return (

@@ -17,7 +17,6 @@ import {
 } from '@mui/material';
 import SquareIcon from '@mui/icons-material/Square';
 import dateFunctions from '../../utils/dateFunctions';
-import './assignment_form.scss';
 
 function AssignmentForm({
   assignment,
@@ -118,7 +117,7 @@ function AssignmentForm({
           },
         }}
       >
-        <Typography variant="h3" sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" sx={{ textAlign: 'center', mb: theme.spacing(3) }}>
           {`${site.name}`}
         </Typography>
 
@@ -234,7 +233,6 @@ function AssignmentForm({
         >
           <Grid item>
             <Button
-              type="submit"
               variant="outlined"
               onClick={handleCancelForm}
               sx={{

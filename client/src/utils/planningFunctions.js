@@ -163,7 +163,7 @@ const planningFunctions = {
     const companies = [];
 
     // Add absences as a company
-    if (absences.length) {
+    if (absences.length && absencesList.length) {
       const absencesCompany = planningFunctions.adminPlanningToAbsences(absences, absencesList);
       companies.push(absencesCompany);
     }
@@ -206,11 +206,11 @@ const planningFunctions = {
   },
 
   /**
-   * Get employees list of all companies sites
+   * Get employees list of all planning
    * @param {object} companies - Companies object
    * @returns {array} List of employees
    */
-  getAllSitesEmployees: (companies) => {
+  getPlanningEmployees: (companies) => {
     const employees = [];
 
     companies.forEach((company) => {
@@ -242,7 +242,6 @@ const planningFunctions = {
       const findedSite = sites.filter((site) => site.id === siteId);
 
       if (findedSite.length === 1) {
-        console.log('finded site', findedSite);
         const { assignments } = findedSite[0];
 
         assignments.forEach(({ employee }) => {
@@ -286,8 +285,6 @@ const planningFunctions = {
    */
   getDraggedAssignment: (drag, companies) => {
     let result = planningFunctions.createAssignment();
-    console.log('drag', drag);
-    console.log('companies', companies);
     const { destination, draggableId } = drag;
     let siteId;
     // is absence ?
@@ -301,8 +298,6 @@ const planningFunctions = {
     }
     const assignmentId = Number(draggableId.replace('assignment-', ''));
 
-    console.log('siteId', siteId);
-    console.log('assignmentId', assignmentId);
     // get site destination
     let toSite;
     companies.forEach(({ sites }) => {
@@ -316,9 +311,7 @@ const planningFunctions = {
     // get assignment
     if (toSite) {
       const { name, assignments: fromAssignments } = toSite;
-      console.log('fromAssignments', fromAssignments);
       const [assignment] = fromAssignments.filter(({ id }) => id === assignmentId);
-      console.log('assignment', assignment);
       const {
         color, employee, ending_date, id, starting_date,
       } = assignment;
@@ -501,6 +494,23 @@ const planningFunctions = {
     const week = matches[2];
 
     return dateFunctions.getWeekMonday(year, week);
+  },
+
+  /**
+   * Get monday date as a string from a week slug
+   * @param {object} companies - Companies object
+   * @returns {object} companies sorted by name
+   */
+  sortCompaniesByName: (companies) => {
+    const sortedCompanies = [];
+
+    Object.keys(companies)
+      .sort()
+      .forEach((v) => {
+        sortedCompanies.push(companies[v]);
+      });
+
+    return sortedCompanies;
   },
 };
 

@@ -79,6 +79,7 @@ function Site({
       ...newAssignement,
       absence_id: isAbsence ? id : null,
       ending_date,
+      position: assignments.length,
       starting_date,
       site: {
         id,
