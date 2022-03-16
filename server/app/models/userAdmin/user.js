@@ -116,28 +116,7 @@ module.exports = {
    */
   async findAll() {
     const result = await client.query(`
-      SELECT
-        "employee"."id",
-        "employee"."firstname",
-        "employee"."lastname",
-        "employee"."email",
-        "employee"."phone_number", 
-        "employee"."mobile_number",
-        "employee"."address",
-        "employee"."zip_code",
-        "employee"."date_of_birth",
-        "employee"."social_security_number",
-        "employee"."starting_date",
-        "employee"."fonction",
-        "employee"."avatar",
-        "employee"."role_application",
-        "employee"."employee_qualification_id",
-        "employee_qualification"."label" AS qualification_label,
-        "employee"."created_at"
-      FROM
-        "employee"
-      JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id"
-      ORDER BY "employee"."id";
+      SELECT * FROM get_user_by_admin;
     `);
 
     if (result.rowCount === 0) {
@@ -201,64 +180,13 @@ module.exports = {
       throw new ApiError(400, 'Cette qualification n\'existe pas');
     }
 
+    Object.assign(user, { employee_qualification_id : qualificationId.rows[0].id });
+
     const userToCreate = await client.query(
       `
-        INSERT INTO "employee" 
-        (
-          "firstname",
-          "lastname",
-          "email",
-          "password",
-          "phone_number",
-          "mobile_number",
-          "address",
-          "zip_code",
-          "date_of_birth",
-          "social_security_number",
-          "starting_date",
-          "fonction",
-          "avatar",
-          "role_application",
-          "employee_qualification_id"
-        )
-        VALUES (
-          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15
-        )
-        RETURNING 
-        "id",
-        "firstname",
-        "lastname",
-        "email",
-        "password",
-        "phone_number",
-        "mobile_number",
-        "address",
-        "zip_code",
-        "date_of_birth",
-        "social_security_number",
-        "starting_date",
-        "fonction",
-        "avatar",
-        "role_application",
-        "employee_qualification_id",
-        "created_at";`,
-      [
-        user.firstname,
-        user.lastname,
-        user.email,
-        user.password,
-        user.phone_number,
-        user.mobile_number,
-        user.address,
-        user.zip_code,
-        user.date_of_birth,
-        user.social_security_number,
-        user.starting_date,
-        user.fonction,
-        user.avatar,
-        user.role_application,
-        qualificationId.rows[0].id,
-      ],
+        SELECT * FROM insert_user($1)
+      `,
+      [user],
     );
 
     Object.assign(userToCreate.rows[0], { qualification_label: qualificationId.rows[0].label });

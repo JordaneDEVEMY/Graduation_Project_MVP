@@ -12,12 +12,12 @@ CREATE VIEW get_user_by_admin AS
             "employee"."mobile_number", 
             "employee"."address", 
             "employee"."zip_code", 
-            "employee"."social_security_number", 
             "employee"."date_of_birth", 
+            "employee"."social_security_number", 
             "employee"."starting_date", 
             "employee"."avatar", 
-            "employee"."fonction", 
             "employee"."role_application", 
+            "employee"."fonction", 
             "employee_qualification"."label" AS qualification_label
         FROM "employee"
         LEFT JOIN "employee_qualification" ON "employee"."employee_qualification_id" = "employee_qualification"."id";
