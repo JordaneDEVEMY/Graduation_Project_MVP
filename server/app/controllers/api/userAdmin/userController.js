@@ -57,7 +57,7 @@ const controller = {
       throw new ApiError(400, 'Le numéro de sécurité social est déjà affecté à un autre salarié');
     }
 
-    const isEmailAvailable = await userAdminDatamapper.getEmail(req.body.email);
+    const isEmailAvailable = await userAdminDatamapper.findByEmail(req.body.email);
 
     if (!isEmailAvailable) {
       throw new ApiError(400, 'L\'email est déjà affecté à un autre salarié');

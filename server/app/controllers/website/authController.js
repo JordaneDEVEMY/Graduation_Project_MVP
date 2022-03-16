@@ -39,7 +39,7 @@ const controller = {
         // ? token: generateToken(user.id),
       });
     } else {
-      throw new WebsiteError(422, 'Email or password invalid');
+      throw new WebsiteError(401, 'Email or password invalid');
     }
   },
 };

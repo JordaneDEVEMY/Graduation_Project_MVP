@@ -65,7 +65,6 @@ const { ApiError } = require('../../helpers/errorHandler');
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
- * @property {string} password - User password
  * @property {string} phone_number - User phone number
  * @property {string} mobile_number - User mobile number
  * @property {string} address - User address
@@ -180,7 +179,7 @@ module.exports = {
       throw new ApiError(400, 'Cette qualification n\'existe pas');
     }
 
-    Object.assign(user, { employee_qualification_id : qualificationId.rows[0].id });
+    Object.assign(user, { employee_qualification_id: qualificationId.rows[0].id });
 
     const userToCreate = await client.query(
       `
@@ -213,11 +212,13 @@ module.exports = {
       throw new ApiError(400, 'Cette qualification n\'existe pas');
     }
 
-    Object.assign(user, 
+    Object.assign(
+      user,
       {
-        id : parseInt(userId, 10), 
-        employee_qualification_id : qualificationId.rows[0].id 
-      });
+        id: parseInt(userId, 10),
+        employee_qualification_id: qualificationId.rows[0].id,
+      },
+    );
 
     const userToSave = await client.query(
       `
@@ -275,7 +276,7 @@ module.exports = {
    * @param {number} userEmail - User Email to find
    * @returns {boolean|ApiError} - Return boolean or ApiError if userEmail not found
    */
-  async getEmail(userEmail) {
+  async findByEmail(userEmail) {
     const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);
 
     if (result.rowCount > 0) {
@@ -292,7 +293,6 @@ module.exports = {
       throw new ApiError(400, 'Cet utilisateur n\'existe pas');
     }
 
-    // TODO: SPRINT 3 - Modifier le returning
     const userToUpdate = await client.query(
       `
       UPDATE "employee" 
@@ -309,4 +309,5 @@ module.exports = {
 
     return userToUpdate.rows[0];
   },
+
 };

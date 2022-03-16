@@ -237,7 +237,7 @@ module.exports = {
    * @param {number} userEmail - User Email to find
    * @returns {boolean|ApiError} - Return boolean or ApiError if userEmail not found
    */
-  async getEmail(userEmail) {
+  async findByEmail(userEmail) {
     const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);
 
     if (result.rowCount > 0) {
