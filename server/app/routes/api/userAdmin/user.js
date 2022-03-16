@@ -1,5 +1,5 @@
 const express = require('express');
-// ? const cache = require('../../../helpers/redisCache');
+// ? NOT IN MVP - const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const userPatchSchema = require('../../../validation/userAdmin/user/userPatchSchema');
@@ -20,6 +20,7 @@ router
    * @return {array.<User>} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - User not found - application/json
    */
   .get(controllerHandler(userAdminUserController.getAll))
 
@@ -31,6 +32,7 @@ router
    * @return {UserCreate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - User not found - application/json
    */
   .post(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
 
@@ -44,6 +46,7 @@ router
    * @return {User} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - User not found - application/json
    */
   .get(controllerHandler(userAdminUserController.getOne))
 
@@ -56,6 +59,7 @@ router
    * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - User not found - application/json
    */
   .patch(validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
 
@@ -67,6 +71,7 @@ router
    * @return {UserDelete} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - User not found - application/json
    */
   .delete(controllerHandler(userAdminUserController.delete));
 
