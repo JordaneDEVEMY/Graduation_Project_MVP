@@ -279,7 +279,7 @@ function ProfilPage({
                   handleChange={changeField}
                   type="password"
                   nameValue="confirmPassword"
-                  label="Nouveau mot de passe"
+                  label="Confirmer le mot de passe"
                   value={userConfirmPassword}
                 />
               </Grid>
