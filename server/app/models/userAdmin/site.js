@@ -78,7 +78,7 @@ module.exports = {
   async insert(site) {
     const siteToCreate = await client.query(
       `
-      SELECT insert_site($1);`,
+      SELECT * FROM insert_site($1);`,
       [site],
     );
 
