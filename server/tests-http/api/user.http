@@ -18,21 +18,43 @@ GET {{ endpoint }}/9999
 GET {{ endpoint }}/tartempion
 
 ### Patch an user 
-PATCH {{ endpoint }}/100/profil
+PATCH {{ endpoint }}/37/profil
 content-type: application/json
 
 {
-    "email": "boris-hall@outlook.edu",
-    "password": "BEX05PPW8UA"
+    "phone_number": "0456565656",
+    "mobile_number": "0656565656",
+    "password": "password"
 }
 
-### Patch an user with a bad email
-PATCH {{ endpoint }}/1/profil
+### Patch an user with a bad password
+PATCH {{ endpoint }}/37/profil
 content-type: application/json
 
 {
-    "email": "jaipasmislearobase",
-    "password": "TESTDEVANTLESREACT"
+    "phone_number": "0456565656",
+    "mobile_number": "0656565656",
+    "password": "o"
+}
+
+### Patch an user with a bad phone number
+PATCH {{ endpoint }}/37/profil
+content-type: application/json
+
+{
+    "phone_number": "045656",
+    "mobile_number": "0656565656",
+    "password": "password"
+}
+
+### Patch an user with a bad mobile number
+PATCH {{ endpoint }}/37/profil
+content-type: application/json
+
+{
+    "phone_number": "0456565656",
+    "mobile_number": "06656",
+    "password": "password"
 }
 
 ### Patch an inexistant user
@@ -40,7 +62,8 @@ PATCH {{ endpoint }}/999/profil
 content-type: application/json
 
 {
-    "email": "j.andy@protonmail.com",
+    "phone_number": "0456565656",
+    "mobile_number": "0656565656",
     "password": "KPP18YZC3OE"
 }
 
@@ -49,6 +72,7 @@ PATCH {{ endpoint }}/tartempion/profil
 content-type: application/json
 
 {
-    "email": "j.andy@protonmail.com",
-    "password": "KPP18YZC3OE"
+    "phone_number": "0456565656",
+    "mobile_number": "0656565656",
+    "password": "password"
 }
