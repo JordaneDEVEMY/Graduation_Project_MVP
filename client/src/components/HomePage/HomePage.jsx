@@ -10,10 +10,15 @@ import { useTheme } from '@mui/material/styles';
 import funct1 from '../../Assets/images/DropImgSvg.svg';
 import funct2 from '../../Assets/images/EventImgSvg.svg';
 import funct3 from '../../Assets/images/Calendar-bro.svg';
-import teamIcon from '../../Assets/images/team-icon.svg';
+// import teamIcon from '../../Assets/images/team-icon.svg';
 import encartImg from '../../Assets/images/Design team-amico.svg';
 import calendarImg from '../../Assets/images/CalendarImgSvg.svg';
 import LoginContainer from '../../containers/LoginContainer';
+import Jordane from '../../Assets/images/avatar_Jordane.jpeg';
+import Pascal from '../../Assets/images/avatar_Pascal.jpeg';
+import Hicham from '../../Assets/images/avatar_Hicham.jpeg';
+import Ben from '../../Assets/images/avatar_Ben.jpeg';
+import Mathieu from '../../Assets/images/avatar_Mathieu.jpeg';
 
 function HomePage() {
   const theme = useTheme();
@@ -271,7 +276,7 @@ function HomePage() {
                 width: '12em',
               }}
             >
-              <img src={teamIcon} alt="" className="team--img" />
+              <img src={Jordane} alt="" className="team--img" />
               <Typography variant="h5" mt={1}>
                 Jordane Dévemy
               </Typography>
@@ -289,7 +294,7 @@ function HomePage() {
                 width: '12em',
               }}
             >
-              <img src={teamIcon} alt="" className="team--img" />
+              <img src={Pascal} alt="" className="team--img" />
               <Typography variant="h5" mt={1}>
                 Pascal Tassel
               </Typography>
@@ -304,7 +309,7 @@ function HomePage() {
                 width: '12em',
               }}
             >
-              <img src={teamIcon} alt="" className="team--img" />
+              <img src={Hicham} alt="" className="team--img" />
               <Typography variant="h5" mt={1}>
                 Hicham Chrita
               </Typography>
@@ -322,7 +327,7 @@ function HomePage() {
                 width: '12em',
               }}
             >
-              <img src={teamIcon} alt="" className="team--img" />
+              <img src={Ben} alt="" className="team--img" />
               <Typography variant="h5" mt={1}>
                 Ben Guillemot
               </Typography>
@@ -340,7 +345,7 @@ function HomePage() {
                 width: '12em',
               }}
             >
-              <img src={teamIcon} alt="" className="team--img" />
+              <img src={Mathieu} alt="" className="team--img" />
               <Typography variant="h5" mt={1}>
                 Mathieu Lebreton
               </Typography>
