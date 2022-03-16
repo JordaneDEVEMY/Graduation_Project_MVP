@@ -22,11 +22,12 @@ router
    * @return {array.<Assignment>} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(assignmentUserController.getAll));
 
 router.use(() => {
-  throw new ApiError(404, 'Page introuvable');
+  throw new ApiError(404, '404 Not Found');
 });
 
 module.exports = router;

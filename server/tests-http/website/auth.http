@@ -13,8 +13,8 @@ POST {{ endpoint }}/
 content-type: application/json
 
 {
-    "email": "boris-hall@outlook.edu",
-    "password": "BEX05PPW8UA"
+    "email": "olleks.planning@gmail.com",
+    "password": "password"
 }
 
 ### Post method for visitor connection with bad E/P
@@ -23,7 +23,7 @@ content-type: application/json
 
 {
     "email": "test@test.com",
-    "password": "ceciestunpassword"
+    "password": "mypassword"
 }
 
 ### Post method for visitor connection WITH @ ERROR
@@ -31,8 +31,8 @@ POST {{ endpoint }}/
 content-type: application/json
 
 {
-    "email": "testsansarobase",
-    "password": "ceciestunpassword"
+    "email": "testwithoutarobase",
+    "password": "mypassword"
 }
 
 ### Post method for visitor connection WITH no email ERROR
@@ -41,7 +41,7 @@ content-type: application/json
 
 {
     "email": "",
-    "password": "ceciestunpassword"
+    "password": "mypassword"
 }
 
 ### Post method for visitor connection WITH no password ERROR
@@ -50,5 +50,14 @@ content-type: application/json
 
 {
     "email": "test@test.com",
+    "password": ""
+}
+
+### Post method for visitor connection WITH email and password empty
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+    "email": "",
     "password": ""
 }

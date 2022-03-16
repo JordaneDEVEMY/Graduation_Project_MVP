@@ -78,7 +78,7 @@ module.exports = {
   async insert(site) {
     const siteToCreate = await client.query(
       `
-      SELECT insert_site($1);`,
+      SELECT * FROM insert_site($1);`,
       [site],
     );
 
@@ -98,29 +98,12 @@ module.exports = {
       throw new ApiError(400, 'Ce site n\'existe pas');
     }
 
+    Object.assign(site, {id: parseInt(siteId, 10)});
+
     const siteToSave = await client.query(
       `
-      UPDATE "site" 
-      SET 
-        "name" = $2,
-        "address" = $3,
-        "zip_code" = $4,
-        "manager_name" = $5,
-        "estimated_duration" = $6,
-        "company_id" = $7,
-        "updated_at" = NOW()
-      WHERE "id"= $1
-      RETURNING *;
-      `,
-      [
-        siteId,
-        site.name,
-        site.address,
-        site.zip_code,
-        site.manager_name,
-        site.estimated_duration,
-        site.company_id,
-      ],
+      SELECT * FROM update_site($1)`,
+      [site],
     );
 
     return siteToSave.rows[0];

@@ -24,9 +24,12 @@ CREATE VIEW get_week_admin_planning AS
                         json_build_object(
                             'id', "employee"."id",
                             'firstname', "employee"."firstname",
-                            'lastname', "employee"."lastname"
+                            'lastname', "employee"."lastname",
+                            'fonction', "employee"."fonction",
+                            'mobile_number', "employee"."mobile_number",
+                            'phone_number', "employee"."phone_number",
+                            'email', "employee"."email"
                         )
-
 			)
 		)
 	) AS sites

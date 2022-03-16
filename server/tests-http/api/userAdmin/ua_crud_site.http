@@ -33,19 +33,6 @@ content-type: application/json
   "company_id": 1
 }
 
-### Create an existant site
-POST {{ endpoint }}
-content-type: application/json
-
-{
-  "name": "testrestclient",
-  "address": "testrestclient",
-  "zip_code": 34000,
-  "manager_name": "testrestclient",
-  "estimated_duration": 5,
-  "company_id": 1
-}
-
 ### Create with an inexistant company_id
 POST {{ endpoint }}
 content-type: application/json
@@ -60,7 +47,7 @@ content-type: application/json
 }
 
 ### Patch a site 
-PATCH {{ endpoint }}/1
+PATCH {{ endpoint }}/35
 content-type: application/json
 
 {
@@ -85,8 +72,8 @@ content-type: application/json
   "company_id": 1
 }
 
-### Patch an inexistant company_id
-PATCH {{ endpoint }}/1
+### Patch with an inexistant company_id
+PATCH {{ endpoint }}/35
 content-type: application/json
 
 {
@@ -99,7 +86,7 @@ content-type: application/json
 }
 
 ### Delete a site
-DELETE {{ endpoint }}/41
+DELETE {{ endpoint }}/34
 
 ### Delete an inexistant site
 DELETE {{ endpoint }}/999

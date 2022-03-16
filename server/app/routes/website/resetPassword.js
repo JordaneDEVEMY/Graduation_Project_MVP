@@ -1,8 +1,7 @@
 const express = require('express');
 
-// TODO :
-// const validate = require('../../validation');
-// const authSchema = require('../../validation/authConnectionSchema');
+const validate = require('../../validation');
+const resetSchema = require('../../validation/resetPasswordSchema');
 
 const { resetPasswordController } = require('../../controllers');
 const controllerHandler = require('../../helpers/websiteControllerHandler');
@@ -23,6 +22,7 @@ router
    * @return {WebsiteError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(resetPasswordController.passwordToReset))
+
   /**
    * POST /reset-password/{id}/{token}
    * @summary Reset password to connect on website
@@ -35,6 +35,6 @@ router
    * @return {WebsiteError} 422 - Incorrect email - application/json
    * @return {WebsiteError} 500 - Internal server error - application/json
    */
-  .post(controllerHandler(resetPasswordController.resetPassword));
+  .post(validate('body', resetSchema), controllerHandler(resetPasswordController.resetPassword));
 
 module.exports = router;

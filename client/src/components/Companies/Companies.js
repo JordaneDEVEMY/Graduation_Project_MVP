@@ -8,7 +8,6 @@ import { Box, Typography } from '@mui/material';
 import SitesList from '../SitesList/SitesList';
 
 function Companies({
-  absences,
   companies,
   // handleAbsence,
   handleAssignment,
@@ -18,7 +17,6 @@ function Companies({
 }) {
   const [brands, setBrands] = React.useState(companies);
   const theme = useTheme();
-  console.log('absences', absences);
   console.log('companies', brands);
 
   React.useEffect(() => {
@@ -31,26 +29,19 @@ function Companies({
         [theme.breakpoints.up('md')]: {
           display: 'flex',
           justifyContent: 'space-between',
-          gap: theme.spacing(2),
+          gap: theme.spacing(4),
           overflowX: 'auto',
-          pb: theme.spacing(2),
+          mb: theme.spacing(2),
         },
       }}
     >
-      {/* <SiteAbsences
-        absences={absences}
-        handleAbsence={handleAbsence}
-        isDropable={isDropable}
-        isMobile={isMobile}
-        week={week}
-      /> */}
       {brands.length
         ? (brands.map((company, index) => (
           <Box
             key={`company-${company.id}-wrapper`}
             sx={{
               [theme.breakpoints.down('md')]: {
-                mt: index !== 0 ? theme.spacing(2) : undefined,
+                mt: index !== 0 ? theme.spacing(4) : undefined,
               },
             }}
           >
@@ -98,11 +89,6 @@ function Companies({
 }
 
 Companies.propTypes = {
-  absences: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -110,7 +96,7 @@ Companies.propTypes = {
       sites: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,
-        }).isRequired,
+        }),
       ).isRequired,
     }).isRequired,
   ).isRequired,

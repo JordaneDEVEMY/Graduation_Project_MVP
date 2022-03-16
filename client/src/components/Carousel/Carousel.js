@@ -64,6 +64,7 @@ function Carousel({
                 <Site
                   {...site}
                   handleAssignment={handleAssignment}
+                  isAbsence={site.id === 0}
                   isDropable={false}
                   isMobile
                   key={site.id}
