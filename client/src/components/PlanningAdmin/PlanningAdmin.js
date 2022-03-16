@@ -68,6 +68,7 @@ function PlanningAdmin({
     const planningCompanies = [...draggableCompanies];
     planningCompanies.push(company);
     console.log(planningFunctions.sortCompaniesByName(planningCompanies));
+    setDraggableCompanies(planningFunctions.sortCompaniesByName(planningCompanies));
     // Add company to planning
     // companiesSelection
     setAddCompany(false);
