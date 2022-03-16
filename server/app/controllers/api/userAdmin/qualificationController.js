@@ -13,7 +13,7 @@ const controller = {
     const qualifications = await qualificationAdminDatamapper.findAll();
 
     if (!qualifications) {
-      throw new ApiError(404, 'Qualifications introuvables');
+      throw new ApiError(404, 'Qualifications not found');
     }
 
     return res.json(qualifications);
