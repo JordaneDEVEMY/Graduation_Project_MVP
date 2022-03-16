@@ -1,5 +1,9 @@
 const Joi = require('joi');
 
+const now = Date.now();
+// Allow to fix minimum age of user to 17 years
+const cutoffDate = new Date(now - (1000 * 60 * 60 * 24 * 365 * 17));
+
 module.exports = Joi.object({
   firstname: Joi.string()
     .min(2)
@@ -27,11 +31,11 @@ module.exports = Joi.object({
   date_of_birth: Joi.date()
     .iso()
     .less('now')
+    .max(cutoffDate)
     .required(),
   address: Joi.string()
     .required(),
   zip_code: Joi.number()
-    .min(2)
     .required(),
   starting_date: Joi.date()
     .iso()
