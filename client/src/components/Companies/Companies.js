@@ -96,7 +96,7 @@ Companies.propTypes = {
       sites: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,
-        }).isRequired,
+        }),
       ).isRequired,
     }).isRequired,
   ).isRequired,

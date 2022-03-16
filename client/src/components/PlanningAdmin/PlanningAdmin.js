@@ -63,15 +63,15 @@ function PlanningAdmin({
     console.log('assignment', assignment);
     // open modal
     if (assignment.site !== undefined) {
-      const { site } = assignment;
-      const absences = companies[0].sites[0].assignments;
+      const { absence_id, site } = assignment;
       let assignmentEmployees;
 
       // it's an assignment
-      if (site.id !== 0) {
+      if (absence_id === null) {
         assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
       // it's an absence
       } else {
+        const absences = planningFunctions.getAbsenceEmployees(companies, absence_id);
         assignmentEmployees = absences;
       }
 

@@ -45,7 +45,7 @@ function SitesList({
             <Site
               {...site}
               handleAssignment={handleAssignment}
-              isAbsence={site.id === 0}
+              isAbsence={company.id === 0}
               isDropable={isDropable}
               isMobile={false}
               key={site.id}
@@ -78,7 +78,7 @@ SitesList.propTypes = {
             position: PropTypes.number.isRequired,
             starting_date: PropTypes.string.isRequired,
             visibility: PropTypes.bool.isRequired,
-          }).isRequired,
+          }),
         ).isRequired,
       }),
     ).isRequired,

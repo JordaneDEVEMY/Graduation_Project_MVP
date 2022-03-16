@@ -3,39 +3,36 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  actionGetUserPlanning,
   actionRequestAdminPlanning,
-  actionRequestAllCompanies,
-  actionRequestAllSites,
   actionRequestAllEmployees,
-  actionRequestAllQualifications, actionRequestAllAbsences, actionSetWeekslug,
+  actionRequestAllAbsences, actionSetWeekslug,
 } from '../actions';
 import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import planningFunctions from '../utils/planningFunctions';
 
 function PlanningAdminContainer() {
   const dispatch = useDispatch();
-  const { admin } = useSelector((state) => state);
+  const admin = useSelector((state) => state.admin);
   const { employees: employeesList } = useSelector((state) => state.allEmployees);
   const { allAbsences: absencesList } = admin;
-  const { absences: planningAbsences, planning, weekStart } = admin;
+  const { weekStart } = admin;
   const [startDate, setStartDate] = React.useState(weekStart);
-  const [companies, setCompanies] = React.useState(planningFunctions.adminPlanningToCompanies(planning, planningAbsences, absencesList));
+  const [companies, setCompanies] = React.useState(planningFunctions.adminPlanningToCompanies(admin));
   let { weekSlug } = useParams();
   if (weekSlug === undefined) {
     weekSlug = planningFunctions.getCurrentWeekSlug();
   }
-  console.log('absencesList', absencesList);
+  console.log('companies', companies);
   useEffect(() => {
     dispatch(actionSetWeekslug(weekSlug));
     dispatch(actionRequestAdminPlanning());
-    dispatch(actionGetUserPlanning());
+    // dispatch(actionGetUserPlanning());
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllAbsences());
-    dispatch(actionRequestAllSites());
-    dispatch(actionRequestAllCompanies());
-    dispatch(actionRequestAllQualifications());
-    setCompanies(planningFunctions.adminPlanningToCompanies(planning, planningAbsences, absencesList));
+    // dispatch(actionRequestAllSites());
+    // dispatch(actionRequestAllCompanies());
+    // dispatch(actionRequestAllQualifications());
+    setCompanies(planningFunctions.adminPlanningToCompanies(admin));
   }, []);
 
   useEffect(() => {
@@ -45,7 +42,7 @@ function PlanningAdminContainer() {
 
   useEffect(() => {
     setStartDate(admin.weekStart);
-    setCompanies(planningFunctions.adminPlanningToCompanies(planning, planningAbsences, absencesList));
+    setCompanies(planningFunctions.adminPlanningToCompanies(admin));
   }, [admin]);
 
   return (

@@ -16,11 +16,10 @@ function DraggableAssignments({
   week,
 }) {
   // save initial companies object
-  const [companiesList, setCompaniesList] = React.useState(companies);
-  const [assignmentsPositions, setAssignmentsPositions] = React.useState(companiesList);
+  const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
+  console.log('assignmentsPositions', assignmentsPositions);
 
   React.useEffect(() => {
-    setCompaniesList(companies);
     setAssignmentsPositions(companies);
   }, [companies]);
 
@@ -40,7 +39,7 @@ function DraggableAssignments({
       setAssignmentsPositions(refreshList);
       handleAssignment(assignment, result);
     }
-  }, [companiesList]);
+  }, [assignmentsPositions]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
