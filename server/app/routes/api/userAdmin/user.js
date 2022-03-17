@@ -50,7 +50,7 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminUserController.getOne))
+  .get(controllerHandler(protect), controllerHandler(userAdminUserController.getOne))
 
   /**
    * PATCH /api/admin/user/{id}
@@ -75,6 +75,6 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .delete(controllerHandler(protect), controllerHandler(userAdminUserController.delete));
+  .delete(controllerHandler(protect), controllerHandler(protect), controllerHandler(userAdminUserController.delete));
 
 module.exports = router;
