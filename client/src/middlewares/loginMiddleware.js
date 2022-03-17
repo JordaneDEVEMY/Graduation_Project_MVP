@@ -1,10 +1,38 @@
 /* eslint-disable camelcase */
-import { requestLogin } from '../requests/loginRequest';
-import { setBearerToken, removeBearerToken } from '../requests';
+import { requestLogin, requestCheck } from '../requests/loginRequest';
+import { setBearerToken, removeBearerToken, getLocalBearerToken } from '../requests';
 import * as actions from '../actions';
+import { APP_MOUNT } from '../actions/system';
 
 const loginMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
+    // check token
+    case APP_MOUNT: {
+      next(action);
+      const localToken = getLocalBearerToken();
+      if (localToken) {
+        const response = await requestCheck(localToken);
+        if (response.status === 200) {
+          const {
+            id, firstname, lastname, avatar, token, role_application,
+          } = response.data;
+          store.dispatch(actions.actionGetUserInformations({
+            id, firstname, lastname, avatar,
+          }));
+
+          if (role_application === 'admin') {
+            store.dispatch(actions.actionSetUserIsAdmin(true));
+          }
+
+          store.dispatch(actions.actionSetIsLogged(true));
+          setBearerToken(token);
+        } else {
+          removeBearerToken();
+        }
+      }
+      return;
+    }
+
     // login action
     case actions.SUBMIT_LOGIN: {
       const { login } = store.getState();
