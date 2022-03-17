@@ -63,8 +63,22 @@ function PlanningAdmin({
 
   const handleAddSite = (company, availablesSitesList) => {
     console.log('add site', company, availablesSitesList);
+    setCompaniesSelection([company]);
     setSitesSelection(availablesSitesList);
+
     setAddSite(true);
+    setModalOpened(true);
+  };
+
+  const handleCancelCompany = () => {
+    setAddCompany(false);
+    setAddSite(false);
+    setSitesSelection([]);
+    setModalOpened(false);
+  };
+
+  const handleModal = () => {
+    setModalOpened((stateModal) => !stateModal);
   };
 
   const handleOnAssignmentSubmitted = () => {
@@ -118,17 +132,6 @@ function PlanningAdmin({
     }
     setAssignment({});
     setModalOpened(false);
-  };
-
-  const handleCancelCompany = () => {
-    setAddCompany(false);
-    setAddSite(false);
-    setSitesSelection([]);
-    setModalOpened(false);
-  };
-
-  const handleModal = () => {
-    setModalOpened((stateModal) => !stateModal);
   };
 
   /**
@@ -260,8 +263,7 @@ function PlanningAdmin({
           <CompanyForm
             addType={addCompany ? 'company' : 'site'}
             companiesList={companiesSelection}
-            sitesList={sitesList}
-            sitesSelection={sitesSelection}
+            sitesList={sitesSelection}
             handleCancel={handleCancelCompany}
             handleSubmit={handleOnCompanySubmitted}
           />

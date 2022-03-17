@@ -24,7 +24,7 @@ function CompanyForm({
     sitesList.filter(({ company: c }) => c.company_id === company.id),
   );
   const [site, setSite] = React.useState(sitesSelection[0]);
-  console.log('site', site);
+  console.log('addType', addType);
 
   const handleCancelForm = () => {
     handleCancel();
