@@ -27,6 +27,7 @@ const loginMiddleware = (store) => (next) => async (action) => {
         store.dispatch(actions.actionSetIsLogged(true));
         setBearerToken(token);
       } else {
+        store.dispatch(actions.actionSetGoodLogin(false));
         store.dispatch(actions.actionSetIsLogged(false));
       }
       return;
