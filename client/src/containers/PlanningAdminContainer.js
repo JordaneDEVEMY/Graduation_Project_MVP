@@ -29,8 +29,6 @@ function PlanningAdminContainer() {
   }
   console.log('companies', companies);
   useEffect(() => {
-    dispatch(actionSetWeekslug(weekSlug));
-    dispatch(actionRequestAdminPlanning());
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllAbsences());
     dispatch(actionRequestAllSites());

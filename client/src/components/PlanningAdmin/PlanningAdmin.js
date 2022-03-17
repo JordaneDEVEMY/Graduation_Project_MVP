@@ -20,9 +20,6 @@ function PlanningAdmin({
   sitesList,
   startDate,
 }) {
-  console.log('companies', companies);
-  console.log('companiesList', companiesList);
-  console.log('sitesList', sitesList);
   const theme = useTheme();
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
@@ -40,9 +37,9 @@ function PlanningAdmin({
   // dragend
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
+  console.log('draggableCompanies into planning', draggableCompanies);
   // forms modal
   const [modalOpened, setModalOpened] = React.useState(false);
-  console.log('modalOpened', modalOpened);
 
   const handleAssignment = (assignmentData, dragResult = {}) => {
     setAssignment(assignmentData);
@@ -62,11 +59,9 @@ function PlanningAdmin({
   };
 
   const handleOnCompanySubmitted = (company) => {
-    console.log('company', company);
     const planningCompanies = [...draggableCompanies];
     planningCompanies.push(company);
     const sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
-    console.log('sortedCompanies', sortedCompanies);
     setDraggableCompanies(sortedCompanies);
     setAddCompany(false);
     setModalOpened(false);
@@ -79,7 +74,7 @@ function PlanningAdmin({
   //   setSitesSelection(siteData);
   // };
 
-  const handleCancel = () => {
+  const handleCancelAssignment = () => {
     setAssignment({});
 
     if (dragEndResult?.draggableId) {
@@ -92,6 +87,12 @@ function PlanningAdmin({
       setDraggableCompanies(refreshList);
       setDragEndResult({});
     }
+    setModalOpened(false);
+  };
+
+  const handleCancelCompany = () => {
+    setAddCompany(false);
+    setModalOpened(false);
   };
 
   const handleModal = () => {
@@ -207,9 +208,8 @@ function PlanningAdmin({
           <AssignmentFormContainer
             assignment={assignment}
             employeesList={employeesSelection}
-            handleCancel={handleCancel}
+            handleCancel={handleCancelAssignment}
             handleSubmit={handleOnAssignmentSubmitted}
-            setModalOpened={setModalOpened}
           />
           )}
           {(canAddCompany && addCompany)
@@ -217,7 +217,7 @@ function PlanningAdmin({
           <CompanyForm
             companiesList={companiesSelection}
             sitesList={sitesList}
-            handleCancel={handleModal}
+            handleCancel={handleCancelCompany}
             handleSubmit={handleOnCompanySubmitted}
           />
           )}

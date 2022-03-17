@@ -83,9 +83,16 @@ function Companies({
         ))
         )
         : (
-          <Typography sx={{ textAlign: 'center' }}>
-            Aucune entreprise à afficher.
-          </Typography>
+          <Alert
+            severity="info"
+            sx={{
+              mt: theme.spacing(2),
+              mx: 'auto',
+              maxWith: '20rem',
+            }}
+          >
+            Aucun planning à afficher.
+          </Alert>
         )}
     </Box>
   );

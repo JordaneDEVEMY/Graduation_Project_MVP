@@ -32,7 +32,9 @@ function Site({
 }) {
   const dispatch = useDispatch();
   const theme = useTheme();
-
+  // assignments
+  const [draggableAssignments, setDraggableAssignments] = React.useState(assignments);
+  console.log('draggableAssignments', draggableAssignments);
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
   // remove dialog
@@ -74,12 +76,12 @@ function Site({
     const newAssignement = planningFunctions.createAssignment();
     const starting_date = dateFunctions.getDate().format('YYYY-MM-DD');
     const ending_date = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
-    console.log('isAbsence', isAbsence);
+
     handleAssignment({
       ...newAssignement,
       absence_id: isAbsence ? id : null,
       ending_date,
-      position: assignments.length,
+      position: draggableAssignments.length,
       starting_date,
       site: {
         id,
@@ -87,6 +89,10 @@ function Site({
       },
     });
   };
+
+  React.useEffect(() => {
+    setDraggableAssignments(assignments);
+  }, [assignments]);
 
   return (
     <>
@@ -111,7 +117,7 @@ function Site({
           name={name}
           handleAddAssignment={handleAddAssignment}
         />
-        {assignments.length
+        {draggableAssignments.length
           && isDropable
           ? (
             <Droppable droppableId={`${isAbsence ? 'absence' : 'site'}-${id}`} type="SITE">
@@ -127,7 +133,7 @@ function Site({
                   }}
                 >
                   <AssignmentsList
-                    assignments={assignments}
+                    assignments={draggableAssignments}
                     expandedSheet={expandedSheet}
                     handleAssignment={handleAssignment}
                     handleRemoveAssignment={handleRemoveAssignment}
@@ -152,7 +158,7 @@ function Site({
               }}
             >
               <AssignmentsList
-                assignments={assignments}
+                assignments={draggableAssignments}
                 expandedSheet={expandedSheet}
                 handleAssignment={handleAssignment}
                 handleCollapse={handleCollapse}

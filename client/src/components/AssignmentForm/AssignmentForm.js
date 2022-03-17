@@ -21,7 +21,6 @@ import dateFunctions from '../../utils/dateFunctions';
 function AssignmentForm({
   assignment,
   employeesList,
-  setModalOpened,
   handleCancel,
   handleSubmit,
 }, ref) {
@@ -78,7 +77,6 @@ function AssignmentForm({
   };
 
   const handleCancelForm = () => {
-    setModalOpened(false);
     handleCancel();
   };
 

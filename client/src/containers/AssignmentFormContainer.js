@@ -16,7 +16,6 @@ function AssignmentFormContainer({
   employeesList,
   handleCancel,
   handleSubmit,
-  setModalOpened,
 }, ref) {
   const dispatch = useDispatch();
 
@@ -72,7 +71,6 @@ function AssignmentFormContainer({
       ref={ref}
       assignment={assignment}
       employeesList={employeesList}
-      setModalOpened={setModalOpened}
       handleCancel={handleCancel}
       handleSubmit={handleSubmitAssignment}
     />
