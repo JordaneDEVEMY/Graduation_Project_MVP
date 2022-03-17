@@ -262,14 +262,14 @@ module.exports = {
     const result = await client.query('SELECT social_security_number FROM "employee" WHERE social_security_number = $1', [userSsn]);
 
     if (result.rowCount > 0) {
-      throw new ApiError(404, 'Social security number already user for an another user');
+      throw new ApiError(400, 'Social security number already user for an another user');
     }
 
     return !result.rowCount;
   },
 
   /**
-   * Search if SSN already exist in db
+   * Search if email already exist in db
    * @param {number} userEmail - User Email to find
    * @returns {boolean|ApiError} - Return boolean or ApiError if userEmail not found
    */
@@ -277,7 +277,7 @@ module.exports = {
     const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);
 
     if (result.rowCount > 0) {
-      throw new ApiError(404, 'Email already used for an another user');
+      throw new ApiError(400, 'Email already used for an another user');
     }
 
     return !result.rowCount;

@@ -13,7 +13,7 @@ const controller = {
     const companies = await companyAdminDatamapper.findAll();
 
     if (!companies) {
-      throw new ApiError(404, 'Entreprises introuvables');
+      throw new ApiError(404, 'Companies not found');
     }
 
     return res.json(companies);
@@ -30,7 +30,7 @@ const controller = {
     const company = await companyAdminDatamapper.findByPk(req.params.id);
 
     if (!company) {
-      throw new ApiError(404, 'Entreprise introuvable');
+      throw new ApiError(404, 'Company not found');
     }
 
     return res.json(company);
@@ -47,13 +47,13 @@ const controller = {
     const isCompanyNameExist = await companyAdminDatamapper.findByName(req.body.name);
 
     if (!isCompanyNameExist) {
-      throw new ApiError(400, 'Le nom de la société existe déjà');
+      throw new ApiError(400, 'This company name already exists');
     }
 
     const isCompanyAddressExist = await companyAdminDatamapper.findByAddress(req.body.address);
 
     if (!isCompanyAddressExist) {
-      throw new ApiError(400, 'L\'adresse de la société existe déjà');
+      throw new ApiError(400, 'This company address already exists');
     }
 
     const companyCreate = await companyAdminDatamapper.insert(req.body);
@@ -85,7 +85,7 @@ const controller = {
     return res.status(200).json({
       isDeleted: companyDelete,
       statusCode: 200,
-      message: 'Entreprise supprimée',
+      message: 'Company deleted successfully',
     });
   },
 

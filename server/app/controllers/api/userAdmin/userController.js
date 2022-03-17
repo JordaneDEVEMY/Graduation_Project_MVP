@@ -53,13 +53,13 @@ const controller = {
     const isSsnAvailable = await userAdminDatamapper.getSsn(req.body.social_security_number);
 
     if (!isSsnAvailable) {
-      throw new ApiError(404, 'Social security number already used for an another user');
+      throw new ApiError(400, 'Social security number already used for an another user');
     }
 
     const isEmailAvailable = await userAdminDatamapper.findByEmail(req.body.email);
 
     if (!isEmailAvailable) {
-      throw new ApiError(404, 'Email already used for an another user');
+      throw new ApiError(400, 'Email already used for an another user');
     }
 
     const userCreate = await userAdminDatamapper.insert(req.body);
