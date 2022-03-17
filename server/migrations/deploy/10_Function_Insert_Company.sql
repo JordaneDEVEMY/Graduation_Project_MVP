@@ -4,19 +4,19 @@ BEGIN;
 
 CREATE OR REPLACE FUNCTION insert_company (c json) RETURNS company AS $$
 	
-		INSERT INTO "company"
-			(
-				"name",
-				"address",
-				"zip_code",
-				"type"
-			)
-			VALUES (
-				(c->> 'name')::text,
-				(c->> 'address')::text,
-				(c->> 'zip_code')::int,
-				(c->> 'type')::text
-			) RETURNING *;
+	INSERT INTO "company"
+		(
+			"name",
+			"address",
+			"zip_code",
+			"type"
+		)
+		VALUES (
+			(c->> 'name')::text,
+			(c->> 'address')::text,
+			(c->> 'zip_code')::int,
+			(c->> 'type')::text
+		) RETURNING *;
 
 $$ LANGUAGE sql;
 

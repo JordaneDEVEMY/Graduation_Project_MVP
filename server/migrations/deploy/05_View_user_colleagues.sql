@@ -2,6 +2,7 @@
 BEGIN;
 
 CREATE VIEW get_user_colleagues AS
+
 	SELECT 
 		"employee"."id", 
 		"employee"."firstname", 
