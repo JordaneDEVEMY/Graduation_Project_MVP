@@ -9,6 +9,7 @@ import {
   actionCreateEmployeeAvatar,
   actionResetEmployeeInformations,
   actionSetEmployeeFile,
+  actionRequestAllQualifications,
 } from '../actions';
 import DataGridEmployee from '../components/DataGridEmployee/DataGridEmployee';
 
@@ -32,6 +33,10 @@ function DatagridEmployeeContainer() {
 
   const handleDeleteEmployee = () => {
     dispatch(actionDeleteEmployee());
+  };
+
+  const getAllQualification = () => {
+    dispatch(actionRequestAllQualifications());
   };
 
   const handleCreateEmployee = () => {
@@ -62,6 +67,7 @@ function DatagridEmployeeContainer() {
       changeField={changeField}
       resetEmployeeInformations={resetEmployeeInformations}
       changeFile={changeFile}
+      getAllQualification={getAllQualification}
     />
   );
 }
