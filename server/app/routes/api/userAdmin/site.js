@@ -8,6 +8,8 @@ const { userAdminSiteController } = require('../../../controllers');
 
 const controllerHandler = require('../../../helpers/apiControllerHandler');
 
+const { protect } = require('../../../helpers/authProtect');
+
 const router = express.Router();
 
 router
@@ -21,7 +23,7 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminSiteController.getAll))
+  .get(controllerHandler(protect), controllerHandler(userAdminSiteController.getAll))
 
   /**
    * POST /api/admin/site
@@ -33,7 +35,7 @@ router
    * @return {ApiError} 404 - site not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .post(validate('body', siteSchema), controllerHandler(userAdminSiteController.create));
+  .post(controllerHandler(protect), validate('body', siteSchema), controllerHandler(userAdminSiteController.create));
 
 router
   .route('/:id(\\d+)')
@@ -47,7 +49,7 @@ router
    * @return {ApiError} 404 - site not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminSiteController.getOne))
+  .get(controllerHandler(protect), controllerHandler(userAdminSiteController.getOne))
 
   /**
    * PATCH /api/admin/site/{id}
@@ -60,7 +62,7 @@ router
    * @return {ApiError} 404 - Site not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .patch(validate('body', siteSchema), controllerHandler(userAdminSiteController.update))
+  .patch(controllerHandler(protect), validate('body', siteSchema), controllerHandler(userAdminSiteController.update))
 
   /**
    * DELETE /api/admin/site/{id}
@@ -72,6 +74,6 @@ router
    * @return {ApiError} 404 - Site not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .delete(controllerHandler(userAdminSiteController.delete));
+  .delete(controllerHandler(protect), controllerHandler(userAdminSiteController.delete));
 
 module.exports = router;

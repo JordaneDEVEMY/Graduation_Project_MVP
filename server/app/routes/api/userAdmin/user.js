@@ -9,6 +9,8 @@ const { userAdminUserController } = require('../../../controllers');
 
 const controllerHandler = require('../../../helpers/apiControllerHandler');
 
+const { protect } = require('../../../helpers/authProtect');
+
 const router = express.Router();
 
 router
@@ -22,7 +24,7 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminUserController.getAll))
+  .get(controllerHandler(protect), controllerHandler(userAdminUserController.getAll))
 
   /**
    * POST /api/admin/user
@@ -34,7 +36,7 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .post(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
+  .post(controllerHandler(protect), validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
 
 router
   .route('/:id(\\d+)')
@@ -61,7 +63,7 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .patch(validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
+  .patch(controllerHandler(protect), validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
 
   /**
    * DELETE /api/admin/user/{id}
@@ -73,6 +75,6 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .delete(controllerHandler(userAdminUserController.delete));
+  .delete(controllerHandler(protect), controllerHandler(userAdminUserController.delete));
 
 module.exports = router;

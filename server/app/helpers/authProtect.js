@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 const jwt = require('jsonwebtoken');
 const authDatamapper = require('../models/website/auth');
 const { WebsiteError } = require('./errorHandler');
@@ -7,7 +8,7 @@ const protect = async (req, res, next) => {
 
   if (
     req.headers.authorization
-    && req.headers.authorization.startsWith('Bearer')
+    && req.headers.authorization.startsWith('bearer')
   ) {
     try {
       // Get token from header
@@ -17,18 +18,16 @@ const protect = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // Get user from the token
-      req.user = await authDatamapper.findOne(decoded.id).select('-password');
+      req.user = await authDatamapper.findOne(decoded.id);
 
       next();
     } catch (err) {
-      console.log(err);
-      throw new WebsiteError(401, 'Accès non autorisé');
+      throw new WebsiteError(401, 'Unauthorized Access');
     }
   }
 
   if (!token) {
-    res.status(401);
-    throw new WebsiteError(401, 'Token manquant, accès non autorisé');
+    throw new WebsiteError(401, 'Token is missing, Unauthorized Access');
   }
 };
 

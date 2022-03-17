@@ -5,6 +5,8 @@ const { userAdminPlanningController } = require('../../../../controllers');
 
 const controllerHandler = require('../../../../helpers/apiControllerHandler');
 
+const { protect } = require('../../../../helpers/authProtect');
+
 const router = express.Router();
 
 router
@@ -19,6 +21,6 @@ router
    * @return {ApiError} 404 - Week not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminPlanningController.getOne));
+  .get(controllerHandler(protect), controllerHandler(userAdminPlanningController.getOne));
 
 module.exports = router;

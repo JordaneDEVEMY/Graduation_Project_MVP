@@ -5,6 +5,8 @@ const { userAdminAbsenceController } = require('../../../controllers');
 
 const controllerHandler = require('../../../helpers/apiControllerHandler');
 
+const { protect } = require('../../../helpers/authProtect');
+
 const router = express.Router();
 
 router
@@ -18,6 +20,6 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminAbsenceController.getAll));
+  .get(controllerHandler(protect), controllerHandler(userAdminAbsenceController.getAll));
 
 module.exports = router;

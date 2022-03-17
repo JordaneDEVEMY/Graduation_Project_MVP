@@ -1,6 +1,6 @@
 const emailValidator = require('email-validator');
-// ? const bcrypt = require('bcryptjs');
-// ? const { generateToken } = require('../../helpers/generateToken');
+// const bcrypt = require('bcryptjs');
+const { generateToken } = require('../../helpers/generateToken');
 const authDatamapper = require('../../models/website/auth');
 const { WebsiteError } = require('../../helpers/errorHandler');
 
@@ -27,7 +27,7 @@ const controller = {
 
     const user = await authDatamapper.findOne(req.body);
 
-    // ? if (user && (await bcrypt.compare(password, user.password))) {
+    // if (user && (await bcrypt.compare(password, user.password))) {
     if (user) {
       res.json({
         id: user.id,
@@ -36,12 +36,14 @@ const controller = {
         email: user.email,
         avatar: user.avatar,
         role_application: user.role_application,
-        // ? token: generateToken(user.id),
+        token: generateToken(user.id, '24h'),
       });
     } else {
       throw new WebsiteError(401, 'Email or password invalid');
     }
+    // }
   },
+
 };
 
 module.exports = controller;
