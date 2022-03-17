@@ -66,19 +66,29 @@ function PlanningAdmin({
   };
 
   const handleOnCompanySubmitted = (company) => {
-    console.log('on company submitted');
+    console.log('on company submitted', company);
     const addType = addCompany ? 'company' : 'site';
     console.log(addType);
     const planningCompanies = [...draggableCompanies];
+    let sortedCompanies = planningCompanies;
 
     if (addType === 'company') {
       planningCompanies.push(company);
-      const sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
-      setDraggableCompanies(sortedCompanies);
-      setAddCompany(false);
+      sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
     } else {
-      setAddSite(false);
+      const { id: companyId, sites } = company;
+      const site = sites[0];
+      sortedCompanies.map((item) => {
+        if (item.id === companyId) {
+          item.sites.push(site);
+        }
+        return item;
+      });
     }
+    setDraggableCompanies(sortedCompanies);
+
+    setAddCompany(false);
+    setAddSite(false);
     setModalOpened(false);
   };
 
