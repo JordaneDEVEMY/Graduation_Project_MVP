@@ -55,11 +55,7 @@ const controller = {
    * @returns {user} Route API JSON response
    */
   async checkTokenAction(req, res) {
-    let { token } = req.body;
-
-    if (!token) {
-      throw new WebsiteError(401, 'Token is missing, Unauthorized Access');
-    }
+    let token;
 
     if (
       req.headers.authorization
@@ -85,12 +81,14 @@ const controller = {
             role_application: req.user.role_application,
             token: generateToken(req.user.id, '24h'),
           });
-        } else {
-          throw new WebsiteError(401, 'Invalid Token');
         }
       } catch (err) {
         throw new WebsiteError(401, 'Unauthorized Access');
       }
+    }
+
+    if (!token) {
+      throw new WebsiteError(401, 'Token is missing, Unauthorized Access');
     }
   },
 
