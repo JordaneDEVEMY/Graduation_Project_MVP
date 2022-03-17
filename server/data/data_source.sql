@@ -43,16 +43,20 @@ VALUES
 (137185514175412,'Malachi','Tristan','1990-06-05 13:07:12','9184 Fringilla St.',31000,'malachi.tristan@icloud.couk','0561166116','0612996644','LIQ49BKK8IB','/images/55.jpg','Lorem','user',5),
 (137185514172632,'Prescott','Geoffrey','1990-06-13 03:47:00','Ap #488-2475 Turpis St.',31000,'g.prescott2267@google.net','0561166116','0612996644','TUO65GTP6PO','/images/48.jpg','Lorem','user',3),
 (184039935083962,'Ashton','Alexandre','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'alexandre-ashton5369@icloud.edu','0561166116','0612996644','VKM73KHB1ND','/images/67.jpg','Lorem','user',3),
-(184039935081472,'Chrita','hicham','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'hicham@oclock.com','0561166116','0612996644','mypassword','/images/67.jpg','Lorem','user',3),
-(184039935084852,'Olleks','Developpeur','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'olleks.planning@gmail.com','0561166116','0612996644','password','/images/67.jpg','Lorem','admin',3);
+(184039935081402,'Guillemot','Ben','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',59230,'ben@olleks.com','0561166116','0612996601','olleks','/images/67.jpg','Lorem','admin',3),
+(184039935081412,'Tassel','Pascal','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',58000,'pascal@olleks.com','0561166116','0612996612','olleks','/images/67.jpg','Lorem','admin',3),
+(184039935081422,'Lebreton','Mathieu','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',27000,'mathieu@olleks.com','0561166116','0612996622','olleks','/images/67.jpg','Lorem','admin',3),
+(184039935081432,'Devémy','Jordane','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',34200,'jordane@olleks.com','0561166116','0612996633','olleks','/images/67.jpg','Lorem','user',3),
+(184039935081442,'Chrita','hicham','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31600,'hicham@olleks.com','0561166116','0612996644','olleks','/images/67.jpg','Lorem','user',3),
+(184039935084862,'Olleks','Developpeur','1990-04-23 20:22:20','P.O. Box 218, 4683 Auctor Av.',31000,'olleks.planning@gmail.com','0561166116','0612996644','password','/images/67.jpg','Lorem','admin',3);
 
 INSERT INTO "company" ("name","address","zip_code","type")
 VALUES
 ('EDF','Ap #155-3218 Lacinia Street',19796,'Client'),
 ('SNCF','Ap #793-4849 Luctus. Av.',15092,'Client'),
-('LAPEYRE','2119 Eu Road',15041,'Client'),
-('NESTLE','Ap #923-3721 Aliquet, Rd.',4754,'Client'),
-('DARTY','Ap #676-1455 Primis Ave',19252,'Client'),
+('Lapeyre','2119 Eu Road',15041,'Client'),
+('Nestlé','Ap #923-3721 Aliquet, Rd.',4754,'Client'),
+('Darty','Ap #676-1455 Primis Ave',19252,'Client'),
 ('Manpower','Ap #189-5565 Id, Rd.',19829,'Fournisseur'),
 ('Addeco','3291 Non St.',9034,'Fournisseur');
 
