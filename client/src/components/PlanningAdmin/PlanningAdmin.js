@@ -26,6 +26,8 @@ function PlanningAdmin({
   const isPast = dateFunctions.isBefore(currentWeek.dates[6]);
   const isMobile = useBreakpointDown();
   const canAddCompany = (companies.length - 1) < companiesList.length;
+  // forms modal
+  const [modalOpened, setModalOpened] = React.useState(false);
   // Instances used for forms
   const [assignment, setAssignment] = React.useState({});
   const [addCompany, setAddCompany] = React.useState(false);
@@ -38,13 +40,11 @@ function PlanningAdmin({
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
   console.log('draggableCompanies into planning', draggableCompanies);
-  // forms modal
-  const [modalOpened, setModalOpened] = React.useState(false);
 
-  const handleAssignment = (assignmentData, dragResult = {}) => {
+  const handleAssignment = (assignmentData, dragResult = undefined) => {
     setAssignment(assignmentData);
 
-    if (dragResult.draggableId !== undefined) {
+    if (dragResult) {
       setDragEndResult(dragResult);
     }
   };
@@ -54,11 +54,13 @@ function PlanningAdmin({
   };
 
   const handleOnAssignmentSubmitted = () => {
+    console.log('on assignment submitted');
     setAssignment({});
     setModalOpened(false);
   };
 
   const handleOnCompanySubmitted = (company) => {
+    console.log('on company submitted');
     const planningCompanies = [...draggableCompanies];
     planningCompanies.push(company);
     const sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
@@ -75,8 +77,6 @@ function PlanningAdmin({
   // };
 
   const handleCancelAssignment = () => {
-    setAssignment({});
-
     if (dragEndResult?.draggableId) {
       const initialResult = {
         ...dragEndResult,
@@ -87,6 +87,7 @@ function PlanningAdmin({
       setDraggableCompanies(refreshList);
       setDragEndResult({});
     }
+    setAssignment({});
     setModalOpened(false);
   };
 
