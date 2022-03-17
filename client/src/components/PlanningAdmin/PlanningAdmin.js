@@ -27,7 +27,7 @@ function PlanningAdmin({
   const isMobile = useBreakpointDown();
   // filter companies list : get only companies having sites
   const allCompanies = planningFunctions.getCompaniesWithSites(companiesList, sitesList);
-  const canAddCompany = (companies.length - 1) < allCompanies.length;
+  const canAddCompany = !isPast && ((companies.length - 1) < allCompanies.length);
   // forms modal
   const [modalOpened, setModalOpened] = React.useState(false);
   // Instances used for forms
@@ -56,6 +56,7 @@ function PlanningAdmin({
       ({ id }) => !displayedCompaniesIds.includes(id),
     );
     setCompaniesSelection(displayableCompagnies);
+    setSitesSelection(sitesList);
 
     setAddCompany(true);
     setModalOpened(true);
@@ -200,17 +201,15 @@ function PlanningAdmin({
 
       <SearchContainer isAdmin date={startDate} />
 
-      {canAddCompany && (
-        <Typography sx={{ mb: theme.spacing(1) }}>
-          <Button
-            variant="outlined"
-            disabled={isPast}
-            onClick={handleAddCompany}
-          >
-            {`Ajouter une compagnie en S${currentWeek.num.toString().padStart(2, '0')}`}
-          </Button>
-        </Typography>
-      )}
+      <Typography sx={{ mb: theme.spacing(1) }}>
+        <Button
+          variant="outlined"
+          disabled={!canAddCompany}
+          onClick={handleAddCompany}
+        >
+          {`Ajouter une compagnie en S${currentWeek.num.toString().padStart(2, '0')}`}
+        </Button>
+      </Typography>
 
       {!isMobile
         ? (

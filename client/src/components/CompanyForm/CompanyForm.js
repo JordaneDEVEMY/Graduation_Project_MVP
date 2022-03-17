@@ -25,6 +25,7 @@ function CompanyForm({
   );
   const [site, setSite] = React.useState(sitesSelection[0]);
   console.log('addType', addType);
+  console.log('sitesList', sitesList);
 
   const handleCancelForm = () => {
     handleCancel();
