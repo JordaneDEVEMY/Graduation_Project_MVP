@@ -26,15 +26,12 @@ module.exports = async function main(email, firstname, lastname, link) {
       `
       <h3>Bonjour, <strong>${firstname} ${lastname}</strong></h3>
       <h2>À vous de jouer !</h2>
-      <h1>Votre nouveau mot de passe :</h1>
-      <br>
       <div>Vous avez souhaité changer de mot de passe.</div>
       <br>
-      <h2>Pour le modifier, nous vous invitons à cliquer sur le lien ci-dessous :</h2>
-      <a href=${link} target="_blank" style="text-decoration:none;color:#000000;">Changer mon mot de passe</a>
-      <br>
+      <div>Pour le modifier, nous vous invitons à cliquer :<a href=${link} target="_blank">Ici</a></div>
       <br>
       <div>Ce lien est valide pendant <em>15 minutes<em>. Passé ce délai, veuillez renouveler l’opération « Mot de passe oublié » sur notre site.</div>
+      <br>
       <div><em>Si vous n’êtes pas à l’origine de cette demande, vous pouvez ignorer cet e-mail : votre mot de passe actuel ne sera pas modifié.<em></div>
       `, // html body
   });
