@@ -51,6 +51,7 @@ function PlanningAdminContainer() {
 
   return (
     <PlanningAdmin
+      absencesList={absencesList}
       companies={companies}
       companiesList={companiesList}
       employeesList={employeesList}

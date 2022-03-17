@@ -14,6 +14,7 @@ import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
 function PlanningAdmin({
+  absencesList,
   companies,
   companiesList,
   employeesList,
@@ -75,9 +76,32 @@ function PlanningAdmin({
     setModalOpened(true);
   };
 
+  /**
+   * Add site into a company
+   * @param {object} company A planning company
+   * @param {array} availablesSitesList List of availables company sites
+   */
   const handleAddSite = (company, availablesSitesList) => {
+    const { id: companyId } = company;
+    let availableSites = [...availablesSitesList];
+
+    console.log(companyId, company, availablesSitesList);
+
+    // is absence ?
+    if (companyId === 0) {
+      availableSites = availablesSitesList.map(({ id, reason: name }) => ({
+        id,
+        name,
+        company: {
+          company_id: 0,
+          company_name: 'Absences',
+        },
+      }));
+    }
+    console.log('availablesSitesList', availableSites);
+
     setCompaniesSelection([company]);
-    setSitesSelection(availablesSitesList);
+    setSitesSelection(availableSites);
 
     setAddSite(true);
     setModalOpened(true);
@@ -203,6 +227,7 @@ function PlanningAdmin({
       >
         <Button
           variant="outlined"
+          color="inherit"
           disabled={!canAddCompany}
           onClick={handleAddCompany}
         >
@@ -213,6 +238,7 @@ function PlanningAdmin({
       {!isMobile
         ? (
           <DraggableAssignments
+            absencesList={absencesList}
             companies={draggableCompanies}
             handleAssignment={handleAddAssignment}
             handleSite={handleAddSite}
@@ -223,6 +249,7 @@ function PlanningAdmin({
         )
         : (
           <Companies
+            absencesList={absencesList}
             companies={companies}
             handleAssignment={handleAddAssignment}
             handleSite={handleAddSite}
@@ -274,6 +301,9 @@ function PlanningAdmin({
 }
 
 PlanningAdmin.propTypes = {
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape(),
   ).isRequired,

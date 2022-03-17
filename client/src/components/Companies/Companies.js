@@ -8,6 +8,7 @@ import { Alert, Box, Typography } from '@mui/material';
 import SitesList from '../SitesList/SitesList';
 
 function Companies({
+  absencesList,
   companies,
   handleAssignment,
   handleSite,
@@ -65,15 +66,19 @@ function Companies({
           {company.sites.length
             ? (
               <SitesList
+                absencesList={absencesList}
                 company={company}
                 handleAssignment={handleAssignment}
                 handleSite={handleSite}
                 id={`company-${company.id}`}
+                isAbsenceList={company.id === 0}
                 isDropable={isDropable}
                 isMobile={isMobile}
                 isPast={isPast}
                 key={`company-${company.id}`}
-                sitesList={sitesList.filter((item) => item.company.company_id === company.id)}
+                sitesList={company.id === 0
+                  ? absencesList
+                  : sitesList.filter((item) => item.company.company_id === company.id)}
                 week={week}
               />
             )
@@ -95,6 +100,9 @@ function Companies({
 }
 
 Companies.propTypes = {
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

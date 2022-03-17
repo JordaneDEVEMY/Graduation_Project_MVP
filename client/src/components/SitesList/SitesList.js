@@ -11,9 +11,11 @@ import Site from '../Site/Site';
 import Carousel from '../Carousel/Carousel';
 
 function SitesList({
+  absencesList,
   company,
   handleAssignment,
   handleSite,
+  isAbsencesList,
   isDropable,
   isMobile,
   isPast,
@@ -23,7 +25,9 @@ function SitesList({
   const theme = useTheme();
   const { id, sites } = company;
   const companySitesIds = company.sites.map((item) => item.id);
-  const availableSites = sitesList.filter((item) => !companySitesIds.includes(item.id));
+  const availableSites = isAbsencesList
+    ? absencesList.filter((item) => !companySitesIds.includes(item.id))
+    : sitesList.filter((item) => !companySitesIds.includes(item.id));
   const canAddSite = availableSites.length !== 0;
 
   /**
@@ -93,6 +97,9 @@ function SitesList({
 }
 
 SitesList.propTypes = {
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   company: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -120,6 +127,7 @@ SitesList.propTypes = {
   }).isRequired,
   handleAssignment: PropTypes.func.isRequired,
   handleSite: PropTypes.func.isRequired,
+  isAbsencesList: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   isPast: PropTypes.bool.isRequired,

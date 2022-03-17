@@ -10,6 +10,7 @@ import Companies from '../Companies/Companies';
 import planningFunctions from '../../utils/planningFunctions';
 
 function DraggableAssignments({
+  absencesList,
   companies,
   handleAssignment,
   handleSite,
@@ -43,6 +44,7 @@ function DraggableAssignments({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
+        absencesList={absencesList}
         companies={assignmentsPositions}
         handleAssignment={handleAssignment}
         handleSite={handleSite}
@@ -57,6 +59,9 @@ function DraggableAssignments({
 }
 
 DraggableAssignments.propTypes = {
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
