@@ -23,6 +23,7 @@ function DataGridEmployee({
   pushEmployeeId,
   resetEmployeeInformations,
   changeFile,
+  getAllQualification,
 }) {
   const theme = useTheme();
   const [selectionModel, setSelectionModel] = useState([]);
@@ -195,6 +196,7 @@ function DataGridEmployee({
             changeField={changeField}
             changeFile={changeFile}
             handleClose={handleClose}
+            getAllQualification={getAllQualification}
           />
         </Box>
       </Modal>
@@ -267,6 +269,7 @@ DataGridEmployee.propTypes = {
   changeFile: PropTypes.func.isRequired,
   pushEmployeeId: PropTypes.func.isRequired,
   resetEmployeeInformations: PropTypes.func.isRequired,
+  getAllQualification: PropTypes.func.isRequired,
 };
 DataGridEmployee.defaultProps = {
   oneEmployee: null,

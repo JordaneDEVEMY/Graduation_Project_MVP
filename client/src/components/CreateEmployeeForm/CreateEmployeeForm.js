@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import {
@@ -14,7 +14,12 @@ function CreateUserForm({
   changeField,
   changeFile,
   employee,
+  getAllQualification,
 }) {
+  useEffect(() => {
+    getAllQualification();
+  }, []);
+
   const qualifications = useSelector((state) => state.admin.allQualifications);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -241,6 +246,7 @@ CreateUserForm.propTypes = {
   handleCreateEmployee: PropTypes.func.isRequired,
   changeField: PropTypes.func.isRequired,
   changeFile: PropTypes.func.isRequired,
+  getAllQualification: PropTypes.func.isRequired,
   employee: PropTypes.shape().isRequired,
 };
 
