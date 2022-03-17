@@ -35,73 +35,59 @@ function Companies({
         },
       }}
     >
-      {brands.length
-        ? (brands.map((company, index) => (
-          <Box
-            key={`company-${company.id}-wrapper`}
+      {brands.map((company, index) => (
+        <Box
+          key={`company-${company.id}-wrapper`}
+          sx={{
+            position: 'relative',
+            width: `calc(300px + ${theme.spacing(4)})`,
+            [theme.breakpoints.down('md')]: {
+              mt: index !== 0 ? theme.spacing(4) : undefined,
+            },
+            [theme.breakpoints.up('md')]: {
+              flex: '0 0 auto',
+            },
+          }}
+        >
+          <Typography
+            variant="h2"
+            key={`company-${company.id}-title`}
             sx={{
-              position: 'relative',
-              width: `calc(300px + ${theme.spacing(4)})`,
-              [theme.breakpoints.down('md')]: {
-                mt: index !== 0 ? theme.spacing(4) : undefined,
-              },
-              [theme.breakpoints.up('md')]: {
-                flex: '0 0 auto',
-              },
+              textAlign: 'center',
             }}
           >
-            <Typography
-              variant="h2"
-              key={`company-${company.id}-title`}
-              sx={{
-                textAlign: 'center',
-              }}
-            >
-              {company.name}
-              {}
-            </Typography>
+            {company.name}
+            {}
+          </Typography>
 
-            {company.sites.length
-              ? (
-                <SitesList
-                  company={company}
-                  handleAssignment={handleAssignment}
-                  handleSite={handleSite}
-                  id={`company-${company.id}`}
-                  isDropable={isDropable}
-                  isMobile={isMobile}
-                  isPast={isPast}
-                  key={`company-${company.id}`}
-                  sitesList={sitesList.filter((item) => item.company.company_id === company.id)}
-                  week={week}
-                />
-              )
-              : (
-                <Alert
-                  severity="info"
-                  key={`empty-company-${company.id}`}
-                  sx={{
-                    mt: theme.spacing(2),
-                  }}
-                >
-                  Aucun planning à afficher.
-                </Alert>
-              )}
-          </Box>
-        ))
-        )
-        : (
-          <Alert
-            severity="info"
-            sx={{
-              mt: theme.spacing(2),
-              mx: 'auto',
-              maxWith: '20rem',
-            }}
-          >
-            Aucune compagnie à afficher.
-          </Alert>
-        )}
+          {company.sites.length
+            ? (
+              <SitesList
+                company={company}
+                handleAssignment={handleAssignment}
+                handleSite={handleSite}
+                id={`company-${company.id}`}
+                isDropable={isDropable}
+                isMobile={isMobile}
+                isPast={isPast}
+                key={`company-${company.id}`}
+                sitesList={sitesList.filter((item) => item.company.company_id === company.id)}
+                week={week}
+              />
+            )
+            : (
+              <Alert
+                severity="info"
+                key={`empty-company-${company.id}`}
+                sx={{
+                  mt: theme.spacing(2),
+                }}
+              >
+                Aucun planning à afficher.
+              </Alert>
+            )}
+        </Box>
+      ))}
     </Box>
   );
 }
