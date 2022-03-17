@@ -1,8 +1,10 @@
+/* eslint-disable prefer-destructuring */
 const emailValidator = require('email-validator');
 // const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { generateToken } = require('../../helpers/generateToken');
 const authDatamapper = require('../../models/website/auth');
-const userDatamapper = require('../../models/user');
+
 const { WebsiteError } = require('../../helpers/errorHandler');
 
 const controller = {
@@ -46,36 +48,50 @@ const controller = {
   },
 
   /**
-   * Login action
+   * check token action
    * ExpressMiddleware signature
-   * @param {object} req Express request object : {email, password}
+   * @param {object} req Express request object : {token}
    * @param {object} res Express response object
    * @returns {user} Route API JSON response
    */
   async checkTokenAction(req, res) {
-    const { id, token } = req.body;
+    let { token } = req.body;
 
     if (!token) {
       throw new WebsiteError(401, 'Token is missing, Unauthorized Access');
     }
 
-    const user = await userDatamapper.findByPk(id);
+    if (
+      req.headers.authorization
+      && req.headers.authorization.startsWith('bearer')
+    ) {
+      try {
+        // Get token from header
+        token = req.headers.authorization.split(' ')[1];
 
-    // if (user && (await bcrypt.compare(password, user.password))) {
-    if (user) {
-      res.json({
-        id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
-        avatar: user.avatar,
-        role_application: user.role_application,
-        token: generateToken(user.id, '24h'),
-      });
-    } else {
-      throw new WebsiteError(401, 'Invalid Token');
+        // Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Get user from the token
+        req.user = await authDatamapper.findOne(decoded.id);
+
+        if (req.user) {
+          res.json({
+            id: req.user.id,
+            firstname: req.user.firstname,
+            lastname: req.user.lastname,
+            email: req.user.email,
+            avatar: req.user.avatar,
+            role_application: req.user.role_application,
+            token: generateToken(req.user.id, '24h'),
+          });
+        } else {
+          throw new WebsiteError(401, 'Invalid Token');
+        }
+      } catch (err) {
+        throw new WebsiteError(401, 'Unauthorized Access');
+      }
     }
-    // }
   },
 
 };
