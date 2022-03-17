@@ -62,14 +62,18 @@ const controller = {
       && req.headers.authorization.startsWith('bearer')
     ) {
       try {
+        console.log('file: authController.js ~ line 62 ~ checkTokenAction ~ req.headers.authorization', req.headers.authorization);
         // Get token from header
         token = req.headers.authorization.split(' ')[1];
+        console.log('file: authController.js ~ line 68 ~ checkTokenAction ~ token', token);
 
         // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log('file: authController.js ~ line 72 ~ checkTokenAction ~ decoded', decoded);
 
         // Get user from the token
         req.user = await authDatamapper.findOne(decoded.id);
+        console.log('file: authController.js ~ line 76 ~ checkTokenAction ~ req.user', req.user);
 
         if (req.user) {
           res.json({
@@ -81,6 +85,7 @@ const controller = {
             role_application: req.user.role_application,
             token: generateToken(req.user.id, '24h'),
           });
+          console.log('file: authController.js ~ line 79 ~ checkTokenAction ~ req.user', req.user);
         }
       } catch (err) {
         throw new WebsiteError(401, 'Unauthorized Access');
