@@ -18,7 +18,7 @@ const controller = {
     const assignments = await assignmentUserAdminDatamapper.findAll();
 
     if (!assignments) {
-      throw new ApiError(404, 'Affectations introuvables');
+      throw new ApiError(404, 'Assignments not found');
     }
 
     return res.json(assignments);
@@ -35,14 +35,14 @@ const controller = {
     const user = await userAdminDatamapper.findByPk(req.body.employee_id);
 
     if (!user) {
-      throw new ApiError(404, 'Utilisateur introuvable');
+      throw new ApiError(404, 'User not found');
     }
 
     if (req.body.site_id) {
       const site = await siteAdminDatamapper.findByPk(req.body.site_id);
 
       if (!site) {
-        throw new ApiError(404, 'Site introuvable');
+        throw new ApiError(404, 'Site not found');
       }
     }
 
@@ -50,7 +50,7 @@ const controller = {
       const absence = await absenceAdminDatamapper.findByPk(req.body.absence_id);
 
       if (!absence) {
-        throw new ApiError(404, 'Absence introuvable');
+        throw new ApiError(404, 'Absence not found');
       }
     }
 
@@ -70,14 +70,14 @@ const controller = {
     const user = await userAdminDatamapper.findByPk(req.body.employee_id);
 
     if (!user) {
-      throw new ApiError(404, 'Utilisateur introuvable');
+      throw new ApiError(404, 'User not found');
     }
 
     if (req.body.site_id) {
       const site = await siteAdminDatamapper.findByPk(req.body.site_id);
 
       if (!site) {
-        throw new ApiError(404, 'Site introuvable');
+        throw new ApiError(404, 'Site not found');
       }
     }
 
@@ -85,7 +85,7 @@ const controller = {
       const absence = await absenceAdminDatamapper.findByPk(req.body.absence_id);
 
       if (!absence) {
-        throw new ApiError(404, 'Absence introuvable');
+        throw new ApiError(404, 'Absence not found');
       }
     }
 
@@ -107,7 +107,7 @@ const controller = {
     return res.status(200).json({
       isDeleted: assignmentDelete,
       statusCode: 200,
-      message: 'Affectation supprimée',
+      message: 'Assignment deleted successfully',
     });
   },
 
