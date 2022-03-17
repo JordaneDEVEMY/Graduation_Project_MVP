@@ -1,4 +1,5 @@
 const emailValidator = require('email-validator');
+const bcrypt = require('bcryptjs');
 const userAdminDatamapper = require('../../../models/userAdmin/user');
 const { ApiError } = require('../../../helpers/errorHandler');
 
@@ -61,6 +62,10 @@ const controller = {
     if (!isEmailAvailable) {
       throw new ApiError(400, 'Email already used for an another user');
     }
+
+    req.body.password = bcrypt.hashSync(req.body.password, 10);
+    console.log('file: userController.js ~ line 67 ~ create ~  req.body', req.body);
+    console.log('file: userController.js ~ line 67 ~ create ~ req.body.password', req.body.password);
 
     const userCreate = await userAdminDatamapper.insert(req.body);
 

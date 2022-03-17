@@ -1,5 +1,4 @@
 const express = require('express');
-
 const validate = require('../../validation');
 const resetSchema = require('../../validation/resetPasswordSchema');
 

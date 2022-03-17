@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const client = require('../../config/database');
 const { ApiError } = require('../../helpers/errorHandler');
 
@@ -106,7 +107,10 @@ module.exports = {
       throw new ApiError(400, 'This user doesn\'t exist');
     }
 
-    const { password, phone_number, mobile_number } = user;
+    const { phone_number, mobile_number } = user;
+    let { password } = user;
+
+    password = bcrypt.hashSync(password, 10);
 
     const userUpdate = await client.query(
       `
