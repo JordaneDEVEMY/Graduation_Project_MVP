@@ -79,11 +79,16 @@ function PlanningAdmin({
       const { id: companyId, sites } = company;
       const site = sites[0];
       sortedCompanies.map((item) => {
-        if (item.id === companyId) {
-          item.sites.push(site);
+        const { id, sites: companySite } = item;
+        if (id === companyId) {
+          companySite.push(site);
         }
-        return item;
+        return {
+          ...item,
+          sites: companySite,
+        };
       });
+      sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
     }
     setDraggableCompanies(sortedCompanies);
 
@@ -109,6 +114,7 @@ function PlanningAdmin({
 
   const handleCancelCompany = () => {
     setAddCompany(false);
+    setAddSite(false);
     setModalOpened(false);
   };
 
