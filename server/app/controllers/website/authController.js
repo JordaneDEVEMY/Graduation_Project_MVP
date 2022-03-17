@@ -30,8 +30,7 @@ const controller = {
     }
 
     const user = await authDatamapper.findOne(email);
-    console.log('file: authController.js ~ line 37 ~ loginAction ~ user.password', user.password);
-    console.log('file: authController.js ~ line 37 ~ loginAction ~ password', password);
+
     if (user && (await bcrypt.compare(password, user.password))) {
       res.json({
         id: user.id,

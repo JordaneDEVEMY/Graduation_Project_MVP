@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const userAdminDatamapper = require('../../models/userAdmin/user');
 
 const { ApiError } = require('../../helpers/errorHandler');
@@ -23,7 +24,8 @@ const controller = {
 
   async resetPassword(req, res) {
     const { id, token } = req.params;
-    const { password, confirmPassword } = req.body;
+    const { confirmPassword } = req.body;
+    let { password } = req.body;
 
     if (password !== confirmPassword) {
       throw new ApiError(400, 'Both passwords must match');
@@ -39,6 +41,8 @@ const controller = {
 
     // ? const payload = jwt.verify(token, secret);
     jwt.verify(token, secret);
+
+    password = bcrypt.hashSync(password, 10);
 
     const userWithNewPassword = await userAdminDatamapper.updatePassword(id, password);
 
