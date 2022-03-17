@@ -82,4 +82,31 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Find one user
+   * @param {number} userId - User primary key id in database
+   * @returns {AuthUser|null} - Return User or null if no user found
+   */
+  async findByPk(userId) {
+    const result = await client.query(
+      `
+      SELECT 
+        "id", 
+        "firstname", 
+        "lastname", 
+        "email", 
+        "avatar",
+        "role_application" 
+      FROM "employee" 
+      WHERE "id" = $1 
+      `,
+      [userId],
+    );
+
+    if (result.rowCount === 0) {
+      return null;
+    }
+
+    return result.rows[0];
+  },
 };
