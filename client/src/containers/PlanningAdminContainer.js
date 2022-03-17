@@ -30,7 +30,6 @@ function PlanningAdminContainer() {
     dispatch(actionRequestAllAbsences());
     // dispatch(actionRequestAllSites());
     // dispatch(actionRequestAllCompanies());
-    // dispatch(actionRequestAllQualifications());
     setCompanies(planningFunctions.adminPlanningToCompanies(admin));
   }, []);
 
