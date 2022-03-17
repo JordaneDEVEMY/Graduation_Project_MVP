@@ -16,6 +16,7 @@ function DraggableAssignments({
 }) {
   // save initial companies object
   const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
+  console.log('assignmentsPositions', assignmentsPositions);
 
   React.useEffect(() => {
     setAssignmentsPositions(companies);

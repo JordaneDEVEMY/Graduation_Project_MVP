@@ -501,17 +501,7 @@ const planningFunctions = {
    * @param {object} companies - Companies object
    * @returns {object} companies sorted by name
    */
-  sortCompaniesByName: (companies) => {
-    const sortedCompanies = [];
-
-    Object.keys(companies)
-      .sort()
-      .forEach((v) => {
-        sortedCompanies.push(companies[v]);
-      });
-
-    return sortedCompanies;
-  },
+  sortCompaniesByName: (companies) => companies.sort((a, b) => a.name.localeCompare(b.name)),
 };
 
 export default planningFunctions;

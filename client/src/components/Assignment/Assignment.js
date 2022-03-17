@@ -216,7 +216,7 @@ Assignment.propTypes = {
   }),
   color: PropTypes.string.isRequired,
   employee: PropTypes.shape({
-    email: PropTypes.string.isRequired,
+    email: PropTypes.string,
     firstname: PropTypes.string.isRequired,
     fonction: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,

@@ -52,25 +52,22 @@ function PlanningAdmin({
     }
   };
 
+  const handleAddCompany = () => {
+    setAddCompany(true);
+  };
+
   const handleOnAssignmentSubmitted = () => {
     setAssignment({});
     setModalOpened(false);
   };
 
-  const handleAddCompany = () => {
-    setAddCompany(true);
-  };
-
-  const handleOnCompanySubmitted = (data) => {
-    const { company } = data;
-    console.log('company submitted', company);
-    console.log('draggableCompanies', draggableCompanies);
+  const handleOnCompanySubmitted = (company) => {
+    console.log('company', company);
     const planningCompanies = [...draggableCompanies];
     planningCompanies.push(company);
-    console.log(planningFunctions.sortCompaniesByName(planningCompanies));
-    setDraggableCompanies(planningFunctions.sortCompaniesByName(planningCompanies));
-    // Add company to planning
-    // companiesSelection
+    const sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
+    console.log('sortedCompanies', sortedCompanies);
+    setDraggableCompanies(sortedCompanies);
     setAddCompany(false);
     setModalOpened(false);
   };

@@ -120,6 +120,7 @@ function Site({
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                   sx={{
+                    minHeight: '50px',
                     pb: '50px',
                     flexGrow: '1',
                     background: `url('${assignmentBg}') repeat-y center bottom`,
@@ -145,6 +146,7 @@ function Site({
             <Box
               sx={{
                 pb: '50px',
+                minHeight: '50px',
                 flexGrow: '1',
                 background: `url('${assignmentBg}') repeat-y center bottom`,
               }}

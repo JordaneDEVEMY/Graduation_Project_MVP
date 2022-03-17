@@ -40,12 +40,13 @@ function CompanyForm({
     event.preventDefault();
 
     handleSubmit({
-      company: {
-        id: company.id,
-        name: company.name,
-        sites: [],
-      },
-      site,
+      id: company.id,
+      name: company.name,
+      sites: [{
+        id: site.id,
+        name: site.name,
+        assignments: [],
+      }],
     });
   };
 
@@ -92,6 +93,7 @@ function CompanyForm({
               onChange={(_event, newValue) => {
                 setCompany(newValue);
               }}
+              disabled={companyId}
               options={companiesList}
               sx={{ width: '100%' }}
               renderInput={(params) => (
@@ -99,8 +101,6 @@ function CompanyForm({
               )}
             />
           </Grid>
-          {companyId
-          && (
           <Grid item xs={12}>
             <Autocomplete
               value={site}
@@ -115,7 +115,6 @@ function CompanyForm({
               )}
             />
           </Grid>
-          )}
         </Grid>
       </Box>
       <Box

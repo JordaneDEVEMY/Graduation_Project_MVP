@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import { Alert, Box, Typography } from '@mui/material';
 // import SiteAbsences from '../SiteAbsences/SiteAbsences';
 import SitesList from '../SitesList/SitesList';
 
@@ -37,8 +37,12 @@ function Companies({
           <Box
             key={`company-${company.id}-wrapper`}
             sx={{
+              width: `calc(300px + ${theme.spacing(4)})`,
               [theme.breakpoints.down('md')]: {
                 mt: index !== 0 ? theme.spacing(4) : undefined,
+              },
+              [theme.breakpoints.up('md')]: {
+                flex: '0 0 auto',
               },
             }}
           >
@@ -65,13 +69,15 @@ function Companies({
                 />
               )
               : (
-                <Typography
-                  id={`empty-company-${company.id}`}
+                <Alert
+                  severity="info"
                   key={`empty-company-${company.id}`}
-                  sx={{ textAlign: 'center' }}
+                  sx={{
+                    mt: theme.spacing(2),
+                  }}
                 >
                   Aucun planning à afficher.
-                </Typography>
+                </Alert>
               )}
           </Box>
         ))
