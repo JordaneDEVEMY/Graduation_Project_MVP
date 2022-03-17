@@ -3,7 +3,7 @@
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { useLocation, Link, useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Box, Tabs, Tab } from '@mui/material';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
@@ -11,9 +11,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import './nav_tabs.scss';
 
-function NavTabs({
-  userId,
-}) {
+function NavTabs() {
   const { pathname } = useLocation();
   const theme = useTheme();
   const { weekSlug } = useParams();
@@ -44,14 +42,12 @@ function NavTabs({
         <Tab key="Employees" icon={<AssignmentIndIcon />} label="Employés" component={Link} to="/admins/employees" value="/admins/employees" />
         <Tab key="Sites" icon={<BusinessIcon />} label="Sites" component={Link} to="/admins/sites" value="/admins/sites" />
         <Tab key="Entreprises" icon={<SupervisorAccountIcon />} label="Entreprises" component={Link} to="/admins/companies" value="/admins/companies" />
-        <Tab key="Profil" icon={<SupervisorAccountIcon />} label="Profil" component={Link} to={`/admins/${userId}/profil`} value={`/admins/${userId}/profil`} sx={{ display: 'none' }} />
       </Tabs>
     </Box>
   );
 }
 
 NavTabs.propTypes = {
-  userId: PropTypes.number.isRequired,
 };
 NavTabs.defaultProps = {
 };
