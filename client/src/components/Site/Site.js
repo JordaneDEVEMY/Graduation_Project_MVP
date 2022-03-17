@@ -34,7 +34,6 @@ function Site({
   const theme = useTheme();
   // assignments
   const [draggableAssignments, setDraggableAssignments] = React.useState(assignments);
-  console.log('draggableAssignments', draggableAssignments);
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
   // remove dialog

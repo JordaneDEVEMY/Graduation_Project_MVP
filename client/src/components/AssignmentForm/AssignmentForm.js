@@ -58,8 +58,6 @@ function AssignmentForm({
       ? employeesList[0]
       : employeesList.filter((item) => item.id === employee_id)[0],
   );
-
-  console.log('employee', employee);
   const [startingDate, setStartingDate] = React.useState(
     new Date(assignment.starting_date),
   );
@@ -69,7 +67,6 @@ function AssignmentForm({
   const [minDate, setMinDate] = React.useState(
     new Date(dateFunctions.getDate(startingDate.toString()).add(1, 'day').format('YYYY-MM-DD')),
   );
-  console.log('minDate', minDate);
   const [color, setColor] = React.useState(assignment.color || colorsList[0][0]);
   const [visibility, setVisibility] = React.useState(true);
 
@@ -112,10 +109,7 @@ function AssignmentForm({
     >
       <Box
         sx={{
-          padding: {
-            sx: theme.spacing(1),
-            md: theme.spacing(2),
-          },
+          padding: theme.spacing(2),
         }}
       >
         <Typography variant="h3" sx={{ textAlign: 'center', mb: theme.spacing(3) }}>
@@ -163,7 +157,7 @@ function AssignmentForm({
                 renderInput={(params) => <TextField {...params} inputFormat="DD.MM.YYYY" />}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <FormControl sx={{ width: '100%' }}>
                 <InputLabel id="color-label">Couleur de la fiche</InputLabel>
                 <Select
@@ -198,7 +192,7 @@ function AssignmentForm({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <FormGroup>
                 <FormControlLabel
                   control={(
@@ -219,10 +213,7 @@ function AssignmentForm({
           borderTop: 1,
           borderTopColor: theme.palette.divider,
           textAlign: 'center',
-          padding: {
-            sx: theme.spacing(1),
-            md: theme.spacing(2),
-          },
+          padding: theme.spacing(2),
         }}
       >
         <Grid

@@ -19,7 +19,6 @@ function DraggableAssignments({
 }) {
   // save initial companies object
   const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
-  console.log('assignmentsPositions', assignmentsPositions);
 
   React.useEffect(() => {
     setAssignmentsPositions(companies);
@@ -29,7 +28,6 @@ function DraggableAssignments({
    * Open assignment insert / update modal
    */
   const onDragEnd = useCallback((result) => {
-    console.log(result);
     if (result.reason === 'DROP') {
       if (!result.destination) {
         return;

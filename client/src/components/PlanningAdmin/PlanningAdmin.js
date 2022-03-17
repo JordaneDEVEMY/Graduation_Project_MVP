@@ -41,9 +41,22 @@ function PlanningAdmin({
   // dragend
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
-
+  console.log('draggableCompanies', draggableCompanies);
   const handleAddAssignment = (assignmentData, dragResult = undefined) => {
     if (dragResult) {
+      const { destination, source } = dragResult;
+
+      // update position only
+      if (destination.droppableId === source.droppableId) {
+        const movedAssignment = {
+          ...assignmentData,
+          position: destination.index,
+          weekSlug: planningFunctions.getWeekSlugFromDate(assignmentData.starting_date),
+        };
+        // TODO : UPDATE ASSIGNMENT POSITION WITHOUT OPENING MODAL
+        console.log('upate position only !', movedAssignment);
+      }
+
       setDragEndResult(dragResult);
     }
     setAssignment(assignmentData);
@@ -63,7 +76,6 @@ function PlanningAdmin({
   };
 
   const handleAddSite = (company, availablesSitesList) => {
-    console.log('add site', company, availablesSitesList);
     setCompaniesSelection([company]);
     setSitesSelection(availablesSitesList);
 
@@ -83,14 +95,12 @@ function PlanningAdmin({
   };
 
   const handleOnAssignmentSubmitted = () => {
-    console.log('on assignment submitted');
     setAssignment({});
     setModalOpened(false);
   };
 
   const handleOnCompanySubmitted = (company) => {
     const addType = addCompany ? 'company' : 'site';
-    console.log(`on ${addType} submitted`, company);
     const planningCompanies = [...draggableCompanies];
     let sortedCompanies = planningCompanies;
 
@@ -139,7 +149,6 @@ function PlanningAdmin({
    * listen assignment change and adjust employees list in assignment Form
    */
   React.useEffect(() => {
-    console.log('assignment', assignment);
     // 1. build employeesList used in assignment modal
     // 2. open modal
     if (assignment.site !== undefined) {
@@ -165,23 +174,7 @@ function PlanningAdmin({
   }, [assignment]);
 
   /**
-   * adjust companies list in new company Form
-   */
-  // React.useEffect(() => {
-  //   if (addCompany) {
-  //     // get all others sites employees
-  //     const displayedCompaniesIds = companies.map((item) => item.id);
-  //     // retrieve all assignments employees from employeesLIst
-  //     const compagniesDispayable = allCompanies.filter(
-  //       ({ id }) => !displayedCompaniesIds.includes(id),
-  //     );
-  //     setCompaniesSelection(compagniesDispayable);
-  //     setModalOpened(true);
-  //   }
-  // }, [addCompany]);
-
-  /**
-   * open modal if add site
+   * open modal when add site
    */
   React.useEffect(() => {
     if (addSite) {
@@ -201,7 +194,13 @@ function PlanningAdmin({
 
       <SearchContainer isAdmin date={startDate} />
 
-      <Typography sx={{ mb: theme.spacing(1) }}>
+      <Typography sx={{
+        mb: theme.spacing(4),
+        [theme.breakpoints.down('md')]: {
+          textAlign: 'center',
+        },
+      }}
+      >
         <Button
           variant="outlined"
           disabled={!canAddCompany}

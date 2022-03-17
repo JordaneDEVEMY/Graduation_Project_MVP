@@ -8,6 +8,17 @@ const themes = {
     ...darkTheme,
     palette: {
       ...darkTheme.palette,
+      text: {
+        ...darkTheme.palette.text,
+        primary: 'rgba(255,255,255,.8)',
+      },
+      primary: {
+        ...darkTheme.palette.primary,
+        main: '#2492be',
+        light: 'rgb(79, 167, 203)',
+        dark: 'rgb(25, 102, 133)',
+        contrastText: 'rgba(255,255,255,0.87)',
+      },
       background: {
         default: '#121212',
         paper: '#121212',

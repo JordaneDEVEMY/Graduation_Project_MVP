@@ -13,11 +13,11 @@ import {
 } from '../actions';
 import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import planningFunctions from '../utils/planningFunctions';
-import { getLocalBearerToken } from '../requests/index';
 
 function PlanningAdminContainer() {
   const dispatch = useDispatch();
   const admin = useSelector((state) => state.admin);
+  const { allAbsences: absencesList } = admin;
   const { companies: companiesList } = useSelector((state) => state.allCompanies);
   const { employees: employeesList } = useSelector((state) => state.allEmployees);
   const { sites: sitesList } = useSelector((state) => state.allSites);
@@ -28,8 +28,9 @@ function PlanningAdminContainer() {
   if (weekSlug === undefined) {
     weekSlug = planningFunctions.getCurrentWeekSlug();
   }
-  console.log('token', getLocalBearerToken());
-  console.log('companies', companies);
+
+  console.log('sitesList', sitesList);
+  console.log('absencesList', absencesList);
   useEffect(() => {
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllAbsences());

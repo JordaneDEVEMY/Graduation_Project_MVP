@@ -44,6 +44,7 @@ function Companies({
             width: `calc(300px + ${theme.spacing(4)})`,
             [theme.breakpoints.down('md')]: {
               mt: index !== 0 ? theme.spacing(4) : undefined,
+              mx: 'auto',
             },
             [theme.breakpoints.up('md')]: {
               flex: '0 0 auto',

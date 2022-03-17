@@ -20,7 +20,6 @@ function Carousel({
   sites,
   week,
 }) {
-  console.log('carousel', sites);
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = sites.length;

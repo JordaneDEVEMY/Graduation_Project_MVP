@@ -24,8 +24,6 @@ function CompanyForm({
     sitesList.filter(({ company: c }) => c.company_id === company.id),
   );
   const [site, setSite] = React.useState(sitesSelection[0]);
-  console.log('addType', addType);
-  console.log('sitesList', sitesList);
 
   const handleCancelForm = () => {
     handleCancel();
@@ -67,10 +65,7 @@ function CompanyForm({
     >
       <Box
         sx={{
-          padding: {
-            sx: theme.spacing(1),
-            md: theme.spacing(2),
-          },
+          padding: theme.spacing(2),
         }}
       >
         <Typography variant="h3" sx={{ textAlign: 'center', mb: theme.spacing(3) }}>
@@ -119,10 +114,7 @@ function CompanyForm({
           borderTop: 1,
           borderTopColor: theme.palette.divider,
           textAlign: 'center',
-          padding: {
-            sx: theme.spacing(1),
-            md: theme.spacing(2),
-          },
+          padding: theme.spacing(2),
         }}
       >
         <Grid
