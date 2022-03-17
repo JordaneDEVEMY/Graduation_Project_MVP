@@ -20,18 +20,21 @@ function CompanyForm({
 }, ref) {
   const theme = useTheme();
   const addType = sitesSelection.length ? 'site' : 'company';
+  console.log('addType', addType);
   console.log('sitesSelection', sitesSelection);
-  const companyId = sitesSelection.length
+  const companyId = sitesSelection.length !== 0
     ? sitesSelection[0].company.company_id
     : null;
   const selectedCompany = companyId !== null
     ? companiesList.filter((company) => company.id === companyId)[0]
     : companiesList[0];
+  console.log('selectedCompany', selectedCompany);
   const [company, setCompany] = React.useState(selectedCompany);
   const [sitesFromCompany, setSitesFromCompany] = React.useState(
-    sitesList.filter((site) => site.company.company_id === company.id),
+    sitesSelection.length
+      ? sitesSelection
+      : sitesList.filter((site) => site.company.company_id === company.id),
   );
-  console.log('sitesFromCompany', sitesFromCompany);
   const [site, setSite] = React.useState(sitesFromCompany.length
     ? sitesFromCompany[0]
     : { id: undefined });

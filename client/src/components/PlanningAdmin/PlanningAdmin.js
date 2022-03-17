@@ -31,7 +31,7 @@ function PlanningAdmin({
   // Instances used for forms
   const [assignment, setAssignment] = React.useState({});
   const [addCompany, setAddCompany] = React.useState(false);
-  const [addSite, setAddSite] = React.useState({});
+  const [addSite, setAddSite] = React.useState(false);
   // lists used in forms
   const [companiesSelection, setCompaniesSelection] = React.useState(companiesList);
   const [sitesSelection, setSitesSelection] = React.useState([]);
@@ -55,8 +55,8 @@ function PlanningAdmin({
 
   const handleAddSite = (company, availablesSitesList) => {
     console.log('add site', company, availablesSitesList);
-    setAddSite({ ...company });
-    setSitesSelection(sitesList);
+    setSitesSelection(availablesSitesList);
+    setAddSite(true);
   };
 
   const handleOnAssignmentSubmitted = () => {
@@ -155,7 +155,7 @@ function PlanningAdmin({
    * open modal if add site
    */
   React.useEffect(() => {
-    if (addSite.id) {
+    if (addSite) {
       setModalOpened(true);
     }
   }, [addSite]);
