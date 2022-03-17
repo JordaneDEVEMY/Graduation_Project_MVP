@@ -22,7 +22,7 @@ router
    * @param {ForgotPassword} request.body.required - User email
    * @return {string} 200 - success response - application/json
    * @return {WebsiteError} 400 - Bad request response - application/json
-   * @return {WebsiteError} 422 - Incorrect email - application/json
+   * @return {WebsiteError} 401 - Incorrect email - application/json
    * @return {WebsiteError} 500 - Internal server error - application/json
    */
   .post(validate('body', forgotSchema), controllerHandler(forgotPasswordController.forgotPassword));

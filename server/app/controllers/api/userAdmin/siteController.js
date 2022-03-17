@@ -1,19 +1,19 @@
 const siteAdminDatamapper = require('../../../models/userAdmin/site');
+const companyAdminDatamapper = require('../../../models/userAdmin/company');
 const { ApiError } = require('../../../helpers/errorHandler');
 
 const controller = {
   /**
    * UserAdmin controller to get all sites
    * ExpressMiddleware signature
-   * @param {object} req Express req.object used for url id params
    * @param {object} res Express response object
    * @returns {string} Route API JSON response
    */
-  async getAll(req, res) {
+  async getAll(_, res) {
     const sites = await siteAdminDatamapper.findAll();
 
     if (!sites) {
-      throw new ApiError(404, 'Sites introuvables');
+      throw new ApiError(404, 'Sites not found');
     }
 
     return res.json(sites);
@@ -30,7 +30,7 @@ const controller = {
     const site = await siteAdminDatamapper.findByPk(req.params.id);
 
     if (!site) {
-      throw new ApiError(404, 'Site introuvable');
+      throw new ApiError(404, 'Site not found');
     }
 
     return res.json(site);
@@ -44,13 +44,14 @@ const controller = {
    * @returns {string} Route API JSON response
    */
   async create(req, res) {
-    const isCompanyExist = await siteAdminDatamapper.getCompanyId(req.body.company_id);
+    const isCompanyExist = await companyAdminDatamapper.findByPk(req.body.company_id);
 
     if (!isCompanyExist) {
-      throw new ApiError(400, 'L\'id de la société n\'existe pas');
+      throw new ApiError(400, 'Company doesn\'t exist');
     }
 
     const siteCreate = await siteAdminDatamapper.insert(req.body);
+
     return res.json(siteCreate);
   },
 
@@ -62,13 +63,14 @@ const controller = {
    * @returns {string} Route API JSON response
    */
   async update(req, res) {
-    const isCompanyExist = await siteAdminDatamapper.getCompanyId(req.body.company_id);
+    const isCompanyExist = await companyAdminDatamapper.findByPk(req.body.company_id);
 
     if (!isCompanyExist) {
-      throw new ApiError(400, 'L\'id de la société n\'existe pas');
+      throw new ApiError(400, 'Company doesn\'t exist');
     }
 
     const siteUpdate = await siteAdminDatamapper.update(req.params.id, req.body);
+
     return res.json(siteUpdate);
   },
 
@@ -85,7 +87,7 @@ const controller = {
     return res.status(200).json({
       isDeleted: siteDelete,
       statusCode: 200,
-      message: 'Site supprimé',
+      message: 'Site deleted successfully',
     });
   },
 

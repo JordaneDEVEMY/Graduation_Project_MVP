@@ -44,7 +44,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Aucun site trouvé');
+      throw new ApiError(404, 'Sites not found');
     }
 
     return result.rows;
@@ -52,7 +52,7 @@ module.exports = {
 
   /**
    * Find a site by his id
-   * @param {number} siteId - Site ID
+   * @param {number} siteId - Site PK id in databse
    * @returns {Site|ApiError} - REST response of Site or ApiError if no site found
    */
   async findByPk(siteId) {
@@ -64,7 +64,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Ce site n\'existe pas');
+      throw new ApiError(404, 'Site doesn\'t exist');
     }
 
     return result.rows[0];
@@ -95,14 +95,17 @@ module.exports = {
     const result = await client.query('SELECT * FROM "site" WHERE "id" = $1', [siteId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Ce site n\'existe pas');
+      throw new ApiError(404, 'Site not found');
     }
 
-    Object.assign(site, {id: parseInt(siteId, 10)});
+    Object.assign(site, {
+      id: parseInt(siteId, 10),
+    });
 
     const siteToSave = await client.query(
       `
-      SELECT * FROM update_site($1)`,
+      SELECT * FROM update_site($1)
+      `,
       [site],
     );
 
@@ -118,7 +121,7 @@ module.exports = {
     const result = await client.query('SELECT * FROM "site" WHERE "id" = $1;', [siteId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Ce site n\'existe pas');
+      throw new ApiError(404, 'Site not found');
     }
 
     const siteToDelete = await client.query('DELETE FROM "site" WHERE "id" = $1;', [siteId]);
@@ -126,18 +129,4 @@ module.exports = {
     return !!siteToDelete.rowCount;
   },
 
-  /**
-   * Search if company id already exist in db
-   * @param {number} companyId - company id PK to find
-   * @returns {boolean|ApiError} - Return boolean or ApiError if company id PK not found
-   */
-  async getCompanyId(companyId) {
-    const result = await client.query('SELECT * FROM "company" WHERE "id" = $1', [companyId]);
-
-    if (result.rowCount === 0) {
-      throw new ApiError(400, 'L\'id de la société n\'existe pas');
-    }
-
-    return result.rows[0];
-  },
 };

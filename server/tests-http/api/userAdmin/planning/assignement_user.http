@@ -13,14 +13,14 @@ POST {{ endpoint }}/user/
 content-type: application/json
 
 {
-"starting_date": "2022-12-13",
-"ending_date": "2022-12-13",
-"color": "#0F0",
-"position": 0,
-"visibility": true,
-"employee_id": 5,
-"site_id": 5,
-"absence_id": null
+  "starting_date": "2022-12-13",
+  "ending_date": "2022-12-13",
+  "color": "#0F0",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": 5,
+  "absence_id": null
 }
 
 ### Create employee assignment WITH ABSENCE
@@ -39,7 +39,7 @@ content-type: application/json
 }
 
 ### Update employee assignment WITH SITE
-PATCH {{ endpoint }}/58/user
+PATCH {{ endpoint }}/57/user
 content-type: application/json
 
 {
@@ -54,7 +54,7 @@ content-type: application/json
 }
 
 ### Update employee assignment WITH ABSENCE
-PATCH {{ endpoint }}/58/user
+PATCH {{ endpoint }}/57/user
 content-type: application/json
 
 {
@@ -69,7 +69,7 @@ content-type: application/json
 }
 
 ### Update employee assignment without employee id
-PATCH {{ endpoint }}/58/user
+PATCH {{ endpoint }}/57/user
 content-type: application/json
 
 {
@@ -84,7 +84,7 @@ content-type: application/json
 }
 
 ### Update employee assignment with an inexistant employee id
-PATCH {{ endpoint }}/58/user
+PATCH {{ endpoint }}/57/user
 content-type: application/json
 
 {
@@ -144,7 +144,7 @@ content-type: application/json
 }
 
 ### Delete an assignment
-DELETE {{ endpoint }}/58/user
+DELETE {{ endpoint }}/57/user
 
 ### Delete an inexistant assignment
 DELETE {{ endpoint }}/999/user

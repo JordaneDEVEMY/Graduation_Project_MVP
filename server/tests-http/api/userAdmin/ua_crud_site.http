@@ -14,7 +14,7 @@ GET {{ endpoint }}
 ### Get one site
 GET {{ endpoint }}/1
 
-### Get a site who does not exist
+### Get a site who doesn't exist
 GET {{ endpoint }}/9999
 
 ### Get a site with an id as not a number
@@ -86,7 +86,7 @@ content-type: application/json
 }
 
 ### Delete a site
-DELETE {{ endpoint }}/34
+DELETE {{ endpoint }}/35
 
 ### Delete an inexistant site
 DELETE {{ endpoint }}/999

@@ -18,7 +18,7 @@ router
    * @param {string} token.path.required - URL token
    * @return {string} 200 - success response - application/json
    * @return {WebsiteError} 400 - Bad request response - application/json
-   * @return {WebsiteError} 422 - Incorrect email - application/json
+   * @return {WebsiteError} 401 - Incorrect email - application/json
    * @return {WebsiteError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(resetPasswordController.passwordToReset))
@@ -32,7 +32,7 @@ router
    * @param {ResetPassword} request.body.required - new password with new password confirmation
    * @return {UserWithPassword} 200 - success response - application/json
    * @return {WebsiteError} 400 - Bad request response - application/json
-   * @return {WebsiteError} 422 - Incorrect email - application/json
+   * @return {WebsiteError} 401 - Incorrect email - application/json
    * @return {WebsiteError} 500 - Internal server error - application/json
    */
   .post(validate('body', resetSchema), controllerHandler(resetPasswordController.resetPassword));

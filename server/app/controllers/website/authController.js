@@ -1,6 +1,6 @@
 const emailValidator = require('email-validator');
 // ? const bcrypt = require('bcryptjs');
-// const { generateToken } = require('../../helpers/generateToken');
+// ? const { generateToken } = require('../../helpers/generateToken');
 const authDatamapper = require('../../models/website/auth');
 const { WebsiteError } = require('../../helpers/errorHandler');
 
@@ -18,11 +18,11 @@ const controller = {
     const isEmailValid = emailValidator.validate(email);
 
     if (!email || !password) {
-      throw new WebsiteError(400, 'L\'email et le mot de passe sont requis');
+      throw new WebsiteError(400, 'Email or password required');
     }
 
     if (!isEmailValid) {
-      throw new WebsiteError(400, 'Cet email n\'est pas valide');
+      throw new WebsiteError(400, 'Invalid Email');
     }
 
     const user = await authDatamapper.findOne(req.body);
@@ -36,10 +36,10 @@ const controller = {
         email: user.email,
         avatar: user.avatar,
         role_application: user.role_application,
-        // token: generateToken(user.id),
+        // ? token: generateToken(user.id),
       });
     } else {
-      throw new WebsiteError(422, 'Email et/ou mot de passe invalide');
+      throw new WebsiteError(401, 'Email or password invalid');
     }
   },
 };

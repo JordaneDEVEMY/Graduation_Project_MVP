@@ -36,11 +36,11 @@ const client = require('../../config/database');
 
 module.exports = {
   /**
-   * Search if SSN already exist in db
-   * @param {number} userEmail - User Email to find
-   * @returns {boolean|ApiError} - Return boolean or ApiError if userEmail not found
+   * Search if user email already exist in database
+   * @param {string} userEmail - User Email to find
+   * @returns {UserWithPassword|ApiError} - Return User with his password or ApiError if userEmail not found
    */
-  async getEmail(userEmail) {
+  async findByEmail(userEmail) {
     const result = await client.query('SELECT * FROM "employee" WHERE email = $1', [userEmail]);
 
     return result.rows[0];

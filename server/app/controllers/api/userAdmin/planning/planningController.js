@@ -20,7 +20,7 @@ const controller = {
     const period = getWeekPeriod(yearId, weekId);
 
     if (!period) {
-      throw new ApiError(404, `Il n'y a pas de semaine ${weekId} en ${yearId}`);
+      throw new ApiError(404, `Week ${weekId} doesn't exist in ${yearId}`);
     }
 
     const monday = getWeekMonday(yearId, weekId);
@@ -31,12 +31,11 @@ const controller = {
     const absences = await planningAdminDatamapper.findByAbsenceDates(weekDates);
 
     if (!week) {
-      throw new ApiError(404, 'Semaine introuvable');
+      throw new ApiError(404, 'Week not found');
     }
 
     if (!Array.isArray(week)) {
-      // TODO: Sprint 3 - TESTING
-      return;
+      throw new ApiError(500, 'Internal Server Error');
     }
 
     const filteredWeek = [];
@@ -108,6 +107,7 @@ const controller = {
     const userAssignment = await planningAdminDatamapper.insert(req.params, req.body);
     return res.json(userAssignment);
   },
+
 };
 
 module.exports = controller;

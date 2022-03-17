@@ -2,7 +2,7 @@ const client = require('../../config/database');
 
 /**
  * @typedef {object} AuthUser
- * @property {number} id - Database primary key of User
+ * @property {number} id - Database primary key of the user
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -25,25 +25,26 @@ const client = require('../../config/database');
  */
 
 module.exports = {
-
   /**
    * Find one user
-   * @param {InputsAuth} inputsAuth - Email and Password for authentication
+   * @param {AuthInput} authInputs - Email and Password for authentication
    * @returns {AuthUser|null} - Return User or null if no user found
    */
-  async findOne(inputsAuth) {
+  async findOne(authInputs) {
     const result = await client.query(
       `
-    SELECT 
-      "id", 
-      "firstname", 
-      "lastname", 
-      "email", 
-      "avatar",
-      "role_application" 
-    FROM "employee" WHERE "email" = $1 AND "password" = $2
-    `,
-      [inputsAuth.email, inputsAuth.password],
+      SELECT 
+        "id", 
+        "firstname", 
+        "lastname", 
+        "email", 
+        "avatar",
+        "role_application" 
+      FROM "employee" 
+      WHERE "email" = $1 
+      AND "password" = $2
+      `,
+      [authInputs.email, authInputs.password],
     );
 
     if (result.rowCount === 0) {
@@ -55,21 +56,22 @@ module.exports = {
 
   /**
    * Find one user
-   * @param {InputsAuth} inputsAuth - Email for authentication
+   * @param {string} email - Email for authentication
    * @returns {AuthUser|null} - Return User or null if no user found
    */
   async findForgotOne(email) {
     const result = await client.query(
       `
-    SELECT 
-      "id", 
-      "firstname", 
-      "lastname", 
-      "email", 
-      "avatar",
-      "role_application" 
-    FROM "employee" WHERE "email" = $1
-    `,
+      SELECT 
+        "id", 
+        "firstname", 
+        "lastname", 
+        "email", 
+        "avatar",
+        "role_application" 
+      FROM "employee" 
+      WHERE "email" = $1
+      `,
       [email],
     );
 
