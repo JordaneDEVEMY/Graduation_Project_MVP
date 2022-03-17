@@ -20,24 +20,23 @@ function CompanyForm({
 }, ref) {
   const theme = useTheme();
   const addType = sitesSelection.length ? 'site' : 'company';
+  console.log('sitesList', sitesList);
   console.log('addType', addType);
   console.log('sitesSelection', sitesSelection);
   const companyId = sitesSelection.length !== 0
     ? sitesSelection[0].company.company_id
-    : null;
-  const selectedCompany = companyId !== null
-    ? companiesList.filter((company) => company.id === companyId)[0]
     : companiesList[0];
-  console.log('selectedCompany', selectedCompany);
-  const [company, setCompany] = React.useState(selectedCompany);
+  console.log('companyId', companyId);
+  const [company, setCompany] = React.useState(companiesList.filter((item) => item.id === companyId)[0]);
+  console.log('company', company);
   const [sitesFromCompany, setSitesFromCompany] = React.useState(
     sitesSelection.length
       ? sitesSelection
-      : sitesList.filter((site) => site.company.company_id === company.id),
+      : sitesList,
   );
-  const [site, setSite] = React.useState(sitesFromCompany.length
-    ? sitesFromCompany[0]
-    : { id: undefined });
+  console.log('sitesFromCompany', sitesFromCompany);
+  const [site, setSite] = React.useState(sitesFromCompany[0]);
+  console.log('site', site);
 
   const handleCancelForm = () => {
     handleCancel();
@@ -58,7 +57,11 @@ function CompanyForm({
   };
 
   React.useEffect(() => {
-    setSitesFromCompany(sitesList.filter((item) => item.company.company_id === company.id));
+    setSitesFromCompany(
+      sitesSelection.length
+        ? sitesSelection
+        : sitesList.filter((item) => item.company.company_id === company.id),
+    );
   }, [company]);
 
   React.useEffect(() => {

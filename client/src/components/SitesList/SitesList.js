@@ -25,6 +25,7 @@ function SitesList({
   const companySitesIds = company.sites.map((item) => item.id);
   const availableSites = sitesList.filter((item) => !companySitesIds.includes(item.id));
   const canAddSite = availableSites.length !== 0;
+  console.log(`company${company.name}, availableSites`, availableSites);
 
   /**
    * add company site
