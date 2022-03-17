@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import {
   Box, Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText,
@@ -26,12 +26,17 @@ const Aside = styled('aside')(({ theme }) => ({
 }));
 
 function Sidebar() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const theme = useTheme();
   const { weekSlug } = useParams();
 
   const handleDrawer = () => {
     setOpen((oldOpen) => !oldOpen);
+  };
+
+  const handleNav = (e, i) => {
+    setSelectedIndex(i);
   };
 
   return (
@@ -83,7 +88,10 @@ function Sidebar() {
             component={RouterLink}
             to={`/admins/planning${weekSlug ? `/${weekSlug}` : ''}`}
           >
-            <ListItemButton>
+            <ListItemButton
+              selected={selectedIndex === 0}
+              onClick={(e) => handleNav(e, 0)}
+            >
               <ListItemIcon>
                 <DateRangeRoundedIcon />
               </ListItemIcon>
@@ -99,7 +107,10 @@ function Sidebar() {
             component={RouterLink}
             to="/admins/employees"
           >
-            <ListItemButton>
+            <ListItemButton
+              selected={selectedIndex === 1}
+              onClick={(e) => handleNav(e, 1)}
+            >
               <ListItemIcon>
                 <AssignmentIndIcon />
               </ListItemIcon>
@@ -115,7 +126,10 @@ function Sidebar() {
             component={RouterLink}
             to="/admins/sites"
           >
-            <ListItemButton>
+            <ListItemButton
+              selected={selectedIndex === 2}
+              onClick={(e) => handleNav(e, 2)}
+            >
               <ListItemIcon>
                 <BusinessIcon />
               </ListItemIcon>
@@ -131,7 +145,10 @@ function Sidebar() {
             component={RouterLink}
             to="/admins/companies"
           >
-            <ListItemButton>
+            <ListItemButton
+              selected={selectedIndex === 3}
+              onClick={(e) => handleNav(e, 3)}
+            >
               <ListItemIcon>
                 <SupervisorAccountIcon />
               </ListItemIcon>
