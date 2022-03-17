@@ -11,7 +11,7 @@ GET {{ endpoint }}/azertyuiop
 ### Get one user
 GET {{ endpoint }}/1
 
-### Get an user who doesn't
+### Get an user who doesn't exist
 GET {{ endpoint }}/9999
 
 ### Get an user with an id as not a number
