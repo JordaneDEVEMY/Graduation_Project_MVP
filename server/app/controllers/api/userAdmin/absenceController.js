@@ -13,7 +13,7 @@ const controller = {
     const absences = await absenceAdminDatamapper.findAll();
 
     if (!absences) {
-      throw new ApiError(404, 'Absences introuvables');
+      throw new ApiError(404, 'Absences not found');
     }
 
     return res.json(absences);

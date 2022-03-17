@@ -22,7 +22,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Aucune absence trouvée');
+      throw new ApiError(400, 'Absences not found');
     }
 
     return result.rows;
