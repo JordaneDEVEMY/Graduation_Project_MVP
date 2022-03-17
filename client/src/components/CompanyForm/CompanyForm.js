@@ -14,13 +14,17 @@ import {
 function CompanyForm({
   companiesList,
   sitesList,
-  companyId,
+  sitesSelection,
   handleCancel,
   handleSubmit,
 }, ref) {
   const theme = useTheme();
-  const addType = companyId ? 'site' : 'company';
-  const selectedCompany = companyId
+  const addType = sitesSelection.length ? 'site' : 'company';
+  console.log('sitesSelection', sitesSelection);
+  const companyId = sitesSelection.length
+    ? sitesSelection[0].company.company_id
+    : null;
+  const selectedCompany = companyId !== null
     ? companiesList.filter((company) => company.id === companyId)[0]
     : companiesList[0];
   const [company, setCompany] = React.useState(selectedCompany);
@@ -93,7 +97,7 @@ function CompanyForm({
               onChange={(_event, newValue) => {
                 setCompany(newValue);
               }}
-              disabled={companyId}
+              disabled={companyId !== null}
               options={companiesList}
               sx={{ width: '100%' }}
               renderInput={(params) => (

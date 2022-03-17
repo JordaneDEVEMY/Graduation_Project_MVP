@@ -31,9 +31,10 @@ function PlanningAdmin({
   // Instances used for forms
   const [assignment, setAssignment] = React.useState({});
   const [addCompany, setAddCompany] = React.useState(false);
-  // const [site, setSite] = React.useState({});
+  const [addSite, setAddSite] = React.useState({});
   // lists used in forms
   const [companiesSelection, setCompaniesSelection] = React.useState(companiesList);
+  const [sitesSelection, setSitesSelection] = React.useState([]);
   const [employeesSelection, setEmployeesSelection] = React.useState(employeesList);
   // const [sitesSelection, setSitesSelection] = React.useState(sitesList);
   // dragend
@@ -41,7 +42,7 @@ function PlanningAdmin({
   const [dragEndResult, setDragEndResult] = React.useState({});
   console.log('draggableCompanies into planning', draggableCompanies);
 
-  const handleAssignment = (assignmentData, dragResult) => {
+  const handleAddAssignment = (assignmentData, dragResult) => {
     if (dragResult.destination) {
       setDragEndResult(dragResult);
     }
@@ -52,6 +53,12 @@ function PlanningAdmin({
     setAddCompany(true);
   };
 
+  const handleAddSite = (company, availablesSitesList) => {
+    console.log('add site', company, availablesSitesList);
+    setAddSite({ ...company });
+    setSitesSelection(sitesList);
+  };
+
   const handleOnAssignmentSubmitted = () => {
     console.log('on assignment submitted');
     setAssignment({});
@@ -60,20 +67,20 @@ function PlanningAdmin({
 
   const handleOnCompanySubmitted = (company) => {
     console.log('on company submitted');
+    const addType = addCompany ? 'company' : 'site';
+    console.log(addType);
     const planningCompanies = [...draggableCompanies];
-    planningCompanies.push(company);
-    const sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
-    setDraggableCompanies(sortedCompanies);
-    setAddCompany(false);
+
+    if (addType === 'company') {
+      planningCompanies.push(company);
+      const sortedCompanies = planningFunctions.sortCompaniesByName(planningCompanies);
+      setDraggableCompanies(sortedCompanies);
+      setAddCompany(false);
+    } else {
+      setAddSite(false);
+    }
     setModalOpened(false);
   };
-
-  // const handleSubmitCompany = () => {
-  // };
-
-  // const handleSite = (siteData) => {
-  //   setSitesSelection(siteData);
-  // };
 
   const handleCancelAssignment = () => {
     if (dragEndResult?.draggableId) {
@@ -135,16 +142,23 @@ function PlanningAdmin({
     if (addCompany) {
       // get all others sites employees
       const allPlanningCompaniesIds = companies.map((item) => item.id);
-      console.log('allPlanningCompaniesIds', allPlanningCompaniesIds);
       // retrieve all assignments employees from employeesLIst
       const compagniesWhoCanBeAdded = companiesList.filter(
         ({ id }) => !allPlanningCompaniesIds.includes(id),
       );
-      console.log('compagniesWhoCanBeAdded', compagniesWhoCanBeAdded);
       setCompaniesSelection(compagniesWhoCanBeAdded);
       setModalOpened(true);
     }
   }, [addCompany]);
+
+  /**
+   * open modal if add site
+   */
+  React.useEffect(() => {
+    if (addSite.id) {
+      setModalOpened(true);
+    }
+  }, [addSite]);
 
   React.useEffect(() => {
     setDraggableCompanies(companies);
@@ -176,16 +190,22 @@ function PlanningAdmin({
         ? (
           <DraggableAssignments
             companies={draggableCompanies}
-            handleAssignment={handleAssignment}
+            handleAssignment={handleAddAssignment}
+            handleSite={handleAddSite}
+            isPast={isPast}
+            sitesList={sitesList}
             week={currentWeek}
           />
         )
         : (
           <Companies
             companies={companies}
-            handleAssignment={handleAssignment}
+            handleAssignment={handleAddAssignment}
+            handleSite={handleAddSite}
             isDropable={false}
             isMobile
+            isPast={isPast}
+            sitesList={sitesList}
             week={currentWeek}
           />
         )}
@@ -212,11 +232,12 @@ function PlanningAdmin({
             handleSubmit={handleOnAssignmentSubmitted}
           />
           )}
-          {(canAddCompany && addCompany)
+          {(addCompany || addSite)
           && (
           <CompanyForm
             companiesList={companiesSelection}
             sitesList={sitesList}
+            sitesSelection={sitesSelection}
             handleCancel={handleCancelCompany}
             handleSubmit={handleOnCompanySubmitted}
           />

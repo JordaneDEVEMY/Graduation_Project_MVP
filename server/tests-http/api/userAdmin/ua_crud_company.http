@@ -14,7 +14,7 @@ GET {{ endpoint }}
 ### Get one company
 GET {{ endpoint }}/1
 
-### Get a company who does not exist
+### Get a company who doesn't exist
 GET {{ endpoint }}/9999
 
 ### Get a company with an id as not a number
@@ -98,7 +98,7 @@ content-type: application/json
 }
 
 ### Delete a company
-DELETE {{ endpoint }}/24
+DELETE {{ endpoint }}/26
 
 ### Delete an inexistant company
 DELETE {{ endpoint }}/999

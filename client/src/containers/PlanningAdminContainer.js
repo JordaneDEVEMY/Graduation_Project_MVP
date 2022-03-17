@@ -13,6 +13,7 @@ import {
 } from '../actions';
 import PlanningAdmin from '../components/PlanningAdmin/PlanningAdmin';
 import planningFunctions from '../utils/planningFunctions';
+import { getLocalBearerToken } from '../requests/index';
 
 function PlanningAdminContainer() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function PlanningAdminContainer() {
   if (weekSlug === undefined) {
     weekSlug = planningFunctions.getCurrentWeekSlug();
   }
+  console.log('token', getLocalBearerToken());
   console.log('companies', companies);
   useEffect(() => {
     dispatch(actionRequestAllEmployees());

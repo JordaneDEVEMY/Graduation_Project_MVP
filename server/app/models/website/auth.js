@@ -2,7 +2,7 @@ const client = require('../../config/database');
 
 /**
  * @typedef {object} AuthUser
- * @property {number} id - Database primary key of User
+ * @property {number} id - Database primary key of the user
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} email - User email
@@ -25,51 +25,25 @@ const client = require('../../config/database');
  */
 
 module.exports = {
-
   /**
    * Find one user
-   * @param {InputsAuth} inputsAuth - Email and Password for authentication
+   * @param {AuthInput} authInputs - Email and Password for authentication
    * @returns {AuthUser|null} - Return User or null if no user found
    */
-  async findOne(inputsAuth) {
+  async findOne(email) {
     const result = await client.query(
       `
-    SELECT 
-      "id", 
-      "firstname", 
-      "lastname", 
-      "email", 
-      "avatar",
-      "role_application" 
-    FROM "employee" WHERE "email" = $1 AND "password" = $2
-    `,
-      [inputsAuth.email, inputsAuth.password],
-    );
-
-    if (result.rowCount === 0) {
-      return null;
-    }
-
-    return result.rows[0];
-  },
-
-  /**
-   * Find one user
-   * @param {InputsAuth} inputsAuth - Email for authentication
-   * @returns {AuthUser|null} - Return User or null if no user found
-   */
-  async findForgotOne(email) {
-    const result = await client.query(
-      `
-    SELECT 
-      "id", 
-      "firstname", 
-      "lastname", 
-      "email", 
-      "avatar",
-      "role_application" 
-    FROM "employee" WHERE "email" = $1
-    `,
+      SELECT 
+        "id", 
+        "firstname", 
+        "lastname", 
+        "email", 
+        "avatar",
+        "role_application",
+        "password"
+      FROM "employee" 
+      WHERE "email" = $1 
+      `,
       [email],
     );
 
@@ -80,4 +54,59 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Find one user
+   * @param {string} email - Email for authentication
+   * @returns {AuthUser|null} - Return User or null if no user found
+   */
+  async findForgotOne(email) {
+    const result = await client.query(
+      `
+      SELECT 
+        "id", 
+        "firstname", 
+        "lastname", 
+        "email", 
+        "avatar",
+        "role_application" 
+      FROM "employee" 
+      WHERE "email" = $1
+      `,
+      [email],
+    );
+
+    if (result.rowCount === 0) {
+      return null;
+    }
+
+    return result.rows[0];
+  },
+
+  /**
+   * Find one user
+   * @param {number} userId - User primary key id in database
+   * @returns {AuthUser|null} - Return User or null if no user found
+   */
+  async findByPk(userId) {
+    const result = await client.query(
+      `
+      SELECT 
+        "id", 
+        "firstname", 
+        "lastname", 
+        "email", 
+        "avatar",
+        "role_application" 
+      FROM "employee" 
+      WHERE "id" = $1 
+      `,
+      [userId],
+    );
+
+    if (result.rowCount === 0) {
+      return null;
+    }
+
+    return result.rows[0];
+  },
 };

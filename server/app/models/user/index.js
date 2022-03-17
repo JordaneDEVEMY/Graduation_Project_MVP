@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const client = require('../../config/database');
 const { ApiError } = require('../../helpers/errorHandler');
 
@@ -75,7 +76,7 @@ const { ApiError } = require('../../helpers/errorHandler');
 module.exports = {
   /**
    * Find an User by his id
-   * @param {number} userId - User's ID
+   * @param {number} userId - User PK id in database
    * @returns {RestUser[]|ApiError} - REST response of an User or ApiError if user not found
    */
   async findByPk(userId) {
@@ -87,7 +88,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+      throw new ApiError(400, 'This user doesn\'t exist');
     }
 
     return result.rows[0];
@@ -95,7 +96,7 @@ module.exports = {
 
   /**
    * Update and User by his id with email and password body request
-   * @param {number} userId - User's ID
+   * @param {number} userId - User PK id in database
    * @param {object<password, phone_number, mobile_number>} user - Body request
    * @returns {UserUpdate|ApiError} - Return updated User or ApiError if user not found
    */
@@ -103,10 +104,15 @@ module.exports = {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cet utilisateur n\'existe pas');
+      throw new ApiError(400, 'This user doesn\'t exist');
     }
 
-    const userToSave = await client.query(
+    const { phone_number, mobile_number } = user;
+    let { password } = user;
+
+    password = bcrypt.hashSync(password, 10);
+
+    const userUpdate = await client.query(
       `
       UPDATE "employee" 
       SET 
@@ -121,22 +127,21 @@ module.exports = {
         "phone_number",
         "mobile_number",
         "updated_at";`,
-      [user.password, user.phone_number, user.mobile_number, userId],
+      [
+        password,
+        phone_number,
+        mobile_number,
+        userId,
+      ],
     );
 
-    // ? Standby Code for update function in SQL
-    // const userToUpdate = result.rows[0];
-    // const userUpdated = { ...userToUpdate, ...user };
-
-    // const userToSave = await client.query('', [userUpdated]);
-
-    return userToSave.rows[0];
+    return userUpdate.rows[0];
   },
 
   /**
    * Find colleagues of an employee
-   * @param {number} startingDate - Starting date of site affectation
-   * @param {number} endingDate - Ending date of site affectation
+   * @param {string} startingDate - Starting date of site affectation
+   * @param {string} endingDate - Ending date of site affectation
    * @param {number} siteId - Site ID
    * @param {number} userId - User ID
    * @returns {Colleagues|ApiError} - Colleagues response

@@ -7,6 +7,8 @@ const { assignmentUserController } = require('../../../../../controllers');
 
 const controllerHandler = require('../../../../../helpers/apiControllerHandler');
 
+const { protect } = require('../../../../../helpers/authProtect');
+
 const router = express.Router();
 
 router
@@ -21,7 +23,7 @@ router
    * @return {ApiError} 404 - Week not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .post(validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.create));
+  .post(controllerHandler(protect), validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.create));
 
 router
   .route('/:id(\\d+)/user')
@@ -36,7 +38,7 @@ router
    * @return {ApiError} 404 - Week not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .patch(validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.update))
+  .patch(controllerHandler(protect), validate('body', userSiteAssignmentSchema), controllerHandler(assignmentUserController.update))
 
   /**
    * DELETE /api/admin/planning/assignment/{id}/user
@@ -48,6 +50,6 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .delete(controllerHandler(assignmentUserController.delete));
+  .delete(controllerHandler(protect), controllerHandler(assignmentUserController.delete));
 
 module.exports = router;

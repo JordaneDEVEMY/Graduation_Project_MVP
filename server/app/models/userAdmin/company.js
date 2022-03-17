@@ -40,7 +40,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Aucune entreprise trouvée');
+      throw new ApiError(404, 'Companies not found');
     }
 
     return result.rows;
@@ -48,7 +48,7 @@ module.exports = {
 
   /**
    * Find a Company by his id
-   * @param {number} companyId - Company ID
+   * @param {number} companyId - Company primary key id in database
    * @returns {Company|ApiError} - REST response of Company or ApiError if no company found
    */
   async findByPk(companyId) {
@@ -58,10 +58,6 @@ module.exports = {
       `,
       [companyId],
     );
-
-    if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cette entreprise n\'existe pas');
-    }
 
     return result.rows[0];
   },
@@ -91,11 +87,13 @@ module.exports = {
     const result = await client.query('SELECT * FROM "company" WHERE "id" = $1', [companyId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cette entreprise n\'existe pas');
+      throw new ApiError(404, 'Company not found');
     }
 
-    Object.assign(company, { id: parseInt(companyId, 10) });
-    
+    Object.assign(company, {
+      id: parseInt(companyId, 10),
+    });
+
     const companyToSave = await client.query(
       `
       SELECT * FROM update_company($1)
@@ -115,7 +113,7 @@ module.exports = {
     const result = await client.query('SELECT * FROM "company" WHERE "id" = $1;', [companyId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cette entreprise n\'existe pas');
+      throw new ApiError(404, 'Company not found');
     }
 
     const companyToDelete = await client.query('DELETE FROM "company" WHERE "id" = $1;', [companyId]);
@@ -132,7 +130,7 @@ module.exports = {
     const result = await client.query('SELECT "name" FROM "company" WHERE "name" = $1', [companyName]);
 
     if (result.rowCount > 0) {
-      throw new ApiError(400, 'Le nom de la société est déjà utilisé');
+      throw new ApiError(400, 'This company name already exists');
     }
 
     return !result.rowCount;
@@ -147,7 +145,7 @@ module.exports = {
     const result = await client.query('SELECT "address" FROM "company" WHERE "address" = $1', [companyAddress]);
 
     if (result.rowCount > 0) {
-      throw new ApiError(400, 'L\'adresse de la société est déjà utilisée');
+      throw new ApiError(400, 'This company address already exists');
     }
 
     return !result.rowCount;

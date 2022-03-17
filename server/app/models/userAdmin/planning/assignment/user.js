@@ -44,7 +44,7 @@ module.exports = {
   async insert(assignment) {
     const assignmentToCreate = await client.query(
       `
-      SELECT insert_assignment($1);`,
+      SELECT * FROM insert_assignment($1);`,
       [assignment],
     );
 
@@ -61,10 +61,12 @@ module.exports = {
     const result = await client.query('SELECT * FROM "assignment" WHERE "id" = $1', [assignmentId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cette affectation n\'existe pas');
+      throw new ApiError(400, 'Assignment doesn\'t exist');
     }
 
-    Object.assign(assignment, {id : parseInt(assignmentId, 10)})
+    Object.assign(assignment, {
+      id: parseInt(assignmentId, 10),
+    });
 
     const siteToSave = await client.query(
       `
@@ -85,7 +87,7 @@ module.exports = {
     const result = await client.query('SELECT * FROM "assignment" WHERE "id" = $1;', [assignmentId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cette affectation n\'existe pas');
+      throw new ApiError(404, 'Assignment not found');
     }
 
     const assignmentToDelete = await client.query('DELETE FROM "assignment" WHERE "id" = $1;', [assignmentId]);

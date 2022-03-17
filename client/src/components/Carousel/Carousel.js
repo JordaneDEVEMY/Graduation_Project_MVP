@@ -16,6 +16,7 @@ import './carousel.scss';
 
 function Carousel({
   handleAssignment,
+  handleSite,
   sites,
   week,
 }) {
@@ -64,6 +65,7 @@ function Carousel({
                 <Site
                   {...site}
                   handleAssignment={handleAssignment}
+                  handleSite={handleSite}
                   isAbsence={site.id === 0}
                   isDropable={false}
                   isMobile
@@ -101,7 +103,8 @@ function Carousel({
 }
 
 Carousel.propTypes = {
-  handleAssignment: PropTypes.func,
+  handleAssignment: PropTypes.func.isRequired,
+  handleSite: PropTypes.func.isRequired,
   sites: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -113,10 +116,6 @@ Carousel.propTypes = {
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
-};
-
-Carousel.defaultProps = {
-  handleAssignment: undefined,
 };
 
 export default React.memo(Carousel);

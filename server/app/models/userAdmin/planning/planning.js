@@ -1,5 +1,4 @@
 const client = require('../../../config/database');
-const { ApiError } = require('../../../helpers/errorHandler');
 
 /**
  * @typedef {object} Week
@@ -40,10 +39,10 @@ const { ApiError } = require('../../../helpers/errorHandler');
 
 module.exports = {
   /**
-   * Find a Week planning with first and last ISO date of the week
+   * Find a Week planning with ISO date of the week planning
    * @param {string} mondayIsoDate - Week monday ISO date ID
    * @param {string} sundayIsoDate - Week sunday ISO date ID
-   * @returns {Week[]|ApiError} - Response of Week or ApiError if no week found
+   * @returns {Week[]} - Response of Week
    */
   async findByDates(weekDates) {
     const result = await client.query(
@@ -76,13 +75,15 @@ module.exports = {
       ],
     );
 
-    // if (result.rowCount === 0) {
-    //   throw new ApiError(400, 'Semaine non planifiée pour le moment');
-    // }
-
     return result.rows;
   },
 
+  /**
+   * Find a absence in a Week planning with ISO dates of the week planning
+   * @param {string} mondayIsoDate - Week monday ISO date ID
+   * @param {string} sundayIsoDate - Week sunday ISO date ID
+   * @returns {Week[]} - Response of Week
+   */
   async findByAbsenceDates(weekDates) {
     const result = await client.query(
       `
@@ -113,10 +114,6 @@ module.exports = {
         weekDates[6],
       ],
     );
-
-    // if (result.rowCount === 0) {
-    //   throw new ApiError(400, ''Semaine non planifiée pour le moment');
-    // }
 
     return result.rows;
   },

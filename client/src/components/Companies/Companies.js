@@ -10,12 +10,15 @@ import SitesList from '../SitesList/SitesList';
 function Companies({
   companies,
   handleAssignment,
+  handleSite,
   isDropable,
   isMobile,
+  isPast,
+  sitesList,
   week,
 }) {
-  const [brands, setBrands] = React.useState(companies);
   const theme = useTheme();
+  const [brands, setBrands] = React.useState(companies);
 
   React.useEffect(() => {
     setBrands(companies);
@@ -26,8 +29,8 @@ function Companies({
       sx={{
         [theme.breakpoints.up('md')]: {
           display: 'flex',
-          gap: theme.spacing(4),
-          overflowX: 'auto',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
           mb: theme.spacing(2),
         },
       }}
@@ -37,6 +40,7 @@ function Companies({
           <Box
             key={`company-${company.id}-wrapper`}
             sx={{
+              position: 'relative',
               width: `calc(300px + ${theme.spacing(4)})`,
               [theme.breakpoints.down('md')]: {
                 mt: index !== 0 ? theme.spacing(4) : undefined,
@@ -54,6 +58,7 @@ function Companies({
               }}
             >
               {company.name}
+              {}
             </Typography>
 
             {company.sites.length
@@ -61,10 +66,13 @@ function Companies({
                 <SitesList
                   company={company}
                   handleAssignment={handleAssignment}
+                  handleSite={handleSite}
                   id={`company-${company.id}`}
                   isDropable={isDropable}
                   isMobile={isMobile}
+                  isPast={isPast}
                   key={`company-${company.id}`}
+                  sitesList={sitesList.filter((item) => item.company.company_id === company.id)}
                   week={week}
                 />
               )
@@ -91,7 +99,7 @@ function Companies({
               maxWith: '20rem',
             }}
           >
-            Aucun planning à afficher.
+            Aucune compagnie à afficher.
           </Alert>
         )}
     </Box>
@@ -111,8 +119,13 @@ Companies.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  handleSite: PropTypes.func.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  isPast: PropTypes.bool.isRequired,
+  sitesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

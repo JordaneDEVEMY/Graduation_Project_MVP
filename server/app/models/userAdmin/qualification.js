@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 const client = require('../../config/database');
 const { ApiError } = require('../../helpers/errorHandler');
 
@@ -23,7 +22,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Aucune qualification trouvée');
+      throw new ApiError(404, 'Qualifications not found');
     }
 
     return result.rows;

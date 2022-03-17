@@ -215,7 +215,7 @@ Site.propTypes = {
       visibility: PropTypes.bool.isRequired,
     }).isRequired,
   ).isRequired,
-  handleAssignment: PropTypes.func,
+  handleAssignment: PropTypes.func.isRequired,
   isAbsence: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
@@ -225,10 +225,6 @@ Site.propTypes = {
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
-};
-
-Site.defaultProps = {
-  handleAssignment: undefined,
 };
 
 export default React.memo(Site);

@@ -12,6 +12,9 @@ import planningFunctions from '../../utils/planningFunctions';
 function DraggableAssignments({
   companies,
   handleAssignment,
+  handleSite,
+  isPast,
+  sitesList,
   week,
 }) {
   // save initial companies object
@@ -44,8 +47,11 @@ function DraggableAssignments({
       <Companies
         companies={assignmentsPositions}
         handleAssignment={handleAssignment}
+        handleSite={handleSite}
         isDropable
         isMobile={false}
+        isPast={isPast}
+        sitesList={sitesList}
         week={week}
       />
     </DragDropContext>
@@ -65,6 +71,11 @@ DraggableAssignments.propTypes = {
     }).isRequired,
   ).isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  handleSite: PropTypes.func.isRequired,
+  isPast: PropTypes.bool.isRequired,
+  sitesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(
