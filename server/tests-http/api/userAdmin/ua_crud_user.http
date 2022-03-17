@@ -14,7 +14,7 @@ GET {{ endpoint }}
 ### Get one user
 GET {{ endpoint }}/1
 
-### Get an user who does not exist
+### Get an user who doesn't exist
 GET {{ endpoint }}/9999
 
 ### Get an user with an id as not a number
@@ -27,17 +27,19 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "strinssesg@test.net",
+  "email": "strinsessg@test.net",
   "password": "string",
-  "social_security_number": 143444789033122,
-  "date_of_birth": "2018-07-10",
+  "social_security_number": "191195952546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-07-10",
   "address": "string",
   "zip_code": 0,
-  "starting_date": "2018-07-10",
+  "starting_date": "2000-07-10",
   "avatar": "string",
   "fonction": "string",
   "role_application": "string",
-  "employee_qualification_id": 1
+  "qualification_label": "Plombier"
 }
 
 ### Create a user with email error
@@ -47,16 +49,19 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "string",
+  "email": "withoutarobase",
   "password": "string",
-  "social_security_number": 123456789012323,
-  "date_of_birth": "string",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-07-10",
   "address": "string",
   "zip_code": 0,
+  "starting_date": "2000-07-10",
   "avatar": "string",
   "fonction": "string",
   "role_application": "string",
-  "employee_qualification_id": 1
+  "qualification_label": "Plombier"
 }
 
 ### Create a user with SSN error
@@ -66,17 +71,19 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "string@testssn.fr",
+  "email": "strinssesg@test.net",
   "password": "string",
-  "social_security_number": "mustbeanumber",
-  "date_of_birth": "2018-07-10",
+  "social_security_number": "1234",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-07-10",
   "address": "string",
   "zip_code": 0,
-  "starting_date": "2018-07-10",
+  "starting_date": "2000-07-10",
   "avatar": "string",
   "fonction": "string",
   "role_application": "string",
-  "employee_qualification_id": 1
+  "qualification_label": "Plombier"
 }
 
 ### Create a user with date error
@@ -86,36 +93,84 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "string@testssn.fr",
+  "email": "strinssesg@test.net",
   "password": "string",
-  "social_security_number": 123453253262326,
-  "date_of_birth": "21-07-10",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "22/10/10",
   "address": "string",
   "zip_code": 0,
-  "starting_date": "20-07-10",
+  "starting_date": "22/10/10",
   "avatar": "string",
   "fonction": "string",
   "role_application": "string",
-  "employee_qualification_id": 1
+  "qualification_label": "Plombier"
 }
 
-### Patch an user 
-PATCH {{ endpoint }}/69
+### Create a user who doesn't have 17 years
+POST {{ endpoint }}/
 content-type: application/json
 
 {
-  "firstname": "test",
-  "lastname": "test",
-  "email": "test@test.com",
-  "social_security_number": "22473299336969",
-  "date_of_birth": "2018-06-22T22:00:00.000Z",
-  "address": "464-6625 Tuuuuuuurpis Av.",
-  "zip_code": 34000,
-  "starting_date": "2022-03-01T23:00:00.000Z",
-  "avatar": "/oups/69.jps",
-  "fonction": "Operator",
-  "role_application": "user",
-  "employee_qualification_id": 1
+  "firstname": "string",
+  "lastname": "string",
+  "email": "strinssesg@test.net",
+  "password": "string",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2020-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2020-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
+}
+
+### Create a user with bad password
+POST {{ endpoint }}/
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "strinssesg@test.net",
+  "password": "0",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
+}
+
+### Patch an user 
+PATCH {{ endpoint }}/37
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "strinsssg@test.net",
+  "social_security_number": "191095950546236",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
 }
 
 ### Patch an inexistant user
@@ -123,18 +178,20 @@ PATCH {{ endpoint }}/999
 content-type: application/json
 
 {
-  "firstname": "test",
-  "lastname": "test",
-  "email": "test@test.com",
-  "social_security_number": "22473299336969",
-  "date_of_birth": "2018-06-22T22:00:00.000Z",
-  "address": "464-6625 Tuuuuuuurpis Av.",
-  "zip_code": 34000,
-  "starting_date": "2022-03-01T23:00:00.000Z",
-  "avatar": "/oups/69.jps",
-  "fonction": "Operator",
-  "role_application": "user",
-  "employee_qualification_id": 1
+  "firstname": "string",
+  "lastname": "string",
+  "email": "strinssesg@test.net",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
 }
 
 ### Patch an inexistant user with id as a string
@@ -142,18 +199,104 @@ PATCH {{ endpoint }}/tartempion/profil
 content-type: application/json
 
 {
-  "firstname": "test",
-  "lastname": "test",
-  "email": "test@test.com",
-  "social_security_number": "22473299336969",
-  "date_of_birth": "2018-06-22T22:00:00.000Z",
-  "address": "464-6625 Tuuuuuuurpis Av.",
-  "zip_code": 34000,
-  "starting_date": "2022-03-01T23:00:00.000Z",
-  "avatar": "/oups/69.jps",
-  "fonction": "Operator",
-  "role_application": "user",
-  "employee_qualification_id": 1
+  "firstname": "string",
+  "lastname": "string",
+  "email": "strinssesg@test.net",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
+}
+
+### Patch an user with bad email
+PATCH {{ endpoint }}/37
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "test.net",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
+}
+
+### Patch an user with bad phone number
+PATCH {{ endpoint }}/37
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "test@test.net",
+  "social_security_number": "191095950546436",
+  "phone_number": "045667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2000-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
+}
+
+### Patch an user with bad mobile number
+PATCH {{ endpoint }}/37
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "test@test.net",
+  "social_security_number": "191095950546436",
+  "phone_number": "0634455667",
+  "mobile_number": "065667",
+  "date_of_birth": "2000-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
+}
+
+### Patch an user who doesn't have 17 years
+PATCH {{ endpoint }}/37
+content-type: application/json
+
+{
+  "firstname": "string",
+  "lastname": "string",
+  "email": "test@test.net",
+  "social_security_number": "191095950546436",
+  "phone_number": "0434455667",
+  "mobile_number": "0634455667",
+  "date_of_birth": "2020-01-01",
+  "address": "string",
+  "zip_code": 0,
+  "starting_date": "2000-01-01",
+  "avatar": "string",
+  "fonction": "string",
+  "role_application": "string",
+  "qualification_label": "Plombier"
 }
 
 ### Delete an user

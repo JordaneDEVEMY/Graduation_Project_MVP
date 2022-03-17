@@ -12,7 +12,6 @@ import {
 import planningFunctions from '../utils/planningFunctions';
 
 function AssignmentFormContainer({
-  absencesList,
   assignment,
   employeesList,
   handleCancel,
@@ -70,7 +69,6 @@ function AssignmentFormContainer({
   return (
     <AssignmentForm
       ref={ref}
-      absencesList={absencesList}
       assignment={assignment}
       employeesList={employeesList}
       setModalOpened={setModalOpened}

@@ -13,18 +13,20 @@ POST {{ endpoint }}/user/
 content-type: application/json
 
 {
-"starting_date": "2022-12-13",
-"ending_date": "2022-12-13",
-"color": "#0F0",
-"position": 0,
-"visibility": true,
-"employee_id": 5,
-"site_id": 5,
-"absence_id": 5
+  "starting_date": "2022-12-13",
+  "ending_date": "2022-12-13",
+  "color": "#0F0",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": 5,
+  "absence_id": null
 }
 
 ### Create employee assignment WITH ABSENCE
 POST {{ endpoint }}/user/
+content-type: application/json
+
 {
   "starting_date": "2022-12-12",
   "ending_date": "2022-12-12",
@@ -32,12 +34,12 @@ POST {{ endpoint }}/user/
   "position": 0,
   "visibility": true,
   "employee_id": 5,
-  "site_id": 5,
+  "site_id": null,
   "absence_id": 5
 }
 
 ### Update employee assignment WITH SITE
-PATCH {{ endpoint }}/47/user
+PATCH {{ endpoint }}/57/user
 content-type: application/json
 
 {
@@ -48,11 +50,88 @@ content-type: application/json
   "visibility": true,
   "employee_id": 5,
   "site_id": 5,
-  "absence_id": 5
+  "absence_id": null
 }
 
 ### Update employee assignment WITH ABSENCE
-PATCH {{ endpoint }}/47/user
+PATCH {{ endpoint }}/57/user
+content-type: application/json
+
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": null,
+  "absence_id": 5
+}
+
+### Update employee assignment without employee id
+PATCH {{ endpoint }}/57/user
+content-type: application/json
+
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": null,
+  "site_id": null,
+  "absence_id": 5
+}
+
+### Update employee assignment with an inexistant employee id
+PATCH {{ endpoint }}/57/user
+content-type: application/json
+
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 999,
+  "site_id": null,
+  "absence_id": 5
+}
+
+### Update employee assignment with bad date format
+PATCH {{ endpoint }}/58/user
+content-type: application/json
+
+{
+  "starting_date": "2022/12/12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 999,
+  "site_id": null,
+  "absence_id": 5
+}
+
+### TODO must return an error : Update employee assignment WITH ABSENCE AND SITE AS NULL
+PATCH {{ endpoint }}/58/user
+content-type: application/json
+
+{
+  "starting_date": "2022-12-12",
+  "ending_date": "2022-12-12",
+  "color": "#OFO",
+  "position": 0,
+  "visibility": true,
+  "employee_id": 5,
+  "site_id": null,
+  "absence_id": null
+}
+
+### TODO must return an error : Update employee assignment WITH ABSENCE AND SITE WITH AN ID
+PATCH {{ endpoint }}/58/user
+content-type: application/json
+
 {
   "starting_date": "2022-12-12",
   "ending_date": "2022-12-12",
@@ -65,7 +144,7 @@ PATCH {{ endpoint }}/47/user
 }
 
 ### Delete an assignment
-DELETE {{ endpoint }}/47/user
+DELETE {{ endpoint }}/57/user
 
 ### Delete an inexistant assignment
 DELETE {{ endpoint }}/999/user

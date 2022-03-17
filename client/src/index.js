@@ -8,11 +8,13 @@ import AppContainer from './containers/AppContainer';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 ReactDOM.render(
   <Provider store={store}>
     <LocalizationProvider dateAdapter={DateAdapter}>
       <BrowserRouter>
+        <ScrollToTop />
         <AppContainer />
       </BrowserRouter>
     </LocalizationProvider>

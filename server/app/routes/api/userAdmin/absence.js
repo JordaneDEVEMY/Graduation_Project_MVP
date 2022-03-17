@@ -1,12 +1,11 @@
 const express = require('express');
-// ? const cache = require('../../../helpers/redisCache');
-
-// const validate = require('../../../validation');
-// const absenceSchema = require('../../../validation/userAdmin/qualification');
+// ? NOT IN MVP - const cache = require('../../../helpers/redisCache');
 
 const { userAdminAbsenceController } = require('../../../controllers');
 
 const controllerHandler = require('../../../helpers/apiControllerHandler');
+
+const { protect } = require('../../../helpers/authProtect');
 
 const router = express.Router();
 
@@ -19,7 +18,8 @@ router
    * @return {array.<Absence>} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminAbsenceController.getAll));
+  .get(controllerHandler(protect), controllerHandler(userAdminAbsenceController.getAll));
 
 module.exports = router;

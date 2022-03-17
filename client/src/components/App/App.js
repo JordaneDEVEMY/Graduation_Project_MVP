@@ -98,7 +98,7 @@ function App({
                     )}
                 />
                 <Route
-                  path={`:${userId}/profil`}
+                  path={`/admins/${userId}/profil`}
                   element={(
                     <ProfilPageContainer isAdmin={isAdmin} />
                     )}

@@ -1,5 +1,5 @@
 const express = require('express');
-// ? const cache = require('../../../helpers/redisCache');
+// ? NOT IN MVP - const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const userPatchSchema = require('../../../validation/userAdmin/user/userPatchSchema');
@@ -8,6 +8,8 @@ const userCreateSchema = require('../../../validation/userAdmin/user/userCreateS
 const { userAdminUserController } = require('../../../controllers');
 
 const controllerHandler = require('../../../helpers/apiControllerHandler');
+
+const { protect } = require('../../../helpers/authProtect');
 
 const router = express.Router();
 
@@ -20,19 +22,21 @@ router
    * @return {array.<User>} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminUserController.getAll))
+  .get(controllerHandler(protect), controllerHandler(userAdminUserController.getAll))
 
   /**
    * POST /api/admin/user
    * @summary Create one user
    * @tags 3.UserAdmin - User CRUD section
-   * @param {UserToCreate} request.body.required - All for creating user
+   * @param {UserToCreate} request.body.required - Body request for create a new user
    * @return {UserCreate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
-  .post(validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
+  .post(controllerHandler(protect), validate('body', userCreateSchema), controllerHandler(userAdminUserController.create));
 
 router
   .route('/:id(\\d+)')
@@ -44,20 +48,22 @@ router
    * @return {User} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminUserController.getOne))
+  .get(controllerHandler(protect), controllerHandler(userAdminUserController.getOne))
 
   /**
    * PATCH /api/admin/user/{id}
    * @summary Update one user
    * @tags 3.UserAdmin - User CRUD section
    * @param {number} id.path.required - User identifier
-   * @param {UserToUpdate} request.body.required - All for updating user
+   * @param {UserToUpdate} request.body.required - Body request for update an user
    * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
-  .patch(validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
+  .patch(controllerHandler(protect), validate('body', userPatchSchema), controllerHandler(userAdminUserController.update))
 
   /**
    * DELETE /api/admin/user/{id}
@@ -67,7 +73,8 @@ router
    * @return {UserDelete} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
-  .delete(controllerHandler(userAdminUserController.delete));
+  .delete(controllerHandler(protect), controllerHandler(protect), controllerHandler(userAdminUserController.delete));
 
 module.exports = router;

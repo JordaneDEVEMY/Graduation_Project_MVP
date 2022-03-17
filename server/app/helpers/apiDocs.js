@@ -15,6 +15,19 @@ const options = {
   exposeApiDocs: true,
   // On this URL in Json response
   apiDocsPath: '/olleks/docs',
+  components: {
+    securitySchemes: {
+      jwt: {
+        type: 'http',
+        scheme: 'bearer',
+        in: 'header',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
+  security: [{
+    jwt: [],
+  }],
 };
 
 /**

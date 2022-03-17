@@ -14,7 +14,7 @@ GET {{ endpoint }}
 ### Get one company
 GET {{ endpoint }}/1
 
-### Get a company who does not exist
+### Get a company who doesn't exist
 GET {{ endpoint }}/9999
 
 ### Get a company with an id as not a number
@@ -25,32 +25,65 @@ POST {{ endpoint }}
 content-type: application/json
 
 {
-  "name": "JD - POST TEST Entreprise de test",
-  "address": "JD - POST TEST Adresse de test",
+  "name": "POST TEST",
+  "address": "POST TEST",
   "zip_code": 34000,
-  "type": "admin"
+  "type": "Customer"
 }
 
-### Create an inexistant company
+### Create with an existant company name
 POST {{ endpoint }}
 content-type: application/json
 
 {
-  "name": "JD - Entreprise de test",
-  "address": "JD - Adresse de test",
+  "name": "POST TEST",
+  "address": "POST TEST 2",
   "zip_code": 34000,
-  "type": "admin"
+  "type": "Customer"
 }
 
-### Patch a company 
-PATCH {{ endpoint }}/50
+### Create with an existant company address
+POST {{ endpoint }}
 content-type: application/json
 
 {
-  "name": "JD - Entreprise de test",
-  "address": "JD - Adresse de test",
+  "name": "POST TEST 2",
+  "address": "POST TEST",
   "zip_code": 34000,
-  "type": "admin"
+  "type": "Customer"
+}
+
+### Patch a company 
+PATCH {{ endpoint }}/22
+content-type: application/json
+
+{
+  "name": "PATCH TEST",
+  "address": "PATCH TEST",
+  "zip_code": 34000,
+  "type": "Customer"
+}
+
+### Create with an existant company name
+POST {{ endpoint }}
+content-type: application/json
+
+{
+  "name": "PATCH TEST",
+  "address": "PATCH TEST 2",
+  "zip_code": 34000,
+  "type": "Customer"
+}
+
+### Create with an existant company address
+POST {{ endpoint }}
+content-type: application/json
+
+{
+  "name": "PATCH TEST 2",
+  "address": "PATCH TEST",
+  "zip_code": 34000,
+  "type": "Customer"
 }
 
 ### Patch an inexistant company
@@ -58,14 +91,14 @@ PATCH {{ endpoint }}/999
 content-type: application/json
 
 {
-  "name": "JD - Entreprise de test",
-  "address": "JD - Adresse de test",
+  "name": "PATCH TEST",
+  "address": "PATCH TEST",
   "zip_code": 34000,
-  "type": "admin"
+  "type": "CUSTOMER"
 }
 
 ### Delete a company
-DELETE {{ endpoint }}/41
+DELETE {{ endpoint }}/26
 
 ### Delete an inexistant company
 DELETE {{ endpoint }}/999

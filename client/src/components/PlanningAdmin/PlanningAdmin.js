@@ -11,8 +11,6 @@ import useBreakpointDown from '../../hooks/useBreakpointDown';
 import './planning_admin.scss';
 
 function PlanningAdmin({
-  absences,
-  absencesList,
   companies,
   employeesList,
   startDate,
@@ -25,6 +23,7 @@ function PlanningAdmin({
   const [employees, setEmployees] = React.useState(employeesList);
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
+  console.log('employeesList', employeesList);
 
   const handleAssignment = (assignmentData, dragResult = undefined) => {
     setAssignment(assignmentData);
@@ -60,30 +59,39 @@ function PlanningAdmin({
   };
 
   React.useEffect(() => {
-    // build employeesList used in assignment modal
-    // open modal
+    console.log(assignment);
+    // 1. build employeesList used in assignment modal
+    // 2. open modal
     if (assignment.site !== undefined) {
-      const { site } = assignment;
-      let assignmentEmployees;
+      const { employee_id } = assignment;
+      const method = employee_id !== null ? 'PATCH' : 'POST';
+      // get all others sites employees
+      const allSitesEmployees = planningFunctions.getAllSitesEmployees(companies);
+      console.log('allSitesEmployees', allSitesEmployees);
+      const allSitesEmployeesIds = allSitesEmployees.map((item) => item.id);
+      console.log('allSitesEmployeesIds', allSitesEmployeesIds);
+      // retrieve all assignments employees from employeesLIst
+      const assignmentEmployees = employeesList.filter(
+        ({ id }) => !allSitesEmployeesIds.includes(id),
+      );
 
-      // it's an assignment
-      if (site.id !== 0) {
-        assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
-      // it's an absence
-      } else {
-        assignmentEmployees = absences;
-      }
+      // // it's an assignment
+      // if (absence_id === null) {
+      //   assignmentEmployees = planningFunctions.getSiteEmployees(companies, site.id);
+      // // it's an absence
+      // } else {
+      //   const absences = planningFunctions.getAbsenceEmployees(companies, absence_id);
+      //   assignmentEmployees = absences;
+      // }
 
-      if (assignment.employee_id !== undefined) {
-        const colleagues = assignmentEmployees.filter(
-          (item) => item.id !== assignment.employee_id,
-        );
-        const colleaguesIds = colleagues.map((item) => item.id);
-        assignmentEmployees = employeesList.filter(
-          ({ id }) => !colleaguesIds.includes(id),
-        );
+      // it's an update
+      // add assignment employee to list
+      if (method === 'PATCH') {
+        const employee = employeesList.filter(({ id }) => id === employee_id)[0];
+        assignmentEmployees.push(employee);
       }
       setEmployees(assignmentEmployees);
+      console.log('assignmentEmployees', assignmentEmployees);
       setModalOpened(true);
     }
   }, [assignment]);
@@ -104,7 +112,6 @@ function PlanningAdmin({
         && !isMobile
         ? (
           <DraggableAssignments
-            absences={absences}
             companies={draggableCompanies}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
@@ -113,7 +120,6 @@ function PlanningAdmin({
         )
         : (
           <Companies
-            absences={absences}
             companies={companies}
             handleAbsence={handleAbsence}
             handleAssignment={handleAssignment}
@@ -136,7 +142,6 @@ function PlanningAdmin({
         onClose={handleModal}
       >
         <AssignmentFormContainer
-          absencesList={absencesList}
           assignment={assignment}
           employeesList={employees}
           handleCancel={handleCancel}
@@ -149,14 +154,6 @@ function PlanningAdmin({
 }
 
 PlanningAdmin.propTypes = {
-  absences: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
-  absencesList: PropTypes.arrayOf(
-    PropTypes.shape(),
-  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape(),
   ).isRequired,

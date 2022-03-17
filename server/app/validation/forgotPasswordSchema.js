@@ -5,7 +5,4 @@ module.exports = Joi.object({
     .min(3)
     .email()
     .required(),
-  password: Joi.string()
-    .min(3)
-    .required(),
 }).required();
