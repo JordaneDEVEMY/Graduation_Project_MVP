@@ -16,6 +16,10 @@ import {
   TextField, Typography,
 } from '@mui/material';
 import SquareIcon from '@mui/icons-material/Square';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import frLocale from 'date-fns/locale/fr';
 import dateFunctions from '../../utils/dateFunctions';
 
 function AssignmentForm({
@@ -56,25 +60,24 @@ function AssignmentForm({
   );
 
   console.log('employee', employee);
-  const [starting_date, setStartingDate] = React.useState(assignment.starting_date);
-  const [ending_date, setEndingDate] = React.useState(assignment.ending_date);
+  const [startingDate, setStartingDate] = React.useState(
+    new Date(assignment.starting_date),
+  );
+  const [endingDate, setEndingDate] = React.useState(
+    new Date(assignment.ending_date),
+  );
+  const [minDate, setMinDate] = React.useState(
+    new Date(dateFunctions.getDate(startingDate.toString()).add(1, 'day').format('YYYY-MM-DD')),
+  );
+  console.log('minDate', minDate);
   const [color, setColor] = React.useState(assignment.color || colorsList[0][0]);
   const [visibility, setVisibility] = React.useState(true);
 
-  const handleChange = (event, fieldLabel) => {
-    const { value } = event.target;
-
-    switch (fieldLabel) {
-      case 'starting_date':
-        setStartingDate(value);
-        break;
-      case 'ending_date':
-        setEndingDate(value);
-        break;
-      default:
-        break;
-    }
-  };
+  React.useEffect(() => {
+    const endTo = dateFunctions.getDate(startingDate.toString()).add(1, 'day').format('YYYY-MM-DD');
+    setEndingDate(new Date(endTo));
+    setMinDate(new Date(endTo));
+  }, [startingDate]);
 
   const handleCancelForm = () => {
     handleCancel();
@@ -89,8 +92,8 @@ function AssignmentForm({
       color,
       method,
       visibility,
-      starting_date,
-      ending_date,
+      starting_date: startingDate,
+      ending_date: endingDate,
       employee_id: employee.id,
     };
 
@@ -118,97 +121,98 @@ function AssignmentForm({
         <Typography variant="h3" sx={{ textAlign: 'center', mb: theme.spacing(3) }}>
           {`${site.name}`}
         </Typography>
-
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          spacing={2}
-        >
-          <Grid item xs={12}>
-            <Autocomplete
-              value={employee}
-              getOptionLabel={(option) => `${option.firstname} ${option.lastname}`}
-              onChange={(_event, newValue) => {
-                setEmployee(newValue);
-              }}
-              disabled={employee_id !== null}
-              options={employeesList}
-              sx={{ width: '100%' }}
-              renderInput={(params) => (
-                <TextField {...params} label="Employé" required />
-              )}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="field-startingDate"
-              label="Du"
-              fullWidth
-              required
-              value={dateFunctions.getDate(starting_date).format('DD-MM-YYYY')}
-              onChange={(e) => handleChange(e, 'starting_date')}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="field-endingDate"
-              label="Au"
-              fullWidth
-              required
-              value={dateFunctions.getDate(ending_date).format('DD-MM-YYYY')}
-              onChange={(e) => handleChange(e, 'ending_date')}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <FormControl sx={{ width: '100%' }}>
-              <InputLabel id="color-label">Couleur de la fiche</InputLabel>
-              <Select
-                labelId="color-label"
-                id="field-color"
-                value={color}
-                label="Couleur de la fiche"
-                fullWidth
+        <LocalizationProvider dateAdapter={AdapterDateFns} locale={frLocale}>
+          <Grid
+            container
+            direction="row"
+            alignItems="center"
+            spacing={2}
+          >
+            <Grid item xs={12}>
+              <Autocomplete
+                value={employee}
+                getOptionLabel={(option) => `${option.firstname} ${option.lastname}`}
                 onChange={(_event, newValue) => {
-                  setColor(newValue.props.value);
+                  setEmployee(newValue);
                 }}
-              >
-                {colorsList.map((c) => (
-                  <MenuItem
-                    key={c[0]}
-                    value={c[0]}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <SquareIcon
-                      sx={{
-                        color: c[0],
-                        mr: theme.spacing(1),
-                        verticalAlign: 'top',
-                      }}
-                    />
-                    {c[1]}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-            <FormGroup>
-              <FormControlLabel
-                control={(
-                  <Checkbox
-                    checked={visibility}
-                    onChange={() => setVisibility((prevVisibility) => !prevVisibility)}
-                  />
-              )}
-                label="Visible par l'employé"
+                disabled={employee_id !== null}
+                options={employeesList}
+                sx={{ width: '100%' }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Employé" required />
+                )}
               />
-            </FormGroup>
+            </Grid>
+            <Grid item xs={6}>
+              <DesktopDatePicker
+                label="Du"
+                mask="__.__.____"
+                value={startingDate}
+                minDate={startingDate}
+                onChange={(newValue) => setStartingDate(newValue)}
+                renderInput={(params) => <TextField {...params} inputFormat="DD.MM.YYYY" />}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <DesktopDatePicker
+                label="Au"
+                mask="__.__.____"
+                value={endingDate}
+                minDate={minDate}
+                onChange={(newValue) => setEndingDate(newValue)}
+                renderInput={(params) => <TextField {...params} inputFormat="DD.MM.YYYY" />}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl sx={{ width: '100%' }}>
+                <InputLabel id="color-label">Couleur de la fiche</InputLabel>
+                <Select
+                  labelId="color-label"
+                  id="field-color"
+                  value={color}
+                  label="Couleur de la fiche"
+                  fullWidth
+                  onChange={(_event, newValue) => {
+                    setColor(newValue.props.value);
+                  }}
+                >
+                  {colorsList.map((c) => (
+                    <MenuItem
+                      key={c[0]}
+                      value={c[0]}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <SquareIcon
+                        sx={{
+                          color: c[0],
+                          mr: theme.spacing(1),
+                          verticalAlign: 'top',
+                        }}
+                      />
+                      {c[1]}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormGroup>
+                <FormControlLabel
+                  control={(
+                    <Checkbox
+                      checked={visibility}
+                      onChange={() => setVisibility((prevVisibility) => !prevVisibility)}
+                    />
+                )}
+                  label="Visible par l'employé"
+                />
+              </FormGroup>
+            </Grid>
           </Grid>
-        </Grid>
+        </LocalizationProvider>
       </Box>
       <Box
         sx={{
