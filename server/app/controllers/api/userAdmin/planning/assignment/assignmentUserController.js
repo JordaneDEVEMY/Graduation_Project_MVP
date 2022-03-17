@@ -1,8 +1,8 @@
 const userAssignmentDatamapper = require('../../../../../models/userAdmin/planning/assignment/user');
-const userAdminDatamapper = require('../../../../../models/userAdmin/user');
 const assignmentUserAdminDatamapper = require('../../../../../models/userAdmin/planning/assignment');
+const userAdminDatamapper = require('../../../../../models/userAdmin/user');
 const siteAdminDatamapper = require('../../../../../models/userAdmin/site');
-const absenceAdminDatamapper = require('../../../../../models/userAdmin/planning/assignment/absence');
+const absenceAdminDatamapper = require('../../../../../models/userAdmin/absence');
 
 const { ApiError } = require('../../../../../helpers/errorHandler');
 
