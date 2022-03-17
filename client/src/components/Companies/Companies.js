@@ -28,9 +28,10 @@ function Companies({
     <Box
       sx={{
         [theme.breakpoints.up('md')]: {
-          display: 'flex',
+          display: 'inline-flex',
           flexWrap: 'wrap',
           justifyContent: 'space-between',
+          gap: theme.spacing(4),
           mb: theme.spacing(2),
         },
       }}

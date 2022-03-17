@@ -12,30 +12,18 @@ import {
 } from '@mui/material';
 
 function CompanyForm({
+  addType,
   companiesList,
   sitesList,
-  sitesSelection,
   handleCancel,
   handleSubmit,
 }, ref) {
   const theme = useTheme();
-  const addType = sitesSelection.length ? 'site' : 'company';
-  console.log('sitesList', sitesList);
-  console.log('addType', addType);
-  console.log('sitesSelection', sitesSelection);
-  const companyId = sitesSelection.length !== 0
-    ? sitesSelection[0].company.company_id
-    : companiesList[0].id;
-  console.log('companyId', companyId, companiesList);
-  const [company, setCompany] = React.useState(companiesList.filter((item) => item.id === companyId)[0]);
-  console.log('company', company);
-  const [sitesFromCompany, setSitesFromCompany] = React.useState(
-    sitesSelection.length
-      ? sitesSelection
-      : sitesList,
+  const [company, setCompany] = React.useState(companiesList[0]);
+  const [sitesSelection, setSitesSelection] = React.useState(
+    sitesList.filter(({ company: c }) => c.company_id === company.id),
   );
-  console.log('sitesFromCompany', sitesFromCompany);
-  const [site, setSite] = React.useState(sitesFromCompany[0]);
+  const [site, setSite] = React.useState(sitesSelection[0]);
   console.log('site', site);
 
   const handleCancelForm = () => {
@@ -57,16 +45,14 @@ function CompanyForm({
   };
 
   React.useEffect(() => {
-    setSitesFromCompany(
-      sitesSelection.length
-        ? sitesSelection
-        : sitesList.filter((item) => item.company.company_id === company.id),
+    setSitesSelection(
+      sitesList.filter(({ company: c }) => c.company_id === company.id),
     );
   }, [company]);
 
   React.useEffect(() => {
-    setSite(sitesFromCompany[0]);
-  }, [sitesFromCompany]);
+    setSite(sitesSelection[0]);
+  }, [sitesSelection]);
 
   return (
     <Box
@@ -118,7 +104,7 @@ function CompanyForm({
               onChange={(_event, newValue) => {
                 setSite(newValue);
               }}
-              options={sitesFromCompany}
+              options={sitesSelection}
               sx={{ width: '100%' }}
               renderInput={(params) => (
                 <TextField {...params} label="Site" required />

@@ -210,6 +210,23 @@ const planningFunctions = {
    * @param {object} companies - Companies object
    * @returns {array} List of employees
    */
+  getCompaniesWithSites: (companiesList, sitesList) => {
+    const companiesIds = [];
+    sitesList.forEach(({ company }) => {
+      const { company_id: id } = company;
+      if (!companiesIds.includes(id)) {
+        companiesIds.push(id);
+      }
+    });
+
+    return companiesList.filter(({ id }) => companiesIds.includes(id));
+  },
+
+  /**
+   * Get employees list of all planning
+   * @param {object} companies - Companies object
+   * @returns {array} List of employees
+   */
   getPlanningEmployees: (companies) => {
     const employees = [];
 

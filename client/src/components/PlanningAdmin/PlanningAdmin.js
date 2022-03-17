@@ -25,7 +25,9 @@ function PlanningAdmin({
   const { current: currentWeek } = week;
   const isPast = dateFunctions.isBefore(currentWeek.dates[6]);
   const isMobile = useBreakpointDown();
-  const canAddCompany = (companies.length - 1) < companiesList.length;
+  // filter companies list : get only companies having sites
+  const allCompanies = planningFunctions.getCompaniesWithSites(companiesList, sitesList);
+  const canAddCompany = (companies.length - 1) < allCompanies.length;
   // forms modal
   const [modalOpened, setModalOpened] = React.useState(false);
   // Instances used for forms
@@ -33,14 +35,12 @@ function PlanningAdmin({
   const [addCompany, setAddCompany] = React.useState(false);
   const [addSite, setAddSite] = React.useState(false);
   // lists used in forms
-  const [companiesSelection, setCompaniesSelection] = React.useState(companiesList);
-  const [sitesSelection, setSitesSelection] = React.useState([]);
+  const [companiesSelection, setCompaniesSelection] = React.useState(allCompanies);
   const [employeesSelection, setEmployeesSelection] = React.useState(employeesList);
-  // const [sitesSelection, setSitesSelection] = React.useState(sitesList);
+  const [sitesSelection, setSitesSelection] = React.useState([]);
   // dragend
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
-  console.log('draggableCompanies into planning', draggableCompanies);
 
   const handleAddAssignment = (assignmentData, dragResult = undefined) => {
     if (dragResult) {
@@ -50,7 +50,15 @@ function PlanningAdmin({
   };
 
   const handleAddCompany = () => {
+    // set companies list
+    const displayedCompaniesIds = companies.map((item) => item.id);
+    const displayableCompagnies = allCompanies.filter(
+      ({ id }) => !displayedCompaniesIds.includes(id),
+    );
+    setCompaniesSelection(displayableCompagnies);
+
     setAddCompany(true);
+    setModalOpened(true);
   };
 
   const handleAddSite = (company, availablesSitesList) => {
@@ -66,9 +74,8 @@ function PlanningAdmin({
   };
 
   const handleOnCompanySubmitted = (company) => {
-    console.log('on company submitted', company);
     const addType = addCompany ? 'company' : 'site';
-    console.log(addType);
+    console.log(`on ${addType} submitted`, company);
     const planningCompanies = [...draggableCompanies];
     let sortedCompanies = planningCompanies;
 
@@ -94,6 +101,7 @@ function PlanningAdmin({
 
     setAddCompany(false);
     setAddSite(false);
+    setSitesSelection([]);
     setModalOpened(false);
   };
 
@@ -115,6 +123,7 @@ function PlanningAdmin({
   const handleCancelCompany = () => {
     setAddCompany(false);
     setAddSite(false);
+    setSitesSelection([]);
     setModalOpened(false);
   };
 
@@ -154,18 +163,18 @@ function PlanningAdmin({
   /**
    * adjust companies list in new company Form
    */
-  React.useEffect(() => {
-    if (addCompany) {
-      // get all others sites employees
-      const allPlanningCompaniesIds = companies.map((item) => item.id);
-      // retrieve all assignments employees from employeesLIst
-      const compagniesWhoCanBeAdded = companiesList.filter(
-        ({ id }) => !allPlanningCompaniesIds.includes(id),
-      );
-      setCompaniesSelection(compagniesWhoCanBeAdded);
-      setModalOpened(true);
-    }
-  }, [addCompany]);
+  // React.useEffect(() => {
+  //   if (addCompany) {
+  //     // get all others sites employees
+  //     const displayedCompaniesIds = companies.map((item) => item.id);
+  //     // retrieve all assignments employees from employeesLIst
+  //     const compagniesDispayable = allCompanies.filter(
+  //       ({ id }) => !displayedCompaniesIds.includes(id),
+  //     );
+  //     setCompaniesSelection(compagniesDispayable);
+  //     setModalOpened(true);
+  //   }
+  // }, [addCompany]);
 
   /**
    * open modal if add site
@@ -189,16 +198,15 @@ function PlanningAdmin({
       <SearchContainer isAdmin date={startDate} />
 
       {canAddCompany && (
-        <Button
-          variant="outlined"
-          disabled={isPast}
-          onClick={handleAddCompany}
-          sx={{
-            mb: theme.spacing(1),
-          }}
-        >
-          {`Ajouter une compagnie en S${currentWeek.num.toString().padStart(2, '0')}`}
-        </Button>
+        <Typography sx={{ mb: theme.spacing(1) }}>
+          <Button
+            variant="outlined"
+            disabled={isPast}
+            onClick={handleAddCompany}
+          >
+            {`Ajouter une compagnie en S${currentWeek.num.toString().padStart(2, '0')}`}
+          </Button>
+        </Typography>
       )}
 
       {!isMobile
@@ -250,6 +258,7 @@ function PlanningAdmin({
           {(addCompany || addSite)
           && (
           <CompanyForm
+            addType={addCompany ? 'company' : 'site'}
             companiesList={companiesSelection}
             sitesList={sitesList}
             sitesSelection={sitesSelection}
