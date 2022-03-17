@@ -49,7 +49,7 @@ router
    * @return {ApiError} 404 - company not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userAdminCompanyController.getOne))
+  .get(controllerHandler(protect), controllerHandler(userAdminCompanyController.getOne))
 
   /**
    * PATCH /api/admin/company/{id}
@@ -62,7 +62,7 @@ router
    * @return {ApiError} 404 - Company not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .patch(controllerHandler(protect), validate('body', companySchema), controllerHandler(userAdminCompanyController.update))
+  .patch(controllerHandler(protect), controllerHandler(protect), validate('body', companySchema), controllerHandler(userAdminCompanyController.update))
 
   /**
    * DELETE /api/admin/company/{id}
