@@ -46,7 +46,7 @@ function Login({
     e.preventDefault();
     handleLogin();
     if (!isLogged) {
-      setTimeout(setShowAlert, 500, true);
+      setShowAlert(true);
     }
   };
 
