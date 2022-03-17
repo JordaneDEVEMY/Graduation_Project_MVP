@@ -139,7 +139,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(404, 'User not found');
+      throw new ApiError(400, 'User doesn\'t exist');
     }
 
     return result.rows[0];
@@ -175,7 +175,7 @@ module.exports = {
     const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
 
     if (qualificationId.rowCount === 0) {
-      throw new ApiError(404, 'Employee qualification not found');
+      throw new ApiError(404, 'Qualification not found');
     }
 
     Object.assign(user, {
@@ -212,7 +212,7 @@ module.exports = {
     const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
 
     if (qualificationId.rowCount === 0) {
-      throw new ApiError(404, 'This employee qualification doesn\'t exist');
+      throw new ApiError(404, 'Qualification doesn\'t exist');
     }
 
     Object.assign(user, {
@@ -261,7 +261,7 @@ module.exports = {
   async getSsn(userSsn) {
     const result = await client.query('SELECT social_security_number FROM "employee" WHERE social_security_number = $1', [userSsn]);
 
-    if (result.rowCount > 0) {
+    if (result.rowCount > 1) {
       throw new ApiError(400, 'Social security number already user for an another user');
     }
 
@@ -276,7 +276,7 @@ module.exports = {
   async findByEmail(userEmail) {
     const result = await client.query('SELECT email FROM "employee" WHERE email = $1', [userEmail]);
 
-    if (result.rowCount > 0) {
+    if (result.rowCount > 1) {
       throw new ApiError(400, 'Email already used for an another user');
     }
 

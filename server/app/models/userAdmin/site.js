@@ -64,7 +64,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(404, 'Site not found');
+      throw new ApiError(404, 'Site doesn\'t exist');
     }
 
     return result.rows[0];

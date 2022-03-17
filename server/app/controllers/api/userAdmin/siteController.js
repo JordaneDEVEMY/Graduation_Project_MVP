@@ -47,7 +47,7 @@ const controller = {
     const isCompanyExist = await companyAdminDatamapper.findByPk(req.body.company_id);
 
     if (!isCompanyExist) {
-      throw new ApiError(400, 'Company not found');
+      throw new ApiError(400, 'Company doesn\'t exist');
     }
 
     const siteCreate = await siteAdminDatamapper.insert(req.body);
@@ -66,7 +66,7 @@ const controller = {
     const isCompanyExist = await companyAdminDatamapper.findByPk(req.body.company_id);
 
     if (!isCompanyExist) {
-      throw new ApiError(400, 'Company not found');
+      throw new ApiError(400, 'Company doesn\'t exist');
     }
 
     const siteUpdate = await siteAdminDatamapper.update(req.params.id, req.body);

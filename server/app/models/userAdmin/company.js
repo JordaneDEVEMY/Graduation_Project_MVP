@@ -59,10 +59,6 @@ module.exports = {
       [companyId],
     );
 
-    if (result.rowCount === 0) {
-      throw new ApiError(404, 'Company not found');
-    }
-
     return result.rows[0];
   },
 

@@ -86,7 +86,7 @@ content-type: application/json
 }
 
 ### Delete a site
-DELETE {{ endpoint }}/34
+DELETE {{ endpoint }}/35
 
 ### Delete an inexistant site
 DELETE {{ endpoint }}/999

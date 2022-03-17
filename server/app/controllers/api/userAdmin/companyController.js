@@ -29,7 +29,7 @@ const controller = {
     const company = await companyAdminDatamapper.findByPk(req.params.id);
 
     if (!company) {
-      throw new ApiError(404, 'Company not found');
+      throw new ApiError(404, 'Company doesn\'t exist');
     }
 
     return res.json(company);

@@ -27,9 +27,9 @@ content-type: application/json
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "strinssesg@test.net",
+  "email": "strinsessg@test.net",
   "password": "string",
-  "social_security_number": "191095950546436",
+  "social_security_number": "191195952546436",
   "phone_number": "0434455667",
   "mobile_number": "0634455667",
   "date_of_birth": "2000-07-10",
@@ -153,14 +153,14 @@ content-type: application/json
 }
 
 ### Patch an user 
-PATCH {{ endpoint }}/38
+PATCH {{ endpoint }}/37
 content-type: application/json
 
 {
   "firstname": "string",
   "lastname": "string",
-  "email": "strinssesg@test.net",
-  "social_security_number": "191095950546436",
+  "email": "strinsssg@test.net",
+  "social_security_number": "191095950546236",
   "phone_number": "0434455667",
   "mobile_number": "0634455667",
   "date_of_birth": "2000-01-01",

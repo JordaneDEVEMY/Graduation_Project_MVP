@@ -30,7 +30,7 @@ const controller = {
     const user = await userAdminDatamapper.findByPk(req.params.id);
 
     if (!user) {
-      throw new ApiError(404, 'User not found');
+      throw new ApiError(400, 'User doesn\'t exist');
     }
 
     return res.json(user);
@@ -79,6 +79,18 @@ const controller = {
 
     if (!isEmailValid) {
       throw new ApiError(404, 'Invalid Email');
+    }
+
+    const isSsnAvailable = await userAdminDatamapper.getSsn(req.body.social_security_number);
+
+    if (isSsnAvailable > 1) {
+      throw new ApiError(400, 'Social security number already used for an another user');
+    }
+
+    const isEmailAvailable = await userAdminDatamapper.findByEmail(req.body.email);
+
+    if (isEmailAvailable > 1) {
+      throw new ApiError(400, 'Email already used for an another user');
     }
 
     const userUpdate = await userAdminDatamapper.update(req.params.id, req.body);

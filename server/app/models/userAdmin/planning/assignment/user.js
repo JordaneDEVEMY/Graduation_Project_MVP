@@ -44,7 +44,7 @@ module.exports = {
   async insert(assignment) {
     const assignmentToCreate = await client.query(
       `
-      SELECT insert_assignment($1);`,
+      SELECT * FROM insert_assignment($1);`,
       [assignment],
     );
 
@@ -61,7 +61,7 @@ module.exports = {
     const result = await client.query('SELECT * FROM "assignment" WHERE "id" = $1', [assignmentId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Qualification doesn\'t exist');
+      throw new ApiError(400, 'Assignment doesn\'t exist');
     }
 
     Object.assign(assignment, {
