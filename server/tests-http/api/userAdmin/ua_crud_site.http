@@ -14,7 +14,7 @@ GET {{ endpoint }}
 ### Get one site
 GET {{ endpoint }}/1
 
-### Get a site who does not exist
+### Get a site who doesn't
 GET {{ endpoint }}/9999
 
 ### Get a site with an id as not a number

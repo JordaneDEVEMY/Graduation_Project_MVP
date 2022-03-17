@@ -14,7 +14,7 @@ GET {{ endpoint }}
 ### Get one company
 GET {{ endpoint }}/1
 
-### Get a company who does not exist
+### Get a company who doesn't
 GET {{ endpoint }}/9999
 
 ### Get a company with an id as not a number

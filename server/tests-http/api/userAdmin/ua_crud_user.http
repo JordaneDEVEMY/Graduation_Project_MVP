@@ -14,7 +14,7 @@ GET {{ endpoint }}
 ### Get one user
 GET {{ endpoint }}/1
 
-### Get an user who does not exist
+### Get an user who doesn't exist
 GET {{ endpoint }}/9999
 
 ### Get an user with an id as not a number
@@ -108,7 +108,7 @@ content-type: application/json
   "qualification_label": "Plombier"
 }
 
-### Create a user who doesn' have 17 years
+### Create a user who doesn't have 17 years
 POST {{ endpoint }}/
 content-type: application/json
 

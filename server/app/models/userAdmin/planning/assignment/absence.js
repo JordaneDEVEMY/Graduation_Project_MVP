@@ -16,7 +16,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'Cette absence n\'existe pas');
+      throw new ApiError(404, 'Absence not found');
     }
 
     return result.rows[0];

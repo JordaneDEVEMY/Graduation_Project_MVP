@@ -212,7 +212,7 @@ module.exports = {
     const qualificationId = await client.query('SELECT * FROM "employee_qualification" WHERE "label" = $1', [user.qualification_label]);
 
     if (qualificationId.rowCount === 0) {
-      throw new ApiError(404, 'This employee qualification does not exist');
+      throw new ApiError(404, 'This employee qualification doesn\'t exist');
     }
 
     Object.assign(user, {

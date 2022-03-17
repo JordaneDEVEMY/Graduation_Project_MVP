@@ -87,7 +87,7 @@ module.exports = {
     );
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'This user does\'nt exist');
+      throw new ApiError(400, 'This user doesn\'t exist');
     }
 
     return result.rows[0];
@@ -103,7 +103,7 @@ module.exports = {
     const result = await client.query('SELECT * FROM "employee" WHERE "id" = $1', [userId]);
 
     if (result.rowCount === 0) {
-      throw new ApiError(400, 'This user does\'nt exist');
+      throw new ApiError(400, 'This user doesn\'t exist');
     }
 
     const { password, phone_number, mobile_number } = user;
