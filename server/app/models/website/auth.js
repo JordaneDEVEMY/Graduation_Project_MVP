@@ -30,7 +30,7 @@ module.exports = {
    * @param {AuthInput} authInputs - Email and Password for authentication
    * @returns {AuthUser|null} - Return User or null if no user found
    */
-  async findOne(authInputs) {
+  async findOne(email) {
     const result = await client.query(
       `
       SELECT 
@@ -39,12 +39,12 @@ module.exports = {
         "lastname", 
         "email", 
         "avatar",
-        "role_application" 
+        "role_application",
+        "password"
       FROM "employee" 
       WHERE "email" = $1 
-      AND "password" = $2
       `,
-      [authInputs.email, authInputs.password],
+      [email],
     );
 
     if (result.rowCount === 0) {
@@ -82,4 +82,31 @@ module.exports = {
     return result.rows[0];
   },
 
+  /**
+   * Find one user
+   * @param {number} userId - User primary key id in database
+   * @returns {AuthUser|null} - Return User or null if no user found
+   */
+  async findByPk(userId) {
+    const result = await client.query(
+      `
+      SELECT 
+        "id", 
+        "firstname", 
+        "lastname", 
+        "email", 
+        "avatar",
+        "role_application" 
+      FROM "employee" 
+      WHERE "id" = $1 
+      `,
+      [userId],
+    );
+
+    if (result.rowCount === 0) {
+      return null;
+    }
+
+    return result.rows[0];
+  },
 };

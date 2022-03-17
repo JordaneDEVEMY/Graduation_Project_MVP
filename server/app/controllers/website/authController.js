@@ -1,6 +1,6 @@
 /* eslint-disable prefer-destructuring */
 const emailValidator = require('email-validator');
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { generateToken } = require('../../helpers/generateToken');
 const authDatamapper = require('../../models/website/auth');
@@ -16,22 +16,22 @@ const controller = {
    * @returns {user} Route API JSON response
    */
   async loginAction(req, res) {
-    const { email, password } = req.body;
-
-    const isEmailValid = emailValidator.validate(email);
+    const { email } = req.body;
+    const { password } = req.body;
 
     if (!email || !password) {
       throw new WebsiteError(400, 'Email or password required');
     }
 
+    const isEmailValid = emailValidator.validate(email);
+
     if (!isEmailValid) {
       throw new WebsiteError(400, 'Invalid Email');
     }
 
-    const user = await authDatamapper.findOne(req.body);
+    const user = await authDatamapper.findOne(email);
 
-    // if (user && (await bcrypt.compare(password, user.password))) {
-    if (user) {
+    if (user && (await bcrypt.compare(password, user.password))) {
       res.json({
         id: user.id,
         firstname: user.firstname,
@@ -44,7 +44,6 @@ const controller = {
     } else {
       throw new WebsiteError(401, 'Email or password invalid');
     }
-    // }
   },
 
   /**
