@@ -34,8 +34,8 @@ function DraggableAssignments({
       const refreshList = planningFunctions.setAssignmentPosition(result, assignmentsPositions);
       const assignment = planningFunctions.getDraggedAssignment(result, assignmentsPositions);
 
-      handleAssignment(assignment, result);
       setAssignmentsPositions(refreshList);
+      handleAssignment(assignment, result);
     }
   }, [assignmentsPositions]);
 

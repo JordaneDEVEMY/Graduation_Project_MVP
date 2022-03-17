@@ -117,8 +117,7 @@ function Site({
           name={name}
           handleAddAssignment={handleAddAssignment}
         />
-        {draggableAssignments.length
-          && isDropable
+        {isDropable
           ? (
             <Droppable droppableId={`${isAbsence ? 'absence' : 'site'}-${id}`} type="SITE">
               {(provided) => (
@@ -132,16 +131,20 @@ function Site({
                     background: `url('${assignmentBg}') repeat-y center bottom`,
                   }}
                 >
-                  <AssignmentsList
-                    assignments={draggableAssignments}
-                    expandedSheet={expandedSheet}
-                    handleAssignment={handleAssignment}
-                    handleRemoveAssignment={handleRemoveAssignment}
-                    handleCollapse={handleCollapse}
-                    isDraggable
-                    isMobile={false}
-                    week={week}
-                  />
+                  {draggableAssignments.length
+                    ? (
+                      <AssignmentsList
+                        assignments={draggableAssignments}
+                        expandedSheet={expandedSheet}
+                        handleAssignment={handleAssignment}
+                        handleRemoveAssignment={handleRemoveAssignment}
+                        handleCollapse={handleCollapse}
+                        isDraggable
+                        isMobile={false}
+                        week={week}
+                      />
+                    )
+                    : null}
 
                   {provided.placeholder}
                 </Box>

@@ -41,12 +41,11 @@ function PlanningAdmin({
   const [dragEndResult, setDragEndResult] = React.useState({});
   console.log('draggableCompanies into planning', draggableCompanies);
 
-  const handleAssignment = (assignmentData, dragResult = undefined) => {
-    setAssignment(assignmentData);
-
-    if (dragResult) {
+  const handleAssignment = (assignmentData, dragResult) => {
+    if (dragResult.destination) {
       setDragEndResult(dragResult);
     }
+    setAssignment(assignmentData);
   };
 
   const handleAddCompany = () => {
