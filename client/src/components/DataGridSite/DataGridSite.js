@@ -62,6 +62,7 @@ function DataGridSite({
       field: 'company',
       headerName: 'Entreprise',
       width: 200,
+      type: 'text',
       valueGetter: (params) => {
         const result = [];
         result.push(params.row.company.company_name);
