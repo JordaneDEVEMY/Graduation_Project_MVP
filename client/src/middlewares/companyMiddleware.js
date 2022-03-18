@@ -32,7 +32,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       if (response.status === 200) {
         store.dispatch(actions.actionResetCompanyInformations());
         store.dispatch(actions.actionRequestAllCompanies());
-        alert('Company created successfully');
+        console.log('Company created successfully');
       }
       return;
     }
@@ -54,7 +54,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
       if (response.status === 200) {
         store.dispatch(actions.actionResetCompanyInformations());
         store.dispatch(actions.actionRequestAllCompanies());
-        alert('Company updated successfully');
+        console.log('Company updated successfully');
       }
       return;
     }
@@ -64,7 +64,7 @@ const companyMiddleware = (store) => (next) => async (action) => {
         const response = await deleteCompany(id);
         if (response.status === 200) {
           store.dispatch(actions.actionRequestAllCompanies());
-          alert('Company deleted successfully');
+          console.log('Company deleted successfully');
         }
       });
       store.dispatch(actions.actionResetCompanyInformations());

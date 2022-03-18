@@ -228,7 +228,7 @@ function PlanningAdmin({
           disabled={!canAddCompany}
           onClick={handleAddCompany}
         >
-          {`Ajouter une compagnie en S${currentWeek.num.toString().padStart(2, '0')}`}
+          {`Ajouter une entreprise en S${currentWeek.num.toString().padStart(2, '0')}`}
         </Button>
       </Typography>
 

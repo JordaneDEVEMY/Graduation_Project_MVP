@@ -3,7 +3,7 @@ import * as actions from '../actions';
 
 const initialState = {
   email: 'xavier_caleb4493@yahoo.edu',
-  password: 'LTK85EWH8HM',
+  password: 'olleks',
   isLogged: false,
   goodLogin: true,
 };
