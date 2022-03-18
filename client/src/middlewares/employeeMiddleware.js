@@ -73,7 +73,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       if (response.status === 200) {
         store.dispatch(actions.actionResetEmployeeInformations());
         store.dispatch(actions.actionRequestAllEmployees());
-        alert('Employee created successfully');
+        console.log('Employee created successfully');
       }
       return;
     }
@@ -115,7 +115,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
       if (response.status === 200) {
         store.dispatch(actions.actionResetEmployeeInformations());
         store.dispatch(actions.actionRequestAllEmployees());
-        alert('Employee updated successfully');
+        console.log('Employee updated successfully');
       }
       return;
     }
@@ -125,7 +125,7 @@ const employeeMiddleware = (store) => (next) => async (action) => {
         const response = await deleteEmployee(id);
         if (response.status === 200) {
           store.dispatch(actions.actionRequestAllEmployees());
-          alert('Employee deleted successfully');
+          console.log('Employee deleted successfully');
         }
       });
       store.dispatch(actions.actionResetEmployeeInformations());

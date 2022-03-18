@@ -21,7 +21,7 @@ function SiteHeader({
     <Box>
       {handleAddAssignment
       && (
-        <Tooltip title={`Ajouter ${isAbsence ? 'une absence' : 'un assignement'}`} placement="top">
+        <Tooltip title={`Ajouter ${isAbsence ? 'une absence' : 'une affectation'}`} placement="top">
           <IconButton
             color="primary"
             onClick={handleAddAssignment}
