@@ -80,7 +80,6 @@ const controller = {
             role_application: req.user.role_application,
             token: generateToken(req.user.id, '24h'),
           });
-          console.log('file: authController.js ~ line 79 ~ checkTokenAction ~ req.user', req.user);
         }
       } catch (err) {
         throw new WebsiteError(401, 'Unauthorized Access');

@@ -7,6 +7,8 @@ const userSchema = require('../../../validation/userSchema');
 const { userController } = require('../../../controllers');
 const controllerHandler = require('../../../helpers/apiControllerHandler');
 
+const { protect } = require('../../../helpers/authProtect');
+
 const router = express.Router();
 
 router
@@ -21,7 +23,7 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .get(controllerHandler(userController.getOne));
+  .get(controllerHandler(protect), controllerHandler(userController.getOne));
 
 router
   .route('/:id(\\d+)/profil')
@@ -36,6 +38,6 @@ router
    * @return {ApiError} 404 - User not found - application/json
    * @return {ApiError} 500 - Internal server error - application/json
    */
-  .patch(validate('body', userSchema), controllerHandler(userController.update));
+  .patch(controllerHandler(protect), validate('body', userSchema), controllerHandler(userController.update));
 
 module.exports = router;
