@@ -68,7 +68,7 @@ const controller = {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         // Get user from the token
-        req.user = await authDatamapper.findOne(decoded.id);
+        req.user = await authDatamapper.findByPk(decoded.id);
 
         if (req.user) {
           res.json({
@@ -80,6 +80,7 @@ const controller = {
             role_application: req.user.role_application,
             token: generateToken(req.user.id, '24h'),
           });
+          console.log('file: authController.js ~ line 79 ~ checkTokenAction ~ req.user', req.user);
         }
       } catch (err) {
         throw new WebsiteError(401, 'Unauthorized Access');
