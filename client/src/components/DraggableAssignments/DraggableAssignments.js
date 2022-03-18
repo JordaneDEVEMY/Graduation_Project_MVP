@@ -10,14 +10,16 @@ import Companies from '../Companies/Companies';
 import planningFunctions from '../../utils/planningFunctions';
 
 function DraggableAssignments({
+  absencesList,
   companies,
-  handleAbsence,
   handleAssignment,
+  handleSite,
+  isPast,
+  sitesList,
   week,
 }) {
   // save initial companies object
   const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
-  console.log('assignmentsPositions', assignmentsPositions);
 
   React.useEffect(() => {
     setAssignmentsPositions(companies);
@@ -27,8 +29,6 @@ function DraggableAssignments({
    * Open assignment insert / update modal
    */
   const onDragEnd = useCallback((result) => {
-    console.log(result);
-
     if (result.reason === 'DROP') {
       if (!result.destination) {
         return;
@@ -44,11 +44,14 @@ function DraggableAssignments({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
+        absencesList={absencesList}
         companies={assignmentsPositions}
-        handleAbsence={handleAbsence}
         handleAssignment={handleAssignment}
+        handleSite={handleSite}
         isDropable
         isMobile={false}
+        isPast={isPast}
+        sitesList={sitesList}
         week={week}
       />
     </DragDropContext>
@@ -56,6 +59,9 @@ function DraggableAssignments({
 }
 
 DraggableAssignments.propTypes = {
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -67,8 +73,12 @@ DraggableAssignments.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
-  handleAbsence: PropTypes.func.isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  handleSite: PropTypes.func.isRequired,
+  isPast: PropTypes.bool.isRequired,
+  sitesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

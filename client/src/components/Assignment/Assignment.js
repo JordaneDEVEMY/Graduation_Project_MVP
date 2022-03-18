@@ -53,7 +53,6 @@ function Assignment({
       id={`assignment-${id}`}
       disabled={userId === employee.id}
       sx={{
-        borderTop: '1px solid rgb(0 0 0 / 10%)',
         background: color,
         '&.Mui-disabled': {
           background: color,
@@ -65,7 +64,7 @@ function Assignment({
       <AccordionSummary
         aria-controls={`panel${index}-content`}
         sx={{
-          height: 50,
+          height: 52,
           alignItems: 'center',
           '&.Mui-disabled': {
             opacity: '1',
@@ -133,64 +132,69 @@ function Assignment({
           <Grid item xs="auto" sx={{ display: 'none' }}>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Grid>
-          <Grid item xs="auto">
+          <Grid item xs={12}>
             <Typography
               component="ul"
               sx={{
                 listStyle: 'none',
                 pl: 0,
-                fontSize: '.75rem',
+                fontSize: '.9em',
               }}
             >
               {absence !== undefined
               && (
-              <Typography component="li">
-                <Typography sx={{ display: 'block' }}><strong>Raison :</strong></Typography>
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
+                <strong>Raison :</strong>
                 {absence.reason}
               </Typography>
               )}
               {employee.visibility !== undefined
               && (
-              <Typography component="li">
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
                 <Typography sx={{ display: 'block' }}><strong>Visibilité :</strong></Typography>
-                {`<br>${employee.visibility ? 'oui' : 'non'}`}
+                <Typography>{`${employee.visibility ? 'oui' : 'non'}`}</Typography>
               </Typography>
               )}
               {employee.mobile_number !== undefined
               && (
-              <Typography component="li">
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
                 <Typography sx={{ display: 'block' }}><strong>Tél. portable :</strong></Typography>
-                {employee.mobile_number}
+                <Typography>{employee.mobile_number}</Typography>
               </Typography>
               )}
               {employee.phone_number !== undefined
               && (
-              <Typography component="li">
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
                 <Typography sx={{ display: 'block' }}><strong>Tél. Fixe :</strong></Typography>
-                {employee.phone_number}
+                <Typography>{employee.phone_number}</Typography>
               </Typography>
               )}
               {employee.fonction !== undefined
               && (
-              <Typography component="li">
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
                 <Typography sx={{ display: 'block' }}><strong>Fonction :</strong></Typography>
-                {employee.fonction}
+                <Typography>{employee.fonction}</Typography>
               </Typography>
               )}
               {employee.email !== undefined
               && (
-              <Typography component="li">
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
                 <Typography sx={{ display: 'block' }}><strong>Courriel :</strong></Typography>
-                {employee.email}
+                <Typography>{employee.email}</Typography>
               </Typography>
               )}
-              {handleRemoveAssignment
-              && (
+            </Typography>
+          </Grid>
+
+          {handleRemoveAssignment
+            && (
+            <Grid item xs={12} sx={{ display: 'flex' }}>
               <Button
                 sx={{
                   mt: theme.spacing(1),
+                  mx: 'auto',
                 }}
-                variant="contained"
+                variant="outlined"
                 color="inherit"
                 size="small"
                 startIcon={<DeleteIcon />}
@@ -200,9 +204,8 @@ function Assignment({
               >
                 Supprimer
               </Button>
-              )}
-            </Typography>
-          </Grid>
+            </Grid>
+            )}
         </Grid>
       </AccordionDetails>
     </Accordion>
@@ -216,7 +219,7 @@ Assignment.propTypes = {
   }),
   color: PropTypes.string.isRequired,
   employee: PropTypes.shape({
-    email: PropTypes.string.isRequired,
+    email: PropTypes.string,
     firstname: PropTypes.string.isRequired,
     fonction: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,

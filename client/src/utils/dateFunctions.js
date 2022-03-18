@@ -152,6 +152,13 @@ const dateFunctions = {
 
     return `${year}-${weekNum}`;
   },
+
+  /**
+   * Check if a date is past
+   * @param {string} dateString - A string date eg. 'YYYY-MM-DD'
+   * @returns {boolean} date past.
+   */
+  isBefore: (dateString) => dayjs(dateString).isBefore(dayjs()),
 };
 
 export default dateFunctions;

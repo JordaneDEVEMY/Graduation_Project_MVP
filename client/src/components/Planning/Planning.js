@@ -18,8 +18,6 @@ function Planning({
   const { id: userId } = user;
   const week = dateFunctions.getWeek(startDate);
   const { current: currentWeek } = week;
-  console.log('assignments', assignments);
-  console.log('absences', absences);
 
   return (
     <>
@@ -61,9 +59,16 @@ function Planning({
           </Box>
         )
         : (
-          <Typography sx={{ textAlign: 'center', mt: theme.spacing(2) }}>
+          <Alert
+            severity="info"
+            sx={{
+              mt: theme.spacing(2),
+              mx: 'auto',
+              maxWidth: '30rem',
+            }}
+          >
             {`Aucune intervention prévue en semaine ${currentWeek.num}.`}
-          </Typography>
+          </Alert>
         )}
     </>
   );
