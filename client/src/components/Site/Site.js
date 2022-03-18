@@ -32,7 +32,8 @@ function Site({
 }) {
   const dispatch = useDispatch();
   const theme = useTheme();
-
+  // assignments
+  const [draggableAssignments, setDraggableAssignments] = React.useState(assignments);
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
   // remove dialog
@@ -72,13 +73,14 @@ function Site({
    */
   const handleAddAssignment = () => {
     const newAssignement = planningFunctions.createAssignment();
-    const starting_date = dateFunctions.getDate().format('YYYY-MM-DD');
+    const starting_date = dateFunctions.getDate(week.dates[0]).format('YYYY-MM-DD');
     const ending_date = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
-    console.log('isAbsence', isAbsence);
+
     handleAssignment({
       ...newAssignement,
       absence_id: isAbsence ? id : null,
       ending_date,
+      position: draggableAssignments.length,
       starting_date,
       site: {
         id,
@@ -86,6 +88,10 @@ function Site({
       },
     });
   };
+
+  React.useEffect(() => {
+    setDraggableAssignments(assignments);
+  }, [assignments]);
 
   return (
     <>
@@ -108,10 +114,10 @@ function Site({
       >
         <SiteHeader
           name={name}
+          isAbsence={isAbsence}
           handleAddAssignment={handleAddAssignment}
         />
-        {assignments.length
-          && isDropable
+        {isDropable
           ? (
             <Droppable droppableId={`${isAbsence ? 'absence' : 'site'}-${id}`} type="SITE">
               {(provided) => (
@@ -119,21 +125,26 @@ function Site({
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                   sx={{
+                    minHeight: '50px',
                     pb: '50px',
                     flexGrow: '1',
                     background: `url('${assignmentBg}') repeat-y center bottom`,
                   }}
                 >
-                  <AssignmentsList
-                    assignments={assignments}
-                    expandedSheet={expandedSheet}
-                    handleAssignment={handleAssignment}
-                    handleRemoveAssignment={handleRemoveAssignment}
-                    handleCollapse={handleCollapse}
-                    isDraggable
-                    isMobile={false}
-                    week={week}
-                  />
+                  {draggableAssignments.length
+                    ? (
+                      <AssignmentsList
+                        assignments={draggableAssignments}
+                        expandedSheet={expandedSheet}
+                        handleAssignment={handleAssignment}
+                        handleRemoveAssignment={handleRemoveAssignment}
+                        handleCollapse={handleCollapse}
+                        isDraggable
+                        isMobile={false}
+                        week={week}
+                      />
+                    )
+                    : null}
 
                   {provided.placeholder}
                 </Box>
@@ -144,12 +155,13 @@ function Site({
             <Box
               sx={{
                 pb: '50px',
+                minHeight: '50px',
                 flexGrow: '1',
                 background: `url('${assignmentBg}') repeat-y center bottom`,
               }}
             >
               <AssignmentsList
-                assignments={assignments}
+                assignments={draggableAssignments}
                 expandedSheet={expandedSheet}
                 handleAssignment={handleAssignment}
                 handleCollapse={handleCollapse}
@@ -203,7 +215,7 @@ Site.propTypes = {
       visibility: PropTypes.bool.isRequired,
     }).isRequired,
   ).isRequired,
-  handleAssignment: PropTypes.func,
+  handleAssignment: PropTypes.func.isRequired,
   isAbsence: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
@@ -213,10 +225,6 @@ Site.propTypes = {
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
-};
-
-Site.defaultProps = {
-  handleAssignment: undefined,
 };
 
 export default React.memo(Site);

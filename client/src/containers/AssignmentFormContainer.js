@@ -15,7 +15,8 @@ function AssignmentFormContainer({
   assignment,
   employeesList,
   handleCancel,
-  setModalOpened,
+  handleSubmit,
+  startDate,
 }, ref) {
   const dispatch = useDispatch();
 
@@ -46,9 +47,7 @@ function AssignmentFormContainer({
       visibility,
       weekSlug: planningFunctions.getWeekSlugFromDate(starting_date),
     };
-
-    console.log('data', assignmentData);
-
+    console.log('assignmentData', assignmentData);
     switch (method) {
       case 'POST':
         dispatch(actionGetAssignmentInformations(assignmentData));
@@ -63,7 +62,7 @@ function AssignmentFormContainer({
         break;
     }
 
-    setModalOpened(false);
+    handleSubmit();
   };
 
   return (
@@ -71,9 +70,9 @@ function AssignmentFormContainer({
       ref={ref}
       assignment={assignment}
       employeesList={employeesList}
-      setModalOpened={setModalOpened}
       handleCancel={handleCancel}
       handleSubmit={handleSubmitAssignment}
+      weekMonday={startDate}
     />
   );
 }
