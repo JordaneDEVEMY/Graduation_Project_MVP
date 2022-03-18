@@ -71,7 +71,7 @@ function Companies({
                 handleAssignment={handleAssignment}
                 handleSite={handleSite}
                 id={`company-${company.id}`}
-                isAbsenceList={company.id === 0}
+                isAbsencesList={company.id === 0}
                 isDropable={isDropable}
                 isMobile={isMobile}
                 isPast={isPast}

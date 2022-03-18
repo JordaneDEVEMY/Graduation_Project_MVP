@@ -41,7 +41,7 @@ function SitesList({
     <>
       {canAddSite
       && (
-        <Tooltip title="Ajouter un site" placement="top">
+        <Tooltip title={`Ajouter ${isAbsencesList ? 'un type d\'absence' : 'un site'}`} placement="top">
           <IconButton
             variant="outlined"
             disabled={isPast}
@@ -83,7 +83,7 @@ function SitesList({
               <Site
                 {...site}
                 handleAssignment={handleAssignment}
-                isAbsence={company.id === 0}
+                isAbsence={isAbsencesList}
                 isDropable={isDropable}
                 isMobile={false}
                 key={site.id}

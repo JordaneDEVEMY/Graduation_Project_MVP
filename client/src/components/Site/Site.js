@@ -114,6 +114,7 @@ function Site({
       >
         <SiteHeader
           name={name}
+          isAbsence={isAbsence}
           handleAddAssignment={handleAddAssignment}
         />
         {isDropable

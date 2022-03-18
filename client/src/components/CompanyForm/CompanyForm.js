@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
@@ -19,6 +20,8 @@ function CompanyForm({
   handleSubmit,
 }, ref) {
   const theme = useTheme();
+  const isAbsence = companiesList[0].id === 0;
+  const title = `Ajouter ${addType === 'company' ? 'une compagnie' : (isAbsence ? 'une absence' : 'un site')}`;
   const [company, setCompany] = React.useState(companiesList[0]);
   const [sitesSelection, setSitesSelection] = React.useState(
     sitesList.filter(({ company: c }) => c.company_id === company.id),
@@ -69,7 +72,7 @@ function CompanyForm({
         }}
       >
         <Typography variant="h3" sx={{ textAlign: 'center', mb: theme.spacing(3) }}>
-          {`Ajouter ${addType === 'company' ? 'une compagnie' : 'un site'}`}
+          {title}
         </Typography>
 
         <Grid

@@ -11,6 +11,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 function SiteHeader({
   address,
   handleAddAssignment,
+  isAbsence,
   manager_name,
   name,
 }) {
@@ -20,7 +21,7 @@ function SiteHeader({
     <Box>
       {handleAddAssignment
       && (
-        <Tooltip title="Ajouter un assignement" placement="top">
+        <Tooltip title={`Ajouter ${isAbsence ? 'une absence' : 'un assignement'}`} placement="top">
           <IconButton
             color="primary"
             onClick={handleAddAssignment}
@@ -95,6 +96,7 @@ function SiteHeader({
 SiteHeader.propTypes = {
   address: PropTypes.string,
   handleAddAssignment: PropTypes.func,
+  isAbsence: PropTypes.bool,
   manager_name: PropTypes.string,
   name: PropTypes.string.isRequired,
 };
@@ -102,6 +104,7 @@ SiteHeader.propTypes = {
 SiteHeader.defaultProps = {
   address: undefined,
   handleAddAssignment: undefined,
+  isAbsence: undefined,
   manager_name: undefined,
 };
 
