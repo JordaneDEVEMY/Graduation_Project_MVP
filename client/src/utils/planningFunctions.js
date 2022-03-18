@@ -367,12 +367,13 @@ const planningFunctions = {
     const refresh = [...companies];
     const { source, destination, draggableId } = result;
     const regex = /absence-([0-9]+)/;
-    // const fromSiteId = Number(source.droppableId.replace('site-', ''));
+    const absenceCompany = refresh.filter((item) => item.id === 0)[0];
 
     let fromSiteId;
     // is absence ?
     const absenceFromFounded = source.droppableId.match(regex);
-    if (absenceFromFounded !== null) {
+    const fromSiteIsAbsence = absenceFromFounded !== null;
+    if (fromSiteIsAbsence) {
       fromSiteId = Number(source.droppableId.replace('absence-', ''));
     } else {
       fromSiteId = Number(source.droppableId.replace('site-', ''));
@@ -381,7 +382,8 @@ const planningFunctions = {
     // const toSiteId = Number(destination.droppableId.replace('site-', ''));
     let toSiteId;
     const absenceToFounded = destination.droppableId.match(regex);
-    if (absenceToFounded !== null) {
+    const toSiteIsAbsence = absenceToFounded !== null;
+    if (toSiteIsAbsence) {
       toSiteId = Number(destination.droppableId.replace('absence-', ''));
     } else {
       toSiteId = Number(destination.droppableId.replace('site-', ''));
@@ -391,24 +393,34 @@ const planningFunctions = {
 
     // get site source
     let fromSite;
-    refresh.forEach(({ sites }) => {
-      sites.forEach((item) => {
-        if (item.id === fromSiteId) {
-          fromSite = item;
-        }
+    if (fromSiteIsAbsence) {
+      fromSite = absenceCompany.sites.filter((item) => item.id === fromSiteId)[0];
+    } else {
+      refresh.forEach(({ id, sites }) => {
+        const isAbsenceSite = id === 0;
+        sites.forEach((item) => {
+          if (!isAbsenceSite && (item.id === fromSiteId)) {
+            fromSite = item;
+          }
+        });
       });
-    });
+    }
 
     if (fromSite) {
       // get site destination
       let toSite;
-      refresh.forEach(({ sites }) => {
-        sites.forEach((item) => {
-          if (item.id === toSiteId) {
-            toSite = item;
-          }
+      if (toSiteIsAbsence) {
+        toSite = absenceCompany.sites.filter((item) => item.id === toSiteId)[0];
+      } else {
+        refresh.forEach(({ id, sites }) => {
+          const isAbsenceSite = id === 0;
+          sites.forEach((item) => {
+            if (!isAbsenceSite && (item.id === toSiteId)) {
+              toSite = item;
+            }
+          });
         });
-      });
+      }
 
       if (toSite) {
         let { assignments: fromAssignments } = fromSite;
