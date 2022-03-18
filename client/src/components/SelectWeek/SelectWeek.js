@@ -64,11 +64,12 @@ function SelectWeek({
    * @returns {array} List of MenuItem components
    */
   const getWeeks = () => {
+    const weekNow = dateFunctions.getDate().isoWeek();
     const nbWeeks = dateFunctions.getDate(`${currentYear}-01-01`).isoWeeksInYear();
     const weeks = [];
     let i = 1;
     while (i <= nbWeeks) {
-      const weekNum = `${i < 10 ? '0' : ''}${i}`;
+      const weekNum = i.toString().padStart(2, '0');
       const period = dateFunctions.getWeekPeriod(currentYear, i);
       const slug = `${currentYear}-${weekNum}`;
       weeks.push(
@@ -84,8 +85,7 @@ function SelectWeek({
       );
       i += 1;
     }
-
-    return isAdmin ? weeks : weeks.slice(week.current.num - 1, week.current.num + 1);
+    return isAdmin ? weeks : weeks.slice(weekNow - 1, weekNow + 1);
   };
 
   const handleWeekSelect = (event) => {

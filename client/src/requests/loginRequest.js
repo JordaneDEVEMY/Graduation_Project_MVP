@@ -18,7 +18,7 @@ export async function requestLogin(email, password) {
  */
 export async function requestCheck(token) {
   try {
-    const response = await apiAxios.post('/check', {}, {
+    const response = await apiAxios.post('/check-token', {}, {
       headers: {
         Authorization: `bearer ${token}`,
       },

@@ -10,10 +10,12 @@ import {
   Box,
   Button,
   Grid,
+  IconButton,
   Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PropTypes from 'prop-types';
 import dateFunctions from '../../utils/dateFunctions';
 
@@ -116,11 +118,13 @@ function Assignment({
           )
           : (handleAssignment
               && (
-              <Box
-                onClick={handleAssignment}
-              >
-                UP
-              </Box>
+                <IconButton
+                  color="primary"
+                  onClick={(e) => { e.stopPropagation(); handleAssignment(); }}
+                  sx={{ display: 'none' }}
+                >
+                  <PersonAddAlt1Icon />
+                </IconButton>
               ))}
       </AccordionSummary>
       <AccordionDetails
@@ -128,9 +132,9 @@ function Assignment({
           padding: '0 40px 10px',
         }}
       >
-        <Grid container spacing={1} mt={-1}>
+        <Grid container spacing={1} mt={1}>
           <Grid item xs="auto" sx={{ display: 'none' }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt={`${employee.firstname} ${employee.lastname}`} src="/static/images/avatar/1.jpg" />
           </Grid>
           <Grid item xs={12}>
             <Typography
@@ -144,43 +148,85 @@ function Assignment({
               {absence !== undefined
               && (
               <Typography component="li" sx={{ fontSize: '.8em' }}>
-                <strong>Raison :</strong>
-                {absence.reason}
+                <Typography sx={{ display: 'block', fontSize: '1.3em' }}><strong>Raison :</strong></Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    fontSize: '1.2em', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis',
+                  }}
+                >
+                  {absence.reason}
+                </Box>
               </Typography>
               )}
               {employee.visibility !== undefined
               && (
               <Typography component="li" sx={{ fontSize: '.8em' }}>
-                <Typography sx={{ display: 'block' }}><strong>Visibilité :</strong></Typography>
-                <Typography>{`${employee.visibility ? 'oui' : 'non'}`}</Typography>
+                <Typography sx={{ display: 'block', fontSize: '1.3em' }}><strong>Visibilité :</strong></Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    fontSize: '1.2em', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis',
+                  }}
+                >
+                  {`${employee.visibility ? 'oui' : 'non'}`}
+                </Box>
               </Typography>
               )}
               {employee.mobile_number !== undefined
               && (
               <Typography component="li" sx={{ fontSize: '.8em' }}>
-                <Typography sx={{ display: 'block' }}><strong>Tél. portable :</strong></Typography>
-                <Typography>{employee.mobile_number}</Typography>
+                <Typography sx={{ display: 'block', fontSize: '1.3em' }}><strong>Tél. portable :</strong></Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    fontSize: '1.2em', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis',
+                  }}
+                >
+                  {employee.mobile_number}
+                </Box>
               </Typography>
               )}
               {employee.phone_number !== undefined
               && (
               <Typography component="li" sx={{ fontSize: '.8em' }}>
-                <Typography sx={{ display: 'block' }}><strong>Tél. Fixe :</strong></Typography>
-                <Typography>{employee.phone_number}</Typography>
+                <Typography sx={{ display: 'block', fontSize: '1.3em' }}><strong>Tél. Fixe :</strong></Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    fontSize: '1.2em', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis',
+                  }}
+                >
+                  {employee.phone_number}
+                </Box>
               </Typography>
               )}
               {employee.fonction !== undefined
               && (
               <Typography component="li" sx={{ fontSize: '.8em' }}>
-                <Typography sx={{ display: 'block' }}><strong>Fonction :</strong></Typography>
-                <Typography>{employee.fonction}</Typography>
+                <Typography sx={{ display: 'block', fontSize: '1.3em' }}><strong>Fonction :</strong></Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    fontSize: '1.2em', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis',
+                  }}
+                >
+                  {employee.fonction}
+                </Box>
               </Typography>
               )}
               {employee.email !== undefined
               && (
               <Typography component="li" sx={{ fontSize: '.8em' }}>
-                <Typography sx={{ display: 'block' }}><strong>Courriel :</strong></Typography>
-                <Typography>{employee.email}</Typography>
+                <Typography sx={{ display: 'block', fontSize: '1.3em' }}><strong>Courriel :</strong></Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    fontSize: '1.2em', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis',
+                  }}
+                >
+                  {employee.email}
+                </Box>
               </Typography>
               )}
             </Typography>
