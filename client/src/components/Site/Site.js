@@ -73,7 +73,7 @@ function Site({
    */
   const handleAddAssignment = () => {
     const newAssignement = planningFunctions.createAssignment();
-    const starting_date = dateFunctions.getDate().format('YYYY-MM-DD');
+    const starting_date = dateFunctions.getDate(week.dates[0]).format('YYYY-MM-DD');
     const ending_date = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
 
     handleAssignment({

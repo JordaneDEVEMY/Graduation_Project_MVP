@@ -16,6 +16,7 @@ function AssignmentFormContainer({
   employeesList,
   handleCancel,
   handleSubmit,
+  startDate,
 }, ref) {
   const dispatch = useDispatch();
 
@@ -46,7 +47,7 @@ function AssignmentFormContainer({
       visibility,
       weekSlug: planningFunctions.getWeekSlugFromDate(starting_date),
     };
-
+    console.log('assignmentData', assignmentData);
     switch (method) {
       case 'POST':
         dispatch(actionGetAssignmentInformations(assignmentData));
@@ -71,6 +72,7 @@ function AssignmentFormContainer({
       employeesList={employeesList}
       handleCancel={handleCancel}
       handleSubmit={handleSubmitAssignment}
+      weekMonday={startDate}
     />
   );
 }

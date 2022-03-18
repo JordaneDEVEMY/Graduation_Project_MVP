@@ -53,7 +53,6 @@ function Assignment({
       id={`assignment-${id}`}
       disabled={userId === employee.id}
       sx={{
-        borderTop: '1px solid rgb(0 0 0 / 10%)',
         background: color,
         '&.Mui-disabled': {
           background: color,
@@ -65,7 +64,7 @@ function Assignment({
       <AccordionSummary
         aria-controls={`panel${index}-content`}
         sx={{
-          height: 50,
+          height: 52,
           alignItems: 'center',
           '&.Mui-disabled': {
             opacity: '1',
@@ -133,7 +132,7 @@ function Assignment({
           <Grid item xs="auto" sx={{ display: 'none' }}>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={12}>
             <Typography
               component="ul"
               sx={{
@@ -185,27 +184,28 @@ function Assignment({
               </Typography>
               )}
             </Typography>
-            {handleRemoveAssignment
-            && (
-              <Box sx={{ display: 'flex' }}>
-                <Button
-                  sx={{
-                    mt: theme.spacing(1),
-                    mx: 'auto',
-                  }}
-                  variant="contained"
-                  color="inherit"
-                  size="small"
-                  startIcon={<DeleteIcon />}
-                  onClick={() => {
-                    handleRemoveAssignment(id);
-                  }}
-                >
-                  Supprimer
-                </Button>
-              </Box>
-            )}
           </Grid>
+
+          {handleRemoveAssignment
+            && (
+            <Grid item xs={12} sx={{ display: 'flex' }}>
+              <Button
+                sx={{
+                  mt: theme.spacing(1),
+                  mx: 'auto',
+                }}
+                variant="outlined"
+                color="inherit"
+                size="small"
+                startIcon={<DeleteIcon />}
+                onClick={() => {
+                  handleRemoveAssignment(id);
+                }}
+              >
+                Supprimer
+              </Button>
+            </Grid>
+            )}
         </Grid>
       </AccordionDetails>
     </Accordion>

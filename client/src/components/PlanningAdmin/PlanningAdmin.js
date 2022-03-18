@@ -43,6 +43,7 @@ function PlanningAdmin({
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
   console.log('draggableCompanies', draggableCompanies);
+
   const handleAddAssignment = (assignmentData, dragResult = undefined) => {
     if (dragResult) {
       const { destination, source } = dragResult;
@@ -281,6 +282,7 @@ function PlanningAdmin({
             employeesList={employeesSelection}
             handleCancel={handleCancelAssignment}
             handleSubmit={handleOnAssignmentSubmitted}
+            startDate={startDate}
           />
           )}
           {(addCompany || addSite)

@@ -27,7 +27,9 @@ function AssignmentForm({
   employeesList,
   handleCancel,
   handleSubmit,
+  weekMonday,
 }, ref) {
+  console.log(weekMonday, assignment);
   const theme = useTheme();
   const method = assignment.id ? 'PATCH' : 'POST';
   const { absence_id, employee_id, site } = assignment;
@@ -65,7 +67,7 @@ function AssignmentForm({
     new Date(assignment.ending_date),
   );
   const [minDate, setMinDate] = React.useState(
-    new Date(dateFunctions.getDate(startingDate.toString()).add(1, 'day').format('YYYY-MM-DD')),
+    new Date(dateFunctions.getDate(weekMonday.toString()).add(1, 'day').format('YYYY-MM-DD')),
   );
   const [color, setColor] = React.useState(assignment.color || colorsList[0][0]);
   const [visibility, setVisibility] = React.useState(true);

@@ -63,7 +63,7 @@ function Companies({
             {}
           </Typography>
 
-          {company.sites.length
+          {(company.sites.length || (company.id === 0))
             ? (
               <SitesList
                 absencesList={absencesList}
@@ -90,7 +90,7 @@ function Companies({
                   mt: theme.spacing(2),
                 }}
               >
-                Aucun planning à afficher.
+                Aucun site à afficher.
               </Alert>
             )}
         </Box>
