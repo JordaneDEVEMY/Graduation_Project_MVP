@@ -10,66 +10,25 @@ import Companies from '../Companies/Companies';
 import planningFunctions from '../../utils/planningFunctions';
 
 function DraggableAssignments({
-  absences,
+  absencesList,
   companies,
-  handleAbsence,
   handleAssignment,
+  handleSite,
+  isPast,
+  sitesList,
   week,
 }) {
   // save initial companies object
-  const [companiesList, setCompaniesList] = React.useState(companies);
-  const [absencesList, setAbsencesList] = React.useState(absences);
-  const [assignmentsPositions, setAssignmentsPositions] = React.useState([
-    {
-      id: 0,
-      name: 'Absences',
-      sites: [{
-        id: 0,
-        name: 'Gestion des absences',
-        assignments: absencesList,
-      }],
-    },
-    ...companiesList,
-  ]);
+  const [assignmentsPositions, setAssignmentsPositions] = React.useState(companies);
 
   React.useEffect(() => {
-    setCompaniesList(companies);
-    setAssignmentsPositions([
-      {
-        id: 0,
-        name: 'Absences',
-        sites: [{
-          id: 0,
-          name: 'Gestion des absences',
-          assignments: absencesList,
-        }],
-      },
-      ...companies,
-    ]);
+    setAssignmentsPositions(companies);
   }, [companies]);
-
-  React.useEffect(() => {
-    setAbsencesList(absences);
-    setAssignmentsPositions([
-      {
-        id: 0,
-        name: 'Absences',
-        sites: [{
-          id: 0,
-          name: 'Absences',
-          assignments: absences,
-        }],
-      },
-      ...companiesList,
-    ]);
-  }, [absences]);
 
   /**
    * Open assignment insert / update modal
    */
   const onDragEnd = useCallback((result) => {
-    console.log(result);
-
     if (result.reason === 'DROP') {
       if (!result.destination) {
         return;
@@ -80,17 +39,19 @@ function DraggableAssignments({
       setAssignmentsPositions(refreshList);
       handleAssignment(assignment, result);
     }
-  }, [absencesList, companiesList]);
+  }, [assignmentsPositions]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Companies
-        absences={absences}
+        absencesList={absencesList}
         companies={assignmentsPositions}
-        handleAbsence={handleAbsence}
         handleAssignment={handleAssignment}
+        handleSite={handleSite}
         isDropable
         isMobile={false}
+        isPast={isPast}
+        sitesList={sitesList}
         week={week}
       />
     </DragDropContext>
@@ -98,10 +59,8 @@ function DraggableAssignments({
 }
 
 DraggableAssignments.propTypes = {
-  absences: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }).isRequired,
+  absencesList: PropTypes.arrayOf(
+    PropTypes.shape(),
   ).isRequired,
   companies: PropTypes.arrayOf(
     PropTypes.shape({
@@ -114,8 +73,12 @@ DraggableAssignments.propTypes = {
       ).isRequired,
     }).isRequired,
   ).isRequired,
-  handleAbsence: PropTypes.func.isRequired,
   handleAssignment: PropTypes.func.isRequired,
+  handleSite: PropTypes.func.isRequired,
+  isPast: PropTypes.bool.isRequired,
+  sitesList: PropTypes.arrayOf(
+    PropTypes.shape(),
+  ).isRequired,
   week: PropTypes.shape({
     num: PropTypes.number.isRequired,
     dates: PropTypes.arrayOf(

@@ -36,7 +36,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       if (response.status === 200) {
         store.dispatch(actions.actionResetSiteInformations());
         store.dispatch(actions.actionRequestAllSites());
-        alert('Site created successfully');
+        console.log('Site created successfully');
       }
       return;
     }
@@ -62,7 +62,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
       if (response.status === 200) {
         store.dispatch(actions.actionResetSiteInformations());
         store.dispatch(actions.actionRequestAllSites());
-        alert('Site updated successfully');
+        console.log('Site updated successfully');
       }
       return;
     }
@@ -72,7 +72,7 @@ const siteMiddleware = (store) => (next) => async (action) => {
         const response = await deleteSite(id);
         if (response.status === 200) {
           store.dispatch(actions.actionRequestAllSites());
-          alert('Site deleted successfully');
+          console.log('Site deleted successfully');
         }
       });
       store.dispatch(actions.actionResetSiteInformations());

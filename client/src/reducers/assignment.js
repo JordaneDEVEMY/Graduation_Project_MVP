@@ -46,7 +46,7 @@ function reducer(state = initialState, action) {
     case actions.RESET_ASSIGNMENT_INFORMATIONS:
       return {
         ...state,
-        id: action.payload.id,
+        id: initialState.id,
         starting_date: initialState.starting_date,
         ending_date: initialState.ending_date,
         color: initialState.color,
@@ -55,7 +55,7 @@ function reducer(state = initialState, action) {
         employee_id: initialState.employee_id,
         site_id: initialState.site_id,
         absence_id: initialState.absence_id,
-        weekSlug: action.payload.weekSlug,
+        weekSlug: initialState.weekSlug,
       };
     default:
       return state;

@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const debug = require('debug')('http:sendLink');
 
 // async..await is not allowed in global scope, must use a wrapper
 module.exports = async function main(email, firstname, lastname, link) {
@@ -23,21 +24,24 @@ module.exports = async function main(email, firstname, lastname, link) {
     // text: 'Hello ?', // plain text body
     html:
       `
-      <b>Bonjour, ${firstname} ${lastname}</b>
+      <h3>Bonjour, <strong>${firstname} ${lastname}</strong></h3>
+      <h2>À vous de jouer !</h2>
+      <div>Vous avez souhaité changer de mot de passe.</div>
       <br>
+      <div>Pour le modifier, nous vous invitons à cliquer :<a href=${link} target="_blank">Ici</a></div>
       <br>
-      <b>Ci-joint le lien pour modifier ton mot de passe :<b>
+      <div>Ce lien est valide pendant <em>15 minutes<em>. Passé ce délai, veuillez renouveler l’opération « Mot de passe oublié » sur notre site.</div>
       <br>
-      ${link}
+      <div><em>Si vous n’êtes pas à l’origine de cette demande, vous pouvez ignorer cet e-mail : votre mot de passe actuel ne sera pas modifié.<em></div>
       `, // html body
   });
 
-  console.log('Message sent: %s', info.messageId);
+  debug('Message sent: %s', info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  debug('Preview URL: %s', nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 };
 
-// main().catch(console.error);
+// ? main().catch(console.error);

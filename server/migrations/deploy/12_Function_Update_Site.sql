@@ -2,7 +2,8 @@
 
 BEGIN;
 
-CREATE OR REPLACE FUNCTION update_site(json) RETURNS void AS $$
+CREATE OR REPLACE FUNCTION update_site(json) RETURNS site AS $$
+
 	UPDATE "site"
 	SET name = ($1 ->> 'name')::text,
 		address = ($1 ->> 'address')::text,
@@ -11,7 +12,9 @@ CREATE OR REPLACE FUNCTION update_site(json) RETURNS void AS $$
 		estimated_duration = ($1 ->> 'estimated_duration')::int,
 		company_id = ($1 ->> 'company_id')::int,
 		updated_at = now()
-	WHERE id = ($1->>'id')::int;
+	WHERE id = ($1->>'id')::int
+	RETURNING *;
+
 $$ LANGUAGE sql;
 
 COMMIT;

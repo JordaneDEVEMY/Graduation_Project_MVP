@@ -13,6 +13,7 @@ function SearchContainer({
   userId,
 }) {
   const theme = useTheme();
+  const hideSearch = true;
 
   return (
     <Box
@@ -24,7 +25,7 @@ function SearchContainer({
       }}
     >
       <SelectWeek date={date} isAdmin={isAdmin} userId={userId} />
-      {isAdmin && (
+      {(isAdmin && !hideSearch) && (
         <SearchAutocompleteContainer />
       )}
     </Box>

@@ -18,10 +18,9 @@ const userMiddleware = (store) => (next) => async (action) => {
         phone_number,
         mobile_number,
       };
-      console.log('userDatas', userDatas);
       const response = await updateUserInformations(user.id, userDatas);
       if (response.status === 200) {
-        alert('Informations modifiées avec succès !');
+        console.log('Informations modifiées avec succès !');
         store.dispatch(actions.actionGetUserPlanning());
       }
 

@@ -2,7 +2,8 @@
 
 BEGIN;
 
-CREATE OR REPLACE FUNCTION update_assignment(json) RETURNS void AS $$
+CREATE OR REPLACE FUNCTION update_assignment(json) RETURNS assignment AS $$
+
 	UPDATE "assignment"
 	SET starting_date = ($1 ->> 'starting_date')::timestamptz,
 		ending_date = ($1 ->> 'ending_date')::timestamptz,
@@ -13,7 +14,9 @@ CREATE OR REPLACE FUNCTION update_assignment(json) RETURNS void AS $$
 		absence_id = ($1 ->> 'absence_id')::int,
 		site_id = ($1 ->> 'site_id')::int,
 		updated_at = now()
-	WHERE id = ($1->>'id')::int;
+	WHERE id = ($1->>'id')::int
+	RETURNING *;
+	
 $$ LANGUAGE sql;
 
 COMMIT;

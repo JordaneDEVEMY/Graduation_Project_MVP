@@ -20,7 +20,7 @@ function Login({
   passwordValue,
   changeField,
   handleLogin,
-  isLogged,
+  goodLogin,
 }) {
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -36,7 +36,11 @@ function Login({
     } else if (isButtonDisable === true) {
       setIsButtonDisable(false);
     }
-  }, [emailValue, passwordValue]);
+
+    if (!goodLogin) {
+      setShowAlert(true);
+    }
+  }, [emailValue, passwordValue, goodLogin]);
 
   /**
    * function used to submit login form
@@ -45,9 +49,6 @@ function Login({
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin();
-    if (!isLogged) {
-      setTimeout(setShowAlert, 500, true);
-    }
   };
 
   /**
@@ -165,7 +166,7 @@ Login.propTypes = {
   passwordValue: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool.isRequired,
+  goodLogin: PropTypes.bool.isRequired,
 };
 Login.defaultProps = {
 };

@@ -97,7 +97,6 @@ CREATE TABLE "company" (
     "updated_at" TIMESTAMPTZ
 );
 
-
 ALTER TABLE "employee" ADD FOREIGN KEY ("employee_qualification_id") REFERENCES "employee_qualification" ("id") ON DELETE CASCADE;
 ALTER TABLE "assignment" ADD FOREIGN KEY ("employee_id") REFERENCES "employee" ("id") ON DELETE CASCADE;
 ALTER TABLE "assignment" ADD FOREIGN KEY ("site_id") REFERENCES "site" ("id") ON DELETE CASCADE;
@@ -107,7 +106,6 @@ ALTER TABLE "employee_contract" ADD FOREIGN KEY ("employee_id") REFERENCES "empl
 ALTER TABLE "site" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
 ALTER TABLE "contact" ADD FOREIGN KEY ("company_id") REFERENCES "company" ("id") ON DELETE CASCADE;
 
-
 CREATE DOMAIN posint AS int
     CHECK(VALUE > 0 OR VALUE = null);
 
@@ -116,14 +114,13 @@ CREATE DOMAIN check_age AS timestamptz
     
 CREATE DOMAIN num_ss_fr AS text
     CHECK(
-        VALUE ~ '^[1-2][0-9][0-9][0-1][1-9][0-9][0-9].{7}'
+        VALUE ~ '^[1-2]\d{2}[0-1][1-9]\d{2}.{6,8}'
     );
 
 ALTER TABLE "employee"
     ALTER COLUMN "employee_qualification_id" TYPE posint,
     ALTER COLUMN "date_of_birth" TYPE check_age,
     ALTER COLUMN "social_security_number" TYPE num_ss_fr;
-
 
 ALTER TABLE "assignment"
     ALTER COLUMN "position" TYPE posint,
@@ -135,7 +132,6 @@ ALTER TABLE "employee_contract"
     ALTER COLUMN "duration" TYPE posint,
     ALTER COLUMN "company_id" TYPE posint,
     ALTER COLUMN "employee_id" TYPE posint;
-
 
 ALTER TABLE "site"
     ALTER COLUMN "estimated_duration" TYPE posint,

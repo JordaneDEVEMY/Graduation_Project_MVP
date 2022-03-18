@@ -11,7 +11,7 @@ router.use('/assignment', assignmentRouter);
 router.use('/', planningRouter);
 
 router.use(() => {
-  throw new ApiError(404, 'Page introuvable');
+  throw new ApiError(404, '404 Not Found');
 });
 
 module.exports = router;

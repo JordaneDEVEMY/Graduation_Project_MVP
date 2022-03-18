@@ -63,7 +63,7 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       const response = await createAssignment(assignmentDatas);
       if (response.status === 200) {
         store.dispatch(actions.actionRequestAdminPlanning());
-        alert('Assignment created successfully');
+        console.log('Assignment created successfully');
       }
       return;
     }
@@ -92,7 +92,7 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       const response = await updateAssignment(assignment.id, assignmentDatas);
       if (response.status === 200) {
         store.dispatch(actions.actionRequestAdminPlanning());
-        alert('Assignment updated successfully');
+        console.log('Assignment updated successfully');
       }
       return;
     }
@@ -102,7 +102,7 @@ const adminPlanningMiddleware = (store) => (next) => async (action) => {
       if (response.status === 200) {
         store.dispatch(actions.actionResetAssignmentInformations());
         store.dispatch(actions.actionRequestAdminPlanning());
-        alert('Assignment deleted successfully');
+        console.log('Assignment deleted successfully');
       }
       return;
     }

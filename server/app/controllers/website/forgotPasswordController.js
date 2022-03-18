@@ -1,10 +1,10 @@
 const emailValidator = require('email-validator');
 // ? const bcrypt = require('bcryptjs');
-const { generateResetPasswordToken } = require('../../helpers/generateToken');
-const { WebsiteError } = require('../../helpers/errorHandler');
-const sendResetPasswordLink = require('../../helpers/sendResetPasswordLink');
-
+const debug = require('debug')('http:forgotPassword');
 const forgotPasswordDatamapper = require('../../models/website/forgotPassword');
+const { generateResetPasswordToken } = require('../../helpers/generateToken');
+const sendResetPasswordLink = require('../../helpers/sendResetPasswordLink');
+const { WebsiteError } = require('../../helpers/errorHandler');
 const { ApiError } = require('../../helpers/errorHandler');
 
 const controller = {
@@ -19,19 +19,19 @@ const controller = {
     const { email } = req.body;
 
     if (!email) {
-      throw new WebsiteError(400, 'L\'email est requis');
+      throw new WebsiteError(400, 'Email required');
     }
 
     const isEmailValid = emailValidator.validate(email);
 
     if (!isEmailValid) {
-      throw new WebsiteError(400, 'Cet email n\'est pas valide');
+      throw new WebsiteError(400, 'Invalid Email');
     }
 
-    const user = await forgotPasswordDatamapper.getEmail(email);
+    const user = await forgotPasswordDatamapper.findByEmail(email);
 
     if (!user) {
-      throw new ApiError(404, 'Utilisateur non enregistré');
+      throw new ApiError(404, 'Unregistered user');
     }
 
     const secret = process.env.JWT_SECRET + user.password;
@@ -48,11 +48,11 @@ const controller = {
 
     sendResetPasswordLink(email, user.firstname, user.lastname, link);
 
-    // TODO : == DEV LOG ==
-    console.log({ link }, { duration });
-    //            =====
+    // ?      == DEV LOG ==
+    debug({ link }, { duration });
+    // ?          =====
 
-    res.send('Password reset link has been sent to ur email...');
+    res.status(200).send('Password reset link has been sent to ur email...');
   },
 
 };

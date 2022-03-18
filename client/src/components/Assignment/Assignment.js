@@ -12,6 +12,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import PropTypes from 'prop-types';
 import dateFunctions from '../../utils/dateFunctions';
@@ -52,7 +53,6 @@ function Assignment({
       id={`assignment-${id}`}
       disabled={userId === employee.id}
       sx={{
-        borderTop: '1px solid rgb(0 0 0 / 10%)',
         background: color,
         '&.Mui-disabled': {
           background: color,
@@ -64,7 +64,7 @@ function Assignment({
       <AccordionSummary
         aria-controls={`panel${index}-content`}
         sx={{
-          height: 50,
+          height: 52,
           alignItems: 'center',
           '&.Mui-disabled': {
             opacity: '1',
@@ -128,58 +128,84 @@ function Assignment({
           padding: '0 40px 10px',
         }}
       >
-        <Grid container spacing={2} mt={-2}>
-          <Grid item xs="auto">
+        <Grid container spacing={1} mt={-1}>
+          <Grid item xs="auto" sx={{ display: 'none' }}>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Grid>
-          <Grid item xs="auto">
+          <Grid item xs={12}>
             <Typography
               component="ul"
               sx={{
                 listStyle: 'none',
                 pl: 0,
+                fontSize: '.9em',
               }}
             >
-              {handleRemoveAssignment
-              && (
-              <Button onClick={() => {
-                console.log('click', id);
-                handleRemoveAssignment(id);
-              }}
-              >
-                REMOVE
-              </Button>
-              )}
               {absence !== undefined
               && (
-              <Typography component="li">
-                <Typography sx={{ display: 'block' }}><strong>Raison :</strong></Typography>
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
+                <strong>Raison :</strong>
                 {absence.reason}
               </Typography>
               )}
               {employee.visibility !== undefined
               && (
-              <Typography component="li">
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
                 <Typography sx={{ display: 'block' }}><strong>Visibilité :</strong></Typography>
-                {`<br>${employee.visibility ? 'oui' : 'non'}`}
+                <Typography>{`${employee.visibility ? 'oui' : 'non'}`}</Typography>
               </Typography>
               )}
               {employee.mobile_number !== undefined
               && (
-              <Typography component="li">
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
                 <Typography sx={{ display: 'block' }}><strong>Tél. portable :</strong></Typography>
-                {employee.mobile_number}
+                <Typography>{employee.mobile_number}</Typography>
               </Typography>
               )}
               {employee.phone_number !== undefined
               && (
-              <Typography component="li">
-                <Typography sx={{ display: 'block' }}><strong>Tél. mobile :</strong></Typography>
-                {employee.phone_number}
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
+                <Typography sx={{ display: 'block' }}><strong>Tél. Fixe :</strong></Typography>
+                <Typography>{employee.phone_number}</Typography>
+              </Typography>
+              )}
+              {employee.fonction !== undefined
+              && (
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
+                <Typography sx={{ display: 'block' }}><strong>Fonction :</strong></Typography>
+                <Typography>{employee.fonction}</Typography>
+              </Typography>
+              )}
+              {employee.email !== undefined
+              && (
+              <Typography component="li" sx={{ fontSize: '.8em' }}>
+                <Typography sx={{ display: 'block' }}><strong>Courriel :</strong></Typography>
+                <Typography>{employee.email}</Typography>
               </Typography>
               )}
             </Typography>
           </Grid>
+
+          {handleRemoveAssignment
+            && (
+            <Grid item xs={12} sx={{ display: 'flex' }}>
+              <Button
+                sx={{
+                  mt: theme.spacing(1),
+                  mx: 'auto',
+                }}
+                variant="outlined"
+                color="inherit"
+                size="small"
+                startIcon={<DeleteIcon />}
+                onClick={() => {
+                  handleRemoveAssignment(id);
+                }}
+              >
+                Supprimer
+              </Button>
+            </Grid>
+            )}
         </Grid>
       </AccordionDetails>
     </Accordion>
@@ -193,7 +219,9 @@ Assignment.propTypes = {
   }),
   color: PropTypes.string.isRequired,
   employee: PropTypes.shape({
+    email: PropTypes.string,
     firstname: PropTypes.string.isRequired,
+    fonction: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     lastname: PropTypes.string.isRequired,
     phone_number: PropTypes.string,

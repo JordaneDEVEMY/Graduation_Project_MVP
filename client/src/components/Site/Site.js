@@ -24,6 +24,7 @@ function Site({
   assignments,
   handleAssignment,
   id,
+  isAbsence,
   isDropable,
   isMobile,
   name,
@@ -31,7 +32,8 @@ function Site({
 }) {
   const dispatch = useDispatch();
   const theme = useTheme();
-
+  // assignments
+  const [draggableAssignments, setDraggableAssignments] = React.useState(assignments);
   // accordion state
   const [expandedSheet, setExpandedSheet] = React.useState('');
   // remove dialog
@@ -47,6 +49,7 @@ function Site({
     setOpenRemoveDialog(false);
     dispatch(actionGetAssignmentInformations({ id: removedAssignmentId }));
     dispatch(actionDeleteAssignment());
+    setExpandedSheet('');
   };
 
   const handleRemoveAssignment = (assignmentId) => {
@@ -70,12 +73,14 @@ function Site({
    */
   const handleAddAssignment = () => {
     const newAssignement = planningFunctions.createAssignment();
-    const starting_date = dateFunctions.getDate().format('YYYY-MM-DD');
+    const starting_date = dateFunctions.getDate(week.dates[0]).format('YYYY-MM-DD');
     const ending_date = dateFunctions.getDate(week.dates[4]).format('YYYY-MM-DD');
 
     handleAssignment({
       ...newAssignement,
+      absence_id: isAbsence ? id : null,
       ending_date,
+      position: draggableAssignments.length,
       starting_date,
       site: {
         id,
@@ -83,6 +88,10 @@ function Site({
       },
     });
   };
+
+  React.useEffect(() => {
+    setDraggableAssignments(assignments);
+  }, [assignments]);
 
   return (
     <>
@@ -101,36 +110,41 @@ function Site({
             flex: '0 0 auto',
           },
         }}
-        id={`site-${id}`}
+        id={`${isAbsence ? 'absence' : 'site'}-${id}`}
       >
         <SiteHeader
           name={name}
+          isAbsence={isAbsence}
           handleAddAssignment={handleAddAssignment}
         />
-        {assignments.length
-          && isDropable
+        {isDropable
           ? (
-            <Droppable droppableId={`site-${id}`} type="SITE">
+            <Droppable droppableId={`${isAbsence ? 'absence' : 'site'}-${id}`} type="SITE">
               {(provided) => (
                 <Box
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                   sx={{
+                    minHeight: '50px',
                     pb: '50px',
                     flexGrow: '1',
                     background: `url('${assignmentBg}') repeat-y center bottom`,
                   }}
                 >
-                  <AssignmentsList
-                    assignments={assignments}
-                    expandedSheet={expandedSheet}
-                    handleAssignment={handleAssignment}
-                    handleRemoveAssignment={handleRemoveAssignment}
-                    handleCollapse={handleCollapse}
-                    isDraggable
-                    isMobile={false}
-                    week={week}
-                  />
+                  {draggableAssignments.length
+                    ? (
+                      <AssignmentsList
+                        assignments={draggableAssignments}
+                        expandedSheet={expandedSheet}
+                        handleAssignment={handleAssignment}
+                        handleRemoveAssignment={handleRemoveAssignment}
+                        handleCollapse={handleCollapse}
+                        isDraggable
+                        isMobile={false}
+                        week={week}
+                      />
+                    )
+                    : null}
 
                   {provided.placeholder}
                 </Box>
@@ -141,12 +155,13 @@ function Site({
             <Box
               sx={{
                 pb: '50px',
+                minHeight: '50px',
                 flexGrow: '1',
                 background: `url('${assignmentBg}') repeat-y center bottom`,
               }}
             >
               <AssignmentsList
-                assignments={assignments}
+                assignments={draggableAssignments}
                 expandedSheet={expandedSheet}
                 handleAssignment={handleAssignment}
                 handleCollapse={handleCollapse}
@@ -167,12 +182,12 @@ function Site({
         >
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Supprimer cet assignement ?
+              {`Supprimer ${isAbsence ? ' cette absence' : 'cet assignement'} ?`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} variant="outlined">Non</Button>
-            <Button onClick={handleAgree} autoFocus>
+            <Button onClick={handleAgree} variant="contained" autoFocus>
               Oui
             </Button>
           </DialogActions>
@@ -200,7 +215,8 @@ Site.propTypes = {
       visibility: PropTypes.bool.isRequired,
     }).isRequired,
   ).isRequired,
-  handleAssignment: PropTypes.func,
+  handleAssignment: PropTypes.func.isRequired,
+  isAbsence: PropTypes.bool.isRequired,
   isDropable: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   week: PropTypes.shape({
@@ -209,10 +225,6 @@ Site.propTypes = {
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
-};
-
-Site.defaultProps = {
-  handleAssignment: undefined,
 };
 
 export default React.memo(Site);

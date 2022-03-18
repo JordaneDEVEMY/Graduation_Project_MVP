@@ -23,6 +23,7 @@ function DataGridEmployee({
   pushEmployeeId,
   resetEmployeeInformations,
   changeFile,
+  getAllQualification,
 }) {
   const theme = useTheme();
   const [selectionModel, setSelectionModel] = useState([]);
@@ -108,8 +109,8 @@ function DataGridEmployee({
 
   return (
     <>
-      <Typography variant="h2" sx={{ textAlign: 'center' }}>
-        Tous les Employés
+      <Typography variant="h1" sx={{ textAlign: 'center' }}>
+        Tous les employés
       </Typography>
       <Box sx={{ minHeight: '80%', width: 'auto' }}>
         {showAlert && (
@@ -195,6 +196,7 @@ function DataGridEmployee({
             changeField={changeField}
             changeFile={changeFile}
             handleClose={handleClose}
+            getAllQualification={getAllQualification}
           />
         </Box>
       </Modal>
@@ -267,6 +269,7 @@ DataGridEmployee.propTypes = {
   changeFile: PropTypes.func.isRequired,
   pushEmployeeId: PropTypes.func.isRequired,
   resetEmployeeInformations: PropTypes.func.isRequired,
+  getAllQualification: PropTypes.func.isRequired,
 };
 DataGridEmployee.defaultProps = {
   oneEmployee: null,

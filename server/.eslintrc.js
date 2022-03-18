@@ -13,6 +13,7 @@ module.exports = {
   },
   rules: {
     indent: ['error', 2],
+    camelcase: 'off',
     'max-len': 'off',
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',

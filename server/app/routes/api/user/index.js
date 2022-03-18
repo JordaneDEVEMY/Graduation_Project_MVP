@@ -1,5 +1,5 @@
 const express = require('express');
-// ? const cache = require('../../../helpers/redisCache');
+// ? NOT IN MVP - const cache = require('../../../helpers/redisCache');
 
 const validate = require('../../../validation');
 const userSchema = require('../../../validation/userSchema');
@@ -19,6 +19,7 @@ router
    * @return {RestUser} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .get(controllerHandler(userController.getOne));
 
@@ -29,10 +30,11 @@ router
    * @summary Update one user profile
    * @tags 2.User
    * @param {number} id.path.required - User identifier
-   * @param {AuthProfilUpdate} request.body.required - User email/password to update
+   * @param {AuthProfilUpdate} request.body.required - Body request with user phone number, mobile number or password to update
    * @return {UserUpdate} 200 - success response - application/json
    * @return {ApiError} 400 - Bad request response - application/json
    * @return {ApiError} 404 - User not found - application/json
+   * @return {ApiError} 500 - Internal server error - application/json
    */
   .patch(validate('body', userSchema), controllerHandler(userController.update));
 

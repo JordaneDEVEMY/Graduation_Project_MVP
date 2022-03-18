@@ -16,10 +16,10 @@ import './carousel.scss';
 
 function Carousel({
   handleAssignment,
+  handleSite,
   sites,
   week,
 }) {
-  console.log('carousel', sites);
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = sites.length;
@@ -64,6 +64,8 @@ function Carousel({
                 <Site
                   {...site}
                   handleAssignment={handleAssignment}
+                  handleSite={handleSite}
+                  isAbsence={site.id === 0}
                   isDropable={false}
                   isMobile
                   key={site.id}
@@ -100,7 +102,8 @@ function Carousel({
 }
 
 Carousel.propTypes = {
-  handleAssignment: PropTypes.func,
+  handleAssignment: PropTypes.func.isRequired,
+  handleSite: PropTypes.func.isRequired,
   sites: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -112,10 +115,6 @@ Carousel.propTypes = {
       PropTypes.string.isRequired,
     ).isRequired,
   }).isRequired,
-};
-
-Carousel.defaultProps = {
-  handleAssignment: undefined,
 };
 
 export default React.memo(Carousel);

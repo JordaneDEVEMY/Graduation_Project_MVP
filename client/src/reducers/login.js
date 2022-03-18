@@ -2,9 +2,10 @@
 import * as actions from '../actions';
 
 const initialState = {
-  email: 'xavier_caleb4493@yahoo.edu',
-  password: 'LTK85EWH8HM',
+  email: '',
+  password: '',
   isLogged: false,
+  goodLogin: true,
 };
 
 function reducer(state = initialState, action) {
@@ -19,6 +20,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         isLogged: action.payload,
+      };
+
+    case actions.SET_GOOD_LOGIN:
+      return {
+        ...state,
+        goodLogin: action.payload,
       };
 
     case actions.RESET_PASSWORD:
