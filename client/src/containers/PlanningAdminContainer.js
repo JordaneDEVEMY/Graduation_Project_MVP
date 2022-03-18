@@ -29,8 +29,6 @@ function PlanningAdminContainer() {
     weekSlug = planningFunctions.getCurrentWeekSlug();
   }
 
-  console.log('sitesList', sitesList);
-  console.log('absencesList', absencesList);
   useEffect(() => {
     dispatch(actionRequestAllEmployees());
     dispatch(actionRequestAllAbsences());

@@ -47,7 +47,7 @@ function AssignmentFormContainer({
       visibility,
       weekSlug: planningFunctions.getWeekSlugFromDate(starting_date),
     };
-    console.log('assignmentData', assignmentData);
+
     switch (method) {
       case 'POST':
         dispatch(actionGetAssignmentInformations(assignmentData));

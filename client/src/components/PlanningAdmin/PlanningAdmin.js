@@ -42,7 +42,6 @@ function PlanningAdmin({
   // dragend
   const [draggableCompanies, setDraggableCompanies] = React.useState(companies);
   const [dragEndResult, setDragEndResult] = React.useState({});
-  console.log('draggableCompanies', draggableCompanies);
 
   const handleAddAssignment = (assignmentData, dragResult = undefined) => {
     if (dragResult) {
@@ -86,8 +85,6 @@ function PlanningAdmin({
     const { id: companyId } = company;
     let availableSites = [...availablesSitesList];
 
-    console.log(companyId, company, availablesSitesList);
-
     // is absence ?
     if (companyId === 0) {
       availableSites = availablesSitesList.map(({ id, reason: name }) => ({
@@ -99,7 +96,6 @@ function PlanningAdmin({
         },
       }));
     }
-    console.log('availablesSitesList', availableSites);
 
     setCompaniesSelection([company]);
     setSitesSelection(availableSites);

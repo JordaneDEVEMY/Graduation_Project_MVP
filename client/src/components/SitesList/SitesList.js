@@ -22,7 +22,6 @@ function SitesList({
   sitesList,
   week,
 }) {
-  console.log('isAbsencesList', isAbsencesList);
   const theme = useTheme();
   const { id, sites } = company;
   const companySitesIds = company.sites.map((item) => item.id);
