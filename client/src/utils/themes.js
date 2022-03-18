@@ -31,7 +31,7 @@ const themes = {
     palette: {
       ...lightTheme.palette,
       background: {
-        default: '#fff',
+        default: '#ededed',
         paper: '#fff',
         component: '#f7f7f7',
       },
