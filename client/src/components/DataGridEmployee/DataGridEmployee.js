@@ -109,8 +109,8 @@ function DataGridEmployee({
 
   return (
     <>
-      <Typography variant="h2" sx={{ textAlign: 'center' }}>
-        Tous les Employés
+      <Typography variant="h1" sx={{ textAlign: 'center' }}>
+        Tous les employés
       </Typography>
       <Box sx={{ minHeight: '80%', width: 'auto' }}>
         {showAlert && (

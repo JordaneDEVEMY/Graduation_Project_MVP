@@ -62,6 +62,7 @@ function DataGridSite({
       field: 'company',
       headerName: 'Entreprise',
       width: 200,
+      type: 'text',
       valueGetter: (params) => {
         const result = [];
         result.push(params.row.company.company_name);
@@ -87,8 +88,8 @@ function DataGridSite({
   };
   return (
     <>
-      <Typography variant="h2" sx={{ textAlign: 'center' }}>
-        Tous les Sites
+      <Typography variant="h1" sx={{ textAlign: 'center' }}>
+        Tous les sites
       </Typography>
       <Box sx={{ height: '80%', width: 'auto' }}>
         {showAlert && (

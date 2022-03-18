@@ -2,8 +2,8 @@
 import * as actions from '../actions';
 
 const initialState = {
-  email: 'xavier_caleb4493@yahoo.edu',
-  password: 'olleks',
+  email: '',
+  password: '',
   isLogged: false,
   goodLogin: true,
 };
