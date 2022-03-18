@@ -74,8 +74,8 @@ function DataGridCompany({
   };
   return (
     <>
-      <Typography variant="h2" sx={{ textAlign: 'center' }}>
-        Toutes les Entreprises
+      <Typography variant="h1" sx={{ textAlign: 'center' }}>
+        Toutes les entreprises
       </Typography>
       <Box sx={{ height: '80%', width: 'auto' }}>
         {showAlert && (
